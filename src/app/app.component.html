@@ -8,11 +8,25 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item href="/">Home</ion-item>
-        <ion-item href="/special">Special</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
+        <ion-menu-toggle>
+            <ion-item [routerLink]="['/home/tabs/tab2']" >Home</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+            <ion-item [routerLink]="['/track']" >Track</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+            <ion-item [routerLink]="['/track-meal']" >Track Meal</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+            <ion-item [routerLink]="['/track-progress']" >Track Progress</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+            <ion-item [routerLink]="['/track-workout']" >Track Workout</ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item  *ngIf="loggedin" (click)="logout()" >Log out</ion-item>
+      </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>

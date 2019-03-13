@@ -1,6 +1,8 @@
 {
   "name": "meld_down_app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "526bb1d9"
 }
