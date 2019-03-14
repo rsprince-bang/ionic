@@ -29,7 +29,7 @@ export class AppComponent {
   ) {
     this.initializeApp();
     this.events.subscribe( 'user logged in', (a, b)=> {
-      console.log('Welcome', a, 'at', b);
+      //console.log('Welcome', a, 'at', b);
       this.loggedin = true;
     });
   }
