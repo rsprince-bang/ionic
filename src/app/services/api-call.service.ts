@@ -14,7 +14,8 @@ export class ApiCallService {
   private API_URL = "http://3.17.161.217/app/";
 
   private headers = new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded'
+    //'Content-Type': 'application/json'  //this one is default
+    //'Content-Type': 'application/x-www-form-urlencoded'
   });
   private options = { headers: this.headers };
 
@@ -29,7 +30,7 @@ export class ApiCallService {
 
     return this.http.post(
       this.API_URL + page,
-      data,
+      JSON.stringify(data) ,
       this.options
     ).pipe(
       map(results => {

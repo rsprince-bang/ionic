@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
     this.myAPI.makeAPIcall(
       "test.php", 
       {
-      "email": "test@test.&com",
+      "email": "test@test.com",
       "password": 12345
       }
     )
