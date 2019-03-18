@@ -16,7 +16,7 @@ import { GlobalServicesService } from './services/global-services.service';
 
 export class AppComponent {
 
-  private loggedin = false;
+  private loggedin = false; //a flag used to show the Logout button in menu
 
   constructor(
     private platform: Platform,
@@ -36,6 +36,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      //maybe check if token is valid
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
@@ -50,6 +51,7 @@ export class AppComponent {
 
   logout(){
     localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
     this.loggedin = false;
     this.router.navigateByUrl("/login");
   }

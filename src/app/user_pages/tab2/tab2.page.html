@@ -12,7 +12,37 @@
 </ion-header>
 
 <ion-content (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
-  <p>Today's</p>
-  <p>Nutrition Info</p>
-  <p>Workout Info</p>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Todays' Nutrition and Workout Info</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+
+<!-- List of Input Items -->
+<ion-list>
+  <ion-item>
+    <ion-label>Input</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Toggle</ion-label>
+    <ion-toggle slot="end"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Radio</ion-label>
+    <ion-radio slot="end"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Checkbox</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+</ion-list>
+
 </ion-content>

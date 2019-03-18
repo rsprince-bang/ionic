@@ -7,16 +7,20 @@
 <ion-content padding>
 
 
+<form [formGroup]="credentialsForm" (ngSubmit)="login()">
+ 
   <ion-item>
-    <ion-label position="floating">E-mail</ion-label>
-    <ion-input type="text" value=""></ion-input>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="email" formControlName="email"></ion-input>
   </ion-item>
+
   <ion-item>
     <ion-label position="floating">Password</ion-label>
-    <ion-input type="password" value=""></ion-input>
+    <ion-input type="password" formControlName="password"></ion-input>
   </ion-item>
 
+  <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
 
-  <ion-button expand="block" (click)="login()">Login</ion-button>
-  <ion-button expand="block" >Login via Social media</ion-button>
+</form>
+
 </ion-content>

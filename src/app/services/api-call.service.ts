@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,6 @@ import { map } from 'rxjs/operators';
 
 
 export class ApiCallService {
-
-  private API_URL = "http://3.17.161.217/app/";
 
   private headers = new HttpHeaders({
     //'Content-Type': 'application/json'  //this one is default
@@ -24,13 +23,25 @@ export class ApiCallService {
   constructor(private http: HttpClient, public loadingController: LoadingController) { }
 
 
-  makeAPIcall(page, data): Observable<any>{
+  makeAPIcall(page, data, auth_needed=false): Observable<any>{
+
+    /*
+    if(auth_needed){
+      let token = localStorage.getItem("token");
+      console.log(token);
+      if (token){
+        data.token = token;
+      }
+      else{
+        //return false;
+      }
+    }*/
 
     this.presentLoadingWithOptions();
 
     return this.http.post(
-      this.API_URL + page,
-      JSON.stringify(data) ,
+      environment.API_URL + page,
+      JSON.stringify(data),
       this.options
     ).pipe(
       map(results => {
