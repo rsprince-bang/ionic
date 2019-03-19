@@ -14,6 +14,7 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
