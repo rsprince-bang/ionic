@@ -36,7 +36,8 @@ export class AlertsPage implements OnInit {
       title: 'Attention',
       text: 'Simons Notification',
       data: { mydata: 'My hidden message this is' },
-      trigger: { in: 5, unit: ELocalNotificationTriggerUnit.SECOND },
+      trigger: { in: 6, unit: ELocalNotificationTriggerUnit.SECOND },
+      lockscreen: true,
       foreground: true // Show the notification while app is open
     });
  
