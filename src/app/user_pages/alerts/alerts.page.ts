@@ -32,12 +32,10 @@ export class AlertsPage implements OnInit {
 
   scheduleNotification() {
 
-    this.localNotifications.requestPermission();
-
     this.localNotifications.schedule({
       id: 1,
       title: 'Attention',
-      text: 'Simons Notification',
+      text: 'Notification text',
       data: { mydata: 'My hidden message this is' },
       trigger: { in: 6, unit: ELocalNotificationTriggerUnit.SECOND },
       lockscreen: true,
@@ -58,8 +56,8 @@ export class AlertsPage implements OnInit {
     this.localNotifications.schedule({
       id: 22,
       title: 'Recurring',
-      text: 'Simons Recurring Notification',
-      trigger: { every: ELocalNotificationTriggerUnit.MINUTE }
+      text: 'Recurring every 5 mins',
+      trigger: { every: {minute: 5} }
     });
   }
  
