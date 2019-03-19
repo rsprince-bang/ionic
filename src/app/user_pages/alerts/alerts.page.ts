@@ -31,6 +31,9 @@ export class AlertsPage implements OnInit {
   }
 
   scheduleNotification() {
+
+    this.localNotifications.requestPermission();
+
     this.localNotifications.schedule({
       id: 1,
       title: 'Attention',
