@@ -30,7 +30,7 @@ export class AlertsPage implements OnInit {
       led: 'FF0000',
       icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiBnKijUbBFZRLL8qFgrPiBJxrCLsFTvb0Qxu-DDhqa_OtCsU0',
       sound: this.setSound(),
-      foreground: true
+      //foreground: true
    });
   
   }
