@@ -10,7 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    NativePageTransitions
+    NativePageTransitions,
+    LocalNotifications
   ],
   bootstrap: [AppComponent]
 })
