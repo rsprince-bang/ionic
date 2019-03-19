@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
     //initialize and set form values
     this.credentialsForm = this.formBuilder.group({
       email: ['stoyan.raychev@vpxsports.com', [Validators.required, Validators.email]], 
-      password: ['Hitman07', [Validators.required, Validators.minLength(1)]]
+      password: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
@@ -40,8 +40,8 @@ export class LoginPage implements OnInit {
       "users.php", 
       {
         "action": "login",
-        "email": this.credentialsForm.value.email, //stoyan.raychev@vpxsports.com
-        "password": this.credentialsForm.value.password //abc'def"ghi
+        "email": this.credentialsForm.value.email,
+        "password": this.credentialsForm.value.password
       }
     )
     .subscribe(
