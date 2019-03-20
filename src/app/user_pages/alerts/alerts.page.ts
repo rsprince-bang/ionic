@@ -55,10 +55,7 @@ export class AlertsPage implements OnInit {
       .then((response) => {
         this.modalResponse = response;
         this.scheduleNotification(this.modalResponse.data.title, this.modalResponse.data.date, this.modalResponse.data.time);
-        //this.getAllAlarms();
-        setTimeout(function(){ 
-          this.getAllAlarms();
-         }, 1500);
+        this.getAllAlarms();
     });
 
     return await modal.present();
@@ -121,6 +118,7 @@ export class AlertsPage implements OnInit {
   }
  
   getAllAlarms() {
+    alert("getAlarm");
     this.localNotifications.getAll().then((res: ILocalNotification[]) => {
       this.scheduled = res;
     })
