@@ -55,7 +55,6 @@ export class AlertsPage implements OnInit {
       .then((response) => {
         this.modalResponse = response;
         this.scheduleNotification(this.modalResponse.data.title, this.modalResponse.data.date, this.modalResponse.data.time);
-        this.getAllAlarms();
     });
 
     return await modal.present();
@@ -83,6 +82,7 @@ export class AlertsPage implements OnInit {
       //icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiBnKijUbBFZRLL8qFgrPiBJxrCLsFTvb0Qxu-DDhqa_OtCsU0',
       //sound: this.setSound()
     });
+    this.getAllAlarms();
   }
 
   deleteAlartm(id){
