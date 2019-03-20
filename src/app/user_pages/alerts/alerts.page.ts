@@ -40,9 +40,6 @@ export class AlertsPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewDidEnter(){
-    //this.getAllAlarms();
-  }
   ionViewWillEnter(){
     this.getAllAlarms();
   }
@@ -58,7 +55,10 @@ export class AlertsPage implements OnInit {
       .then((response) => {
         this.modalResponse = response;
         this.scheduleNotification(this.modalResponse.data.title, this.modalResponse.data.date, this.modalResponse.data.time);
-        this.getAllAlarms();
+        //this.getAllAlarms();
+        setTimeout(function(){ 
+          this.getAllAlarms();
+         }, 1500);
     });
 
     return await modal.present();
