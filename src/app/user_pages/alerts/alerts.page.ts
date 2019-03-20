@@ -22,7 +22,8 @@ export class AlertsPage implements OnInit {
     private alertCtrl: AlertController,
     private modalController: ModalController
     ) {
-    
+
+    /*
     this.plt.ready().then(() => {
       this.localNotifications.on('click').subscribe(res => {
         let msg = res.data ? res.data.mydata : '';
@@ -33,10 +34,11 @@ export class AlertsPage implements OnInit {
         let msg = res.data ? res.data.mydata : '';
         this.showAlert(res.title, res.text, msg);
       });
-    });
+    });*/
   }
 
   ngOnInit() {
+    this.getAll();
   }
 
   async openModal(alarm_id){
