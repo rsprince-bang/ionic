@@ -82,7 +82,9 @@ export class AlertsPage implements OnInit {
       //icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiBnKijUbBFZRLL8qFgrPiBJxrCLsFTvb0Qxu-DDhqa_OtCsU0',
       //sound: this.setSound()
     });
-    this.getAllAlarms();
+
+    this.scheduled.push({ "id": notificationIdInteger, "title": "Alert", "text": title });
+    console.log(this.scheduled);
   }
 
   deleteAlartm(id){
@@ -118,7 +120,6 @@ export class AlertsPage implements OnInit {
   }
  
   getAllAlarms() {
-    alert("getAlarm");
     this.localNotifications.getAll().then((res: ILocalNotification[]) => {
       this.scheduled = res;
     })

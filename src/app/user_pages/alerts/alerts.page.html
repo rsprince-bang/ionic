@@ -31,8 +31,8 @@
   <ion-list>
     <ion-item-sliding *ngFor="let n of scheduled">
         <ion-item (click)="openModal(n.id)">
-          <ion-label>{{ n.id }} - {{ n.title }}</ion-label>
-          <p>{{n.text}}</p>
+          <ion-label>{{ n.id }} {{n.text}}</ion-label>
+          <p>on {{n.text}} at {{n.trigger.at}}</p>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option color="danger" (click)="deleteAlartm(n.id)">Delete</ion-item-option>
@@ -40,16 +40,5 @@
       </ion-item-sliding>
   </ion-list>
 
-
-
-
-  <ion-list>
-    <ion-item *ngFor="let n of scheduled">
-      <ion-label text-wrap>
-        {{ n.id }} - {{ n.title }}
-        <p>Trigger: {{ n.trigger | json }} </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
 
 </ion-content>
