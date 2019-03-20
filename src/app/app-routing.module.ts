@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'track-workout', loadChildren: './user_pages/track-workout/track-workout.module#TrackWorkoutPageModule', canActivate:[AuthGuard] },
   { path: 'track-progress', loadChildren: './user_pages/track-progress/track-progress.module#TrackProgressPageModule', canActivate:[AuthGuard] },
   { path: 'alerts', loadChildren: './user_pages/alerts/alerts.module#AlertsPageModule', canActivate:[AuthGuard] }
+  //{ path: 'alerts-picker-modal', loadChildren: './user_pages/alerts-picker-modal/alerts-picker-modal.module#AlertsPickerModalPageModule' }
   
 
 ];

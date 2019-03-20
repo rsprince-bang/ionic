@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/alerts-picker-modal.module';
 
 
 
@@ -22,7 +23,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
     BrowserModule,
      IonicModule.forRoot(),
       AppRoutingModule,
-      HttpClientModule
+      HttpClientModule,
+      AlertsPickerModalPageModule
     ],
   providers: [
     StatusBar,

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform, AlertController } from '@ionic/angular';
-//import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Platform, AlertController, ModalController } from '@ionic/angular';
 import { LocalNotifications, ELocalNotificationTriggerUnit, ILocalNotificationActionType, ILocalNotification } from '@ionic-native/local-notifications/ngx';
+import { AlertsPickerModalPage } from '../alerts-picker-modal/alerts-picker-modal.page';
+
+
 
 
 @Component({
@@ -12,8 +14,15 @@ import { LocalNotifications, ELocalNotificationTriggerUnit, ILocalNotificationAc
 export class AlertsPage implements OnInit {
   
   scheduled = [];
+  modalResponse = null;
 
-  constructor(private plt: Platform, private localNotifications: LocalNotifications, private alertCtrl: AlertController) {
+  constructor(
+    private plt: Platform, 
+    private localNotifications: LocalNotifications, 
+    private alertCtrl: AlertController,
+    private modalController: ModalController
+    ) {
+    
     this.plt.ready().then(() => {
       this.localNotifications.on('click').subscribe(res => {
         let msg = res.data ? res.data.mydata : '';
@@ -30,34 +39,53 @@ export class AlertsPage implements OnInit {
   ngOnInit() {
   }
 
-  scheduleNotification() {
+  async openModal(alarm_id){
+
+    const modal = await this.modalController.create({
+      component: AlertsPickerModalPage,
+      componentProps: { alarm_id: alarm_id }
+    });
+
+    modal.onDidDismiss()
+      .then((response) => {
+        this.modalResponse = response;
+        this.scheduleNotification(this.modalResponse.data.title, this.modalResponse.data.date, this.modalResponse.data.time);
+    });
+
+    return await modal.present();
+  }
+
+
+  scheduleNotification(title, date, time) {
+
+    //for id we will use the time 
+    var notificationIdString = date + time;
+    notificationIdString = notificationIdString.replace(/-/g, "");  //global
+    notificationIdString = notificationIdString.replace(/:/g, "");
+    var notificationIdInteger = parseFloat(notificationIdString);
 
     this.localNotifications.schedule({
-      id: 1,
-      title: 'Attention',
-      text: 'Notification text',
-      data: { mydata: 'My hidden message this is' },
-      trigger: { in: 6, unit: ELocalNotificationTriggerUnit.SECOND },
+      id: notificationIdInteger,
+      title: 'Alert',
+      text: title,
+      data: { mydata: 'My hidden message' },
+     // trigger: { in: 6, unit: ELocalNotificationTriggerUnit.SECOND },
+      trigger: { at: new Date(date+"T"+time+":00") },
       lockscreen: true,
-      foreground: true // Show the notification while app is open
+      foreground: true, // Show the notification while app is open
+      //led: 'FF0000',
+      //icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiBnKijUbBFZRLL8qFgrPiBJxrCLsFTvb0Qxu-DDhqa_OtCsU0',
+      //sound: this.setSound()
     });
- 
-    // Works as well!
-    // this.localNotifications.schedule({
-    //   id: 1,
-    //   title: 'Attention',
-    //   text: 'Simons Notification',
-    //   data: { mydata: 'My hidden message this is' },
-    //   trigger: { at: new Date(new Date().getTime() + 5 * 1000) }
-    // });
   }
  
+  /*
   recurringNotification() {
     this.localNotifications.schedule({
       id: 22,
       title: 'Recurring',
-      text: 'Recurring every 5 mins',
-      trigger: { every: {minute: 5} }
+      text: 'Recurring every ',
+      trigger: { every: ELocalNotificationTriggerUnit.MINUTE }
     });
   }
  
@@ -68,7 +96,7 @@ export class AlertsPage implements OnInit {
       text: 'Code something epic today!',
       trigger: { every: { hour: 9, minute: 30 } }
     });
-  }
+  }*/
  
   showAlert(header, sub, msg) {
     this.alertCtrl.create({
@@ -87,22 +115,6 @@ export class AlertsPage implements OnInit {
 
 
 
-/* MY TEST
-  sheduleNotification(){
-
-    this.localNotifications.schedule({
-      id:1,
-      title: 'Test Title',
-      text: 'Delayed ILocalNotification',
-      data: { mydata: "hidden message fgoes here"},
-      trigger: {at: new Date(new Date().getTime() + 10000)}, //10 seconds from now
-      led: 'FF0000',
-      icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiBnKijUbBFZRLL8qFgrPiBJxrCLsFTvb0Qxu-DDhqa_OtCsU0',
-      sound: this.setSound(),
-      //foreground: true
-   });
-  
-  }
 
   setSound() {
     if (this.plt.is('android')) {
@@ -111,7 +123,7 @@ export class AlertsPage implements OnInit {
     else {
       return 'file://assets/sounds/bell.mp3'
     }
-  }*/
+  }
 
 
 }

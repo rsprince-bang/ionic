@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>alerts_picker_modal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  Alarm id: {{alarm_id}}
+
+  <ion-item>
+      <ion-label >Title</ion-label>
+      <ion-input [(ngModel)]="selected_title" ></ion-input>
+    </ion-item>
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime [(ngModel)]="selected_date" display-format="MM/DD/YYYY" picker-format="MMM DD YYYY"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Time</ion-label>
+    <ion-datetime [(ngModel)]="selected_time" display-format="h:mm A" picker-format="h mm A"></ion-datetime>
+  </ion-item>
+
+
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="cancelModal()">Cancel</ion-button>
+    <ion-button expand="full" [disabled]="!selected_date || !selected_time || !selected_title" (click)="saveAlarm()">Save</ion-button>
+  </ion-toolbar>
+</ion-footer>
