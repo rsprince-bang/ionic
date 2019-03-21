@@ -63,10 +63,6 @@ export class AlertsPage implements OnInit {
 
   scheduleNotification(title, date, time, alarm_id) {
 
-    if(alarm_id == -1){
-      //remove old alarm and add ne, this way our alarm id always represents the alarm time
-      this.deleteAlarm(alarm_id);
-    }
     
     //for id we will use the time 
     var notificationIdString = date + time;
@@ -90,8 +86,13 @@ export class AlertsPage implements OnInit {
     this.localNotifications.schedule(options);
 
     //push manually cuz getAllAlarms() returns empty
-    this.scheduled.push(options);
-    this.translateDateTime();
+    //this.scheduled.push(options);
+    //this.translateDateTime();
+
+    if(alarm_id != -1){
+      //remove old alarm and add ne, this way our alarm id always represents the alarm time
+      this.deleteAlarm(alarm_id);
+    }
   }
 
   deleteAlarm(id){
