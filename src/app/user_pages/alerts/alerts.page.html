@@ -35,7 +35,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let n of scheduled">
         <ion-item (click)="openModal(n.id)">
-          <ion-label>{{ n.id }} {{n.text}}</ion-label>
+          <ion-label>{{n.text}}</ion-label>
           <p>{{n.date}} at {{n.time}}</p>
         </ion-item>
         <ion-item-options side="end">
