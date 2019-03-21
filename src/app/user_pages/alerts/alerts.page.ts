@@ -143,12 +143,10 @@ export class AlertsPage implements OnInit {
 
 
   translateDateTime(){
-    console.log( this.scheduled );
     for ( var i = 0; i < this.scheduled.length; i++) { 
       var date = new Date( this.scheduled[i].trigger.at );
       this.scheduled[i].date = date.toLocaleDateString();
       this.scheduled[i].time = date.toLocaleTimeString();
-      console.log( this.scheduled[i] );
     }
   }
 
