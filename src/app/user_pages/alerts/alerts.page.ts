@@ -111,6 +111,12 @@ export class AlertsPage implements OnInit {
     });
   }
  
+  doRefresh(event) {
+    this.getAllAlarms();
+    event.target.complete();
+  }
+
+  
   /*
   recurringNotification() {
     this.localNotifications.schedule({
