@@ -83,18 +83,11 @@ export class AlertsPage implements OnInit {
     }
     this.localNotifications.schedule(options);
 
+    //call the delete function wich in turn will call the getAlarms function to update main page,
+    //it bugs out of first try after app restart and then i works
+    //added refresher for now
     this.deleteAlarm(alarm_id);
-    /*
-    if(alarm_id != -1){
-      //remove old alarm and add ne, this way our alarm id always represents the alarm time
-      this.deleteAlarm(alarm_id);
-    }
-    else{
-      //this.getAllAlarms();
-      //push manually cuz getAllAlarms() returns empty
-      this.scheduled.push(options);
-      this.translateDateTime();
-    }*/
+
 
   }
 
@@ -116,7 +109,14 @@ export class AlertsPage implements OnInit {
     event.target.complete();
   }
 
-  
+  translateDateTime(){
+    for ( var i = 0; i < this.scheduled.length; i++) { 
+      var date = new Date( this.scheduled[i].trigger.at );
+      this.scheduled[i].date = date.toLocaleDateString();
+      this.scheduled[i].time = date.toLocaleTimeString();
+    }
+  }
+
   /*
   recurringNotification() {
     this.localNotifications.schedule({
@@ -144,17 +144,7 @@ export class AlertsPage implements OnInit {
       buttons: ['Ok']
     }).then(alert => alert.present());
   }
- 
 
-
-
-  translateDateTime(){
-    for ( var i = 0; i < this.scheduled.length; i++) { 
-      var date = new Date( this.scheduled[i].trigger.at );
-      this.scheduled[i].date = date.toLocaleDateString();
-      this.scheduled[i].time = date.toLocaleTimeString();
-    }
-  }
 
   setSound() {
     if (this.plt.is('android')) {

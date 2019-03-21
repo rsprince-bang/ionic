@@ -26,9 +26,18 @@ export class AlertsPickerModalPage implements OnInit {
       this.localNotifications.get(this.alarm_id).then((notification)=>{
         this.selected_title = notification.text;
         var date = new Date( notification.trigger.at );
-        this.selected_date = date.toLocaleDateString();
-        this.selected_time = date.toLocaleTimeString();
+        this.selected_date = date.toISOString();
+        this.selected_time = date.toISOString();
       });
+    }
+    else{
+      //test case
+      //this.selected_title = "baa";
+      //var date = new Date();
+      //console.log( date.toDateString() );
+      //this.selected_date = new Date().toISOString();
+      //this.selected_time = new Date().toISOString();
+
     }
   }
 
