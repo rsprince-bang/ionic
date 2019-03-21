@@ -62,7 +62,7 @@ export class AlertsPage implements OnInit {
 
 
   scheduleNotification(title, date, time, alarm_id) {
-    
+
     var notificationIdString = date + time;
     notificationIdString = notificationIdString.replace(/-/g, "");  //global
     notificationIdString = notificationIdString.replace(/:/g, "");
@@ -91,6 +91,7 @@ export class AlertsPage implements OnInit {
 
   }
 
+
   getAllAlarms() {
     this.localNotifications.getAll().then((res: ILocalNotification[]) => {
       this.scheduled = res;
@@ -98,16 +99,19 @@ export class AlertsPage implements OnInit {
     })
   }
 
+
   deleteAlarm(id){
     this.localNotifications.clear(id).then(()=>{
       this.getAllAlarms();
     });
   }
  
+
   doRefresh(event) {
     this.getAllAlarms();
     event.target.complete();
   }
+
 
   translateDateTime(){
     for ( var i = 0; i < this.scheduled.length; i++) { 
@@ -136,6 +140,7 @@ export class AlertsPage implements OnInit {
     });
   }*/
  
+  
   showAlert(header, sub, msg) {
     this.alertCtrl.create({
       header: header,
