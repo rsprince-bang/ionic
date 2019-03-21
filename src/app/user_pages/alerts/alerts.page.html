@@ -30,8 +30,6 @@
     </ion-label>
   </ion-item>
 
-  <ion-button expand="block" (click)="getAllAlarms()">Get All</ion-button>
-
   <ion-list>
     <ion-item-sliding *ngFor="let n of scheduled">
         <ion-item (click)="openModal(n.id)">

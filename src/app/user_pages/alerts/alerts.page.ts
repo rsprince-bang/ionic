@@ -117,7 +117,7 @@ export class AlertsPage implements OnInit {
     for ( var i = 0; i < this.scheduled.length; i++) { 
       var date = new Date( this.scheduled[i].trigger.at );
       this.scheduled[i].date = date.toLocaleDateString();
-      this.scheduled[i].time = date.toLocaleTimeString();
+      this.scheduled[i].time = this.formatTime(date);
     }
   }
 
@@ -140,7 +140,7 @@ export class AlertsPage implements OnInit {
     });
   }*/
  
-  
+
   showAlert(header, sub, msg) {
     this.alertCtrl.create({
       header: header,
@@ -160,7 +160,28 @@ export class AlertsPage implements OnInit {
     }
   }
 
+  formatTime( date:Date): string{
 
+    var hourN = date.getHours();
+    var hourS = "";
+    if( hourN < 10 ){
+      hourS = "0" + hourN.toString();
+    }
+    else{
+      hourS = hourN.toString();
+    }
+
+    var minutesN = date.getMinutes();
+    var minutesS = "";
+    if( minutesN < 10 ){
+      minutesS = "0" + minutesN.toString();
+    }
+    else{
+      minutesS = minutesN.toString();
+    }
+
+    return `${hourS}:${minutesS}`;
+  }
 }
 
 
