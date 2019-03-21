@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-alerts-picker-modal',
@@ -13,10 +15,18 @@ export class AlertsPickerModalPage implements OnInit {
   selected_title = null;
   alarm_id = null;
 
-  constructor(private navParams: NavParams, private modalController: ModalController) { }
+  constructor(
+    private navParams: NavParams,
+    private modalController: ModalController,
+    private localNotifications: LocalNotifications) { }
 
   ngOnInit() {
     this.alarm_id = this.navParams.get('alarm_id');
+    if( this.alarm_id != -1 ){
+      this.localNotifications.get(this.alarm_id).then((notification)=>{
+        this.selected_title = notification.title;
+      });
+    }
   }
 
   cancelModal(){
