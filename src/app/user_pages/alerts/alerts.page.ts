@@ -62,9 +62,7 @@ export class AlertsPage implements OnInit {
 
 
   scheduleNotification(title, date, time, alarm_id) {
-
     
-    //for id we will use the time 
     var notificationIdString = date + time;
     notificationIdString = notificationIdString.replace(/-/g, "");  //global
     notificationIdString = notificationIdString.replace(/:/g, "");
@@ -93,6 +91,16 @@ export class AlertsPage implements OnInit {
       //remove old alarm and add ne, this way our alarm id always represents the alarm time
       this.deleteAlarm(alarm_id);
     }
+    else{
+      this.getAllAlarms();
+    }
+  }
+
+  getAllAlarms() {
+    this.localNotifications.getAll().then((res: ILocalNotification[]) => {
+      this.scheduled = res;
+      this.translateDateTime();
+    })
   }
 
   deleteAlarm(id){
@@ -129,12 +137,7 @@ export class AlertsPage implements OnInit {
     }).then(alert => alert.present());
   }
  
-  getAllAlarms() {
-    this.localNotifications.getAll().then((res: ILocalNotification[]) => {
-      this.scheduled = res;
-      this.translateDateTime();
-    })
-  }
+
 
 
   translateDateTime(){
