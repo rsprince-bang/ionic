@@ -83,7 +83,8 @@ export class AlertsPage implements OnInit {
     }
     this.localNotifications.schedule(options);
 
-
+    this.deleteAlarm(alarm_id);
+    /*
     if(alarm_id != -1){
       //remove old alarm and add ne, this way our alarm id always represents the alarm time
       this.deleteAlarm(alarm_id);
@@ -93,8 +94,8 @@ export class AlertsPage implements OnInit {
       //push manually cuz getAllAlarms() returns empty
       this.scheduled.push(options);
       this.translateDateTime();
-      
-    }
+    }*/
+
   }
 
   getAllAlarms() {
@@ -142,6 +143,7 @@ export class AlertsPage implements OnInit {
 
 
   translateDateTime(){
+    console.log( this.scheduled );
     for ( var i = 0; i < this.scheduled.length; i++) { 
       var date = new Date( this.scheduled[i].trigger.at );
       this.scheduled[i].date = date.toLocaleDateString();
