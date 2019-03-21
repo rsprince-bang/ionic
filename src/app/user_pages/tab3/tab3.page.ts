@@ -9,6 +9,8 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 })
 export class Tab3Page {
 
+  segment_choice = 'nutrition';
+  
   constructor(private router: Router, private nativePageTransitions: NativePageTransitions) {}
 
   handleSwipeRight(){

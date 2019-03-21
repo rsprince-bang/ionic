@@ -13,35 +13,36 @@
 
 <ion-content (swiperight)="handleSwipeRight()">
 
-
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Tomorrow' Nutrition and Workout Info</ion-card-title>
+      <ion-card-title>Tomorrow's Nutrition and Workout Info</ion-card-title>
     </ion-card-header>
-  
+
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      CCC
     </ion-card-content>
   </ion-card>
 
-  <!-- Toggles in a List -->
-  <ion-list>
-    <ion-item>
-      <ion-label>Pepperoni</ion-label>
-      <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
-    </ion-item>
 
-    <ion-item>
-      <ion-label>Sausage</ion-label>
-      <ion-toggle [(ngModel)]="sausage" disabled="true"></ion-toggle>
-    </ion-item>
+  <!-- Default Segment -->
+  <ion-segment [(ngModel)]="segment_choice">
+    <ion-segment-button value="nutrition">
+      <ion-label>Nutrition</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="workout">
+      <ion-label>Workout</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
-    <ion-item>
-      <ion-label>Mushrooms</ion-label>
-      <ion-toggle [(ngModel)]="mushrooms"></ion-toggle>
-    </ion-item>
-  </ion-list>
-
+  <div *ngIf="segment_choice == 'nutrition'">
+    <p>
+        Non odio euismod lacinia at quis risus. Scelerisque felis imperdiet proin fermentum leo vel orci. Massa sed elementum tempus egestas sed sed risus pretium quam. Cras fermentum odio eu feugiat pretium nibh. 
+    </p>
+  </div>
+  <div *ngIf="segment_choice == 'workout'">
+    <p>
+        Enim nulla aliquet porttitor lacus luctus accumsan. Habitasse platea dictumst vestibulum rhoncus est pellentesque.
+    </p>
+  </div>
 
 </ion-content>

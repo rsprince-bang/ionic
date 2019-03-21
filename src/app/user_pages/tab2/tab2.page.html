@@ -20,29 +20,71 @@
     </ion-card-header>
   
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      Day x of 90 day program
     </ion-card-content>
   </ion-card>
 
-<!-- List of Input Items -->
-<ion-list>
-  <ion-item>
-    <ion-label>Input</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Toggle</ion-label>
-    <ion-toggle slot="end"></ion-toggle>
-  </ion-item>
-  <ion-item>
-    <ion-label>Radio</ion-label>
-    <ion-radio slot="end"></ion-radio>
-  </ion-item>
-  <ion-item>
-    <ion-label>Checkbox</ion-label>
-    <ion-checkbox slot="start"></ion-checkbox>
-  </ion-item>
-</ion-list>
+
+<!-- Default Segment -->
+<ion-segment [(ngModel)]="segment_choice"  >
+  <ion-segment-button value="nutrition">
+    <ion-label>Nutrition</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="workout">
+    <ion-label>Workout</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<div *ngIf="segment_choice == 'nutrition'"  >
+  <p>
+      Day X nutrient profile consists of 50%
+      Protein and 50% Carbohydrate. Your
+      protein intake per meal is 29.38 and
+      Carbohydrate intake per meal is 29.38.
+      During Phase I, you may eat as many
+      servings of vegetables as you desire from
+      Food Chart I (i). Set a goal to eat
+      vegetables at least three times daily. Use
+      FiberTeq if vegetable intake falls below
+      three servings per day.
+      A Zero Impact SuperFood Protein Shake
+      MRP can be used as a meal replacement
+  </p>
+    <!-- Toggles in a List -->
+    <ion-list>
+        <ion-item>
+          <ion-label>Pizza</ion-label>
+          <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Beer</ion-label>
+          <ion-toggle [(ngModel)]="mushrooms"></ion-toggle>
+        </ion-item>
+      </ion-list>
+</div>
+<div *ngIf="segment_choice == 'workout'" >
+  <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
+      culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+    <!-- Toggles in a List -->
+    <ion-list>
+        <ion-item>
+          <ion-label>Bench Press</ion-label>
+          <ion-toggle ></ion-toggle>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>Squads</ion-label>
+          <ion-toggle></ion-toggle>
+        </ion-item>
+      </ion-list>
+</div>
 
 </ion-content>
