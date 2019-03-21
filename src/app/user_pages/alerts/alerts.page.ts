@@ -83,16 +83,17 @@ export class AlertsPage implements OnInit {
     }
     this.localNotifications.schedule(options);
 
-    //push manually cuz getAllAlarms() returns empty
-    //this.scheduled.push(options);
-    //this.translateDateTime();
 
     if(alarm_id != -1){
       //remove old alarm and add ne, this way our alarm id always represents the alarm time
       this.deleteAlarm(alarm_id);
     }
     else{
-      this.getAllAlarms();
+      //this.getAllAlarms();
+      //push manually cuz getAllAlarms() returns empty
+      this.scheduled.push(options);
+      this.translateDateTime();
+      
     }
   }
 
