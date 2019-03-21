@@ -117,7 +117,7 @@ export class AlertsPage implements OnInit {
     for ( var i = 0; i < this.scheduled.length; i++) { 
       var date = new Date( this.scheduled[i].trigger.at );
       this.scheduled[i].date = date.toLocaleDateString();
-      this.scheduled[i].time = this.formatTime(date);
+      this.scheduled[i].time = date.toLocaleTimeString().replace(/:\d{2}\s/,' '); //remove seconds
     }
   }
 
@@ -160,6 +160,7 @@ export class AlertsPage implements OnInit {
     }
   }
 
+  /*
   formatTime( date:Date): string{
 
     var hourN = date.getHours();
@@ -182,6 +183,8 @@ export class AlertsPage implements OnInit {
 
     return `${hourS}:${minutesS}`;
   }
+  */
+ 
 }
 
 
