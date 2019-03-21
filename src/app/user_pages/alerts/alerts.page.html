@@ -32,10 +32,10 @@
     <ion-item-sliding *ngFor="let n of scheduled">
         <ion-item (click)="openModal(n.id)">
           <ion-label>{{ n.id }} {{n.text}}</ion-label>
-          <p>on {{n.text}} at {{n.trigger.at}}</p>
+          <p>{{n.date}} at {{n.time}}</p>
         </ion-item>
         <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="deleteAlartm(n.id)">Delete</ion-item-option>
+          <ion-item-option color="danger" (click)="deleteAlarm(n.id)">Delete</ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
   </ion-list>

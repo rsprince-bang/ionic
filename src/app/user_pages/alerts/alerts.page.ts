@@ -54,22 +54,27 @@ export class AlertsPage implements OnInit {
     modal.onDidDismiss()
       .then((response) => {
         this.modalResponse = response;
-        this.scheduleNotification(this.modalResponse.data.title, this.modalResponse.data.date, this.modalResponse.data.time);
+        this.scheduleNotification(this.modalResponse.data.title, this.modalResponse.data.date, this.modalResponse.data.time, alarm_id);
     });
 
     return await modal.present();
   }
 
 
-  scheduleNotification(title, date, time) {
+  scheduleNotification(title, date, time, alarm_id) {
 
+    if(alarm_id == -1){
+      //remove old alarm and add ne, this way our alarm id always represents the alarm time
+      this.deleteAlarm(alarm_id);
+    }
+    
     //for id we will use the time 
     var notificationIdString = date + time;
     notificationIdString = notificationIdString.replace(/-/g, "");  //global
     notificationIdString = notificationIdString.replace(/:/g, "");
     var notificationIdInteger = parseFloat(notificationIdString);
 
-    this.localNotifications.schedule({
+    let options = {
       id: notificationIdInteger,
       title: 'Alert',
       text: title,
@@ -81,14 +86,18 @@ export class AlertsPage implements OnInit {
       //led: 'FF0000',
       //icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiBnKijUbBFZRLL8qFgrPiBJxrCLsFTvb0Qxu-DDhqa_OtCsU0',
       //sound: this.setSound()
-    });
+    }
+    this.localNotifications.schedule(options);
 
-    this.scheduled.push({ "id": notificationIdInteger, "title": "Alert", "text": title });
-    console.log(this.scheduled);
+    //push manually cuz getAllAlarms() returns empty
+    this.scheduled.push(options);
+    this.translateDateTime();
   }
 
-  deleteAlartm(id){
-    alert("delete alarm "+id+" here");
+  deleteAlarm(id){
+    this.localNotifications.clear(id).then(()=>{
+      this.getAllAlarms();
+    });
   }
  
   /*
@@ -122,9 +131,19 @@ export class AlertsPage implements OnInit {
   getAllAlarms() {
     this.localNotifications.getAll().then((res: ILocalNotification[]) => {
       this.scheduled = res;
+      this.translateDateTime();
     })
   }
 
+
+  translateDateTime(){
+    for ( var i = 0; i < this.scheduled.length; i++) { 
+      var date = new Date( this.scheduled[i].trigger.at );
+      this.scheduled[i].date = date.toLocaleDateString();
+      this.scheduled[i].time = date.toLocaleTimeString();
+      console.log( this.scheduled[i] );
+    }
+  }
 
   setSound() {
     if (this.plt.is('android')) {
