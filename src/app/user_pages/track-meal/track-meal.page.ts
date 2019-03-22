@@ -86,7 +86,7 @@ export class TrackMealPage implements OnInit {
   handleSwipeRight() {
     if( this.day > 1 ){
       var prevday = parseInt(this.day)-1;
-      this.globalServices.swipeLeft("/track-meal/"+prevday);
+      this.globalServices.swipeRight("/track-meal/"+prevday);
     }
   }
 

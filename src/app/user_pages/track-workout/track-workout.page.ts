@@ -54,7 +54,7 @@ export class TrackWorkoutPage implements OnInit {
   handleSwipeRight() {
     if( this.day > 1 ){
       var prevday = parseInt(this.day)-1;
-      this.globalServices.swipeLeft("/track-workout/"+prevday);
+      this.globalServices.swipeRight("/track-workout/"+prevday);
     }
   }
 
