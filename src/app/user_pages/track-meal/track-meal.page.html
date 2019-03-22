@@ -1,16 +1,74 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-toggle>
-            <ion-button>
-              <ion-icon slot="icon-only" name="menu"></ion-icon>
-            </ion-button>
-          </ion-menu-toggle>
-        </ion-buttons>
-        <ion-title>Track Meal</ion-title>
-      </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Track Meal</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
+  <ion-toolbar>
+    <ion-icon name="arrow-dropleft" slot="start"></ion-icon>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Day {{day}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Current progress
+      </ion-card-content>
+    </ion-card>
+    <ion-icon name="arrow-dropright" slot="end"></ion-icon>
+  </ion-toolbar>
+
+
+  <ion-searchbar *ngIf="!disablechecksmarks" debounce="500" [(ngModel)]="searchTerm"
+    (ionChange)="searchChanged($event)"></ion-searchbar>
+
+  <!--<ion-item>
+    <ion-label>Select SearchType</ion-label>
+    <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option value="movie">Movie</ion-select-option>
+      <ion-select-option value="series">Series</ion-select-option>
+      <ion-select-option value="episode">Episode</ion-select-option>
+
+    </ion-select>
+  </ion-item>-->
+
+  <ion-list>
+    <ion-item button *ngFor="let item of (results | async)">
+      <ion-avatar slot="start">
+        <img [src]="item.Poster" *ngIf="item.Poster != 'N/A' ">
+      </ion-avatar>
+
+      <ion-label text-wrap>
+        <h3>{{item.Title}}</h3>
+      </ion-label>
+
+      <ion-button slot="end" size="small" (click)="addToList(item.Title)">Add</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Checkboxes in a List -->
+  <ion-list>
+    <ion-item-sliding *ngFor="let meal of todaymeals">
+      <ion-item>
+        <ion-checkbox slot="start" [checked]="meal.isChecked" [disabled]="disablechecksmarks" (press)="press()">
+        </ion-checkbox>
+        <ion-label>{{meal.name}}</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="removeFromList(meal)">Delete</ion-item-option>
+        <ion-item-option (click)="editMeal(meal)">Edit</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 </ion-content>

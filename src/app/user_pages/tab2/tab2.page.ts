@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
+import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 
 @Component({
@@ -12,40 +12,14 @@ export class Tab2Page {
 
   segment_choice = 'nutrition';
 
-  constructor(private router: Router, private nativePageTransitions: NativePageTransitions) { }
-
-  /*
-  options: NativeTransitionOptions = {
-    direction: 'left',
-    duration: 400,
-    slowdownfactor: -1,
-    //slidePixels: 20,
-    //iosdelay: 100,
-    //androiddelay: 150,
-    //fixedPixelsTop: 0,
-    //fixedPixelsBottom: 60
-  }*/
+  constructor(private router: Router, private globalServices: GlobalServicesService) { }
 
   handleSwipeLeft() {
-
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1
-    }
-    this.nativePageTransitions.slide(options);
-    this.router.navigateByUrl("/home/tabs/tab3");
+    this.globalServices.swipeLeft("/home/tabs/tab3");
   }
 
   handleSwipeRight() {
-
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: -1
-    }
-    this.nativePageTransitions.slide(options);
-    this.router.navigateByUrl("/home/tabs/tab1");
+    this.globalServices.swipeRight("/home/tabs/tab1");
   }
 
 }

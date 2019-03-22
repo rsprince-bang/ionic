@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
+import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 @Component({
   selector: 'app-tab3',
@@ -11,16 +11,9 @@ export class Tab3Page {
 
   segment_choice = 'nutrition';
   
-  constructor(private router: Router, private nativePageTransitions: NativePageTransitions) {}
+  constructor(private router: Router, private globalServices: GlobalServicesService) {}
 
   handleSwipeRight(){
-
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: -1
-    }
-    this.nativePageTransitions.slide(options);
-    this.router.navigateByUrl("/home/tabs/tab2");
+    this.globalServices.swipeRight("/home/tabs/tab2");
   }
 }
