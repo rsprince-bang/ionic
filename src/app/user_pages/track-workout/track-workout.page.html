@@ -1,16 +1,63 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-toggle>
-            <ion-button>
-              <ion-icon slot="icon-only" name="menu"></ion-icon>
-            </ion-button>
-          </ion-menu-toggle>
-        </ion-buttons>
-        <ion-title>Track Workout</ion-title>
-      </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Track Workout</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
+  <ion-toolbar>
+    <ion-icon name="arrow-dropleft" slot="start"></ion-icon>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Day {{day}}</ion-card-title>
+      </ion-card-header>
 
+      <ion-card-content>
+        Current progress
+      </ion-card-content>
+    </ion-card>
+    <ion-icon name="arrow-dropright" slot="end"></ion-icon>
+  </ion-toolbar>
+
+  <ion-item>
+    <ion-label>Workouit complete?</ion-label>
+    <ion-toggle></ion-toggle>
+  </ion-item>
+
+  <!--
+  <ion-list>
+      <ion-item-sliding *ngFor="let workout of todayWorkouts">
+        <ion-item>
+          <ion-checkbox slot="start" [checked]="workout.isChecked" [disabled]="disablechecksmarks" ></ion-checkbox>
+          <ion-label>{{workout.name}}</ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="removeFromList(workout)">Delete</ion-item-option>
+          <ion-item-option (click)="edit(workout)">Edit</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list> -->
+
+  <ion-grid>
+    <ion-row *ngFor="let workout of todayWorkouts">
+      <ion-col size="9">
+        <ion-item>
+          <ion-checkbox slot="start" [checked]="workout.isChecked" [disabled]="disablechecksmarks"></ion-checkbox>
+          <ion-label>{{workout.name}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button (click)="openExersize(workout)">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

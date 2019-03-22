@@ -11,17 +11,17 @@
         <ion-menu-toggle>
             <ion-item [routerLink]="['/home/tabs/tab2']" >Home</ion-item>
         </ion-menu-toggle>
-        <ion-menu-toggle>
+        <!--<ion-menu-toggle>
             <ion-item [routerLink]="['/track']" >Track</ion-item>
-        </ion-menu-toggle>
+        </ion-menu-toggle> -->
         <ion-menu-toggle>
             <ion-item [routerLink]="['/', 'track-meal', 5]" >Track Meal</ion-item> 
         </ion-menu-toggle>
         <ion-menu-toggle>
-            <ion-item [routerLink]="['/track-progress']" >Track Progress</ion-item>
+            <ion-item [routerLink]="['/track-workout', 5]" >Track Workout</ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-            <ion-item [routerLink]="['/track-workout']" >Track Workout</ion-item>
+            <ion-item [routerLink]="['/track-progress']" >Track Progress</ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
           <ion-item [routerLink]="['/alerts']" >Alerts</ion-item>
