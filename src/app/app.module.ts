@@ -13,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/alerts-picker-modal.module';
-
+import { TrackWorkoutModalPageModule } from './user_pages/track-workout-modal/track-workout-modal.module';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 
 @NgModule({
@@ -24,14 +25,16 @@ import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/al
      IonicModule.forRoot(),
       AppRoutingModule,
       HttpClientModule,
-      AlertsPickerModalPageModule
+      AlertsPickerModalPageModule,
+      TrackWorkoutModalPageModule
     ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativePageTransitions,
-    LocalNotifications
+    LocalNotifications,
+    InAppBrowser
   ],
   bootstrap: [AppComponent]
 })

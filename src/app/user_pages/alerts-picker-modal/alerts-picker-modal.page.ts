@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { stringify } from '@angular/compiler/src/util';
+
 
 @Component({
   selector: 'app-alerts-picker-modal',
