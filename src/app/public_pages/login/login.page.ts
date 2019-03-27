@@ -54,15 +54,14 @@ export class LoginPage implements OnInit {
         else if(this.userInfo.success){
           localStorage.setItem("token", this.userInfo.success.token);
           localStorage.setItem("user_id", this.userInfo.success.user_id);
-          localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
-
           this.events.publish("user logged in", 1111, 2222); //test passsing args
 
           if( this.userInfo.success.first_time_user && this.userInfo.success.first_time_user == "yes" ){
             this.router.navigateByUrl("/enter-measurements");
           }
           else{
-            this.router.navigateByUrl("/home/tabs/tab2");
+            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
+            this.router.navigateByUrl("/home/today");
           }
         }
         else{

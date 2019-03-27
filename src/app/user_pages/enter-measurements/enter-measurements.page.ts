@@ -40,7 +40,7 @@ export class EnterMeasurementsPage implements OnInit {
       }
       else{
         localStorage.setItem("dailyCaloriesIntake", result.success.dailyCaloriesIntake);
-        this.router.navigateByUrl("/home/tabs/tab2");
+        this.router.navigateByUrl("/home/today");
       }
 
     });

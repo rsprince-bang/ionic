@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-toolbar>
+    <ion-icon *ngIf="day == 'today' || day == 'tomorrow'" name="arrow-dropleft" slot="start"></ion-icon>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{day}} Nutrition and Workout Info</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Day x of 90 day program
+      </ion-card-content>
+    </ion-card>
+    <ion-icon *ngIf="day == 'today' || day == 'yesterday'" name="arrow-dropright" slot="end"></ion-icon>
+  </ion-toolbar>
+
+
+  <!-- Segment choice-->
+  <ion-segment [(ngModel)]="segment_choice">
+    <ion-segment-button value="nutrition">
+      <ion-label>Nutrition</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="workout">
+      <ion-label>Workout</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!--Nutrition segment-->
+  <div *ngIf="segment_choice == 'nutrition'">
+    <p>
+      Day X nutrient profile consists of 50%
+      Protein and 50% Carbohydrate. Your
+      protein intake per meal is 29.38 and
+      Carbohydrate intake per meal is 29.38.
+      During Phase I, you may eat as many
+      servings of vegetables as you desire from
+      Food Chart I (i). Set a goal to eat
+      vegetables at least three times daily. Use
+      FiberTeq if vegetable intake falls below
+      three servings per day.
+      A Zero Impact SuperFood Protein Shake
+      MRP can be used as a meal replacement
+    </p>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Pizza</ion-label>
+        <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Beer</ion-label>
+        <ion-toggle [(ngModel)]="mushrooms"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-button>Add food</ion-button>
+    </ion-item>
+  </div>
+  <!--End segments-->
+
+  <!--Workout segment-->
+  <div *ngIf="segment_choice == 'workout'">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+      culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Bench Press</ion-label>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Squads</ion-label>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+        <ion-button>Add exercise</ion-button>
+      </ion-item>
+  </div>
+  <!--End segments-->
+
+  <p>Target calories to loose weight:</p>
+  <p>{{dietCaloriesIntake}}<p>
+</ion-content>

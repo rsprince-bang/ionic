@@ -42,7 +42,7 @@ export class AppComponent {
 
       if( this.globalservice.isLoggedIn() ){
         this.loggedin = true;
-        this.router.navigateByUrl("/home/tabs/tab2");
+        this.router.navigateByUrl("/home/today");
       }
 
     });

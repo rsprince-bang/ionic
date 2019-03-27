@@ -19,10 +19,10 @@ export class Tab2Page {
   }
 
   ionViewWillEnter(){
-    alert("ionViewWillEnter");
+    console.log("ionViewWillEnter");
     this.updatepage();
   }
-  
+
 
   handleSwipeLeft() {
     this.globalServices.swipeLeft("/home/tabs/tab3");
