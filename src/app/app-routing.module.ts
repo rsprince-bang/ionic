@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'track-meal/:day', loadChildren: './user_pages/track-meal/track-meal.module#TrackMealPageModule', canActivate:[AuthGuard] },
   { path: 'track-workout/:day', loadChildren: './user_pages/track-workout/track-workout.module#TrackWorkoutPageModule', canActivate:[AuthGuard] },
   { path: 'track-progress', loadChildren: './user_pages/track-progress/track-progress.module#TrackProgressPageModule', canActivate:[AuthGuard] },
-  { path: 'alerts', loadChildren: './user_pages/alerts/alerts.module#AlertsPageModule', canActivate:[AuthGuard] }
+  { path: 'alerts', loadChildren: './user_pages/alerts/alerts.module#AlertsPageModule', canActivate:[AuthGuard] },
+  { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] }
 
   
 

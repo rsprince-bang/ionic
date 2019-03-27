@@ -68,10 +68,10 @@ export class TrackWorkoutPage implements OnInit {
       componentProps: { workout: workout }
     });
 
-    modal.onDidDismiss()
+/*     modal.onDidDismiss()
       .then((response) => {
         console.log(response);
-      });
+      }); */
 
     return await modal.present();
   }

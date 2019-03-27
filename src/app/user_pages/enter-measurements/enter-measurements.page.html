@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Enter Measurements</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="measurementsForm" (ngSubmit)="submitMeasurements()">
+
+    <ion-item>
+      <ion-label position="floating">Feet</ion-label>
+      <ion-input type="number" formControlName="heightFeet"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Inches</ion-label>
+      <ion-input type="number" formControlName="heightInches"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Weight lbs</ion-label>
+      <ion-input type="number" formControlName="weight"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Age</ion-label>
+      <ion-input type="number" formControlName="age"></ion-input>
+    </ion-item>
+
+    <!--
+    <ion-radio-group formControlName="gender">
+      <ion-list-header>
+        <ion-label>Gender</ion-label>
+      </ion-list-header>
+  
+      <ion-item>
+        <ion-label>Male</ion-label>
+        <ion-radio slot="start" value="M" ></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Female</ion-label>
+        <ion-radio slot="start" value="F" ></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    -->
+
+    <ion-item >
+      <ion-label>Gender</ion-label>
+      <ion-select interface="popover" placeholder="Select one" formControlName="gender">
+        <ion-select-option value="M">Male</ion-select-option>
+        <ion-select-option value="F">Female</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item >
+      <ion-label>Activity Level</ion-label>
+      <ion-select interface="action-sheet" placeholder="Select one" formControlName="activity">
+        <ion-select-option value="1.2">Sedentary</ion-select-option>
+        <ion-select-option value="1.375">Light Exercise 1-3 days/w</ion-select-option>
+        <ion-select-option value="1.55">Moderate Exercise 3-5 days/w</ion-select-option>
+        <ion-select-option value="1.725">Hardcore Exercise or Sports 6-7 days/w</ion-select-option>
+        <ion-select-option value="1.9">Hardcore Exercise 6-7 days/w + labor intensive job</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!measurementsForm.valid">Continue</ion-button>
+  </form>
+
+</ion-content>

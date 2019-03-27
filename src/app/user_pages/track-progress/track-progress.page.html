@@ -1,16 +1,23 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-toggle>
-            <ion-button>
-              <ion-icon slot="icon-only" name="menu"></ion-icon>
-            </ion-button>
-          </ion-menu-toggle>
-        </ion-buttons>
-        <ion-title>Track Progress</ion-title>
-      </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Track Progress</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+    <ion-virtual-scroll [items]="items" >
+        <ion-item *virtualItem="let item">
+          <ion-label>{{item.registered.date}}</ion-label>
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-item>
+      </ion-virtual-scroll>
 
 </ion-content>

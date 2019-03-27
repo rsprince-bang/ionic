@@ -11,8 +11,18 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 export class Tab2Page {
 
   segment_choice = 'nutrition';
+  dailyCaloriesIntake = null;
+  dietCaloriesIntake = null;
 
-  constructor(private router: Router, private globalServices: GlobalServicesService) { }
+  constructor(private router: Router, private globalServices: GlobalServicesService) { 
+
+  }
+
+  ionViewWillEnter(){
+    alert("ionViewWillEnter");
+    this.updatepage();
+  }
+  
 
   handleSwipeLeft() {
     this.globalServices.swipeLeft("/home/tabs/tab3");
@@ -22,4 +32,20 @@ export class Tab2Page {
     this.globalServices.swipeRight("/home/tabs/tab1");
   }
 
+
+  doRefresh(event) {
+    this.updatepage();
+    event.target.complete();
+  }
+
+  updatepage(){
+    if( !this.globalServices.hasDailyCaloriesIntake() ){
+      this.router.navigateByUrl("/enter-measurements");
+    }
+    else{
+      this.dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
+      this.dietCaloriesIntake = this.dailyCaloriesIntake - 200;
+    }
+    
+  }
 }

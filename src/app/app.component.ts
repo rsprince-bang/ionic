@@ -45,14 +45,12 @@ export class AppComponent {
         this.router.navigateByUrl("/home/tabs/tab2");
       }
 
-
     });
   }
 
   logout(){
-    localStorage.removeItem("token");
-    localStorage.removeItem("user_id");
+
     this.loggedin = false;
-    this.router.navigateByUrl("/login");
+    this.globalservice.logOut();
   }
 }

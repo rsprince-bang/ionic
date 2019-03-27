@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoadingController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { LoadingController, AlertController } from '@ionic/angular';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
+import { GlobalServicesService } from './global-services.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +22,16 @@ export class ApiCallService {
 
   private loading = null;
 
-  constructor(private http: HttpClient, public loadingController: LoadingController) { }
+  constructor(private http: HttpClient, public loadingController: LoadingController, private alertController: AlertController, private router: Router,
+    private globalservice: GlobalServicesService ) { }
 
 
   makeAPIcall(page, data, auth_needed=false): Observable<any>{
 
-    /*
     if(auth_needed){
-      let token = localStorage.getItem("token");
-      console.log(token);
-      if (token){
-        data.token = token;
-      }
-      else{
-        //return false;
-      }
-    }*/
+      data.token = localStorage.getItem("token");
+      data.user_id = localStorage.getItem("user_id");
+    }
 
     this.presentLoadingWithOptions();
 
@@ -47,6 +43,12 @@ export class ApiCallService {
       map(results => {
         this.loading.dismiss();
         return results;
+      }),
+      catchError(error => {
+        this.showError(error);
+
+        this.loading.dismiss();
+        return throwError(error);
       })
     );
     
@@ -70,7 +72,22 @@ export class ApiCallService {
   }
 
 
+  async showError(error) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: 'We were unable handle your request, please try again later with better Wi-Fi connection.',
+      buttons: ['OK']
+    });
 
+    await alert.present();
+  }
+
+
+  handleMyAPIError(error){
+    if(error == "Expired token"){
+      this.globalservice.logOut();
+    }
+  }
 
 
 }

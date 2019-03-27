@@ -34,6 +34,7 @@ export class TrackMealPage implements OnInit {
     private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit() {
+
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
 
     //get 2 random meals for testing stackoverflow func

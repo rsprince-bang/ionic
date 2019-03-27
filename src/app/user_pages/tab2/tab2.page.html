@@ -11,9 +11,12 @@
       </ion-toolbar>
 </ion-header>
 
-<ion-content padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
+<ion-content padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
 
-
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
   <ion-card>
     <ion-card-header>
       <ion-card-title>Todays' Nutrition and Workout Info</ion-card-title>
@@ -87,4 +90,6 @@
       </ion-list>
 </div>
 
+<h1>{{dailyCaloriesIntake}} calories a day to sustain weight</h1>
+<h1>{{dietCaloriesIntake}} calories a day to sustain weight</h1>
 </ion-content>

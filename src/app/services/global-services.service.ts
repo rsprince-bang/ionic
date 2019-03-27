@@ -10,7 +10,6 @@ export class GlobalServicesService {
   constructor(private router: Router, private nativePageTransitions: NativePageTransitions) { }
 
   isLoggedIn(){
-
     let token = localStorage.getItem('token');
     if (token){
       return true;
@@ -21,8 +20,13 @@ export class GlobalServicesService {
   }
 
 
-  swipeLeft( url:string) {
+  logOut(){
+    localStorage.clear();
+    this.router.navigateByUrl("/login");
+  }
 
+
+  swipeLeft( url:string) {
     let options: NativeTransitionOptions = {
       direction: 'left',
       duration: 400,
@@ -33,7 +37,6 @@ export class GlobalServicesService {
   }
 
   swipeRight( url ) {
-
     let options: NativeTransitionOptions = {
       direction: 'right',
       duration: 400,
@@ -41,5 +44,16 @@ export class GlobalServicesService {
     }
     this.nativePageTransitions.slide(options);
     this.router.navigateByUrl(url);
+  }
+
+
+  hasDailyCaloriesIntake(){
+    let dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
+    if (dailyCaloriesIntake){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }
