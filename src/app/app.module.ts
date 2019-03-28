@@ -12,9 +12,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/alerts-picker-modal.module';
 import { TrackWorkoutModalPageModule } from './user_pages/track-workout-modal/track-workout-modal.module';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { HomeAddFoodModalPageModule } from './user_pages/home-add-food-modal/home-add-food-modal.module';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
       AppRoutingModule,
       HttpClientModule,
       AlertsPickerModalPageModule,
-      TrackWorkoutModalPageModule
+      TrackWorkoutModalPageModule,
+      HomeAddFoodModalPageModule,
+      HomeAddFoodModalPageModule
     ],
   providers: [
     StatusBar,

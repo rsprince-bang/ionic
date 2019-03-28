@@ -59,21 +59,18 @@
       MRP can be used as a meal replacement
     </p>
 
+    <!--Food toggles loop-->
     <ion-list>
-      <ion-item>
-        <ion-label>Pizza</ion-label>
-        <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Beer</ion-label>
-        <ion-toggle [(ngModel)]="mushrooms"></ion-toggle>
-      </ion-item>
+        <ion-item *ngFor="let meal of todaymeals" (press)="presentActionSheet(meal.name)">
+            <ion-label>{{meal.name}}</ion-label>
+            <ion-toggle [checked]="meal.isChecked" [disabled]="disabletoggles"></ion-toggle>
+        </ion-item>
     </ion-list>
 
-    <ion-item>
-      <ion-button>Add food</ion-button>
+    <ion-item *ngIf="day != 'yesterday'">
+      <ion-button (click)="addFoodModal()">Add food</ion-button>
     </ion-item>
+
   </div>
   <!--End segments-->
 
@@ -102,11 +99,13 @@
     </ion-list>
 
     <ion-item>
-        <ion-button>Add exercise</ion-button>
-      </ion-item>
+      <ion-button>Add exercise</ion-button>
+    </ion-item>
   </div>
   <!--End segments-->
 
   <p>Target calories to loose weight:</p>
   <p>{{dietCaloriesIntake}}<p>
+
+
 </ion-content>
