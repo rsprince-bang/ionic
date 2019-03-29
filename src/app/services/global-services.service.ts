@@ -56,4 +56,15 @@ export class GlobalServicesService {
       return false;
     }
   }
+
+  getTodayDate(){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    var today_string = yyyy + '-' + mm + '-' + dd;
+
+    return today_string;
+  }
 }

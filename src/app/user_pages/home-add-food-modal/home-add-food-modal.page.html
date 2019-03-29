@@ -6,9 +6,9 @@
 
 <ion-content padding>
 
-  <ion-searchbar debounce="2000" [(ngModel)]="searchTerm" (ionClear)="clearSearch()" (keyup.enter)="searchChanged()">
+  <ion-searchbar debounce="2000" (ionChange)="searchChanged($event)" [(ngModel)]="searchTerm" (ionClear)="clearSearch()" >
   </ion-searchbar>
-  <!-- (ionChange)="searchChanged($event)" -->
+
 
   <ion-list>
     <div *ngFor="let item of searchResults">

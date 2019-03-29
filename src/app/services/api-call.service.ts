@@ -55,6 +55,23 @@ export class ApiCallService {
   }
 
 
+  makeSilentCall(page, data, auth_needed=false){
+
+    if(auth_needed){
+      data.token = localStorage.getItem("token");
+      data.user_id = localStorage.getItem("user_id");
+    }
+
+    this.http.post(
+      environment.API_URL + page,
+      JSON.stringify(data),
+      this.options
+    ).subscribe( () =>{
+      //do nothing
+    });
+  }
+
+
   async presentLoadingWithOptions() {
     this.loading = await this.loadingController.create({
       spinner: "lines",

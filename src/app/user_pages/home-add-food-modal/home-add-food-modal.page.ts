@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Observable } from 'rxjs';
 import { ApiCallService } from 'src/app/services/api-call.service';
+
 
 @Component({
   selector: 'app-home-add-food-modal',
@@ -83,32 +83,24 @@ export class HomeAddFoodModalPage implements OnInit {
     }
   }
 
-  addToList(item, calories, protein, fat, carbohydrate){
-
-    console.log(calories);
-    console.log(protein);
-    console.log(fat);
-    console.log(carbohydrate);
-    console.log(item);
-
-    //now save to DB
-/*     this.myAPI.makeAPIcall(
-      "food_api.php", 
+  addToList(item, calories, protein, fat, carbohydrate){    
+    this.myAPI.makeSilentCall(
+      "users.php", 
       {
-        "action": "loadFoodById",
-        "food_id": item.food_id
+        "action": "saveMeal",
+        "food_name": item.food_name,
+        "calories": calories,
+        "protein": protein,
+        "fat": fat,
+        "carbohydrate": carbohydrate
       },
       true
-    ).subscribe((result)=>{
-      if( result.error ){
-        this.myAPI.handleMyAPIError(result.error);
-      }
-      else{
-        console.log(result);
-        
-      }
-    }); */
-    
-    this.modalController.dismiss({ "item":item});
+    );
+
+    this.modalController.dismiss({ "item":item, "calories":calories});
   }
+
+
+
+
 }
