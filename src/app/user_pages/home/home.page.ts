@@ -99,7 +99,7 @@ export class HomePage implements OnInit {
     modal.onDidDismiss()
       .then((response) => {
         if( response.data ){
-          this.addToList(response.data.title);
+          this.addToList(response.data.item.food_name);
         }        
     });
 
