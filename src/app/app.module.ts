@@ -17,6 +17,8 @@ import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/al
 import { TrackWorkoutModalPageModule } from './user_pages/track-workout-modal/track-workout-modal.module';
 import { HomeAddFoodModalPageModule } from './user_pages/home-add-food-modal/home-add-food-modal.module';
 
+//import { NgCircleProgressModule } from 'ng-circle-progress';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +31,8 @@ import { HomeAddFoodModalPageModule } from './user_pages/home-add-food-modal/hom
       AlertsPickerModalPageModule,
       TrackWorkoutModalPageModule,
       HomeAddFoodModalPageModule,
-      HomeAddFoodModalPageModule
+      HomeAddFoodModalPageModule,
+      //NgCircleProgressModule.forRoot()
     ],
   providers: [
     StatusBar,

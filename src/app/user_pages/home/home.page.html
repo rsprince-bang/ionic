@@ -61,8 +61,8 @@
 
     <!--Food toggles loop-->
     <ion-list>
-        <ion-item *ngFor="let meal of todaymeals" (press)="presentActionSheet(meal.name)">
-            <ion-label>{{meal.name}}</ion-label>
+        <ion-item *ngFor="let meal of todaymeals" (press)="presentActionSheet(meal.id, meal.meal_name)">
+            <ion-label>{{meal.meal_name}}</ion-label>
             <ion-toggle [checked]="meal.isChecked" [disabled]="disabletoggles"></ion-toggle>
         </ion-item>
     </ion-list>
@@ -107,5 +107,9 @@
   <p>Target calories to loose weight:</p>
   <p>{{dietCaloriesIntake}}<p>
 
+  <p>Cosnusmed so far:</p>
+  <p>{{caloriesConsumed}}</p>
 
+  <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
+  <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle"></circle-progress>
 </ion-content>

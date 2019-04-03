@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 
 @Component({
@@ -10,12 +11,15 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 })
 export class HomeAddFoodModalPage implements OnInit {
 
+  day; //passed from previous page
+  date = null;
   searchResults = [];
-  //results = null;
   searchTerm = '';
-  constructor(private modalController: ModalController, private myAPI: ApiCallService) { }
+
+  constructor(private modalController: ModalController, private myAPI: ApiCallService, private globalServices: GlobalServicesService) { }
 
   ngOnInit() {
+    this.date = this.globalServices.getDate(this.day);
   }
 
   searchChanged(){
@@ -28,6 +32,7 @@ export class HomeAddFoodModalPage implements OnInit {
       true
     ).subscribe((result)=>{
       if( result.error ){
+        this.modalController.dismiss();
         this.myAPI.handleMyAPIError(result.error);
       }
       else{
@@ -59,6 +64,7 @@ export class HomeAddFoodModalPage implements OnInit {
         true
       ).subscribe((result)=>{
         if( result.error ){
+          this.modalController.dismiss();
           this.myAPI.handleMyAPIError(result.error);
         }
         else{
@@ -84,7 +90,7 @@ export class HomeAddFoodModalPage implements OnInit {
   }
 
   addToList(item, calories, protein, fat, carbohydrate){    
-    this.myAPI.makeSilentCall(
+/*     this.myAPI.makeSilentCall(
       "users.php", 
       {
         "action": "saveMeal",
@@ -92,12 +98,36 @@ export class HomeAddFoodModalPage implements OnInit {
         "calories": calories,
         "protein": protein,
         "fat": fat,
-        "carbohydrate": carbohydrate
+        "carbohydrate": carbohydrate,
+        "day": this.date
       },
       true
-    );
+    ); */
 
-    this.modalController.dismiss({ "item":item, "calories":calories});
+    //this.modalController.dismiss({ "item":item, "calories":calories});
+
+    this.myAPI.makeAPIcall(
+      "users.php", 
+      {
+        "action": "saveMeal",
+        "food_name": item.food_name,
+        "calories": calories,
+        "protein": protein,
+        "fat": fat,
+        "carbohydrate": carbohydrate,
+        "day": this.date
+      },
+      true
+    ).subscribe((result)=>{
+      if( result.error ){
+        this.modalController.dismiss();
+        this.myAPI.handleMyAPIError(result.error);
+      }
+      else{
+        this.modalController.dismiss({ "item":item, "calories":calories, meal_id:result.success.meal_id});
+
+      }
+    });
   }
 
 

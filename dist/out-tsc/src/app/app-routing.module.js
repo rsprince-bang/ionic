@@ -14,7 +14,7 @@ var routes = [
     { path: 'track-progress', loadChildren: './user_pages/track-progress/track-progress.module#TrackProgressPageModule', canActivate: [AuthGuard] },
     { path: 'alerts', loadChildren: './user_pages/alerts/alerts.module#AlertsPageModule', canActivate: [AuthGuard] },
     { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate: [AuthGuard] },
-    { path: 'home', loadChildren: './user_pages/home/home.module#HomePageModule' }
+    { path: 'home/:day', loadChildren: './user_pages/home/home.module#HomePageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

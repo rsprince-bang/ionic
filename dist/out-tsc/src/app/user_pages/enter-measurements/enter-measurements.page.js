@@ -30,7 +30,7 @@ var EnterMeasurementsPage = /** @class */ (function () {
             }
             else {
                 localStorage.setItem("dailyCaloriesIntake", result.success.dailyCaloriesIntake);
-                _this.router.navigateByUrl("/home/tabs/tab2");
+                _this.router.navigateByUrl("/home/today");
             }
         });
     };

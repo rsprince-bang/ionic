@@ -31,7 +31,7 @@ var AppComponent = /** @class */ (function () {
             _this.splashScreen.hide();
             if (_this.globalservice.isLoggedIn()) {
                 _this.loggedin = true;
-                _this.router.navigateByUrl("/home");
+                _this.router.navigateByUrl("/home/today");
             }
         });
     };

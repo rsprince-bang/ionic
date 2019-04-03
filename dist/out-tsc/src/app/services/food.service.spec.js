@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { MovieService } from './movies.service';
-describe('MoviesService', function () {
+import { FoodService } from './food.service';
+describe('FoodService', function () {
     beforeEach(function () { return TestBed.configureTestingModule({}); });
     it('should be created', function () {
-        var service = TestBed.get(MovieService);
+        var service = TestBed.get(FoodService);
         expect(service).toBeTruthy();
     });
 });
-//# sourceMappingURL=movies.service.spec.js.map
+//# sourceMappingURL=food.service.spec.js.map

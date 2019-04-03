@@ -38,6 +38,16 @@ var ApiCallService = /** @class */ (function () {
             return throwError(error);
         }));
     };
+    ApiCallService.prototype.makeSilentCall = function (page, data, auth_needed) {
+        if (auth_needed === void 0) { auth_needed = false; }
+        if (auth_needed) {
+            data.token = localStorage.getItem("token");
+            data.user_id = localStorage.getItem("user_id");
+        }
+        this.http.post(environment.API_URL + page, JSON.stringify(data), this.options).subscribe(function () {
+            //do nothing
+        });
+    };
     ApiCallService.prototype.presentLoadingWithOptions = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var _a;

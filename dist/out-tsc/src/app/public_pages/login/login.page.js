@@ -4,20 +4,22 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 import { Router } from '@angular/router';
 import { Events, ToastController } from '@ionic/angular';
 import { FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
+import { GlobalServicesService } from 'src/app/services/global-services.service';
 var LoginPage = /** @class */ (function () {
-    function LoginPage(myAPI, router, events, formBuilder, toastController) {
+    function LoginPage(myAPI, router, events, formBuilder, toastController, globalServices) {
         this.myAPI = myAPI;
         this.router = router;
         this.events = events;
         this.formBuilder = formBuilder;
         this.toastController = toastController;
+        this.globalServices = globalServices;
         this.userInfo = null;
     }
     LoginPage.prototype.ngOnInit = function () {
         //initialize and set form values
         this.credentialsForm = this.formBuilder.group({
             email: ['stoyan.raychev@vpxsports.com', [Validators.required, Validators.email]],
-            password: ['Hitman07', [Validators.required, Validators.minLength(1)]]
+            password: ['', [Validators.required, Validators.minLength(1)]]
         });
     };
     LoginPage.prototype.login = function () {
@@ -25,7 +27,8 @@ var LoginPage = /** @class */ (function () {
         this.myAPI.makeAPIcall("login.php", {
             "action": "login",
             "email": this.credentialsForm.value.email,
-            "password": this.credentialsForm.value.password
+            "password": this.credentialsForm.value.password,
+            "date": this.globalServices.getTodayDate()
         })
             .subscribe(function (result) {
             _this.userInfo = result;
@@ -35,13 +38,14 @@ var LoginPage = /** @class */ (function () {
             else if (_this.userInfo.success) {
                 localStorage.setItem("token", _this.userInfo.success.token);
                 localStorage.setItem("user_id", _this.userInfo.success.user_id);
-                localStorage.setItem('dailyCaloriesIntake', _this.userInfo.success.dailyCaloriesIntake);
                 _this.events.publish("user logged in", 1111, 2222); //test passsing args
                 if (_this.userInfo.success.first_time_user && _this.userInfo.success.first_time_user == "yes") {
                     _this.router.navigateByUrl("/enter-measurements");
                 }
                 else {
-                    _this.router.navigateByUrl("/home");
+                    localStorage.setItem('dailyCaloriesIntake', _this.userInfo.success.dailyCaloriesIntake);
+                    localStorage.setItem('todayMeals', JSON.stringify(_this.userInfo.success.todayMeals));
+                    _this.router.navigateByUrl("/home/today");
                 }
             }
             else {
@@ -80,7 +84,8 @@ var LoginPage = /** @class */ (function () {
             Router,
             Events,
             FormBuilder,
-            ToastController])
+            ToastController,
+            GlobalServicesService])
     ], LoginPage);
     return LoginPage;
 }());

@@ -3,6 +3,7 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 import { Router } from '@angular/router';
 import { Events, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
+import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
     private router: Router, 
     public events: Events,
     private formBuilder: FormBuilder,
-    public toastController: ToastController) { 
+    public toastController: ToastController,
+    private globalServices: GlobalServicesService) { 
 
   }
 
@@ -41,7 +43,8 @@ export class LoginPage implements OnInit {
       {
         "action": "login",
         "email": this.credentialsForm.value.email,
-        "password": this.credentialsForm.value.password
+        "password": this.credentialsForm.value.password,
+        "date": this.globalServices.getTodayDate()
       }
     )
     .subscribe(
@@ -61,6 +64,8 @@ export class LoginPage implements OnInit {
           }
           else{
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
+            localStorage.setItem('todayMeals', JSON.stringify(this.userInfo.success.todayMeals));
+
             this.router.navigateByUrl("/home/today");
           }
         }
