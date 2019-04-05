@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order 
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -44,7 +45,10 @@ export class LoginPage implements OnInit {
         "action": "login",
         "email": this.credentialsForm.value.email,
         "password": this.credentialsForm.value.password,
-        "date": this.globalServices.getTodayDate()
+        //in case its a returning user lets load the meals as well
+        "yesterday": this.globalServices.getDate("yesterday"),
+        "today": this.globalServices.getDate("today"),
+        "tomorrow": this.globalServices.getDate("tomorrow")
       }
     )
     .subscribe(
@@ -64,7 +68,8 @@ export class LoginPage implements OnInit {
           }
           else{
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
-            localStorage.setItem('todayMeals', JSON.stringify(this.userInfo.success.todayMeals));
+            localStorage.setItem('homepageMeals', JSON.stringify(result.success.meals));
+            localStorage.setItem('date_registered', JSON.stringify(result.success.date_registered));
 
             this.router.navigateByUrl("/home/today");
           }

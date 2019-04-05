@@ -28,7 +28,10 @@ var LoginPage = /** @class */ (function () {
             "action": "login",
             "email": this.credentialsForm.value.email,
             "password": this.credentialsForm.value.password,
-            "date": this.globalServices.getTodayDate()
+            //in case its a returning user lets load the meals as well
+            "yesterday": this.globalServices.getDate("yesterday"),
+            "today": this.globalServices.getDate("today"),
+            "tomorrow": this.globalServices.getDate("tomorrow")
         })
             .subscribe(function (result) {
             _this.userInfo = result;
@@ -44,7 +47,8 @@ var LoginPage = /** @class */ (function () {
                 }
                 else {
                     localStorage.setItem('dailyCaloriesIntake', _this.userInfo.success.dailyCaloriesIntake);
-                    localStorage.setItem('todayMeals', JSON.stringify(_this.userInfo.success.todayMeals));
+                    localStorage.setItem('homepageMeals', JSON.stringify(result.success.meals));
+                    localStorage.setItem('date_registered', JSON.stringify(result.success.date_registered));
                     _this.router.navigateByUrl("/home/today");
                 }
             }

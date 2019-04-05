@@ -72,6 +72,11 @@ var GlobalServicesService = /** @class */ (function () {
         //day must be yesterday, today, tomorrow
         var day_string = null;
         if (day == "yesterday") {
+            var today = new Date();
+            var dd = String(today.getDate() - 1).padStart(2, '0'); //yesterday's date
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            day_string = yyyy + '-' + mm + '-' + dd;
         }
         else if (day == "today") {
             var today = new Date();
@@ -81,6 +86,11 @@ var GlobalServicesService = /** @class */ (function () {
             day_string = yyyy + '-' + mm + '-' + dd;
         }
         else if (day == "tomorrow") {
+            var today = new Date();
+            var dd = String(today.getDate() + 1).padStart(2, '0'); //tomorrow's date
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            day_string = yyyy + '-' + mm + '-' + dd;
         }
         return day_string;
     };

@@ -118,4 +118,7 @@ export class GlobalServicesService {
 
     return day_string;
   }
+
+
+
 }

@@ -21,12 +21,19 @@
     <ion-icon *ngIf="day == 'today' || day == 'tomorrow'" name="arrow-dropleft" slot="start"></ion-icon>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{day}} Nutrition and Workout Info</ion-card-title>
+        <ion-card-title>{{day}} Info</ion-card-title>
       </ion-card-header>
 
-      <ion-card-content>
-        Day x of 90 day program
+      <ion-card-content *ngIf="dayNumber>84; else templateName">
+        Congratulations!<br>
+        You have completed the The Meltdown Anti-Diet!
       </ion-card-content>
+      <ng-template #templateName>
+        <ion-card-content>
+          Day {{dayNumber}} of 84 day program
+        </ion-card-content>
+      </ng-template>
+
     </ion-card>
     <ion-icon *ngIf="day == 'today' || day == 'yesterday'" name="arrow-dropright" slot="end"></ion-icon>
   </ion-toolbar>
@@ -44,27 +51,25 @@
 
   <!--Nutrition segment-->
   <div *ngIf="segment_choice == 'nutrition'">
-    <p>
-      Day X nutrient profile consists of 50%
-      Protein and 50% Carbohydrate. Your
-      protein intake per meal is 29.38 and
-      Carbohydrate intake per meal is 29.38.
-      During Phase I, you may eat as many
-      servings of vegetables as you desire from
-      Food Chart I (i). Set a goal to eat
-      vegetables at least three times daily. Use
-      FiberTeq if vegetable intake falls below
-      three servings per day.
-      A Zero Impact SuperFood Protein Shake
-      MRP can be used as a meal replacement
+
+    <p *ngIf="dayNutritionInfo.daynutrition.hasOwnProperty('fat'); else nofattemplate"><!--days with w fat-->
+      Day {{dayNumber}} consist of {{dayNutritionInfo.daynutrition.protein}}% protein {{dayNutritionInfo.daynutrition.carbs}}% carbs and {{dayNutritionInfo.daynutrition.fat}}% fat.
     </p>
+    <ng-template #nofattemplate>
+      <p>
+        Day {{dayNumber}} consist of {{dayNutritionInfo.daynutrition.protein}}% protein {{dayNutritionInfo.daynutrition.carbs}}% carbs (5%+/- Dietary Fat that occur naturally in the
+        Protein and Carbohydrate food sources).
+      </p>
+    </ng-template>
+
+    <p>Current protein:{{caloriesFromProtein}}%, carbs:{{caloriesFromCarbs}}%, fat:{{caloriesFromFat}}%</p>
 
     <!--Food toggles loop-->
     <ion-list>
-        <ion-item *ngFor="let meal of todaymeals" (press)="presentActionSheet(meal.id, meal.meal_name)">
-            <ion-label>{{meal.meal_name}}</ion-label>
-            <ion-toggle [checked]="meal.isChecked" [disabled]="disabletoggles"></ion-toggle>
-        </ion-item>
+      <ion-item *ngFor="let meal of meals" (press)="presentActionSheet(meal.id, meal.meal_name)">
+        <ion-label>{{meal.meal_name}}</ion-label>
+        <ion-toggle [checked]="meal.isChecked" [disabled]="disabletoggles"></ion-toggle>
+      </ion-item>
     </ion-list>
 
     <ion-item *ngIf="day != 'yesterday'">
@@ -104,11 +109,9 @@
   </div>
   <!--End segments-->
 
-  <p>Target calories to loose weight:</p>
-  <p>{{dietCaloriesIntake}}<p>
+  <p>Target calories to loose weight:{{dietCaloriesIntake}}</p>
+  <p>Cosnusmed so far:{{caloriesConsumed}}</p>
 
-  <p>Cosnusmed so far:</p>
-  <p>{{caloriesConsumed}}</p>
 
   <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
   <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle"></circle-progress>

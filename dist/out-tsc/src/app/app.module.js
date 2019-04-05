@@ -14,6 +14,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/alerts-picker-modal.module';
 import { TrackWorkoutModalPageModule } from './user_pages/track-workout-modal/track-workout-modal.module';
 import { HomeAddFoodModalPageModule } from './user_pages/home-add-food-modal/home-add-food-modal.module';
+//import { NgCircleProgressModule } from 'ng-circle-progress';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -29,7 +30,7 @@ var AppModule = /** @class */ (function () {
                 AlertsPickerModalPageModule,
                 TrackWorkoutModalPageModule,
                 HomeAddFoodModalPageModule,
-                HomeAddFoodModalPageModule
+                HomeAddFoodModalPageModule,
             ],
             providers: [
                 StatusBar,

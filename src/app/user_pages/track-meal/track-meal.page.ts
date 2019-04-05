@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SearchType, MovieService } from 'src/app/services/movies.service';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
@@ -16,7 +15,6 @@ export class TrackMealPage implements OnInit {
   disablechecksmarks = false;
   results: Observable<any>;
   searchTerm = '';
-  type: SearchType = SearchType.all;
   randomMeals = [
     { name: 'Eggs', isChecked: true },
     { name: 'Turkey Sandwich', isChecked: false },
@@ -30,7 +28,7 @@ export class TrackMealPage implements OnInit {
   ];
   todaymeals = [];
 
-  constructor( private movieService: MovieService, private alertCtrl: AlertController, private router: Router,
+  constructor( private alertCtrl: AlertController, private router: Router,
     private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit() {
@@ -55,7 +53,7 @@ export class TrackMealPage implements OnInit {
 
 
   searchChanged(){
-    this.results = this.movieService.searchData(this.searchTerm, this.type);
+    //this.results = this.movieService.searchData(this.searchTerm, this.type);
   }
 
 

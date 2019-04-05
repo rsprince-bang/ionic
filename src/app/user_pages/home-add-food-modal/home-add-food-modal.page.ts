@@ -89,7 +89,7 @@ export class HomeAddFoodModalPage implements OnInit {
     }
   }
 
-  addToList(item, calories, protein, fat, carbohydrate){    
+  addToList(item, calories, protein, fat, carbs){    
 /*     this.myAPI.makeSilentCall(
       "users.php", 
       {
@@ -114,7 +114,7 @@ export class HomeAddFoodModalPage implements OnInit {
         "calories": calories,
         "protein": protein,
         "fat": fat,
-        "carbohydrate": carbohydrate,
+        "carbohydrate": carbs,
         "day": this.date
       },
       true
@@ -124,8 +124,7 @@ export class HomeAddFoodModalPage implements OnInit {
         this.myAPI.handleMyAPIError(result.error);
       }
       else{
-        this.modalController.dismiss({ "item":item, "calories":calories, meal_id:result.success.meal_id});
-
+        this.modalController.dismiss({ "item":item, "calories":calories, meal_id:result.success.meal_id, "protein":protein, "carbs":carbs, "fat":fat});
       }
     });
   }

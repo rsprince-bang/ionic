@@ -1,12 +1,10 @@
 import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
-import { SearchType, MovieService } from 'src/app/services/movies.service';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 var TrackMealPage = /** @class */ (function () {
-    function TrackMealPage(movieService, alertCtrl, router, globalServices, activatedRoute) {
-        this.movieService = movieService;
+    function TrackMealPage(alertCtrl, router, globalServices, activatedRoute) {
         this.alertCtrl = alertCtrl;
         this.router = router;
         this.globalServices = globalServices;
@@ -14,7 +12,6 @@ var TrackMealPage = /** @class */ (function () {
         this.day = null;
         this.disablechecksmarks = false;
         this.searchTerm = '';
-        this.type = SearchType.all;
         this.randomMeals = [
             { name: 'Eggs', isChecked: true },
             { name: 'Turkey Sandwich', isChecked: false },
@@ -45,7 +42,7 @@ var TrackMealPage = /** @class */ (function () {
         }
     };
     TrackMealPage.prototype.searchChanged = function () {
-        this.results = this.movieService.searchData(this.searchTerm, this.type);
+        //this.results = this.movieService.searchData(this.searchTerm, this.type);
     };
     TrackMealPage.prototype.addToList = function (title) {
         this.todaymeals.push({ "name": title, "isChecked": true });
@@ -81,7 +78,7 @@ var TrackMealPage = /** @class */ (function () {
             templateUrl: './track-meal.page.html',
             styleUrls: ['./track-meal.page.scss'],
         }),
-        tslib_1.__metadata("design:paramtypes", [MovieService, AlertController, Router,
+        tslib_1.__metadata("design:paramtypes", [AlertController, Router,
             GlobalServicesService, ActivatedRoute])
     ], TrackMealPage);
     return TrackMealPage;

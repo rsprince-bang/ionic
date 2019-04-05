@@ -5,22 +5,29 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 import { ModalController, ActionSheetController } from '@ionic/angular';
 import { HomeAddFoodModalPage } from '../home-add-food-modal/home-add-food-modal.page';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 var HomePage = /** @class */ (function () {
-    function HomePage(router, globalServices, activatedRoute, modalController, actionSheetController, myAPI) {
+    function HomePage(router, globalServices, activatedRoute, modalController, actionSheetController, myAPI, foodSuggestionsService) {
         this.router = router;
         this.globalServices = globalServices;
         this.activatedRoute = activatedRoute;
         this.modalController = modalController;
         this.actionSheetController = actionSheetController;
         this.myAPI = myAPI;
+        this.foodSuggestionsService = foodSuggestionsService;
         this.day = null;
         this.date = null;
+        this.dayNumber = null;
         this.segment_choice = 'nutrition';
         this.dailyCaloriesIntake = null;
         this.dietCaloriesIntake = null;
         this.caloriesConsumed = 0;
-        this.todaymeals = [];
+        this.meals = [];
         this.disabletoggles = false;
+        this.percent = 0;
+        this.circlesubtitle = "";
+        this.circlecolor = "#c0c0c0"; //gray atr first
+        this.dayNutritionInfo = null;
     }
     HomePage.prototype.ngOnInit = function () {
         this.day = this.activatedRoute.snapshot.paramMap.get('day');
@@ -28,6 +35,9 @@ var HomePage = /** @class */ (function () {
         if (!this.globalServices.hasDailyCaloriesIntake()) {
             this.router.navigateByUrl("/enter-measurements");
         }
+        //initialize them, so it doesnt throw errors, but they get updated later on
+        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+        this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
     };
     HomePage.prototype.ionViewWillEnter = function () {
         this.updatepage();
@@ -64,25 +74,82 @@ var HomePage = /** @class */ (function () {
             }
         }
     };
-    HomePage.prototype.doRefresh = function (event) {
-        console.log("Update current list on pull, update from server regadless");
-        event.target.complete();
-    };
     HomePage.prototype.updatepage = function () {
+        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+        this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
+        console.log(this.dayNutritionInfo);
         this.dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
         this.dietCaloriesIntake = this.dailyCaloriesIntake - 200;
-        //pull meals based on day
-        if (this.day == "yesterday") {
-            this.disabletoggles = true;
-            console.log("Pull meals for yesterday");
-        }
-        else if (this.day == "today") {
-            this.todaymeals = JSON.parse(localStorage.getItem('todayMeals'));
-        }
-        else if (this.day == "tomorrow") {
-            console.log("Pull meals for tomorrow");
-        }
+        var meals = JSON.parse(localStorage.getItem('homepageMeals'));
+        this.meals = meals[this.day];
         this.calculateCaloriesConsumed();
+    };
+    HomePage.prototype.doRefresh = function (event) {
+        this.getFoodsList();
+        event.target.complete();
+    };
+    HomePage.prototype.getFoodsList = function () {
+        var _this = this;
+        this.myAPI.makeAPIcall("users.php", {
+            "action": "getFoodsList",
+            "yesterday": this.globalServices.getDate("yesterday"),
+            "today": this.globalServices.getDate("today"),
+            "tomorrow": this.globalServices.getDate("tomorrow")
+        }, true).subscribe(function (result) {
+            if (result.error) {
+                _this.myAPI.handleMyAPIError(result.error);
+            }
+            else {
+                _this.dayNumber = _this.foodSuggestionsService.getDietDayNumber(_this.date);
+                _this.dayNutritionInfo = _this.foodSuggestionsService.getDietDayDescription(_this.date);
+                localStorage.setItem('homepageMeals', JSON.stringify(result.success.meals));
+                _this.meals = result.success.meals[_this.day];
+                for (var i = 0; i < _this.meals.length; i++) {
+                    _this.meals[i].isChecked = true;
+                }
+                if (_this.day == "yesterday") {
+                    _this.disabletoggles = true;
+                }
+                else if (_this.day == "today") {
+                }
+                else if (_this.day == "tomorrow") {
+                }
+                _this.calculateCaloriesConsumed();
+            }
+        });
+    };
+    HomePage.prototype.addToList = function (data) {
+        this.meals.push({ "id": data.meal_id, "meal_name": data.item.food_name, "calories": data.calories, "isChecked": true });
+        var meals = JSON.parse(localStorage.getItem('homepageMeals'));
+        meals[this.day] = this.meals;
+        localStorage.setItem('homepageMeals', JSON.stringify(meals));
+        this.calculateCaloriesConsumed();
+    };
+    HomePage.prototype.removeFromList = function (meal_id) {
+        this.meals = this.meals.filter(function (el) { return el.id != meal_id; });
+        var meals = JSON.parse(localStorage.getItem('homepageMeals'));
+        meals[this.day] = this.meals;
+        localStorage.setItem('homepageMeals', JSON.stringify(meals));
+        this.myAPI.makeSilentCall("users.php", {
+            "action": "removeMeal",
+            "meal_id": meal_id
+        }, true);
+        this.calculateCaloriesConsumed();
+    };
+    HomePage.prototype.calculateCaloriesConsumed = function () {
+        //reset before accumulation duh
+        this.caloriesConsumed = 0;
+        for (var i = 0; i < this.meals.length; i++) {
+            this.caloriesConsumed = this.caloriesConsumed + parseInt(this.meals[i].calories);
+        }
+        this.percent = this.caloriesConsumed * 100 / this.dietCaloriesIntake;
+        if (this.percent > 100) {
+            this.circlecolor = "#CA1616";
+        }
+        else {
+            this.circlecolor = "#2FB202";
+        }
+        this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
     };
     HomePage.prototype.addFoodModal = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
@@ -107,46 +174,6 @@ var HomePage = /** @class */ (function () {
                 }
             });
         });
-    };
-    /*   getFoodsList(){
-        this.myAPI.makeAPIcall(
-          "users.php",
-          {
-            "action": "getFoodsList",
-            "date": this.date
-          },
-          true
-        ).subscribe((result)=>{
-          if( result.error ){
-            this.myAPI.handleMyAPIError(result.error);
-          }
-          else{
-            this.todaymeals = result.success.foods;
-            for(let i=0; i<this.todaymeals.length; i++){
-              this.todaymeals[i].isChecked = true;
-            }
-            this.calculateCaloriesConsumed();
-          }
-        });
-      } */
-    HomePage.prototype.addToList = function (data) {
-        this.todaymeals.push({ "id": data.meal_id, "meal_name": data.item.food_name, "calories": data.calories, "isChecked": true });
-        this.calculateCaloriesConsumed();
-    };
-    HomePage.prototype.removeFromList = function (meal_id) {
-        this.todaymeals = this.todaymeals.filter(function (el) { return el.id != meal_id; });
-        this.myAPI.makeSilentCall("users.php", {
-            "action": "removeMeal",
-            "meal_id": meal_id
-        }, true);
-        this.calculateCaloriesConsumed();
-    };
-    HomePage.prototype.calculateCaloriesConsumed = function () {
-        //reset before accumulation duh
-        this.caloriesConsumed = 0;
-        for (var i = 0; i < this.todaymeals.length; i++) {
-            this.caloriesConsumed = this.caloriesConsumed + parseInt(this.todaymeals[i].calories);
-        }
     };
     HomePage.prototype.presentActionSheet = function (meal_id, mealName) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
@@ -193,7 +220,8 @@ var HomePage = /** @class */ (function () {
             styleUrls: ['./home.page.scss'],
         }),
         tslib_1.__metadata("design:paramtypes", [Router, GlobalServicesService, ActivatedRoute,
-            ModalController, ActionSheetController, ApiCallService])
+            ModalController, ActionSheetController, ApiCallService,
+            FoodSuggestionsService])
     ], HomePage);
     return HomePage;
 }());

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home.page';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 var routes = [
     {
         path: '',
@@ -20,7 +21,20 @@ var HomePageModule = /** @class */ (function () {
                 CommonModule,
                 FormsModule,
                 IonicModule,
-                RouterModule.forChild(routes)
+                RouterModule.forChild(routes),
+                NgCircleProgressModule.forRoot({
+                    "radius": 60,
+                    "maxPercent": 100,
+                    "unitsColor": "#ffffff",
+                    "outerStrokeWidth": 5,
+                    "outerStrokeColor": "#FFFFFF",
+                    "innerStrokeColor": "#FFFFFF",
+                    "titleColor": "#ffffff",
+                    "subtitleColor": "#ffffff",
+                    "showInnerStroke": false,
+                    "startFromZero": false,
+                    "showZeroOuterStroke": false
+                })
             ],
             declarations: [HomePage]
         })
