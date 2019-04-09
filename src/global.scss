@@ -9,3 +9,40 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+
+////////////////////////////////////////
+//calender CSS override
+
+/* monthview-primary-with-event
+The date that is in current month and having events
+
+monthview-secondary-with-event
+The date that is in previous/next month and having events
+
+monthview-selected
+The selected date
+
+monthview-current
+The current date
+
+monthview-disabled
+The disabled date */
+.monthview-current{
+    background-color: rgb(199, 198, 198) !important;
+    color: black !important;
+}
+.monthview-selected{
+    background-color: white !important;
+    color: black !important;
+}
+.monthview-primary-with-event{
+    background-color: white !important;
+    color: black !important;
+}
+.monthview-secondary-with-event{
+    background-color: white !important;
+    color: black !important;
+}
+//end calender override
+/////////////////////////////////////////

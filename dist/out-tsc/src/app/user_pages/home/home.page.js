@@ -22,12 +22,15 @@ var HomePage = /** @class */ (function () {
         this.dailyCaloriesIntake = null;
         this.dietCaloriesIntake = null;
         this.caloriesConsumed = 0;
+        this.caloriesFromProtein = 0;
+        this.caloriesFromCarbs = 0;
+        this.caloriesFromFat = 0;
         this.meals = [];
         this.disabletoggles = false;
         this.percent = 0;
         this.circlesubtitle = "";
         this.circlecolor = "#c0c0c0"; //gray atr first
-        this.dayNutritionInfo = null;
+        this.dayNutritionInfo = { "phase": null, "phaseday": null, "daynutrition": { "protein": null, "carbs": null, "fat": null } };
     }
     HomePage.prototype.ngOnInit = function () {
         this.day = this.activatedRoute.snapshot.paramMap.get('day');
@@ -35,9 +38,6 @@ var HomePage = /** @class */ (function () {
         if (!this.globalServices.hasDailyCaloriesIntake()) {
             this.router.navigateByUrl("/enter-measurements");
         }
-        //initialize them, so it doesnt throw errors, but they get updated later on
-        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
-        this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
     };
     HomePage.prototype.ionViewWillEnter = function () {
         this.updatepage();
@@ -77,7 +77,6 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.updatepage = function () {
         this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
         this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
-        console.log(this.dayNutritionInfo);
         this.dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
         this.dietCaloriesIntake = this.dailyCaloriesIntake - 200;
         var meals = JSON.parse(localStorage.getItem('homepageMeals'));
@@ -119,7 +118,8 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.addToList = function (data) {
-        this.meals.push({ "id": data.meal_id, "meal_name": data.item.food_name, "calories": data.calories, "isChecked": true });
+        this.meals.push({ "id": data.meal_id, "meal_name": data.item.food_name, "calories": data.calories,
+            "protein": data.protein, "carbs": data.carbs, "fat": data.fat, "isChecked": true });
         var meals = JSON.parse(localStorage.getItem('homepageMeals'));
         meals[this.day] = this.meals;
         localStorage.setItem('homepageMeals', JSON.stringify(meals));
@@ -139,8 +139,21 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.calculateCaloriesConsumed = function () {
         //reset before accumulation duh
         this.caloriesConsumed = 0;
+        this.caloriesFromProtein = 0;
+        this.caloriesFromCarbs = 0;
+        this.caloriesFromFat = 0;
         for (var i = 0; i < this.meals.length; i++) {
             this.caloriesConsumed = this.caloriesConsumed + parseInt(this.meals[i].calories);
+            this.caloriesFromProtein = this.caloriesFromProtein + (this.meals[i].protein * 4);
+            this.caloriesFromCarbs = this.caloriesFromCarbs + (this.meals[i].carbs * 4);
+            this.caloriesFromFat = this.caloriesFromFat + (this.meals[i].fat * 9);
+        }
+        //we got the actual values for each, let just turn them into percentage
+        if (this.meals.length > 0) {
+            var totalCaloriesFromFormula = this.caloriesFromProtein + this.caloriesFromCarbs + this.caloriesFromFat;
+            this.caloriesFromProtein = Math.round(this.caloriesFromProtein * 100 / totalCaloriesFromFormula);
+            this.caloriesFromCarbs = Math.round(this.caloriesFromCarbs * 100 / totalCaloriesFromFormula);
+            this.caloriesFromFat = Math.round(this.caloriesFromFat * 100 / totalCaloriesFromFormula);
         }
         this.percent = this.caloriesConsumed * 100 / this.dietCaloriesIntake;
         if (this.percent > 100) {

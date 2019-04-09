@@ -14,7 +14,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/alerts-picker-modal.module';
 import { TrackWorkoutModalPageModule } from './user_pages/track-workout-modal/track-workout-modal.module';
 import { HomeAddFoodModalPageModule } from './user_pages/home-add-food-modal/home-add-food-modal.module';
-//import { NgCircleProgressModule } from 'ng-circle-progress';
+import { NgCircleProgressModule } from 'ng-circle-progress'; //works without it too but im supposed to declare it?!
+import { NgCalendarModule } from 'ionic2-calendar';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -31,6 +32,8 @@ var AppModule = /** @class */ (function () {
                 TrackWorkoutModalPageModule,
                 HomeAddFoodModalPageModule,
                 HomeAddFoodModalPageModule,
+                NgCircleProgressModule.forRoot(),
+                NgCalendarModule
             ],
             providers: [
                 StatusBar,

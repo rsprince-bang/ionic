@@ -17,8 +17,8 @@ import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/al
 import { TrackWorkoutModalPageModule } from './user_pages/track-workout-modal/track-workout-modal.module';
 import { HomeAddFoodModalPageModule } from './user_pages/home-add-food-modal/home-add-food-modal.module';
 
-//import { NgCircleProgressModule } from 'ng-circle-progress';
-
+import { NgCircleProgressModule } from 'ng-circle-progress'; //works without it too but im supposed to declare it?!
+import { NgCalendarModule  } from 'ionic2-calendar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +32,8 @@ import { HomeAddFoodModalPageModule } from './user_pages/home-add-food-modal/hom
       TrackWorkoutModalPageModule,
       HomeAddFoodModalPageModule,
       HomeAddFoodModalPageModule,
-      //NgCircleProgressModule.forRoot()
+      NgCircleProgressModule.forRoot(),
+      NgCalendarModule
     ],
   providers: [
     StatusBar,

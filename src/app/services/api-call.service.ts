@@ -21,6 +21,7 @@ export class ApiCallService {
   private options = { headers: this.headers };
 
   private loading = null;
+  isLoading = false;
 
   constructor(private http: HttpClient, public loadingController: LoadingController, private alertController: AlertController, private router: Router,
     private globalservice: GlobalServicesService ) { }
@@ -33,7 +34,8 @@ export class ApiCallService {
       data.user_id = localStorage.getItem("user_id");
     }
 
-    this.presentLoadingWithOptions();
+    //this.presentLoadingWithOptions();
+    this.presentLoading();
 
     return this.http.post(
       environment.API_URL + page,
@@ -41,13 +43,14 @@ export class ApiCallService {
       this.options
     ).pipe(
       map(results => {
-        this.loading.dismiss();
+        //this.loading.dismiss();
+        this.dismissLoading();
         return results;
       }),
       catchError(error => {
+        //this.loading.dismiss();
+        this.dismissLoading();
         this.showError(error);
-
-        this.loading.dismiss();
         return throwError(error);
       })
     );
@@ -72,7 +75,7 @@ export class ApiCallService {
   }
 
 
-  async presentLoadingWithOptions() {
+/*   async presentLoadingWithOptions() {
     this.loading = await this.loadingController.create({
       spinner: "lines",
       animated: true,
@@ -86,8 +89,38 @@ export class ApiCallService {
       
     });
     return await this.loading.present();
+  } */
+
+
+  async presentLoading() {
+    this.isLoading = true;
+    return await this.loadingController.create({
+      spinner: "lines",
+      animated: true,
+      backdropDismiss: false,
+      cssClass: 'custom-class custom-loading',
+      duration: null,
+      keyboardClose: true,
+      message: 'Please wait...',
+      translucent: true,
+    }).then(a => {
+      a.present().then(() => {
+        //console.log('presented');
+        if (!this.isLoading) {
+          a.dismiss().then(() => {
+            //console.log('abort presenting')
+          });
+        }
+      });
+    });
   }
 
+  async dismissLoading() {
+    this.isLoading = false;
+    return await this.loadingController.dismiss().then( () => {
+      //console.log('dismissed')
+    });
+  }
 
   async showError(error) {
     const alert = await this.alertController.create({

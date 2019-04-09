@@ -72,7 +72,7 @@ var HomeAddFoodModalPage = /** @class */ (function () {
             });
         }
     };
-    HomeAddFoodModalPage.prototype.addToList = function (item, calories, protein, fat, carbohydrate) {
+    HomeAddFoodModalPage.prototype.addToList = function (item, calories, protein, fat, carbs) {
         /*     this.myAPI.makeSilentCall(
               "users.php",
               {
@@ -94,7 +94,7 @@ var HomeAddFoodModalPage = /** @class */ (function () {
             "calories": calories,
             "protein": protein,
             "fat": fat,
-            "carbohydrate": carbohydrate,
+            "carbohydrate": carbs,
             "day": this.date
         }, true).subscribe(function (result) {
             if (result.error) {
@@ -102,7 +102,7 @@ var HomeAddFoodModalPage = /** @class */ (function () {
                 _this.myAPI.handleMyAPIError(result.error);
             }
             else {
-                _this.modalController.dismiss({ "item": item, "calories": calories, meal_id: result.success.meal_id });
+                _this.modalController.dismiss({ "item": item, "calories": calories, meal_id: result.success.meal_id, "protein": protein, "carbs": carbs, "fat": fat });
             }
         });
     };

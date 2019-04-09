@@ -1,0 +1,17 @@
+
+
+
+.calendar-day {
+  border-radius: 6px;
+  padding: 3px 5px;
+
+  &.green {
+    background-color: green;
+    color: white;
+  }
+
+  &.red {
+    background-color: red;
+    color: white;
+  }
+}

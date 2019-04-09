@@ -20,6 +20,7 @@ var ApiCallService = /** @class */ (function () {
         });
         this.options = { headers: this.headers };
         this.loading = null;
+        this.isLoading = false;
     }
     ApiCallService.prototype.makeAPIcall = function (page, data, auth_needed) {
         var _this = this;
@@ -28,13 +29,16 @@ var ApiCallService = /** @class */ (function () {
             data.token = localStorage.getItem("token");
             data.user_id = localStorage.getItem("user_id");
         }
-        this.presentLoadingWithOptions();
+        //this.presentLoadingWithOptions();
+        this.presentLoading();
         return this.http.post(environment.API_URL + page, JSON.stringify(data), this.options).pipe(map(function (results) {
-            _this.loading.dismiss();
+            //this.loading.dismiss();
+            _this.dismissLoading();
             return results;
         }), catchError(function (error) {
+            //this.loading.dismiss();
+            _this.dismissLoading();
             _this.showError(error);
-            _this.loading.dismiss();
             return throwError(error);
         }));
     };
@@ -48,13 +52,28 @@ var ApiCallService = /** @class */ (function () {
             //do nothing
         });
     };
-    ApiCallService.prototype.presentLoadingWithOptions = function () {
+    /*   async presentLoadingWithOptions() {
+        this.loading = await this.loadingController.create({
+          spinner: "lines",
+          animated: true,
+          backdropDismiss: false,
+          cssClass: 'custom-class custom-loading',
+          duration: null,
+          keyboardClose: true,
+          message: 'Please wait...',
+    
+          translucent: true,
+          
+        });
+        return await this.loading.present();
+      } */
+    ApiCallService.prototype.presentLoading = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var _a;
-            return tslib_1.__generator(this, function (_b) {
-                switch (_b.label) {
+            var _this = this;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        _a = this;
+                        this.isLoading = true;
                         return [4 /*yield*/, this.loadingController.create({
                                 spinner: "lines",
                                 animated: true,
@@ -64,11 +83,31 @@ var ApiCallService = /** @class */ (function () {
                                 keyboardClose: true,
                                 message: 'Please wait...',
                                 translucent: true,
+                            }).then(function (a) {
+                                a.present().then(function () {
+                                    //console.log('presented');
+                                    if (!_this.isLoading) {
+                                        a.dismiss().then(function () {
+                                            //console.log('abort presenting')
+                                        });
+                                    }
+                                });
                             })];
-                    case 1:
-                        _a.loading = _b.sent();
-                        return [4 /*yield*/, this.loading.present()];
-                    case 2: return [2 /*return*/, _b.sent()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    ApiCallService.prototype.dismissLoading = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.isLoading = false;
+                        return [4 /*yield*/, this.loadingController.dismiss().then(function () {
+                                console.log('dismissed');
+                            })];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });

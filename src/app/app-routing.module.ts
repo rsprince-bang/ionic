@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'track-progress', loadChildren: './user_pages/track-progress/track-progress.module#TrackProgressPageModule', canActivate:[AuthGuard] },
   { path: 'alerts', loadChildren: './user_pages/alerts/alerts.module#AlertsPageModule', canActivate:[AuthGuard] },
   { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] },
-  { path: 'home/:day', loadChildren: './user_pages/home/home.module#HomePageModule' }
+  { path: 'home/:day', loadChildren: './user_pages/home/home.module#HomePageModule', canActivate:[AuthGuard] },
+  { path: 'calendar', loadChildren: './user_pages/calendar/calendar.module#CalendarPageModule', canActivate:[AuthGuard] }
   
 ];
 @NgModule({

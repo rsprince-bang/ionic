@@ -11,18 +11,18 @@ export class GlobalServicesService {
 
   constructor(private router: Router, private nativePageTransitions: NativePageTransitions, private http: HttpClient) { }
 
-  isLoggedIn(){
+  isLoggedIn() {
     let token = localStorage.getItem('token');
-    if (token){
+    if (token) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
 
-  logOut(){
+  logOut() {
 
     //I cant include the API service in this file because
     //circular includes happen...
@@ -35,7 +35,7 @@ export class GlobalServicesService {
         "token": localStorage.getItem("token")
       }),
       { headers: new HttpHeaders({}) }
-    ).subscribe( () =>{
+    ).subscribe(() => {
       //do nothing
     });
 
@@ -45,7 +45,7 @@ export class GlobalServicesService {
   }
 
 
-  swipeLeft( url:string) {
+  swipeLeft(url: string) {
     let options: NativeTransitionOptions = {
       direction: 'left',
       duration: 400,
@@ -55,7 +55,7 @@ export class GlobalServicesService {
     this.router.navigateByUrl(url);
   }
 
-  swipeRight( url ) {
+  swipeRight(url) {
     let options: NativeTransitionOptions = {
       direction: 'right',
       duration: 400,
@@ -66,17 +66,17 @@ export class GlobalServicesService {
   }
 
 
-  hasDailyCaloriesIntake(){
+  hasDailyCaloriesIntake() {
     let dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
-    if (dailyCaloriesIntake){
+    if (dailyCaloriesIntake) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
-  getTodayDate(){
+  getTodayDate() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -87,32 +87,32 @@ export class GlobalServicesService {
     return today_string;
   }
 
-  getDate(day){
+  getDate(day) {
     //day must be yesterday, today, tomorrow
 
     var day_string = null;
-    if( day == "yesterday" ){
+    if (day == "yesterday") {
       var today = new Date();
-      var dd = String( today.getDate()-1 ).padStart(2, '0'); //yesterday's date
+      var dd = String(today.getDate() - 1).padStart(2, '0'); //yesterday's date
       var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
       var yyyy = today.getFullYear();
-  
+
       day_string = yyyy + '-' + mm + '-' + dd;
     }
-    else if( day == "today" ){
+    else if (day == "today") {
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
       var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
       var yyyy = today.getFullYear();
-  
+
       day_string = yyyy + '-' + mm + '-' + dd;
     }
-    else if( day == "tomorrow" ){
+    else if (day == "tomorrow") {
       var today = new Date();
-      var dd = String( today.getDate()+1 ).padStart(2, '0'); //tomorrow's date
+      var dd = String(today.getDate() + 1).padStart(2, '0'); //tomorrow's date
       var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
       var yyyy = today.getFullYear();
-  
+
       day_string = yyyy + '-' + mm + '-' + dd;
     }
 
@@ -120,5 +120,15 @@ export class GlobalServicesService {
   }
 
 
+  getDateFromObject(dateObject:Date) {
+
+    var dd = String(dateObject.getDate()).padStart(2, '0');
+    var mm = String(dateObject.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = dateObject.getFullYear();
+
+    var string = yyyy + '-' + mm + '-' + dd;
+
+    return string;
+  }
 
 }
