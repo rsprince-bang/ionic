@@ -1,9 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>home_add_workout_modal</ion-title>
+    <ion-title>Search for excercise</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
+  <ion-searchbar debounce="500" (ionChange)="searchExercises($event)" [(ngModel)]="searchTerm"
+    (ionClear)="clearSearch()">
+  </ion-searchbar>
+
+
+  <ion-list>
+    <div *ngFor="let item of searchResults">
+      <ion-item>
+        <ion-label text-wrap>
+          <h3>{{item.name}}</h3>
+        </ion-label>
+        <ion-button slot="end" size="small" (click)="selectExercise(item)">Select</ion-button>
+      </ion-item>
+
+      <ion-item *ngIf="item.selected">
+        <ion-input type="number" value="" [(ngModel)]="item.hours" >Hours:</ion-input>
+        <ion-button slot="end" size="small" (click)="addExercise(item)">Add</ion-button>
+      </ion-item>
+
+    </div>
+  </ion-list>
+
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="cancelModal()">Back</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -49,6 +49,7 @@
     </ion-segment-button>
   </ion-segment>
 
+
   <!--Nutrition segment-->
   <div *ngIf="segment_choice == 'nutrition'">
 
@@ -62,49 +63,36 @@
       </p>
     </ng-template>
 
+    <p>Try to eat at elast 40g of protein per meal.</p>
     <p>Current protein:{{caloriesFromProtein}}%, carbs:{{caloriesFromCarbs}}%, fat:{{caloriesFromFat}}%</p>
 
-    <!--Food toggles loop-->
+    <!--Foods loop-->
     <ion-list>
-      <ion-item *ngFor="let meal of meals" (press)="presentActionSheet(meal.id, meal.meal_name)">
+      <ion-item *ngFor="let meal of meals" (press)="foodDeleteActionSheet(meal.id, meal.meal_name)">
         <ion-label>{{meal.meal_name}}</ion-label>
-        <ion-toggle [checked]="meal.isChecked" [disabled]="disabletoggles"></ion-toggle>
       </ion-item>
     </ion-list>
 
-    <ion-item *ngIf="day != 'yesterday'">
-      <ion-button (click)="addFoodModal()">Add food</ion-button>
+    <ion-item *ngIf="day!='yesterday' && day!='tomorrow'">
+      <ion-button (click)="openFoodModal()">Add food</ion-button>
     </ion-item>
 
   </div>
   <!--End segments-->
 
+  
   <!--Workout segment-->
   <div *ngIf="segment_choice == 'workout'">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-      culpa qui officia deserunt mollit anim id est laborum.
-    </p>
 
+    <!--exercise loop-->
     <ion-list>
-      <ion-item>
-        <ion-label>Bench Press</ion-label>
-        <ion-toggle></ion-toggle>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Squads</ion-label>
-        <ion-toggle></ion-toggle>
+      <ion-item *ngFor="let exercise of exercises" (press)="exerciseDeleteActionSheet(exercise.id, exercise.exercise_name)" >
+        <ion-label>{{exercise.exercise_name}}</ion-label>
       </ion-item>
     </ion-list>
 
-    <ion-item>
-      <ion-button>Add exercise</ion-button>
+    <ion-item *ngIf="day!='yesterday' && day!='tomorrow'">
+      <ion-button (click)="openExerciseModal()">Add exercise</ion-button>
     </ion-item>
   </div>
   <!--End segments-->

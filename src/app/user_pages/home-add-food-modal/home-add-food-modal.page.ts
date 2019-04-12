@@ -89,24 +89,9 @@ export class HomeAddFoodModalPage implements OnInit {
     }
   }
 
-  addToList(item, calories, protein, fat, carbs){    
-/*     this.myAPI.makeSilentCall(
-      "users.php", 
-      {
-        "action": "saveMeal",
-        "food_name": item.food_name,
-        "calories": calories,
-        "protein": protein,
-        "fat": fat,
-        "carbohydrate": carbohydrate,
-        "day": this.date
-      },
-      true
-    ); */
-
-    //this.modalController.dismiss({ "item":item, "calories":calories});
-
-    this.myAPI.makeAPIcall(
+  addMeal(item, calories, protein, fat, carbs){
+    
+/*     this.myAPI.makeAPIcall(
       "users.php", 
       {
         "action": "saveMeal",
@@ -126,7 +111,23 @@ export class HomeAddFoodModalPage implements OnInit {
       else{
         this.modalController.dismiss({ "item":item, "calories":calories, meal_id:result.success.meal_id, "protein":protein, "carbs":carbs, "fat":fat});
       }
-    });
+    }); */
+
+    this.myAPI.makeSilentCall(
+      "meals.php", 
+      {
+        "action": "saveMeal",
+        "food_name": item.food_name,
+        "calories": calories,
+        "protein": protein,
+        "fat": fat,
+        "carbohydrate": carbs,
+        "day": this.date
+      },
+      true
+    );
+    this.modalController.dismiss(item);
+    
   }
 
 

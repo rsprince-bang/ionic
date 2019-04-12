@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { CalendarComponent } from "ionic2-calendar/calendar";
+import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 
 @Component({
   selector: 'app-calendar',
@@ -22,7 +23,7 @@ export class CalendarPage implements OnInit {
   selectedDay = new Date();
   eventSource = [];
 
-  constructor(private myAPI: ApiCallService, private globalServices: GlobalServicesService) {
+  constructor(private myAPI: ApiCallService, private globalServices: GlobalServicesService, private foodSuggestionsService: FoodSuggestionsService) {
 
   }
 
@@ -52,29 +53,21 @@ export class CalendarPage implements OnInit {
         this.myAPI.handleMyAPIError(result.error);
       }
       else {
-        //returns an array of days with total calories for each day
-        var dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
-        var dietCaloriesIntake = parseInt(dailyCaloriesIntake) - 200;
+        //returns an array of days with meals and exercises
+        for (let i = 0; i < result.success.daysInfo.length; i++){
+          var dayCalorieInfo = this.foodSuggestionsService.getCaloriesPercentages(result.success.daysInfo[i].date.date_consumed, result.success.daysInfo[i].meals, result.success.daysInfo[i].exercises);
 
-        for (let i = 0; i < result.success.mealsInRange.length; i++) {
-          if (parseInt(result.success.mealsInRange[i].totalCal) > dietCaloriesIntake) {
-            result.success.mealsInRange[i].color = "red";
-          }
-          else {
-            result.success.mealsInRange[i].color = "green";
-          }
-
-          var dateNoLeadingZeros = result.success.mealsInRange[i].date_consumed.replace(/-0/g, "-");
+          var dateNoLeadingZeros = result.success.daysInfo[i].date.date_consumed.replace(/-0/g, "-");
           //add to calendar
           this.eventSource.push({
             title: 'None',
             startTime: new Date(dateNoLeadingZeros),
             endTime: new Date(dateNoLeadingZeros),
             allDay: true,
-            color: result.success.mealsInRange[i].color
+            color: dayCalorieInfo.color
           });
         }
-        this.myCalendar.loadEvents();
+        this.myCalendar.loadEvents(); 
       }
     });
   }
@@ -90,15 +83,12 @@ export class CalendarPage implements OnInit {
   onCurrentDateChanged(ev: Date) {
     this.selectedDay = ev;
     //console.log('Currently viewed date: ' + ev);
+    //console.log(this.eventSource);
   }
 
-  onEventSelected(event) {
+/*   onEventSelected(event) {
     console.log(event);
-  }
+  } */
 
-  markDisabled = (date: Date) => {
-    //var current = new Date();
-    //return date < current;
-    return false;
-  };
+
 }

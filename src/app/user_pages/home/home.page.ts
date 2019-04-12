@@ -5,6 +5,7 @@ import { ModalController, ActionSheetController } from '@ionic/angular';
 import { HomeAddFoodModalPage } from '../home-add-food-modal/home-add-food-modal.page';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
+import { HomeAddWorkoutModalPage } from '../home-add-workout-modal/home-add-workout-modal.page';
 
 
 
@@ -27,7 +28,7 @@ export class HomePage implements OnInit {
   caloriesFromCarbs:number =0;
   caloriesFromFat:number =0;
   meals = [];
-  disabletoggles = false;
+  exercises = [];
   percent:number = 0;
   circlesubtitle = "";
   circlecolor = "#c0c0c0"; //gray atr first
@@ -73,7 +74,10 @@ export class HomePage implements OnInit {
   handleSwipeRight() {
     switch(this.day) { 
       case "today": { 
-        this.globalServices.swipeRight("/home/yesterday");
+        if( this.dayNumber > 1 ){
+          //if its not your first day, then you can see previous day
+          this.globalServices.swipeRight("/home/yesterday");
+        }
         break; 
       } 
       case "tomorrow": { 
@@ -87,32 +91,20 @@ export class HomePage implements OnInit {
    }
   }
 
-  updatepage(){
-    this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
-    this.dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
-    this.dietCaloriesIntake = this.dailyCaloriesIntake - 200;
-
-    let meals = JSON.parse(localStorage.getItem('homepageMeals'));
-    this.meals = meals[this.day];
-
-    this.calculateCaloriesConsumed();
-  }
-
-
   doRefresh(event) {
-    this.getFoodsList();
+    this.updatepage();
     event.target.complete();
   }
 
-  getFoodsList(){
+  updatepage(){
+    this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
+
     this.myAPI.makeAPIcall(
-      "users.php", 
+      "meals.php", 
       {
-        "action": "getFoodsList",
-        "yesterday": this.globalServices.getDate("yesterday"),
-        "today": this.globalServices.getDate("today"),
-        "tomorrow": this.globalServices.getDate("tomorrow")
+        "action": "getDayInfo",
+        "date":this.date
       },
       true
     ).subscribe((result)=>{
@@ -120,95 +112,33 @@ export class HomePage implements OnInit {
         this.myAPI.handleMyAPIError(result.error);
       }
       else{
-        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
-        this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
-
-        localStorage.setItem('homepageMeals', JSON.stringify(result.success.meals));
-        this.meals = result.success.meals[this.day];
-
-        for(let i=0; i<this.meals.length; i++){
-          this.meals[i].isChecked = true;
-        }
-
-        if( this.day == "yesterday" ){
-          this.disabletoggles = true;
-        }
-        else if( this.day == "today" ){
-
-        }
-        else if( this.day == "tomorrow" ){
-          
-        }
-    
+        this.meals = result.success.dayInfo.meals;
+        this.exercises = result.success.dayInfo.exercises;
         this.calculateCaloriesConsumed();
       }
     });
   }
 
-  addToList(data){
-    this.meals.push({"id":data.meal_id, "meal_name": data.item.food_name, "calories": data.calories, 
-    "protein":data.protein, "carbs":data.carbs, "fat":data.fat, "isChecked": true});
-
-    let meals = JSON.parse(localStorage.getItem('homepageMeals'));
-    meals[this.day] = this.meals;
-    localStorage.setItem('homepageMeals', JSON.stringify(meals));
-
-    this.calculateCaloriesConsumed();
-  }
-  
-  removeFromList(meal_id){
-    this.meals = this.meals.filter( el => el.id != meal_id );
-
-    let meals = JSON.parse(localStorage.getItem('homepageMeals'));
-    meals[this.day] = this.meals;
-    localStorage.setItem('homepageMeals', JSON.stringify(meals));
-
-    this.myAPI.makeSilentCall(
-      "users.php", 
-      {
-        "action": "removeMeal",
-        "meal_id": meal_id
-      },
-      true
-    );
-    this.calculateCaloriesConsumed();
-  }
-
   calculateCaloriesConsumed(){
-    //reset before accumulation duh
-    this.caloriesConsumed = 0;
-    this.caloriesFromProtein =0;
-    this.caloriesFromCarbs =0;
-    this.caloriesFromFat =0;
+    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises);
 
-    for(let i=0; i<this.meals.length; i++){
-      this.caloriesConsumed = this.caloriesConsumed + parseInt(this.meals[i].calories);
+    this.caloriesConsumed = info.caloriesConsumed;
+    this.caloriesFromProtein = info.caloriesFromProtein;
+    this.caloriesFromCarbs = info.caloriesFromCarbs;
+    this.caloriesFromFat = info.caloriesFromFat;
+    this.dietCaloriesIntake = info.dietCaloriesIntake;
+    this.percent = info.percent;
 
-      this.caloriesFromProtein = this.caloriesFromProtein + (this.meals[i].protein * 4);
-      this.caloriesFromCarbs = this.caloriesFromCarbs + (this.meals[i].carbs * 4);
-      this.caloriesFromFat = this.caloriesFromFat + (this.meals[i].fat * 9);
-    }
-
-    //we got the actual values for each, let just turn them into percentage
-    if( this.meals.length > 0){
-      let totalCaloriesFromFormula = this.caloriesFromProtein + this.caloriesFromCarbs + this.caloriesFromFat;
-      this.caloriesFromProtein = Math.round(this.caloriesFromProtein*100/totalCaloriesFromFormula);
-      this.caloriesFromCarbs = Math.round(this.caloriesFromCarbs*100/totalCaloriesFromFormula);
-      this.caloriesFromFat = Math.round(this.caloriesFromFat*100/totalCaloriesFromFormula);
-    }
-
-
-    this.percent = this.caloriesConsumed*100/this.dietCaloriesIntake;
-    if( this.percent> 100 ){
+    if( info.color == "red" ){
       this.circlecolor = "#CA1616";
     }
     else{
-      this.circlecolor = "#2FB202";
+      this.circlecolor = "#2FB202"; //green
     }
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }
 
-  async addFoodModal(){
+  async openFoodModal(){
     const modal = await this.modalController.create({
       component: HomeAddFoodModalPage,
       componentProps: { day: this.day }
@@ -217,15 +147,15 @@ export class HomePage implements OnInit {
     modal.onDidDismiss()
       .then((response) => {
         if( response.data ){
-          this.addToList(response.data);
+          this.updatepage();
         }        
     });
 
     return await modal.present();
   }
 
-  async presentActionSheet(meal_id, mealName) {
-    if(this.day != "yesterday"){
+  async foodDeleteActionSheet(meal_id, mealName) {
+    if(this.day == "today"){
       const actionSheet = await this.actionSheetController.create({
         header: mealName,
         buttons: [{
@@ -233,7 +163,7 @@ export class HomePage implements OnInit {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.removeFromList(meal_id);
+            this.removeMeal(meal_id);
           }
         }, 
         {
@@ -241,7 +171,60 @@ export class HomePage implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            //console.log('Cancel clicked');
+          }
+        }]
+      });
+      await actionSheet.present();
+    }
+  }
+      
+  removeMeal(meal_id) {
+    this.meals = this.meals.filter(el => el.id != meal_id);
+    this.calculateCaloriesConsumed();
+
+    this.myAPI.makeSilentCall(
+      "meals.php",
+      {
+        "action": "removeMeal",
+        "meal_id": meal_id
+      },
+      true
+    );
+  }
+
+  async openExerciseModal(){
+    const modal2 = await this.modalController.create({
+      component: HomeAddWorkoutModalPage,
+      componentProps: { day: this.day }
+    });
+
+    modal2.onDidDismiss()
+      .then((response) => {
+        if( response.data ){
+          this.updatepage();
+        }        
+    });
+
+    return await modal2.present();
+  }
+
+  async exerciseDeleteActionSheet(exercise_id, exerciseName) {
+    if(this.day == "today"){
+      const actionSheet = await this.actionSheetController.create({
+        header: exerciseName,
+        buttons: [{
+          text: 'Delete',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.removeExercise(exercise_id);
+          }
+        }, 
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
           }
         }]
       });
@@ -249,8 +232,19 @@ export class HomePage implements OnInit {
     }
   }
 
+  removeExercise(exercise_id) {
+    this.exercises = this.exercises.filter(el => el.id != exercise_id);
+    this.calculateCaloriesConsumed();
 
-
+    this.myAPI.makeSilentCall(
+      "exercises.php",
+      {
+        "action": "removeExercise",
+        "exercise_id": exercise_id
+      },
+      true
+    );
+  }
 
 
 

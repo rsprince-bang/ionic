@@ -26,7 +26,7 @@
           <h3>{{serving.serving_description}}</h3> <h3 *ngIf="item.brand_name"> - {{item.brand_name}}</h3>
           <p>Calories: {{serving.calories}}, Protein: {{serving.protein}}, Fat: {{serving.fat}}, Carbs: {{serving.carbohydrate}}</p>
         </ion-label>
-        <ion-button slot="end" size="small" (click)="addToList(item, serving.calories, serving.protein, serving.fat, serving.carbohydrate )">Add</ion-button>
+        <ion-button slot="end" size="small" (click)="addMeal(item, serving.calories, serving.protein, serving.fat, serving.carbohydrate )">Add</ion-button>
       </ion-item>
 
     </div>
