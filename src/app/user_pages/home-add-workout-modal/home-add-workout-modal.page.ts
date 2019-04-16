@@ -10,15 +10,13 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 })
 export class HomeAddWorkoutModalPage implements OnInit {
 
-  day; //passed from previous page
-  date = null;
+  date; //passed from previous page
   searchResults = [];
   searchTerm = '';
 
   constructor(private modalController: ModalController, private myAPI: ApiCallService, private globalServices: GlobalServicesService) { }
 
   ngOnInit() {
-    this.date = this.globalServices.getDate(this.day);
   }
 
   searchExercises(){
@@ -59,25 +57,6 @@ export class HomeAddWorkoutModalPage implements OnInit {
 
   addExercise(exercise){
     if( exercise.hours && exercise.hours > 0 ){
-
-/*       this.myAPI.makeAPIcall(
-        "exercises.php", 
-        {
-          "action": "saveExercise",
-          "exercise": exercise,
-          "day": this.date
-        },
-        true
-      ).subscribe((result)=>{
-        if( result.error ){
-          this.modalController.dismiss();
-          this.myAPI.handleMyAPIError(result.error);
-        }
-        else{
-          this.modalController.dismiss();
-        }
-      }); */
-
       this.myAPI.makeSilentCall(
         "exercises.php", 
         {
@@ -87,7 +66,6 @@ export class HomeAddWorkoutModalPage implements OnInit {
         },
         true
       );
-
       this.modalController.dismiss(exercise);
     }
   }

@@ -11,15 +11,14 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 })
 export class HomeAddFoodModalPage implements OnInit {
 
-  day; //passed from previous page
-  date = null;
+  date = null;  //passed from previous page
   searchResults = [];
   searchTerm = '';
 
   constructor(private modalController: ModalController, private myAPI: ApiCallService, private globalServices: GlobalServicesService) { }
 
   ngOnInit() {
-    this.date = this.globalServices.getDate(this.day);
+
   }
 
   searchChanged(){
@@ -90,29 +89,6 @@ export class HomeAddFoodModalPage implements OnInit {
   }
 
   addMeal(item, calories, protein, fat, carbs){
-    
-/*     this.myAPI.makeAPIcall(
-      "users.php", 
-      {
-        "action": "saveMeal",
-        "food_name": item.food_name,
-        "calories": calories,
-        "protein": protein,
-        "fat": fat,
-        "carbohydrate": carbs,
-        "day": this.date
-      },
-      true
-    ).subscribe((result)=>{
-      if( result.error ){
-        this.modalController.dismiss();
-        this.myAPI.handleMyAPIError(result.error);
-      }
-      else{
-        this.modalController.dismiss({ "item":item, "calories":calories, meal_id:result.success.meal_id, "protein":protein, "carbs":carbs, "fat":fat});
-      }
-    }); */
-
     this.myAPI.makeSilentCall(
       "meals.php", 
       {
@@ -127,7 +103,6 @@ export class HomeAddFoodModalPage implements OnInit {
       true
     );
     this.modalController.dismiss(item);
-    
   }
 
 

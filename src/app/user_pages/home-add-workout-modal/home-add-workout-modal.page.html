@@ -6,7 +6,7 @@
 
 <ion-content padding>
 
-  <ion-searchbar debounce="500" (ionChange)="searchExercises($event)" [(ngModel)]="searchTerm"
+  <ion-searchbar debounce="1000" (ionChange)="searchExercises($event)" [(ngModel)]="searchTerm"
     (ionClear)="clearSearch()">
   </ion-searchbar>
 

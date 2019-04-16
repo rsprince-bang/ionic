@@ -87,6 +87,26 @@ export class GlobalServicesService {
     return today_string;
   }
 
+  getPreviousDate(date){
+    var currentdate = new Date(date + " 00:00:00");
+
+    var dd = String(currentdate.getDate() - 1).padStart(2, '0'); //yesterday's date
+    var mm = String(currentdate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = currentdate.getFullYear();
+
+    return yyyy + '-' + mm + '-' + dd;
+  }
+
+  getNextDate(date){
+    var currentdate = new Date(date + " 00:00:00");
+
+    var dd = String(currentdate.getDate() + 1).padStart(2, '0'); //yesterday's date
+    var mm = String(currentdate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = currentdate.getFullYear();
+
+    return yyyy + '-' + mm + '-' + dd;
+  }
+
   getDate(day) {
     //day must be yesterday, today, tomorrow
 

@@ -20,7 +20,7 @@ import { HomeAddWorkoutModalPageModule } from './user_pages/home-add-workout-mod
 
 import { NgCircleProgressModule } from 'ng-circle-progress'; //works without it too but im supposed to declare it?!
 import { NgCalendarModule  } from 'ionic2-calendar';
-
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +35,8 @@ import { NgCalendarModule  } from 'ionic2-calendar';
       HomeAddFoodModalPageModule,
       HomeAddWorkoutModalPageModule,
       NgCircleProgressModule.forRoot(),
-      NgCalendarModule
+      NgCalendarModule,
+      ChartsModule
     ],
   providers: [
     StatusBar,

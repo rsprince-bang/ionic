@@ -18,10 +18,11 @@
   </ion-refresher>
 
   <ion-toolbar>
-    <ion-icon *ngIf="day == 'today' || day == 'tomorrow'" name="arrow-dropleft" slot="start"></ion-icon>
+    <ion-icon *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()" name="arrow-dropleft"
+      slot="start"></ion-icon>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{day}} Info TEST</ion-card-title>
+        <ion-card-title>{{day}} Info</ion-card-title>
       </ion-card-header>
 
       <ion-card-content *ngIf="dayNumber>84; else templateName">
@@ -35,67 +36,42 @@
       </ng-template>
 
     </ion-card>
-    <ion-icon *ngIf="day == 'today' || day == 'yesterday'" name="arrow-dropright" slot="end"></ion-icon>
+    <ion-icon *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-dropright"
+      slot="end"></ion-icon>
   </ion-toolbar>
 
 
-  <!-- Segment choice-->
-  <ion-segment [(ngModel)]="segment_choice">
-    <ion-segment-button value="nutrition">
-      <ion-label>Nutrition</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="workout">
-      <ion-label>Workout</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+  <div style="display: block">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
 
+  <ion-item>
+    <ion-label>Workout complete</ion-label>
+    <ion-toggle disabled [(ngModel)]="workout_completed"></ion-toggle>
+  </ion-item>
 
-  <!--Nutrition segment-->
-  <div *ngIf="segment_choice == 'nutrition'">
-
-    <p *ngIf="dayNutritionInfo.daynutrition.hasOwnProperty('fat'); else nofattemplate"><!--days with w fat-->
-      Day {{dayNumber}} consist of {{dayNutritionInfo.daynutrition.protein}}% protein {{dayNutritionInfo.daynutrition.carbs}}% carbs and {{dayNutritionInfo.daynutrition.fat}}% fat.
+  <div>
+    <p *ngIf="dayNutritionInfo.daynutrition.hasOwnProperty('fat'); else nofattemplate">
+      <!--days with w fat-->
+      Day {{dayNumber}} consist of {{dayNutritionInfo.daynutrition.protein}}% protein
+      {{dayNutritionInfo.daynutrition.carbs}}% carbs and {{dayNutritionInfo.daynutrition.fat}}% fat.
     </p>
     <ng-template #nofattemplate>
       <p>
-        Day {{dayNumber}} consist of {{dayNutritionInfo.daynutrition.protein}}% protein {{dayNutritionInfo.daynutrition.carbs}}% carbs (5%+/- Dietary Fat that occur naturally in the
+        Day {{dayNumber}} consist of {{dayNutritionInfo.daynutrition.protein}}% protein
+        {{dayNutritionInfo.daynutrition.carbs}}% carbs (5%+/- Dietary Fat that occur naturally in the
         Protein and Carbohydrate food sources).
       </p>
     </ng-template>
 
     <p>Try to eat at elast 40g of protein per meal.</p>
-    <p>Current protein:{{caloriesFromProtein}}%, carbs:{{caloriesFromCarbs}}%, fat:{{caloriesFromFat}}%</p>
-
-    <!--Foods loop-->
-    <ion-list>
-      <ion-item *ngFor="let meal of meals" (press)="foodDeleteActionSheet(meal.id, meal.meal_name)">
-        <ion-label>{{meal.meal_name}}</ion-label>
-      </ion-item>
-    </ion-list>
-
-    <ion-item *ngIf="day!='yesterday' && day!='tomorrow'">
-      <ion-button (click)="openFoodModal()">Add food</ion-button>
-    </ion-item>
-
+    <p>Current protein:{{caloriesFromProteinAsP}}%, carbs:{{caloriesFromCarbsAsP}}%, fat:{{caloriesFromFatAsP}}%</p>
   </div>
-  <!--End segments-->
 
-  
-  <!--Workout segment-->
-  <div *ngIf="segment_choice == 'workout'">
 
-    <!--exercise loop-->
-    <ion-list>
-      <ion-item *ngFor="let exercise of exercises" (press)="exerciseDeleteActionSheet(exercise.id, exercise.exercise_name)" >
-        <ion-label>{{exercise.exercise_name}}</ion-label>
-      </ion-item>
-    </ion-list>
 
-    <ion-item *ngIf="day!='yesterday' && day!='tomorrow'">
-      <ion-button (click)="openExerciseModal()">Add exercise</ion-button>
-    </ion-item>
-  </div>
-  <!--End segments-->
 
   <p>Target calories to loose weight:{{dietCaloriesIntake}}</p>
   <p>Cosnusmed so far:{{caloriesConsumed}}</p>

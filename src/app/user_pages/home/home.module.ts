@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ChartsModule } from 'ng2-charts';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
       "showInnerStroke": false,
       "startFromZero": false,
       "showZeroOuterStroke": false
-    })
+    }),
+    ChartsModule
   ],
   declarations: [HomePage]
 })

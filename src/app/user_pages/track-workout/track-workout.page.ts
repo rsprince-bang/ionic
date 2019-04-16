@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ModalController } from '@ionic/angular';
-import { TrackWorkoutModalPage } from '../track-workout-modal/track-workout-modal.page';
+import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
+import { ApiCallService } from 'src/app/services/api-call.service';
+import { HomeAddWorkoutModalPage } from '../home-add-workout-modal/home-add-workout-modal.page';
 
 @Component({
   selector: 'app-track-workout',
@@ -11,69 +13,85 @@ import { TrackWorkoutModalPage } from '../track-workout-modal/track-workout-moda
 })
 export class TrackWorkoutPage implements OnInit {
 
-  day = null;
-  disablechecksmarks = false;
-  randomWorkouts = [
-    { name: 'Bench press', isChecked: true },
-    { name: 'Squads', isChecked: false },
-    { name: 'Curls', isChecked: true },
-    { name: 'Pull ups', isChecked: true },
-    { name: 'Chin ups', isChecked: false },
-    { name: 'Push ups', isChecked: true },
-    { name: 'Triceps extensions', isChecked: true },
-    { name: 'Calves', isChecked: false },
-    { name: 'Crunches', isChecked: false },
-  ];
-  todayWorkouts = [];
+  today = false;
+  dayNumber = null;
+  date = null;
+  meals = [];
+  exercises = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private globalServices: GlobalServicesService, private modalController: ModalController) { }
+  constructor(private activatedRoute: ActivatedRoute, private globalServices: GlobalServicesService, private modalController: ModalController,
+    private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService) { }
 
   ngOnInit() {
-    this.day = this.activatedRoute.snapshot.paramMap.get('day');
-
-    //get 2 random meals for testing stackoverflow func
-    this.todayWorkouts = this.randomWorkouts.sort(() => .5 - Math.random()).slice(0, 2);
-
-    //default day is 5 , i.e. 5 == today
-    //if anyuthing before that will be disabled; anything after will be unchecked
-    for (var i = 0; i < this.todayWorkouts.length; i++) {
-      if (this.day < 5) {
-        this.disablechecksmarks = true;
-      }
-      else if (this.day > 5) {
-        this.todayWorkouts[i].isChecked = false;
-      }
+    this.date = this.activatedRoute.snapshot.paramMap.get('day');
+    if( this.date == '' ){
+      this.date = this.date = this.globalServices.getTodayDate();
     }
+    this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+
+    if( this.date == this.globalServices.getTodayDate() ){
+      this.today = true;
+    }
+
+    this.loadExercises();
   }
 
 
   handleSwipeLeft() {
-    var nextday = parseInt(this.day) + 1;
-    this.globalServices.swipeLeft("/track-workout/" + nextday);
+    this.globalServices.swipeLeft("/track-workout/" + this.globalServices.getNextDate(this.date));
   }
 
 
   handleSwipeRight() {
-    if (this.day > 1) {
-      var prevday = parseInt(this.day) - 1;
-      this.globalServices.swipeRight("/track-workout/" + prevday);
+    if (this.dayNumber > 1) {
+      this.globalServices.swipeRight("/track-workout/" + this.globalServices.getPreviousDate(this.date));
     }
   }
 
+  loadExercises(){
+    this.myAPI.makeAPIcall(
+      "exercises.php", 
+      {
+        "action": "getExercises",
+        "date":this.date
+      },
+      true
+    ).subscribe((result)=>{
+      if( result.error ){
+        this.myAPI.handleMyAPIError(result.error);
+      }
+      else{
+        this.exercises = result.success.exercises;
+      }
+    });
+  }
 
-  async openExersize(workout) {
-
+  async openExerciseModal(){
     const modal = await this.modalController.create({
-      component: TrackWorkoutModalPage,
-      componentProps: { workout: workout }
+      component: HomeAddWorkoutModalPage,
+      componentProps: { date: this.date }
     });
 
-/*     modal.onDidDismiss()
+    modal.onDidDismiss()
       .then((response) => {
-        console.log(response);
-      }); */
+        if( response.data ){
+          this.loadExercises();
+        }        
+    });
 
     return await modal.present();
+  }
+
+  removeExercise(exercise_id) {
+    this.exercises = this.exercises.filter(el => el.id != exercise_id);
+    this.myAPI.makeSilentCall(
+      "exercises.php",
+      {
+        "action": "removeExercise",
+        "exercise_id": exercise_id
+      },
+      true
+    );
   }
 
 }

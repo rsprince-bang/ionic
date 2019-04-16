@@ -84,6 +84,15 @@ export class FoodSuggestionsService {
     var caloriesFromProtein =0;
     var caloriesFromCarbs =0;
     var caloriesFromFat =0;
+
+    var targetCaloriesFromProtein = 0;
+    var targetCaloriesFromCarbs = 0;
+    var targetCaloriesFromFat = 0;
+
+    var caloriesFromProteinAsP =0;
+    var caloriesFromCarbsAsP =0;
+    var caloriesFromFatAsP =0;
+
     var dietCaloriesIntake = parseInt(localStorage.getItem('dailyCaloriesIntake')) - 200;
     var eat_extra_protein = false;
 
@@ -102,9 +111,9 @@ export class FoodSuggestionsService {
 
     //calculate targeted calories
     var dayNutritionInfo = this.getDietDayDescription(date);
-    var targetCaloriesFromProtein = dayNutritionInfo.daynutrition.protein/100*dietCaloriesIntake;
-    var targetCaloriesFromCarbs = dayNutritionInfo.daynutrition.carbs/100*dietCaloriesIntake;
-    var targetCaloriesFromFat = 5/100*dietCaloriesIntake;
+    targetCaloriesFromProtein = dayNutritionInfo.daynutrition.protein/100*dietCaloriesIntake;
+    targetCaloriesFromCarbs = dayNutritionInfo.daynutrition.carbs/100*dietCaloriesIntake;
+    targetCaloriesFromFat = 5/100*dietCaloriesIntake;
     if( dayNutritionInfo.daynutrition.fat ){
       targetCaloriesFromFat = dayNutritionInfo.daynutrition.fat/100*dietCaloriesIntake;
     }
@@ -119,9 +128,9 @@ export class FoodSuggestionsService {
     //we got the actual values for each, let just turn them into percentage
     if( meals.length > 0){
       let totalCaloriesFromFormula = caloriesFromProtein + caloriesFromCarbs + caloriesFromFat;
-      caloriesFromProtein = Math.round(caloriesFromProtein*100/totalCaloriesFromFormula);
-      caloriesFromCarbs = Math.round(caloriesFromCarbs*100/totalCaloriesFromFormula);
-      caloriesFromFat = Math.round(caloriesFromFat*100/totalCaloriesFromFormula);
+      caloriesFromProteinAsP = Math.round(caloriesFromProtein*100/totalCaloriesFromFormula);
+      caloriesFromCarbsAsP = Math.round(caloriesFromCarbs*100/totalCaloriesFromFormula);
+      caloriesFromFatAsP = Math.round(caloriesFromFat*100/totalCaloriesFromFormula);
     }
 
     //if we devided by zero percentages are NaN, so lets reset them to zero
@@ -148,10 +157,20 @@ export class FoodSuggestionsService {
     }
 
     return { 
-      "caloriesConsumed":caloriesConsumed,
       "caloriesFromProtein": caloriesFromProtein,
       "caloriesFromCarbs":caloriesFromCarbs,
       "caloriesFromFat":caloriesFromFat,
+
+      "targetCaloriesFromProtein": targetCaloriesFromProtein,
+      "targetCaloriesFromCarbs":targetCaloriesFromCarbs,
+      "targetCaloriesFromFat":targetCaloriesFromFat,
+
+      "caloriesConsumed":caloriesConsumed,
+
+      "caloriesFromProteinAsP": caloriesFromProteinAsP,
+      "caloriesFromCarbsAsP":caloriesFromCarbsAsP,
+      "caloriesFromFatAsP":caloriesFromFatAsP,
+      
       "dietCaloriesIntake":dietCaloriesIntake,
       "percent":percent,
       "color": color

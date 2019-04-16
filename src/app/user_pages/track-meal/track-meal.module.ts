@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TrackMealPage } from './track-meal.page';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 const routes: Routes = [
   {
@@ -19,7 +20,20 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgCircleProgressModule.forRoot({
+      "radius": 60,
+      "maxPercent": 100,
+      "unitsColor": "#ffffff",
+      "outerStrokeWidth": 5,
+      "outerStrokeColor": "#FFFFFF",
+      "innerStrokeColor": "#FFFFFF",
+      "titleColor": "#ffffff",
+      "subtitleColor": "#ffffff",
+      "showInnerStroke": false,
+      "startFromZero": false,
+      "showZeroOuterStroke": false
+    })
   ],
   declarations: [TrackMealPage]
 })
