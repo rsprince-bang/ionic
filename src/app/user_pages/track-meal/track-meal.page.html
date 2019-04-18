@@ -13,6 +13,11 @@
 
 <!-- <ion-content padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()"> -->
 <ion-content padding>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-toolbar>
     <ion-icon name="arrow-dropleft" slot="start" (click)="handleSwipeRight()"></ion-icon>
     <ion-card>

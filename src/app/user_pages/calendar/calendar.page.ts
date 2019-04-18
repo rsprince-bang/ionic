@@ -3,6 +3,7 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { CalendarComponent } from "ionic2-calendar/calendar";
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
+import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
 
 @Component({
   selector: 'app-calendar',
@@ -22,6 +23,13 @@ export class CalendarPage implements OnInit {
   title: string = null;;
   selectedDay = new Date();
   eventSource = [];
+  //for specific date
+  meals = [];
+  exercises = [];
+  workout_completed = false;
+  date = null;
+  info = null;
+  score = 0;
 
   constructor(private myAPI: ApiCallService, private globalServices: GlobalServicesService, private foodSuggestionsService: FoodSuggestionsService) {
 
@@ -82,8 +90,42 @@ export class CalendarPage implements OnInit {
 
   onCurrentDateChanged(ev: Date) {
     this.selectedDay = ev;
-    //console.log('Currently viewed date: ' + ev);
-    //console.log(this.eventSource);
+    var selectedDate = this.globalServices.getDateFromObject(ev);
+
+    if( this.eventSource.length == 0 ){
+      this.showDateStats( this.globalServices.getTodayDate() );
+    }
+    else{
+      this.showDateStats(selectedDate);
+    }
+  }
+
+  showDateStats(datestring){
+    this.myAPI.makeAPIcall(
+      "meals.php",
+      {
+        "action": "getDayInfo",
+        "date": datestring
+      },
+      true
+    ).subscribe((result) => {
+      if (result.error) {
+        this.myAPI.handleMyAPIError(result.error);
+      }
+      else {
+        this.date = datestring;
+        this.meals = result.success.dayInfo.meals;
+        this.exercises = result.success.dayInfo.exercises;
+
+        this.workout_completed = this.foodSuggestionsService.getWorkoutStatus(this.exercises);
+
+        this.info = this.foodSuggestionsService.getCaloriesPercentages(datestring, this.meals, this.exercises);
+        this.score = this.foodSuggestionsService.getScore(this.info.caloriesConsumed, this.info.dietCaloriesIntake, this.workout_completed, this.info.color, this.info.percent);
+        //console.log(this.info);
+      }
+    });
+
+
   }
 
 /*   onEventSelected(event) {

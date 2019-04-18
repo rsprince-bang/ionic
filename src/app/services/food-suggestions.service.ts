@@ -177,6 +177,56 @@ export class FoodSuggestionsService {
      };
   }
 
+  getWorkoutStatus(exercises){
+    if (exercises.length > 0) {
+      //at elast 20 minutes of exersice
+      var hoursOfExercise = 0;
+      for (var i = 0; i < exercises.length; i++) { 
+        hoursOfExercise = (hoursOfExercise) + parseFloat(exercises[i].hours);
+      }
+      if( hoursOfExercise > 0.3 ){
+        return true;
+      }
+    }
+    else {
+      return false;
+    }
+  }
+  
+  getScore(caloriesEat, targetCalories, didExercise, color, percent){
+    var baseScore = 100;
 
+    if( color == "green" ){
+      if( caloriesEat>targetCalories ){
+        //overeat with protein only wich is ok
+      }
+      else{
+        //met calories count or undereat
+        var underEatByP = 100 - Math.round(percent);
+        if( underEatByP > 10 ){
+          baseScore = baseScore + 10;
+        }
+        else{
+          baseScore = baseScore + underEatByP;
+        }
+      }
+    }
+    else{
+      //red, overeat
+      var overEatByP = Math.round(percent) - 100;
+      baseScore = baseScore - (overEatByP*2);
+    }
+
+    if(!didExercise){
+      baseScore = baseScore - 15;
+    }
+
+    //no food info, i.e. yesterday
+    if( caloriesEat == 0 ){
+      baseScore = 0;
+    }
+
+    return baseScore;
+  }
 
 }

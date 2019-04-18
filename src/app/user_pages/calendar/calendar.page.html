@@ -23,7 +23,9 @@
 
   <ng-template #detailstemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
     <div>
-      <p>Details for {{selectedDay}}</p>
+      <p>Details for {{date}}</p>
+      <p>Consumed {{info?.caloriesConsumed}} of {{info?.dietCaloriesIntake}}</p>
+      <p>Daily score: {{score}}</p>
     </div>
   </ng-template>
 

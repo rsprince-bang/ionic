@@ -22,22 +22,27 @@ export class HomeAddFoodModalPage implements OnInit {
   }
 
   searchChanged(){
-    this.myAPI.makeAPIcall(
-      "food_api.php", 
-      {
-        "action": "loadFoods",
-        "food": this.searchTerm
-      },
-      true
-    ).subscribe((result)=>{
-      if( result.error ){
-        this.modalController.dismiss();
-        this.myAPI.handleMyAPIError(result.error);
-      }
-      else{
-        this.searchResults = result.success.foods;
-      }
-    });
+    if( this.searchTerm != ''){
+      this.myAPI.makeAPIcall(
+        "food_api_edamam.php", 
+        {
+          "action": "loadFoods",
+          "food": this.searchTerm
+        },
+        true
+      ).subscribe((result)=>{
+        if( result.error ){
+          this.modalController.dismiss();
+          this.myAPI.handleMyAPIError(result.error);
+        }
+        else{
+          this.searchResults = result.success.foods;
+        }
+      });
+    }
+    else{
+      this.searchResults = [];
+    }
   }
 
   clearSearch(){
@@ -105,7 +110,31 @@ export class HomeAddFoodModalPage implements OnInit {
     this.modalController.dismiss(item);
   }
 
+  edamamAddMeal(foodname, foodId, quantity, measureURI){
+    if( quantity && quantity>0 ){
+      this.myAPI.makeSilentCall(
+        "food_api_edamam.php", 
+        {
+          "action": "edamamAddMeal",
+          "foodname": foodname,
+          "foodId": foodId,
+          "quantity": quantity,
+          "measureURI": measureURI,
+          "day": this.date
+        },
+        true
+      );
+      this.modalController.dismiss(foodId);
+    }
+  }
 
-
+  expandHint(hint){
+    if( hint.selected ){
+      hint.selected = false;
+    }
+    else{
+      hint.selected = true;
+    }
+  }
 
 }

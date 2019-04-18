@@ -22,7 +22,7 @@
       slot="start"></ion-icon>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{day}} Info</ion-card-title>
+        <ion-card-title>{{day}} score {{score}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content *ngIf="dayNumber>84; else templateName">
@@ -48,7 +48,7 @@
   </div>
 
   <ion-item>
-    <ion-label>Workout complete</ion-label>
+    <ion-label>20 min workout complete</ion-label>
     <ion-toggle disabled [(ngModel)]="workout_completed"></ion-toggle>
   </ion-item>
 
@@ -67,7 +67,7 @@
     </ng-template>
 
     <p>Try to eat at elast 40g of protein per meal.</p>
-    <p>Current protein:{{caloriesFromProteinAsP}}%, carbs:{{caloriesFromCarbsAsP}}%, fat:{{caloriesFromFatAsP}}%</p>
+    <!-- <p>Current protein:{{caloriesFromProteinAsP}}%, carbs:{{caloriesFromCarbsAsP}}%, fat:{{caloriesFromFatAsP}}%</p> -->
   </div>
 
 

@@ -6,11 +6,13 @@
 
 <ion-content padding>
 
-  <ion-searchbar debounce="1000" (ionChange)="searchChanged($event)" [(ngModel)]="searchTerm" (ionClear)="clearSearch()" >
+  <ion-searchbar debounce="1000" (ionChange)="searchChanged($event)" [(ngModel)]="searchTerm"
+    (ionClear)="clearSearch()">
   </ion-searchbar>
 
 
-  <ion-list>
+  <!--for fatsecret-->
+  <!--   <ion-list>
     <div *ngFor="let item of searchResults">
       <ion-item>
         <ion-label text-wrap>
@@ -30,7 +32,46 @@
       </ion-item>
 
     </div>
+  </ion-list> -->
+
+
+  <!--for Edamam-->
+  <ion-list>
+
+    <!--first item-->
+    <ion-item *ngIf="searchResults.parsed && searchResults.parsed.length > 0 && searchResults.parsed[0].measure">
+      <ion-label text-wrap>
+        <h3>{{searchResults.parsed[0].quantity}} {{searchResults.parsed[0].measure.label}} of {{searchResults.parsed[0].food.label}}</h3>
+        <!-- <p>{{item.food_description}}</p> -->
+      </ion-label>
+
+      <ion-button slot="end" size="small"
+        (click)="edamamAddMeal(searchResults.parsed[0].food.label, searchResults.parsed[0].food.foodId, searchResults.parsed[0].quantity, searchResults.parsed[0].measure.uri)">
+        Add</ion-button>
+    </ion-item>
+
+    <!--hints loop-->
+    <div *ngFor="let hint of searchResults.hints">
+      <ion-item>
+        <ion-label text-wrap>
+          <h3>{{hint.food.label}}</h3>
+          <!-- <p>{{item.food_description}}</p> -->
+        </ion-label>
+
+        <ion-button slot="end" size="small" (click)="expandHint(hint)">Expand</ion-button>
+      </ion-item>
+
+      <ion-item *ngIf="hint.selected">
+        <ion-list>
+          <ion-item *ngFor="let measure of hint.measures">
+              <ion-input type="number" value="" [(ngModel)]="measure.quantity" >{{measure.label}}: </ion-input>
+              <ion-button slot="end" size="small" (click)="edamamAddMeal(hint.food.label, hint.food.foodId, measure.quantity, measure.uri)">Add</ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-item>
+    </div>
   </ion-list>
+
 
 </ion-content>
 

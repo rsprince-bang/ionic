@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
   circlesubtitle = "";
   circlecolor = "#c0c0c0"; //gray atr first
   dayNutritionInfo = { "phase": null, "phaseday": null, "daynutrition": { "protein": null, "carbs": null, "fat": null } }
-
+  score:number = 0;
   //declare barcharts
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -165,14 +165,9 @@ export class HomePage implements OnInit {
       else {
         this.meals = result.success.dayInfo.meals;
         this.exercises = result.success.dayInfo.exercises;
-        this.calculateCaloriesConsumed();
+        this.workout_completed = this.foodSuggestionsService.getWorkoutStatus(this.exercises);
 
-        if (this.exercises.length > 0) {
-          this.workout_completed = true;
-        }
-        else {
-          this.workout_completed = false;
-        }
+        this.calculateCaloriesConsumed();
       }
     });
 
@@ -198,6 +193,8 @@ export class HomePage implements OnInit {
       this.circlecolor = "#2FB202"; //green
     }
     this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
+
+    this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
   }
 
 

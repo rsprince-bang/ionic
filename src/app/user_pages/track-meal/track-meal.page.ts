@@ -47,6 +47,11 @@ export class TrackMealPage implements OnInit {
     this.loadMeals();
   }
 
+  doRefresh(event) {
+    this.ngOnInit();
+    event.target.complete();
+  }
+
   handleSwipeLeft() {
     this.globalServices.swipeLeft("/track-meal/" + this.globalServices.getNextDate(this.date));
   }
