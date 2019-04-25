@@ -41,7 +41,7 @@ export class FoodSuggestionsService {
 
   getDietDayNumber(date){
 
-    var dateRegistered = new Date(JSON.parse(localStorage.getItem('date_registered')));
+    var dateRegistered = new Date(JSON.parse(localStorage.getItem('diet_start_date')));
     var dateRequested = new Date(date);
 
     var diffTime = (dateRequested.getTime() - dateRegistered.getTime());
@@ -214,7 +214,7 @@ export class FoodSuggestionsService {
     else{
       //red, overeat
       var overEatByP = Math.round(percent) - 100;
-      baseScore = baseScore - (overEatByP*2);
+      baseScore = baseScore - (overEatByP*0.75);
     }
 
     if(!didExercise){
@@ -224,6 +224,11 @@ export class FoodSuggestionsService {
     //no food info, i.e. yesterday
     if( caloriesEat == 0 ){
       baseScore = 0;
+    }
+
+    //check for negatives if you way overeat
+    if( baseScore<0 ){
+      baseScore = 1;
     }
 
     return baseScore;

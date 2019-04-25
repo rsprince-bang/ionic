@@ -20,7 +20,9 @@ const routes: Routes = [
   { path: 'alerts', loadChildren: './user_pages/alerts/alerts.module#AlertsPageModule', canActivate:[AuthGuard] },
   { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] },
   { path: 'home/:day', loadChildren: './user_pages/home/home.module#HomePageModule', canActivate:[AuthGuard] },
-  { path: 'calendar', loadChildren: './user_pages/calendar/calendar.module#CalendarPageModule', canActivate:[AuthGuard] }
+  { path: 'calendar', loadChildren: './user_pages/calendar/calendar.module#CalendarPageModule', canActivate:[AuthGuard] },
+  { path: 'profile', loadChildren: './user_pages/profile/profile.module#ProfilePageModule',  canActivate:[AuthGuard] }
+
   
 ];
 @NgModule({

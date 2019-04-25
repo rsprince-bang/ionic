@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-avatar>
+    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+  </ion-avatar>
+  <h2>Name</h2>
+
+  <p>Current day: {{dayNumber}}</p>
+  <ion-button (click)="resetDiet()">Reset diet</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let diet of previousDiets">
+      <ion-label>{{diet.diet_start_date}} - {{diet.diet_end_date}}</ion-label>
+      <ion-button slot="end" size="small" (click)="viewOldDiet(diet.diet_start_date, diet.diet_end_date)">View</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ApiCallService } from 'src/app/services/api-call.service';
+import { GlobalServicesService } from 'src/app/services/global-services.service';
+import { File, FileEntry } from '@ionic-native/File/ngx';
+
+declare let window: any; // <--- Declare it like this
 
 @Component({
   selector: 'app-track-progress',
@@ -9,14 +14,66 @@ import { HttpClient } from '@angular/common/http';
 export class TrackProgressPage implements OnInit {
 
   items = [];
+  currentImage: any;
+  testImageURL = "";
+  file: File;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private camera: Camera, private myAPI: ApiCallService, private globalServices: GlobalServicesService) { }
 
   ngOnInit() {
-    this.httpClient.get('https://randomuser.me/api/?results=300').subscribe( res => {
-      this.items = res['results'];
-      //console.log(this.items);
+  }
+
+  takePicture() {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      window.resolveLocalFileSystemURL(imageData, (fileEntry) => {
+        fileEntry.file((file) => {
+          let self = this;
+          var reader = new FileReader();
+          reader.onloadend = function (e) {
+            var imgBlob = new Blob([this.result], { type: "image/jpeg" });
+            self.myAPI.uploadImageFromBlob(imgBlob, file.name)
+              .subscribe((result) => {
+                if (result.error) {
+                  self.myAPI.handleMyAPIError(result.error);
+                }
+                else {
+                  alert(JSON.stringify(result));
+                }
+              });
+          };
+          reader.readAsArrayBuffer(file);
+        });
+      });
+    }, (err) => {
+      // Handle error
+      console.log("Camera issue:" + err);
     });
   }
+
+
+
+  //upload file
+  changeListener($event): void {
+    this.myAPI.uploadImageFromFile($event.target.files[0])
+      .subscribe((result) => {
+        if (result.error) {
+          this.myAPI.handleMyAPIError(result.error);
+        }
+        else {
+          alert(JSON.stringify(result));
+        }
+      });
+  }
+
+
+
 
 }

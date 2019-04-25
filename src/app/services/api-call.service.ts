@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { GlobalServicesService } from './global-services.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,17 +25,16 @@ export class ApiCallService {
   isLoading = false;
 
   constructor(private http: HttpClient, public loadingController: LoadingController, private alertController: AlertController, private router: Router,
-    private globalservice: GlobalServicesService ) { }
+    private globalservice: GlobalServicesService) { }
 
 
-  makeAPIcall(page, data, auth_needed=false): Observable<any>{
+  makeAPIcall(page, data, auth_needed = false): Observable<any> {
 
-    if(auth_needed){
+    if (auth_needed) {
       data.token = localStorage.getItem("token");
       data.user_id = localStorage.getItem("user_id");
     }
 
-    //this.presentLoadingWithOptions();
     this.presentLoading();
 
     return this.http.post(
@@ -43,24 +43,22 @@ export class ApiCallService {
       this.options
     ).pipe(
       map(results => {
-        //this.loading.dismiss();
         this.dismissLoading();
         return results;
       }),
       catchError(error => {
-        //this.loading.dismiss();
         this.dismissLoading();
         this.showError(error);
         return throwError(error);
       })
     );
-    
+
   }
 
 
-  makeSilentCall(page, data, auth_needed=false){
+  makeSilentCall(page, data, auth_needed = false) {
 
-    if(auth_needed){
+    if (auth_needed) {
       data.token = localStorage.getItem("token");
       data.user_id = localStorage.getItem("user_id");
     }
@@ -69,27 +67,10 @@ export class ApiCallService {
       environment.API_URL + page,
       JSON.stringify(data),
       this.options
-    ).subscribe( () =>{
+    ).subscribe(() => {
       //do nothing
     });
   }
-
-
-/*   async presentLoadingWithOptions() {
-    this.loading = await this.loadingController.create({
-      spinner: "lines",
-      animated: true,
-      backdropDismiss: false,
-      cssClass: 'custom-class custom-loading',
-      duration: null,
-      keyboardClose: true,
-      message: 'Please wait...',
-
-      translucent: true,
-      
-    });
-    return await this.loading.present();
-  } */
 
 
   async presentLoading() {
@@ -105,10 +86,8 @@ export class ApiCallService {
       translucent: true,
     }).then(a => {
       a.present().then(() => {
-        //console.log('presented');
         if (!this.isLoading) {
           a.dismiss().then(() => {
-            //console.log('abort presenting')
           });
         }
       });
@@ -117,9 +96,59 @@ export class ApiCallService {
 
   async dismissLoading() {
     this.isLoading = false;
-    return await this.loadingController.dismiss().then( () => {
-      //console.log('dismissed')
+    return await this.loadingController.dismiss().then(() => {
     });
+  }
+
+  uploadImageFromFile(file: File): Observable<any> {
+    this.presentLoading();
+    //should be always authenticated call
+    const formData = new FormData();
+    formData.append("action", "saveImage" );
+    formData.append("token", localStorage.getItem("token") );
+    formData.append("user_id", localStorage.getItem("user_id") );
+    formData.append("date", this.globalservice.getTodayDate() );
+
+    formData.append('uploadFile', file, file.name);
+
+    return this.http.post(environment.API_URL + "image_upload.php", formData)
+      .pipe(
+        map(results => {
+          this.dismissLoading();
+          return results;
+        }),
+        catchError(error => {
+          this.dismissLoading();
+          this.showError(error);
+          return throwError(error);
+        })
+    );
+  }
+
+  uploadImageFromBlob(blob: Blob, filename): Observable<any> {
+    this.presentLoading();
+    //should be always authenticated call
+    const formData = new FormData();
+    formData.append("action", "saveImage" );
+    formData.append("token", localStorage.getItem("token") );
+    formData.append("user_id", localStorage.getItem("user_id") );
+    formData.append("date", this.globalservice.getTodayDate() );
+
+    formData.append('uploadFile', blob);
+    formData.append('filename', filename);
+
+    return this.http.post(environment.API_URL + "image_upload.php", formData)
+      .pipe(
+        map(results => {
+          this.dismissLoading();
+          return results;
+        }),
+        catchError(error => {
+          this.dismissLoading();
+          this.showError(error);
+          return throwError(error);
+        })
+    );
   }
 
   async showError(error) {
@@ -133,8 +162,8 @@ export class ApiCallService {
   }
 
 
-  handleMyAPIError(error){
-    if(error == "Expired token"){
+  handleMyAPIError(error) {
+    if (error == "Expired token") {
       this.globalservice.logOut();
     }
   }

@@ -85,4 +85,9 @@
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="0.6.5" />
     <plugin name="cordova-plugin-local-notification" spec="0.9.0-beta.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
+    <plugin name="cordova-plugin-camera" spec="4.0.3" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>Used to take pictures</string>
+    </edit-config>
+    <plugin name="cordova-plugin-file" spec="6.0.1" />
 </widget>

@@ -22,6 +22,10 @@ import { NgCircleProgressModule } from 'ng-circle-progress'; //works without it 
 import { NgCalendarModule  } from 'ionic2-calendar';
 import { ChartsModule } from 'ng2-charts';
 
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -41,6 +45,8 @@ import { ChartsModule } from 'ng2-charts';
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativePageTransitions,
     LocalNotifications,
