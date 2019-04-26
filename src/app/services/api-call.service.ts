@@ -166,6 +166,9 @@ export class ApiCallService {
     if (error == "Expired token") {
       this.globalservice.logOut();
     }
+    else{
+      alert(error);
+    }
   }
 
 
