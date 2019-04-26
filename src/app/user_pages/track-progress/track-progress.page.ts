@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
-import { File, FileEntry } from '@ionic-native/File/ngx';
+//import { File, FileEntry } from '@ionic-native/File/ngx';
 
 declare let window: any; // <--- Declare it like this
 
