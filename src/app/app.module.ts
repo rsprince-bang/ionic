@@ -23,7 +23,7 @@ import { NgCalendarModule  } from 'ionic2-calendar';
 import { ChartsModule } from 'ng2-charts';
 
 import { Camera } from '@ionic-native/camera/ngx';
-//import { File } from '@ionic-native/file/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 
 @NgModule({
@@ -46,7 +46,7 @@ import { Camera } from '@ionic-native/camera/ngx';
     StatusBar,
     SplashScreen,
     Camera,
-    //File,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativePageTransitions,
     LocalNotifications,
