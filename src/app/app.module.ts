@@ -23,7 +23,7 @@ import { NgCalendarModule  } from 'ionic2-calendar';
 import { ChartsModule } from 'ng2-charts';
 
 import { Camera } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { File } from '@ionic-native/file/ngx'; //it seems file transfer works as long as we have the cordova-plugin-file added, but lets import it
 
 
 @NgModule({

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
-//import { File, FileEntry } from '@ionic-native/File/ngx';
 
 declare let window: any; // <--- Declare it like this
 
@@ -25,7 +24,7 @@ export class TrackProgressPage implements OnInit {
 
   takePicture() {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 70, //1-100
       sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
