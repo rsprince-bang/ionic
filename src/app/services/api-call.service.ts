@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -25,7 +25,7 @@ export class ApiCallService {
   isLoading = false;
 
   constructor(private http: HttpClient, public loadingController: LoadingController, private alertController: AlertController, private router: Router,
-    private globalservice: GlobalServicesService) { }
+    private globalservice: GlobalServicesService, public toastController: ToastController) { }
 
 
   makeAPIcall(page, data, auth_needed = false): Observable<any> {
@@ -167,9 +167,19 @@ export class ApiCallService {
       this.globalservice.logOut();
     }
     else{
-      alert(error);
+      this.presentToastWithOptions(error);
     }
   }
 
-
+  async presentToastWithOptions(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      showCloseButton: true,
+      position: 'bottom',
+      closeButtonText: 'OK',
+      duration: 3000,
+      translucent: false
+    });
+    toast.present();
+  }
 }

@@ -20,12 +20,13 @@
     </ion-item>
   </ion-virtual-scroll> -->
 
-  <ion-item>
-    <ion-label id="profile_image" color="primary" stacked>Profilbild wählen</ion-label>
-    <ion-input type="file" accept="image/*" (change)="changeListener($event)"></ion-input>
-  </ion-item>
 
-  <img src="http://3.17.161.217/md-app/user_images/17708/lion_80c4a6bf8a9f3b689d99.jpg?token=1234" alt="Smiley face"> 
+  <ion-slides [options]="sliderOpts">
+    <ion-slide *ngFor="let image of images">
+        <ion-img [src]="image.url"></ion-img>
+    </ion-slide>
+  </ion-slides>
+
 
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
@@ -33,4 +34,10 @@
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-item>
+    <ion-label>Select existing</ion-label>
+    <ion-input type="file" accept="image/*" (change)="changeListener($event)"></ion-input>
+  </ion-item>
+
 </ion-content>

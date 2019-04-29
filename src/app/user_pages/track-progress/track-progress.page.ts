@@ -13,13 +13,18 @@ declare let window: any; // <--- Declare it like this
 export class TrackProgressPage implements OnInit {
 
   items = [];
-  currentImage: any;
-  testImageURL = "";
-  file: File;
-
+  images = [];
+  sliderOpts = {
+    zoom: false,
+    slidesPerView: 1.5,
+    spaceBetween: 20,
+    centeredSlides: true
+  };
+  
   constructor(private camera: Camera, private myAPI: ApiCallService, private globalServices: GlobalServicesService) { }
 
   ngOnInit() {
+    this.loadImages();
   }
 
   takePicture() {
@@ -44,7 +49,7 @@ export class TrackProgressPage implements OnInit {
                   self.myAPI.handleMyAPIError(result.error);
                 }
                 else {
-                  alert(JSON.stringify(result));
+                  //alert(JSON.stringify(result));
                 }
               });
           };
@@ -67,12 +72,27 @@ export class TrackProgressPage implements OnInit {
           this.myAPI.handleMyAPIError(result.error);
         }
         else {
-          alert(JSON.stringify(result));
+          //alert(JSON.stringify(result));
         }
       });
   }
 
-
+  loadImages(){
+    this.myAPI.makeAPIcall(
+      "images.php", 
+      {
+        "action": "loadImages"
+      },
+      true
+    ).subscribe((result)=>{
+      if( result.error ){
+        this.myAPI.handleMyAPIError(result.error);
+      }
+      else{
+        this.images = result.success.images;
+      }
+    });
+  }
 
 
 }
