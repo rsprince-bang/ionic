@@ -23,6 +23,8 @@ const routes: Routes = [
   { path: 'calendar', loadChildren: './user_pages/calendar/calendar.module#CalendarPageModule', canActivate:[AuthGuard] },
   { path: 'profile', loadChildren: './user_pages/profile/profile.module#ProfilePageModule',  canActivate:[AuthGuard] }
 
+
+
   
 ];
 @NgModule({

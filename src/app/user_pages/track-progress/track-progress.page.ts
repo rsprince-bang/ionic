@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+//import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
+import { ModalController } from '@ionic/angular';
+import { AddPhotoModalPage } from '../add-photo-modal/add-photo-modal.page';
 
 declare let window: any; // <--- Declare it like this
 
@@ -21,61 +23,12 @@ export class TrackProgressPage implements OnInit {
     centeredSlides: true
   };
   
-  constructor(private camera: Camera, private myAPI: ApiCallService, private globalServices: GlobalServicesService) { }
+  constructor(private myAPI: ApiCallService, private globalServices: GlobalServicesService, private modalController: ModalController) { }
 
   ngOnInit() {
     this.loadImages();
   }
 
-  takePicture() {
-    const options: CameraOptions = {
-      quality: 70, //1-100
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      window.resolveLocalFileSystemURL(imageData, (fileEntry) => {
-        fileEntry.file((file) => {
-          let self = this;
-          var reader = new FileReader();
-          reader.onloadend = function (e) {
-            var imgBlob = new Blob([this.result], { type: "image/jpeg" });
-            self.myAPI.uploadImageFromBlob(imgBlob, file.name)
-              .subscribe((result) => {
-                if (result.error) {
-                  self.myAPI.handleMyAPIError(result.error);
-                }
-                else {
-                  //alert(JSON.stringify(result));
-                }
-              });
-          };
-          reader.readAsArrayBuffer(file);
-        });
-      });
-    }, (err) => {
-      // Handle error
-      console.log("Camera issue:" + err);
-    });
-  }
-
-
-
-  //upload file
-  changeListener($event): void {
-    this.myAPI.uploadImageFromFile($event.target.files[0])
-      .subscribe((result) => {
-        if (result.error) {
-          this.myAPI.handleMyAPIError(result.error);
-        }
-        else {
-          //alert(JSON.stringify(result));
-        }
-      });
-  }
 
   loadImages(){
     this.myAPI.makeAPIcall(
@@ -95,4 +48,19 @@ export class TrackProgressPage implements OnInit {
   }
 
 
+  async openPhotoModal(){
+    const modal = await this.modalController.create({
+      component: AddPhotoModalPage,
+      componentProps: { }
+    });
+
+    modal.onDidDismiss()
+      .then((response) => {
+        if( response.data ){
+          this.loadImages();
+        }
+    });
+
+    return await modal.present();
+  }
 }

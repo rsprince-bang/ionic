@@ -24,6 +24,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx'; //it seems file transfer works as long as we have the cordova-plugin-file added, but lets import it
+import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-modal.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { File } from '@ionic-native/file/ngx'; //it seems file transfer works as
       TrackWorkoutModalPageModule,
       HomeAddFoodModalPageModule,
       HomeAddWorkoutModalPageModule,
+      AddPhotoModalPageModule,
       NgCircleProgressModule.forRoot(),
       NgCalendarModule,
       ChartsModule
