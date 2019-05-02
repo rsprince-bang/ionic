@@ -97,12 +97,15 @@ export class LoginPage implements OnInit {
     this.facebook.login(["public_profile", "email"])
     .then( (response:FacebookLoginResponse) =>{
 			let userId = response.authResponse.userID;
-
+      alert("userId: "+userId);
 			//Getting name and gender properties
 			this.facebook.api("/me?fields=name,email,id,first_name", [])
 			.then(user =>{
-        alert(user);
-        alert(JSON.stringify(user));
+        alert("user.name: "+user.name);
+        alert("user.email: "+user.email);
+        alert("user.id: "+user.id);
+        alert("user.first_name: "+user.first_name);
+
         loading.dismiss();
 /* 				user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
 				//now we have the users info, let's save it in the NativeStorage
