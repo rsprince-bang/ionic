@@ -124,7 +124,7 @@ export class LoginPage implements OnInit {
 				}) */
 			})
 		}, error =>{
-			alert(error);
+			alert("error"+error);
 			loading.dismiss();
 		});
 	}
