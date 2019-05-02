@@ -97,8 +97,11 @@ export class LoginPage implements OnInit {
 			//Getting name and gender properties
 			this.facebook.api("/me?fields=name,email,id,first_name", [])
 			.then(user =>{
-        this.loginWithFB(user);
-        //this.myAPI.dismissLoading();
+        this.myAPI.dismissLoading();
+        alert(user.id);
+
+        //this.loginWithFB(user);
+        
 			})
 		}, error =>{
       //alert("error");
