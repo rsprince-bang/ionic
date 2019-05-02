@@ -20,7 +20,7 @@
     <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
   </form>
 
-  <ion-button expand="full" type="submit" (click)="loginWithFB()">login via Facebook</ion-button>
+  <ion-button expand="full" type="submit" (click)="doFbLogIn()">login via Facebook</ion-button>
 
   <p>Dont have account? <a [routerLink]="['/register']">Register.</a></p>
 </ion-content>

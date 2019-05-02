@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
           }
         }
         else{
-          this.presentToastWithOptions("Something went wrong, please try again alter.");
+          this.presentToastWithOptions("Something went wrong, please try again later.");
         }
       }
     );
@@ -88,51 +88,86 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-	async loginWithFB(){
-		const loading = await this.loadingController.create({
-			message: 'Please wait...'
-		});
-    this.presentLoading(loading);
-
+	async doFbLogIn(){
+    this.myAPI.presentLoading();
     this.facebook.login(["public_profile", "email"])
     .then( (response:FacebookLoginResponse) =>{
 			let userId = response.authResponse.userID;
-      alert("userId: "+userId);
+
 			//Getting name and gender properties
 			this.facebook.api("/me?fields=name,email,id,first_name", [])
 			.then(user =>{
-        alert("user.name: "+user.name);
-        alert("user.email: "+user.email);
-        alert("user.id: "+user.id);
-        alert("user.first_name: "+user.first_name);
-
-        loading.dismiss();
-/* 				user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
-				//now we have the users info, let's save it in the NativeStorage
-				this.nativeStorage.setItem('facebook_user',
-				{
-					name: user.name,
-					email: user.email,
-					picture: user.picture
-				})
-				.then(() =>{
-					this.router.navigate(["/user"]);
-					loading.dismiss();
-				}, error =>{
-					console.log(error);
-					loading.dismiss();
-				}) */
+        this.loginWithFB(user);
+        //this.myAPI.dismissLoading();
 			})
 		}, error =>{
-      alert("error");
-      alert(JSON.stringify(error));
-			loading.dismiss();
+      //alert("error");
+      //alert(JSON.stringify(error));
+      this.myAPI.dismissLoading();
+      this.presentToastWithOptions("Something went wrong, please try again later.");
 		});
-	}
+  }
+  
+  loginWithFB(fbuser) {
+/*     alert("user.name: "+user.name); //Stoyan raychev
+    alert("user.email: "+user.email);
+    alert("user.id: "+user.id); //numeric
+    alert("user.first_name: "+user.first_name); */
+    this.myAPI.makeAPIcall(
+      "login.php", 
+      {
+        "action": "loginWfb",
+        "fbuser": fbuser,
 
-	async presentLoading(loading) {
+        //in case its a returning user lets load the meals as well
+        "yesterday": this.globalServices.getDate("yesterday"),
+        "today": this.globalServices.getDate("today"),
+        "tomorrow": this.globalServices.getDate("tomorrow")
+      }
+    )
+    .subscribe(
+      (result) => {
+        this.userInfo = result;
+alert(JSON.stringify(result));
+        if( this.userInfo.error ){
+          this.presentToastWithOptions(this.userInfo.error);
+        }
+        else if(this.userInfo.success){
+          localStorage.setItem("token", this.userInfo.success.token);
+          localStorage.setItem("user_id", this.userInfo.success.user_id);
+          this.events.publish("user logged in", 1111, 2222); //test passsing args
+          localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
+
+          if( this.userInfo.success.first_time_user && this.userInfo.success.first_time_user == "yes" ){
+            this.router.navigateByUrl("/enter-measurements");
+          }
+          else{
+            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
+            this.router.navigateByUrl("/home/today");
+          }
+        }
+        else{
+          this.presentToastWithOptions("Something went wrong, please try again later.");
+        }
+      }
+    );
+  }
+
+/* 	async presentLoading(loading) {
 		return await loading.present();
-	}
+	} */
 
+  doFbLogout(){
+    //do we really need this function? Not sure. it might log us out of facebook as well...
+
+/* 		this.fb.logout()
+		.then(res =>{
+			//user logged out so we will remove him from the NativeStorage
+			this.nativeStorage.remove('facebook_user');
+			this.router.navigate(["/login"]);
+		}, error =>{
+			console.log(error);
+		}); */
+	}
 
 }
