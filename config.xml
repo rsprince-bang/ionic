@@ -90,4 +90,8 @@
         <string>Used to take pictures</string>
     </edit-config>
     <plugin name="cordova-plugin-file" spec="6.0.1" />
+    <plugin name="cordova-plugin-facebook4" spec="4.2.1">
+        <variable name="APP_ID" value="542603042932919" />
+        <variable name="APP_NAME" value="Melt Down App" />
+    </plugin>
 </widget>

@@ -26,6 +26,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx'; //it seems file transfer works as long as we have the cordova-plugin-file added, but lets import it
 import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-modal.module';
 
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,7 +53,8 @@ import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativePageTransitions,
     LocalNotifications,
-    InAppBrowser
+    InAppBrowser,
+    Facebook
   ],
   bootstrap: [AppComponent]
 })

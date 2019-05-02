@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { Router } from '@angular/router';
-import { Events, ToastController } from '@ionic/angular';
+import { Events, ToastController, LoadingController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
 import { GlobalServicesService } from 'src/app/services/global-services.service';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 
 
@@ -19,12 +20,8 @@ export class LoginPage implements OnInit {
   userInfo = null;
 
   constructor(
-    private myAPI: ApiCallService, 
-    private router: Router, 
-    public events: Events,
-    private formBuilder: FormBuilder,
-    public toastController: ToastController,
-    private globalServices: GlobalServicesService) { 
+    private myAPI: ApiCallService, private router: Router, public events: Events, private formBuilder: FormBuilder, public toastController: ToastController,
+    private globalServices: GlobalServicesService, private facebook: Facebook, public loadingController: LoadingController) { 
 
   }
 
@@ -38,7 +35,6 @@ export class LoginPage implements OnInit {
 
 
   login() {
-
     this.myAPI.makeAPIcall(
       "login.php", 
       {
@@ -77,7 +73,6 @@ export class LoginPage implements OnInit {
         }
       }
     );
-
   }
 
 
@@ -92,5 +87,48 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+
+	async loginWithFB(){
+		const loading = await this.loadingController.create({
+			message: 'Please wait...'
+		});
+    this.presentLoading(loading);
+
+    this.facebook.login(["public_profile", "email"])
+    .then( (response:FacebookLoginResponse) =>{
+			let userId = response.authResponse.userID;
+
+			//Getting name and gender properties
+			this.facebook.api("/me?fields=name,email,id,first_name", [])
+			.then(user =>{
+        alert(user);
+        alert(JSON.stringify(user));
+        loading.dismiss();
+/* 				user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+				//now we have the users info, let's save it in the NativeStorage
+				this.nativeStorage.setItem('facebook_user',
+				{
+					name: user.name,
+					email: user.email,
+					picture: user.picture
+				})
+				.then(() =>{
+					this.router.navigate(["/user"]);
+					loading.dismiss();
+				}, error =>{
+					console.log(error);
+					loading.dismiss();
+				}) */
+			})
+		}, error =>{
+			alert(error);
+			loading.dismiss();
+		});
+	}
+
+	async presentLoading(loading) {
+		return await loading.present();
+	}
+
 
 }
