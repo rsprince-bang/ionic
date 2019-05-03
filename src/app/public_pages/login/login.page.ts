@@ -112,7 +112,6 @@ export class LoginPage implements OnInit {
   }
   
 
-  //create a fake user for function testing maybe??!
   loginWithFB(fbuser) {
     this.myAPI.makeAPIcall(
       "login.php", 
@@ -128,7 +127,7 @@ export class LoginPage implements OnInit {
     .subscribe(
       (result) => {
         this.userInfo = result;
-alert(JSON.stringify(result));
+
         if( this.userInfo.error ){
           this.presentToastWithOptions(this.userInfo.error);
         }
