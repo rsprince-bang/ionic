@@ -94,10 +94,11 @@ export class LoginPage implements OnInit {
     .then( (response:FacebookLoginResponse) =>{
 			let userId = response.authResponse.userID;
 			//Getting name and gender properties
-			this.facebook.api("/me?fields=name,email,id,first_name", [])
+			this.facebook.api("/me?fields=name,email,id,first_name,last_name", [])
 			.then(user =>{
         this.myAPI.dismissLoading();
-        this.loginWithFB(user);
+        //this.loginWithFB(user);
+        alert(JSON.stringify(user));
 			},error=>{
         this.myAPI.dismissLoading();
         this.presentToastWithOptions("Something went wrong, please try again later.");
