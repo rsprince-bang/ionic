@@ -97,8 +97,7 @@ export class LoginPage implements OnInit {
 			this.facebook.api("/me?fields=name,email,id,first_name,last_name", [])
 			.then(user =>{
         this.myAPI.dismissLoading();
-        //this.loginWithFB(user);
-        alert(JSON.stringify(user));
+        this.loginWithFB(user);
 			},error=>{
         this.myAPI.dismissLoading();
         this.presentToastWithOptions("Something went wrong, please try again later.");
