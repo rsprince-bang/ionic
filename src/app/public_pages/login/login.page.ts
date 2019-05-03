@@ -93,16 +93,15 @@ export class LoginPage implements OnInit {
     this.facebook.login(["public_profile", "email"])
     .then( (response:FacebookLoginResponse) =>{
 			let userId = response.authResponse.userID;
-
 			//Getting name and gender properties
 			this.facebook.api("/me?fields=name,email,id,first_name", [])
 			.then(user =>{
         this.myAPI.dismissLoading();
-        alert(user.id);
-
-        //this.loginWithFB(user);
-        
-			})
+        this.loginWithFB(user);
+			},error=>{
+        this.myAPI.dismissLoading();
+        this.presentToastWithOptions("Something went wrong, please try again later.");
+      })
 		}, error =>{
       //alert("error");
       //alert(JSON.stringify(error));
@@ -111,17 +110,14 @@ export class LoginPage implements OnInit {
 		});
   }
   
+
+  //create a fake user for function testing maybe??!
   loginWithFB(fbuser) {
-/*     alert("user.name: "+user.name); //Stoyan raychev
-    alert("user.email: "+user.email);
-    alert("user.id: "+user.id); //numeric
-    alert("user.first_name: "+user.first_name); */
     this.myAPI.makeAPIcall(
       "login.php", 
       {
         "action": "loginWfb",
         "fbuser": fbuser,
-
         //in case its a returning user lets load the meals as well
         "yesterday": this.globalServices.getDate("yesterday"),
         "today": this.globalServices.getDate("today"),
@@ -156,9 +152,6 @@ alert(JSON.stringify(result));
     );
   }
 
-/* 	async presentLoading(loading) {
-		return await loading.present();
-	} */
 
   doFbLogout(){
     //do we really need this function? Not sure. it might log us out of facebook as well...
