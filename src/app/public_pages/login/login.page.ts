@@ -153,7 +153,7 @@ export class LoginPage implements OnInit {
 
 
   doFbLogout(){
-    //do we really need this function? Not sure. it might log us out of facebook as well...
+    //do we really need this function? Not sure. it might log us out of facebook as well.....
 
 /* 		this.fb.logout()
 		.then(res =>{
