@@ -19,7 +19,7 @@
   <h2>Name</h2>
 
   <p>Current day: {{dayNumber}}</p>
-  <ion-button (click)="resetDiet()">Reset diet</ion-button>
+  <ion-button  [disabled]="dayNumber==1" (click)="resetDiet()">Reset diet</ion-button>
 
   <ion-list>
     <ion-item *ngFor="let diet of previousDiets">

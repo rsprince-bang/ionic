@@ -10,29 +10,14 @@
     (ionClear)="clearSearch()">
   </ion-searchbar>
 
-
-  <!--for fatsecret-->
-  <!--   <ion-list>
-    <div *ngFor="let item of searchResults">
-      <ion-item>
-        <ion-label text-wrap>
-          <h3>{{item.food_name}}</h3>
-          <p>{{item.food_description}}</p>
-        </ion-label>
-
-        <ion-button slot="end" size="small" (click)="showMoreInfo(item)">Expand</ion-button>
-      </ion-item>
-      
-      <ion-item *ngFor="let serving of item.servings">
-      <ion-label text-wrap>
-          <h3>{{serving.serving_description}}</h3> <h3 *ngIf="item.brand_name"> - {{item.brand_name}}</h3>
-          <p>Calories: {{serving.calories}}, Protein: {{serving.protein}}, Fat: {{serving.fat}}, Carbs: {{serving.carbohydrate}}</p>
-        </ion-label>
-        <ion-button slot="end" size="small" (click)="addMeal(item, serving.calories, serving.protein, serving.fat, serving.carbohydrate )">Add</ion-button>
-      </ion-item>
-
-    </div>
-  </ion-list> -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Suggestions:</ion-label>
+    </ion-list-header>
+    <ion-item>Item 1</ion-item>
+    <ion-item>Item 2</ion-item>
+    <ion-item>Item 3</ion-item>
+  </ion-list>
 
 
   <!--for Edamam-->

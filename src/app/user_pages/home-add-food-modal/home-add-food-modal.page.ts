@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ApiCallService } from 'src/app/services/api-call.service';
-import { GlobalServicesService } from 'src/app/services/global-services.service';
+import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 
 
 @Component({
@@ -14,11 +14,13 @@ export class HomeAddFoodModalPage implements OnInit {
   date = null;  //passed from previous page
   searchResults = [];
   searchTerm = '';
+  suggestedFoods = [];
 
-  constructor(private modalController: ModalController, private myAPI: ApiCallService, private globalServices: GlobalServicesService) { }
+  constructor(private modalController: ModalController, private myAPI: ApiCallService, private foodSuggestionsService: FoodSuggestionsService) { }
 
   ngOnInit() {
-
+    //this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
+    this.foodSuggestionsService.getFoodSuggestions(this.date);
   }
 
   searchChanged(){

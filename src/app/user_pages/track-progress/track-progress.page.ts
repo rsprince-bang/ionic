@@ -4,6 +4,8 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ModalController } from '@ionic/angular';
 import { AddPhotoModalPage } from '../add-photo-modal/add-photo-modal.page';
+import { environment } from 'src/environments/environment';
+
 
 declare let window: any; // <--- Declare it like this
 
@@ -43,6 +45,9 @@ export class TrackProgressPage implements OnInit {
       }
       else{
         this.images = result.success.images;
+        for (var i = 0; i < this.images.length; i++) {
+          this.images[i].url = environment.API_URL+this.images[i].url;
+        }
       }
     });
   }

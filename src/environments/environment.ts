@@ -6,7 +6,7 @@ export const environment = {
 
   production: false,
 
-  API_URL: "http://3.17.161.217/md-app/"
+  API_URL: "http://10.220.0.4/~sraychev/Bang-Energy/md-app/"
 };
 
 /*
