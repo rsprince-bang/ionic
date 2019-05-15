@@ -14,9 +14,10 @@
     <ion-list-header>
       <ion-label>Suggestions:</ion-label>
     </ion-list-header>
-    <ion-item>Item 1</ion-item>
-    <ion-item>Item 2</ion-item>
-    <ion-item>Item 3</ion-item>
+    <ion-item>Meal one of the day can be {{suggestedFoods.mealOne}}</ion-item>
+    <ion-item>protein: {{suggestedFoods.proteinMeals}}</ion-item>
+    <ion-item>carbs: {{suggestedFoods.carbMeals}}</ion-item>
+    <ion-item *ngIf="!suggestedFoods?.fatMeals?.length == 0">fat: {{suggestedFoods.fatMeals}}</ion-item>
   </ion-list>
 
 

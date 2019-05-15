@@ -311,25 +311,47 @@ export class FoodSuggestionsService {
     suggestedFoods["mealOne"] = null;
     suggestedFoods["proteinMeals"] = [];
     suggestedFoods["carbMeals"] = [];
-    suggestedFoods["fatMeals"] = []; 
+    suggestedFoods["fatMeals"] = [];
 
     var dayDescription = this.getDietDayDescription(date);
-    console.log(dayDescription);
-    
+
     //get random meal1
-    if(dayDescription.daynutrition.hasOwnProperty("meal1_suggestion")){
+    if (dayDescription.daynutrition.hasOwnProperty("meal1_suggestion")) {
       var suggestionsArray = this.charts[dayDescription.daynutrition.meal1_suggestion];
       suggestedFoods["mealOne"] = suggestionsArray[Math.floor(Math.random() * suggestionsArray.length)];
     }
 
     //get random protein meals
-    if(dayDescription.daynutrition.hasOwnProperty("protein_suggestion")){
-/*       var suggestionsArray = this.charts[dayDescription.daynutrition.meal1_suggestion];
-      console.log(suggestionsArray); */
+    if (dayDescription.daynutrition.hasOwnProperty("protein_suggestion")) {
+      dayDescription.daynutrition.protein_suggestion.forEach(chartletter => {
+        suggestedFoods["proteinMeals"] = suggestedFoods["proteinMeals"].concat(this.charts[chartletter]);
+      });
+      suggestedFoods["proteinMeals"] = Array.from(new Set(suggestedFoods["proteinMeals"])); //make it unique
+      suggestedFoods["proteinMeals"] = suggestedFoods["proteinMeals"][Math.floor(Math.random() * suggestedFoods["proteinMeals"].length)]; //limit to 1
+    }
+    //get random carb meals
+    if (dayDescription.daynutrition.hasOwnProperty("carbs_suggestion")) {
+      dayDescription.daynutrition.carbs_suggestion.forEach(chartletter => {
+        suggestedFoods["carbMeals"] = suggestedFoods["carbMeals"].concat(this.charts[chartletter]);
+      });
+      suggestedFoods["carbMeals"] = Array.from(new Set(suggestedFoods["carbMeals"])); //make it unique
+      suggestedFoods["carbMeals"] = suggestedFoods["carbMeals"][Math.floor(Math.random() * suggestedFoods["carbMeals"].length)]; //limit to 1
+    }
+    //get random fat meals
+    if (dayDescription.daynutrition.hasOwnProperty("fat_suggestion")) {
+      dayDescription.daynutrition.fat_suggestion.forEach(chartletter => {
+        suggestedFoods["fatMeals"] = suggestedFoods["fatMeals"].concat(this.charts[chartletter]);
+      });
+      suggestedFoods["fatMeals"] = Array.from(new Set(suggestedFoods["fatMeals"])); //make it unique
+      suggestedFoods["fatMeals"] = suggestedFoods["fatMeals"][Math.floor(Math.random() * suggestedFoods["fatMeals"].length)]; //limit to 1
     }
 
-
-
+    return {
+      "mealOne":suggestedFoods["mealOne"],
+      "proteinMeals":suggestedFoods["proteinMeals"],
+      "carbMeals":suggestedFoods["carbMeals"],
+      "fatMeals":suggestedFoods["fatMeals"]
+    }
   }
 
 

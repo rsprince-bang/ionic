@@ -14,13 +14,12 @@ export class HomeAddFoodModalPage implements OnInit {
   date = null;  //passed from previous page
   searchResults = [];
   searchTerm = '';
-  suggestedFoods = [];
+  suggestedFoods ;
 
   constructor(private modalController: ModalController, private myAPI: ApiCallService, private foodSuggestionsService: FoodSuggestionsService) { }
 
   ngOnInit() {
-    //this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
-    this.foodSuggestionsService.getFoodSuggestions(this.date);
+    this.suggestedFoods = this.foodSuggestionsService.getFoodSuggestions(this.date);
   }
 
   searchChanged(){
