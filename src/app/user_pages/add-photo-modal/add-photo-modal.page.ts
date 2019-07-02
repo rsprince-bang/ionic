@@ -58,7 +58,7 @@ export class AddPhotoModalPage implements OnInit {
           var reader = new FileReader();
           reader.onloadend = function (e) {
             var imgBlob = new Blob([this.result], { type: "image/jpeg" });
-            self.myAPI.uploadImageFromBlob(imgBlob, file.name, self.photoForm.value.weight, self.photoForm.value.fatpercent, this.photoForm.value.comment)
+            self.myAPI.uploadImageFromBlob(imgBlob, file.name, self.photoForm.value.weight, self.photoForm.value.fatpercent, self.photoForm.value.comment)
               .subscribe((result) => {
                 if (result.error) {
                   self.myAPI.handleMyAPIError(result.error);
