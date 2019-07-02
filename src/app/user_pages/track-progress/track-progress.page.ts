@@ -24,7 +24,7 @@ export class TrackProgressPage implements OnInit {
     spaceBetween: 20,
     centeredSlides: true
   };
-  
+
   constructor(private myAPI: ApiCallService, private globalServices: GlobalServicesService, private modalController: ModalController) { }
 
   ngOnInit() {
@@ -32,40 +32,65 @@ export class TrackProgressPage implements OnInit {
   }
 
 
-  loadImages(){
+  loadImages() {
     this.myAPI.makeAPIcall(
-      "images.php", 
+      "images.php",
       {
         "action": "loadImages"
       },
       true
-    ).subscribe((result)=>{
-      if( result.error ){
+    ).subscribe((result) => {
+      if (result.error) {
         this.myAPI.handleMyAPIError(result.error);
       }
-      else{
+      else {
         this.images = result.success.images;
         for (var i = 0; i < this.images.length; i++) {
-          this.images[i].url = environment.API_URL+this.images[i].url;
+          this.images[i].url = environment.API_URL + this.images[i].url;
+          this.images[i].human_date = this.globalServices.getDateAsHumanString(this.images[i].date_uploaded);
         }
       }
     });
   }
 
 
-  async openPhotoModal(){
+  async openPhotoModal() {
     const modal = await this.modalController.create({
       component: AddPhotoModalPage,
-      componentProps: { }
+      componentProps: {}
     });
 
     modal.onDidDismiss()
       .then((response) => {
-        if( response.data ){
+        if (response.data) {
           this.loadImages();
         }
-    });
+      });
 
     return await modal.present();
   }
+
+
+  deleteImage(imgID) {
+    this.myAPI.makeAPIcall(
+      "images.php",
+      {
+        "action": "deleteImage",
+        "imgID": imgID
+      },
+      true
+    ).subscribe((result) => {
+      if (result.error) {
+        this.myAPI.handleMyAPIError(result.error);
+      }
+      else {
+        this.loadImages();
+      }
+    });
+  }
+
+
+
+
+
 }

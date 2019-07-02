@@ -151,4 +151,12 @@ export class GlobalServicesService {
     return string;
   }
 
+
+  getDateAsHumanString(datestring){
+    
+    var dateObj = new Date(datestring + " 00:00:00");
+
+    return  dateObj.toDateString();
+  }
+
 }
