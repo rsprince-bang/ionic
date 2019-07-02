@@ -15,7 +15,10 @@
       <ion-label position="floating">Fat %</ion-label>
       <ion-input type="number" formControlName="fatpercent"></ion-input>
     </ion-item>
-
+    <ion-item>
+      <ion-label position="floating">Comment</ion-label>
+      <ion-textarea formControlName="comment"></ion-textarea>
+    </ion-item>
     
     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
       <ion-fab-button (click)="takePicture()" [disabled]="!photoForm.valid">

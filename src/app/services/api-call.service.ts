@@ -100,7 +100,7 @@ export class ApiCallService {
     });
   }
 
-  uploadImageFromFile(file: File, weight, fat_percent): Observable<any> {
+  uploadImageFromFile(file: File, weight, fat_percent, comment): Observable<any> {
     this.presentLoading();
     //should be always authenticated call
     const formData = new FormData();
@@ -110,6 +110,7 @@ export class ApiCallService {
     formData.append("date", this.globalservice.getTodayDate() );
     formData.append("weight", weight );
     formData.append("fat_percent", fat_percent );
+    formData.append("comment", comment );
 
     formData.append('uploadFile', file, file.name);
 
@@ -127,7 +128,7 @@ export class ApiCallService {
     );
   }
 
-  uploadImageFromBlob(blob: Blob, filename, weight, fat_percent): Observable<any> {
+  uploadImageFromBlob(blob: Blob, filename, weight, fat_percent, comment): Observable<any> {
     this.presentLoading();
     //should be always authenticated call
     const formData = new FormData();
@@ -137,6 +138,7 @@ export class ApiCallService {
     formData.append("date", this.globalservice.getTodayDate() );
     formData.append("weight", weight );
     formData.append("fat_percent", fat_percent );
+    formData.append("comment", comment );
 
     formData.append('uploadFile', blob);
     formData.append('filename', filename);

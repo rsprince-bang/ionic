@@ -20,7 +20,8 @@ export class AddPhotoModalPage implements OnInit {
   ngOnInit() {
     this.photoForm = this.formBuilder.group({
       weight: ['', [ Validators.required, Validators.pattern('[0-9]+') ]],
-      fatpercent: ['', [ Validators.required, Validators.pattern('[0-9]+') ]]
+      fatpercent: ['', [ Validators.required, Validators.pattern('[0-9]+') ]],
+      comment:['']
     });
   }
 
@@ -30,7 +31,7 @@ export class AddPhotoModalPage implements OnInit {
 
   //upload file
   uploadPicture($event): void {
-    this.myAPI.uploadImageFromFile($event.target.files[0], this.photoForm.value.weight, this.photoForm.value.fatpercent)
+    this.myAPI.uploadImageFromFile($event.target.files[0], this.photoForm.value.weight, this.photoForm.value.fatpercent, this.photoForm.value.comment)
       .subscribe((result) => {
         if (result.error) {
           this.myAPI.handleMyAPIError(result.error);
@@ -57,7 +58,7 @@ export class AddPhotoModalPage implements OnInit {
           var reader = new FileReader();
           reader.onloadend = function (e) {
             var imgBlob = new Blob([this.result], { type: "image/jpeg" });
-            self.myAPI.uploadImageFromBlob(imgBlob, file.name, self.photoForm.value.weight, self.photoForm.value.fatpercent)
+            self.myAPI.uploadImageFromBlob(imgBlob, file.name, self.photoForm.value.weight, self.photoForm.value.fatpercent, this.photoForm.value.comment)
               .subscribe((result) => {
                 if (result.error) {
                   self.myAPI.handleMyAPIError(result.error);
