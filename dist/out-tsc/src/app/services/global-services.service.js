@@ -71,21 +71,21 @@ var GlobalServicesService = /** @class */ (function () {
     GlobalServicesService.prototype.getDate = function (day) {
         //day must be yesterday, today, tomorrow
         var day_string = null;
-        if (day == "yesterday") {
+        if (day == "Yesterday") {
             var today = new Date();
             var dd = String(today.getDate() - 1).padStart(2, '0'); //yesterday's date
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
             day_string = yyyy + '-' + mm + '-' + dd;
         }
-        else if (day == "today") {
+        else if (day == "Today") {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
             day_string = yyyy + '-' + mm + '-' + dd;
         }
-        else if (day == "tomorrow") {
+        else if (day == "Tomorrow") {
             var today = new Date();
             var dd = String(today.getDate() + 1).padStart(2, '0'); //tomorrow's date
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!

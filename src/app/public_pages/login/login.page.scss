@@ -1,0 +1,39 @@
+.login_img{
+    display: flex;
+    justify-content: center;
+}
+.login_form{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    
+}
+.login_form_input{
+    margin-top: 10px;
+}
+.login_bt{
+    margin-top: 35px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    --background:#c001ff;
+    --ion-color-primary-shade:#db68fa;
+}
+.login_fb{
+    --background: #3b5998 ;
+    text-transform: uppercase;
+    --ion-color-primary-shade:none;
+}
+.login_fb{
+    --ion-color-primary-shade:#546996;
+}
+.login_register{
+    font-weight: 400;
+    text-align: center;
+   
+}
+
+
+.ion-padding{
+    background: pink;
+}

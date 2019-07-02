@@ -7,6 +7,7 @@ import { FoodSuggestionsService } from 'src/app/services/food-suggestions.servic
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+import { reduce } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomePage implements OnInit {
   day = null;
   date = null;
   dayNumber = null;
+  warnText= [];
   segment_choice = 'nutrition';
   dailyCaloriesIntake = null;
   dietCaloriesIntake = null;
@@ -26,14 +28,19 @@ export class HomePage implements OnInit {
   caloriesFromProteinAsP: number = 0;
   caloriesFromCarbsAsP: number = 0;
   caloriesFromFatAsP: number = 0;
+  warnCaloriesFromProteinAsP: number = 0;
+  warnCaloriesFromCarbsAsP: number = 0;
+  warnCaloriesFromFatAsP: number = 0;
   meals = [];
   exercises = [];
   workout_completed = false;
+  workout_completed_msn ="";
   percent: number = 0;
   circlesubtitle = "";
-  circlecolor = "#c0c0c0"; //gray atr first
+  circlecolor = "#2b2b2b"; //gray atr first
   dayNutritionInfo = { "phase": null, "phaseday": null, "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
+  
   //declare barcharts
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -43,7 +50,6 @@ export class HomePage implements OnInit {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          //max: 1000,
           min: 0,
           display: false
         },
@@ -59,16 +65,13 @@ export class HomePage implements OnInit {
     },
     plugins: {
       datalabels: {
-/*         anchor: 'end',
-        align: 'end',
-        font: {
-          size: 15,
-        } */
         anchor: 'end',
         clamp : true,
         offset: 0,
         font: {
-          size: 15,
+          size: 11,
+          weight:900,
+          
         }
       }
     }
@@ -79,8 +82,8 @@ export class HomePage implements OnInit {
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [1, 2, 3], label: 'Grams consumed', backgroundColor: "lightblue" },
-    { data: [4, 5, 6], label: 'Limit', backgroundColor: "orange" }
+    { data: [1, 2, 3], label: 'Grams consumed', backgroundColor: "rgb(186, 73, 252)" },
+    { data: [4, 5, 6], label: 'Limit', backgroundColor: "rgb(255, 233, 0)"}
   ];
 
 
@@ -109,10 +112,12 @@ export class HomePage implements OnInit {
     switch (this.day) {
       case "yesterday": {
         this.globalServices.swipeLeft("/home/today");
+       
         break;
       }
       case "today": {
         this.globalServices.swipeLeft("/home/tomorrow");
+    
         break;
       }
       default: {
@@ -128,11 +133,13 @@ export class HomePage implements OnInit {
         if (this.dayNumber > 1) {
           //if its not your first day, then you can see previous day
           this.globalServices.swipeRight("/home/yesterday");
+         
         }
         break;
       }
       case "tomorrow": {
         this.globalServices.swipeRight("/home/today");
+
         break;
       }
       default: {
@@ -166,8 +173,9 @@ export class HomePage implements OnInit {
         this.meals = result.success.dayInfo.meals;
         this.exercises = result.success.dayInfo.exercises;
         this.workout_completed = this.foodSuggestionsService.getWorkoutStatus(this.exercises);
-
+        this.workoutCompleted();
         this.calculateCaloriesConsumed();
+     
       }
     });
 
@@ -186,6 +194,11 @@ export class HomePage implements OnInit {
     this.dietCaloriesIntake = info.dietCaloriesIntake;
     this.percent = info.percent;
 
+    this.warnCaloriesFromProteinAsP = info.targetCaloriesFromProtein - info.caloriesFromProtein;
+    this.warnCaloriesFromCarbsAsP = info.targetCaloriesFromCarbs - info.caloriesFromCarbs;
+    this.warnCaloriesFromFatAsP = info.targetCaloriesFromFat - info.caloriesFromFat;
+
+
     if (info.color == "red") {
       this.circlecolor = "#CA1616";
     }
@@ -195,10 +208,42 @@ export class HomePage implements OnInit {
     this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
 
     this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
+
+
+  this.warnTextFunction(info.targetCaloriesFromProtein,info.caloriesFromProtein, Math.floor(this.warnCaloriesFromProteinAsP));
+  this.warnTextFunction(info.targetCaloriesFromCarbs,info.caloriesFromCarbs,Math.floor(this.warnCaloriesFromCarbsAsP));
+  this.warnTextFunction(info.targetCaloriesFromFat,info.caloriesFromFat, Math.round(this.warnCaloriesFromFatAsP));
+  }
+
+  workoutCompleted(){
+    if(this.workout_completed){
+      this.workout_completed_msn = " Workout Completed";
+    }else{
+      this.workout_completed_msn = "Need Workout";
+    }
+
+  }
+
+  warnTextFunction( target, current, calories){
+    console.log(target);
+    console.log(current);
+
+    console.log(calories)
+  
+    if ( target > current && this.caloriesConsumed > this.dietCaloriesIntake ){
+      this.warnText.push("missing " + calories + " Calories");
+
+    }else if(target > current ){
+      this.warnText.push("need " + calories + " Calories");
+
+    }else if( target < current ){
+      this.warnText.push("consumed too much " + calories  + " Calories");      
+    }
+    console.log(this.warnText)      
+
   }
 
 
 
-
-
+  
 }

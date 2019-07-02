@@ -44,5 +44,40 @@ The disabled date */
     background-color: white !important;
     color: black !important;
 }
+
+app-home{
+    position: relative;
+}
+
+ion-content{
+    --ion-background-color: rgba(235, 251, 255, 0.79);
+    background-image: url("./smoke.jpg") ;
+    background-repeat: no-repeat;
+    background-position-x: left;
+    background-position-y: bottom;
+}
+
+
+
+ion-toolbar, ion-button{
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    --background:rgb(0, 198, 242);
+}
+
+// .imgg{
+    // background-image: url("./smoke.jpg")  ;
+//     filter:opacity(0.3); 
+// }
+
+.img{
+    position: absolute;
+    bottom: 0px;
+    max-width: none;
+}
+
+
+
+
 //end calender override
 /////////////////////////////////////////

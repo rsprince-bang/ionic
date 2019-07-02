@@ -1,27 +1,31 @@
-
-
 <ion-content padding>
-
-  <img src="http://placehold.jp/400x200.png">
-  <!--<ion-img src="/assets/shapes.svg"></ion-img>-->
-
-  <form [formGroup]="credentialsForm" (ngSubmit)="login()">
-
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-
-    <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
-  </form>
-
-  <ion-button expand="full" type="submit" (click)="doFbLogIn()">login via Facebook</ion-button>
-
-
-  <p>Dont have account? <a [routerLink]="['/register']">Register.</a></p>
+  <div class="login_form">
+    <div>
+    <div class="login_img">
+        <img src="http://placehold.jp/400x200.png">
+      </div>
+  
+      <!--<ion-img src="/assets/shapes.svg"></ion-img>-->
+  
+      <form class="login_form_input"[formGroup]="credentialsForm" (ngSubmit)="login()">
+  
+        <ion-item>
+          <ion-label class="login_email" position="stacked">Email</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+  
+        <ion-button class="login_bt"expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
+      </form>
+  
+      <ion-button  class="login_fb " expand="full" type="submit" (click)="doFbLogIn()" tabIcon="fab fa-facebook">continue with Facebook</ion-button> 
+      
+  
+      <p class="login_register">Dont have a account? <a class="login_link"[routerLink]="['/register']">Register</a></p>
+      </div>
+  </div>
 </ion-content>

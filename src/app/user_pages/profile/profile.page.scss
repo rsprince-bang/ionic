@@ -1,0 +1,16 @@
+.info{
+    display: flex;
+    justify-content: space-around;
+    font-weight: 600;
+  }
+  .info2{
+    display: flex;
+    justify-content: space-around;
+    margin-top: -15px;
+    font-weight: 600;
+  }
+  .reset{
+    --background:#CA1616;
+    display: list-item;
+    margin-top: 50px;
+  }

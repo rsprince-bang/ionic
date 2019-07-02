@@ -12,7 +12,7 @@ import { HomeAddWorkoutModalPage } from '../home-add-workout-modal/home-add-work
   styleUrls: ['./track-workout.page.scss'],
 })
 export class TrackWorkoutPage implements OnInit {
-
+  day = ""
   today = false;
   dayNumber = null;
   date = null;
@@ -31,6 +31,7 @@ export class TrackWorkoutPage implements OnInit {
 
     if( this.date == this.globalServices.getTodayDate() ){
       this.today = true;
+      this.day = "Today"
     }
 
     this.loadExercises();

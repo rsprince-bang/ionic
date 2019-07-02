@@ -19,7 +19,7 @@ export class TrackMealPage implements OnInit {
   date = null;
   meals = [];
   exercises = [];
-
+  status = "";
   percent:number = 0;
   circlesubtitle = "";
   circlecolor = "#c0c0c0"; //gray atr first
@@ -43,7 +43,6 @@ export class TrackMealPage implements OnInit {
     if( this.date == this.globalServices.getTodayDate() ){
       this.today = true;
     }
-
     this.loadMeals();
   }
 
@@ -79,6 +78,7 @@ export class TrackMealPage implements OnInit {
         this.meals = result.success.dayInfo.meals;
         this.exercises = result.success.dayInfo.exercises;
         this.calculateCaloriesConsumed();
+        console.log(this.meals)
       }
     });
   }
@@ -125,9 +125,11 @@ export class TrackMealPage implements OnInit {
 
     if( info.color == "red" ){
       this.circlecolor = "#CA1616";
+      this.status = "BAD";
     }
     else{
       this.circlecolor = "#2FB202"; //green
+      this.status ="GOOD";
     }
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }

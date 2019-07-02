@@ -13,18 +13,33 @@
 
 <ion-content padding>
 
-  <ion-avatar>
+  <span> "uplond Picture and can edit"</span>
+  <ion-avatar style="margin: 0 auto;">
     <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
   </ion-avatar>
-  <h2>Name</h2>
 
-  <p>Current day: {{dayNumber}}</p>
-  <ion-button  [disabled]="dayNumber==1" (click)="resetDiet()">Reset diet</ion-button>
+  <ion-item>
+    <p style="margin: 0 auto;  text-align: center">Username <br/><span>Current day: <strong>{{dayNumber}}</strong></span></p>
+  </ion-item>
+ 
+  <div class="info">
+    <p>Day Start</p>
+    <p>Height</p>
+    <p>Weight </p>
+  </div>
+    <span class="info">
+        <p>dd/mm/yy</p>
+        <p>"height"</p>
+        <p>weight</p>
+    </span>
+
+  <ion-button class="reset" [disabled]="dayNumber==1" (click)="resetDiet()">Reset diet</ion-button>
 
   <ion-list>
     <ion-item *ngFor="let diet of previousDiets">
       <ion-label>{{diet.diet_start_date}} - {{diet.diet_end_date}}</ion-label>
-      <ion-button slot="end" size="small" (click)="viewOldDiet(diet.diet_start_date, diet.diet_end_date)">View</ion-button>
+      <ion-button slot="end" size="small" (click)="viewOldDiet(diet.diet_start_date, diet.diet_end_date)">View
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

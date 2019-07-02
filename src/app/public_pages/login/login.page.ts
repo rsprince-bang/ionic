@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     //initialize and set form values
     this.credentialsForm = this.formBuilder.group({
-      email: ['stoyan.raychev@vpxsports.com', [Validators.required, Validators.email]], 
+      email: ['', [Validators.required, Validators.email]], 
       password: ['', [Validators.required, Validators.minLength(1)]]
     });
   }

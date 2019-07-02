@@ -13,7 +13,7 @@
 
 <ion-content padding>
 
-  <h4>{{title}}</h4>
+  <h4>{{title}} / alert here + -></h4> 
 
   <ng-template #daystemplate let-view="view" let-row="row" let-col="col">
     <div class="calendar-day {{getEventClass(view.dates[row*7+col].events)}}" >
@@ -23,9 +23,11 @@
 
   <ng-template #detailstemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
     <div>
-      <p>Details for {{date}}</p>
-      <p>Consumed {{info?.caloriesConsumed}} of {{info?.dietCaloriesIntake}}</p>
-      <p>Daily score: {{score}}</p>
+      <br/>
+      <strong style="   color: rgb(67, 66, 66);">{{date}}</strong>
+      <br/>
+      <span style="   color: rgb(67, 66, 66);">Consumed <strong>{{info?.caloriesConsumed}}</strong> Calories of <strong>{{info?.dietCaloriesIntake}}</strong> Calories</span>
+      <!-- <p>Daily score: {{score}}</p> -->
     </div>
   </ng-template>
 
@@ -43,5 +45,7 @@
     [monthviewEventDetailTemplate]="detailstemplate"
     step="30">
   </calendar>
+
+
 
 </ion-content>
