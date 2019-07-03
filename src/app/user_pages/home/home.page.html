@@ -118,12 +118,10 @@
       <span class="home_day_2">Day {{dayNumber}} </span> / <span class="home_day_3">84 Days Program </span> <br/>
       <span class="home_text2">Consist of {{dayNutritionInfo.daynutrition.protein}}% Protein,
         {{dayNutritionInfo.daynutrition.carbs}}% Carbs and {{dayNutritionInfo.daynutrition.fat}}% Fat
-     
       </span>
-    
-  
-   
     </p>
+
+    
     <ng-template #nofattemplate>
       <p>
         <span class="home_day_2">Day {{dayNumber}} </span> / <span class="home_day_3">84 Days Program </span> <br />
@@ -137,17 +135,12 @@
 
 <ion-item>
   <p>
-    <span class="namePercentt home_text3" *ngIf = 'caloriesConsumed < dietCaloriesIntake' style=" color:rgb(37, 148, 0)">
-        <span class="name_percent"> <strong> Protein </strong> : {{warnText[0]}} </span>  
-        <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText[1]}} </span>
-        <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText[2]}}</span>
+    <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
+        <span class="name_percent"> <strong> Protein </strong> : {{warnText.proteinText}} </span>  
+        <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText.carbsText}} </span>
+        <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText.fatText}}</span>
   </span>
 
-  <span class="namePercentt home_text3" *ngIf = 'caloriesConsumed > dietCaloriesIntake' style = "color: #CA1616;">
-      <span class="name_percent"> <strong> Protein </strong> : {{warnText[0]}} </span>  
-      <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText[1]}} </span>
-      <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText[2]}}</span>
-</span>
   </p>
 </ion-item>
 
@@ -155,8 +148,7 @@
   <div class="home_totalCol">
 
     <p style= " color: rgb(67, 66, 66); font-weight:500" > Maximum Calories Today : <strong>{{dietCaloriesIntake}}</strong> Calories<br />Cosnusmed : 
-      <strong *ngIf = 'caloriesConsumed > dietCaloriesIntake' style = "color: #CA1616;">{{caloriesConsumed}}</strong>
-      <strong *ngIf = 'caloriesConsumed < dietCaloriesIntake' style = "color: rgb(37, 148, 0)">{{caloriesConsumed}}</strong>
+      <strong [ngStyle]="{ 'color' : circlecolor}">{{caloriesConsumed}}</strong>
        Calories
     </p>
 

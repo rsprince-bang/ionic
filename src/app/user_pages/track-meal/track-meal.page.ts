@@ -14,6 +14,7 @@ import { HomeAddFoodModalPage } from '../home-add-food-modal/home-add-food-modal
 })
 export class TrackMealPage implements OnInit {
 
+  
   today = false;
   dayNumber = null;
   date = null;
@@ -135,3 +136,5 @@ export class TrackMealPage implements OnInit {
   }
 
 }
+
+

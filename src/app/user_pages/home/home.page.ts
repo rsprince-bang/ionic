@@ -20,7 +20,8 @@ export class HomePage implements OnInit {
   day = null;
   date = null;
   dayNumber = null;
-  warnText= [];
+  warnText= {proteinText:"...", carbsText:"...", fatText:"..."};
+  backgroundColor = "";
   segment_choice = 'nutrition';
   dailyCaloriesIntake = null;
   dietCaloriesIntake = null;
@@ -93,7 +94,9 @@ export class HomePage implements OnInit {
     private foodSuggestionsService: FoodSuggestionsService) {
 
   }
-
+if(){
+  
+}
   ngOnInit() {
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
     this.date = this.globalServices.getDate(this.day);
@@ -108,23 +111,37 @@ export class HomePage implements OnInit {
     this.updatepage();
   }
 
+  // colorday(){
+  //   switch(this.day){
+  //     case "today":
+  //     this.backgroundColor = "rgb(245, 242, 255)";
+  //     break;
+  //     case "tomorrow":
+  //     this.backgroundColor = "rgb(220, 254, 233)";
+  //     case "yesterday":
+  //     this.backgroundColor =  "rgb(245, 242, 255)";
+  //   }
+  //   console.log(this.backgroundColor)
+  // }
+
   handleSwipeLeft() {
     switch (this.day) {
       case "yesterday": {
         this.globalServices.swipeLeft("/home/today");
-       
+        this.backgroundColor =  "rgb(226, 246, 250";
         break;
       }
       case "today": {
         this.globalServices.swipeLeft("/home/tomorrow");
-    
+        this.backgroundColor = "rgb(220, 254, 233)";
         break;
       }
       default: {
-        //cant swipe past tomorrow 
+       // cant swipe after tomorrow 
         break;
       }
     }
+    console.log(this.backgroundColor)
   }
 
   handleSwipeRight() {
@@ -133,13 +150,13 @@ export class HomePage implements OnInit {
         if (this.dayNumber > 1) {
           //if its not your first day, then you can see previous day
           this.globalServices.swipeRight("/home/yesterday");
-         
+          this.backgroundColor = "rgb(245, 242, 255)";
         }
         break;
       }
       case "tomorrow": {
         this.globalServices.swipeRight("/home/today");
-
+        this.backgroundColor = "rgb(226, 246, 250";
         break;
       }
       default: {
@@ -147,6 +164,7 @@ export class HomePage implements OnInit {
         break;
       }
     }
+    console.log(this.backgroundColor)
   }
 
   doRefresh(event) {
@@ -175,7 +193,7 @@ export class HomePage implements OnInit {
         this.workout_completed = this.foodSuggestionsService.getWorkoutStatus(this.exercises);
         this.workoutCompleted();
         this.calculateCaloriesConsumed();
-     
+       
       }
     });
 
@@ -194,10 +212,10 @@ export class HomePage implements OnInit {
     this.dietCaloriesIntake = info.dietCaloriesIntake;
     this.percent = info.percent;
 
-    this.warnCaloriesFromProteinAsP = info.targetCaloriesFromProtein - info.caloriesFromProtein;
-    this.warnCaloriesFromCarbsAsP = info.targetCaloriesFromCarbs - info.caloriesFromCarbs;
-    this.warnCaloriesFromFatAsP = info.targetCaloriesFromFat - info.caloriesFromFat;
 
+    this.warnText.proteinText = this.warnTextFunction(info.targetCaloriesFromProtein, info.caloriesFromProtein );
+    this.warnText.carbsText = this.warnTextFunction(info.targetCaloriesFromCarbs, info.caloriesFromCarbs);
+    this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
 
     if (info.color == "red") {
       this.circlecolor = "#CA1616";
@@ -210,9 +228,7 @@ export class HomePage implements OnInit {
     this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
 
 
-  this.warnTextFunction(info.targetCaloriesFromProtein,info.caloriesFromProtein, Math.floor(this.warnCaloriesFromProteinAsP));
-  this.warnTextFunction(info.targetCaloriesFromCarbs,info.caloriesFromCarbs,Math.floor(this.warnCaloriesFromCarbsAsP));
-  this.warnTextFunction(info.targetCaloriesFromFat,info.caloriesFromFat, Math.round(this.warnCaloriesFromFatAsP));
+  
   }
 
   workoutCompleted(){
@@ -224,26 +240,28 @@ export class HomePage implements OnInit {
 
   }
 
-  warnTextFunction( target, current, calories){
-    console.log(target);
-    console.log(current);
+  warnTextFunction( target, current){
+    var text = '';
 
-    console.log(calories)
-  
-    if ( target > current && this.caloriesConsumed > this.dietCaloriesIntake ){
-      this.warnText.push("missing " + calories + " Calories");
-
-    }else if(target > current ){
-      this.warnText.push("need " + calories + " Calories");
-
-    }else if( target < current ){
-      this.warnText.push("consumed too much " + calories  + " Calories");      
+    var difference = Math.floor(target - current);
+    
+    if( target > current && this.caloriesConsumed > this.dietCaloriesIntake ){
+      text = "missing " + difference + " Calories";
     }
-    console.log(this.warnText)      
+    else if(target > current){
+      text = "need " + difference + " Calories";
+    }
+    else if( target < current ){
+      text = "consumed too much " + difference + " Calories";
+    }
 
+    return text;  
   }
 
 
 
   
 }
+
+
+
