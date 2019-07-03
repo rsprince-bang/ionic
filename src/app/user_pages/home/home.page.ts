@@ -21,7 +21,6 @@ export class HomePage implements OnInit {
   date = null;
   dayNumber = null;
   warnText= {proteinText:"...", carbsText:"...", fatText:"..."};
-  backgroundColor = "";
   segment_choice = 'nutrition';
   dailyCaloriesIntake = null;
   dietCaloriesIntake = null;
@@ -111,29 +110,16 @@ if(){
     this.updatepage();
   }
 
-  // colorday(){
-  //   switch(this.day){
-  //     case "today":
-  //     this.backgroundColor = "rgb(245, 242, 255)";
-  //     break;
-  //     case "tomorrow":
-  //     this.backgroundColor = "rgb(220, 254, 233)";
-  //     case "yesterday":
-  //     this.backgroundColor =  "rgb(245, 242, 255)";
-  //   }
-  //   console.log(this.backgroundColor)
-  // }
+
 
   handleSwipeLeft() {
     switch (this.day) {
       case "yesterday": {
         this.globalServices.swipeLeft("/home/today");
-        this.backgroundColor =  "rgb(226, 246, 250";
         break;
       }
       case "today": {
         this.globalServices.swipeLeft("/home/tomorrow");
-        this.backgroundColor = "rgb(220, 254, 233)";
         break;
       }
       default: {
@@ -141,7 +127,7 @@ if(){
         break;
       }
     }
-    console.log(this.backgroundColor)
+
   }
 
   handleSwipeRight() {
@@ -150,13 +136,11 @@ if(){
         if (this.dayNumber > 1) {
           //if its not your first day, then you can see previous day
           this.globalServices.swipeRight("/home/yesterday");
-          this.backgroundColor = "rgb(245, 242, 255)";
         }
         break;
       }
       case "tomorrow": {
         this.globalServices.swipeRight("/home/today");
-        this.backgroundColor = "rgb(226, 246, 250";
         break;
       }
       default: {
@@ -164,7 +148,7 @@ if(){
         break;
       }
     }
-    console.log(this.backgroundColor)
+
   }
 
   doRefresh(event) {

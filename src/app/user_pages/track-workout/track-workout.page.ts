@@ -19,6 +19,8 @@ export class TrackWorkoutPage implements OnInit {
   meals = [];
   exercises = [];
 
+
+
   constructor(private activatedRoute: ActivatedRoute, private globalServices: GlobalServicesService, private modalController: ModalController,
     private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService) { }
 
@@ -39,6 +41,9 @@ export class TrackWorkoutPage implements OnInit {
 
 
   handleSwipeLeft() {
+    if (this.today){
+       // won't swipeLeft 
+    }else
     this.globalServices.swipeLeft("/track-workout/" + this.globalServices.getNextDate(this.date));
   }
 

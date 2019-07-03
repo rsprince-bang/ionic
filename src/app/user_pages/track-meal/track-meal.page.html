@@ -24,13 +24,10 @@
         <ion-card-title style="text-align:center;color: rgb(67, 66, 66);" >DAY {{dayNumber}}</ion-card-title>
       </ion-card-header>
         
-      <ion-card-content   style="text-align:center; color: red; font-weight: bold" *ngIf ="caloriesConsumed > 0 && status == 'BAD'">
+      <ion-card-content  [ngStyle]="{ 'color' : circlecolor}" style="text-align:center;  font-weight: bold" >
        <strong> Current progress <br/> <span style="font-size: 22px">{{status}} </span></strong> 
       </ion-card-content>
 
-      <ion-card-content   style="text-align:center; color: #2FB202; font-weight: bold" *ngIf ="caloriesConsumed > 0 && status == 'GOOD'">
-        <strong> Current progress <br/> <span style="font-size: 22px">{{status}} </span></strong> 
-       </ion-card-content>
 
     </ion-card>
     <ion-icon name="arrow-forward" slot="end" (click)="handleSwipeLeft()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
