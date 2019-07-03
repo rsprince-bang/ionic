@@ -15,8 +15,13 @@
 
   <span> "uplond Picture and can edit"</span>
   <ion-avatar style="margin: 0 auto;">
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    <ion-img [src]="profileImageURL"></ion-img>
   </ion-avatar>
+
+  <ion-item>
+      <ion-label>Update image</ion-label>
+      <ion-input type="file" accept="image/*" (change)="uploadPicture($event)" ></ion-input>
+    </ion-item>
 
   <ion-item>
     <p style="margin: 0 auto;  text-align: center">Username <br /><span>Current day:
