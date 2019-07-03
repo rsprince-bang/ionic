@@ -31,7 +31,7 @@ export class AddPhotoModalPage implements OnInit {
 
   //upload file
   uploadPicture($event): void {
-    this.myAPI.uploadImageFromFile($event.target.files[0], this.photoForm.value.weight, this.photoForm.value.fatpercent, this.photoForm.value.comment)
+    this.myAPI.uploadImageFromFile($event.target.files[0], this.photoForm.value.weight, this.photoForm.value.fatpercent, this.photoForm.value.comment, "progress")
       .subscribe((result) => {
         if (result.error) {
           this.myAPI.handleMyAPIError(result.error);
@@ -58,7 +58,7 @@ export class AddPhotoModalPage implements OnInit {
           var reader = new FileReader();
           reader.onloadend = function (e) {
             var imgBlob = new Blob([this.result], { type: "image/jpeg" });
-            self.myAPI.uploadImageFromBlob(imgBlob, file.name, self.photoForm.value.weight, self.photoForm.value.fatpercent, self.photoForm.value.comment)
+            self.myAPI.uploadImageFromBlob(imgBlob, file.name, self.photoForm.value.weight, self.photoForm.value.fatpercent, self.photoForm.value.comment, "progress")
               .subscribe((result) => {
                 if (result.error) {
                   self.myAPI.handleMyAPIError(result.error);

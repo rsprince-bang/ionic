@@ -15,23 +15,29 @@
 
   <span> "uplond Picture and can edit"</span>
   <ion-avatar style="margin: 0 auto;">
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    <ion-img [src]="profileImageURL"></ion-img>
   </ion-avatar>
 
   <ion-item>
-    <p style="margin: 0 auto;  text-align: center">Username <br/><span>Current day: <strong>{{dayNumber}}</strong></span></p>
+      <ion-label>Update image</ion-label>
+      <ion-input type="file" accept="image/*" (change)="uploadPicture($event)" ></ion-input>
+    </ion-item>
+
+  <ion-item>
+    <p style="margin: 0 auto;  text-align: center">Username <br /><span>Current day:
+        <strong>{{dayNumber}}</strong></span></p>
   </ion-item>
- 
+
   <div class="info">
     <p>Day Start</p>
     <p>Height</p>
     <p>Weight </p>
   </div>
-    <span class="info">
-        <p>dd/mm/yy</p>
-        <p>"height"</p>
-        <p>weight</p>
-    </span>
+  <span class="info">
+    <p>{{startInfo.date}}</p>
+    <p>{{startInfo.height}}</p>
+    <p>{{startInfo.weight}}</p>
+  </span>
 
   <ion-button class="reset" [disabled]="dayNumber==1" (click)="resetDiet()">Reset diet</ion-button>
 
