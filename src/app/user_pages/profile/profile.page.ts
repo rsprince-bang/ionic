@@ -13,6 +13,7 @@ export class ProfilePage implements OnInit {
   dayNumber = null;
   date = null;
   previousDiets = [];
+  startInfo = {date:"...", height:"...", weight:"..."};
 
   constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService) { }
 
@@ -20,14 +21,14 @@ export class ProfilePage implements OnInit {
     this.date = this.globalServices.getTodayDate();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
 
-    this.getPreviousDiets();
+    this.getProfileDetails();
   }
 
-  getPreviousDiets(){
+  getProfileDetails(){
     this.myAPI.makeAPIcall(
       "user_statistics.php",
       {
-        "action": "getPreviousDiets"
+        "action": "getProfileDetails"
       },
       true
     ).subscribe((result) => {
@@ -36,6 +37,11 @@ export class ProfilePage implements OnInit {
       }
       else {
         this.previousDiets = result.success.prev_diets;
+
+        this.startInfo.date = result.success.start_date;
+        this.startInfo.height = Math.floor(result.success.user_measurements.height_inches/12) + '\'' + result.success.user_measurements.height_inches%12 + '"';
+        this.startInfo.weight = result.success.user_measurements.weight_lbs;
+
       }
     });
   }
