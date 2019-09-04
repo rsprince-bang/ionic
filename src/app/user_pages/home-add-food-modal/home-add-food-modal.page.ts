@@ -113,7 +113,7 @@ export class HomeAddFoodModalPage implements OnInit {
 
   edamamAddMeal(foodname, foodId, quantity, measureURI){
     if( quantity && quantity>0 ){
-      this.myAPI.makeSilentCall(
+      this.myAPI.makeAPIcall(
         "food_api_edamam.php", 
         {
           "action": "edamamAddMeal",
@@ -124,8 +124,9 @@ export class HomeAddFoodModalPage implements OnInit {
           "day": this.date
         },
         true
-      );
-      this.modalController.dismiss(foodId);
+      ).subscribe((result)=>{
+        this.modalController.dismiss(foodId);
+      });
     }
   }
 

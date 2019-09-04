@@ -57,7 +57,7 @@ export class HomeAddWorkoutModalPage implements OnInit {
 
   addExercise(exercise){
     if( exercise.hours && exercise.hours > 0 ){
-      this.myAPI.makeSilentCall(
+      this.myAPI.makeAPIcall(
         "exercises.php", 
         {
           "action": "saveExercise",
@@ -65,8 +65,10 @@ export class HomeAddWorkoutModalPage implements OnInit {
           "day": this.date
         },
         true
-      );
-      this.modalController.dismiss(exercise);
+      ).subscribe((result)=>{
+        this.modalController.dismiss(exercise);
+      });
+      
     }
   }
 
