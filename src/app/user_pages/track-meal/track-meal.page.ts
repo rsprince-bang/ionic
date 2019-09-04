@@ -79,7 +79,6 @@ export class TrackMealPage implements OnInit {
         this.meals = result.success.dayInfo.meals;
         this.exercises = result.success.dayInfo.exercises;
         this.calculateCaloriesConsumed();
-        console.log(this.meals)
       }
     });
   }

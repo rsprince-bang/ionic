@@ -73,9 +73,9 @@ export class ProfilePage implements OnInit {
   }
 
   viewOldDiet(from_date, to_date){
-    console.log("View old diet here");
-    console.log(from_date);
-    console.log(to_date);
+    // console.log("View old diet here");
+    // console.log(from_date);
+    // console.log(to_date);
   }
 
   uploadPicture($event): void {
