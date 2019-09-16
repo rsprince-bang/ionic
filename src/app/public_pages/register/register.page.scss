@@ -5,9 +5,9 @@
   
 }
 .register_title{
-    // --background: #8100ac;
-    // color:white;
-    // text-transform: uppercase; 
+    --background: #8100ac;
+    color:white;
+    text-transform: uppercase; 
 
 }
 .register_back{
@@ -20,4 +20,7 @@
     color: darkblue;
     font-weight: bold;
 }
+.register{
+    bottom: 0px; position: absolute;margin-left: -15px;
+  }
 

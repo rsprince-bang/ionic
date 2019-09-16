@@ -7,35 +7,40 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title>Track Workout</ion-title>
+    <ion-title>Workout</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <!-- <ion-content padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()"> -->
 <ion-content padding>
 <ion-toolbar style="--background: rgb(226, 246, 250);" >
-    <ion-icon name="arrow-back" slot="start" (click)="handleSwipeRight()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
+    <ion-icon *ngIf = "dayNumber > 1"  name="arrow-back" slot="start" (click)="handleSwipeRight()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
     <ion-card>
       <ion-card-header>
-        <ion-card-title style="text-align:center;color: rgb(67, 66, 66);" > DAY {{dayNumber}} <br/> <span style = "font-size:18px; ">{{day}}</span></ion-card-title>
+        <ion-card-title style=" font-weight: bold; text-align:center;color: rgb(67, 66, 66);" > {{day}} <span *ngIf = "!day">DAY {{dayNumber}} </span><br/> </ion-card-title>
       </ion-card-header>
 
     </ion-card>
-    <ion-icon name="arrow-forward" slot="end" (click)="handleSwipeLeft()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
+    <ion-icon *ngIf = "!today" name="arrow-forward" slot="end" (click)="handleSwipeLeft()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
   </ion-toolbar>
 
 
   <ion-item style="font-weight:700; margin-top: 10px; font-size: 18px; color: rgb(67, 66, 66);">
-      <ion-label  >
+      <ion-label style="display:flex; justify-content: space-between;" >
             Workout List
+            <div>
+            <ion-icon style="font-size: 25px;" name="pulse" ></ion-icon>
+            <ion-icon  name="heart"  style="font-size: 25px; color:rgb(147, 24, 24)"></ion-icon>
+            </div>
+
       </ion-label>
   </ion-item>
 
-  <ion-item lines="none" style="padding-top:15px; font-size: 14px; text-transform :lowercase;  ">
-    <ion-list>
+  <ion-item lines="none" style="padding-top:15px; font-size: 14px; text-transform :lowercase; margin-bottom: 50px; ">
+    <ion-list style="width: 100%;">
       <ion-item-sliding *ngFor="let exercise of exercises">
         <ion-item>
-          <ion-label style=" font-size: 14px; color: rgb(67, 66, 66);"> - {{exercise.exercise_name}} <span style = " font-weight: 600">{{exercise.hours}}/hr</span> </ion-label>
+          <ion-label style=" font-size: 14px; color: rgb(67, 66, 66);"> - {{exercise.exercise_name}} <span style = " font-weight: 600"></span> </ion-label>
         </ion-item>
         <ion-item-options *ngIf="today" side="end">
           <ion-item-option color="danger" (click)="removeExercise(exercise.id)"><ion-icon name="trash"></ion-icon></ion-item-option>
@@ -45,8 +50,14 @@
     </ion-list>
   </ion-item>
 
-  <ion-item *ngIf="today" lines="none" >
-      <ion-button (click)="openExerciseModal()">Add workout</ion-button>
-    </ion-item>
+    <div>  
+      <ion-footer  style=" bottom: 0px; position: fixed;margin-left: -15px;margin-top: 20px">
+      <ion-button style="font-weight: bold;" expand="full" (click)="openExerciseModal()">Add workout</ion-button>
+      </ion-footer>
+    </div>  
+
+
   
 </ion-content>
+
+

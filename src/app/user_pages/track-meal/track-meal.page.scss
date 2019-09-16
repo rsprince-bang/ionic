@@ -1,6 +1,6 @@
 .track-meal{
-    color: rgb(74, 74, 74);
-    text-align: center
+
+    margin: 0 auto;
 }
 .percent{
     display: flex;
@@ -11,11 +11,16 @@
     justify-content: space-between;
     text-align: center;
     margin-top: 15px;
-    // margin-bottom: 15px;
-}
-.button{
-    margin-bottom: 10px;
 }
 .circle{
     margin-top: 15px;
+}
+.meal{
+    text-transform:lowercase;
+    display: flex;
+    justify-content: space-between;
+    overflow: auto;
+}
+.addFood{
+    width: 100%;
 }
