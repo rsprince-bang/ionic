@@ -21,8 +21,7 @@
 
   <!--for Edamam-->
   <ion-list>
-
-    <!--first item-->
+    <!--first item if direct hit, i.e. 10 oz ribeye-->
     <ion-item *ngIf="searchResults.parsed && searchResults.parsed.length > 0 && searchResults.parsed[0].measure">
       <ion-label text-wrap>
         <h3>{{searchResults.parsed[0].quantity}} {{searchResults.parsed[0].measure.label}} of {{searchResults.parsed[0].food.label}}</h3>
@@ -37,18 +36,13 @@
     <div *ngFor="let hint of searchResults.hints">
         <ion-card>
           <ion-item>
+              <ion-img *ngIf="hint.food.image" style="max-width:80px" [src]="hint.food.image"></ion-img>
             <ion-label text-wrap>
                 <h3>{{hint.food.label.toLowerCase()}}</h3>
-                <h3 *ngIf="hint.food.brand">brand - {{hint.food.brand.toLowerCase()}}</h3>
-                <h3 *ngIf="hint.food.category">category - {{hint.food.category.toLowerCase()}}</h3>
-              </ion-label>
+            </ion-label>
             <ion-button fill="outline" slot="end" (click)="expandHint(hint)">View</ion-button>
           </ion-item>
         
-          <ion-card-content>
-            <ion-img *ngIf="hint.food.image" [src]="hint.food.image"></ion-img>
-          </ion-card-content>
-
           <ion-item *ngIf="hint.selected">
               <ion-list>
                 <ion-item *ngFor="let measure of hint.measures">
@@ -60,8 +54,24 @@
         </ion-card>
 
     </div>
-
   </ion-list>
+
+
+  <!--for Nutritionix -->
+  <!-- <ion-list>
+    <div *ngFor="let food of searchResults.foods">
+        <ion-card>
+          <ion-item>
+              <ion-img *ngIf="food.photo.thumb" style="max-width:80px" [src]="food.photo.thumb"></ion-img>
+            <ion-label text-wrap>
+                <h3>{{food.serving_qty}} {{food.serving_unit}} {{food.food_name.toLowerCase()}}</h3>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+    </div>
+    <ion-button *ngIf="searchResults.foods?.length > 0" slot="end" size="small" >Add</ion-button>
+    
+  </ion-list> -->
 
 
 </ion-content>

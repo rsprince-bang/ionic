@@ -66,7 +66,7 @@ export class HomeAddWorkoutModalPage implements OnInit {
         },
         true
       ).subscribe((result)=>{
-        this.modalController.dismiss(exercise);
+        this.modalController.dismiss(result);
       });
       
     }

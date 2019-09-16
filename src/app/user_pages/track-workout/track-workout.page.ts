@@ -81,7 +81,7 @@ export class TrackWorkoutPage implements OnInit {
     modal.onDidDismiss()
       .then((response) => {
         if( response.data ){
-          this.loadExercises();
+          this.exercises.push(response.data.success.exercise_array);
         }        
     });
 

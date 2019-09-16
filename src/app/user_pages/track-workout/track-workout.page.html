@@ -35,11 +35,10 @@
     <ion-list>
       <ion-item-sliding *ngFor="let exercise of exercises">
         <ion-item>
-          <ion-label style=" font-size: 14px; color: rgb(67, 66, 66);"> - {{exercise.exercise_name}} <span style = " font-weight: 600">{{exercise.hours}}/hr</span> </ion-label>
+          <ion-label style=" font-size: 14px; color: rgb(67, 66, 66);"> - {{exercise.exercise_name}} <span style = " font-weight: 600">{{exercise.hours}}/hr</span> - {{exercise.calories_burned}} cal </ion-label>
         </ion-item>
         <ion-item-options *ngIf="today" side="end">
           <ion-item-option color="danger" (click)="removeExercise(exercise.id)"><ion-icon name="trash"></ion-icon></ion-item-option>
-          <!-- <ion-item-option (click)="editMeal(meal)">Edit</ion-item-option> -->
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>

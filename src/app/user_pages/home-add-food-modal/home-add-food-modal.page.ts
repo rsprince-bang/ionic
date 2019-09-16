@@ -25,7 +25,8 @@ export class HomeAddFoodModalPage implements OnInit {
   searchChanged(){
     if( this.searchTerm != ''){
       this.myAPI.makeAPIcall(
-        "food_api_edamam.php", 
+        "food_api_edamam.php",
+        //"food_api_nutritionix.php",
         {
           "action": "loadFoods",
           "food": this.searchTerm
@@ -38,6 +39,7 @@ export class HomeAddFoodModalPage implements OnInit {
         }
         else{
           this.searchResults = result.success.foods;
+          //console.log(this.searchResults);
         }
       });
     }

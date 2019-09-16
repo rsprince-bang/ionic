@@ -177,9 +177,9 @@ export class FoodSuggestionsService {
     }
 
     //if they worked out they can eat more calories
-    for (let i = 0; i < exercises.length; i++) {
-      dietCaloriesIntake = dietCaloriesIntake + parseInt(exercises[i].calories_burned);
-    }
+    // for (let i = 0; i < exercises.length; i++) {
+    //   dietCaloriesIntake = dietCaloriesIntake + parseInt(exercises[i].calories_burned);
+    // }
 
     //calculate targeted calories
     var dayNutritionInfo = this.getDietDayDescription(date);

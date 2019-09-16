@@ -55,6 +55,7 @@
     <ion-item-sliding *ngFor="let meal of meals">
       <ion-item style="--background:none;">
         <ion-label style= "text-transform:lowercase; ">- {{meal.meal_name}}</ion-label>
+        <ion-label slot="end">{{meal.calories}} cal</ion-label>
       </ion-item>
 
       <ion-item-options *ngIf="today" side="end">
