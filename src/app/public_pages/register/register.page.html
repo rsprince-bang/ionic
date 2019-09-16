@@ -34,8 +34,9 @@
       <ion-label position="floating">Verify Password</ion-label>
       <ion-input type="password" formControlName="password_verify"></ion-input>
     </ion-item>
-
-    <ion-button class="register_bt"expand="block" type="submit" [disabled]="!registerForm.valid">Register</ion-button>
+    <ion-footer class="register">
+      <ion-button class="register_bt"expand="full" type="submit" [disabled]="!registerForm.valid">Register</ion-button>
+    </ion-footer>
   </form>
 
 

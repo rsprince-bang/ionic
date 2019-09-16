@@ -26,21 +26,24 @@
       <!-- <ion-img [src]="image.url"></ion-img> -->
 
       <ion-card>
-        <ion-img [src]="image.url"></ion-img>
+          <ion-card-content >
+              <ion-icon class = "close" (click)="deleteImage(image.id)" color="danger" name="close-circle"></ion-icon>
+          </ion-card-content>
+        <ion-img style= "margin-top: 25px"  [src]="image.url"></ion-img>
         <ion-card-header>
-          <ion-card-title>{{image.human_date}}</ion-card-title>
-          <ion-card-title>{{image.fat_percent}}% fat</ion-card-title>
-          <ion-card-subtitle>{{image.comment}}</ion-card-subtitle>
+          <ion-card-title class = "date" >{{image.human_date}} </ion-card-title>
+          <ion-card-title class = "date">{{image.fat_percent}}% fat</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
-          <ion-button color="danger" expand="block" (click)="deleteImage(image.id)">Delete</ion-button>
-        </ion-card-content>
+          <ion-card-subtitle >{{image.comment}} need to change on database to be "day" {{image.day}}</ion-card-subtitle>
+        
       </ion-card>
 
     </ion-slide>
   </ion-slides>
-
-  <ion-button expand="block" (click)="openPhotoModal()">Add photo</ion-button>
+  <ion-footer style=" bottom: 0px; position: fixed;margin-left: -15px; " >  
+    <ion-button expand="block" (click)="openPhotoModal()">Add photo</ion-button>
+  </ion-footer>
+  
 
 
 </ion-content>

@@ -83,7 +83,7 @@ export class HomePage implements OnInit {
 
   public barChartData: ChartDataSets[] = [
     { data: [1, 2, 3], label: 'Grams consumed', backgroundColor: "rgb(186, 73, 252)" },
-    { data: [4, 5, 6], label: 'Limit', backgroundColor: "rgb(255, 233, 0)"}
+    { data: [4, 5, 6], label: 'Limit', backgroundColor: "rgb(191, 191, 191)"}
   ];
 
 

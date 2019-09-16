@@ -7,7 +7,7 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title>Track Meal</ion-title>
+    <ion-title> Meal</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
@@ -18,10 +18,10 @@
 
 
   <ion-toolbar style="--background: rgb(226, 246, 250);" >
-    <ion-icon name="arrow-back" slot="start" (click)="handleSwipeRight()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
+    <ion-icon *ngIf = "dayNumber > 1" name="arrow-back" slot="start" (click)="handleSwipeRight()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
     <ion-card>
       <ion-card-header>
-        <ion-card-title style="text-align:center;color: rgb(67, 66, 66);" >DAY {{dayNumber}}</ion-card-title>
+        <ion-card-title style=" font-weight: bold; text-align:center;color: rgb(67, 66, 66);" >{{day}} <span *ngIf = "!day">DAY {{dayNumber}}</span> </ion-card-title>
       </ion-card-header>
         
       <ion-card-content  [ngStyle]="{ 'color' : circlecolor}" style="text-align:center;  font-weight: bold" >
@@ -30,32 +30,33 @@
 
 
     </ion-card>
-    <ion-icon name="arrow-forward" slot="end" (click)="handleSwipeLeft()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
+    <ion-icon *ngIf = "!today" name="arrow-forward" slot="end" (click)="handleSwipeLeft()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
   </ion-toolbar>
 
   <!-- Nutririon info-->
+  <div class="box-track-meal">
+     <ion-item >
+    <div class="track-meal">
 
-  <ion-item>
-  <div class="track-meal">
-    
-    <p class="text">Total Calories you ate  <strong> {{caloriesConsumed}}</strong> Calories<br/>
-    <span class="namePercentt">
-          <span class="name_percent"> <strong> Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
-          <br/><span class="name_percent"> <strong> Carbs </strong> <br/>{{caloriesFromCarbsAsP}}% </span>
-          <br/><span class="name_percent"> <strong> Fat </strong> <br/>{{caloriesFromFatAsP}}%</span>
-    </span>
-    </p>
+      <p class="text">Total Calories you ate  <strong [ngStyle]="{ 'color' : circlecolor}" > {{caloriesConsumed}}</strong> Calories<br/>
+      <span class="namePercentt">
+            <span class="name_percent"> <strong > Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
+            <br/><span class="name_percent"> <strong> Carbs </strong> <br/>{{caloriesFromCarbsAsP}}% </span>
+            <br/><span class="name_percent"> <strong> Fat </strong> <br/>{{caloriesFromFatAsP}}%</span>
+      </span>
+      </p>
 
+    </div>
+  </ion-item>
   </div>
-</ion-item>
+   
 
   <!-- Food List -->
-  <ion-list>
+  <ion-list >
       <p *ngIf= "meals.length > 0"  style="margin-left:10px; font-weight: bold;font-size: 18px;">Food List</p>
     <ion-item-sliding *ngFor="let meal of meals">
-      <ion-item style="--background:none;">
-        <ion-label style= "text-transform:lowercase; ">- {{meal.meal_name}}</ion-label>
-        <ion-label slot="end">{{meal.calories}} cal</ion-label>
+      <ion-item style="--background:none; ">
+        <ion-label class= "meal">- {{meal.meal_name}} <span>{{meal.calories}} cal</span></ion-label>
       </ion-item>
 
       <ion-item-options *ngIf="today" side="end">
@@ -65,11 +66,13 @@
     </ion-item-sliding>
   </ion-list>
 
-
-  <ion-item *ngIf="today" style="--background:none;  " lines="none">
-    <ion-button  *ngIf="today" (click)="openFoodModal()" class="button">Add food</ion-button>
-  </ion-item>
-  <br/>
   <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
-  <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle" ></circle-progress>
+  <div style="height:200px; margin: 10px;">
+    <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle" ></circle-progress>
+  </div>
+  
+
+  <ion-footer style="position: fixed ; bottom: 0px; margin-left: -15px; " >  
+      <ion-button style="font-weight: bold;" expand="full" class="addFood" *ngIf="today" (click)="openFoodModal()" class="button">Add food</ion-button>
+  </ion-footer>
 </ion-content>
