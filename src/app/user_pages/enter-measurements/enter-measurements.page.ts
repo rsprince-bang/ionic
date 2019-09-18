@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
 import { PickerController } from '@ionic/angular';
 import { ApiCallService } from 'src/app/services/api-call.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-enter-measurements',
@@ -12,17 +13,28 @@ import { Router } from '@angular/router';
 export class EnterMeasurementsPage implements OnInit {
 
   measurementsForm: FormGroup;
+  action = "save";
+  currentUserMeasurements = {feet:"", inches:"", weight_lbs:"", age:"", gender:"", activity_level:"" };
 
-  constructor(private formBuilder: FormBuilder, private myAPI: ApiCallService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private myAPI: ApiCallService, private route: ActivatedRoute, private router: Router, private navCtrl: NavController) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.action = this.router.getCurrentNavigation().extras.state.action; // has value of update because it is coming from profile page
+        this.currentUserMeasurements = this.router.getCurrentNavigation().extras.state.userMeasurements;
+        this.currentUserMeasurements.feet = ""+Math.floor(this.router.getCurrentNavigation().extras.state.userMeasurements.height_inches/12);
+        this.currentUserMeasurements.inches = ""+this.router.getCurrentNavigation().extras.state.userMeasurements.height_inches%12;
+      }
+    });
+  }
 
   ngOnInit() {
     this.measurementsForm = this.formBuilder.group({
-      heightFeet: ['5', [ Validators.required, Validators.pattern('[0-9]{1}') ]], 
-      heightInches: ['11', [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(11) ]],
-      weight: ['160', [ Validators.required, Validators.pattern('[0-9]+') ]],
-      age: ['34', [ Validators.required, Validators.pattern('[0-9]+') ]],
-      gender: ['M', [ Validators.required ]],
-      activity: ['1.2', [ Validators.required ]]
+      heightFeet: [ this.currentUserMeasurements.feet, [ Validators.required, Validators.pattern('[0-9]{1}') ]], 
+      heightInches: [this.currentUserMeasurements.inches, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(11) ]],
+      weight: [this.currentUserMeasurements.weight_lbs, [ Validators.required, Validators.pattern('[0-9]+') ]],
+      age: [this.currentUserMeasurements.age, [ Validators.required, Validators.pattern('[0-9]+') ]],
+      gender: [this.currentUserMeasurements.gender, [ Validators.required ]],
+      activity: [this.currentUserMeasurements.activity_level, [ Validators.required ]]
     });
   }
 
@@ -40,10 +52,20 @@ export class EnterMeasurementsPage implements OnInit {
       }
       else{
         localStorage.setItem("dailyCaloriesIntake", result.success.dailyCaloriesIntake);
-        this.router.navigateByUrl("/home/today");
+        
+        if( this.action == "update" ){
+          this.router.navigateByUrl("/profile");
+        }
+        else{
+          this.router.navigateByUrl("/home/today");
+        }
       }
-
     });
-
   }
+
+  goBack(){
+    this.navCtrl.navigateBack('/profile');
+  }
+  
+
 }

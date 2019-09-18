@@ -3,6 +3,7 @@ import { FoodSuggestionsService } from 'src/app/services/food-suggestions.servic
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { environment } from 'src/environments/environment';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -16,10 +17,14 @@ export class ProfilePage implements OnInit {
   previousDiets = [];
   startInfo = {date:"...", height:"...", weight:"..."};
   profileImageURL = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
+  userMeasurements = null;
 
-  constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService) { }
+  constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router:Router) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
     this.date = this.globalServices.getTodayDate();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
 
@@ -48,6 +53,7 @@ export class ProfilePage implements OnInit {
         this.startInfo.height = Math.floor(result.success.user_measurements.height_inches/12) + '\'' + result.success.user_measurements.height_inches%12 + '"';
         this.startInfo.weight = result.success.user_measurements.weight_lbs;
 
+        this.userMeasurements = result.success.user_measurements;
       }
     });
   }
@@ -90,6 +96,15 @@ export class ProfilePage implements OnInit {
       });
   }
 
+  redirectToUpdatePage(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        action: "update",
+        userMeasurements: this.userMeasurements
+      }
+    };
+    this.router.navigate(['enter-measurements'], navigationExtras);
+  }
 
 
 }
