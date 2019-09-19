@@ -69,7 +69,7 @@ export class HomePage implements OnInit {
         clamp : true,
         offset: 0,
         font: {
-          size: 11,
+          size: this.chartOptionsfontSize(),
           weight:900,
           
         }
@@ -159,7 +159,7 @@ if(){
   updatepage() {
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
-
+    this.barChartLabels = ['Protein '+this.dayNutritionInfo.daynutrition.protein +'%', 'Carbs '+this.dayNutritionInfo.daynutrition.carbs+'%', 'Fat '+ this.daynutritionOfFat()];
     this.myAPI.makeAPIcall(
       "meals.php",
       {
@@ -226,7 +226,6 @@ if(){
 
   warnTextFunction( target, current){
     var text = '';
-
     var difference = Math.floor(target - current);
     
     if( target > current && this.caloriesConsumed > this.dietCaloriesIntake ){
@@ -238,11 +237,31 @@ if(){
     else if( target < current ){
       text = "consumed too much " + difference + " Calories";
     }
-
     return text;  
   }
 
+  daynutritionOfFat(){
+    var text = null;
 
+    if (this.dayNutritionInfo.daynutrition.fat == undefined){
+        text = '5%'
+    }else {
+      text = this.dayNutritionInfo.daynutrition.fat + '%'
+    }
+    return text;
+  } 
+
+  chartOptionsfontSize(){
+    var windowSize = window.matchMedia('(min-width: 700px)')
+    var fontSize = null;
+
+    if (windowSize.matches){
+        fontSize = 14;
+    }else {
+      fontSize = 11;
+    }
+    return fontSize;
+  }
 
   
 }
