@@ -51,7 +51,7 @@ app-home{
 
 ion-content{
     --ion-background-color: rgba(235, 251, 255, 0.79);
-    background-image: url("./smoke.jpg") ;
+    // background-image: url("./smoke.jpg") ;
     background-repeat: no-repeat;
     background-position-x: left;
     background-position-y: bottom;
@@ -65,10 +65,7 @@ ion-toolbar, ion-button{
     --background:rgb(0, 198, 242);
 }
 
-// .imgg{
-    // background-image: url("./smoke.jpg")  ;
-//     filter:opacity(0.3); 
-// }
+
 
 .img{
     position: absolute;

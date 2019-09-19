@@ -14,7 +14,7 @@ import { HomeAddFoodModalPage } from '../home-add-food-modal/home-add-food-modal
 })
 export class TrackMealPage implements OnInit {
 
-  
+  day = "";
   today = false;
   dayNumber = null;
   date = null;
@@ -40,11 +40,16 @@ export class TrackMealPage implements OnInit {
       this.date = this.date = this.globalServices.getTodayDate();
     }
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
-
     if( this.date == this.globalServices.getTodayDate() ){
-      this.today = true;
+      if(this.today = true){
+        this.day = "TODAY"
+      }
     }
     this.loadMeals();
+    console.log(this.globalServices.getTodayDate())
+    console.log(this.foodSuggestionsService.getDietDayNumber(this.date))
+    console.log(this.activatedRoute.snapshot.paramMap.get('day'))
+    console.log(this.dayNumber)
   }
 
   doRefresh(event) {
@@ -53,7 +58,12 @@ export class TrackMealPage implements OnInit {
   }
 
   handleSwipeLeft() {
-    this.globalServices.swipeLeft("/track-meal/" + this.globalServices.getNextDate(this.date));
+    if(this.today){
+      //won't swipe left tomorrow
+    }else{
+      this.globalServices.swipeLeft("/track-meal/" + this.globalServices.getNextDate(this.date));
+    }
+
   }
 
   handleSwipeRight() {
@@ -79,6 +89,7 @@ export class TrackMealPage implements OnInit {
         this.meals = result.success.dayInfo.meals;
         this.exercises = result.success.dayInfo.exercises;
         this.calculateCaloriesConsumed();
+        console.log(this.meals)
       }
     });
   }
@@ -93,6 +104,7 @@ export class TrackMealPage implements OnInit {
       .then((response) => {
         if( response.data ){
           this.loadMeals();
+          console.log(this.meals)
         }        
     });
 
@@ -127,12 +139,16 @@ export class TrackMealPage implements OnInit {
       this.circlecolor = "#CA1616";
       this.status = "BAD";
     }
-    else{
+    else if (this.caloriesConsumed == 0){
+      this.status = "NO INFO";
+    }
+    else {
       this.circlecolor = "#2FB202"; //green
       this.status ="GOOD";
     }
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }
+
 
 }
 
