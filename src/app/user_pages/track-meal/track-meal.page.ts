@@ -46,10 +46,6 @@ export class TrackMealPage implements OnInit {
       }
     }
     this.loadMeals();
-    console.log(this.globalServices.getTodayDate())
-    console.log(this.foodSuggestionsService.getDietDayNumber(this.date))
-    console.log(this.activatedRoute.snapshot.paramMap.get('day'))
-    console.log(this.dayNumber)
   }
 
   doRefresh(event) {
@@ -89,7 +85,6 @@ export class TrackMealPage implements OnInit {
         this.meals = result.success.dayInfo.meals;
         this.exercises = result.success.dayInfo.exercises;
         this.calculateCaloriesConsumed();
-        console.log(this.meals)
       }
     });
   }
@@ -104,7 +99,6 @@ export class TrackMealPage implements OnInit {
       .then((response) => {
         if( response.data ){
           this.loadMeals();
-          console.log(this.meals)
         }        
     });
 
