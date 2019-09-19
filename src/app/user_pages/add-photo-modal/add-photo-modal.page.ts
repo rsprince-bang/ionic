@@ -20,7 +20,7 @@ export class AddPhotoModalPage implements OnInit {
   ngOnInit() {
     this.photoForm = this.formBuilder.group({
       weight: ['', [ Validators.required, Validators.pattern('[0-9]+') ]],
-      fatpercent: ['', [ Validators.required, Validators.pattern('[0-9]+') ]],
+      fatpercent: ['', [ Validators.pattern('[0-9]+') ]],
       comment:['']
     });
   }

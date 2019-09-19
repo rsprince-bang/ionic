@@ -4,6 +4,7 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { environment } from 'src/environments/environment';
 import { Router, NavigationExtras } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -15,23 +16,24 @@ export class ProfilePage implements OnInit {
   dayNumber = null;
   date = null;
   previousDiets = [];
-  startInfo = {date:"...", height:"...", weight:"..."};
+  startInfo = { date: "...", height: "...", weight: "..." };
   profileImageURL = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
   userMeasurements = null;
 
-  constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router:Router) { }
+  constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router: Router, 
+    private alertController: AlertController) { }
 
   ngOnInit() {
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.date = this.globalServices.getTodayDate();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
 
     this.getProfileDetails();
   }
 
-  getProfileDetails(){
+  getProfileDetails() {
     this.myAPI.makeAPIcall(
       "user_statistics.php",
       {
@@ -45,12 +47,12 @@ export class ProfilePage implements OnInit {
       else {
         this.previousDiets = result.success.prev_diets;
 
-        if( result.success.profile_image && result.success.profile_image.hasOwnProperty('url') ){
+        if (result.success.profile_image && result.success.profile_image.hasOwnProperty('url')) {
           this.profileImageURL = environment.API_URL + result.success.profile_image.url;
         }
 
         this.startInfo.date = result.success.start_date;
-        this.startInfo.height = Math.floor(result.success.user_measurements.height_inches/12) + '\'' + result.success.user_measurements.height_inches%12 + '"';
+        this.startInfo.height = Math.floor(result.success.user_measurements.height_inches / 12) + '\'' + result.success.user_measurements.height_inches % 12 + '"';
         this.startInfo.weight = result.success.user_measurements.weight_lbs;
 
         this.userMeasurements = result.success.user_measurements;
@@ -58,7 +60,29 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  resetDiet(){
+  async confirmReset() {
+    const alert = await this.alertController.create({
+      header: 'Confirm',
+      message: 'Are you sure you want to reset your diet?',
+      buttons: [
+        {
+            text: 'Yes',
+            handler: () => {
+              this.resetDiet();
+            }
+        },
+        {
+            text: 'No',
+            handler: () => {
+            }
+        }
+    ]
+    });
+
+    await alert.present();
+  }
+
+  resetDiet() {
     this.myAPI.makeAPIcall(
       "users.php",
       {
@@ -73,12 +97,12 @@ export class ProfilePage implements OnInit {
       }
       else {
         localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
-        this.ngOnInit();
+        this.ionViewWillEnter();
       }
     });
   }
 
-  viewOldDiet(from_date, to_date){
+  viewOldDiet(from_date, to_date) {
     // console.log("View old diet here");
     // console.log(from_date);
     // console.log(to_date);
@@ -96,7 +120,7 @@ export class ProfilePage implements OnInit {
       });
   }
 
-  redirectToUpdatePage(){
+  redirectToUpdatePage() {
     let navigationExtras: NavigationExtras = {
       state: {
         action: "update",
