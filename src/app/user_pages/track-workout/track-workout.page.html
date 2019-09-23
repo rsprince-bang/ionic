@@ -41,24 +41,25 @@
       </ion-label>
   </ion-item>
 
-  <ion-item lines="none" style="padding-top:15px; font-size: 14px; text-transform :lowercase; margin-bottom: 50px; ">
-    <ion-list style="width: 100%;">
-      <ion-item-sliding *ngFor="let exercise of exercises">
-        <ion-item>
-          <ion-label style=" font-size: 14px; color: rgb(67, 66, 66);"> - {{exercise.exercise_name}} - {{exercise.calories_burned}} cal </ion-label>
-        </ion-item>
-        <ion-item-options *ngIf="today" side="end">
-          <ion-item-option color="danger" (click)="removeExercise(exercise.id)"><ion-icon name="trash"></ion-icon></ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-  </ion-item>
 
-    <div>  
-      <ion-footer  style=" bottom: 0px; position: fixed;margin-left: -15px;margin-top: 20px">
-      <ion-button style="font-weight: bold;" expand="full" (click)="openExerciseModal()">Add workout</ion-button>
-      </ion-footer>
-    </div>  
+  <ion-list style="width: 100%;">
+    <ion-item-sliding *ngFor="let exercise of exercises">
+      <ion-item>
+        <ion-label style=" font-size: 14px; color: rgb(67, 66, 66);"> - {{exercise.exercise_name}} {{exercise.minutes}} minutes  <span>{{exercise.calories_burned}} cal</span></ion-label>
+      </ion-item>
+
+      <ion-item-options *ngIf="today" side="end">
+        <ion-item-option color="danger" (click)="removeExercise(exercise.id)"><ion-icon name="trash"></ion-icon></ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+  <div>  
+    <ion-footer  style=" bottom: 0px; position: fixed;margin-left: -15px;margin-top: 20px">
+    <ion-button style="font-weight: bold;" expand="full" (click)="openExerciseModal()">Add workout</ion-button>
+    </ion-footer>
+  </div>  
 
 
   

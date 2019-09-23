@@ -53,7 +53,7 @@
 
   <!-- Food List -->
   <ion-list >
-      <p *ngIf= "meals.length > 0"  style="margin-left:10px; font-weight: bold;font-size: 18px;">Food List</p>
+    <p *ngIf= "meals.length > 0"  style="margin-left:10px; font-weight: bold;font-size: 18px;">Food List</p>
     <ion-item-sliding *ngFor="let meal of meals">
       <ion-item style="--background:none; ">
         <ion-label class= "meal">- {{meal.meal_name}} <span>{{meal.calories}} cal</span></ion-label>
@@ -61,7 +61,6 @@
 
       <ion-item-options *ngIf="today" side="end">
         <ion-item-option color="danger" (click)="removeMeal(meal.id)">   <ion-icon name="trash"></ion-icon></ion-item-option>
-        <!-- <ion-item-option (click)="editMeal(meal)">Edit</ion-item-option> -->
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
