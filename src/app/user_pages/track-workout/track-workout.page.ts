@@ -39,6 +39,10 @@ export class TrackWorkoutPage implements OnInit {
     this.loadExercises();
   }
 
+  doRefresh(event) {
+    this.ngOnInit();
+    event.target.complete();
+  }
 
   handleSwipeLeft() {
     if (this.today){
@@ -81,7 +85,7 @@ export class TrackWorkoutPage implements OnInit {
     modal.onDidDismiss()
       .then((response) => {
         if( response.data ){
-          this.exercises.push(response.data.success.exercise_array);
+          this.loadExercises();
         }        
     });
 

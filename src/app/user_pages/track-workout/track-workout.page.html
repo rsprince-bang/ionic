@@ -13,7 +13,12 @@
 
 <!-- <ion-content padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()"> -->
 <ion-content padding>
-<ion-toolbar style="--background: rgb(226, 246, 250);" >
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-toolbar style="--background: rgb(226, 246, 250);" >
     <ion-icon *ngIf = "dayNumber > 1"  name="arrow-back" slot="start" (click)="handleSwipeRight()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
     <ion-card>
       <ion-card-header>

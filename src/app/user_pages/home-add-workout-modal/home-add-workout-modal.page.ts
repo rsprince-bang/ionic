@@ -21,7 +21,8 @@ export class HomeAddWorkoutModalPage implements OnInit {
 
   searchExercises(){
     this.myAPI.makeAPIcall(
-      "exercises.php", 
+      //"exercises.php",
+      "food_api_nutritionix.php",
       {
         "action": "loadExercises",
         "searchterm": this.searchTerm
@@ -33,7 +34,7 @@ export class HomeAddWorkoutModalPage implements OnInit {
         this.myAPI.handleMyAPIError(result.error);
       }
       else{
-        this.searchResults = result.success.exercises;
+        this.searchResults = result.success.api_exercises;
       }
     });
   }
@@ -55,21 +56,19 @@ export class HomeAddWorkoutModalPage implements OnInit {
     }
   }
 
-  addExercise(exercise){
-    if( exercise.hours && exercise.hours > 0 ){
+  addExercise(exercises){
       this.myAPI.makeAPIcall(
-        "exercises.php", 
+        //"exercises.php",
+        "food_api_nutritionix.php",
         {
           "action": "saveExercise",
-          "exercise": exercise,
+          "exercises": exercises,
           "day": this.date
         },
         true
       ).subscribe((result)=>{
         this.modalController.dismiss(result);
       });
-      
-    }
   }
 
 

@@ -10,20 +10,17 @@
 
 
   <ion-list>
-    <div *ngFor="let item of searchResults">
-      <ion-item>
-        <ion-label text-wrap>
-          <h3>{{item.name}}</h3>
-        </ion-label>
-        <ion-button slot="end" size="small" (click)="selectExercise(item)">Select</ion-button>
-      </ion-item>
-
-      <ion-item *ngIf="item.selected">
-        <ion-input type="number" value="" [(ngModel)]="item.hours" >Hours:</ion-input>
-        <ion-button slot="end" size="small" (click)="addExercise(item)">Add</ion-button>
-      </ion-item>
-
+    <div *ngFor="let exercise of searchResults.exercises">
+        <ion-card>
+          <ion-item>
+              <ion-img *ngIf="exercise.photo.thumb" style="max-width:80px" [src]="exercise.photo.thumb"></ion-img>
+            <ion-label text-wrap>
+                <h3>{{exercise.name.toLowerCase()}} {{exercise.duration_min}} minutes</h3>
+            </ion-label>
+          </ion-item>
+        </ion-card>
     </div>
+    <ion-button *ngIf="searchResults.exercises?.length > 0" slot="end" size="small" (click)="addExercise(searchResults.exercises)" >Add</ion-button>
   </ion-list>
 
 </ion-content>

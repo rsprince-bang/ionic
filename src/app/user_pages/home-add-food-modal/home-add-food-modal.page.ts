@@ -25,8 +25,8 @@ export class HomeAddFoodModalPage implements OnInit {
   searchChanged(){
     if( this.searchTerm != ''){
       this.myAPI.makeAPIcall(
-        "food_api_edamam.php",
-        //"food_api_nutritionix.php",
+        //"food_api_edamam.php",
+        "food_api_nutritionix.php",
         {
           "action": "loadFoods",
           "food": this.searchTerm
@@ -39,7 +39,6 @@ export class HomeAddFoodModalPage implements OnInit {
         }
         else{
           this.searchResults = result.success.foods;
-          //console.log(this.searchResults);
         }
       });
     }
@@ -130,6 +129,20 @@ export class HomeAddFoodModalPage implements OnInit {
         this.modalController.dismiss(foodId);
       });
     }
+  }
+
+  nutritionixAddMeal(foods){
+      this.myAPI.makeAPIcall(
+        "food_api_nutritionix.php", 
+        {
+          "action": "nutritionixAddMeal",
+          "foods": foods,
+          "day": this.date
+        },
+        true
+      ).subscribe((result)=>{
+        this.modalController.dismiss(result);
+      });
   }
 
   expandHint(hint){
