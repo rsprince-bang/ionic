@@ -2,17 +2,17 @@
   <div class="login_form">
     <div>
     <div class="login_img">
-        <img src="assets/img/jack.jpg" >
+        <img src="assets/img/jack.png" >
       </div>
   
       <form class="login_form_input"[formGroup]="credentialsForm" (ngSubmit)="login()">
   
-        <ion-item>
-          <ion-label class="login_email" position="stacked">Email</ion-label>
+        <ion-item class="login email">
+          <ion-label  position="stacked">Email</ion-label>
           <ion-input type="email" formControlName="email"></ion-input>
         </ion-item>
   
-        <ion-item>
+        <ion-item class="login password">
           <ion-label position="stacked">Password</ion-label>
           <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>

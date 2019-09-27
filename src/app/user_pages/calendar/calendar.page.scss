@@ -3,10 +3,8 @@
 
 .calendar-day {
   border-radius: 6px;
-  padding: 3px 5px;
-
   &.green {
-    background-color: green;
+    background-color: rgb(56, 129, 255);
     color: white;
   }
 

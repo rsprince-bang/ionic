@@ -137,7 +137,7 @@ export class TrackMealPage implements OnInit {
       this.status = "NO INFO";
     }
     else {
-      this.circlecolor = "#2FB202"; //green
+      this.circlecolor = "rgb(56, 129, 255";
       this.status ="GOOD";
     }
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;

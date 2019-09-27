@@ -1,13 +1,14 @@
 .login_img{
-    width:80vw;
-    // background-image: url(./img/jack.jpg)
+    width:70vw;
 }
 .login_form{
-    display: flex;
-    justify-content: center;
-    margin-top: 20%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     
 }
+
 .login_form_input{
     margin-top: 10px;
 }
@@ -32,9 +33,10 @@
     text-align: center;
    
 }
-
-
 .ion-padding{
     background: pink;
+}
+ion-content{
+    background-image: none;
 }
 

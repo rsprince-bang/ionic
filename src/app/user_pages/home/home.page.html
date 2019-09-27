@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="bg-color">
+  <ion-toolbar >
     <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-button class="bg-color">
@@ -18,12 +18,12 @@
 
 
 
-  <ion-toolbar class="home today" *ngIf = " day == 'today'" >
-    <ion-icon class="home_clickLift" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
-      name="arrow-back" style="font-size:25px;  color: rgb(67, 66, 66); " slot="start"></ion-icon>
-    <ion-card>
+  <ion-toolbar class="home todayy" [ngStyle]="{ 'background-color' : backgroundColor}"  >
+    <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
+      name="arrow-back" slot="start"></ion-icon>
+    <ion-card >
       <ion-card-header>
-        <ion-card-title class="home_day"><span class="day">{{day}}</span>  </ion-card-title>
+        <ion-card-title class="home_day"><span  class="day">{{day}}</span>  </ion-card-title>
        
       </ion-card-header>
 
@@ -38,64 +38,8 @@
       </ng-template>
 
     </ion-card>
-    <ion-icon *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward"
-      style="font-size:25px;  color: rgb(67, 66, 66);" slot="end"></ion-icon>
-  </ion-toolbar>
-
-
-
-  <ion-toolbar class="home tomorrow" *ngIf = " day == 'tomorrow'" >
-    <ion-icon class="home_clickLift" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
-      name="arrow-back" style="font-size:25px;  color: rgb(67, 66, 66);" slot="start"></ion-icon>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="home_day"><span class="day">{{day}} </span>
-        </ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content *ngIf="dayNumber>84; else templateName" class="day">
-        Congratulations!<br>
-        You have completed the The Meltdown Anti-Diet!
-      </ion-card-content>
-      <ng-template #templateName>
-        <ion-card-content class="home_day program">
-          <span class="dayNumber">DAY {{dayNumber}} </span>
-        </ion-card-content>
-      </ng-template>
-
-    </ion-card>
-    <ion-icon *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward"
-      style="font-size:25px" slot="end"></ion-icon>
-  </ion-toolbar>
-
-
-
-
-  <ion-toolbar class="home yesterday" *ngIf = " day == 'yesterday'" >
-    <ion-icon class="home_clickLift" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
-      name="arrow-back" style="font-size:25px;  color: rgb(67, 66, 66);" slot="start"></ion-icon>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="home_day"><span class="day">{{day}}</span>
-        </ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content *ngIf="dayNumber>84; else templateName" class="day">
-        Congratulations!<br>
-        You have completed the The Meltdown Anti-Diet!
-      </ion-card-content>
-      <ng-template #templateName>
-        <ion-card-content class="home_day program">
-          <span class="dayNumber">DAY {{dayNumber}} </span>
-        </ion-card-content>
-      </ng-template>
-
-    </ion-card>
-    <ion-icon *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward"
-      style="font-size:25px;  color: rgb(67, 66, 66);" slot="end"></ion-icon>
-  </ion-toolbar>
-
-
+      <ion-icon class="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
+    </ion-toolbar>
 
 
   <div style="display: block">

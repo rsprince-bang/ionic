@@ -3,15 +3,7 @@
     margin-bottom: 15px;
     --border-radius: 10px;
 }
-.today{
-    --background: rgb(226, 246, 250);
-}
-.tomorrow{
-    --background:rgb(211, 247, 255);
-}
-.yesterday{
-    --background:rgb(232, 244, 247);
-}
+
 .home_day{
    color: rgb(67, 66, 66);
    text-align: center;
@@ -54,15 +46,16 @@
 .home_text2{
     font-size: 12px;
 }
-.bg-color{
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    --background:rgb(0, 198, 242);
-    
+
+.arrow-back{
+    font-size:25px;  
+    color: rgb(67, 66, 66);
 }
-ion-content.img{
-    filter:none; 
+.arrow-forward{
+    font-size:25px;  
+    color: rgb(67, 66, 66);
 }
+
 @media only screen and (min-width: 700px) {
     .workout{
         font-size: 22px;
@@ -73,4 +66,8 @@ ion-content.img{
     .home_text2{
         font-size: 14px;
     }
+    circle-progress{
+        margin-left: 5%;
+    }
   }
+  

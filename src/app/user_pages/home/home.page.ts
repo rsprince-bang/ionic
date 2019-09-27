@@ -40,6 +40,7 @@ export class HomePage implements OnInit {
   circlecolor = "#2b2b2b"; //gray atr first
   dayNutritionInfo = { "phase": null, "phaseday": null, "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
+  backgroundColor = "#2b2b2b";
   
   //declare barcharts
   public barChartOptions: ChartOptions = {
@@ -82,7 +83,7 @@ export class HomePage implements OnInit {
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [1, 2, 3], label: 'Grams consumed', backgroundColor: "rgb(186, 73, 252)" },
+    { data: [1, 2, 3], label: 'Grams consumed', backgroundColor: "rgb(56, 129, 255)" },
     { data: [4, 5, 6], label: 'Limit', backgroundColor: "rgb(191, 191, 191)"}
   ];
 
@@ -103,9 +104,7 @@ if(){
     if (!this.globalServices.hasDailyCaloriesIntake()) {
       this.router.navigateByUrl("/enter-measurements");
     }
-
   }
-
   ionViewWillEnter() {
     this.updatepage();
   }
@@ -157,6 +156,7 @@ if(){
   }
 
   updatepage() {
+    this.backgroundColor = this.changeBackgroundColor();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
     this.barChartLabels = ['Protein '+this.dayNutritionInfo.daynutrition.protein +'%', 'Carbs '+this.dayNutritionInfo.daynutrition.carbs+'%', 'Fat '+ this.daynutritionOfFat()];
@@ -177,7 +177,6 @@ if(){
         this.workout_completed = this.foodSuggestionsService.getWorkoutStatus(this.exercises);
         this.workoutCompleted();
         this.calculateCaloriesConsumed();
-       
       }
     });
 
@@ -205,7 +204,7 @@ if(){
       this.circlecolor = "#CA1616";
     }
     else {
-      this.circlecolor = "#2FB202"; //green
+      this.circlecolor = "rgb(56, 129, 255"; 
     }
     this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
 
@@ -256,13 +255,32 @@ if(){
     var fontSize = null;
 
     if (windowSize.matches){
-        fontSize = 14;
+        fontSize = 16;
     }else {
       fontSize = 11;
     }
     return fontSize;
   }
 
+  changeBackgroundColor(){
+    var color = null;
+    switch(this.day){
+      case 'today':{
+        color = '#e2f6fa';
+      break;
+      }
+      case 'tomorrow':{
+        color = '#99d2ff';
+      break;
+      }
+      case 'yesterday':{
+        color = '#99d2ff';
+      break;
+      }
+    }
+    return color
+  }
+  
   
 }
 
