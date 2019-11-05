@@ -73,7 +73,7 @@ export class FoodSuggestionsService {
 
     //declare charts
     this.charts["A"] = ["Albacore Tuna", "Soft-Shell Crab", "Cod", "Crayfish", "Dungeness Crab", "Flounder", "Fresh Tuna Steak", "Grouper", "Haddock",
-      "Halibut", "King Crab", "Lobster", "Mahi Mahi", "MOnkfish", "Ocean Perch", "Orange Roughy", "Scallops", "Sea Bass", "Shrimp", "Snapper", "Sole"];
+      "Halibut", "King Crab", "Lobster", "Mahi Mahi", "Monkfish", "Ocean Perch", "Orange Roughy", "Scallops", "Sea Bass", "Shrimp", "Snapper", "Sole"];
 
     this.charts["B"] = ["Blue Fish", "Catfish", "Herring", "King Salmon", "Mackerel", "Pompano", "Rainbow Trout", "Sea Trout", "Silver (Pink) Salmon",
       "Sockeye Salmon", "Striped Bass", "Sturgeon", "Swordfish", "Whitefish", "Yellowtail"];
@@ -102,9 +102,9 @@ export class FoodSuggestionsService {
 
     this.charts["L"] = ["Almonds", "Brazil Nuts", "Hazelnuts, Roasted", "Peanuts, Roasted", "Pecans", "Pine Nuts", "Walnuts"];
 
-    this.charts["M"] = ["Zero Impact Protein Bar"];
+    this.charts["M"] = ["Zero Impact"];
 
-    this.charts["N"] = ["NO Shotgun", "Redline Liquid Caps", "Redline Drink", "Zero Carb Protein", "Zero Impact Protein"];
+    this.charts["N"] = ["NO Shotgun", "Redline Liquid Caps", "Redline Drink", "Zero Carb", "Zero Impact"];
 
   }
 
