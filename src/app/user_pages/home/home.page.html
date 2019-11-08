@@ -11,14 +11,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content  padding (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
+
+<ion-content  padding >
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
 
 
-  <ion-toolbar class="home todayy" [ngStyle]="{ 'background-color' : backgroundColor}"  >
+  <ion-toolbar class="home todayy" [ngStyle]="{ 'background-color' : backgroundColor}" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
     <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
       name="arrow-back" slot="start"></ion-icon>
     <ion-card >
