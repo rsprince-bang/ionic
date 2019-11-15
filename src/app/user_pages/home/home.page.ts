@@ -126,7 +126,6 @@ if(){
         break;
       }
     }
-
   }
 
   handleSwipeRight() {
@@ -147,7 +146,6 @@ if(){
         break;
       }
     }
-
   }
 
   doRefresh(event) {

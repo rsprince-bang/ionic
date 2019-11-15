@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
+// import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalServicesService {
 
-  constructor(private router: Router, private nativePageTransitions: NativePageTransitions, private http: HttpClient) { }
+  constructor(private router: Router, /*private nativePageTransitions: NativePageTransitions, */ private navCtrl: NavController, private http: HttpClient) { }
 
   isLoggedIn() {
     let token = localStorage.getItem('token');
@@ -46,23 +47,27 @@ export class GlobalServicesService {
 
 
   swipeLeft(url: string) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1
-    }
-    this.nativePageTransitions.slide(options);
-    this.router.navigateByUrl(url);
+    // let options: NativeTransitionOptions = {
+    //   direction: 'left',
+    //   duration: 400,
+    //   slowdownfactor: -1
+    // }
+    // this.nativePageTransitions.slide(options);
+    //this.router.navigateByUrl(url);
+
+    this.navCtrl.navigateForward(url);
   }
 
   swipeRight(url) {
-    let options: NativeTransitionOptions = {
-      direction: 'right',
-      duration: 400,
-      slowdownfactor: -1
-    }
-    this.nativePageTransitions.slide(options);
-    this.router.navigateByUrl(url);
+    // let options: NativeTransitionOptions = {
+    //   direction: 'right',
+    //   duration: 400,
+    //   slowdownfactor: -1
+    // }
+    // this.nativePageTransitions.slide(options);
+    //this.router.navigateByUrl(url);
+
+    this.navCtrl.navigateBack(url);
   }
 
 

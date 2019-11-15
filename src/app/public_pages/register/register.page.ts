@@ -20,6 +20,7 @@ export class RegisterPage implements OnInit {
       first_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       last_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(1)]],
       password_verify: ['', [Validators.required, Validators.minLength(1)]]
     });
@@ -57,5 +58,6 @@ export class RegisterPage implements OnInit {
     }
 
   }
+  
 
 }

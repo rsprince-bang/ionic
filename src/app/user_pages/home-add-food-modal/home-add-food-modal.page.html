@@ -19,42 +19,6 @@
   </ion-list>
 
 
-  <!--for Edamam-->
-  <!-- <ion-list>
-    <ion-item *ngIf="searchResults.parsed && searchResults.parsed.length > 0 && searchResults.parsed[0].measure">
-      <ion-label text-wrap>
-        <h3>{{searchResults.parsed[0].quantity}} {{searchResults.parsed[0].measure.label}} of {{searchResults.parsed[0].food.label}}</h3>
-      </ion-label>
-
-      <ion-button slot="end" size="small"
-        (click)="edamamAddMeal(searchResults.parsed[0].food.label, searchResults.parsed[0].food.foodId, searchResults.parsed[0].quantity, searchResults.parsed[0].measure.uri)">
-        Add</ion-button>
-    </ion-item>
-
-    <div *ngFor="let hint of searchResults.hints">
-        <ion-card>
-          <ion-item>
-              <ion-img *ngIf="hint.food.image" style="max-width:80px" [src]="hint.food.image"></ion-img>
-            <ion-label text-wrap>
-                <h3>{{hint.food.label.toLowerCase()}}</h3>
-            </ion-label>
-            <ion-button fill="outline" slot="end" (click)="expandHint(hint)">View</ion-button>
-          </ion-item>
-        
-          <ion-item *ngIf="hint.selected">
-              <ion-list>
-                <ion-item *ngFor="let measure of hint.measures">
-                    <ion-input type="number" value="" [(ngModel)]="measure.quantity" >{{measure.label}}: </ion-input>
-                    <ion-button slot="end" size="small" (click)="edamamAddMeal(hint.food.label, hint.food.foodId, measure.quantity, measure.uri)">Add</ion-button>
-                </ion-item>
-              </ion-list>
-            </ion-item>
-        </ion-card>
-
-    </div>
-  </ion-list> -->
-
-
   <!--for Nutritionix -->
   <ion-list>
     <h2 *ngIf="searchResults.message" >{{searchResults.message}}</h2>
