@@ -51,30 +51,30 @@ app-home{
 
 ion-content{
     --ion-background-color: rgba(235, 251, 255, 0.79);
-    background-image:url("./assets/img/book-smoke.jpg") ;
+    background-image:url("./assets/img/book-smoke-mobile.jpg") ;
     background-repeat: no-repeat;
     background-position-x: left;
     background-position-y: bottom;
-
 }
-
 
 ion-header ion-toolbar,ion-button{
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     --background:rgb(0, 198, 242);
 }
-
-
-
 .img{
     position: absolute;
     bottom: 0px;
     max-width: none;
 }
+@media only screen and (min-width: 700px) {
+    ion-content{
+    background-image:url("./assets/img/book-smoke-ipad.jpg") ;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-size: contain;
+    }
+  }
 
 
 
-
-//end calender override
-/////////////////////////////////////////

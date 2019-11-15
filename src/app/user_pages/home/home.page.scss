@@ -8,16 +8,16 @@
    color: rgb(67, 66, 66);
    text-align: center;
 }
-.program{
-   font-weight: bold;
-   color: rgb(74, 74, 74);
-}
-
 .day{
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
 }
+.program{
+   font-weight: bold;
+   color: rgb(74, 74, 74);
+}
+
 .dayNumber{
     font-size: 22px;
     font-weight: bold;
@@ -26,7 +26,7 @@
     color: rgb(74, 74, 74);
     font-weight:500; 
 }
-.home_totalCol,.home_day_2,.home_day_3{
+.home_totalCol,.home_day_2,.home_day_3,.arrow-back,.arrow-forward{
     color: rgb(67, 66, 66);
 }
 .home_totalCol{
@@ -47,14 +47,11 @@
     font-size: 12px;
 }
 
-.arrow-back{
+.arrow-back,.arrow-forward{
     font-size:25px;  
     color: rgb(67, 66, 66);
 }
-.arrow-forward{
-    font-size:25px;  
-    color: rgb(67, 66, 66);
-}
+
 
 @media only screen and (min-width: 700px) {
     .workout{
