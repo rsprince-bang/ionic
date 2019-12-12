@@ -19,21 +19,21 @@
 
 
 
-  <ion-toolbar class="home todayy" [ngStyle]="{ 'background-color' : backgroundColor}" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
+  <ion-toolbar class="day-block" [ngStyle]="{ 'background-color' : backgroundColor}" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
     <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
       name="arrow-back" slot="start"></ion-icon>
     <ion-card >
       <ion-card-header>
-        <ion-card-title class="home_day"><span  class="day">{{day}}</span>  </ion-card-title>
-       
+        <ion-card-title class="day"> {{day}} </ion-card-title>
       </ion-card-header>
 
       <ion-card-content *ngIf="dayNumber>84; else templateName" class="day">
         Congratulations!<br>
         You have completed the The Meltdown Anti-Diet!
       </ion-card-content>
+
       <ng-template #templateName>
-        <ion-card-content class="home_day program">
+        <ion-card-content class="day">
           <span class="dayNumber">DAY {{dayNumber}}  </span>
         </ion-card-content>
       </ng-template>

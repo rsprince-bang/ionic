@@ -1,27 +1,19 @@
-.home{
- 
-    margin-bottom: 15px;
-    --border-radius: 10px;
+.day-block{
+    margin-bottom: 1em;
+    --border-radius: 0.1rem;
 }
 
-.home_day{
+.home_day.dayNumber, .day {
    color: rgb(67, 66, 66);
    text-align: center;
-}
-.day{
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: bold;
-}
-.program{
    font-weight: bold;
-   color: rgb(74, 74, 74);
+   text-transform: uppercase;
 }
 
 .dayNumber{
     font-size: 22px;
-    font-weight: bold;
 }
+
 .workout{
     color: rgb(74, 74, 74);
     font-weight:500; 
