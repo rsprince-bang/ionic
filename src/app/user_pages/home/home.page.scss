@@ -1,10 +1,13 @@
+$fontGrayColor : rgb(67, 66, 66);
+$red : rgb(211, 0, 0);
+
 .day-block{
     margin-bottom: 1em;
     --border-radius: 0.1rem;
 }
 
 .home_day.dayNumber, .day {
-   color: rgb(67, 66, 66);
+   color: $fontGrayColor;
    text-align: center;
    font-weight: bold;
    text-transform: uppercase;
@@ -14,49 +17,32 @@
     font-size: 22px;
 }
 
-.workout{
-    color: rgb(74, 74, 74);
+.workout, .maxCalories{
     font-weight:500; 
 }
-.home_totalCol,.home_day_2,.home_day_3,.arrow-back,.arrow-forward{
-    color: rgb(67, 66, 66);
+
+.maxCalories{
+    color: $fontGrayColor;
 }
-.home_totalCol{
-    margin-left: 15px;
+
+.heart{
+    color: $red;
 }
-.home_day_2{
+
+.dayNumber_2{
     font-size: 18px;
     font-weight: bold;
 }
-.home_day_3{
+
+.totalDayProgram{
     font-size: 12px;
     font-weight: bold;
-}
-.home_text3{
-    font-size: 14px;
-}
-.home_text2{
-    font-size: 12px;
 }
 
 .arrow-back,.arrow-forward{
     font-size:25px;  
-    color: rgb(67, 66, 66);
+    color: $fontGrayColor;
 }
 
 
-@media only screen and (min-width: 700px) {
-    .workout{
-        font-size: 22px;
-    }
-    .home_text3{
-        font-size: 18px;
-    }
-    .home_text2{
-        font-size: 14px;
-    }
-    circle-progress{
-        margin-left: 5%;
-    }
-  }
   
