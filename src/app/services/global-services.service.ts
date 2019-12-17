@@ -93,25 +93,29 @@ export class GlobalServicesService {
   }
 
   getPreviousDate(date){
-    //var currentdate = new Date(date + " 00:00:00");
     var d_string = date + " 00:00:00";
     var currentdate = new Date(d_string.replace(/-/g, '/'));
 
-    var dd = String(currentdate.getDate() - 1).padStart(2, '0'); //yesterday's date
-    var mm = String(currentdate.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = currentdate.getFullYear();
+    var yesterday = new Date(currentdate);
+    yesterday.setDate(currentdate.getDate() - 1);
+
+    var dd = String(yesterday.getDate()).padStart(2, '0'); //yesterday's date
+    var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = yesterday.getFullYear();
 
     return yyyy + '-' + mm + '-' + dd;
   }
 
   getNextDate(date){
-    //var currentdate = new Date(date + " 00:00:00");
     var d_string = date + " 00:00:00";
     var currentdate = new Date(d_string.replace(/-/g, '/'));
 
-    var dd = String(currentdate.getDate() + 1).padStart(2, '0'); //yesterday's date
-    var mm = String(currentdate.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = currentdate.getFullYear();
+    var tomorrow = new Date(currentdate);
+    tomorrow.setDate(currentdate.getDate() + 1);
+
+    var dd = String(tomorrow.getDate()).padStart(2, '0'); //yesterday's date
+    var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = tomorrow.getFullYear();
 
     return yyyy + '-' + mm + '-' + dd;
   }
@@ -122,9 +126,13 @@ export class GlobalServicesService {
     var day_string = null;
     if (day == "yesterday") {
       var today = new Date();
-      var dd = String(today.getDate() - 1).padStart(2, '0'); //yesterday's date
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-      var yyyy = today.getFullYear();
+
+      var yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+
+      var dd = String(yesterday.getDate()).padStart(2, '0'); //yesterday's date
+      var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = yesterday.getFullYear();
 
       day_string = yyyy + '-' + mm + '-' + dd;
     }
@@ -138,9 +146,13 @@ export class GlobalServicesService {
     }
     else if (day == "tomorrow") {
       var today = new Date();
-      var dd = String(today.getDate() + 1).padStart(2, '0'); //tomorrow's date
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-      var yyyy = today.getFullYear();
+
+      var tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+
+      var dd = String(tomorrow.getDate()).padStart(2, '0'); //tomorrow's date
+      var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = tomorrow.getFullYear();
 
       day_string = yyyy + '-' + mm + '-' + dd;
     }
