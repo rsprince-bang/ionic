@@ -116,7 +116,6 @@ export class CalendarPage implements OnInit {
         this.date = datestring;
         this.meals = result.success.dayInfo.meals;
         this.exercises = result.success.dayInfo.exercises;
-
         this.workout_completed = this.foodSuggestionsService.getWorkoutStatus(this.exercises);
 
         this.info = this.foodSuggestionsService.getCaloriesPercentages(datestring, this.meals, this.exercises);

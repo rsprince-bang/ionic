@@ -108,7 +108,6 @@ export class HomePage implements OnInit {
     switch (this.day) {
       case "yesterday": {
         this.globalServices.swipeLeft("/home/today");
-        console.log(this.day)
         break;
       }
       case "today": {
