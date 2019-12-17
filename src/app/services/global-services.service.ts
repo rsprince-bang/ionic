@@ -93,7 +93,9 @@ export class GlobalServicesService {
   }
 
   getPreviousDate(date){
-    var currentdate = new Date(date + " 00:00:00");
+    //var currentdate = new Date(date + " 00:00:00");
+    var d_string = date + " 00:00:00";
+    var currentdate = new Date(d_string.replace(/-/g, '/'));
 
     var dd = String(currentdate.getDate() - 1).padStart(2, '0'); //yesterday's date
     var mm = String(currentdate.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -103,7 +105,9 @@ export class GlobalServicesService {
   }
 
   getNextDate(date){
-    var currentdate = new Date(date + " 00:00:00");
+    //var currentdate = new Date(date + " 00:00:00");
+    var d_string = date + " 00:00:00";
+    var currentdate = new Date(d_string.replace(/-/g, '/'));
 
     var dd = String(currentdate.getDate() + 1).padStart(2, '0'); //yesterday's date
     var mm = String(currentdate.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -158,8 +162,9 @@ export class GlobalServicesService {
 
 
   getDateAsHumanString(datestring){
-    
-    var dateObj = new Date(datestring + " 00:00:00");
+    //var dateObj = new Date(datestring + " 00:00:00");
+    var d_string = datestring + " 00:00:00";
+    var dateObj = new Date(d_string.replace(/-/g, '/'));
 
     return  dateObj.toDateString();
   }
