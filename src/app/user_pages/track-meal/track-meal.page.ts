@@ -37,7 +37,7 @@ export class TrackMealPage implements OnInit {
   ngOnInit() {
     this.date = this.activatedRoute.snapshot.paramMap.get('day');
     if( this.date == '' ){
-      this.date = this.date = this.globalServices.getTodayDate();
+      this.date += this.globalServices.getTodayDate();
     }
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     if( this.date == this.globalServices.getTodayDate() ){
@@ -58,13 +58,15 @@ export class TrackMealPage implements OnInit {
       //won't swipe left tomorrow
     }else{
       this.globalServices.swipeLeft("/track-meal/" + this.globalServices.getNextDate(this.date));
+      console.log(this.globalServices.getNextDate(this.date))
     }
 
   }
 
   handleSwipeRight() {
-    if( this.dayNumber > 1 ){
+    if( this.dayNumber > 1){
       this.globalServices.swipeRight("/track-meal/" + this.globalServices.getPreviousDate(this.date));
+      console.log(this.dayNumber)
     }
   }
 
