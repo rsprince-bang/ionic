@@ -28,13 +28,13 @@
        
       </ion-card-header>
 
-      <ion-card-content *ngIf="dayNumber>84; else templateName" class="day">
+      <ion-card-content *ngIf="dayNumber>planLength_days; else templateName" class="day">
         Congratulations!<br>
         You have completed the The Meltdown Anti-Diet!
       </ion-card-content>
       <ng-template #templateName>
         <ion-card-content class="home_day program">
-          <span class="dayNumber">DAY {{dayNumber}}  </span>
+          <span class="dayNumber">DAY {{dayNumber}}</span>
         </ion-card-content>
       </ng-template>
 
@@ -56,31 +56,20 @@
   </ion-item>
 
   <ion-item>
-  <div >
-    <p *ngIf="dayNutritionInfo.daynutrition.hasOwnProperty('fat'); else nofattemplate">
-      <!--days with w fat-->
-      <span class="home_day_2">Day {{dayNumber}} </span> / <span class="home_day_3">84 Days Program </span> 
+  <div>
+    <p>
+      <span class="home_day_2">Day {{dayNumber}} </span> / <span class="home_day_3">{{planLength_days}}</span> 
     </p>
-
-    
-    <ng-template #nofattemplate>
-      <p>
-        <span class="home_day_2">Day {{dayNumber}} </span> / <span class="home_day_3">84 Days Program </span> <br />
-        <span class="home_text2"> *(5% +/- Dietary Fat that occur naturally in the
-          Protein and Carbohydrate food sources)</span>
-      </p>
-    </ng-template>
   </div>
 </ion-item>
 
 <ion-item>
   <p>
-    <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
+    <!-- <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
         <span class="name_percent"> <strong> Protein </strong> : {{warnText.proteinText}} </span>  
         <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText.carbsText}} </span>
         <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText.fatText}}</span>
-  </span>
-
+  </span> -->
   </p>
 </ion-item>
 

@@ -62,8 +62,9 @@ export class CalendarPage implements OnInit {
       }
       else {
         //returns an array of days with meals and exercises
+        var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
         for (let i = 0; i < result.success.daysInfo.length; i++){
-          var dayCalorieInfo = this.foodSuggestionsService.getCaloriesPercentages(result.success.daysInfo[i].date.date_consumed, result.success.daysInfo[i].meals, result.success.daysInfo[i].exercises);
+          var dayCalorieInfo = this.foodSuggestionsService.getCaloriesPercentages(result.success.daysInfo[i].date.date_consumed, result.success.daysInfo[i].meals, result.success.daysInfo[i].exercises, planLength_weeks);
 
           var dateNoLeadingZeros = result.success.daysInfo[i].date.date_consumed.replace(/-0/g, "-");
           //add to calendar
@@ -119,7 +120,8 @@ export class CalendarPage implements OnInit {
 
         this.workout_completed = this.foodSuggestionsService.getWorkoutStatus(this.exercises);
 
-        this.info = this.foodSuggestionsService.getCaloriesPercentages(datestring, this.meals, this.exercises);
+        var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+        this.info = this.foodSuggestionsService.getCaloriesPercentages(datestring, this.meals, this.exercises, planLength_weeks);
         this.score = this.foodSuggestionsService.getScore(this.info.caloriesConsumed, this.info.dietCaloriesIntake, this.workout_completed, this.info.color, this.info.percent);
         //console.log(this.info);
       }

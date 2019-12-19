@@ -19,7 +19,8 @@ export class HomeAddFoodModalPage implements OnInit {
   constructor(private modalController: ModalController, private myAPI: ApiCallService, private foodSuggestionsService: FoodSuggestionsService) { }
 
   ngOnInit() {
-    this.suggestedFoods = this.foodSuggestionsService.getFoodSuggestions(this.date);
+    var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+    this.suggestedFoods = this.foodSuggestionsService.getFoodSuggestions(this.date, planLength_weeks);
   }
 
   searchChanged(){
