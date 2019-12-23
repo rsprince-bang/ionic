@@ -8,6 +8,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { reduce } from 'rxjs/operators';
+import { preserveWhitespacesDefault } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -62,19 +63,18 @@ export class HomePage implements OnInit {
       }],
       xAxes: [{
         gridLines: {
-          display: false
+          display: false,
         }
       }]
     },
     plugins: {
       datalabels: {
-        anchor: 'end',
+        anchor: 'center',
         clamp : true,
         offset: 0,
         font: {
           size: this.chartOptionsfontSize(),
           weight:900,
-          
         }
       }
     }
@@ -83,22 +83,15 @@ export class HomePage implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = false;
   public barChartPlugins = [pluginDataLabels];
-
   public barChartData: ChartDataSets[] = [
-    { data: [1, 2, 3], label: 'Grams consumed', backgroundColor: "rgb(56, 129, 255)" },
+    { data: [1, 2, 3], label: 'consumed', backgroundColor: "rgb(99, 156, 855)" },
     { data: [4, 5, 6], label: 'Limit', backgroundColor: "rgb(191, 191, 191)"}
   ];
 
-
-
-
   constructor(private router: Router, private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute, private myAPI: ApiCallService,
     private foodSuggestionsService: FoodSuggestionsService) {
-
   }
-if(){
-  
-}
+
   ngOnInit() {
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
     this.date = this.globalServices.getDate(this.day);
@@ -117,6 +110,7 @@ if(){
     switch (this.day) {
       case "yesterday": {
         this.globalServices.swipeLeft("/home/today");
+        console.log(this.day)
         break;
       }
       case "today": {

@@ -1,70 +1,48 @@
-.home{
- 
-    margin-bottom: 15px;
-    --border-radius: 10px;
+$fontGrayColor : rgb(67, 66, 66);
+$red : rgb(211, 0, 0);
+
+.day-block{
+    margin-bottom: 1em;
+    --border-radius: 0.1rem;
 }
 
-.home_day{
-   color: rgb(67, 66, 66);
+.home_day.dayNumber, .day {
+   color: $fontGrayColor;
    text-align: center;
-}
-.day{
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: bold;
-}
-.program{
    font-weight: bold;
-   color: rgb(74, 74, 74);
+   text-transform: uppercase;
 }
 
 .dayNumber{
     font-size: 22px;
-    font-weight: bold;
 }
-.workout{
-    color: rgb(74, 74, 74);
+
+.workout, .maxCalories{
     font-weight:500; 
 }
-.home_totalCol,.home_day_2,.home_day_3,.arrow-back,.arrow-forward{
-    color: rgb(67, 66, 66);
+
+.maxCalories{
+    color: $fontGrayColor;
 }
-.home_totalCol{
-    margin-left: 15px;
+
+.heart{
+    color: $red;
 }
-.home_day_2{
+
+.dayNumber_2{
     font-size: 18px;
     font-weight: bold;
 }
-.home_day_3{
+
+.totalDayProgram{
     font-size: 12px;
     font-weight: bold;
-}
-.home_text3{
-    font-size: 14px;
-}
-.home_text2{
-    font-size: 12px;
 }
 
 .arrow-back,.arrow-forward{
     font-size:25px;  
-    color: rgb(67, 66, 66);
+    color: $fontGrayColor;
 }
 
 
-@media only screen and (min-width: 700px) {
-    .workout{
-        font-size: 22px;
-    }
-    .home_text3{
-        font-size: 18px;
-    }
-    .home_text2{
-        font-size: 14px;
-    }
-    circle-progress{
-        margin-left: 5%;
-    }
-  }
   

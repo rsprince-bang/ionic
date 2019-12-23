@@ -397,7 +397,7 @@ export class FoodSuggestionsService {
       //at elast 20 minutes of exersice
       var hoursOfExercise = 0;
       for (var i = 0; i < exercises.length; i++) {
-        hoursOfExercise = (hoursOfExercise) + parseFloat(exercises[i].hours);
+        hoursOfExercise = (hoursOfExercise) + parseFloat(exercises[i].minutes);
       }
       if (hoursOfExercise > 0.3) {
         return true;
