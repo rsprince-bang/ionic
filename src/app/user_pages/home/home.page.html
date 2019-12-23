@@ -19,6 +19,7 @@
 
 
 
+  <ion-toolbar class="day-block" [ngStyle]="{ 'color' : backgroundColor}" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
   <ion-toolbar class = "day_block"  (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
     <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
       name="arrow-back" slot="start"></ion-icon>
@@ -27,12 +28,15 @@
         <ion-card-title class="day"> {{day}} </ion-card-title>
       </ion-card-header>
 
-      <ion-card-content *ngIf="dayNumber>84; else templateName" class="day">
+      <ion-card-content *ngIf="dayNumber>planLength_days; else templateName" class="day">
         Congratulations!<br>
         You have completed the The Meltdown Anti-Diet!
       </ion-card-content>
 
       <ng-template #templateName>
+
+        <ion-card-content class="home_day program">
+          <span class="dayNumber">DAY {{dayNumber}}</span>
         <ion-card-content class="day program">
           <span class="dayNumber">DAY {{dayNumber}}  </span>
         </ion-card-content>
@@ -56,6 +60,53 @@
   </ion-item>
 
   <ion-item>
+
+  <div>
+    <p>
+      <span class="home_day_2">Day {{dayNumber}} </span> / <span class="home_day_3">{{planLength_days}}</span> 
+    </p>
+  </div>
+</ion-item>
+
+<ion-item>
+  <p>
+    <!-- <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
+        <span class="name_percent"> <strong> Protein </strong> : {{warnText.proteinText}} </span>  
+        <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText.carbsText}} </span>
+        <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText.fatText}}</span>
+  </span> -->
+  </p>
+</ion-item>
+
+
+  <div class="home_totalCol">
+
+    <p style= " color: rgb(67, 66, 66); font-weight:500" > Maximum Calories Today : <strong>{{dietCaloriesIntake}}</strong> Calories<br />Cosnusmed : 
+      <strong [ngStyle]="{ 'color' : circlecolor}">{{caloriesConsumed}}</strong> Calories
+
+    <div >
+      <p *ngIf="dayNutritionInfo.daynutrition.hasOwnProperty('fat'); else nofattemplate">
+        <!--days with w fat-->
+        <span class="dayNumber_2">Day {{dayNumber}} </span> / <span class="totalDayProgram">84 Days Program </span> 
+      </p>
+      
+      <ng-template #nofattemplate>
+        <p>
+          <span class="dayNumber_2">Day {{dayNumber}} </span> / <span class="totalDayProgram">84 Days Program </span> <br />
+          <span class="totalDayProgram"> *(5% +/- Dietary Fat that occur naturally in the Protein and Carbohydrate food sources)</span>
+        </p>
+      </ng-template>
+    </div>
+  </ion-item>
+
+  <ion-item>
+    <p>
+      <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
+        <span class="name_percent"> <strong> Protein </strong> : {{warnText.proteinText}} </span>  
+        <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText.carbsText}} </span>
+        <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText.fatText}}</span>
+      </span>
+
     <div >
       <p *ngIf="dayNutritionInfo.daynutrition.hasOwnProperty('fat'); else nofattemplate">
         <!--days with w fat-->
@@ -88,4 +139,5 @@
     <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
     <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle"></circle-progress>
   </div>
+
   </ion-content>

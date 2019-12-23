@@ -1,6 +1,12 @@
 
+$backgroundColor : rgb(226, 246, 250);
 $frontColor : rgb(67, 66, 66);
 $fontBold : bold;
+
+
+$frontColor : rgb(67, 66, 66);
+$fontBold : bold;
+
 
 .arrow-back, .arrow-forward{
     color: $frontColor;
@@ -18,11 +24,20 @@ $fontBold : bold;
 
 .CurrentProgress span{
     font-size: 20px;
+
 }
 
 .track-meal{
     margin: 0 auto;
 }
+
+
+}
+
+.track-meal{
+    margin: 0 auto;
+}
+
 
 .namePercentt{
     display: flex;
@@ -42,6 +57,8 @@ $fontBold : bold;
     width: 100%;
 }
 
+
+
 .foodList{
     margin-left:10px; 
     font-weight: $fontBold;
@@ -56,3 +73,4 @@ $fontBold : bold;
     height:200px; 
     margin: 10px;
 }
+

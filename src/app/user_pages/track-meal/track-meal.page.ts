@@ -58,6 +58,7 @@ export class TrackMealPage implements OnInit {
       //won't swipe left tomorrow
     }else{
       this.globalServices.swipeLeft("/track-meal/" + this.globalServices.getNextDate(this.date));
+      console.log(this.globalServices.getNextDate(this.date))
     }
 
   }
@@ -65,11 +66,13 @@ export class TrackMealPage implements OnInit {
   handleSwipeRight() {
     if( this.dayNumber > 1){
       this.globalServices.swipeRight("/track-meal/" + this.globalServices.getPreviousDate(this.date));
+      console.log(this.dayNumber)
     }
   }
 
   loadMeals(){
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
+    var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, planLength_weeks);
     this.myAPI.makeAPIcall(
       "meals.php", 
       {
@@ -120,7 +123,8 @@ export class TrackMealPage implements OnInit {
   }
 
   calculateCaloriesConsumed(){
-    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises);
+    var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, planLength_weeks);
 
     this.caloriesConsumed = info.caloriesConsumed;
     this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
