@@ -1,6 +1,12 @@
+
 $backgroundColor : rgb(226, 246, 250);
 $frontColor : rgb(67, 66, 66);
 $fontBold : bold;
+
+
+$frontColor : rgb(67, 66, 66);
+$fontBold : bold;
+
 
 .arrow-back, .arrow-forward{
     color: $frontColor;
@@ -18,11 +24,20 @@ $fontBold : bold;
 
 .CurrentProgress span{
     font-size: 20px;
+
 }
 
 .track-meal{
     margin: 0 auto;
 }
+
+
+}
+
+.track-meal{
+    margin: 0 auto;
+}
+
 
 .namePercentt{
     display: flex;
@@ -35,10 +50,27 @@ $fontBold : bold;
     text-transform:lowercase;
     display: flex;
     justify-content: space-between;
-    overflow: auto;
+    color: $frontColor;
 }
 
 .addFood{
     width: 100%;
+}
+
+
+
+.foodList{
+    margin-left:10px; 
+    font-weight: $fontBold;
+    font-size: 18px;
+}
+
+.foodListBg{
+    --background: none;
+}
+
+.circleProgress{
+    height:200px; 
+    margin: 10px;
 }
 

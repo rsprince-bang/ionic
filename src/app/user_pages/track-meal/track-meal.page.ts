@@ -146,8 +146,6 @@ export class TrackMealPage implements OnInit {
     }
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }
-
-
 }
 
 

@@ -20,6 +20,7 @@
 
 
   <ion-toolbar class="day-block" [ngStyle]="{ 'color' : backgroundColor}" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
+  <ion-toolbar class = "day_block"  (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
     <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
       name="arrow-back" slot="start"></ion-icon>
     <ion-card >
@@ -36,7 +37,6 @@
 
         <ion-card-content class="home_day program">
           <span class="dayNumber">DAY {{dayNumber}}</span>
-
         <ion-card-content class="day program">
           <span class="dayNumber">DAY {{dayNumber}}  </span>
         </ion-card-content>
@@ -107,6 +107,28 @@
         <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText.fatText}}</span>
       </span>
 
+    <div >
+      <p *ngIf="dayNutritionInfo.daynutrition.hasOwnProperty('fat'); else nofattemplate">
+        <!--days with w fat-->
+        <span class="dayNumber_2">Day {{dayNumber}} </span> / <span class="totalDayProgram">84 Days Program </span> 
+      </p>
+      
+      <ng-template #nofattemplate>
+        <p>
+          <span class="dayNumber_2">Day {{dayNumber}} </span> / <span class="totalDayProgram">84 Days Program </span> <br />
+          <span class="totalDayProgram"> *(5% +/- Dietary Fat that occur naturally in the Protein and Carbohydrate food sources)</span>
+        </p>
+      </ng-template>
+    </div>
+  </ion-item>
+
+  <ion-item>
+    <p>
+      <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
+        <span class="name_percent"> <strong> Protein </strong> : {{warnText.proteinText}} </span>  
+        <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText.carbsText}} </span>
+        <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText.fatText}}</span>
+      </span>
     </p>
   </ion-item>
 

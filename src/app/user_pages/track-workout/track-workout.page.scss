@@ -1,0 +1,44 @@
+$frontColor : rgb(67, 66, 66);
+$fontBold : bold;
+$fontSize : 25px;
+
+.arrow-back, .arrow-forward{
+    font-size: $fontSize;
+    color : $frontColor;
+}
+
+.dayNumber{
+    font-weight : $fontBold;
+    color: $frontColor;
+    text-align: center;
+}
+
+.box-workout-list{
+    color: $frontColor; 
+}
+
+.box-workout-list{
+    font-weight:700; 
+    margin-top: 10px; 
+    font-size: 18px; 
+    color: $frontColor;
+}
+
+.workout-list{
+    display:flex; 
+    justify-content: space-between;
+}
+
+.icon{
+    font-size: $fontSize;
+}
+
+.heart{
+    color : rgb(147, 24, 24);
+}
+
+.list{
+    color: $frontColor;
+    display:flex; 
+    justify-content: space-between;
+}
