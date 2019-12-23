@@ -4,7 +4,7 @@
     }
     .close{
         position: absolute;
-        right: 5px;
+        right: 15px;
         font-size: 30px;
     }
     .swiper-slide{
@@ -19,12 +19,4 @@
     ion-card-subtitle{
         height: 60px;
         padding: 5px;
-    }
-    .img-box{
-        margin: 0 auto;
-        margin-top: 5%;
-        width:100%;
-        height:30em;
-        object-fit: cover;
-        object-position: center;
     }

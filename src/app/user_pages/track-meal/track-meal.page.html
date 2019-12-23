@@ -11,39 +11,41 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="track-meal">
+<ion-content padding>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-toolbar class="day_block" >
-    <ion-icon *ngIf = "dayNumber > 1" name="arrow-back" slot="start" (click)="handleSwipeRight()" class="arrow-back" ></ion-icon>
+  <ion-toolbar style="--background: rgb(226, 246, 250);" >
+    <ion-icon *ngIf = "dayNumber > 1" name="arrow-back" slot="start" (click)="handleSwipeRight()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
     <ion-card>
       <ion-card-header>
-        <ion-card-title class="dayNumber"> {{day}} <span *ngIf = "!day">DAY {{dayNumber}}</span> </ion-card-title>
+        <ion-card-title style=" font-weight: bold; text-align:center;color: rgb(67, 66, 66);" >{{day}} <span *ngIf = "!day">DAY {{dayNumber}}</span> </ion-card-title>
       </ion-card-header>
         
-      <ion-card-content class="CurrentProgress" [ngStyle]="{ 'color' : circlecolor}">
-       <strong> Current progress <br/> <span>{{status}} </span></strong> 
+      <ion-card-content  [ngStyle]="{ 'color' : circlecolor}" style="text-align:center;  font-weight: bold" >
+       <strong> Current progress <br/> <span style="font-size: 22px">{{status}} </span></strong> 
       </ion-card-content>
 
 
     </ion-card>
-    <ion-icon *ngIf = "!today" name="arrow-forward" slot="end" (click)="handleSwipeLeft()" class="arrow-forward"></ion-icon>
+    <ion-icon *ngIf = "!today" name="arrow-forward" slot="end" (click)="handleSwipeLeft()" style="font-size: 25px;  color: rgb(67, 66, 66);"></ion-icon>
   </ion-toolbar>
 
   <!-- Nutririon info-->
   <div class="box-track-meal">
      <ion-item >
     <div class="track-meal">
+
       <p class="text">Total Calories you ate  <strong [ngStyle]="{ 'color' : circlecolor}" > {{caloriesConsumed}}</strong> Calories<br/>
-        <span class="namePercentt">
+      <span class="namePercentt">
             <span class="name_percent"> <strong > Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
             <br/><span class="name_percent"> <strong> Carbs </strong> <br/>{{caloriesFromCarbsAsP}}% </span>
             <br/><span class="name_percent"> <strong> Fat </strong> <br/>{{caloriesFromFatAsP}}%</span>
-        </span>
+      </span>
       </p>
+
     </div>
   </ion-item>
   </div>
@@ -51,10 +53,9 @@
 
   <!-- Food List -->
   <ion-list >
-    <p *ngIf= "meals.length > 0" class="foodLi" style="margin-left:10px; font-weight: bold;font-size: 18px;">Food List</p>
-    <p *ngIf= "meals.length > 0" class="foodList">Food List</p>
+    <p *ngIf= "meals.length > 0"  style="margin-left:10px; font-weight: bold;font-size: 18px;">Food List</p>
     <ion-item-sliding *ngFor="let meal of meals">
-      <ion-item class="foodListBg">
+      <ion-item style="--background:none; ">
         <ion-label class= "meal">- {{meal.meal_name}} <span>{{meal.calories}} cal</span></ion-label>
       </ion-item>
 
@@ -65,13 +66,12 @@
   </ion-list>
 
   <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
-  <div class = "circleProgress">
+  <div style="height:200px; margin: 10px;">
     <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle" ></circle-progress>
   </div>
+  
 
+  <ion-footer style="position: fixed ; bottom: 0px; margin-left: -15px; " >  
+      <ion-button style="font-weight: bold;" expand="full" class="addFood" *ngIf="today" (click)="openFoodModal()" class="button">Add food</ion-button>
+  </ion-footer>
 </ion-content>
-
-
-<ion-footer class = "footer">  
-  <ion-button expand="block" class="addFood" *ngIf="today" (click)="openFoodModal()" class="button">Add food</ion-button>
-</ion-footer>

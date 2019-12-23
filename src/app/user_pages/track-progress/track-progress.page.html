@@ -25,20 +25,25 @@
     <ion-slide *ngFor="let image of images">
       <!-- <ion-img [src]="image.url"></ion-img> -->
 
-      <ion-card >
-        <ion-card-content >
-            <ion-icon class = "close" (click)="deleteImage(image.id)" color="danger" name="close-circle"></ion-icon>
-        </ion-card-content>
-        <ion-img class="img-box" [src]="image.url"></ion-img>
+      <ion-card>
+          <ion-card-content >
+              <ion-icon class = "close" (click)="deleteImage(image.id)" color="danger" name="close-circle"></ion-icon>
+          </ion-card-content>
+        <ion-img  [src]="image.url"></ion-img>
         <ion-card-header>
           <ion-card-title class = "date" >{{image.human_date}} </ion-card-title>
           <ion-card-title class = "date">{{image.fat_percent}}% fat</ion-card-title>
         </ion-card-header>
           <ion-card-subtitle >{{image.comment}}</ion-card-subtitle>
+        
       </ion-card>
+
     </ion-slide>
   </ion-slides>
-</ion-content>
-<ion-footer >  
+  <ion-footer style=" bottom: 0px; position: fixed;margin-left: -15px; " >  
     <ion-button expand="block" (click)="openPhotoModal()">Add photo</ion-button>
-</ion-footer>
+  </ion-footer>
+  
+
+
+</ion-content>

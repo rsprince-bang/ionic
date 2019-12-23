@@ -8,7 +8,6 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { reduce } from 'rxjs/operators';
-import { preserveWhitespacesDefault } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -43,6 +42,7 @@ export class HomePage implements OnInit {
   circlecolor = "#2b2b2b"; //gray atr first
   dayNutritionInfo = { "phase": null, "phaseday": null,"phasename":null , "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
+  backgroundColor = "#2b2b2b";
   
   //declare barcharts
   public barChartOptions: ChartOptions = {
@@ -62,18 +62,19 @@ export class HomePage implements OnInit {
       }],
       xAxes: [{
         gridLines: {
-          display: false,
+          display: false
         }
       }]
     },
     plugins: {
       datalabels: {
-        anchor: 'center',
+        anchor: 'end',
         clamp : true,
         offset: 0,
         font: {
           size: this.chartOptionsfontSize(),
           weight:900,
+          
         }
       }
     }
@@ -82,15 +83,22 @@ export class HomePage implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = false;
   public barChartPlugins = [pluginDataLabels];
+
   public barChartData: ChartDataSets[] = [
-    { data: [1, 2, 3], label: 'consumed', backgroundColor: "rgb(99, 156, 855)" },
+    { data: [1, 2, 3], label: 'Grams consumed', backgroundColor: "rgb(56, 129, 255)" },
     { data: [4, 5, 6], label: 'Limit', backgroundColor: "rgb(191, 191, 191)"}
   ];
 
+
+
+
   constructor(private router: Router, private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute, private myAPI: ApiCallService,
     private foodSuggestionsService: FoodSuggestionsService) {
-  }
 
+  }
+if(){
+  
+}
   ngOnInit() {
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
     this.date = this.globalServices.getDate(this.day);
@@ -109,7 +117,6 @@ export class HomePage implements OnInit {
     switch (this.day) {
       case "yesterday": {
         this.globalServices.swipeLeft("/home/today");
-        console.log(this.day)
         break;
       }
       case "today": {
@@ -149,6 +156,7 @@ export class HomePage implements OnInit {
   }
 
   updatepage() {
+    this.backgroundColor = this.changeBackgroundColor();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
     this.planLength_days = this.planLength_weeks * 7;
@@ -174,6 +182,7 @@ export class HomePage implements OnInit {
         this.calculateCaloriesConsumed();
       }
     });
+
   }
 
   calculateCaloriesConsumed() {
@@ -195,7 +204,7 @@ export class HomePage implements OnInit {
     this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
 
     if (info.color == "red") {
-      this.circlecolor = "rgb(202, 22, 22)";
+      this.circlecolor = "#CA1616";
     }
     else {
       this.circlecolor = "rgb(56, 129, 255"; 
@@ -203,8 +212,7 @@ export class HomePage implements OnInit {
     this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
 
     //this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
-
-    this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
+  
   }
 
   workoutCompleted(){
@@ -253,6 +261,25 @@ export class HomePage implements OnInit {
       fontSize = 11;
     }
     return fontSize;
+  }
+
+  changeBackgroundColor(){
+    var color = null;
+    switch(this.day){
+      case 'today':{
+        color = '#e2f6fa';
+      break;
+      }
+      case 'tomorrow':{
+        color = '#99d2ff';
+      break;
+      }
+      case 'yesterday':{
+        color = '#99d2ff';
+      break;
+      }
+    }
+    return color
   }
   
   

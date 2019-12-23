@@ -20,8 +20,8 @@ export class TrackProgressPage implements OnInit {
   images = [];
   sliderOpts = {
     zoom: false,
-    slidesPerView: 1,
-    spaceBetween: 0,
+    slidesPerView: 1.5,
+    spaceBetween: 20,
     centeredSlides: true
   };
 
@@ -45,8 +45,7 @@ export class TrackProgressPage implements OnInit {
       }
       else {
         this.images = result.success.images;
-        for (var i = 0; i < this.images.reverse().length; i++) {
-          this.images.reverse()[i];
+        for (var i = 0; i < this.images.length; i++) {
           this.images[i].url = environment.API_URL + this.images[i].url;
           this.images[i].human_date = this.globalServices.getDateAsHumanString(this.images[i].date_uploaded);
         }
