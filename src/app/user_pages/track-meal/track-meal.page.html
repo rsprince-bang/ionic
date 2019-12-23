@@ -37,15 +37,13 @@
   <div class="box-track-meal">
      <ion-item >
     <div class="track-meal">
-
       <p class="text">Total Calories you ate  <strong [ngStyle]="{ 'color' : circlecolor}" > {{caloriesConsumed}}</strong> Calories<br/>
-      <span class="namePercentt">
+        <span class="namePercentt">
             <span class="name_percent"> <strong > Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
             <br/><span class="name_percent"> <strong> Carbs </strong> <br/>{{caloriesFromCarbsAsP}}% </span>
             <br/><span class="name_percent"> <strong> Fat </strong> <br/>{{caloriesFromFatAsP}}%</span>
-      </span>
+        </span>
       </p>
-
     </div>
   </ion-item>
   </div>
@@ -53,9 +51,9 @@
 
   <!-- Food List -->
   <ion-list >
-    <p *ngIf= "meals.length > 0" class="foodLi" style="margin-left:10px; font-weight: bold;font-size: 18px;">Food List</p>
+    <p *ngIf= "meals.length > 0" class="foodList">Food List</p>
     <ion-item-sliding *ngFor="let meal of meals">
-      <ion-item style="--background:none; ">
+      <ion-item class="foodListBg">
         <ion-label class= "meal">- {{meal.meal_name}} <span>{{meal.calories}} cal</span></ion-label>
       </ion-item>
 
@@ -66,12 +64,13 @@
   </ion-list>
 
   <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
-  <div style="height:200px; margin: 10px;">
+  <div class = "circleProgress">
     <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle" ></circle-progress>
   </div>
-  
 
-  <ion-footer style="position: fixed ; bottom: 0px; margin-left: -15px; " >  
-      <ion-button style="font-weight: bold;" expand="full" class="addFood" *ngIf="today" (click)="openFoodModal()" class="button">Add food</ion-button>
-  </ion-footer>
 </ion-content>
+
+
+<ion-footer class = "footer">  
+  <ion-button expand="block" class="addFood" *ngIf="today" (click)="openFoodModal()" class="button">Add food</ion-button>
+</ion-footer>

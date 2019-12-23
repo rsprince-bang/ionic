@@ -41,7 +41,6 @@ export class HomePage implements OnInit {
   circlecolor = "#2b2b2b"; //gray atr first
   dayNutritionInfo = { "phase": null, "phaseday": null, "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
-  backgroundColor = "#2b2b2b";
   
   //declare barcharts
   public barChartOptions: ChartOptions = {
@@ -147,7 +146,6 @@ export class HomePage implements OnInit {
   }
 
   updatepage() {
-    this.backgroundColor = this.changeBackgroundColor();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
     this.barChartLabels = ['Protein '+this.dayNutritionInfo.daynutrition.protein +'%', 'Carbs '+this.dayNutritionInfo.daynutrition.carbs+'%', 'Fat '+ this.daynutritionOfFat()];
@@ -170,7 +168,6 @@ export class HomePage implements OnInit {
         this.calculateCaloriesConsumed();
       }
     });
-
   }
 
   calculateCaloriesConsumed() {
@@ -192,7 +189,7 @@ export class HomePage implements OnInit {
     this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
 
     if (info.color == "red") {
-      this.circlecolor = "#CA1616";
+      this.circlecolor = "rgb(202, 22, 22)";
     }
     else {
       this.circlecolor = "rgb(56, 129, 255"; 
@@ -200,9 +197,6 @@ export class HomePage implements OnInit {
     this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
 
     this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
-
-
-  
   }
 
   workoutCompleted(){
@@ -251,25 +245,6 @@ export class HomePage implements OnInit {
       fontSize = 11;
     }
     return fontSize;
-  }
-
-  changeBackgroundColor(){
-    var color = null;
-    switch(this.day){
-      case 'today':{
-        color = '#e2f6fa';
-      break;
-      }
-      case 'tomorrow':{
-        color = '#99d2ff';
-      break;
-      }
-      case 'yesterday':{
-        color = '#99d2ff';
-      break;
-      }
-    }
-    return color
   }
   
   

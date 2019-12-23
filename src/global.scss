@@ -28,6 +28,9 @@ The current date
 
 monthview-disabled
 The disabled date */
+
+$fontBold : bold;
+
 .monthview-current{
     background-color: rgb(199, 198, 198) !important;
     color: black !important;
@@ -44,11 +47,9 @@ The disabled date */
     background-color: white !important;
     color: black !important;
 }
-
 app-home{
     position: relative;
 }
-
 ion-content{
     --ion-background-color: rgba(235, 251, 255, 0.79);
     background-image:url("./assets/img/book-smoke-mobile.jpg") ;
@@ -56,7 +57,6 @@ ion-content{
     background-position-x: left;
     background-position-y: bottom;
 }
-
 ion-header ion-toolbar,ion-button{
     color: rgb(255, 255, 255);
     text-transform: uppercase;
@@ -67,6 +67,13 @@ ion-header ion-toolbar,ion-button{
     bottom: 0px;
     max-width: none;
 }
+.footer ion-button{
+    font-weight: $fontBold;
+}
+.day_block{
+    --background: rgb(226, 246, 250);
+}
+
 @media only screen and (min-width: 700px) {
     ion-content{
     background-image:url("./assets/img/book-smoke-ipad.jpg") ;

@@ -19,7 +19,7 @@
 
 
 
-  <ion-toolbar class="day-block" [ngStyle]="{ 'color' : backgroundColor}" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
+  <ion-toolbar class = "day_block"  (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
     <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
       name="arrow-back" slot="start"></ion-icon>
     <ion-card >
@@ -88,5 +88,4 @@
     <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
     <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle"></circle-progress>
   </div>
-
   </ion-content>

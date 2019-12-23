@@ -1,4 +1,4 @@
-$backgroundColor : rgb(226, 246, 250);
+
 $frontColor : rgb(67, 66, 66);
 $fontBold : bold;
 
@@ -35,10 +35,24 @@ $fontBold : bold;
     text-transform:lowercase;
     display: flex;
     justify-content: space-between;
-    overflow: auto;
+    color: $frontColor;
 }
 
 .addFood{
     width: 100%;
 }
 
+.foodList{
+    margin-left:10px; 
+    font-weight: $fontBold;
+    font-size: 18px;
+}
+
+.foodListBg{
+    --background: none;
+}
+
+.circleProgress{
+    height:200px; 
+    margin: 10px;
+}

@@ -58,7 +58,6 @@ export class TrackMealPage implements OnInit {
       //won't swipe left tomorrow
     }else{
       this.globalServices.swipeLeft("/track-meal/" + this.globalServices.getNextDate(this.date));
-      console.log(this.globalServices.getNextDate(this.date))
     }
 
   }
@@ -66,7 +65,6 @@ export class TrackMealPage implements OnInit {
   handleSwipeRight() {
     if( this.dayNumber > 1){
       this.globalServices.swipeRight("/track-meal/" + this.globalServices.getPreviousDate(this.date));
-      console.log(this.dayNumber)
     }
   }
 
@@ -144,8 +142,6 @@ export class TrackMealPage implements OnInit {
     }
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }
-
-
 }
 
 
