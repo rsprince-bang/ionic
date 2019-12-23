@@ -21,6 +21,8 @@ export class HomePage implements OnInit {
   day = null;
   date = null;
   dayNumber = null;
+  planLength_weeks = null;
+  planLength_days = null;
   warnText= {proteinText:"...", carbsText:"...", fatText:"..."};
   segment_choice = 'nutrition';
   dailyCaloriesIntake = null;
@@ -39,7 +41,7 @@ export class HomePage implements OnInit {
   percent: number = 0;
   circlesubtitle = "";
   circlecolor = "#2b2b2b"; //gray atr first
-  dayNutritionInfo = { "phase": null, "phaseday": null, "daynutrition": { "protein": null, "carbs": null, "fat": null } }
+  dayNutritionInfo = { "phase": null, "phaseday": null,"phasename":null , "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
   backgroundColor = "#2b2b2b";
   
@@ -150,7 +152,10 @@ export class HomePage implements OnInit {
   updatepage() {
     this.backgroundColor = this.changeBackgroundColor();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
+    this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+    this.planLength_days = this.planLength_weeks * 7;
+    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
+
     this.barChartLabels = ['Protein '+this.dayNutritionInfo.daynutrition.protein +'%', 'Carbs '+this.dayNutritionInfo.daynutrition.carbs+'%', 'Fat '+ this.daynutritionOfFat()];
     this.myAPI.makeAPIcall(
       "meals.php",
@@ -175,7 +180,7 @@ export class HomePage implements OnInit {
   }
 
   calculateCaloriesConsumed() {
-    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises);
+    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
 
     this.barChartData[0].data = [Math.round(info.caloriesFromProtein), Math.round(info.caloriesFromCarbs), Math.round(info.caloriesFromFat)];
     this.barChartData[1].data = [Math.round(info.targetCaloriesFromProtein), Math.round(info.targetCaloriesFromCarbs), Math.round(info.targetCaloriesFromFat)];
@@ -200,9 +205,7 @@ export class HomePage implements OnInit {
     }
     this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
 
-    this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
-
-
+    //this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
   
   }
 

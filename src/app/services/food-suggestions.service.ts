@@ -16,100 +16,214 @@ export enum Phases {
 
 export class FoodSuggestionsService {
 
+  dietPlan = { w7:[], w12:[] }; //7 or 12 week
   phases = [];
   charts = [];
 
+  // This constructor is for the old diet
+  // constructor() {
+
+  //   //define phase one days
+  //   this.phases[Phases.one] = [];
+  //   this.phases[Phases.one][1] = {
+  //     "protein": 50, "carbs": 50,
+  //     "meal1_suggestion": "M",
+  //     "protein_suggestion": ["A", "D", "M", "N"],
+  //     "carbs_suggestion": ["G"]
+  //   };
+  //   this.phases[Phases.one][2] = {
+  //     "protein": 60, "fat": 30, "carbs": 10,
+  //     "meal1_suggestion": "N",
+  //     "protein_suggestion": ["A", "B", "C", "D", "E", "F", "N"],
+  //     "carbs_suggestion": ["I"],
+  //     "fat_suggestion": ["K", "L", "M", "N"]
+  //   };
+  //   this.phases[Phases.one][3] = {
+  //     "protein": 60, "fat": 30, "carbs": 10,
+  //     "meal1_suggestion": "N",
+  //     "protein_suggestion": ["A", "B", "C", "D", "E", "F", "N"],
+  //     "carbs_suggestion": ["I"],
+  //     "fat_suggestion": ["K", "L", "M", "N"]
+  //   };
+
+  //   //define phase two days
+  //   this.phases[Phases.two] = [];
+  //   this.phases[Phases.two][1] = {
+  //     "protein": 50, "carbs": 50,
+  //     "meal1_suggestion": "M",
+  //     "protein_suggestion": ["A", "D", "M", "N"],
+  //     "carbs_suggestion": ["G"]
+  //   };
+  //   this.phases[Phases.two][2] = {
+  //     "protein": 60, "fat": 30, "carbs": 10,
+  //     "meal1_suggestion": "N",
+  //     "protein_suggestion": ["A", "B", "C", "D", "E", "F", "N"],
+  //     "carbs_suggestion": ["I"],
+  //     "fat_suggestion": ["K", "L", "M", "N"]
+  //   };
+
+  //   //define phase three days
+  //   this.phases[Phases.three] = [];
+  //   this.phases[Phases.three][1] = {
+  //     "protein": 50, "carbs": 30, "fat": 20,
+  //     "meal1_suggestion": "M",
+  //     "protein_suggestion": ["A", "B", "C", "D", "E", "F", "M", "N"],
+  //     "carbs_suggestion": ["G"],
+  //     "fat_suggestion": ["K", "L", "M", "N"]
+  //   };
+
+
+  //   //declare charts
+  //   this.charts["A"] = ["Albacore Tuna", "Soft-Shell Crab", "Cod", "Crayfish", "Dungeness Crab", "Flounder", "Fresh Tuna Steak", "Grouper", "Haddock",
+  //     "Halibut", "King Crab", "Lobster", "Mahi Mahi", "Monkfish", "Ocean Perch", "Orange Roughy", "Scallops", "Sea Bass", "Shrimp", "Snapper", "Sole"];
+
+  //   this.charts["B"] = ["Blue Fish", "Catfish", "Herring", "King Salmon", "Mackerel", "Pompano", "Rainbow Trout", "Sea Trout", "Silver (Pink) Salmon",
+  //     "Sockeye Salmon", "Striped Bass", "Sturgeon", "Swordfish", "Whitefish", "Yellowtail"];
+
+  //   this.charts["C"] = ["Blue Fish", "Catfish", "Herring", "King Salmon", "Mackerel", "Pompano", "Rainbow Trout", "Sea Trout", "Silver (Pink) Salmon",
+  //     "Sockeye Salmon", "Striped Bass", "Sturgeon", "Swordfish", "Whitefish", "Yellowtail"];
+
+  //   this.charts["D"] = ["Chicken Breast", "Low Fat Cottage Cheese", "Nonfat Cottage Cheese", "Turkey Breast", "Egg Whites"];
+
+  //   this.charts["E"] = ["XL Whole Eggs", "XL Egg Yolks"];
+
+  //   this.charts["F"] = ["Beef Eye Round", "Flat Iron Steak", "Filet Mignon", "Pork Top Loin", "Pork Tenderloin", "Veal Shank"];
+
+  //   this.charts["G"] = ["Barley", "Black Beans (Dry)", "Brown Rice (Dry)", "Buckweat", "Couscous (Dry)", "Kidney Beans (Dry)", "Oatmeal (Dry)", "Multi-grain Oatmeal",
+  //     "Rye", "Wheat Germ", "Wild Rice", "Yam", "Sweet Potato", "Whole Wheat Bread", "Multi-grain Bread"];
+
+  //   this.charts["H"] = ["Oatmeal Pancakes", "Sweet Potato Pancakes"];
+
+  //   this.charts["I"] = ["Alfalfa Sprouts", "Artichokes", "Asparagus", "Bell Pepper", "Broccoli", "Cabbage", "Cauliflower", "Celery", "Chicory", "Chives", "Cilantro",
+  //     "Collards", "Cucumber", "Endive", "Fennel", "Garlic", "Green Beans", "Onion", "Kale", "Leeks", "Lettuce", "Mushrooms", "Mustard greens", "Okra", "Parsley",
+  //     "Radish", "Sauerkraut", "Spinach", "Sugar Snap Peas", "Sweet Potato", "Turnip", "Watercress", "Yam", "Yellow Squash"];
+
+  //   this.charts["J"] = ["Apple", "Cranberries", "Kiwi", "Lemon", "Lime", "Peach", "Plum", "Raspberries", "Strawberries"];
+
+  //   this.charts["K"] = ["Avocado", "Black Olives", "Green Olives"];
+
+  //   this.charts["L"] = ["Almonds", "Brazil Nuts", "Hazelnuts, Roasted", "Peanuts, Roasted", "Pecans", "Pine Nuts", "Walnuts"];
+
+  //   this.charts["M"] = ["Zero Impact"];
+
+  //   this.charts["N"] = ["NO Shotgun", "Redline Liquid Caps", "Redline Drink", "Zero Carb", "Zero Impact"];
+
+  // }
+
+
+  //This constructyor is for new diet as of Dec 17 2019
   constructor() {
 
+    //12 week plan
     //define phase one days
-    this.phases[Phases.one] = [];
-    this.phases[Phases.one][1] = {
-      "protein": 50, "carbs": 50,
-      "meal1_suggestion": "M",
-      "protein_suggestion": ["A", "D", "M", "N"],
-      "carbs_suggestion": ["G"]
+    this.dietPlan.w12[Phases.one] = { name:"Fuel Shifting - 28 days", days:[] };
+    this.dietPlan.w12[Phases.one].days[1] = {
+      "protein": 60, "carbs": 19, "fat": 21
     };
-    this.phases[Phases.one][2] = {
-      "protein": 60, "fat": 30, "carbs": 10,
-      "meal1_suggestion": "N",
-      "protein_suggestion": ["A", "B", "C", "D", "E", "F", "N"],
-      "carbs_suggestion": ["I"],
-      "fat_suggestion": ["K", "L", "M", "N"]
+    this.dietPlan.w12[Phases.one].days[2] = {
+      "protein": 60, "carbs": 19, "fat": 21
     };
-    this.phases[Phases.one][3] = {
-      "protein": 60, "fat": 30, "carbs": 10,
-      "meal1_suggestion": "N",
-      "protein_suggestion": ["A", "B", "C", "D", "E", "F", "N"],
-      "carbs_suggestion": ["I"],
-      "fat_suggestion": ["K", "L", "M", "N"]
+    this.dietPlan.w12[Phases.one].days[3] = {
+      "protein": 50, "carbs": 40, "fat": 10
+    };
+    this.dietPlan.w12[Phases.one].days[4] = {
+      "protein": 60, "carbs": 19, "fat": 21
+    };
+    this.dietPlan.w12[Phases.one].days[5] = {
+      "protein": 60, "carbs": 19, "fat": 21
+    };
+    this.dietPlan.w12[Phases.one].days[6] = {
+      "protein": 50, "carbs": 40, "fat": 10
+    };
+    this.dietPlan.w12[Phases.one].days[7] = {
+      "protein": 40, "carbs": 40, "fat": 20
     };
 
     //define phase two days
-    this.phases[Phases.two] = [];
-    this.phases[Phases.two][1] = {
-      "protein": 50, "carbs": 50,
-      "meal1_suggestion": "M",
-      "protein_suggestion": ["A", "D", "M", "N"],
-      "carbs_suggestion": ["G"]
+    this.dietPlan.w12[Phases.two] = { name:"Calorie Shift Metabolic Kick - 28 days", days:[] };
+    this.dietPlan.w12[Phases.two].days[1] = {
+      "protein": 60, "carbs": 19, "fat": 21
     };
-    this.phases[Phases.two][2] = {
-      "protein": 60, "fat": 30, "carbs": 10,
-      "meal1_suggestion": "N",
-      "protein_suggestion": ["A", "B", "C", "D", "E", "F", "N"],
-      "carbs_suggestion": ["I"],
-      "fat_suggestion": ["K", "L", "M", "N"]
+    this.dietPlan.w12[Phases.two].days[2] = {
+      "protein": 50, "carbs": 40, "fat": 10
+    };
+    this.dietPlan.w12[Phases.two].days[3] = {
+      "protein": 60, "carbs": 19, "fat": 21
+    };
+    this.dietPlan.w12[Phases.two].days[4] = {
+      "protein": 50, "carbs": 40, "fat": 10
+    };
+    this.dietPlan.w12[Phases.two].days[5] = {
+      "protein": 60, "carbs": 19, "fat": 21
+    };
+    this.dietPlan.w12[Phases.two].days[6] = {
+      "protein": 50, "carbs": 40, "fat": 10
+    };
+    this.dietPlan.w12[Phases.two].days[7] = {
+      "protein": 40, "carbs": 40, "fat": 20
     };
 
     //define phase three days
-    this.phases[Phases.three] = [];
-    this.phases[Phases.three][1] = {
-      "protein": 50, "carbs": 30, "fat": 20,
-      "meal1_suggestion": "M",
-      "protein_suggestion": ["A", "B", "C", "D", "E", "F", "M", "N"],
-      "carbs_suggestion": ["G"],
-      "fat_suggestion": ["K", "L", "M", "N"]
+    this.dietPlan.w12[Phases.three] = { name:"The Rapid Body Remodeling Bang Anti-Diet Lifestyle - 28 days", days:[] };
+    this.dietPlan.w12[Phases.three].days[1] = { //day one repets all week
+      "protein": 60, "carbs": 20, "fat": 20
+    };
+    //end 12 week plan
+
+    //7 week plan
+    //define phase one days
+    this.dietPlan.w7[Phases.one] = { name:"Fuel Shifting - 28 days", days:[] };
+    this.dietPlan.w7[Phases.one].days[1] = {
+      "protein": 60, "carbs": 19, "fat": 21
+    };
+    this.dietPlan.w7[Phases.one].days[2] = {
+      "protein": 60, "carbs": 19, "fat": 21
+    };
+    this.dietPlan.w7[Phases.one].days[3] = {
+      "protein": 50, "carbs": 40, "fat": 10
+    };
+    this.dietPlan.w7[Phases.one].days[4] = {
+      "protein": 60, "carbs": 19, "fat": 21
+    };
+    this.dietPlan.w7[Phases.one].days[5] = {
+      "protein": 60, "carbs": 19, "fat": 21
+    };
+    this.dietPlan.w7[Phases.one].days[6] = {
+      "protein": 50, "carbs": 40, "fat": 10
+    };
+    this.dietPlan.w7[Phases.one].days[7] = {
+      "protein": 40, "carbs": 40, "fat": 20
     };
 
+    //define phase two days
+    this.dietPlan.w7[Phases.two] = { name:"Calorie Shift Ketone Kick - 21 days", days:[] };
+    this.dietPlan.w7[Phases.two].days[1] = {
+      "protein": 59, "carbs": 19.5, "fat": 21.5
+    };
+    this.dietPlan.w7[Phases.two].days[2] = {
+      "protein": 37, "carbs": 55, "fat": 8
+    };
+    this.dietPlan.w7[Phases.two].days[3] = {
+      "protein": 59, "carbs": 19.5, "fat": 21.5
+    };
+    this.dietPlan.w7[Phases.two].days[4] = {
+      "protein": 37, "carbs": 55, "fat": 8
+    };
+    this.dietPlan.w7[Phases.two].days[5] = {
+      "protein": 59, "carbs": 19.5, "fat": 21.5
+    };
+    this.dietPlan.w7[Phases.two].days[6] = {
+      "protein": 37, "carbs": 55, "fat": 8
+    };
+    this.dietPlan.w7[Phases.two].days[7] = {
+      "protein": 40, "carbs": 40, "fat": 20
+    };
+    //end 7 week plan
 
     //declare charts
-    this.charts["A"] = ["Albacore Tuna", "Soft-Shell Crab", "Cod", "Crayfish", "Dungeness Crab", "Flounder", "Fresh Tuna Steak", "Grouper", "Haddock",
-      "Halibut", "King Crab", "Lobster", "Mahi Mahi", "Monkfish", "Ocean Perch", "Orange Roughy", "Scallops", "Sea Bass", "Shrimp", "Snapper", "Sole"];
-
-    this.charts["B"] = ["Blue Fish", "Catfish", "Herring", "King Salmon", "Mackerel", "Pompano", "Rainbow Trout", "Sea Trout", "Silver (Pink) Salmon",
-      "Sockeye Salmon", "Striped Bass", "Sturgeon", "Swordfish", "Whitefish", "Yellowtail"];
-
-    this.charts["C"] = ["Blue Fish", "Catfish", "Herring", "King Salmon", "Mackerel", "Pompano", "Rainbow Trout", "Sea Trout", "Silver (Pink) Salmon",
-      "Sockeye Salmon", "Striped Bass", "Sturgeon", "Swordfish", "Whitefish", "Yellowtail"];
-
-    this.charts["D"] = ["Chicken Breast", "Low Fat Cottage Cheese", "Nonfat Cottage Cheese", "Turkey Breast", "Egg Whites"];
-
-    this.charts["E"] = ["XL Whole Eggs", "XL Egg Yolks"];
-
-    this.charts["F"] = ["Beef Eye Round", "Flat Iron Steak", "Filet Mignon", "Pork Top Loin", "Pork Tenderloin", "Veal Shank"];
-
-    this.charts["G"] = ["Barley", "Black Beans (Dry)", "Brown Rice (Dry)", "Buckweat", "Couscous (Dry)", "Kidney Beans (Dry)", "Oatmeal (Dry)", "Multi-grain Oatmeal",
-      "Rye", "Wheat Germ", "Wild Rice", "Yam", "Sweet Potato", "Whole Wheat Bread", "Multi-grain Bread"];
-
-    this.charts["H"] = ["Oatmeal Pancakes", "Sweet Potato Pancakes"];
-
-    this.charts["I"] = ["Alfalfa Sprouts", "Artichokes", "Asparagus", "Bell Pepper", "Broccoli", "Cabbage", "Cauliflower", "Celery", "Chicory", "Chives", "Cilantro",
-      "Collards", "Cucumber", "Endive", "Fennel", "Garlic", "Green Beans", "Onion", "Kale", "Leeks", "Lettuce", "Mushrooms", "Mustard greens", "Okra", "Parsley",
-      "Radish", "Sauerkraut", "Spinach", "Sugar Snap Peas", "Sweet Potato", "Turnip", "Watercress", "Yam", "Yellow Squash"];
-
-    this.charts["J"] = ["Apple", "Cranberries", "Kiwi", "Lemon", "Lime", "Peach", "Plum", "Raspberries", "Strawberries"];
-
-    this.charts["K"] = ["Avocado", "Black Olives", "Green Olives"];
-
-    this.charts["L"] = ["Almonds", "Brazil Nuts", "Hazelnuts, Roasted", "Peanuts, Roasted", "Pecans", "Pine Nuts", "Walnuts"];
-
-    this.charts["M"] = ["Zero Impact"];
-
-    this.charts["N"] = ["NO Shotgun", "Redline Liquid Caps", "Redline Drink", "Zero Carb", "Zero Impact"];
+    //dont have charts for new diet
 
   }
-
-
-
 
   getDietDayNumber(date) {
 
@@ -122,36 +236,65 @@ export class FoodSuggestionsService {
     return diffDays + 1; //cuz if resitered today its day 1 not day zero
   }
 
-  getDietDayDescription(date) {
-    //date = "2019-04-13";
+  getDietPlanWeeks(){
+    var weeks = localStorage.getItem('diet_plan_length');
+
+    return parseInt(weeks);
+  }
+
+  getDietDayDescription(date, plan_length) { //plan_length is ineger weeks
+    //date = "2020-02-17";
+
     let daynumber = this.getDietDayNumber(date);
     let phase = "";
     let phaseday = null;
 
-    if (daynumber >= 1 && daynumber <= 30) {
-      phase = Phases.one;
-      phaseday = daynumber % 3; //because 3 days in phase one
-      if (phaseday == 0) {
-        phaseday = 3;
+    //calc day for 12 week plan
+    if( plan_length == 12 ){ 
+      if (daynumber >= 1 && daynumber <= 28) {
+        phase = Phases.one;
+        phaseday = daynumber % 7; //because 7 days in phase one
+        if (phaseday == 0) {
+          phaseday = 7;
+        }
+      }
+      else if (daynumber >= 29 && daynumber <= 56) {
+        phase = Phases.two;
+        phaseday = daynumber % 7; //7 days in phase two
+        if (phaseday == 0) {
+          phaseday = 7;
+        }
+      }
+      else {
+        phase = Phases.three;
+        phaseday = 1; //it always day one in phase three
       }
     }
-    else if (daynumber >= 31 && daynumber <= 60) {
-      phase = Phases.two;
-      phaseday = daynumber % 2; //2 days in phase two
-      if (phaseday == 0) {
-        phaseday = 2;
+    //calc day for 7 week plan
+    else{
+      //plan_length == 7
+      if (daynumber >= 1 && daynumber <= 28) {
+        phase = Phases.one;
+        phaseday = daynumber % 7; //because 7 days in phase one
+        if (phaseday == 0) {
+          phaseday = 7;
+        }
+      }
+      else{
+        phase = Phases.two;
+        phaseday = daynumber % 7; //7 days in phase two
+        if (phaseday == 0) {
+          phaseday = 7;
+        }
       }
     }
-    else {
-      phase = Phases.three;
-      phaseday = 1; //it always day one in phase three
-    }
+    var plan = "w"+plan_length;
 
-    return { "phase": phase, "phaseday": phaseday, "daynutrition": this.phases[phase][phaseday] };
+    return { "phase": phase, "phaseday": phaseday, "phasename": this.dietPlan[plan][phase].name, "daynutrition": this.dietPlan[plan][phase].days[phaseday] };
   }
 
 
-  getCaloriesPercentages(date, meals, exercises) {
+  getCaloriesPercentages(date, meals, exercises, plan_length) {
     var caloriesConsumed = 0;
     var caloriesFromProtein = 0;
     var caloriesFromCarbs = 0;
@@ -182,7 +325,7 @@ export class FoodSuggestionsService {
     // }
 
     //calculate targeted calories
-    var dayNutritionInfo = this.getDietDayDescription(date);
+    var dayNutritionInfo = this.getDietDayDescription(date, plan_length);
     targetCaloriesFromProtein = dayNutritionInfo.daynutrition.protein / 100 * dietCaloriesIntake;
     targetCaloriesFromCarbs = dayNutritionInfo.daynutrition.carbs / 100 * dietCaloriesIntake;
     targetCaloriesFromFat = 5 / 100 * dietCaloriesIntake;
@@ -306,14 +449,14 @@ export class FoodSuggestionsService {
     return baseScore;
   }
 
-  getFoodSuggestions(date) {
+  getFoodSuggestions(date, plan_length) {
     var suggestedFoods = [];
     suggestedFoods["mealOne"] = null;
     suggestedFoods["proteinMeals"] = [];
     suggestedFoods["carbMeals"] = [];
     suggestedFoods["fatMeals"] = [];
 
-    var dayDescription = this.getDietDayDescription(date);
+    var dayDescription = this.getDietDayDescription(date, plan_length);
 
     //get random meal1
     if (dayDescription.daynutrition.hasOwnProperty("meal1_suggestion")) {

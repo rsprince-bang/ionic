@@ -21,6 +21,10 @@
       <ion-input type="number" formControlName="weight"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label position="floating">Target Weight lbs</ion-label>
+      <ion-input type="number" formControlName="target_weight"></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label position="floating">Age</ion-label>
       <ion-input type="number" formControlName="age"></ion-input>
     </ion-item>
@@ -39,6 +43,13 @@
         <ion-select-option value="1.5500">Moderate Exercise 3-5 days/w</ion-select-option>
         <ion-select-option value="1.7250">Hardcore Exercise or Sports 6-7 days/w</ion-select-option>
         <ion-select-option value="1.9000">Hardcore Exercise 6-7 days/w + labor intensive job</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item >
+      <ion-label>Diet Plan</ion-label>
+      <ion-select interface="popover" placeholder="Select one" formControlName="plan">
+        <ion-select-option value="7">7 week</ion-select-option>
+        <ion-select-option value="12">12 week</ion-select-option>
       </ion-select>
     </ion-item>
 

@@ -69,7 +69,8 @@ export class TrackMealPage implements OnInit {
   }
 
   loadMeals(){
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
+    var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, planLength_weeks);
     this.myAPI.makeAPIcall(
       "meals.php", 
       {
@@ -120,7 +121,8 @@ export class TrackMealPage implements OnInit {
   }
 
   calculateCaloriesConsumed(){
-    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises);
+    var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, planLength_weeks);
 
     this.caloriesConsumed = info.caloriesConsumed;
     this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
