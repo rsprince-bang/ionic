@@ -65,8 +65,8 @@ export class CalendarPage implements OnInit {
         var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
         for (let i = 0; i < result.success.daysInfo.length; i++){
           var dayCalorieInfo = this.foodSuggestionsService.getCaloriesPercentages(result.success.daysInfo[i].date.date_consumed, result.success.daysInfo[i].meals, result.success.daysInfo[i].exercises, planLength_weeks);
-
           var dateNoLeadingZeros = result.success.daysInfo[i].date.date_consumed.replace(/-0/g, "-");
+
           //add to calendar
           this.eventSource.push({
             title: 'None',

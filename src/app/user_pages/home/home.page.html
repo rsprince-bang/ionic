@@ -19,12 +19,11 @@
 
 
 
-  <ion-toolbar class="home todayy" [ngStyle]="{ 'background-color' : backgroundColor}" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
-    <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()"
-      name="arrow-back" slot="start"></ion-icon>
+  <ion-toolbar class="day-block" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
+    <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeLeft()" name="arrow-back" slot="start"></ion-icon>
     <ion-card >
       <ion-card-header>
-        <ion-card-title class="home_day"><span  class="day">{{day}}</span>  </ion-card-title>
+        <ion-card-title class="day">{{day}}</ion-card-title>
        
       </ion-card-header>
 
@@ -33,32 +32,32 @@
         You have completed the The Meltdown Anti-Diet!
       </ion-card-content>
       <ng-template #templateName>
-        <ion-card-content class="home_day program">
+        <ion-card-content class="day program">
           <span class="dayNumber">DAY {{dayNumber}}</span>
         </ion-card-content>
       </ng-template>
 
     </ion-card>
-      <ion-icon class="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
+      <ion-icon class="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeRight()" name="arrow-forward" slot="end"></ion-icon>
     </ion-toolbar>
 
-  <div style="display: block">
+  <div>
     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
       [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
     </canvas>
   </div>
 
   <ion-item>
-    <ion-label class="workout">{{workout_completed_msn}}</ion-label>
+    <ion-label class="workout" [routerLink]="['/track-workout', '']">{{workout_completed_msn}}</ion-label>
     <ion-icon name="fitness" *ngIf="workout_completed == true"></ion-icon>
     <ion-icon name="pulse" *ngIf="workout_completed == false"></ion-icon>
-    <ion-icon name="heart" *ngIf="workout_completed == false" style="color:rgb(211, 0, 0)"></ion-icon>
+    <ion-icon class = "heart" name="heart" *ngIf="workout_completed == false" ></ion-icon>
   </ion-item>
 
-  <ion-item>
+<ion-item>
   <div>
     <p>
-      <span class="home_day_2">Day {{dayNumber}} </span> / <span class="home_day_3">{{planLength_days}}</span> 
+      <span class="dayNumber_2">Day {{dayNumber}} </span> / <span class="totalDayProgram">{{planLength_days}}</span> 
     </p>
   </div>
 </ion-item>
@@ -76,7 +75,7 @@
 
   <div class="home_totalCol">
 
-    <p style= " color: rgb(67, 66, 66); font-weight:500" > Maximum Calories Today : <strong>{{dietCaloriesIntake}}</strong> Calories<br />Cosnusmed : 
+    <p class= "maxCalories" > Maximum Calories Today : <strong>{{dietCaloriesIntake}}</strong> Calories<br />Cosnusmed : 
       <strong [ngStyle]="{ 'color' : circlecolor}">{{caloriesConsumed}}</strong>
        Calories
     </p>
