@@ -96,9 +96,7 @@ export class HomePage implements OnInit {
     private foodSuggestionsService: FoodSuggestionsService, private alertController: AlertController) {
 
   }
-if(){
-  
-}
+
   ngOnInit() {
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
     this.date = this.globalServices.getDate(this.day);
