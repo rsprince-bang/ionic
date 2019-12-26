@@ -1,3 +1,6 @@
+$center : 0 auto;
+
+
 .info{
   display: flex;
   justify-content: space-between;
@@ -12,22 +15,32 @@ display: flex;
 text-decoration-line: underline;
 }
 
-  .reset{
-    --background:#CA1616;
-    display: list-item;
-    margin-top: 50px;
-  }
-  #myFileInput{
-    position: absolute;
-    opacity: 0;
-  }
+.reset{
+  --background:#CA1616;
+  display: list-item;
+  margin-top: 50px;
+}
+#myFileInput{
+  position: absolute;
+  opacity: 0;
+}
   
-  .myFakeUploadButton{
-   background-color: rgb(0, 198, 242);
-   color: white;
-   margin: 0 auto;
-   padding: 5px;
-   border-radius: 5px;
-   font-size: x-small;
-   font-weight: bold;
-  }
+.myFakeUploadButton{
+  background-color: rgb(0, 198, 242);
+  color: white;
+  margin: 0 auto;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: x-small;
+  font-weight: bold;
+}
+.profilePicture{
+  margin: $center;
+  width: 250px; 
+  height: 250px;
+}
+.dayNumber{
+  text-align: center; 
+  font-size: 24px;
+  margin : $center;
+}
