@@ -308,8 +308,9 @@ export class FoodSuggestionsService {
     var caloriesFromCarbsAsP = 0;
     var caloriesFromFatAsP = 0;
 
-    var dietCaloriesIntake = parseInt(localStorage.getItem('dailyCaloriesIntake')) - 200;
+    var dietCaloriesIntake = parseInt(localStorage.getItem('currentCaloriesIntake'));
     var eat_extra_protein = false;
+    var dayNutritionInfo = this.getDietDayDescription(date, plan_length);
 
     for (let i = 0; i < meals.length; i++) {
       caloriesConsumed = caloriesConsumed + parseInt(meals[i].calories);
@@ -319,13 +320,7 @@ export class FoodSuggestionsService {
       caloriesFromFat = caloriesFromFat + (meals[i].fat * 9);
     }
 
-    //if they worked out they can eat more calories
-    // for (let i = 0; i < exercises.length; i++) {
-    //   dietCaloriesIntake = dietCaloriesIntake + parseInt(exercises[i].calories_burned);
-    // }
-
     //calculate targeted calories
-    var dayNutritionInfo = this.getDietDayDescription(date, plan_length);
     targetCaloriesFromProtein = dayNutritionInfo.daynutrition.protein / 100 * dietCaloriesIntake;
     targetCaloriesFromCarbs = dayNutritionInfo.daynutrition.carbs / 100 * dietCaloriesIntake;
     targetCaloriesFromFat = 5 / 100 * dietCaloriesIntake;

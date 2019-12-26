@@ -1,13 +1,14 @@
 import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
+// import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { NavController } from '@ionic/angular';
 var GlobalServicesService = /** @class */ (function () {
-    function GlobalServicesService(router, nativePageTransitions, http) {
+    function GlobalServicesService(router, /*private nativePageTransitions: NativePageTransitions, */ navCtrl, http) {
         this.router = router;
-        this.nativePageTransitions = nativePageTransitions;
+        this.navCtrl = navCtrl;
         this.http = http;
     }
     GlobalServicesService.prototype.isLoggedIn = function () {
@@ -34,22 +35,24 @@ var GlobalServicesService = /** @class */ (function () {
         this.router.navigateByUrl("/login");
     };
     GlobalServicesService.prototype.swipeLeft = function (url) {
-        var options = {
-            direction: 'left',
-            duration: 400,
-            slowdownfactor: -1
-        };
-        this.nativePageTransitions.slide(options);
-        this.router.navigateByUrl(url);
+        // let options: NativeTransitionOptions = {
+        //   direction: 'left',
+        //   duration: 400,
+        //   slowdownfactor: -1
+        // }
+        // this.nativePageTransitions.slide(options);
+        //this.router.navigateByUrl(url);
+        this.navCtrl.navigateForward(url);
     };
     GlobalServicesService.prototype.swipeRight = function (url) {
-        var options = {
-            direction: 'right',
-            duration: 400,
-            slowdownfactor: -1
-        };
-        this.nativePageTransitions.slide(options);
-        this.router.navigateByUrl(url);
+        // let options: NativeTransitionOptions = {
+        //   direction: 'right',
+        //   duration: 400,
+        //   slowdownfactor: -1
+        // }
+        // this.nativePageTransitions.slide(options);
+        //this.router.navigateByUrl(url);
+        this.navCtrl.navigateBack(url);
     };
     GlobalServicesService.prototype.hasDailyCaloriesIntake = function () {
         var dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
@@ -68,37 +71,74 @@ var GlobalServicesService = /** @class */ (function () {
         var today_string = yyyy + '-' + mm + '-' + dd;
         return today_string;
     };
+    GlobalServicesService.prototype.getPreviousDate = function (date) {
+        var d_string = date + " 00:00:00";
+        var currentdate = new Date(d_string.replace(/-/g, '/'));
+        var yesterday = new Date(currentdate);
+        yesterday.setDate(currentdate.getDate() - 1);
+        var dd = String(yesterday.getDate()).padStart(2, '0'); //yesterday's date
+        var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = yesterday.getFullYear();
+        return yyyy + '-' + mm + '-' + dd;
+    };
+    GlobalServicesService.prototype.getNextDate = function (date) {
+        var d_string = date + " 00:00:00";
+        var currentdate = new Date(d_string.replace(/-/g, '/'));
+        var tomorrow = new Date(currentdate);
+        tomorrow.setDate(currentdate.getDate() + 1);
+        var dd = String(tomorrow.getDate()).padStart(2, '0'); //yesterday's date
+        var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = tomorrow.getFullYear();
+        return yyyy + '-' + mm + '-' + dd;
+    };
     GlobalServicesService.prototype.getDate = function (day) {
         //day must be yesterday, today, tomorrow
         var day_string = null;
-        if (day == "Yesterday") {
+        if (day == "yesterday") {
             var today = new Date();
-            var dd = String(today.getDate() - 1).padStart(2, '0'); //yesterday's date
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            var yyyy = today.getFullYear();
+            var yesterday = new Date(today);
+            yesterday.setDate(today.getDate() - 1);
+            var dd = String(yesterday.getDate()).padStart(2, '0'); //yesterday's date
+            var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = yesterday.getFullYear();
             day_string = yyyy + '-' + mm + '-' + dd;
         }
-        else if (day == "Today") {
+        else if (day == "today") {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
             day_string = yyyy + '-' + mm + '-' + dd;
         }
-        else if (day == "Tomorrow") {
+        else if (day == "tomorrow") {
             var today = new Date();
-            var dd = String(today.getDate() + 1).padStart(2, '0'); //tomorrow's date
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            var yyyy = today.getFullYear();
+            var tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            var dd = String(tomorrow.getDate()).padStart(2, '0'); //tomorrow's date
+            var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = tomorrow.getFullYear();
             day_string = yyyy + '-' + mm + '-' + dd;
         }
         return day_string;
+    };
+    GlobalServicesService.prototype.getDateFromObject = function (dateObject) {
+        var dd = String(dateObject.getDate()).padStart(2, '0');
+        var mm = String(dateObject.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = dateObject.getFullYear();
+        var string = yyyy + '-' + mm + '-' + dd;
+        return string;
+    };
+    GlobalServicesService.prototype.getDateAsHumanString = function (datestring) {
+        //var dateObj = new Date(datestring + " 00:00:00");
+        var d_string = datestring + " 00:00:00";
+        var dateObj = new Date(d_string.replace(/-/g, '/'));
+        return dateObj.toDateString();
     };
     GlobalServicesService = tslib_1.__decorate([
         Injectable({
             providedIn: 'root'
         }),
-        tslib_1.__metadata("design:paramtypes", [Router, NativePageTransitions, HttpClient])
+        tslib_1.__metadata("design:paramtypes", [Router, NavController, HttpClient])
     ], GlobalServicesService);
     return GlobalServicesService;
 }());

@@ -2,33 +2,41 @@ import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ApiCallService } from 'src/app/services/api-call.service';
-import { GlobalServicesService } from 'src/app/services/global-services.service';
+import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 var HomeAddFoodModalPage = /** @class */ (function () {
-    function HomeAddFoodModalPage(modalController, myAPI, globalServices) {
+    function HomeAddFoodModalPage(modalController, myAPI, foodSuggestionsService) {
         this.modalController = modalController;
         this.myAPI = myAPI;
-        this.globalServices = globalServices;
-        this.date = null;
+        this.foodSuggestionsService = foodSuggestionsService;
+        this.date = null; //passed from previous page
         this.searchResults = [];
         this.searchTerm = '';
     }
     HomeAddFoodModalPage.prototype.ngOnInit = function () {
-        this.date = this.globalServices.getDate(this.day);
+        var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+        this.suggestedFoods = this.foodSuggestionsService.getFoodSuggestions(this.date, planLength_weeks);
     };
     HomeAddFoodModalPage.prototype.searchChanged = function () {
         var _this = this;
-        this.myAPI.makeAPIcall("food_api.php", {
-            "action": "loadFoods",
-            "food": this.searchTerm
-        }, true).subscribe(function (result) {
-            if (result.error) {
-                _this.modalController.dismiss();
-                _this.myAPI.handleMyAPIError(result.error);
-            }
-            else {
-                _this.searchResults = result.success.foods;
-            }
-        });
+        if (this.searchTerm != '') {
+            this.myAPI.makeAPIcall(
+            //"food_api_edamam.php",
+            "food_api_nutritionix.php", {
+                "action": "loadFoods",
+                "food": this.searchTerm
+            }, true).subscribe(function (result) {
+                if (result.error) {
+                    _this.modalController.dismiss();
+                    _this.myAPI.handleMyAPIError(result.error);
+                }
+                else {
+                    _this.searchResults = result.success.foods;
+                }
+            });
+        }
+        else {
+            this.searchResults = [];
+        }
     };
     HomeAddFoodModalPage.prototype.clearSearch = function () {
         this.searchResults = [];
@@ -72,23 +80,8 @@ var HomeAddFoodModalPage = /** @class */ (function () {
             });
         }
     };
-    HomeAddFoodModalPage.prototype.addToList = function (item, calories, protein, fat, carbs) {
-        /*     this.myAPI.makeSilentCall(
-              "users.php",
-              {
-                "action": "saveMeal",
-                "food_name": item.food_name,
-                "calories": calories,
-                "protein": protein,
-                "fat": fat,
-                "carbohydrate": carbohydrate,
-                "day": this.date
-              },
-              true
-            ); */
-        var _this = this;
-        //this.modalController.dismiss({ "item":item, "calories":calories});
-        this.myAPI.makeAPIcall("users.php", {
+    HomeAddFoodModalPage.prototype.addMeal = function (item, calories, protein, fat, carbs) {
+        this.myAPI.makeSilentCall("meals.php", {
             "action": "saveMeal",
             "food_name": item.food_name,
             "calories": calories,
@@ -96,15 +89,41 @@ var HomeAddFoodModalPage = /** @class */ (function () {
             "fat": fat,
             "carbohydrate": carbs,
             "day": this.date
+        }, true);
+        this.modalController.dismiss(item);
+    };
+    HomeAddFoodModalPage.prototype.edamamAddMeal = function (foodname, foodId, quantity, measureURI) {
+        var _this = this;
+        if (quantity && quantity > 0) {
+            this.myAPI.makeAPIcall("food_api_edamam.php", {
+                "action": "edamamAddMeal",
+                "foodname": foodname,
+                "foodId": foodId,
+                "quantity": quantity,
+                "measureURI": measureURI,
+                "day": this.date
+            }, true).subscribe(function (result) {
+                _this.modalController.dismiss(foodId);
+            });
+        }
+    };
+    HomeAddFoodModalPage.prototype.nutritionixAddMeal = function (foods) {
+        var _this = this;
+        this.myAPI.makeAPIcall("food_api_nutritionix.php", {
+            "action": "nutritionixAddMeal",
+            "foods": foods,
+            "day": this.date
         }, true).subscribe(function (result) {
-            if (result.error) {
-                _this.modalController.dismiss();
-                _this.myAPI.handleMyAPIError(result.error);
-            }
-            else {
-                _this.modalController.dismiss({ "item": item, "calories": calories, meal_id: result.success.meal_id, "protein": protein, "carbs": carbs, "fat": fat });
-            }
+            _this.modalController.dismiss(result);
         });
+    };
+    HomeAddFoodModalPage.prototype.expandHint = function (hint) {
+        if (hint.selected) {
+            hint.selected = false;
+        }
+        else {
+            hint.selected = true;
+        }
     };
     HomeAddFoodModalPage = tslib_1.__decorate([
         Component({
@@ -112,7 +131,7 @@ var HomeAddFoodModalPage = /** @class */ (function () {
             templateUrl: './home-add-food-modal.page.html',
             styleUrls: ['./home-add-food-modal.page.scss'],
         }),
-        tslib_1.__metadata("design:paramtypes", [ModalController, ApiCallService, GlobalServicesService])
+        tslib_1.__metadata("design:paramtypes", [ModalController, ApiCallService, FoodSuggestionsService])
     ], HomeAddFoodModalPage);
     return HomeAddFoodModalPage;
 }());

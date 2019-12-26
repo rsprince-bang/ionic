@@ -1,19 +1,20 @@
 import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { GlobalServicesService } from './global-services.service';
 var ApiCallService = /** @class */ (function () {
-    function ApiCallService(http, loadingController, alertController, router, globalservice) {
+    function ApiCallService(http, loadingController, alertController, router, globalservice, toastController) {
         this.http = http;
         this.loadingController = loadingController;
         this.alertController = alertController;
         this.router = router;
         this.globalservice = globalservice;
+        this.toastController = toastController;
         this.headers = new HttpHeaders({
         //'Content-Type': 'application/json'  //this one is default
         //'Content-Type': 'application/x-www-form-urlencoded'
@@ -29,14 +30,11 @@ var ApiCallService = /** @class */ (function () {
             data.token = localStorage.getItem("token");
             data.user_id = localStorage.getItem("user_id");
         }
-        //this.presentLoadingWithOptions();
         this.presentLoading();
         return this.http.post(environment.API_URL + page, JSON.stringify(data), this.options).pipe(map(function (results) {
-            //this.loading.dismiss();
             _this.dismissLoading();
             return results;
         }), catchError(function (error) {
-            //this.loading.dismiss();
             _this.dismissLoading();
             _this.showError(error);
             return throwError(error);
@@ -52,21 +50,6 @@ var ApiCallService = /** @class */ (function () {
             //do nothing
         });
     };
-    /*   async presentLoadingWithOptions() {
-        this.loading = await this.loadingController.create({
-          spinner: "lines",
-          animated: true,
-          backdropDismiss: false,
-          cssClass: 'custom-class custom-loading',
-          duration: null,
-          keyboardClose: true,
-          message: 'Please wait...',
-    
-          translucent: true,
-          
-        });
-        return await this.loading.present();
-      } */
     ApiCallService.prototype.presentLoading = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -85,10 +68,8 @@ var ApiCallService = /** @class */ (function () {
                                 translucent: true,
                             }).then(function (a) {
                                 a.present().then(function () {
-                                    //console.log('presented');
                                     if (!_this.isLoading) {
                                         a.dismiss().then(function () {
-                                            //console.log('abort presenting')
                                         });
                                     }
                                 });
@@ -105,12 +86,60 @@ var ApiCallService = /** @class */ (function () {
                     case 0:
                         this.isLoading = false;
                         return [4 /*yield*/, this.loadingController.dismiss().then(function () {
-                                console.log('dismissed');
                             })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
+    };
+    ApiCallService.prototype.uploadImageFromFile = function (file, weight, fat_percent, comment, type) {
+        var _this = this;
+        this.presentLoading();
+        //should be always authenticated call
+        var formData = new FormData();
+        formData.append("action", "saveImage");
+        formData.append("token", localStorage.getItem("token"));
+        formData.append("user_id", localStorage.getItem("user_id"));
+        formData.append("date", this.globalservice.getTodayDate());
+        formData.append("weight", weight);
+        formData.append("fat_percent", fat_percent);
+        formData.append("comment", comment);
+        formData.append("type", type);
+        formData.append('uploadFile', file, file.name);
+        return this.http.post(environment.API_URL + "image_upload.php", formData)
+            .pipe(map(function (results) {
+            _this.dismissLoading();
+            return results;
+        }), catchError(function (error) {
+            _this.dismissLoading();
+            _this.showError(error);
+            return throwError(error);
+        }));
+    };
+    ApiCallService.prototype.uploadImageFromBlob = function (blob, filename, weight, fat_percent, comment, type) {
+        var _this = this;
+        this.presentLoading();
+        //should be always authenticated call
+        var formData = new FormData();
+        formData.append("action", "saveImage");
+        formData.append("token", localStorage.getItem("token"));
+        formData.append("user_id", localStorage.getItem("user_id"));
+        formData.append("date", this.globalservice.getTodayDate());
+        formData.append("weight", weight);
+        formData.append("fat_percent", fat_percent);
+        formData.append("comment", comment);
+        formData.append("type", type);
+        formData.append('uploadFile', blob);
+        formData.append('filename', filename);
+        return this.http.post(environment.API_URL + "image_upload.php", formData)
+            .pipe(map(function (results) {
+            _this.dismissLoading();
+            return results;
+        }), catchError(function (error) {
+            _this.dismissLoading();
+            _this.showError(error);
+            return throwError(error);
+        }));
     };
     ApiCallService.prototype.showError = function (error) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
@@ -136,13 +165,37 @@ var ApiCallService = /** @class */ (function () {
         if (error == "Expired token") {
             this.globalservice.logOut();
         }
+        else {
+            this.presentToastWithOptions(error);
+        }
+    };
+    ApiCallService.prototype.presentToastWithOptions = function (message) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var toast;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.toastController.create({
+                            message: message,
+                            showCloseButton: true,
+                            position: 'bottom',
+                            closeButtonText: 'OK',
+                            duration: 3000,
+                            translucent: false
+                        })];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     ApiCallService = tslib_1.__decorate([
         Injectable({
             providedIn: 'root'
         }),
         tslib_1.__metadata("design:paramtypes", [HttpClient, LoadingController, AlertController, Router,
-            GlobalServicesService])
+            GlobalServicesService, ToastController])
     ], ApiCallService);
     return ApiCallService;
 }());

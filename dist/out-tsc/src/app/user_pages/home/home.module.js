@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home.page';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ChartsModule } from 'ng2-charts';
 var routes = [
     {
         path: '',
@@ -34,7 +35,8 @@ var HomePageModule = /** @class */ (function () {
                     "showInnerStroke": false,
                     "startFromZero": false,
                     "showZeroOuterStroke": false
-                })
+                }),
+                ChartsModule
             ],
             declarations: [HomePage]
         })

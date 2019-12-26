@@ -25,7 +25,6 @@
     <ion-card >
       <ion-card-header>
         <ion-card-title class="home_day"><span  class="day">{{day}}</span>  </ion-card-title>
-       
       </ion-card-header>
 
       <ion-card-content *ngIf="dayNumber>planLength_days; else templateName" class="day">
@@ -57,21 +56,23 @@
 
   <ion-item>
   <div>
+    <p>Phase {{dayNutritionInfo.phase}}, phase-day {{dayNutritionInfo.phaseday}}</p>
+    <p>{{dayNutritionInfo.phasename}}</p>
     <p>
       <span class="home_day_2">Day {{dayNumber}} </span> / <span class="home_day_3">{{planLength_days}}</span> 
     </p>
   </div>
 </ion-item>
 
-<ion-item>
+<!-- <ion-item>
   <p>
-    <!-- <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
+    <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
         <span class="name_percent"> <strong> Protein </strong> : {{warnText.proteinText}} </span>  
         <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText.carbsText}} </span>
         <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText.fatText}}</span>
-  </span> -->
+  </span>
   </p>
-</ion-item>
+</ion-item> -->
 
 
   <div class="home_totalCol">

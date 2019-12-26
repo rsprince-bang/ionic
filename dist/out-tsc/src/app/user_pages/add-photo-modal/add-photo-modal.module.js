@@ -4,17 +4,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { RegisterPage } from './register.page';
+import { AddPhotoModalPage } from './add-photo-modal.page';
 var routes = [
     {
         path: '',
-        component: RegisterPage
+        component: AddPhotoModalPage
     }
 ];
-var RegisterPageModule = /** @class */ (function () {
-    function RegisterPageModule() {
+var AddPhotoModalPageModule = /** @class */ (function () {
+    function AddPhotoModalPageModule() {
     }
-    RegisterPageModule = tslib_1.__decorate([
+    AddPhotoModalPageModule = tslib_1.__decorate([
         NgModule({
             imports: [
                 CommonModule,
@@ -23,10 +23,10 @@ var RegisterPageModule = /** @class */ (function () {
                 RouterModule.forChild(routes),
                 ReactiveFormsModule
             ],
-            declarations: [RegisterPage]
+            declarations: [AddPhotoModalPage]
         })
-    ], RegisterPageModule);
-    return RegisterPageModule;
+    ], AddPhotoModalPageModule);
+    return AddPhotoModalPageModule;
 }());
-export { RegisterPageModule };
-//# sourceMappingURL=register.module.js.map
+export { AddPhotoModalPageModule };
+//# sourceMappingURL=add-photo-modal.module.js.map

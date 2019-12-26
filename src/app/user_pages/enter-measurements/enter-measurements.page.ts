@@ -59,6 +59,7 @@ export class EnterMeasurementsPage implements OnInit {
       }
       else{
         localStorage.setItem("dailyCaloriesIntake", result.success.dailyCaloriesIntake);
+        localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
         localStorage.setItem("diet_plan_length", this.measurementsForm.value.plan);
         
         if( this.action == "update" ){

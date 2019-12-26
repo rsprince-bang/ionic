@@ -10,29 +10,6 @@ var Tab2Page = /** @class */ (function () {
         this.dailyCaloriesIntake = null;
         this.dietCaloriesIntake = null;
     }
-    Tab2Page.prototype.ionViewWillEnter = function () {
-        console.log("ionViewWillEnter");
-        this.updatepage();
-    };
-    Tab2Page.prototype.handleSwipeLeft = function () {
-        this.globalServices.swipeLeft("/home/tabs/tab3");
-    };
-    Tab2Page.prototype.handleSwipeRight = function () {
-        this.globalServices.swipeRight("/home/tabs/tab1");
-    };
-    Tab2Page.prototype.doRefresh = function (event) {
-        this.updatepage();
-        event.target.complete();
-    };
-    Tab2Page.prototype.updatepage = function () {
-        if (!this.globalServices.hasDailyCaloriesIntake()) {
-            this.router.navigateByUrl("/enter-measurements");
-        }
-        else {
-            this.dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
-            this.dietCaloriesIntake = this.dailyCaloriesIntake - 200;
-        }
-    };
     Tab2Page = tslib_1.__decorate([
         Component({
             selector: 'app-tab2',

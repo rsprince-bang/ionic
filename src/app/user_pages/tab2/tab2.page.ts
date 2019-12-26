@@ -18,34 +18,33 @@ export class Tab2Page {
 
   }
 
-  ionViewWillEnter(){
-    console.log("ionViewWillEnter");
-    this.updatepage();
-  }
+  // ionViewWillEnter(){
+  //   console.log("ionViewWillEnter");
+  //   this.updatepage();
+  // }
 
 
-  handleSwipeLeft() {
-    this.globalServices.swipeLeft("/home/tabs/tab3");
-  }
+  // handleSwipeLeft() {
+  //   this.globalServices.swipeLeft("/home/tabs/tab3");
+  // }
 
-  handleSwipeRight() {
-    this.globalServices.swipeRight("/home/tabs/tab1");
-  }
+  // handleSwipeRight() {
+  //   this.globalServices.swipeRight("/home/tabs/tab1");
+  // }
 
 
-  doRefresh(event) {
-    this.updatepage();
-    event.target.complete();
-  }
+  // doRefresh(event) {
+  //   this.updatepage();
+  //   event.target.complete();
+  // }
 
-  updatepage(){
-    if( !this.globalServices.hasDailyCaloriesIntake() ){
-      this.router.navigateByUrl("/enter-measurements");
-    }
-    else{
-      this.dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake');
-      this.dietCaloriesIntake = this.dailyCaloriesIntake - 200;
-    }
-    
-  }
+  // updatepage(){
+  //   if( !this.globalServices.hasDailyCaloriesIntake() ){
+  //     this.router.navigateByUrl("/enter-measurements");
+  //   }
+  //   else{
+  //     this.dailyCaloriesIntake = localStorage.getItem('dailyCaloriesIntake'); //currentCaloriesIntake
+  //     this.dietCaloriesIntake = this.dailyCaloriesIntake - 200;
+  //   }
+  // }
 }

@@ -3,73 +3,95 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ModalController } from '@ionic/angular';
-import { TrackWorkoutModalPage } from '../track-workout-modal/track-workout-modal.page';
+import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
+import { ApiCallService } from 'src/app/services/api-call.service';
+import { HomeAddWorkoutModalPage } from '../home-add-workout-modal/home-add-workout-modal.page';
 var TrackWorkoutPage = /** @class */ (function () {
-    function TrackWorkoutPage(activatedRoute, globalServices, modalController) {
+    function TrackWorkoutPage(activatedRoute, globalServices, modalController, foodSuggestionsService, myAPI) {
         this.activatedRoute = activatedRoute;
         this.globalServices = globalServices;
         this.modalController = modalController;
-        this.day = null;
-        this.disablechecksmarks = false;
-        this.randomWorkouts = [
-            { name: 'Bench press', isChecked: true },
-            { name: 'Squads', isChecked: false },
-            { name: 'Curls', isChecked: true },
-            { name: 'Pull ups', isChecked: true },
-            { name: 'Chin ups', isChecked: false },
-            { name: 'Push ups', isChecked: true },
-            { name: 'Triceps extensions', isChecked: true },
-            { name: 'Calves', isChecked: false },
-            { name: 'Crunches', isChecked: false },
-        ];
-        this.todayWorkouts = [];
+        this.foodSuggestionsService = foodSuggestionsService;
+        this.myAPI = myAPI;
+        this.day = "";
+        this.today = false;
+        this.dayNumber = null;
+        this.date = null;
+        this.meals = [];
+        this.exercises = [];
     }
     TrackWorkoutPage.prototype.ngOnInit = function () {
-        this.day = this.activatedRoute.snapshot.paramMap.get('day');
-        //get 2 random meals for testing stackoverflow func
-        this.todayWorkouts = this.randomWorkouts.sort(function () { return .5 - Math.random(); }).slice(0, 2);
-        //default day is 5 , i.e. 5 == today
-        //if anyuthing before that will be disabled; anything after will be unchecked
-        for (var i = 0; i < this.todayWorkouts.length; i++) {
-            if (this.day < 5) {
-                this.disablechecksmarks = true;
-            }
-            else if (this.day > 5) {
-                this.todayWorkouts[i].isChecked = false;
-            }
+        this.date = this.activatedRoute.snapshot.paramMap.get('day');
+        if (this.date == '') {
+            this.date = this.date = this.globalServices.getTodayDate();
         }
+        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+        if (this.date == this.globalServices.getTodayDate()) {
+            this.today = true;
+            this.day = "Today";
+        }
+        this.loadExercises();
+    };
+    TrackWorkoutPage.prototype.doRefresh = function (event) {
+        this.ngOnInit();
+        event.target.complete();
     };
     TrackWorkoutPage.prototype.handleSwipeLeft = function () {
-        var nextday = parseInt(this.day) + 1;
-        this.globalServices.swipeLeft("/track-workout/" + nextday);
+        if (this.today) {
+            // won't swipeLeft 
+        }
+        else
+            this.globalServices.swipeLeft("/track-workout/" + this.globalServices.getNextDate(this.date));
     };
     TrackWorkoutPage.prototype.handleSwipeRight = function () {
-        if (this.day > 1) {
-            var prevday = parseInt(this.day) - 1;
-            this.globalServices.swipeRight("/track-workout/" + prevday);
+        if (this.dayNumber > 1) {
+            this.globalServices.swipeRight("/track-workout/" + this.globalServices.getPreviousDate(this.date));
         }
     };
-    TrackWorkoutPage.prototype.openExersize = function (workout) {
+    TrackWorkoutPage.prototype.loadExercises = function () {
+        var _this = this;
+        this.myAPI.makeAPIcall("exercises.php", {
+            "action": "getExercises",
+            "date": this.date
+        }, true).subscribe(function (result) {
+            if (result.error) {
+                _this.myAPI.handleMyAPIError(result.error);
+            }
+            else {
+                _this.exercises = result.success.exercises;
+            }
+        });
+    };
+    TrackWorkoutPage.prototype.openExerciseModal = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var modal;
+            var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.modalController.create({
-                            component: TrackWorkoutModalPage,
-                            componentProps: { workout: workout }
+                            component: HomeAddWorkoutModalPage,
+                            componentProps: { date: this.date }
                         })];
                     case 1:
                         modal = _a.sent();
+                        modal.onDidDismiss()
+                            .then(function (response) {
+                            if (response.data) {
+                                _this.loadExercises();
+                            }
+                        });
                         return [4 /*yield*/, modal.present()];
-                    case 2: 
-                    /*     modal.onDidDismiss()
-                          .then((response) => {
-                            console.log(response);
-                          }); */
-                    return [2 /*return*/, _a.sent()];
+                    case 2: return [2 /*return*/, _a.sent()];
                 }
             });
         });
+    };
+    TrackWorkoutPage.prototype.removeExercise = function (exercise_id) {
+        this.exercises = this.exercises.filter(function (el) { return el.id != exercise_id; });
+        this.myAPI.makeSilentCall("exercises.php", {
+            "action": "removeExercise",
+            "exercise_id": exercise_id
+        }, true);
     };
     TrackWorkoutPage = tslib_1.__decorate([
         Component({
@@ -77,7 +99,8 @@ var TrackWorkoutPage = /** @class */ (function () {
             templateUrl: './track-workout.page.html',
             styleUrls: ['./track-workout.page.scss'],
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, GlobalServicesService, ModalController])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, GlobalServicesService, ModalController,
+            FoodSuggestionsService, ApiCallService])
     ], TrackWorkoutPage);
     return TrackWorkoutPage;
 }());

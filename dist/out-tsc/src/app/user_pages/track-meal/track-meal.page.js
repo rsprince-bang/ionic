@@ -1,76 +1,136 @@
 import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
+import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
+import { ApiCallService } from 'src/app/services/api-call.service';
+import { HomeAddFoodModalPage } from '../home-add-food-modal/home-add-food-modal.page';
 var TrackMealPage = /** @class */ (function () {
-    function TrackMealPage(alertCtrl, router, globalServices, activatedRoute) {
-        this.alertCtrl = alertCtrl;
-        this.router = router;
+    function TrackMealPage(globalServices, activatedRoute, foodSuggestionsService, myAPI, modalController) {
         this.globalServices = globalServices;
         this.activatedRoute = activatedRoute;
-        this.day = null;
-        this.disablechecksmarks = false;
-        this.searchTerm = '';
-        this.randomMeals = [
-            { name: 'Eggs', isChecked: true },
-            { name: 'Turkey Sandwich', isChecked: false },
-            { name: 'Salmon', isChecked: true },
-            { name: 'Pork Chops', isChecked: true },
-            { name: 'Ribeye Steak', isChecked: false },
-            { name: 'Grilled Chicken', isChecked: true },
-            { name: 'Canolli', isChecked: true },
-            { name: 'Pizza', isChecked: false },
-            { name: 'Ice Cream', isChecked: false },
-        ];
-        this.todaymeals = [];
+        this.foodSuggestionsService = foodSuggestionsService;
+        this.myAPI = myAPI;
+        this.modalController = modalController;
+        this.day = "";
+        this.today = false;
+        this.dayNumber = null;
+        this.date = null;
+        this.meals = [];
+        this.exercises = [];
+        this.status = "";
+        this.percent = 0;
+        this.circlesubtitle = "";
+        this.circlecolor = "#c0c0c0"; //gray atr first
+        this.dayNutritionInfo = { "phase": null, "phaseday": null, "daynutrition": { "protein": null, "carbs": null, "fat": null } };
+        this.dietCaloriesIntake = null;
+        this.caloriesConsumed = 0;
+        this.caloriesFromProteinAsP = 0;
+        this.caloriesFromCarbsAsP = 0;
+        this.caloriesFromFatAsP = 0;
     }
     TrackMealPage.prototype.ngOnInit = function () {
-        this.day = this.activatedRoute.snapshot.paramMap.get('day');
-        //get 2 random meals for testing stackoverflow func
-        this.todaymeals = this.randomMeals.sort(function () { return .5 - Math.random(); }).slice(0, 2);
-        //default day is 5 , i.e. 5 == today
-        //if anyuthing before that will be checked and disabled; anything after will be unchecked
-        for (var i = 0; i < this.todaymeals.length; i++) {
-            if (this.day < 5) {
-                this.todaymeals[i].isChecked = true;
-                this.disablechecksmarks = true;
-            }
-            else if (this.day > 5) {
-                this.todaymeals[i].isChecked = false;
+        this.date = this.activatedRoute.snapshot.paramMap.get('day');
+        if (this.date == '') {
+            this.date = this.date = this.globalServices.getTodayDate();
+        }
+        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+        if (this.date == this.globalServices.getTodayDate()) {
+            if (this.today = true) {
+                this.day = "TODAY";
             }
         }
+        this.loadMeals();
     };
-    TrackMealPage.prototype.searchChanged = function () {
-        //this.results = this.movieService.searchData(this.searchTerm, this.type);
-    };
-    TrackMealPage.prototype.addToList = function (title) {
-        this.todaymeals.push({ "name": title, "isChecked": true });
-        this.searchTerm = '';
-    };
-    TrackMealPage.prototype.removeFromList = function (item) {
-        this.todaymeals = this.todaymeals.filter(function (el) { return el.name != item.name; });
-    };
-    TrackMealPage.prototype.editMeal = function () {
-        this.alertCtrl.create({
-            header: "Header",
-            subHeader: "Subheader",
-            message: "Edit Meal",
-            buttons: ['Ok']
-        }).then(function (alert) { return alert.present(); });
+    TrackMealPage.prototype.doRefresh = function (event) {
+        this.ngOnInit();
+        event.target.complete();
     };
     TrackMealPage.prototype.handleSwipeLeft = function () {
-        var nextday = parseInt(this.day) + 1;
-        this.globalServices.swipeLeft("/track-meal/" + nextday);
-    };
-    TrackMealPage.prototype.handleSwipeRight = function () {
-        if (this.day > 1) {
-            var prevday = parseInt(this.day) - 1;
-            this.globalServices.swipeRight("/track-meal/" + prevday);
+        if (this.today) {
+            //won't swipe left tomorrow
+        }
+        else {
+            this.globalServices.swipeLeft("/track-meal/" + this.globalServices.getNextDate(this.date));
         }
     };
-    TrackMealPage.prototype.press = function () {
-        console.log("press");
+    TrackMealPage.prototype.handleSwipeRight = function () {
+        if (this.dayNumber > 1) {
+            this.globalServices.swipeRight("/track-meal/" + this.globalServices.getPreviousDate(this.date));
+        }
+    };
+    TrackMealPage.prototype.loadMeals = function () {
+        var _this = this;
+        var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+        this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, planLength_weeks);
+        this.myAPI.makeAPIcall("meals.php", {
+            "action": "getDayInfo",
+            "date": this.date
+        }, true).subscribe(function (result) {
+            if (result.error) {
+                _this.myAPI.handleMyAPIError(result.error);
+            }
+            else {
+                _this.meals = result.success.dayInfo.meals;
+                _this.exercises = result.success.dayInfo.exercises;
+                _this.calculateCaloriesConsumed();
+            }
+        });
+    };
+    TrackMealPage.prototype.openFoodModal = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var modal;
+            var _this = this;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalController.create({
+                            component: HomeAddFoodModalPage,
+                            componentProps: { date: this.date }
+                        })];
+                    case 1:
+                        modal = _a.sent();
+                        modal.onDidDismiss()
+                            .then(function (response) {
+                            if (response.data) {
+                                _this.loadMeals();
+                            }
+                        });
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    TrackMealPage.prototype.removeMeal = function (meal_id) {
+        this.meals = this.meals.filter(function (el) { return el.id != meal_id; });
+        this.calculateCaloriesConsumed();
+        this.myAPI.makeSilentCall("meals.php", {
+            "action": "removeMeal",
+            "meal_id": meal_id
+        }, true);
+    };
+    TrackMealPage.prototype.calculateCaloriesConsumed = function () {
+        var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+        var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, planLength_weeks);
+        this.caloriesConsumed = info.caloriesConsumed;
+        this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
+        this.caloriesFromCarbsAsP = info.caloriesFromCarbsAsP;
+        this.caloriesFromFatAsP = info.caloriesFromFatAsP;
+        this.dietCaloriesIntake = info.dietCaloriesIntake;
+        this.percent = info.percent;
+        if (info.color == "red") {
+            this.circlecolor = "#CA1616";
+            this.status = "BAD";
+        }
+        else if (this.caloriesConsumed == 0) {
+            this.status = "NO INFO";
+        }
+        else {
+            this.circlecolor = "rgb(56, 129, 255";
+            this.status = "GOOD";
+        }
+        this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
     };
     TrackMealPage = tslib_1.__decorate([
         Component({
@@ -78,8 +138,8 @@ var TrackMealPage = /** @class */ (function () {
             templateUrl: './track-meal.page.html',
             styleUrls: ['./track-meal.page.scss'],
         }),
-        tslib_1.__metadata("design:paramtypes", [AlertController, Router,
-            GlobalServicesService, ActivatedRoute])
+        tslib_1.__metadata("design:paramtypes", [GlobalServicesService, ActivatedRoute,
+            FoodSuggestionsService, ApiCallService, ModalController])
     ], TrackMealPage);
     return TrackMealPage;
 }());

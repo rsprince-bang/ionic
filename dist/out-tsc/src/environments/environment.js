@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 export var environment = {
     production: false,
-    API_URL: "http://3.17.161.217/md-app/"
+    API_URL: "http://10.220.0.4/~sraychev/bang-us-new/md-app/"
 };
 /*
  * For easier debugging in development mode, you can import the following file
