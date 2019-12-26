@@ -20,7 +20,7 @@
 
 
   <ion-toolbar class="day-block" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
-    <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeLeft()" name="arrow-back" slot="start"></ion-icon>
+    <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
     <ion-card >
       <ion-card-header>
         <ion-card-title class="day">{{day}}</ion-card-title>
@@ -37,7 +37,7 @@
       </ng-template>
 
     </ion-card>
-      <ion-icon class="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeRight()" name="arrow-forward" slot="end"></ion-icon>
+      <ion-icon class="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
     </ion-toolbar>
 
   <div>

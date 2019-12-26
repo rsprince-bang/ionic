@@ -114,7 +114,7 @@ if(){
 
 
 
-  handleSwipeRight() {
+  handleSwipeLeft() {
     switch (this.day) {
       case "yesterday": {
         this.globalServices.swipeLeft("/home/today");
@@ -131,7 +131,7 @@ if(){
     }
   }
 
-  handleSwipeLeft() {
+  handleSwipeRight() {
     switch (this.day) {
       case "today": {
         if (this.dayNumber > 1) {
@@ -261,25 +261,6 @@ if(){
     }
     return fontSize;
   }
-
-  // changeBackgroundColor(){
-  //   var color = null;
-  //   switch(this.day){
-  //     case 'today':{
-  //       color = '#e2f6fa';
-  //     break;
-  //     }
-  //     case 'tomorrow':{
-  //       color = '#99d2ff';
-  //     break;
-  //     }
-  //     case 'yesterday':{
-  //       color = '#99d2ff';
-  //     break;
-  //     }
-  //   }
-  //   return color
-  // }
 
   getFeedback(){
     //this.dayNumber is stored in lcoal storage so it will be available at the time this functino gets called 
