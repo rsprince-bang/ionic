@@ -11,6 +11,8 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 
+$fontBold : bold;
+
 ////////////////////////////////////////
 //calender CSS override
 
@@ -29,14 +31,12 @@ The current date
 monthview-disabled
 The disabled date */
 
-$fontBold : bold;
-
-.monthview-current{
+.monthview-current.monthview-current{
     background-color: rgb(199, 198, 198) !important;
     color: black !important;
 }
 .monthview-selected{
-    background-color: rgb(199, 198, 198) !important;
+    background-color: rgba(199, 198, 198, 0.3) !important;
     color: black !important;
 }
 .monthview-primary-with-event{
@@ -47,6 +47,7 @@ $fontBold : bold;
     background-color: white !important;
     color: black !important;
 }
+
 app-home{
     position: relative;
 }
@@ -70,7 +71,7 @@ ion-header ion-toolbar,ion-button{
 .footer ion-button{
     font-weight: $fontBold;
 }
-.day_block{
+.day_box{
     --background: rgb(226, 246, 250);
 }
 

@@ -1,22 +1,30 @@
 .date{
-        font-size: 18px;
-        font-weight: bold;
-    }
-    .close{
-        position: absolute;
-        right: 15px;
-        font-size: 30px;
-    }
-    .swiper-slide{
-        margin-bottom: 40px;
-    }
-    ion-img {
-        margin-top: 25px;
-    }
-    ion-content{
-        background-image: none;
-    }
-    ion-card-subtitle{
-        height: 60px;
-        padding: 5px;
-    }
+    font-size: 18px;
+    font-weight: bold;
+}
+.close{
+    position: absolute;
+    right: 5px;
+    font-size: 30px;
+}
+.swiper-slide{
+    margin-bottom: 40px;
+}
+ion-img {
+    margin-top: 25px;
+}
+ion-content{
+    background-image: none;
+}
+ion-card-subtitle{
+    height: 60px;
+    padding: 5px;
+}
+.img-box{
+    margin: 0 auto;
+    margin-top: 5%;
+    width:100%;
+    height:30em;
+    object-fit: cover;
+    object-position: center;
+}

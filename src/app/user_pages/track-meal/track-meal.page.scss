@@ -1,26 +1,68 @@
-.track-meal{
 
+$backgroundColor : rgb(226, 246, 250);
+$frontColor : rgb(67, 66, 66);
+$fontBold : bold;
+
+
+$frontColor : rgb(67, 66, 66);
+$fontBold : bold;
+
+
+.arrow-back, .arrow-forward{
+    color: $frontColor;
+    font-size: 25px;
+}
+
+.dayNumber{
+    color : $frontColor;
+}
+
+.dayNumber, .CurrentProgress{
+    text-align:center;
+    font-weight: $fontBold;
+}
+
+.CurrentProgress span{
+    font-size: 20px;
+
+}
+
+.track-meal{
     margin: 0 auto;
 }
-.percent{
-    display: flex;
-    
-}
+
 .namePercentt{
     display: flex;
     justify-content: space-between;
     text-align: center;
     margin-top: 15px;
 }
-.circle{
-    margin-top: 15px;
-}
+
 .meal{
     text-transform:lowercase;
     display: flex;
     justify-content: space-between;
-    overflow: auto;
+    color: $frontColor;
 }
+
 .addFood{
     width: 100%;
 }
+
+
+
+.foodList{
+    margin-left:10px; 
+    font-weight: $fontBold;
+    font-size: 18px;
+}
+
+.foodListBg{
+    --background: none;
+}
+
+.circleProgress{
+    height:200px; 
+    margin: 10px;
+}
+

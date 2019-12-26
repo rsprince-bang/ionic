@@ -42,7 +42,6 @@ export class HomePage implements OnInit {
   circlecolor = "#2b2b2b"; //gray atr first
   dayNutritionInfo = { "phase": null, "phaseday": null,"phasename":null , "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
-  backgroundColor = "#2b2b2b";
   
   //declare barcharts
   public barChartOptions: ChartOptions = {
@@ -68,7 +67,7 @@ export class HomePage implements OnInit {
     },
     plugins: {
       datalabels: {
-        anchor: 'end',
+        anchor: 'center',
         clamp : true,
         offset: 0,
         font: {
@@ -113,7 +112,7 @@ if(){
 
 
 
-  handleSwipeLeft() {
+  handleSwipeRight() {
     switch (this.day) {
       case "yesterday": {
         this.globalServices.swipeLeft("/home/today");
@@ -130,7 +129,7 @@ if(){
     }
   }
 
-  handleSwipeRight() {
+  handleSwipeLeft() {
     switch (this.day) {
       case "today": {
         if (this.dayNumber > 1) {
@@ -156,7 +155,6 @@ if(){
   }
 
   updatepage() {
-    this.backgroundColor = this.changeBackgroundColor();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
     this.planLength_days = this.planLength_weeks * 7;
@@ -262,27 +260,6 @@ if(){
     }
     return fontSize;
   }
-
-  changeBackgroundColor(){
-    var color = null;
-    switch(this.day){
-      case 'today':{
-        color = '#e2f6fa';
-      break;
-      }
-      case 'tomorrow':{
-        color = '#99d2ff';
-      break;
-      }
-      case 'yesterday':{
-        color = '#99d2ff';
-      break;
-      }
-    }
-    return color
-  }
-  
-  
 }
 
 
