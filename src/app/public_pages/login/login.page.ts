@@ -66,6 +66,7 @@ export class LoginPage implements OnInit {
           else{
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
             localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
+            localStorage.setItem("lastFeedback", result.success.lastFeedback);
             localStorage.setItem('diet_plan_length', result.success.plan_length);
             this.router.navigateByUrl("/home/today");
           }
@@ -144,6 +145,7 @@ export class LoginPage implements OnInit {
           else{
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
             localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
+            localStorage.setItem("lastFeedback", result.success.lastFeedback);
             localStorage.setItem('diet_plan_length', result.success.plan_length );
             this.router.navigateByUrl("/home/today");
           }

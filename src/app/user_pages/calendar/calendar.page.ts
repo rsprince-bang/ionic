@@ -63,19 +63,21 @@ export class CalendarPage implements OnInit {
       else {
         //returns an array of days with meals and exercises
         var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+        this.eventSource = [];
         for (let i = 0; i < result.success.daysInfo.length; i++){
           var dayCalorieInfo = this.foodSuggestionsService.getCaloriesPercentages(result.success.daysInfo[i].date.date_consumed, result.success.daysInfo[i].meals, result.success.daysInfo[i].exercises, planLength_weeks);
-          var dateNoLeadingZeros = result.success.daysInfo[i].date.date_consumed.replace(/-0/g, "-");
+          var eventdate = result.success.daysInfo[i].date.date_consumed + " 00:00:00";
 
           //add to calendar
           this.eventSource.push({
             title: 'None',
-            startTime: new Date(dateNoLeadingZeros),
-            endTime: new Date(dateNoLeadingZeros),
+            startTime: new Date(eventdate.replace(/-/g, '/')),
+            endTime: new Date(eventdate.replace(/-/g, '/')),
             allDay: true,
             color: dayCalorieInfo.color
           });
         }
+
         this.myCalendar.loadEvents(); 
       }
     });
