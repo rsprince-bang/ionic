@@ -33,6 +33,15 @@
     <ion-icon *ngIf = "!today" name="arrow-forward" slot="end" (click)="handleSwipeLeft()" class="arrow-forward"></ion-icon>
   </ion-toolbar>
 
+  <ion-list *ngIf="suggestedSupplements?.supplement?.hasOwnProperty('name') && today">
+    <ion-list-header>
+      <ion-label>Today supplement suggestion:</ion-label>
+    </ion-list-header>
+    <ion-item >
+      <p><a (click)="globalServices.openLink(suggestedSupplements.supplement.link, '_system')">{{suggestedSupplements.supplement.name}}</a></p>
+    </ion-item>
+  </ion-list>
+  
   <!-- Nutririon info-->
   <div class="box-track-meal">
      <ion-item >

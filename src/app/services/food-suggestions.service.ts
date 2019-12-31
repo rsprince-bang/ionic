@@ -118,19 +118,23 @@ export class FoodSuggestionsService {
     //define phase one days
     this.dietPlan.w12[Phases.one] = { name:"Fuel Shifting - 28 days", days:[] };
     this.dietPlan.w12[Phases.one].days[1] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w12[Phases.one].days[2] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w12[Phases.one].days[3] = {
       "protein": 50, "carbs": 40, "fat": 10
     };
     this.dietPlan.w12[Phases.one].days[4] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w12[Phases.one].days[5] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w12[Phases.one].days[6] = {
       "protein": 50, "carbs": 40, "fat": 10
@@ -142,19 +146,22 @@ export class FoodSuggestionsService {
     //define phase two days
     this.dietPlan.w12[Phases.two] = { name:"Calorie Shift Metabolic Kick - 28 days", days:[] };
     this.dietPlan.w12[Phases.two].days[1] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w12[Phases.two].days[2] = {
       "protein": 50, "carbs": 40, "fat": 10
     };
     this.dietPlan.w12[Phases.two].days[3] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w12[Phases.two].days[4] = {
       "protein": 50, "carbs": 40, "fat": 10
     };
     this.dietPlan.w12[Phases.two].days[5] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w12[Phases.two].days[6] = {
       "protein": 50, "carbs": 40, "fat": 10
@@ -166,7 +173,8 @@ export class FoodSuggestionsService {
     //define phase three days
     this.dietPlan.w12[Phases.three] = { name:"The Rapid Body Remodeling Bang Anti-Diet Lifestyle - 28 days", days:[] };
     this.dietPlan.w12[Phases.three].days[1] = { //day one repets all week
-      "protein": 60, "carbs": 20, "fat": 20
+      "protein": 60, "carbs": 20, "fat": 20,
+      "suplement_suggestions": ["Carb"]
     };
     //end 12 week plan
 
@@ -174,19 +182,23 @@ export class FoodSuggestionsService {
     //define phase one days
     this.dietPlan.w7[Phases.one] = { name:"Fuel Shifting - 28 days", days:[] };
     this.dietPlan.w7[Phases.one].days[1] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w7[Phases.one].days[2] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w7[Phases.one].days[3] = {
       "protein": 50, "carbs": 40, "fat": 10
     };
     this.dietPlan.w7[Phases.one].days[4] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w7[Phases.one].days[5] = {
-      "protein": 60, "carbs": 19, "fat": 21
+      "protein": 60, "carbs": 19, "fat": 21,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w7[Phases.one].days[6] = {
       "protein": 50, "carbs": 40, "fat": 10
@@ -198,19 +210,22 @@ export class FoodSuggestionsService {
     //define phase two days
     this.dietPlan.w7[Phases.two] = { name:"Calorie Shift Ketone Kick - 21 days", days:[] };
     this.dietPlan.w7[Phases.two].days[1] = {
-      "protein": 59, "carbs": 19.5, "fat": 21.5
+      "protein": 59, "carbs": 19.5, "fat": 21.5,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w7[Phases.two].days[2] = {
       "protein": 37, "carbs": 55, "fat": 8
     };
     this.dietPlan.w7[Phases.two].days[3] = {
-      "protein": 59, "carbs": 19.5, "fat": 21.5
+      "protein": 59, "carbs": 19.5, "fat": 21.5,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w7[Phases.two].days[4] = {
       "protein": 37, "carbs": 55, "fat": 8
     };
     this.dietPlan.w7[Phases.two].days[5] = {
-      "protein": 59, "carbs": 19.5, "fat": 21.5
+      "protein": 59, "carbs": 19.5, "fat": 21.5,
+      "suplement_suggestions": ["Carb"]
     };
     this.dietPlan.w7[Phases.two].days[6] = {
       "protein": 37, "carbs": 55, "fat": 8
@@ -221,8 +236,15 @@ export class FoodSuggestionsService {
     //end 7 week plan
 
     //declare charts
-    //dont have charts for new diet
-
+    this.charts["Carb"] = [ 
+      {name:"Meltdown® 1 KETO Caffeine Free", link: "https://bang-energy.com/shop/meltdown-1-keto-caffeine-free/" },
+      {name:"Meltdown® 1 KETO 12 Pack", link: "https://bang-energy.com/shop/meltdown-1-keto-12-pack/" },
+      {name:"Meltdown Princess", link: "https://bang-energy.com/shop/meltdown-princess/" },
+      {name:"Ketonz Fat Blaster", link: "https://bang-energy.com/shop/ketonz-fat-blaster/" }
+    ];
+    this.charts["Anyday"] = [ 
+      {name:"Bang Keto Coffee 12 Pack", link: "https://bang-energy.com/shop/bang-keto-coffee-12-pack/" }
+    ];
   }
 
   getDietDayNumber(date) {
@@ -492,6 +514,25 @@ export class FoodSuggestionsService {
     }
   }
 
+  getSupplementSuggestions(date, plan_length){
+    var suggestions = [];
+    suggestions["supplement"] = null;
+
+    var dayDescription = this.getDietDayDescription(date, plan_length);
+    if (dayDescription.daynutrition.hasOwnProperty("suplement_suggestions")) {
+      var suggestionsArray = this.charts[dayDescription.daynutrition.suplement_suggestions];
+      suggestions["supplement"] = suggestionsArray[Math.floor(Math.random() * suggestionsArray.length)];
+    }
+    else{
+      //if there are no suggestions, then you can take keto coffee any day
+      var suggestionsArray = this.charts["Anyday"];
+      suggestions["supplement"] = suggestionsArray[Math.floor(Math.random() * suggestionsArray.length)];
+    }
+
+    return {
+      "supplement":suggestions["supplement"]
+    }
+  }
 
 
 }

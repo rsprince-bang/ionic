@@ -4,13 +4,15 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { NavController } from '@ionic/angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalServicesService {
 
-  constructor(private router: Router, /*private nativePageTransitions: NativePageTransitions, */ private navCtrl: NavController, private http: HttpClient) { }
+  constructor(private router: Router, /*private nativePageTransitions: NativePageTransitions, */ private navCtrl: NavController, private http: HttpClient, 
+    private iab: InAppBrowser) { }
 
   isLoggedIn() {
     let token = localStorage.getItem('token');
@@ -179,6 +181,18 @@ export class GlobalServicesService {
     var dateObj = new Date(d_string.replace(/-/g, '/'));
 
     return  dateObj.toDateString();
+  }
+
+
+  openLink(link, type){
+    /*
+    window.open(‘http://example.com’, ‘_system’);	Loads in the system browser
+    window.open(‘http://example.com’, ‘_blank’);	Loads in the InAppBrowser
+    window.open(‘http://example.com’, ‘_blank’, ‘location=no’);	Loads in the InAppBrowser with no location bar
+    window.open(‘http://example.com’, ‘_self’);	Loads in the Cordova web view
+    */
+
+   const browser = this.iab.create(link, type);
   }
 
 }

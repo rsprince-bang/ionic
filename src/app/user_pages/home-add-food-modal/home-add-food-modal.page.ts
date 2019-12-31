@@ -14,13 +14,15 @@ export class HomeAddFoodModalPage implements OnInit {
   date = null;  //passed from previous page
   searchResults = [];
   searchTerm = '';
-  suggestedFoods ;
+  //suggestedFoods ;
+  //suggestedSupplements;
 
   constructor(private modalController: ModalController, private myAPI: ApiCallService, private foodSuggestionsService: FoodSuggestionsService) { }
 
   ngOnInit() {
     var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
-    this.suggestedFoods = this.foodSuggestionsService.getFoodSuggestions(this.date, planLength_weeks);
+    //this.suggestedFoods = this.foodSuggestionsService.getFoodSuggestions(this.date, planLength_weeks);
+    //this.suggestedSupplements = this.foodSuggestionsService.getSupplementSuggestions(this.date, planLength_weeks);
   }
 
   searchChanged(){

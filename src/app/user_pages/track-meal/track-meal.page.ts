@@ -30,6 +30,8 @@ export class TrackMealPage implements OnInit {
   caloriesFromProteinAsP:number =0;
   caloriesFromCarbsAsP:number =0;
   caloriesFromFatAsP:number =0;
+  planLength_weeks;
+  suggestedSupplements;
 
   constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,
     private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
@@ -45,6 +47,8 @@ export class TrackMealPage implements OnInit {
         this.day = "TODAY"
       }
     }
+    this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+    this.suggestedSupplements = this.foodSuggestionsService.getSupplementSuggestions(this.date, this.planLength_weeks);
     this.loadMeals();
   }
 
@@ -69,8 +73,7 @@ export class TrackMealPage implements OnInit {
   }
 
   loadMeals(){
-    var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, planLength_weeks);
+    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
     this.myAPI.makeAPIcall(
       "meals.php", 
       {
@@ -121,8 +124,7 @@ export class TrackMealPage implements OnInit {
   }
 
   calculateCaloriesConsumed(){
-    var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
-    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, planLength_weeks);
+    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
 
     this.caloriesConsumed = info.caloriesConsumed;
     this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;

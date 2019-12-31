@@ -8,15 +8,14 @@
 
   <ion-searchbar (search)="searchChanged($event)" [(ngModel)]="searchTerm" (ionClear)="clearSearch()" placeholder="Enter a quesry like '10 oz ribeye with a side of french fries' to see how it works."></ion-searchbar>
 
-  <ion-list>
+  <!-- <ion-list *ngIf="suggestedSupplements?.supplement?.hasOwnProperty('name')">
     <ion-list-header>
       <ion-label>Suggestions:</ion-label>
     </ion-list-header>
-    <ion-item>Meal one of the day can be {{suggestedFoods.mealOne}}</ion-item>
-    <ion-item>protein: {{suggestedFoods.proteinMeals}}</ion-item>
-    <ion-item>carbs: {{suggestedFoods.carbMeals}}</ion-item>
-    <ion-item *ngIf="!suggestedFoods?.fatMeals?.length == 0">fat: {{suggestedFoods.fatMeals}}</ion-item>
-  </ion-list>
+    <ion-item >
+      <p><a (click)="openLink('https://bang-energy.com/shop/zero-carb-sro-4-4lb/')">{{suggestedSupplements.supplement.name}}</a></p>
+    </ion-item>
+  </ion-list> -->
 
 
   <!--for Nutritionix -->
