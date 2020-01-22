@@ -53,4 +53,4 @@ The following database tables will need to be added to the primary WordPress ins
 
 These tables should be a part of the primary Bang US WordPress website that you have setup as your test/development website, aka where your API is calling to. 
 
-[Download SQL Database Tables Here]('http://10.220.0.4/~csteurer/_db/md_tables.sql')
+[Download SQL Database Tables Here](http://10.220.0.4/~csteurer/_db/md_tables.sql)
