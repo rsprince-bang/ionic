@@ -5,7 +5,7 @@ See: https://ionicframework.com/docs/installation/cli
 
 Dependencies
 - Git
-- Node
+- Node [Download Node LTS](https://nodejs.org/en/download/)
   - NPM
     - Ionic
 
