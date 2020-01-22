@@ -37,13 +37,14 @@ ionic serve --devapp
 ## Setup
 ### Change API URL in 
 Update the URL in the Environment's file to match your test/development environment on the development server.
+
+Open the file with nano or other editor:
 ```
-/** File To Update **/
-src/app/environments/environment.ts
+sudo nano src/app/environments/environment.ts
 ```
 
+Change The Following Line To Match Your Dev URL:
 ```
-/** Change The Following Line To Match Your Dev URL **/
 API_URL: "http://10.220.0.4/~sraychev/bang-us-new/md-app/"
 ```
 
