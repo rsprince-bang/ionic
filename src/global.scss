@@ -31,44 +31,45 @@ The current date
 monthview-disabled
 The disabled date */
 
-.monthview-current.monthview-current{
+.monthview-current.monthview-current {
     background-color: rgb(199, 198, 198) !important;
     color: black !important;
 }
-.monthview-selected{
+.monthview-selected {
     background-color: rgba(199, 198, 198, 0.3) !important;
     color: black !important;
 }
-.monthview-primary-with-event{
+.monthview-primary-with-event {
     background-color: white !important;
     color: black !important;
 }
-.monthview-secondary-with-event{
+.monthview-secondary-with-event {
     background-color: white !important;
     color: black !important;
 }
 
-app-home{
+app-home {
     position: relative;
 }
-ion-content{
+ion-content {
     --ion-background-color: rgba(235, 251, 255, 0.79);
     background-image:url("./assets/img/book-smoke-mobile.jpg") ;
     background-repeat: no-repeat;
     background-position-x: left;
     background-position-y: bottom;
 }
-ion-header ion-toolbar,ion-button{
+ion-header ion-toolbar,
+ion-button { 
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     --background:rgb(0, 198, 242);
 }
-.img{
+.img {
     position: absolute;
     bottom: 0px;
     max-width: none;
 }
-.footer ion-button{
+.footer ion-button {
     font-weight: $fontBold;
 }
 .day_box{
@@ -76,13 +77,28 @@ ion-header ion-toolbar,ion-button{
 }
 
 @media only screen and (min-width: 700px) {
-    ion-content{
-    background-image:url("./assets/img/book-smoke-ipad.jpg") ;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-    background-size: contain;
+    ion-content { 
+        background-image:url("./assets/img/book-smoke-ipad.jpg") ;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        background-size: contain;
     }
-  }
+}
+
+
+// ion-page.login {
+//     background-image: url('assets/img/jack.jpg');
+// }
+
+// ion-content {
+//     background-image: url("./assets/img/book-smoke-mobile.jpg") ;
+// }
 
 
 
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-white { color: #fff; }
+.text-black { color: #000; }

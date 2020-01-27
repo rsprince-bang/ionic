@@ -1,29 +1,42 @@
 <ion-content padding>
   <div class="login_form">
     <div>
-    <div class="login_img">
-        <img src="assets/img/jack.png" >
+      
+      <div class="login_img">
+        <img src="assets/img/book-cover-no-shadow.png" >
       </div>
   
       <form class="login_form_input"[formGroup]="credentialsForm" (ngSubmit)="login()">
+
+        <fieldset class="login email">
+          <ion-label color="light" position="floating">Username / Email</ion-label>
+          <ion-input type="email" formControlName="email" placeholder="Username">
+            <span class="input-icon input-icon-left" item-right>
+              <ion-icon name="person"></ion-icon>
+            </span>
+          </ion-input>
+        </fieldset>
+
+        <fieldset class="login password">
+          <ion-label color="light" position="floating">Password</ion-label>
+          <ion-input type="password" formControlName="password" placeholder="Password">
+            <span class="input-icon input-icon-left" item-right>
+              <ion-icon name="lock"></ion-icon>
+            </span>
+          </ion-input>
+        </fieldset>
   
-        <ion-item class="login email">
-          <ion-label  position="stacked">Email</ion-label>
-          <ion-input type="email" formControlName="email"></ion-input>
-        </ion-item>
-  
-        <ion-item class="login password">
-          <ion-label position="stacked">Password</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
-        </ion-item>
-  
-        <ion-button class="login_bt"expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
+        <ion-button class="btn btn-login btn-round" expand="full" type="submit" [disabled]="!credentialsForm.valid" shape="round">Login</ion-button>
+        <div class="text-center text-white">OR</div>
+        <ion-button  class="btn btn-login-facebook btn-round" expand="full" type="submit" (click)="doFbLogIn()" tabIcon="fab fa-facebook" shape="round">
+          <ion-icon slot="start" name="logo-facebook"></ion-icon>
+          continue with Facebook
+        </ion-button>
+
       </form>
-  
-      <ion-button  class="login_fb " expand="full" type="submit" (click)="doFbLogIn()" tabIcon="fab fa-facebook">continue with Facebook</ion-button> 
       
-  
-      <p class="login_register">Dont have a account? <a class="login_link"[routerLink]="['/register']">Register</a></p>
-      </div>
+      <p class="register-prompt text-white">Dont have a account? <a class="register-link"[routerLink]="['/register']">Register</a></p>
+
+    </div>
   </div>
 </ion-content>
