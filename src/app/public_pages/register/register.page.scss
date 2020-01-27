@@ -1,38 +1,81 @@
-.register_bt{
+ion-header ion-toolbar {
+    background-color: #0967ec;
+    --background: linear-gradient(90deg, rgba(9,103,236,1) 0%, rgba(2,146,253,1) 50%);
+}
+.header-ios ion-toolbar:last-child {
+    border-width: 0;
+}
+
+ion-content.hydrated {
+    --ion-background-color: rgba(235, 251, 255, 0.0);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../../assets/img/blue-background.png");
+}
+
+ion-input {
+    background-color: rgba(255,255,255,0.8);
+    color: #000;
+    border-radius: 10px;
+    border: none;
+}
+
+form .item-label-stacked .sc-ion-input-md-h {
+    --padding-start: 0.72rem;
+    --padding-end: 0.72rem;
+    --padding-top: 0.12rem;
+    --padding-bottom: 0.12rem;
+}
+
+form ion-label {
+    color: #fff;
+}
+
+.form ion-item {
+    margin-bottom: 0.5rem;
+}
+
+.btn-register {
     text-transform: uppercase;
-    --border-radius: block;
-    --ion-color-primary-shade:rgb(84, 163, 247);
-  
-}
-.register_title{
-    --background: #8100ac;
-    color:white;
-    text-transform: uppercase; 
+    --background: #0417c2;
+    // background-color: #0417c2;
+    --border-radius: 10px;
 
-}
-.register_back{
-    --color:white;
-    text-transform: uppercase; 
+    max-width: 9rem;
+    display: block;
+    margin: 3rem auto 0;
+    border-radius: 10px;
 }
 
-.login_link{
-    --ion-color-primary: block;
-    color: darkblue;
+.register_title {
+    background: transparent;
+    color: white;
+    text-transform: uppercase;
+}
+
+.register_back {
+    color: white;
+    text-transform: uppercase;
+}
+
+.login_link {
+    // color: darkblue;
     font-weight: bold;
 }
-.form{
-    padding: 5%;
+
+.form {
+    // padding: 5%;
 }
-.register{
-    bottom: 0px; position: absolute;margin-left: -15px;
-  }
-  @media only screen and (min-width: 700px) {
-    .form{
-        margin: 10% 5%;
-    }
-    .form ion-item{
-        padding: 2%;
-    }
-  }
 
+.register {
+    // bottom: 0px;
+    // position: absolute;
+    // margin-left: -15px;
+}
 
+@media screen and ( min-width: 700px ) {
+    .form {
+        // margin: 10% 5%;
+    }
+}

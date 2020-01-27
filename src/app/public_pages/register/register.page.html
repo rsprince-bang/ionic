@@ -3,46 +3,45 @@
     <ion-buttons slot="start">
       <ion-back-button class="register_back"></ion-back-button>
     </ion-buttons >
-    <ion-title >Register</ion-title>
+    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <form class = "form"[formGroup]="registerForm" (ngSubmit)="register()">
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
     <ion-item>
-      <ion-label position="floating">First Name</ion-label>
-      <ion-input type="text" formControlName="first_name"></ion-input>
+      <ion-label position="stacked">First Name</ion-label>
+      <ion-input type="text" formControlName="first_name" expand="full"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Last Name</ion-label>
+      <ion-label position="stacked">Last Name</ion-label>
       <ion-input type="text" formControlName="last_name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">E-mail</ion-label>
+      <ion-label position="stacked">E-mail</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Username</ion-label>
+      <ion-label position="stacked">Username</ion-label>
       <ion-input type="text" formControlName="username"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Password</ion-label>
+      <ion-label position="stacked">Password</ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Verify Password</ion-label>
+      <ion-label position="stacked">Verify Password</ion-label>
       <ion-input type="password" formControlName="password_verify"></ion-input>
     </ion-item>
 
     <ion-footer class="register">
-      <ion-button class="register_bt" expand="full" type="submit" [disabled]="!registerForm.valid">Register</ion-button>
-      <ion-button expand="full" [routerLink]="['/']" routerDirection="back" >Back</ion-button>
+      <ion-button class="btn btn-primary btn-register" expand="block" type="submit" [disabled]="!registerForm.valid">Register</ion-button>
     </ion-footer>
   </form >
 
