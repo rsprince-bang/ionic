@@ -12,6 +12,8 @@
 
 
 $fontBold : bold;
+$lightGrey : #c9ccd0;
+$darkBlue : #000e1e;
 
 ////////////////////////////////////////
 //calender CSS override
@@ -48,21 +50,28 @@ The disabled date */
     color: black !important;
 }
 
+
+
 app-home {
     position: relative;
 }
 ion-content {
-    --ion-background-color: rgba(235, 251, 255, 0.79);
-    background-image:url("./assets/img/book-smoke-mobile.jpg") ;
+    // --ion-background-color: rgba(235, 251, 255, 0.79);
+    --ion-background-color: rgba(235, 251, 255, 0);
+    // background-image:url("./assets/img/book-smoke-mobile.jpg");
+    background-image: url("./assets/img/app-background.jpg");
     background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: bottom;
+    background-position: center;
+    background-size: cover;
 }
 ion-header ion-toolbar,
 ion-button { 
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     --background:rgb(0, 198, 242);
+}
+ion-header ion-toolbar { 
+    --background: #000e1e;
 }
 .img {
     position: absolute;
@@ -72,7 +81,7 @@ ion-button {
 .footer ion-button {
     font-weight: $fontBold;
 }
-.day_box{
+.day_box {
     --background: rgb(226, 246, 250);
 }
 
@@ -86,19 +95,138 @@ ion-button {
 }
 
 
-// ion-page.login {
-//     background-image: url('assets/img/jack.jpg');
-// }
+/*
+ * Generic Helper Classes
+ */
 
-// ion-content {
-//     background-image: url("./assets/img/book-smoke-mobile.jpg") ;
-// }
-
-
-
+// Text Alignment
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
+// Text Color
 .text-white { color: #fff; }
 .text-black { color: #000; }
+
+
+
+
+
+/*
+ * Day Change Slider
+ * 
+ * @desc This is the style section for the Day Change Slider that is used to 
+ *  change what day's data is being shown.
+ */
+ion-toolbar.day-change-slider {
+    
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    border-radius: 9px;
+    margin-bottom: 2.1rem;
+
+    ion-card {
+
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        background-color: $darkBlue;
+        --ion-item-background: $darkBlue;
+
+        &.sc-ion-card-ios-h {
+            -webkit-box-shadow: 0 4px 16px rgba(0,0,0,0);
+            box-shadow: 0 4px 16px rgba(0,0,0,0);
+
+            -webkit-margin-start: 0;
+            margin-inline-start: 0;
+            -webkit-margin-end: 0;
+            margin-inline-end: 0;
+
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .arrow-back,
+        .arrow-forward {
+            font-size: 27px;  
+            color: $lightGrey;
+            width: 36px;
+            height: 90px;
+        }
+
+        section {
+            width: calc(100% - (36px * 2));
+
+            ion-card-header {
+                padding-bottom: 0;
+            }
+
+            ion-card-content {
+                color: #fff;
+
+                &.card-content-ios {
+                    padding-top: 0;
+                }
+            }
+
+            .dc-slider-title,
+            .dc-slider-title-label {
+                text-align: center;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .dc-slider-title {
+                font-size: 30px;
+                line-height: 30px;
+                color: #fff;
+            }
+            .dc-slider-title-label {
+                font-size: 15px;
+                color: $lightGrey;
+            }
+        }
+
+        
+    }
+
+}
+
+
+/**
+ * List Groups
+ *
+ * @desc Styles for blocks of list items
+ *
+ */
+.list-group {
+    display: block;
+    background-color: #0417c2;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+
+    .list-group-header {
+        padding: 0.45rem;
+        font-weight: bold;
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.21);
+        font-size: 0.9rem;
+    }
+
+    .list-group-body {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+        .list-group-item {
+            padding: 0.45rem;
+            font-size: 0.81rem;
+        }
+    }
+
+    .list-group-footer {
+        padding: 0.45rem;
+    }
+}

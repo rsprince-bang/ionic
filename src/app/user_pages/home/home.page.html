@@ -1,87 +1,134 @@
 <ion-header>
-  <ion-toolbar >
-    <ion-buttons slot="start">
-      <ion-menu-toggle>
-        <ion-button class="bg-color">
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-button>
-      </ion-menu-toggle>
-    </ion-buttons >
-    <ion-title>Home</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-toggle>
+                <ion-button class="bg-color">
+                    <ion-icon slot="icon-only" name="menu"></ion-icon>
+                </ion-button>
+            </ion-menu-toggle>
+        </ion-buttons>
+        <ion-title>Home</ion-title>
+    </ion-toolbar>
 </ion-header>
-
-
-<ion-content  padding >
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-
-
-  <ion-toolbar class="day-block" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()" >
-    <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
-    <ion-card >
-      <ion-card-header>
-        <ion-card-title class="day">{{day}}</ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content *ngIf="dayNumber>planLength_days; else templateName" class="day">
-        Congratulations!<br>
-        You have completed the The Meltdown Anti-Diet!
-      </ion-card-content>
-      <ng-template #templateName>
-        <ion-card-content class="day program">
-          <span class="dayNumber">DAY {{dayNumber}}</span>
-        </ion-card-content>
-      </ng-template>
-
-    </ion-card>
-      <ion-icon class="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
+<ion-content padding>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    
+    <!-- Day Change Slider -->
+    <ion-toolbar class="day-change-slider" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
+        <ion-card>
+            <ion-icon class="arrow-back" *ngIf="day == 'today' || day == 'tomorrow'" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
+            <section>
+                <ion-card-header>
+                    <ion-card-title class="dc-slider-title-label">{{day}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content *ngIf="dayNumber>planLength_days; else templateName" class="day">
+                    Congratulations!<br>
+                    You have completed the The Meltdown Anti-Diet!
+                </ion-card-content>
+                <ng-template #templateName>
+                    <ion-card-content class="dc-slider-title">
+                        <div class="dayNumber">DAY {{dayNumber}}</div>
+                    </ion-card-content>
+                </ng-template>
+            </section>
+            <ion-icon class="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
+        </ion-card>
     </ion-toolbar>
 
-  <div>
-    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-    </canvas>
-  </div>
+    <!-- Chart -->
+    <div>
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    </div>
 
-  <ion-item>
-    <ion-label class="workout" [routerLink]="['/track-workout', '']">{{workout_completed_msn}}</ion-label>
-    <ion-icon name="fitness" *ngIf="workout_completed == true"></ion-icon>
-    <ion-icon name="pulse" *ngIf="workout_completed == false"></ion-icon>
-    <ion-icon class = "heart" name="heart" *ngIf="workout_completed == false" ></ion-icon>
+    <!-- Workout Status -->
+    <ion-item>
+        <ion-label class="workout" [routerLink]="['/track-workout', '']">{{workout_completed_msn}}</ion-label>
+        <ion-icon name="fitness" *ngIf="workout_completed == true"></ion-icon>
+        <ion-icon name="pulse" *ngIf="workout_completed == false"></ion-icon>
+        <ion-icon class="heart" name="heart" *ngIf="workout_completed == false"></ion-icon>
+    </ion-item>
+
+    <!-- Phase -->
+<!--     <ion-item>
+        <div>
+            <p>Phase {{dayNutritionInfo.phase}}</p>
+            <p>{{dayNutritionInfo.phasename}}</p>
+            <p>
+                <span class="dayNumber_2">Day {{dayNumber}} </span> / <span class="totalDayProgram">{{planLength_days}}</span>
+            </p>
+        </div>
+    </ion-item> -->
+
+
+    <!-- Days Remaining --> 
+    <ion-item>
+      <div class="daily-progress">
+        <div class="text">DAY {{dayNumber}}</div>
+        <div class="chart">
+          <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
+        </div>
+      </div>
+    </ion-item>
+
+
+
+    <!-- Dietary Breakdown -->
+    <ion-item>
+      <ul class="daily-dietary-needs">
+        
+        <li class="daily-dietary-category">
+          <strong>Protein:</strong> Need <span class="">??</span> Calories
+        </li>
+
+        <li class="daily-dietary-category">
+          <strong>Carbs:</strong> Need <span class="">??</span> Calories
+        </li>
+
+        <li class="daily-dietary-category">
+          <strong>Fat:</strong> Need <span class="">??</span> Calories
+        </li>
+
+      </ul>
   </ion-item>
 
-<ion-item>
-  <div>
-    <p>Phase {{dayNutritionInfo.phase}}</p>
-    <p>{{dayNutritionInfo.phasename}}</p>
-    <p>
-      <span class="dayNumber_2">Day {{dayNumber}} </span> / <span class="totalDayProgram">{{planLength_days}}</span> 
-    </p>
+
+  <!-- Daily Calorie Consumption -->
+  <div class="content-footer">
+    <ion-grid>
+      <ion-row>
+        
+        <ion-col size="6">
+          <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
+          <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle"></circle-progress>
+        </ion-col>
+
+        <ion-col size="6">
+          <div class="list-group">
+            
+            <div class="list-group-header">Maximum Calories</div>
+            
+            <ul class="list-group-body">
+              <li class="list-group-item">{{dietCaloriesIntake}} Calories</li>
+            </ul>
+
+          </div>
+
+          <div class="list-group">
+            
+            <div class="list-group-header">Consumed Calories</div>
+            
+            <ul class="list-group-body">
+              <li class="list-group-item">{{caloriesConsumed}} Calories</li>
+            </ul>
+            
+          </div>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
   </div>
-</ion-item>
 
-<!-- <ion-item>
-  <p>
-    <span class="namePercentt home_text3" [ngStyle]="{ 'color' : circlecolor}">
-        <span class="name_percent"> <strong> Protein </strong> : {{warnText.proteinText}} </span>  
-        <br/><span class="name_percent"> <strong> Carbs </strong> : {{warnText.carbsText}} </span>
-        <br/><span class="name_percent"> <strong> Fat </strong> : {{warnText.fatText}}</span>
-  </span>
-  </p>
-</ion-item> -->
-
-
-  <div class="home_totalCol">
-
-    <p class= "maxCalories" > Maximum Calories Today : <strong>{{dietCaloriesIntake}}</strong> Calories<br />Cosnusmed : 
-      <strong [ngStyle]="{ 'color' : circlecolor}">{{caloriesConsumed}}</strong>
-       Calories
-    </p>
-
-    <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
-    <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle"></circle-progress>
-  </div>
-  </ion-content>
+</ion-content>
