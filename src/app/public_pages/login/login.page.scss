@@ -1,52 +1,15 @@
-.login_img {
-    width: 80%;
-    max-width: 180px;
-    display: block;
-    margin: 0 auto 2.1rem;
-}
-.login_form {
+// Page Content Container
+.login-screen {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-.login_form_input {
-    margin-top: 10px;
-}
-
-
-.btn.btn-round {
-    --border-radius: 10px;
-}
-.btn-login {
-    margin: 2rem 0 0.5rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    --background: #fff;
-    --ion-color-primary-shade: #dbdbdb;
-    color: #000;
-}
-.btn-login-facebook {
-    margin: 0.5rem 0;
-    --background: #3b5998 ;
-    text-transform: uppercase;
-    --ion-color-primary-shade: #546996;
+    width: 90%;
+    max-width: 360px;
 }
 
 
-.register-prompt {
-    margin-top: 1.5rem;
-    font-weight: 400;
-    text-align: center;
-    color: #fff;
-    font-size: 0.72rem;
-}
-.register-link {
-    color: #fff;
-    font-weight: bold;
-    text-decoration: none;
-}
-
+// Additional Container Styles
 ion-content.hydrated {
     --ion-background-color: rgba(235, 251, 255, 0.0);
     background-repeat: no-repeat;
@@ -55,34 +18,91 @@ ion-content.hydrated {
     background-image: url("../../../assets/img/blue-background.png");
 }
 
-fieldset.login {
-    border: none;
-    padding: 0;
-    margin: 0 0 1rem 0;
 
-    input {
-        border-bottom: solid 1px #000;
+// Image on the Login Screen
+.login-screen-img {
+    width: 80%;
+    max-width: 210px;
+    display: block;
+    margin: 0 auto 2.1rem;
+}
+
+ion-item {
+    // Remove the padding from the start of inputs
+    --padding-start: 0;
+    --ion-safe-area-left: 0;
+
+    // Remove the padding from the end of inputs
+    --ion-safe-area-right: 0;
+    --inner-padding-end: 0;
+
+    // Set height of the color validation bars on inputs
+    --inset-highlight-height: 1px;
+}
+
+// The Primary Login Form
+.form.form-app-login {
+    margin-top: 10px;
+
+
+    // Style the Ionic Input Wrapper
+    ion-input {
+        border-bottom: solid 1px #fff;
+        color: #fff;
+        margin-bottom: 1px;
+    }
+
+
+    // Set the Input Icons
+    .input-icon.input-icon-left {
+        margin-right: 1rem;
+    }
+    .input-icon.input-icon-right {
+        margin-left: 1rem;
+    }
+
+
+    // Styles for Input Labels
+    ion-label {
+        font-weight: bold;
+        font-size: 0.81rem;
     }
 }
 
-ion-input {
-    border-bottom: solid 2px #fff;
-    color: #fff
+
+// Button Styles
+.btn {
+    &.btn-round {
+        --border-radius: 10px;
+    }
+    &.btn-login {
+        margin: 2rem 0 0.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        --background: #fff;
+        --ion-color-primary-shade: #dbdbdb;
+        color: #000;
+    }
+    &.btn-login-facebook {
+        margin: 0.5rem 0;
+        --background: #3b5998 ;
+        text-transform: uppercase;
+        --ion-color-primary-shade: #546996;
+    }
 }
 
 
+// Register Text
+.register-text {
+    margin-top: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    font-size: 0.72rem;
 
-
-.input-icon.input-icon-left {
-    margin-right: 1rem;
-}
-.input-icon.input-icon-right {
-    margin-left: 1rem;
-}
-
-
-
-ion-label {
-    font-weight: bold;
-    font-size: 0.81rem;
+    .register-link {
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+    }
 }
