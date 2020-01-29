@@ -2,10 +2,7 @@
 $backgroundColor : rgb(226, 246, 250);
 $frontColor : rgb(67, 66, 66);
 $fontBold : bold;
-
-
-$frontColor : rgb(67, 66, 66);
-$fontBold : bold;
+$primary : #0417c2;
 
 
 .arrow-back, .arrow-forward{
@@ -17,14 +14,14 @@ $fontBold : bold;
     color : $frontColor;
 }
 
-.dayNumber, .CurrentProgress{
+.dayNumber, 
+.current-progress{
     text-align:center;
     font-weight: $fontBold;
 }
 
-.CurrentProgress span{
+.current-progress span{
     font-size: 20px;
-
 }
 
 .track-meal{
@@ -39,10 +36,16 @@ $fontBold : bold;
 }
 
 .meal{
-    text-transform:lowercase;
+    text-transform: capitalize;
     display: flex;
     justify-content: space-between;
     color: $frontColor;
+    font-size: 0.81rem;
+    padding-left: 0.72rem;
+    font-weight: bold;
+}
+.meal span {
+    font-weight: normal;
 }
 
 .addFood{
@@ -52,13 +55,17 @@ $fontBold : bold;
 
 
 .foodList{
-    margin-left:10px; 
-    font-weight: $fontBold;
-    font-size: 18px;
+    background-color: #fff;
+    border-radius: 9px;
+    border: solid 2px #c7c7c7;
+    padding: 0.12rem;
 }
 
 .foodListBg{
     --background: none;
+    --ion-safe-area-left:0;
+    --padding-start: 0;
+
 }
 
 .circleProgress{
@@ -66,3 +73,47 @@ $fontBold : bold;
     margin: 10px;
 }
 
+
+ion-toolbar.day-change-slider ion-card section .dc-slider-title.current-progress {
+    font-size: 1.08rem;
+    line-height: 1.08rem;
+    color: #fff;
+}
+
+.list-header {
+    background-color: $primary;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
+    h3 {
+        display: block;
+        width: 100%;
+        margin: 0.25rem 0;
+        text-transform: uppercase;
+        font-size: 1rem;
+    }
+
+}
+
+
+section.content-footer {
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../../assets/img/meal-footer-background.jpg");
+
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-bottom: -16px;
+    margin-top: -3rem;
+    padding: 3.5rem 0.5rem 0.5rem;
+
+    ion-button {
+        max-width: 210px;
+        border-radius: 9px;
+        font-weight: bold;
+        display: block;
+        margin: 0 auto 0.5rem;
+    }
+}

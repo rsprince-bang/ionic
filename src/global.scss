@@ -94,22 +94,22 @@ ion-header ion-toolbar,
 ion-button { 
     color: rgb(255, 255, 255);
     text-transform: uppercase;
-    --background:rgb(0, 198, 242);
+    --background: #0417c2;
 }
 ion-header ion-toolbar { 
     --background: #000e1e;
 }
-.img {
-    position: absolute;
-    bottom: 0px;
-    max-width: none;
-}
-.footer ion-button {
-    font-weight: $fontBold;
-}
-.day_box {
-    --background: rgb(226, 246, 250);
-}
+// .img {
+//     position: absolute;
+//     bottom: 0px;
+//     max-width: none;
+// }
+// .footer ion-button {
+//     font-weight: $fontBold;
+// }
+// .day_box {
+//     --background: rgb(226, 246, 250);
+// }
 
 @media only screen and (min-width: 700px) {
     ion-content { 
@@ -277,8 +277,14 @@ ion-toolbar.day-change-slider {
 
 
 .btn {
+
+    &.btn-primary {
+        --background: $primary;
+        background-color: $primary;
+        color: #fff;
+    }
     &.btn-back {
-        --background: #0716c1;
+        --background: $primary;
         --border-radius: 10px;
 
         font-weight: bold;
