@@ -1,0 +1,83 @@
+form {
+	margin-top: 9vh;
+
+	& > ion-item:first-child,
+	& > ion-item:last-child {
+		--ion-item-border-color: transparent;
+		--border-color: transparent;
+	}
+
+	& > ion-item:first-child {
+		margin-bottom: 3vh;
+	}
+
+	ion-item-group:nth-child(2n) {
+		background-color: #fff;
+		border: solid 2px #dbdbdb;
+		border-radius: 9px;
+
+		ion-item {
+			--ion-safe-area-left: 0;
+
+			ion-grid.hydrated {
+				padding-left: 1rem;
+
+				ion-col {
+					padding: 0;
+					font-size: 0.9rem;
+				}
+			}
+
+			ion-label {
+				margin-top: 0.6rem;
+				font-weight: bold;
+			}
+
+			ion-input {
+				text-align: right;
+				color: #737373;
+			}
+
+			
+		}
+	}
+
+	ion-item-group {
+
+		ion-item {
+			
+			ion-label {
+
+			}
+
+			ion-input {
+
+				input::-webkit-input-placeholder {
+					color: orange;
+				}
+			}
+
+			
+		}
+	}
+}
+
+.add-photo-existing {
+				
+	ion-label {
+		font-size: 0.81rem;
+	}
+	ion-input {
+		--padding-start: 8px;
+		--padding-top: 6px;
+		--padding-bottom: 6px;
+
+		background-color: #0417c2;
+		color: #fff;
+		border-radius: 9px;
+		margin: 1rem;
+		font-size: 0.81rem;
+	}
+	
+}
+
