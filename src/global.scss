@@ -16,6 +16,22 @@ $lightGrey : #c9ccd0;
 $darkBlue : #000e1e;
 $primary : #0417c2;
 
+/* 
+ * Navigation Styles
+ */
+// General Nav Bar Styles
+ion-header ion-toolbar { 
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    --background: #000e1e;
+}
+// Logo
+ion-img.nav-logo.hydrated {
+    max-width: 2rem;
+    margin-right: 0.81rem;
+}
+
+
 ////////////////////////////////////////
 //calender CSS override
 
@@ -80,7 +96,11 @@ app-home {
 // }
 
 
-
+ion-button { 
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    --background: #0417c2;
+}
 ion-content {
     // --ion-background-color: rgba(235, 251, 255, 0.79);
     --ion-background-color: rgba(235, 251, 255, 0);
@@ -90,15 +110,7 @@ ion-content {
     background-position: center;
     background-size: cover;
 }
-ion-header ion-toolbar,
-ion-button { 
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    --background: #0417c2;
-}
-ion-header ion-toolbar { 
-    --background: #000e1e;
-}
+
 // .img {
 //     position: absolute;
 //     bottom: 0px;
