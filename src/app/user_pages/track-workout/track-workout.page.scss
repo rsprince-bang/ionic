@@ -1,44 +1,104 @@
-$frontColor : rgb(67, 66, 66);
-$fontBold : bold;
-$fontSize : 25px;
-
-.arrow-back, .arrow-forward{
-    font-size: $fontSize;
-    color : $frontColor;
+// Update Font Size in Day Changer Slider
+ion-toolbar.day-change-slider ion-card section .dc-slider-title {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
 }
 
-.dayNumber{
-    font-weight : $fontBold;
-    color: $frontColor;
-    text-align: center;
-}
-
-.box-workout-list{
-    color: $frontColor; 
-}
-
-.box-workout-list{
-    font-weight:700; 
-    margin-top: 10px; 
-    font-size: 18px; 
-    color: $frontColor;
-}
-
-.workout-list{
-    display:flex; 
+/*
+ * Title Bar
+ */
+.title-bar {
+    margin: 0 0 1rem;
+    display: flex; 
     justify-content: space-between;
+
+    h3 {
+        margin: 0;
+        color: #0417c2;
+    }
+
+    .icon {
+        font-size: 1.6rem;
+    }
+    .heart {
+        color : rgb(147, 24, 24);
+    }
 }
 
-.icon{
-    font-size: $fontSize;
+
+/*
+ * Workout List
+ */
+.workoutList {
+    background-color: #fff;
+    border-radius: 9px;
+    border: solid 2px #c7c7c7;
+    padding: 0.12rem;
+
+
+    .list-header {
+
+        // Reset Padding and Margins
+        --ion-safe-area-left:0;
+        --padding-start: 0;
+
+        // Generic Styles
+        background-color: #0417c2;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+
+        h3 {
+            display: block;
+            width: 100%;
+            margin: 0.25rem 0;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+    }
+
+    .workoutListBkg {
+        --background: none;
+
+        // Reset Padding and Margins
+        --ion-safe-area-left:0;
+        --ion-safe-area-right: 0;
+        --padding-start: 0;
+
+        ion-label {
+            padding: 0.21rem 0.72rem;
+            text-transform: capitalize;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
 }
 
-.heart{
-    color : rgb(147, 24, 24);
+/*
+ * Footer Section
+ */
+section.content-footer {
+    // Set Background Image
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../../assets/img/meal-footer-background.jpg");
+
+    // Set Negative Margins to simulate full width area
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-bottom: -16px;
+
+    // Set generic styles
+    margin-top: 3rem;
+    min-height: 270px;
+
+    ion-button {
+        position: relative;
+        top: -1rem; // Raise the button out of the footer content area
+        left: calc(50vw - 7.5em); // Center the button
+        max-width: 210px;
+        --border-radius: 6px;
+    }
 }
 
-.list{
-    color: $frontColor;
-    display:flex; 
-    justify-content: space-between;
-}
