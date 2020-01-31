@@ -97,7 +97,15 @@ export class ProfilePage implements OnInit {
       }
       else {
         localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
-        this.ionViewWillEnter();
+        //this.ionViewWillEnter();
+        //when diet is reset, we need to confirm measurements and recalculate teh calories intake
+        let navigationExtras: NavigationExtras = {
+          state: {
+            action: "confirm",
+            userMeasurements: this.userMeasurements
+          }
+        };
+        this.router.navigate(['enter-measurements'], navigationExtras);
       }
     });
   }
