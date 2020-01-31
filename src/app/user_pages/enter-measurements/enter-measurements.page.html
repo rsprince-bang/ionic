@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{action}} Measurements</ion-title>
+    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
   </ion-toolbar>
 </ion-header>
 
@@ -8,53 +9,57 @@
 
   <form [formGroup]="measurementsForm" (ngSubmit)="submitMeasurements()">
 
-    <ion-item>
-      <ion-label position="floating">Feet</ion-label>
-      <ion-input type="number" formControlName="heightFeet"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Inches</ion-label>
-      <ion-input type="number" formControlName="heightInches"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Weight lbs</ion-label>
-      <ion-input type="number" formControlName="weight"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Target Weight lbs</ion-label>
-      <ion-input type="number" formControlName="target_weight"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Age</ion-label>
-      <ion-input type="number" formControlName="age"></ion-input>
-    </ion-item>
-    <ion-item >
-      <ion-label>Gender</ion-label>
-      <ion-select interface="popover" placeholder="Select one" formControlName="gender">
-        <ion-select-option value="M">Male</ion-select-option>
-        <ion-select-option value="F">Female</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item >
-      <ion-label>Activity Level</ion-label>
-      <ion-select interface="action-sheet" placeholder="Select one" formControlName="activity">
-        <ion-select-option value="1.2000">Sedentary</ion-select-option>
-        <ion-select-option value="1.3750">Light Exercise 1-3 days/w</ion-select-option>
-        <ion-select-option value="1.5500">Moderate Exercise 3-5 days/w</ion-select-option>
-        <ion-select-option value="1.7250">Hardcore Exercise or Sports 6-7 days/w</ion-select-option>
-        <ion-select-option value="1.9000">Hardcore Exercise 6-7 days/w + labor intensive job</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item >
-      <ion-label>Diet Plan</ion-label>
-      <ion-select interface="popover" placeholder="Select one" formControlName="plan">
-        <ion-select-option value="7">7 week</ion-select-option>
-        <ion-select-option value="12">12 week</ion-select-option>
-      </ion-select>
-    </ion-item>
+    <fieldset>
+      <label for="heightFeet">Height</label>
+      <input type="number" min="0" max="9" name="heightFeet" formControlName="heightFeet"> ft
+      <input type="number" min="0" max="12" name="heightInches" formControlName="heightInches"> in
+    </fieldset>
+
+    <fieldset>
+      <label for="weight">Weight (lbs)</label>
+      <input type="number" min="0" max="1000" name="weight" formControlName="weight">
+    </fieldset>
+
+    <fieldset>
+      <label for="target_weight">Target Weight (lbs)</label>
+      <input type="number" min="0" max="1000" name="target_weight" formControlName="target_weight">
+    </fieldset>
+
+    <fieldset>
+      <label for="age">Age</label>
+      <input type="number" min="0" max="150" name="age" formControlName="age">
+    </fieldset>
+
+    <fieldset>
+      <label for="gender">Gender</label>
+      <select name="gender" formControlName="gender" >
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <label for="activity">Activity Level</label>
+      <select name="activity" formControlName="activity">
+        <option value="1.2000">Sedentary</option>
+        <option value="1.3750">Light Exercise 1-3 days/w</option>
+        <option value="1.5500">Moderate Exercise 3-5 days/w</option>
+        <option value="1.7250">Hardcore Exercise or Sports 6-7 days/w</option>
+        <option value="1.9000">Hardcore Exercise 6-7 days/w + labor intensive job</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <label for="plan">Plan</label>
+      <select name="plan" formControlName="plan">
+        <option value="7">7 week</option>
+        <option value="12">12 week</option>
+      </select>
+    </fieldset>
 
     <ion-button expand="full" type="submit" [disabled]="!measurementsForm.valid">{{action}}</ion-button>
-    <ion-button *ngIf="action == 'update' " expand="full" (click)="goBack()" >Cancel</ion-button>
+    <ion-button *ngIf="action == 'update'" expand="full" (click)="goBack()">Cancel</ion-button>
+
   </form>
 
 </ion-content>

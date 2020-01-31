@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    
     <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-button>
@@ -7,34 +8,81 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
+
     <ion-title>Profile</ion-title>
+
+    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-avatar class = "profilePicture">
-    <ion-img  [src]="profileImageURL"></ion-img>
-  </ion-avatar>
+  <!-- Profile Header -->
+  <section class="profile-header">
 
-    <ion-item>
-      <label class="myFakeUploadButton" for="myFileInput">Edit</label>
+    <ion-avatar class="profileImage">
+      <ion-img  [src]="profileImageURL"></ion-img>
+    </ion-avatar>
+
+    <ion-item classs="update-image">
+      <label class="myFakeUploadButton" for="myFileInput">Edit Photo</label>
       <ion-input id="myFileInput"  type="file" accept="image/*" (change)="uploadPicture($event)" ></ion-input>
     </ion-item>
 
-  <ion-item>
-    <p class = "dayNumber">
-        <strong>DAY {{dayNumber}}</strong></p>
-  </ion-item>
+    <h1 class="text-center">John Doe</h1>
+    <h2 class="text-center">DAY {{dayNumber}}</h2>
 
-  <span class="info">
-      <span class="name_percent"> <strong > Day Start </strong> <br/>{{startInfo.date}}</span>  
-      <br/><span class="name_percent"> <strong> Height </strong> <br/>{{startInfo.height}} </span>
-      <br/><span class="name_percent"> <strong> Weight </strong> <br/>{{startInfo.weight}}</span>
-  </span>
-  <ion-button expand="full" (click)="redirectToUpdatePage()">Update</ion-button>
+  </section>
+
+  <!-- Profile Highlights -->
+  <section class="profile-highlights">
+    
+    <ion-grid>
+      <ion-row>
+        
+        <ion-col class="profile-highlight">
+          <h3 class="label">Start Date</h3>
+          <div class="value">{{startInfo.date}}</div>
+        </ion-col>
+
+        <ion-col class="profile-highlight">
+          <h3 class="label">Height</h3>
+          <div class="value">{{startInfo.height}}</div>
+        </ion-col>
+
+        <ion-col class="profile-highlight">
+          <h3 class="label">Weight</h3>
+          <div class="value">{{startInfo.weight}} lbs.</div>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+    <ion-button expand="full" (click)="redirectToUpdatePage()" class="btn btn-rounded" shape="round">Update My Measurements</ion-button>
+
+  </section>
   
+  
+  <!-- Profile Overview -->
+  <section class="profile-overview">
+    <ion-grid>
+      <ion-row>
+        
+        <ion-col class="progress">
+          <h3 class="label">The Bang Anti Diet</h3>
+          <div class="value">Phase 3 : Week 1</div>
+        </ion-col>
 
+        <ion-col class="completion-chart">
+          <!-- <circle-progress [backgroundColor]="blue" [percent]="70" [subtitle]="Completed"></circle-progress> -->
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </section>
+
+  <!-- Profile Reset -->
   <ion-button class="reset" [disabled]="dayNumber==1" (click)="confirmReset()">Reset diet</ion-button><br/>
 
   <ion-list>
@@ -44,4 +92,5 @@
       </ion-button>
     </ion-item>
   </ion-list>
+
 </ion-content>

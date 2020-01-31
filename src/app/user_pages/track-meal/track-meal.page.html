@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    
     <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-button>
@@ -7,7 +8,11 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
+    
     <ion-title> Meal</ion-title>
+    
+    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
+
   </ion-toolbar>
 </ion-header>
 
@@ -17,68 +22,75 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-toolbar class="day_box" >
-    <ion-icon *ngIf = "dayNumber > 1" name="arrow-back" slot="start" (click)="handleSwipeRight()" class="arrow-back" ></ion-icon>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="dayNumber"> {{day}} <span *ngIf = "!day">DAY {{dayNumber}}</span> </ion-card-title>
-      </ion-card-header>
-        
-      <ion-card-content class="CurrentProgress" [ngStyle]="{ 'color' : circlecolor}">
-       <strong> Current progress <br/> <span>{{status}} </span></strong> 
-      </ion-card-content>
+  <!-- Day Change Slider -->
+  <ion-toolbar class="day-change-slider" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
+      <ion-card>
+          <ion-icon class="arrow-back" *ngIf="dayNumber > 1" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
+          <section>
+              
+              <ion-card-header>
+                  <ion-card-title class="dc-slider-title-label">{{day}} <span *ngIf="!day">DAY {{dayNumber}}</span></ion-card-title>
+              </ion-card-header>
+              
+              <!-- <ion-card-content class="CurrentProgress dc-slider-title" [ngStyle]="{ 'color' : circlecolor}"> -->
+              <ion-card-content class="dc-slider-title current-progress">
+                <strong> Current progress <br/> <span>{{status}} </span></strong> 
+              </ion-card-content>
 
+              <ng-template #templateName>
+                  <ion-card-content class="dc-slider-title">
+                      <div class="dayNumber">DAY {{dayNumber}}</div>
+                  </ion-card-content>
+              </ng-template>
 
-    </ion-card>
-    <ion-icon *ngIf = "!today" name="arrow-forward" slot="end" (click)="handleSwipeLeft()" class="arrow-forward"></ion-icon>
+          </section>
+          <ion-icon class="arrow-forward" *ngIf="!today" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
+      </ion-card>
   </ion-toolbar>
 
-  <ion-list *ngIf="suggestedSupplements?.supplement?.hasOwnProperty('name') && today">
-    <ion-list-header>
-      <ion-label>Today supplement suggestion:</ion-label>
-    </ion-list-header>
-    <ion-item >
-      <p><a (click)="globalServices.openLink(suggestedSupplements.supplement.link, '_system')">{{suggestedSupplements.supplement.name}}</a></p>
-    </ion-item>
-  </ion-list>
-  
-  <!-- Nutririon info-->
-  <div class="box-track-meal">
-     <ion-item >
-    <div class="track-meal">
-      <p class="text">Total Calories you ate  <strong [ngStyle]="{ 'color' : circlecolor}" > {{caloriesConsumed}}</strong> Calories<br/>
-        <span class="namePercentt">
-            <span class="name_percent"> <strong > Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
-            <br/><span class="name_percent"> <strong> Carbs </strong> <br/>{{caloriesFromCarbsAsP}}% </span>
-            <br/><span class="name_percent"> <strong> Fat </strong> <br/>{{caloriesFromFatAsP}}%</span>
-        </span>
-      </p>
+
+  <!-- Diet Breakdown by Category Bar Chart -->
+  <div class="bar-chart">
+    
+    <p class="text-center">...Bar Chart Here...</p>
+    <div class="namePercentt">
+      <span class="name_percent"> <strong > Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
+      <br/><span class="name_percent"> <strong> Carbs </strong> <br/>{{caloriesFromCarbsAsP}}% </span>
+      <br/><span class="name_percent"> <strong> Fat </strong> <br/>{{caloriesFromFatAsP}}%</span>
     </div>
-  </ion-item>
+
+    <p class="total-calories-daily text-center">Total Calories Eaten Today: <span style="font-weight: bold; color: #0417c2;" class="value">{{caloriesConsumed}}</span></p>
+
   </div>
    
 
   <!-- Food List -->
-  <ion-list >
-    <p *ngIf= "meals.length > 0" class="foodList">Food List</p>
+  <ion-list class="foodList">
+
+    <ion-item *ngIf="meals.length > 0" class="list-header">
+      <h3 class="text-center text-white">Food List</h3>
+    </ion-item>
+
     <ion-item-sliding *ngFor="let meal of meals">
       <ion-item class="foodListBg">
-        <ion-label class= "meal">- {{meal.meal_name}} <span>{{meal.calories}} cal</span></ion-label>
+        <ion-label class= "meal">{{meal.meal_name}} <span>{{meal.calories}} cal</span></ion-label>
       </ion-item>
 
       <ion-item-options *ngIf="today" side="end">
-        <ion-item-option color="danger" (click)="removeMeal(meal.id)">   <ion-icon name="trash"></ion-icon></ion-item-option>
+        <ion-item-option color="danger" (click)="removeMeal(meal.id)"><ion-icon name="trash"></ion-icon></ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 
-  <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
-  <div class = "circleProgress">
-    <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle" ></circle-progress>
-  </div>
+  <section class="content-footer">
+    
+    <ion-button expand="block" class="addFood btn btn-primary block-center" *ngIf="today" (click)="openFoodModal()" class="button">Add Food</ion-button>
+
+    <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
+    <div class = "circleProgress">
+      <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle" ></circle-progress>
+    </div>
+
+  </section>
 
 </ion-content>
-
-<ion-footer class = "footer">  
-  <ion-button expand="block" class="addFood" *ngIf="today" (click)="openFoodModal()" class="button">Add food</ion-button>
-</ion-footer>

@@ -43,6 +43,7 @@ export class HomePage implements OnInit {
   circlecolor = "#2b2b2b"; //gray atr first
   dayNutritionInfo = { "phase": null, "phaseday": null,"phasename":null , "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
+  progressPercentage = 0;
   
   //declare barcharts
   public barChartOptions: ChartOptions = {
@@ -104,6 +105,7 @@ export class HomePage implements OnInit {
     if (!this.globalServices.hasDailyCaloriesIntake()) {
       this.router.navigateByUrl("/enter-measurements");
     }
+    
   }
   ionViewWillEnter() {
     this.updatepage();
@@ -180,6 +182,9 @@ export class HomePage implements OnInit {
         this.calculateCaloriesConsumed();
       }
     });
+
+    this.progressPercentage = this.calculateDayCompletionPercentage();
+
   }
 
   calculateCaloriesConsumed() {
@@ -321,6 +326,22 @@ export class HomePage implements OnInit {
         this.calculateCaloriesConsumed();
       }
     });
+  }
+
+  /* 
+   * Calculate Day Completion Percentage
+   *
+   * @desc Calculate the percentage of days that a user has completed. This 
+   *  number is used to create the Days Completed / Days Remaining progress bar.
+   *
+   * @return (float) progressPercentage The percentage of days that have been completed.
+   *
+   */
+  calculateDayCompletionPercentage() {
+
+    let progressPercentage = ( this.dayNumber / this.planLength_days );
+    return progressPercentage;
+
   }
   
   

@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    
     <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-button>
@@ -7,41 +8,40 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
+
     <ion-title>Track Progress</ion-title>
+
+    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <!-- <ion-virtual-scroll [items]="items">
-    <ion-item *virtualItem="let item">
-      <ion-label>{{item.registered.date}}</ion-label>
-      <ion-icon name="arrow-dropright"></ion-icon>
-    </ion-item>
-  </ion-virtual-scroll> -->
-
-
+  <!-- Ion Slides -->
   <ion-slides [options]="sliderOpts">
     <ion-slide *ngFor="let image of images">
-      <!-- <ion-img [src]="image.url"></ion-img> -->
 
-      <ion-card>
-          <ion-card-content >
-              <ion-icon class = "close" (click)="deleteImage(image.id)" color="danger" name="close-circle"></ion-icon>
-          </ion-card-content>
-        <ion-img class="img-box" [src]="image.url"></ion-img>
-        <ion-card-header>
-          <ion-card-title class = "date" >{{image.human_date}} </ion-card-title>
-          <ion-card-title class = "date">{{image.fat_percent}}% fat</ion-card-title>
-        </ion-card-header>
-          <ion-card-subtitle >{{image.comment}}</ion-card-subtitle>
+      <!-- Ion Slide -->
+      <div class="slider-image">
         
-      </ion-card>
+        <ion-icon class = "close" (click)="deleteImage(image.id)" color="danger" name="close-circle"></ion-icon>
+        <ion-img class="img-box" [src]="image.url"></ion-img>
+
+        <header>
+          <h3>{{image.human_date}}</h3>
+          <div class="slider-image-body-fat">{{image.fat_percent}}% Body Fat</div>
+          <p class="slider-image-comment">{{image.comment}}</p>
+        </header>
+
+      </div>
 
     </ion-slide>
   </ion-slides>
 </ion-content>
 
+
+<!-- Footer -->
 <ion-footer >  
   <ion-button expand="block" (click)="openPhotoModal()">Add photo</ion-button>
 </ion-footer>

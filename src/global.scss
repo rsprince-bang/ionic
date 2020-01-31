@@ -12,6 +12,25 @@
 
 
 $fontBold : bold;
+$lightGrey : #c9ccd0;
+$darkBlue : #000e1e;
+$primary : #0417c2;
+
+/* 
+ * Navigation Styles
+ */
+// General Nav Bar Styles
+ion-header ion-toolbar { 
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    --background: #000e1e;
+}
+// Logo
+ion-img.nav-logo.hydrated {
+    max-width: 2rem;
+    margin-right: 0.81rem;
+}
+
 
 ////////////////////////////////////////
 //calender CSS override
@@ -31,58 +50,262 @@ The current date
 monthview-disabled
 The disabled date */
 
-.monthview-current.monthview-current{
+.monthview-current.monthview-current {
     background-color: rgb(199, 198, 198) !important;
     color: black !important;
 }
-.monthview-selected{
+.monthview-selected {
     background-color: rgba(199, 198, 198, 0.3) !important;
     color: black !important;
 }
-.monthview-primary-with-event{
+.monthview-primary-with-event {
     background-color: white !important;
     color: black !important;
 }
-.monthview-secondary-with-event{
+.monthview-secondary-with-event {
     background-color: white !important;
     color: black !important;
 }
 
-app-home{
+
+app-home {
     position: relative;
 }
-ion-content{
-    --ion-background-color: rgba(235, 251, 255, 0.79);
-    background-image:url("./assets/img/book-smoke-mobile.jpg") ;
-    background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: bottom;
-}
-ion-header ion-toolbar,ion-button{
+
+
+
+/**
+ * App Menu
+ *
+ * @desc Styles for the primary menu
+ *
+ */
+// app-home > ion-content:after{
+//     content: "";
+//     display: block;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(0,0,0,0.81);
+//     z-index: 11;
+//     transform: translateZ(10px);
+//     opacity: 0;
+//     transition: opacity .36s ease-in-out;
+// }
+// .backdrop-no-scroll app-home > ion-content:after{
+//     opacity: 1;
+// }
+
+
+ion-button { 
     color: rgb(255, 255, 255);
     text-transform: uppercase;
-    --background:rgb(0, 198, 242);
+    --background: #0417c2;
 }
-.img{
-    position: absolute;
-    bottom: 0px;
-    max-width: none;
+ion-content {
+    // --ion-background-color: rgba(235, 251, 255, 0.79);
+    --ion-background-color: rgba(235, 251, 255, 0);
+    // background-image:url("./assets/img/book-smoke-mobile.jpg");
+    background-image: url("./assets/img/app-background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-.footer ion-button{
-    font-weight: $fontBold;
-}
-.day_box{
-    --background: rgb(226, 246, 250);
-}
+
+// .img {
+//     position: absolute;
+//     bottom: 0px;
+//     max-width: none;
+// }
+// .footer ion-button {
+//     font-weight: $fontBold;
+// }
+// .day_box {
+//     --background: rgb(226, 246, 250);
+// }
 
 @media only screen and (min-width: 700px) {
-    ion-content{
-    background-image:url("./assets/img/book-smoke-ipad.jpg") ;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-    background-size: contain;
+    ion-content { 
+        background-image:url("./assets/img/book-smoke-ipad.jpg") ;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        background-size: contain;
     }
-  }
+}
+
+
+/*
+ * Generic Helper Classes
+ */
+
+// Text Alignment
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+// Text Color
+.text-white { color: #fff; }
+.text-black { color: #000; }
+
+// Block Alignment
+.block-center { display: block; margin: 0 auto; }
 
 
 
+/*
+ * Day Change Slider
+ * 
+ * @desc This is the style section for the Day Change Slider that is used to 
+ *  change what day's data is being shown.
+ */
+ion-toolbar.day-change-slider {
+    
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    border-radius: 9px;
+    margin-bottom: 2.1rem;
+
+    ion-card {
+
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        background-color: $darkBlue;
+        --ion-item-background: $darkBlue;
+
+        &.sc-ion-card-ios-h {
+            -webkit-box-shadow: 0 4px 16px rgba(0,0,0,0);
+            box-shadow: 0 4px 16px rgba(0,0,0,0);
+
+            -webkit-margin-start: 0;
+            margin-inline-start: 0;
+            -webkit-margin-end: 0;
+            margin-inline-end: 0;
+
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .arrow-back,
+        .arrow-forward {
+            font-size: 27px;  
+            color: $lightGrey;
+            width: 36px;
+            height: 90px;
+        }
+
+        section {
+            width: calc(100% - (36px * 2));
+
+            ion-card-header {
+                padding-bottom: 0;
+            }
+
+            ion-card-content {
+                color: #fff;
+
+                &.card-content-ios {
+                    padding-top: 0;
+                }
+            }
+
+            .dc-slider-title,
+            .dc-slider-title-label {
+                text-align: center;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .dc-slider-title {
+                font-size: 30px;
+                line-height: 30px;
+                color: #fff;
+            }
+            .dc-slider-title-label {
+                font-size: 15px;
+                color: $lightGrey;
+            }
+        }
+
+        
+    }
+
+}
+
+
+/**
+ * List Groups
+ *
+ * @desc Styles for blocks of list items
+ *
+ */
+.list-group {
+    display: block;
+    background-color: $primary;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+
+    .list-group-header {
+        padding: 0.45rem;
+        font-weight: bold;
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.21);
+        font-size: 0.9rem;
+    }
+
+    .list-group-body {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+        .list-group-item {
+            padding: 0.45rem;
+            font-size: 0.81rem;
+        }
+    }
+
+    .list-group-footer {
+        padding: 0.45rem;
+    }
+}
+
+
+
+
+.icon {
+
+    &.icon-round {
+        padding: 0.72rem;
+        border-radius: 100%;
+    }
+
+    &.icon-primary {
+        background-color: $primary;
+        color: #fff;
+    }
+}
+
+
+
+.btn {
+
+    &.btn-primary {
+        --background: $primary;
+        background-color: $primary;
+        color: #fff;
+    }
+    &.btn-back {
+        --background: $primary;
+        --border-radius: 10px;
+
+        font-weight: bold;
+        width: 150px;
+        margin: 1rem auto 1rem;
+        padding: 6px;
+
+        position: absolute;
+        bottom: 0;
+        left: calc(50% - (150px / 2));
+    }
+}
