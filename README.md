@@ -3,11 +3,11 @@ The Melt Down app is the Android & iPhone app that is being developed to accompa
 
 Use the instructions below to get started with developing on this app!
 
- ## Dependencies
+ ## Dependencies at the time of this install
 - Git [(install instructions)](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- Node: 10.1* [(download)](https://nodejs.org/en/download/)
-- NPM: 6.* [(download)](https://nodejs.org/en/download/)
-- Ionic: 5.4.* [(install instructions)](https://ionicframework.com/docs/installation/cli)
+- Node: v12.18.3 [(download)](https://nodejs.org/en/download/)
+- NPM: 6.14.6 [(download)](https://nodejs.org/en/download/)
+- Ionic: 6.11.8 [(install instructions)](https://ionicframework.com/docs/installation/cli)
 
 
 
@@ -45,7 +45,7 @@ sudo nano src/app/environments/environment.ts
 
 Change The Following Line To Match Your Dev URL:
 ```
-API_URL: "http://10.220.0.4/~username/bang-us-new/md-app/"
+API_URL: "https://bang-us-new.bangstg.com/md-app/"
 ```
 
 ### Add Database Tables
