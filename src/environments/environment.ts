@@ -6,7 +6,7 @@ export const environment = {
 
   production: false,
 
-  API_URL: "http://10.220.0.4/~sraychev/bang-us-new/md-app/"
+  API_URL: "https://bang-us-new.bangstg.com/md-app/"
 };
 
 /*
