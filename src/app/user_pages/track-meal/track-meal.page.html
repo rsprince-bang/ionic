@@ -24,37 +24,44 @@
 
   <!-- Day Change Slider -->
   <ion-toolbar class="day-change-slider" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
-      <ion-card>
-          <ion-icon class="arrow-back" *ngIf="dayNumber > 1" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
-          <section>
-              
-              <ion-card-header>
-                  <ion-card-title class="dc-slider-title-label">{{day}} <span *ngIf="!day">DAY {{dayNumber}}</span></ion-card-title>
-              </ion-card-header>
-              
-              <!-- <ion-card-content class="CurrentProgress dc-slider-title" [ngStyle]="{ 'color' : circlecolor}"> -->
-              <ion-card-content class="dc-slider-title current-progress">
-                <strong> Current progress <br/> <span>{{status}} </span></strong> 
-              </ion-card-content>
+    <ion-card>
+        <ion-icon class="arrow-back" *ngIf="dayNumber > 1" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
+        <section>      
+            <ion-card-header>
+                <ion-card-title class="dc-slider-title-label">{{day}} <span *ngIf="!day">DAY {{dayNumber}}</span></ion-card-title>
+            </ion-card-header>
+            
+            <!-- <ion-card-content class="CurrentProgress dc-slider-title" [ngStyle]="{ 'color' : circlecolor}"> -->
+            <ion-card-content class="dc-slider-title current-progress">
+              <strong> Current progress <br/> <span>{{status}} </span></strong> 
+            </ion-card-content>
 
-              <ng-template #templateName>
-                  <ion-card-content class="dc-slider-title">
-                      <div class="dayNumber">DAY {{dayNumber}}</div>
-                  </ion-card-content>
-              </ng-template>
+            <ng-template #templateName>
+                <ion-card-content class="dc-slider-title">
+                    <div class="dayNumber">DAY {{dayNumber}}</div>
+                </ion-card-content>
+            </ng-template>
 
-          </section>
-          <ion-icon class="arrow-forward" *ngIf="!today" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
-      </ion-card>
+        </section>
+        <ion-icon class="arrow-forward" *ngIf="!today" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
+    </ion-card>
   </ion-toolbar>
 
 
   <!-- Diet Breakdown by Category Bar Chart -->
-  <div class="bar-chart">
+  <div class="chart">
+    <canvas baseChart *ngIf="pieChartData"
+      [data]="pieChartData" 
+      [labels]="pieChartLabels" 
+      [chartType]="pieChartType"
+      [options]="pieChartOptions"
+      [plugins]="pieChartPlugins"
+      [legend]="pieChartLegend"
+      [colors]="pieChartColors">
+    </canvas>
     
-    <p class="text-center">...Bar Chart Here...</p>
     <div class="namePercentt">
-      <span class="name_percent"> <strong > Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
+      <span class="name_percent"> <strong> Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
       <br/><span class="name_percent"> <strong> Carbs </strong> <br/>{{caloriesFromCarbsAsP}}% </span>
       <br/><span class="name_percent"> <strong> Fat </strong> <br/>{{caloriesFromFatAsP}}%</span>
     </div>
