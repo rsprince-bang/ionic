@@ -6,6 +6,9 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { HomeAddFoodModalPage } from '../home-add-food-modal/home-add-food-modal.page';
+import { ChartOptions, ChartType } from 'chart.js';
+import { Label, SingleDataSet } from 'ng2-charts';
+import * as pluginLabels from 'chartjs-plugin-labels';
 
 @Component({
   selector: 'app-track-meal',
@@ -13,7 +16,6 @@ import { HomeAddFoodModalPage } from '../home-add-food-modal/home-add-food-modal
   styleUrls: ['./track-meal.page.scss'],
 })
 export class TrackMealPage implements OnInit {
-
   day = "";
   today = false;
   dayNumber = null;
@@ -33,10 +35,31 @@ export class TrackMealPage implements OnInit {
   planLength_weeks;
   suggestedSupplements;
 
+  // PIE CHART VARIABLES
+  pieChartOptions: ChartOptions;
+  pieChartLabels: Label[];
+  pieChartData: SingleDataSet;
+  pieChartType: ChartType;
+  pieChartLegend: boolean;
+  pieChartPlugins = [];
+  pieChartColors = [
+    {
+      backgroundColor: ['rgba(0,0,255,1.0)', 'rgba(255,165,0,1.0)', 'rgba(0,255,0,1.0)'],
+    },
+  ];
+
   constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,
     private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
 
   ngOnInit() {
+    // PIE CHART SETTINGS
+    this.pieChartOptions = this.createOptions();
+    this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
+    this.pieChartData = [50.4, 33.6, 15.9];
+    this.pieChartType = 'pie';
+    this.pieChartLegend = true;
+    this.pieChartPlugins = [pluginLabels];
+
     this.date = this.activatedRoute.snapshot.paramMap.get('day');
     if( this.date == '' ){
       this.date = this.date = this.globalServices.getTodayDate();
@@ -50,6 +73,21 @@ export class TrackMealPage implements OnInit {
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
     this.suggestedSupplements = this.foodSuggestionsService.getSupplementSuggestions(this.date, this.planLength_weeks);
     this.loadMeals();
+  }
+
+  // PIE CHART OPTIONS
+  private createOptions(): ChartOptions {
+    return {
+      responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+              labels: {
+                render: 'percentage',
+                fontColor: ['white', 'white', 'white'],
+                precision: 0
+              }
+          },
+    };
   }
 
   doRefresh(event) {

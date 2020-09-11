@@ -53,6 +53,11 @@ export class HomePage implements OnInit {
   pieChartType: ChartType;
   pieChartLegend: boolean;
   pieChartPlugins = [];
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(0,0,255,1.0)', 'rgba(255,165,0,1.0)', 'rgba(0,255,0,1.0)'],
+    },
+  ];
 
   constructor(
     private router: Router, 
@@ -64,6 +69,7 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    // PIE CHART SETTINGS
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
     this.pieChartData = [50.4, 33.6, 15.9];
@@ -80,6 +86,7 @@ export class HomePage implements OnInit {
     
   }
 
+  // PIE CHART OPTIONS
   private createOptions(): ChartOptions {
     return {
       responsive: true,
@@ -87,7 +94,7 @@ export class HomePage implements OnInit {
           plugins: {
               labels: {
                 render: 'percentage',
-                fontColor: ['green', 'white', 'red'],
+                fontColor: ['white', 'white', 'white'],
                 precision: 0
               }
           },
