@@ -38,13 +38,26 @@
                     </ion-card-content>
                 </ng-template>
             </section>
-            <ion-icon class="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
+            <ion-icon 
+              class="arrow-forward" 
+              *ngIf="day == 'today' || day == 'yesterday'" 
+              (click)="handleSwipeLeft()" 
+              name="arrow-forward" 
+              slot="end">
+            </ion-icon>
         </ion-card>
     </ion-toolbar>
 
     <!-- Chart -->
-    <div>
-        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    <div class="chart">
+      <canvas baseChart *ngIf="pieChartData"
+        [data]="pieChartData" 
+        [labels]="pieChartLabels" 
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend">
+      </canvas>
     </div>
 
     <!-- Workout Status -->
