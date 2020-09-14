@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
 
   credentialsForm: FormGroup;
   userInfo = null;
+  isSubmitted = false;
 
   constructor(
     private myAPI: ApiCallService, private router: Router, public events: Events, private formBuilder: FormBuilder, public toastController: ToastController,
@@ -33,8 +34,12 @@ export class LoginPage implements OnInit {
     });
   }
 
+  get errorControl() {
+    return this.credentialsForm.controls;
+  }
 
   login() {
+    this.isSubmitted = true;
     this.myAPI.makeAPIcall(
       "login.php", 
       {

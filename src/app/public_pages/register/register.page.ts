@@ -43,7 +43,7 @@ export class RegisterPage implements OnInit {
             this.myAPI.presentToastWithOptions(result.error);
           }
           else if (result.success) {
-            this.router.navigateByUrl("/enter-measurements"); // not work ???
+            this.router.navigateByUrl("/welcome"); // not work ???
             this.myAPI.presentToastWithOptions("Account has been created.");
             
           }
