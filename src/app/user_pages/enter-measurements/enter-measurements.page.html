@@ -1,65 +1,141 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{action}} Measurements</ion-title>
-    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
-  </ion-toolbar>
+<!-- <ion-header>
+   <ion-toolbar>
+     <ion-title>{{action}} Measurements</ion-title>
+     <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
+   </ion-toolbar>
+   </ion-header> -->
+   <ion-header [translucent]="true" class="profile-header">
+    <!-- <ion-toolbar> -->
+    <ion-title class="profile-img-bg" style="z-index: -1 !important;">{{action}} Measurements </ion-title>
+    <ion-avatar class="profile-img">
+        <img alt="Avatar" class="image" src="../../../assets/icon/plaindp.png" />
+        <!-- <div class="overlay">
+         <div class="imagetext">Upload Image</div>
+       </div> -->
+        <!-- <ion-label>
+          Upload Photo
+       </ion-label> -->
+    </ion-avatar>
+    <!-- </ion-toolbar> -->
 </ion-header>
+<ion-content class="ion-padding" style="align-items: center; justify-content: center;">
+    <form [formGroup]="measurementsForm" (ngSubmit)="submitMeasurements()">
+        <ion-row>
+            <ion-col col-6>
+                <ion-row>
+                    <ion-col>
+                        <ion-label for="heightFeet">Height</ion-label>
+                    </ion-col>
+                </ion-row>
+               
+            </ion-col>
+            <ion-col col-6>
+                <ion-row>
+                    <ion-col>
+                        <ion-label for="DateOfBirth">Date of Birth</ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col col-2 style="font-size: smaller;">
+              <ion-select  add  class="form-control" value= "Feet" name="heightFeet" formControlName="heightFeet">
+                  <ion-select-option>Feet</ion-select-option>
+              </ion-select>
+          </ion-col>
+          <ion-col col-2 style="font-size: smaller;">
+              <ion-select class="form-control" value="Inches" name="heightInches" formControlName="heightInches">
+                  <ion-select-option>Inches</ion-select-option>
+              </ion-select>
+          </ion-col>
+          <!-- <ion-col col-2></ion-col> -->
+          <ion-col col-2>
+             <ion-datetime style="font-size: smaller;" displayFormat="MMM" class="dob-ion-input" name="month" formControlName="month" placeholder="MM"></ion-datetime>
+          </ion-col>
+          <ion-col col-2>
+             <ion-datetime style="font-size: smaller;" displayFormat="DD" class="dob-ion-input" name="date" formControlName="date" placeholder="DD"> </ion-datetime>
+          </ion-col>
+          <ion-col col-2>
+             <ion-datetime style="font-size: smaller;" displayFormat="YYYY" class="dob-ion-input" name="year" formControlName="year" placeholder="YYYY"></ion-datetime>
+          </ion-col>
+      </ion-row>
+        <ion-row>
+          <ion-col col-6>
+              <ion-row>
+                  <ion-col>
+              <ion-label for="weight">Weight</ion-label>
+                  </ion-col>
+              </ion-row>
+             
+          </ion-col>
+          <ion-col col-6>
+              <ion-row>
+                  <ion-col>
+               <ion-label for="gender">Gender</ion-label>
+                  </ion-col>
+              </ion-row>
+          </ion-col>
+      </ion-row>     
+      
+   <ion-row>
+    <ion-col col-5>
+        <ion-input style="font-size: smaller;" type="number" class="common-ion-input" min="0" max="1000" name="weight" formControlName="weight" placeholder="lbs"></ion-input>
+    </ion-col>
+<ion-col col-2></ion-col>
+<ion-col col-5>
+ <ion-item>
+    <ion-select class="common-ion-input" value="M" name="gender" style="font-size: smaller;" formControlName="gender">
+        <ion-select-option value="M">Male</ion-select-option>
+        <ion-select-option value="F">Female</ion-select-option>
+    </ion-select>
+</ion-item>
+</ion-col>
+</ion-row>
 
-<ion-content padding>
+      <ion-row>
+       <ion-col col-6>
+           <ion-row>
+               <ion-col>
+              <ion-label for="dietStart">Diet Start Date</ion-label>
+               </ion-col>
+           </ion-row>
+          
+       </ion-col>
+       <ion-col col-6>
+           <ion-row>
+               <ion-col>
+               <ion-label for="dietStart">Diet End Date</ion-label>
+               </ion-col>
+           </ion-row>
+       </ion-col>
+   </ion-row>
 
-  <form [formGroup]="measurementsForm" (ngSubmit)="submitMeasurements()">
-
-    <fieldset>
-      <label for="heightFeet">Height</label>
-      <input type="number" min="0" max="9" name="heightFeet" formControlName="heightFeet"> ft
-      <input type="number" min="0" max="12" name="heightInches" formControlName="heightInches"> in
-    </fieldset>
-
-    <fieldset>
-      <label for="weight">Weight (lbs)</label>
-      <input type="number" min="0" max="1000" name="weight" formControlName="weight">
-    </fieldset>
-
-    <fieldset>
-      <label for="target_weight">Target Weight (lbs)</label>
-      <input type="number" min="0" max="1000" name="target_weight" formControlName="target_weight">
-    </fieldset>
-
-    <fieldset>
-      <label for="age">Age</label>
-      <input type="number" min="0" max="150" name="age" formControlName="age">
-    </fieldset>
-
-    <fieldset>
-      <label for="gender">Gender</label>
-      <select name="gender" formControlName="gender" >
-        <option value="M">Male</option>
-        <option value="F">Female</option>
-      </select>
-    </fieldset>
-
-    <fieldset>
-      <label for="activity">Activity Level</label>
-      <select name="activity" formControlName="activity">
-        <option value="1.2000">Sedentary</option>
-        <option value="1.3750">Light Exercise 1-3 days/w</option>
-        <option value="1.5500">Moderate Exercise 3-5 days/w</option>
-        <option value="1.7250">Hardcore Exercise or Sports 6-7 days/w</option>
-        <option value="1.9000">Hardcore Exercise 6-7 days/w + labor intensive job</option>
-      </select>
-    </fieldset>
-
-    <fieldset>
-      <label for="plan">Plan</label>
-      <select name="plan" formControlName="plan">
-        <option value="7">7 week</option>
-        <option value="12">12 week</option>
-      </select>
-    </fieldset>
-
-    <ion-button expand="full" type="submit" [disabled]="!measurementsForm.valid">{{action}}</ion-button>
-    <ion-button *ngIf="action == 'update'" expand="full" (click)="goBack()">Cancel</ion-button>
-
-  </form>
-
+      <ion-row>
+          <ion-col col-6>
+              <ion-item>
+                  <ion-datetime style="font-size: smaller;" [(ngModel)]="startDate" class="common-ion-input" displayFormat="MMM DD YYYY" formControlName="dietStartDate" placeholder="Start Date"></ion-datetime>
+              </ion-item>
+          </ion-col>
+      
+           <ion-col col-6>
+               <ion-item>
+                   <ion-datetime style="font-size: smaller;" [(ngModel)]="endDate" class="common-ion-input" displayFormat="MMM DD YYYY" formControlName="dietEndDate" placeholder="End Date"></ion-datetime>
+               </ion-item>
+           </ion-col>
+       </ion-row>
+    </form>
 </ion-content>
+<ion-footer>
+    <ion-row no-margin>
+        <ion-col col-4>
+            <button ion-button class="primary" type="submit" [disabled]="!measurementsForm.valid">{{action}}</button>
+        </ion-col>
+        <ion-col col-4>
+            <!-- <button ion-button full>Button 2</button> -->
+        </ion-col>
+        <ion-col col-4 class="secondary">
+            <button ion-button *ngIf="action == 'update'" expand="full" (click)="goBack()">cancel</button>
+        </ion-col>
+    </ion-row>
+</ion-footer>
