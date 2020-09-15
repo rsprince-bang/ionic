@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
           localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
 
           if( this.userInfo.success.first_time_user && this.userInfo.success.first_time_user == "yes" ){
-            this.router.navigateByUrl("/enter-measurements");
+            this.router.navigateByUrl("/welcome");
           }
           else{
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);

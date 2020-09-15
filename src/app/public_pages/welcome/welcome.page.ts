@@ -14,7 +14,7 @@ export class WelcomePage implements OnInit {
   }
 
   begin() {
-    this.router.navigateByUrl("/login");
+    this.router.navigateByUrl("/set-goals");
   }
 
 }

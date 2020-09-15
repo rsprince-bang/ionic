@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'home/:day', loadChildren: './user_pages/home/home.module#HomePageModule', canActivate:[AuthGuard] },
   { path: 'calendar', loadChildren: './user_pages/calendar/calendar.module#CalendarPageModule', canActivate:[AuthGuard] },
   { path: 'profile', loadChildren: './user_pages/profile/profile.module#ProfilePageModule',  canActivate:[AuthGuard] },
-  { path: 'welcome', loadChildren: './public_pages/welcome/welcome.module#WelcomePageModule' }
+  { path: 'set-goals', loadChildren: './user_pages/set-goals/set-goals.module#SetGoalsPageModule' }
+
 
 
 
