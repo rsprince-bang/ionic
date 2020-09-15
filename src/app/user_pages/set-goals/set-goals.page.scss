@@ -15,6 +15,17 @@ ion-content.hydrated {
   background-image: url("../../../assets/img/blue-background.png");
 }
 
+// Needed to color datetime selection
+.hydrated {
+  color: white;
+ 
+}
+
+/* Set the text color */
+ion-select::part(text) {
+  color: white;
+}
+
 .day-selector {
   display: inline-block;
   width: 40px;

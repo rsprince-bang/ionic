@@ -14,8 +14,14 @@ export class SetGoalsPage implements OnInit {
     {day:'thu', selected: false},
     {day:'fri', selected: false}
   ];
+  lossOptions = [
+    {name: "5 pounds", value: 5},
+    {name: "10 pounds", value: 10},
+    {name: "15 pounds", value: 15},
+    {name: "20 pounds", value: 20}
+  ]
+  lossGoal: number;
 
-  // currentDate: String = new Date().toISOString();
   date = new Date(); 
   currentDateTime: String = new Date(this.date.getTime() - this.date.getTimezoneOffset()*60000).toISOString();
 
@@ -24,6 +30,7 @@ export class SetGoalsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.lossGoal = 5;
   }
 
   select(item) {
@@ -36,7 +43,14 @@ export class SetGoalsPage implements OnInit {
   };
 
   continue() {
+    this.sendData();
     this.router.navigateByUrl("/enter-measurements");
+  }
+
+  sendData() {
+    console.log('weighinDays: ', this.days);
+    console.log('lossGoal: ', this.lossGoal);
+    console.log('weighTime: ', this.currentDateTime);
   }
 
 

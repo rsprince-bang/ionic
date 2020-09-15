@@ -9,12 +9,13 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label>Pounds to Lose</ion-label>
-          <ion-select value="brown" okText="OK" cancelText="Cancel">
-            <ion-select-option value="brown">5 pounds</ion-select-option>
-            <ion-select-option value="blonde">10 pounds</ion-select-option>
-            <ion-select-option value="black">15 pounds</ion-select-option>
-            <ion-select-option value="red">20 pounds</ion-select-option>
+          <ion-label color="light">Pounds to Lose</ion-label>
+          <ion-select name="lossgoal" [(ngModel)]="lossGoal" okText="OK" cancelText="Cancel">
+            <ion-select-option 
+              *ngFor="let item of lossOptions"
+              [value]="item.value">
+                {{ item.name}}
+              </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -32,7 +33,7 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label>Weigh-in Time</ion-label>
+          <ion-label color="light">Weigh-in Time</ion-label>
           <ion-datetime displayFormat="h:mm a" pickerFormat="HH:mm" [(ngModel)]="currentDateTime"></ion-datetime>
         </ion-item>
       </ion-col>
