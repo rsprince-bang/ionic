@@ -6,9 +6,10 @@ import { FoodSuggestionsService } from 'src/app/services/food-suggestions.servic
 
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Label } from 'ng2-charts';
+import { Label, SingleDataSet } from 'ng2-charts';
 import { reduce } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import * as pluginLabels from 'chartjs-plugin-labels';
 
 @Component({
   selector: 'app-home',
@@ -44,61 +45,38 @@ export class HomePage implements OnInit {
   dayNutritionInfo = { "phase": null, "phaseday": null,"phasename":null , "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
   progressPercentage = 0;
-  
-  //declare barcharts
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    tooltips: {enabled: false},
-    hover: {mode: null},
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          min: 0,
-          display: false
-        },
-        gridLines: {
-          display: false
-        }
-      }],
-      xAxes: [{
-        gridLines: {
-          display: false
-        }
-      }]
-    },
-    plugins: {
-      datalabels: {
-        anchor: 'center',
-        clamp : true,
-        offset: 0,
-        font: {
-          size: this.chartOptionsfontSize(),
-          weight:900,
-          
-        }
-      }
-    }
-  };
-  public barChartLabels: Label[] = ['protein', 'carbs', 'fat'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = false;
-  public barChartPlugins = [pluginDataLabels];
 
-  public barChartData: ChartDataSets[] = [
-    { data: [1, 2, 3], label: 'Grams consumed', backgroundColor: "rgb(56, 129, 255)" },
-    { data: [4, 5, 6], label: 'Limit', backgroundColor: "rgb(191, 191, 191)"}
+  // PIE CHART VARIABLES
+  pieChartOptions: ChartOptions;
+  pieChartLabels: Label[];
+  pieChartData: SingleDataSet;
+  pieChartType: ChartType;
+  pieChartLegend: boolean;
+  pieChartPlugins = [];
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(0,0,255,1.0)', 'rgba(255,165,0,1.0)', 'rgba(0,255,0,1.0)'],
+    },
   ];
 
-
-
-
-  constructor(private router: Router, private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute, private myAPI: ApiCallService,
-    private foodSuggestionsService: FoodSuggestionsService, private alertController: AlertController) {
-
-  }
+  constructor(
+    private router: Router, 
+    private globalServices: GlobalServicesService, 
+    private activatedRoute: ActivatedRoute, 
+    private myAPI: ApiCallService,
+    private foodSuggestionsService: FoodSuggestionsService, 
+    private alertController: AlertController
+  ) { }
 
   ngOnInit() {
+    // PIE CHART SETTINGS
+    this.pieChartOptions = this.createOptions();
+    this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
+    this.pieChartData = [50.4, 33.6, 15.9];
+    this.pieChartType = 'pie';
+    this.pieChartLegend = true;
+    this.pieChartPlugins = [pluginLabels];
+
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
     this.date = this.globalServices.getDate(this.day);
 
@@ -107,12 +85,34 @@ export class HomePage implements OnInit {
     }
     
   }
+
+  // PIE CHART OPTIONS
+  private createOptions(): ChartOptions {
+    return {
+      responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+              labels: {
+                render: 'percentage',
+                fontColor: ['white', 'white', 'white'],
+                precision: 0
+              }
+          },
+    };
+  }
+
+  getAverages(array) {
+    let sum = 0 ;
+    let pieChartAvgs = [];
+    array.forEach(item => sum += item);
+    array.forEach(item => pieChartAvgs.push((item/sum) * 100));
+    return pieChartAvgs;
+  }
+
   ionViewWillEnter() {
     this.updatepage();
     this.getFeedback();
   }
-
-
 
   handleSwipeLeft() {
     switch (this.day) {
@@ -162,7 +162,7 @@ export class HomePage implements OnInit {
     this.planLength_days = this.planLength_weeks * 7;
     this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
 
-    this.barChartLabels = ['Protein '+this.dayNutritionInfo.daynutrition.protein +'%', 'Carbs '+this.dayNutritionInfo.daynutrition.carbs+'%', 'Fat '+ this.daynutritionOfFat()];
+    // this.pieChartLabels = ['Protein' + this.dayNutritionInfo.daynutrition.protein +'%', this.dayNutritionInfo.daynutrition.carbs+'%', this.daynutritionOfFat()];
     this.myAPI.makeAPIcall(
       "meals.php",
       {
@@ -190,8 +190,8 @@ export class HomePage implements OnInit {
   calculateCaloriesConsumed() {
     var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
 
-    this.barChartData[0].data = [Math.round(info.caloriesFromProtein), Math.round(info.caloriesFromCarbs), Math.round(info.caloriesFromFat)];
-    this.barChartData[1].data = [Math.round(info.targetCaloriesFromProtein), Math.round(info.targetCaloriesFromCarbs), Math.round(info.targetCaloriesFromFat)];
+    // this.barChartData[0].data = [Math.round(info.caloriesFromProtein), Math.round(info.caloriesFromCarbs), Math.round(info.caloriesFromFat)];
+    // this.barChartData[1].data = [Math.round(info.targetCaloriesFromProtein), Math.round(info.targetCaloriesFromCarbs), Math.round(info.targetCaloriesFromFat)];
 
     this.caloriesConsumed = info.caloriesConsumed;
     this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
