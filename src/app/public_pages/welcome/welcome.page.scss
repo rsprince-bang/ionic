@@ -1,0 +1,26 @@
+ion-header ion-toolbar {
+  background-color: #0967ec;
+  --background: linear-gradient(90deg, rgba(9,103,236,1) 0%, rgba(2,146,253,1) 50%);
+}
+
+
+.header-ios ion-toolbar:last-child {
+  border-width: 0;
+}
+
+ion-content.hydrated {
+  --ion-background-color: rgba(235, 251, 255, 0.0);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../../../assets/img/blue-background.png");
+}
+
+h1, strong {
+  color: white;
+  text-transform: uppercase;
+}
+
+p {
+  color: white;
+}

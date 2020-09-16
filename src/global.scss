@@ -31,6 +31,20 @@ ion-img.nav-logo.hydrated {
     margin-right: 0.81rem;
 }
 
+// Register Text
+.register-text {
+    margin-top: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    font-size: 0.72rem;
+
+    .register-link {
+        color: orange;
+        font-weight: bold;
+        text-decoration: none;
+    }
+}
 
 ////////////////////////////////////////
 //calender CSS override
@@ -312,13 +326,18 @@ ion-toolbar.day-change-slider {
         left: calc(50% - (150px / 2));
     }
 }
-.row {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 5px;
-    width: 100%;
-  }
+.icon-large {
+  color: white;
+}
+
+.form.form-app-login ion-label, .form.form-app-login ion-input {
+  font-size: 1.0rem !important;
+  font-weight: 300 !important;
+	padding-left: 10px !important;
+	border-bottom: 0 !important;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}

@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterPage } from './register.page';
+import { SetGoalsPage } from './set-goals.page';
 
 const routes: Routes = [
-  { path: '', component: RegisterPage}
+  {
+    path: '',
+    component: SetGoalsPage
+  }
 ];
 
 @NgModule({
@@ -16,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [RegisterPage]
+  declarations: [SetGoalsPage]
 })
-export class RegisterPageModule {}
+export class SetGoalsPageModule {}

@@ -7,26 +7,46 @@
       </div>
   
       <form class="form form-app-login" [formGroup]="credentialsForm" (ngSubmit)="login()">
+        <ion-grid>
+          <ion-row align-items-end>
+            <ion-col size="1" align-self-bottom>
+              <ion-icon name="person" size="large"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <ion-item class="" lines="full">
+                <ion-label color="light" position="floating"> User Name / Email Address</ion-label>
+                <ion-input type="email" formControlName="email" required></ion-input>
+              </ion-item>
+              <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+                Email address is required.
+              </span>
+            </ion-col>
+          </ion-row>
 
-        <ion-item class="login email">
-          <ion-label color="light" position="floating">Username / Email</ion-label>
-          <ion-input type="email" formControlName="email" placeholder="Username">
-            <span class="input-icon input-icon-left" item-right>
-              <ion-icon name="person"></ion-icon>
-            </span>
-          </ion-input>
-        </ion-item>
+          <ion-row align-items-end>
+            <ion-col size="1" align-self-bottom>
+              <ion-icon name="lock" size="large"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <ion-item class="" lines="full">
+                <ion-label color="light" position="floating">Password</ion-label>
+                <ion-input type="email" formControlName="password" required></ion-input>
+              </ion-item>
+              <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+                Password is required.
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-        <ion-item class="login password">
-          <ion-label color="light" position="floating">Password</ion-label>
-          <ion-input type="password" formControlName="password" placeholder="Password">
-            <span class="input-icon input-icon-left" item-right>
-              <ion-icon name="lock"></ion-icon>
-            </span>
-          </ion-input>
-        </ion-item>
-  
-        <ion-button class="btn btn-login btn-round" expand="full" type="submit" [disabled]="!credentialsForm.valid" shape="round">Login</ion-button>
+        <ion-button
+         class="btn btn-login btn-round" 
+         expand="full" 
+         type="submit"  
+         shape="round">
+         <!-- [disabled]="!credentialsForm.valid" -->
+          Login
+        </ion-button>
         <div class="text-center text-white" style="font-size: 0.72rem;">OR</div>
         <ion-button  class="btn btn-login-facebook btn-round" expand="full" type="submit" (click)="doFbLogIn()" tabIcon="fab fa-facebook" shape="round">
           <ion-icon slot="start" name="logo-facebook"></ion-icon>

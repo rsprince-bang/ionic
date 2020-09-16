@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar text-center>
+    <ion-title>Set Diet Goals</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding text-center>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label color="light">Pounds to Lose</ion-label>
+          <ion-select name="lossgoal" [(ngModel)]="lossGoal" okText="OK" cancelText="Cancel">
+            <ion-select-option 
+              *ngFor="let item of lossOptions"
+              [value]="item.value">
+                {{ item.name}}
+              </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <div *ngFor="let item of days; let i of index"
+          class="day-selector"
+          [class.day-selected]="item.selected"
+          (click)="select(i)">
+          {{ item.day }}
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label color="light">Weigh-in Time</ion-label>
+          <ion-datetime displayFormat="h:mm a" pickerFormat="HH:mm" [(ngModel)]="currentDateTime"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button class="button icon icon-right ion-home" (click)="continue()">
+    Continue
+    <ion-icon name="arrow-forward" slot="end"></ion-icon>
+  </ion-button>
+
+</ion-content>
