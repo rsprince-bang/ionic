@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
 
   credentialsForm: FormGroup;
   userInfo = null;
+  isSubmitted = false;
 
   constructor(
     private myAPI: ApiCallService, private router: Router, public events: Events, private formBuilder: FormBuilder, public toastController: ToastController,
@@ -33,8 +34,12 @@ export class LoginPage implements OnInit {
     });
   }
 
+  get errorControl() {
+    return this.credentialsForm.controls;
+  }
 
   login() {
+    this.isSubmitted = true;
     this.myAPI.makeAPIcall(
       "login.php", 
       {
@@ -61,7 +66,7 @@ export class LoginPage implements OnInit {
           localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
 
           if( this.userInfo.success.first_time_user && this.userInfo.success.first_time_user == "yes" ){
-            this.router.navigateByUrl("/enter-measurements");
+            this.router.navigateByUrl("/welcome");
           }
           else{
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
