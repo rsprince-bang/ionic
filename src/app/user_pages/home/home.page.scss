@@ -31,10 +31,10 @@ $fontGrayColor : rgb(67, 66, 66);
 }
 
 .chart {
-    width: 100%;
+	width:52%;
 
     ion-progress-bar {
-	    width: 100%;
+		width: 100%;
 	}
 }
 
@@ -46,7 +46,8 @@ $fontGrayColor : rgb(67, 66, 66);
 	justify-content: center;
 
 	.text {
-		width: 6rem;
+		width: 4.5rem;
+		color: #0417c2;
 	}
 }
 
@@ -60,3 +61,41 @@ $fontGrayColor : rgb(67, 66, 66);
 	margin-right: -16px;
 	margin-bottom: -16px;
 }
+.imgBacStyle{
+	margin: auto;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+	object-fit: cover;
+	margin-top: 5px;
+	border: 3px solid white;
+}
+.nameStyle {
+	color: #3880ff;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 3px solid #3880ff;
+    width: fit-content;
+    margin: auto;
+}
+svg {
+    height: 100 !important;
+    width: 100 !important;
+}
+.progressBack {
+	background-color: #e2e2e2;
+    width: 100%;
+    height: auto;
+}
+.chart-container-big{
+	min-height:auto;
+	width: 100%;
+}
+.quizz-progress {
+	ion-progress-bar {
+	   --background: green;
+	   --buffer-background: #e2e2e2 ;
+	   --progress-background:#0417c2 ;
+	 }
+   }

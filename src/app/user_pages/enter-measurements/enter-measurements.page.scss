@@ -33,19 +33,15 @@ fieldset {
   }
 }
 .profile-img-bg {
-  position: sticky;
-  color: white;
-  font-weight: bolder;
-  height: 92%;
-  background-color: #5d5df1;
-  clear: both;
-  text-align: center;
-  border-bottom-left-radius: 1000px 250px;
-  border-bottom-right-radius: 1000px 250px;
-  box-shadow: 4px antiquewhite !important;
-  -webkit-box-shadow: -7px 37px 62px -10px rgba(0, 0, 0, 0.53);
-  -moz-box-shadow: -7px 37px 62px -10px rgba(0, 0, 0, 0.53);
-  box-shadow: 4px 4px 32px 4px rgba(0, 0, 0, 0.53);
+    position: sticky;
+    color: white;
+    font-weight: bolder;
+    height: 92%;
+    background: #0417c2;
+    clear: both;
+    text-align: center;
+    border-bottom-left-radius: 1000px 0px;
+    border-bottom-right-radius: 1000px 0px;
 }
 .profile-img {
   text-align: center !important;
@@ -89,6 +85,7 @@ fieldset {
   height: auto;
   transition: 0.5s ease;
   backface-visibility: hidden;
+  background-color: white;
 }
 
 .middle {
@@ -122,8 +119,8 @@ fieldset {
 
 .image {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 130px;
+  height: 100px;
 }
 #add {
   width: 60%;
