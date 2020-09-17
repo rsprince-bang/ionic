@@ -115,11 +115,14 @@ ion-button {
     text-transform: uppercase;
     --background: #0417c2;
 }
+.header-md:after {
+    background-image: none;
+}
 ion-content {
     // --ion-background-color: rgba(235, 251, 255, 0.79);
     --ion-background-color: rgba(235, 251, 255, 0);
     // background-image:url("./assets/img/book-smoke-mobile.jpg");
-    background-image: url("./assets/img/app-background.jpg");
+    // background-image: url("./assets/img/app-background.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -337,4 +340,23 @@ ion-toolbar.day-change-slider {
 .error {
     color: red;
     font-size: 12px;
+}
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 5px;
+    width: 100%;
+  }                                     
+  svg .here {
+    height: 100 !important;
+    width: 100 !important;
+}
+svg:not(:root) {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }

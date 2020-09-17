@@ -15,41 +15,45 @@
 
     </ion-toolbar>
 </ion-header>
-<ion-content padding>
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-    
-    <!-- Day Change Slider -->
-    <ion-toolbar class="day-change-slider" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
-        <ion-card>
-            <ion-icon class="arrow-back" *ngIf="(day == 'today' && dayNumber != 1) || day == 'tomorrow'" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
-            <section>
-                <ion-card-header>
-                    <ion-card-title class="dc-slider-title-label">{{day}}</ion-card-title>
-                </ion-card-header>
-                <ion-card-content *ngIf="dayNumber>planLength_days; else templateName" class="day">
-                    Congratulations!<br>
-                    You have completed the The Meltdown Anti-Diet!
-                </ion-card-content>
-                <ng-template #templateName>
-                    <ion-card-content class="dc-slider-title">
-                        <div class="dayNumber">DAY {{dayNumber}}</div>
-                    </ion-card-content>
-                </ng-template>
-            </section>
-            <ion-icon 
-              class="arrow-forward" 
-              *ngIf="day == 'today' || day == 'yesterday'" 
-              (click)="handleSwipeLeft()" 
-              name="arrow-forward" 
-              slot="end">
-            </ion-icon>
-        </ion-card>
-    </ion-toolbar>
-
+<ion-content >
+    <div style="padding: 15px ;">
+  
+    <ion-card style="background-color: #e2e2e2;margin: 15px 0px;">
+      <ion-row>
+        <ion-col size="4">
+          <div style="margin: auto ;height: 100%;">
+            <img class="imgBacStyle" src="../../../assets/img/track-workout-footer-background.jpg">
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="nameStyle">
+            JHON DOE
+          </div>
+          <div style="margin: auto;margin-top: 10px;text-align: center;color: black;
+          font-weight: 600;">Your Daily Tracking Report</div>
+          <div class="row" style="margin: auto;text-align: center;">
+            <div style="margin: auto;font-size: x-large;">
+              <ion-icon style="color: #3880ff;" name="arrow-back" *ngIf="(day == 'today' && dayNumber != 1) || day == 'tomorrow'" 
+              (click)="handleSwipeRight()"></ion-icon>
+            </div>
+            <div style="margin: auto;">
+              <div style="text-transform: uppercase;color: black;
+              font-weight: 600;font-size:19px"><b>
+                {{day}}
+              </b></div>
+              <div style="color: black;
+              font-weight: 500;">DAY {{dayNumber}}</div>
+            </div>
+            <div  style="margin: auto;font-size: x-large;">
+              <ion-icon style="color: #3880ff;" name="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" 
+              (click)="handleSwipeLeft()" ></ion-icon>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
     <!-- Chart -->
-    <div class="chart">
+    <div style="width: 100%;">
       <canvas baseChart *ngIf="pieChartData"
         [data]="pieChartData" 
         [labels]="pieChartLabels" 
@@ -68,85 +72,161 @@
         <ion-icon name="pulse" *ngIf="workout_completed == false"></ion-icon>
         <ion-icon class="heart" name="heart" *ngIf="workout_completed == false"></ion-icon>
     </ion-item>
-
-    <!-- Phase -->
-<!--     <ion-item>
-        <div>
-            <p>Phase {{dayNutritionInfo.phase}}</p>
-            <p>{{dayNutritionInfo.phasename}}</p>
-            <p>
-                <span class="dayNumber_2">Day {{dayNumber}} </span> / <span class="totalDayProgram">{{planLength_days}}</span>
-            </p>
-        </div>
-    </ion-item> -->
-
-
-    <!-- Days Remaining --> 
+    
+    <ion-row>
+      <ion-col style="font-weight: 600;">
+        Daily calories progress
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-left: -20px;
+    margin-right: 10px;
+    margin-top: -20px;
+">
+      <ion-col size="4">
+        <ion-card class="progressBack">
+          <circle-progress
+            [percent]="58"
+[showInnerStroke]="true" [radius]="200"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="16"
+  [space]="-14"
+  [outerStrokeColor]="'#0417c2'"
+  [innerStrokeColor] = "'white'"
+  [backgroundStroke]="'white'"
+  [animation]="true"
+  [showTitle] = "true"
+  [animationDuration]="300" [title]="'58g of FAT'"
+  [outerStrokeGradientStopColor] ="'white'"
+  [backgroundGradientStopColor] = "'white'"
+  [titleColor] = "'#0417c2'"
+  [titleFontSize] = "45"
+  [subtitle] = "'xxxg remaining'"
+  [showSubtitle] ="true"
+  [subtitleColor] = "'black'"
+  [subtitleFontSize]="30"
+></circle-progress>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card class="progressBack">
+          <circle-progress
+          [percent]="100"
+          [showInnerStroke]="true" [radius]="200"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="16"
+  [space]="-14"
+          [outerStrokeColor]="'#0417c2'"
+          [innerStrokeColor] = "'white'"
+          [backgroundStroke]="'white'"
+          [animation]="false"
+          [showTitle] = "true"
+          [animationDuration]="300" [title]="data"
+          [outerStrokeGradientStopColor] ="'white'"
+          [backgroundGradientStopColor] = "'white'"
+          [titleColor] = "'#0417c2'"
+          [titleFontSize] = "40"
+          [subtitle] = "'xxxg remaining'"
+          [showSubtitle] ="true"
+          [subtitleColor] = "'black'"
+          [subtitleFontSize]="30"
+          [showBackground] ="false"
+></circle-progress>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card class="progressBack">
+          <circle-progress
+          [percent]="58"
+          [showInnerStroke]="true" [radius]="200"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="16"
+          [space]="-14"
+          [outerStrokeColor]="'#0417c2'"
+          [innerStrokeColor] = "'white'"
+          [backgroundStroke]="'white'"
+          [animation]="true"
+          [showTitle] = "true"
+          [animationDuration]="300" [title]="'58g of CARBS'"
+          [outerStrokeGradientStopColor] ="'white'"
+          [backgroundGradientStopColor] = "'white'"
+          [titleColor] = "'#0417c2'"
+          [titleFontSize] = "40"
+          [subtitle] = "'xxxg remaining'"
+          [showSubtitle] ="true"
+          [subtitleColor] = "'black'"
+          [subtitleFontSize]="30"
+></circle-progress>
+        </ion-card>
+      </ion-col>
+    </ion-row>
     <ion-item>
       <div class="daily-progress">
         <div class="text">DAY {{dayNumber}}</div>
-        <div class="chart">
-          <ion-progress-bar value="{{progressPercentage}}"></ion-progress-bar>
+          <div class="row"><div class="chart quizz-progress">
+            <ion-progress-bar value="0.3" style="height: 22px;"></ion-progress-bar>
+          </div>
+          <div style="font-size: 12px;background-color: #e2e2e2;height:22px">
+            <div style="text-align: right;text-align: right;
+            margin: 4px 0px;
+        }">97 DAYS REMAINING</div>
+          </div>
+          
         </div>
       </div>
     </ion-item>
+    <div style="font-weight: 600;font-size: 16px;padding: 10px 0px;">March 1-7</div>
 
-
-    <!-- Dietary Breakdown -->
-    <ion-item>
-      <ul class="daily-dietary-needs">
-        
-        <li class="daily-dietary-category">
-          <strong>Protein:</strong> Need <span class="">??</span> Calories
-        </li>
-
-        <li class="daily-dietary-category">
-          <strong>Carbs:</strong> Need <span class="">??</span> Calories
-        </li>
-
-        <li class="daily-dietary-category">
-          <strong>Fat:</strong> Need <span class="">??</span> Calories
-        </li>
-
-      </ul>
-  </ion-item>
-
-
-  <!-- Daily Calorie Consumption -->
-  <div class="content-footer">
-    <ion-grid>
+    <ion-card-content style="background-color: #0417c2;padding: 10px;border-radius: 15px;">
       <ion-row>
-        
-        <ion-col size="6">
-          <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
-          <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle"></circle-progress>
+        <ion-col size="2.5">
+          <ion-button style="font-size: 10px;
+          background-color: #00ff00;
+          --background: #00ff00;
+          border-radius: 10px;
+          /* border-color: white; */
+          border: 1px solid black;
+          color:white">
+            weight
+
+          </ion-button>
         </ion-col>
-
-        <ion-col size="6">
-          <div class="list-group">
-            
-            <div class="list-group-header">Maximum Calories</div>
-            
-            <ul class="list-group-body">
-              <li class="list-group-item">{{dietCaloriesIntake}} Calories</li>
-            </ul>
-
-          </div>
-
-          <div class="list-group">
-            
-            <div class="list-group-header">Consumed Calories</div>
-            
-            <ul class="list-group-body">
-              <li class="list-group-item">{{caloriesConsumed}} Calories</li>
-            </ul>
-            
-          </div>
-
+        <ion-col size="3.5">
+          <ion-button  style="font-size: 10px;
+          background-color: white;
+          --background: white;
+          border-radius: 10px;
+          /* border-color: white; */
+          border: 1px solid black;
+          color:black">
+           body mass
+          </ion-button>
         </ion-col>
+        <ion-col size="3">
+          <ion-button style="font-size: 10px;
+          background-color: white;
+          --background: white;
+          border-radius: 10px;
+          /* border-color: white; */
+          border: 1px solid black;
+          color:black">
+            body fat
 
+          </ion-button>
+        </ion-col>
+        <ion-col size="3" style="margin: auto;">
+          <select style="border: none;color:white;background: transparent;font-size: 12px;">
+            <option>WEEEKLY</option>
+          </select>
+        </ion-col>
       </ion-row>
-    </ion-grid>
-  </div>
-
+      <ion-row>
+          <ion-col size=12 size-md="12" size-lg="8" size-xl="4" style="margin: auto;text-align: center;">
+              <div class='chart-container-big'>
+                  <canvas #barCanvas></canvas> 
+              </div>
+          </ion-col>
+      </ion-row>
+  </ion-card-content>
+  
+</div>
 </ion-content>
