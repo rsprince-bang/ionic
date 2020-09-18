@@ -69,6 +69,7 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     // PIE CHART SETTINGS
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
@@ -78,6 +79,10 @@ export class HomePage implements OnInit {
     this.pieChartPlugins = [pluginLabels];
 
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
+    if(!this.day) {
+      this.day = 'today';
+    }
+    console.log('Day: ', this.day);
     this.date = this.globalServices.getDate(this.day);
 
     if (!this.globalServices.hasDailyCaloriesIntake()) {
