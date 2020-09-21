@@ -3,19 +3,20 @@
     <div>
       
       <div class="login-screen-img">
-        <img src="assets/img/book-cover@3x.png" >
+        <img src="assets/img/login-logo-new.png">
       </div>
   
       <form class="form form-app-login" [formGroup]="credentialsForm" (ngSubmit)="login()">
         <ion-grid>
+          <h1>Login</h1>
           <ion-row align-items-end>
-            <ion-col size="1" align-self-bottom>
+            <!-- <ion-col size="1" align-self-bottom>
               <ion-icon name="person" size="large"></ion-icon>
-            </ion-col>
+            </ion-col> -->
             <ion-col>
               <ion-item class="" lines="full">
-                <ion-label color="light" position="floating"> User Name / Email Address</ion-label>
-                <ion-input type="email" formControlName="email" required></ion-input>
+                <!-- <ion-label position="floating">Email Address</ion-label> -->
+                <ion-input type="email" formControlName="email" placeholder="Email Address" required></ion-input>
               </ion-item>
               <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
                 Email address is required.
@@ -24,38 +25,48 @@
           </ion-row>
 
           <ion-row align-items-end>
-            <ion-col size="1" align-self-bottom>
+            <!-- <ion-col size="1" align-self-bottom>
               <ion-icon name="lock" size="large"></ion-icon>
-            </ion-col>
+            </ion-col> -->
             <ion-col>
               <ion-item class="" lines="full">
-                <ion-label color="light" position="floating">Password</ion-label>
-                <ion-input type="email" formControlName="password" required></ion-input>
+                <!-- <ion-label position="floating">Password</ion-label> -->
+                <ion-input type="email" placeholder="Password" formControlName="password" required></ion-input>
               </ion-item>
               <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
                 Password is required.
               </span>
             </ion-col>
           </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-button
+              class="btn btn-login btn-round ion-text-center" 
+              type="submit"  
+              shape="round">
+              <!-- [disabled]="!credentialsForm.valid" -->
+               Login
+             </ion-button>
+             <div class="text-center text-white" style="font-size: 0.72rem;">OR</div>
+             <!-- <ion-button  class="btn btn-login-facebook btn-round" expand="full" type="submit" (click)="doFbLogIn()" tabIcon="fab fa-facebook" shape="round">
+               <ion-icon slot="start" name="logo-facebook"></ion-icon>
+               continue with Facebook
+             </ion-button> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <img class="social-icons" src="assets/img/thefixicon.png">
+              <img class="social-icons" src="assets/img/twittericon.png">
+              <img class="social-icons" src="assets/img/instagramicon.png">
+              <img class="social-icons" src="assets/img/facebookicon.png">
+              <img class="social-icons" src="assets/img/googleicon.png">
+            </ion-col>
+          </ion-row>
         </ion-grid>
-
-        <ion-button
-         class="btn btn-login btn-round" 
-         expand="full" 
-         type="submit"  
-         shape="round">
-         <!-- [disabled]="!credentialsForm.valid" -->
-          Login
-        </ion-button>
-        <div class="text-center text-white" style="font-size: 0.72rem;">OR</div>
-        <ion-button  class="btn btn-login-facebook btn-round" expand="full" type="submit" (click)="doFbLogIn()" tabIcon="fab fa-facebook" shape="round">
-          <ion-icon slot="start" name="logo-facebook"></ion-icon>
-          continue with Facebook
-        </ion-button>
-
       </form>
       
-      <p class="register-text text-white">Dont have an account? <a class="register-link"[routerLink]="['/register']">Register</a></p>
+      <p class="register-text">Dont have an account? <a class="register-link"[routerLink]="['/register']">Register</a></p>
 
     </div>
   </div>

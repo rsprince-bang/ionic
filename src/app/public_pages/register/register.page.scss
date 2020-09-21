@@ -8,25 +8,24 @@ ion-header ion-toolbar {
 }
 
 ion-content.hydrated {
-    --ion-background-color: rgba(235, 251, 255, 0.0);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-image: url("../../../assets/img/blue-background.png");
+    // --ion-background-color: rgba(235, 251, 255, 0.0);
+    // background-repeat: no-repeat;
+    // background-position: center;
+    // background-size: cover;
+    // background-image: url("../../../assets/img/blue-background.png");
 }
 
-ion-input {
-    background-color: rgba(255,255,255,0.8);
-    color: #000;
-    // border-radius: 10px;
+// ion-input {
+//     color: #000;
+//     // border-radius: 10px;
 
-    --padding-start: 0.72rem;
-    --padding-end: 0.72rem;
-    --padding-top: 0.12rem;
-    --padding-bottom: 0.12rem;
+//     --padding-start: 0.72rem;
+//     --padding-end: 0.72rem;
+//     --padding-top: 0.12rem;
+//     --padding-bottom: 0.12rem;
 
-    --border-radius: 10px;
-}
+//     --border-radius: 10px;
+// }
 
 form ion-label {
     color: #fff;

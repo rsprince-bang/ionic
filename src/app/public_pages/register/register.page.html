@@ -1,60 +1,64 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar class="register_title">
     <ion-buttons slot="start">
       <ion-back-button class="register_back"></ion-back-button>
     </ion-buttons>
     <ion-title>Create New Account</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content padding>
+  <div class="logo-img-sml">
+    <img src="assets/img/login-logo-new.png">
+  </div>
 
-  <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
+  <form class="form form-app-login" [formGroup]="registerForm" (ngSubmit)="register()">
     <ion-grid>
+      <h1>Signup</h1>
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="stacked">First Name</ion-label>
-            <ion-input type="text" formControlName="first_name"></ion-input>
+            <!-- <ion-label position="stacked">First Name</ion-label> -->
+            <ion-input type="text" placeholder="First Name" formControlName="first_name"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-label position="stacked">Last Name</ion-label>
-            <ion-input type="text" formControlName="last_name"></ion-input>
+            <!-- <ion-label position="stacked">Last Name</ion-label> -->
+            <ion-input type="text" placeholder="Last Name" formControlName="last_name"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
 
     <ion-item>
-      <ion-label position="stacked">E-mail</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
+      <!-- <ion-label position="stacked">E-mail</ion-label> -->
+      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Username</ion-label>
-      <ion-input type="text" formControlName="username"></ion-input>
+      <!-- <ion-label position="stacked">Username</ion-label> -->
+      <ion-input type="text" placeholder="Username" formControlName="username"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Password</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
+      <!-- <ion-label position="stacked">Password</ion-label> -->
+      <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Verify Password</ion-label>
-      <ion-input type="password" formControlName="password_verify"></ion-input>
+      <!-- <ion-label position="stacked">Verify Password</ion-label> -->
+      <ion-input type="password" placeholder="Verify Password" formControlName="password_verify"></ion-input>
     </ion-item>
 
-    <ion-footer class="register">
-      <ion-button class="btn btn-primary btn-register" expand="block" type="submit" [disabled]="!registerForm.valid">
-        Register
-      </ion-button>
-    </ion-footer>
   </form >
 
   <p class="register-text text-white">I agree to the <a class="register-link"[routerLink]="['/terms']">terms and privacy policy.</a></p>
 
-
 </ion-content>
+
+<ion-footer class="register">
+  <ion-button class="btn btn-primary btn-register" expand="block" type="submit" [disabled]="!registerForm.valid">
+    Register
+  </ion-button>
+</ion-footer>
