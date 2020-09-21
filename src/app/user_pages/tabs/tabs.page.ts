@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { AddEventModalPage } from '../add-event-modal/add-event-modal.page';
 
 @Component({
   selector: 'app-tabs',
@@ -9,7 +11,13 @@ import { Component, OnInit } from '@angular/core';
 
 export class TabsPage implements OnInit {
 
+  constructor(private modalController: ModalController) { }
+
   ngOnInit() {
-    console.log("Hello");
   }
+
+  async openModal() {
+    const modal = await this.modalController.create({component: AddEventModalPage});
+    return await modal.present();
+   }
 }
