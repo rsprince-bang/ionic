@@ -48,18 +48,19 @@ export class TrackMealPage implements OnInit {
     },
   ];
 
-  constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,
-    private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
+  constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,public router: Router
+   , private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
 
   ngOnInit() {
     // PIE CHART SETTINGS
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
     this.pieChartData = [50.4, 33.6, 15.9];
-    this.pieChartType = 'pie';
+    this.pieChartType = 'doughnut';
     this.pieChartLegend = true;
     this.pieChartPlugins = [pluginLabels];
-
+    this.day = this.activatedRoute.snapshot.paramMap.get('day');
+    this.date = this.globalServices.getDate(this.day);
     this.date = this.activatedRoute.snapshot.paramMap.get('day');
     if( this.date == '' ){
       this.date = this.date = this.globalServices.getTodayDate();
@@ -67,7 +68,7 @@ export class TrackMealPage implements OnInit {
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     if( this.date == this.globalServices.getTodayDate() ){
       if(this.today = true){
-        this.day = "TODAY"
+        // this.day = "TODAY"
       }
     }
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
@@ -132,19 +133,20 @@ export class TrackMealPage implements OnInit {
   }
 
   async openFoodModal(){
-    const modal = await this.modalController.create({
-      component: HomeAddFoodModalPage,
-      componentProps: { date: this.date }
-    });
+    // const modal = await this.modalController.create({
+    //   component: HomeAddFoodModalPage,
+    //   componentProps: { date: this.date }
+    // });
 
-    modal.onDidDismiss()
-      .then((response) => {
-        if( response.data ){
-          this.loadMeals();
-        }        
-    });
+    // modal.onDidDismiss()
+    //   .then((response) => {
+    //     if( response.data ){
+    //       this.loadMeals();
+    //     }        
+    // });
 
-    return await modal.present();
+    // return await modal.present();
+    this.router.navigateByUrl('/home-add')
   }
 
   removeMeal(meal_id) {
@@ -185,9 +187,4 @@ export class TrackMealPage implements OnInit {
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }
 
-
 }
-
-
-
-

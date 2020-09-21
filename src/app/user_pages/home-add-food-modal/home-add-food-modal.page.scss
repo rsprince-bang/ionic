@@ -1,0 +1,27 @@
+.chart {
+	width:78%;
+
+    ion-progress-bar {
+		width: 100%;
+	}
+}
+
+.daily-progress {
+	padding: 1rem 0;
+    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.text {
+		width: 4.5rem;
+		color: #0417c2;
+	}
+}
+.quizz-progress {
+	ion-progress-bar {
+	   --background: green;
+	   --buffer-background: #e2e2e2 ;
+	   --progress-background:#0417c2 ;
+	 }
+}
