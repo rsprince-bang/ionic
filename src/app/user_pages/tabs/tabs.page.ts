@@ -14,10 +14,16 @@ export class TabsPage implements OnInit {
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
+    // this.dismiss();
+    console.log("Tabs");
   }
 
   async openModal() {
     const modal = await this.modalController.create({component: AddEventModalPage});
     return await modal.present();
-   }
+  }
+
+  dismiss() {
+    this.modalController.dismiss();
+  }
 }

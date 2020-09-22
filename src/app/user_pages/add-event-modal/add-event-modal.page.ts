@@ -15,6 +15,6 @@ export class AddEventModalPage implements OnInit {
 
   dismiss() {
     this.modalController.dismiss();
-    }
+  }
 
 }

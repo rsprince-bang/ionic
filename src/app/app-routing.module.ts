@@ -4,9 +4,9 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
   
-  { path: 'home', loadChildren: () => import('./user_pages/tabs/tabs.module').then(m => m.TabsPageModule)},
+  { path: '', loadChildren: () => import('./user_pages/tabs/tabs.module').then(m => m.TabsPageModule)},
 
   //public paths
   { path: 'login', loadChildren: './public_pages/login/login.module#LoginPageModule' },
@@ -26,7 +26,8 @@ const routes: Routes = [
   // { path: 'profile', loadChildren: './user_pages/profile/profile.module#ProfilePageModule',  canActivate:[AuthGuard] },
   { path: 'welcome', loadChildren: './public_pages/welcome/welcome.module#WelcomePageModule', canActivate:[AuthGuard] },
   { path: 'set-goals', loadChildren: './user_pages/set-goals/set-goals.module#SetGoalsPageModule',  canActivate:[AuthGuard] },
-  { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] },  { path: 'add-event-modal', loadChildren: './user_pages/add-event-modal/add-event-modal.module#AddEventModalPageModule' },
+  { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] },
+  { path: 'add-event-modal', loadChildren: './user_pages/add-event-modal/add-event-modal.module#AddEventModalPageModule' },
 
   
 ];
