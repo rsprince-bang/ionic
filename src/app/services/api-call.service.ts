@@ -30,6 +30,8 @@ export class ApiCallService {
 
   makeAPIcall(page, data, auth_needed = false): Observable<any> {
 
+    data.signature = environment.API_Signature;
+
     if (auth_needed) {
       data.token = localStorage.getItem("token");
       data.user_id = localStorage.getItem("user_id");
@@ -58,6 +60,8 @@ export class ApiCallService {
 
   makeSilentCall(page, data, auth_needed = false) {
 
+    data.signature = environment.API_Signature;
+    
     if (auth_needed) {
       data.token = localStorage.getItem("token");
       data.user_id = localStorage.getItem("user_id");
