@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
   login() {
     this.isSubmitted = true;
     this.myAPI.makeAPIcall(
-      "login.php", 
+      "login", 
       {
         "action": "login",
         "email": this.credentialsForm.value.email,

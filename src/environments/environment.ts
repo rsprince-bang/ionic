@@ -6,7 +6,8 @@ export const environment = {
 
   production: false,
 
-  API_URL: "https://bang-us-new.bangstg.com/md-app/"
+  //API_URL: "https://bang-us-new.bangstg.com/md-app/"
+  API_URL: "http://localhost:8013/api/"
 };
 
 /*
