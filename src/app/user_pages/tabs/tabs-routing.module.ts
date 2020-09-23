@@ -12,7 +12,7 @@ const routes: Routes = [
       // { path: 'home/:day', loadChildren: './home/home.module#HomePageModule', canActivate:[AuthGuard] },
       // { path: 'home', loadChildren: '../../user_pages/home/home.module#HomePageModule', canActivate:[AuthGuard] },
 
-      { path: 'home', loadChildren: '../home/home.module#HomePageModule', canActivate:[AuthGuard] },
+      { path: 'home', loadChildren: '../../user_pages/home/home.module#HomePageModule', canActivate:[AuthGuard] },
 
       { path: 'track-meal', loadChildren: '../../user_pages/track-meal/track-meal.module#TrackMealPageModule', canActivate:[AuthGuard] },
       { path: 'track-meal/:day', loadChildren: '../../user_pages/track-meal/track-meal.module#TrackMealPageModule', canActivate:[AuthGuard] },
