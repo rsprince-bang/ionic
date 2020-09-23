@@ -13,7 +13,7 @@
         
         <!-- <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img> -->
 
-    </ion-toolbar>
+  </ion-toolbar>
 </ion-header>
 <ion-content >
     <div >
@@ -22,32 +22,31 @@
       <ion-row style="padding:15px 0px">
         <ion-col size="4">
           <div style="margin: auto ;height: 100%;">
-            <img class="imgBacStyle" src="../../../assets/img/track-workout-footer-background.jpg">
+            <img class="imgBacStyle" src="../../../assets/img/track-workout-footer-background.jpg"></div>
+          </ion-col>
+          <ion-col>
+            <div class="nameStyle">
+              JHON DOE
+            </div>
+            <div style="margin: auto;margin-top: 10px;text-align: center;color: black;
+            font-weight: 600;">Your Daily Tracking Report</div>
+            <div class="row" style="margin: auto;text-align: center;">
+              <div style="margin: auto;font-size: x-large;">
+                <ion-icon style="color: #3880ff;" name="arrow-back" *ngIf="(day == 'today' && dayNumber != 1) || day == 'tomorrow'" 
+                (click)="handleSwipeRight()"></ion-icon>
           </div>
-        </ion-col>
-        <ion-col>
-          <div class="nameStyle">
-            JHON DOE
+          <div style="margin: auto;">
+            <div style="text-transform: uppercase;color: black;
+            font-weight: 600;font-size:19px"><b>
+              {{day}}
+            </b></div>
+            <div style="color: black;
+            font-weight: 500;">DAY {{dayNumber}}</div>
           </div>
-          <div style="margin: auto;margin-top: 10px;text-align: center;color: black;
-          font-weight: 600;">Your Daily Tracking Report</div>
-          <div class="row" style="margin: auto;text-align: center;">
-            <div style="margin: auto;font-size: x-large;">
-              <ion-icon style="color: #3880ff;" name="arrow-back" *ngIf="(day == 'today' && dayNumber != 1) || day == 'tomorrow'" 
-              (click)="handleSwipeRight()"></ion-icon>
-            </div>
-            <div style="margin: auto;">
-              <div style="text-transform: uppercase;color: black;
-              font-weight: 600;font-size:19px"><b>
-                {{day}}
-              </b></div>
-              <div style="color: black;
-              font-weight: 500;">DAY {{dayNumber}}</div>
-            </div>
-            <div  style="margin: auto;font-size: x-large;">
-              <ion-icon style="color: #3880ff;" name="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" 
-              (click)="handleSwipeLeft()" ></ion-icon>
-            </div>
+          <div  style="margin: auto;font-size: x-large;">
+            <ion-icon style="color: #3880ff;" name="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" 
+            (click)="handleSwipeLeft()" ></ion-icon>
+          </div>
           </div>
         </ion-col>
       </ion-row>
@@ -176,6 +175,7 @@
           </div>
           
         </div>
+        
       </div>
     </div>
     <div style="font-weight: 600;font-size: 16px;padding: 10px 10px;">March 1-7</div>
