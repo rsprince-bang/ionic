@@ -30,7 +30,7 @@ export class RegisterPage implements OnInit {
   register() {
     if (this.registerForm.value.password == this.registerForm.value.password_verify) {
       this.myAPI.makeAPIcall(
-        "login.php",
+        "login",
         {
           "action": "register",
           "form": this.registerForm.value,
