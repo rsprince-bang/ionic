@@ -9,7 +9,7 @@ import { EnterMeasurementsPage } from './enter-measurements.page';
 
 const routes: Routes = [
   {
-    path: 'enter-measurements',
+    path: '',
     component: EnterMeasurementsPage
   }
 ];

@@ -1,40 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-      
-      <ion-buttons slot="start">
-          <ion-menu-toggle>
-              <ion-button class="bg-color">
-                  <ion-icon slot="icon-only" name="menu"></ion-icon>
-              </ion-button>
-          </ion-menu-toggle>
-      </ion-buttons>
-      
-      <ion-title>Home</ion-title>
-      
-      <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
+    <ion-toolbar>
+        
+        <ion-buttons slot="start">
+            <ion-menu-toggle>
+                <ion-button class="bg-color">
+                    <ion-icon slot="icon-only" name="menu"></ion-icon>
+                </ion-button>
+            </ion-menu-toggle>
+        </ion-buttons>
+        
+        <ion-title>Home</ion-title>
+        
+        <!-- <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img> -->
 
   </ion-toolbar>
 </ion-header>
 <ion-content >
-  <div style="padding: 15px ;">
-
-  <ion-card style="background-color: #e2e2e2;margin: 15px 0px;">
-    <ion-row>
-      <ion-col size="4">
-        <div style="margin: auto ;height: 100%;">
-          <img class="imgBacStyle" src="../../../assets/img/track-workout-footer-background.jpg">
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="nameStyle">
-          JHON DOE
-        </div>
-        <div style="margin: auto;margin-top: 10px;text-align: center;color: black;
-        font-weight: 600;">Your Daily Tracking Report</div>
-        <div class="row" style="margin: auto;text-align: center;">
-          <div style="margin: auto;font-size: x-large;">
-            <ion-icon style="color: #3880ff;" name="arrow-back" *ngIf="(day == 'today' && dayNumber != 1) || day == 'tomorrow'" 
-            (click)="handleSwipeRight()"></ion-icon>
+    <div >
+  
+    <ion-card style="background-color:#f1f1f1;margin: 0px 0px;">
+      <ion-row style="padding:15px 0px">
+        <ion-col size="4">
+          <div style="margin: auto ;height: 100%;">
+            <img class="imgBacStyle" src="../../../assets/img/track-workout-footer-background.jpg"></div>
+          </ion-col>
+          <ion-col>
+            <div class="nameStyle">
+              JHON DOE
+            </div>
+            <div style="margin: auto;margin-top: 10px;text-align: center;color: black;
+            font-weight: 600;">Your Daily Tracking Report</div>
+            <div class="row" style="margin: auto;text-align: center;">
+              <div style="margin: auto;font-size: x-large;">
+                <ion-icon style="color: #3880ff;" name="arrow-back" *ngIf="(day == 'today' && dayNumber != 1) || day == 'tomorrow'" 
+                (click)="handleSwipeRight()"></ion-icon>
           </div>
           <div style="margin: auto;">
             <div style="text-transform: uppercase;color: black;
@@ -48,185 +47,172 @@
             <ion-icon style="color: #3880ff;" name="arrow-forward" *ngIf="day == 'today' || day == 'yesterday'" 
             (click)="handleSwipeLeft()" ></ion-icon>
           </div>
-        </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <!-- Chart -->
+    <div style="width: 100%;">
+      <canvas baseChart *ngIf="pieChartData"
+        [data]="pieChartData" 
+        [labels]="pieChartLabels" 
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend"
+        [colors]="pieChartColors" style="width:250px;height:220px">
+      </canvas>
+    </div>
+
+    <!-- Workout Status -->
+    <!-- <ion-item>
+        <ion-label class="workout" [routerLink]="['/track-workout', '']">{{workout_completed_msn}}</ion-label>
+        <ion-icon name="fitness" *ngIf="workout_completed == true"></ion-icon>
+        <ion-icon name="pulse" *ngIf="workout_completed == false"></ion-icon>
+        <ion-icon class="heart" name="heart" *ngIf="workout_completed == false"></ion-icon>
+    </ion-item> -->
+    
+    <ion-row>
+      <ion-col style="font-weight: 600;margin: 15px 10px;">
+        Daily calories progress
       </ion-col>
     </ion-row>
-  </ion-card>
-  <!-- Chart -->
-  <div style="width: 100%;">
-    <canvas baseChart *ngIf="pieChartData"
-      [data]="pieChartData" 
-      [labels]="pieChartLabels" 
-      [chartType]="pieChartType"
-      [options]="pieChartOptions"
-      [plugins]="pieChartPlugins"
-      [legend]="pieChartLegend"
-      [colors]="pieChartColors">
-    </canvas>
-  </div>
-
-  <!-- Workout Status -->
-  <ion-item>
-      <ion-label class="workout" [routerLink]="['/track-workout', '']">{{workout_completed_msn}}</ion-label>
-      <ion-icon name="fitness" *ngIf="workout_completed == true"></ion-icon>
-      <ion-icon name="pulse" *ngIf="workout_completed == false"></ion-icon>
-      <ion-icon class="heart" name="heart" *ngIf="workout_completed == false"></ion-icon>
-  </ion-item>
-  
-  <ion-row>
-    <ion-col style="font-weight: 600;">
-      Daily calories progress
-    </ion-col>
-  </ion-row>
-  <ion-row style="margin-left: -20px;
-  margin-right: 10px;
-  margin-top: -20px;
+    <ion-row style="
+    margin-right: 20px;
+    margin-top: -20px;
 ">
-    <ion-col size="4">
-      <ion-card class="progressBack">
-        <circle-progress
+      <ion-col size="4">
+        <ion-card class="progressBack">
+          <circle-progress
+            [percent]="58"
+            [showInnerStroke]="true" [radius]="200"
+              [outerStrokeWidth]="16"
+              [innerStrokeWidth]="16"
+              [space]="-14"
+              [outerStrokeColor]="'#00ff00'"
+              [innerStrokeColor] = "'white'"
+              [backgroundStroke]="'white'"
+              [animation]="true"
+              [showTitle] = "true"
+              [animationDuration]="300" [title]="[' ','58g',' ', 'of FAT',' ']"
+              [outerStrokeGradientStopColor] ="'white'"
+              [backgroundGradientStopColor] = "'white'"
+              [titleFontSize] = "50"
+              [subtitle] = "'xxxg remaining'"
+              [showSubtitle] ="true"
+              [subtitleColor] = "'black'"
+              [subtitleFontSize]="40"
+              [titleColor] = "'#00ff00'"
+              [titleFontWeight] = "600"
+            ></circle-progress>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card class="progressBack">
+          <circle-progress
+          [percent]="100"
+          [showInnerStroke]="true" [radius]="200"
+  [outerStrokeWidth]="16"
+  [innerStrokeWidth]="16"
+  [space]="-14"
+          [outerStrokeColor]="'#0417c2'"
+          [innerStrokeColor] = "'white'"
+          [backgroundStroke]="'white'"
+          [animation]="false"
+          [showTitle] = "true"
+          [animationDuration]="300" [title]="data"
+          [outerStrokeGradientStopColor] ="'white'"
+          [backgroundGradientStopColor] = "'white'"
+          [titleColor] = "'#0417c2'"
+          [titleFontSize] = "50"
+          [subtitle] = "'xxxg remaining'"
+          [showSubtitle] ="true"
+          [subtitleColor] = "'black'"
+          [subtitleFontSize]="40"
+          [showBackground] ="false"
+          [titleFontWeight] ="600"
+></circle-progress>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card class="progressBack">
+          <circle-progress
           [percent]="58"
           [showInnerStroke]="true" [radius]="200"
-            [outerStrokeWidth]="16"
-            [innerStrokeWidth]="16"
-            [space]="-14"
-            [outerStrokeColor]="'#0417c2'"
-            [innerStrokeColor] = "'white'"
-            [backgroundStroke]="'white'"
-            [animation]="true"
-            [showTitle] = "true"
-            [animationDuration]="300" [title]="'58g of FAT'"
-            [outerStrokeGradientStopColor] ="'white'"
-            [backgroundGradientStopColor] = "'white'"
-            [titleColor] = "'#0417c2'"
-            [titleFontSize] = "45"
-            [subtitle] = "'xxxg remaining'"
-            [showSubtitle] ="true"
-            [subtitleColor] = "'black'"
-            [subtitleFontSize]="30"
-          ></circle-progress>
-      </ion-card>
-    </ion-col>
-    <ion-col size="4">
-      <ion-card class="progressBack">
-        <circle-progress
-        [percent]="100"
-        [showInnerStroke]="true" [radius]="200"
-[outerStrokeWidth]="16"
-[innerStrokeWidth]="16"
-[space]="-14"
-        [outerStrokeColor]="'#0417c2'"
-        [innerStrokeColor] = "'white'"
-        [backgroundStroke]="'white'"
-        [animation]="false"
-        [showTitle] = "true"
-        [animationDuration]="300" [title]="data"
-        [outerStrokeGradientStopColor] ="'white'"
-        [backgroundGradientStopColor] = "'white'"
-        [titleColor] = "'#0417c2'"
-        [titleFontSize] = "40"
-        [subtitle] = "'xxxg remaining'"
-        [showSubtitle] ="true"
-        [subtitleColor] = "'black'"
-        [subtitleFontSize]="30"
-        [showBackground] ="false"
+          [outerStrokeWidth]="16"
+          [innerStrokeWidth]="16"
+          [space]="-14"
+          [outerStrokeColor]="'#ffa500'"
+          [innerStrokeColor] = "'white'"
+          [backgroundStroke]="'white'"
+          [animation]="true"
+          [showTitle] = "true"
+          [animationDuration]="300" [title]="[' ','58g',' ',' of CARBS',' ']"
+          [outerStrokeGradientStopColor] ="'white'"
+          [backgroundGradientStopColor] = "'white'"
+          [titleColor] = "'#ffa500'"
+          [titleFontSize] = "50"
+          [subtitle] = "'xxxg remaining'"
+          [showSubtitle] ="true"
+          [subtitleColor] = "'black'"
+          [subtitleFontSize]="40"
+          [titleFontWeight] ="600"
 ></circle-progress>
-      </ion-card>
-    </ion-col>
-    <ion-col size="4">
-      <ion-card class="progressBack">
-        <circle-progress
-        [percent]="58"
-        [showInnerStroke]="true" [radius]="200"
-        [outerStrokeWidth]="16"
-        [innerStrokeWidth]="16"
-        [space]="-14"
-        [outerStrokeColor]="'#0417c2'"
-        [innerStrokeColor] = "'white'"
-        [backgroundStroke]="'white'"
-        [animation]="true"
-        [showTitle] = "true"
-        [animationDuration]="300" [title]="'58g of CARBS'"
-        [outerStrokeGradientStopColor] ="'white'"
-        [backgroundGradientStopColor] = "'white'"
-        [titleColor] = "'#0417c2'"
-        [titleFontSize] = "40"
-        [subtitle] = "'xxxg remaining'"
-        [showSubtitle] ="true"
-        [subtitleColor] = "'black'"
-        [subtitleFontSize]="30"
-></circle-progress>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-item>
-    <div class="daily-progress">
-      <div class="text">DAY {{dayNumber}}</div>
-        <div class="row"><div class="chart quizz-progress">
-          <ion-progress-bar value="0.3" style="height: 22px;"></ion-progress-bar>
-        </div>
-        <div style="font-size: 12px;background-color: #e2e2e2;height:22px">
-          <div style="text-align: right;text-align: right;
-          margin: 4px 0px;
-      ">97 DAYS REMAINING</div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <div>
+      <div class="text" style="color: #0417c2;font-weight:600;margin-left: 10px;">DAY {{dayNumber}}</div>
+      <div class="daily-progress" style="margin-left: 10px;">
+        
+          <div style="width: 100%;" ><div class="chart quizz-progress">
+            <ion-progress-bar value="0.3" style="height: 22px;"></ion-progress-bar>
+          </div>
+          <div style="font-size: 12px;">
+            <div style="text-align: right;text-align: right;width: 95%;
+            
+        ">97Days Remaining</div>
+          </div>
+          
         </div>
         
       </div>
     </div>
-  </ion-item>
-  <div style="font-weight: 600;font-size: 16px;padding: 10px 0px;">March 1-7</div>
+    <div style="font-weight: 600;font-size: 16px;padding: 10px 10px;">March 1-7</div>
 
-  <ion-card-content style="background-color: #0417c2;padding: 10px;border-radius: 15px;">
-    <ion-row>
-      <ion-col size="2.5">
-        <ion-button style="font-size: 10px;
-        background-color: #00ff00;
-        --background: #00ff00;
-        border-radius: 10px;
-        /* border-color: white; */
-        border: 1px solid black;
-        color:white">
-          weight
+    <ion-card-content style="background-color:white;padding: 10px;border-radius: 15px;">
+      <ion-row>
+        <ion-col size="2.4" [ngClass]="{'ColorChange' : OnWeightSelecr}" (click)="clickOnWeight()">
+          <ion-text style="font-size: 15px;">
+            Weight
 
-        </ion-button>
-      </ion-col>
-      <ion-col size="3.5">
-        <ion-button  style="font-size: 10px;
-        background-color: white;
-        --background: white;
-        border-radius: 10px;
-        /* border-color: white; */
-        border: 1px solid black;
-        color:black">
-         body mass
-        </ion-button>
-      </ion-col>
-      <ion-col size="3">
-        <ion-button style="font-size: 10px;
-        background-color: white;
-        --background: white;
-        border-radius: 10px;
-        /* border-color: white; */
-        border: 1px solid black;
-        color:black">
-          body fat
-
-        </ion-button>
-      </ion-col>
-      <ion-col size="3" style="margin: auto;">
-        <select style="border: none;color:white;background: transparent;font-size: 12px;">
-          <option>WEEEKLY</option>
-        </select>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-col size=12 size-md="12" size-lg="8" size-xl="4" style="margin: auto;text-align: center;">
-            <div class='chart-container-big'>
-                <canvas #barCanvas></canvas> 
-            </div>
+          </ion-text>
         </ion-col>
-    </ion-row>
-</ion-card-content>
+        <ion-col size="3.3" [ngClass]="{'ColorChange' : onBodyMassSelect}" (click)="clickOnBodyMass()">
+          <ion-text  style="font-size: 15px;">
+           Body Mass
+          </ion-text>
+        </ion-col>
+        <ion-col size="3" (click)="clickOnBodyFat()">
+          <ion-text style="font-size: 15px;" [ngClass]="{'ColorChange' : onBodyFatSelect}">
+            Body Fat
 
+          </ion-text>
+        </ion-col>
+        <ion-col size="3.2" style="margin: auto;">
+          <select style="border: none;background: transparent;font-size: 15px;">
+            <option>WEEEKLY</option>
+          </select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size=12 size-md="12" size-lg="8" size-xl="4" style="margin: auto;text-align: center;">
+              <div class='chart-container-big'>
+                  <canvas #barCanvas height="200" style="height: 250px;width: 100%;"></canvas> 
+              </div>
+          </ion-col>
+      </ion-row>
+  </ion-card-content>
+  
 </div>
 </ion-content>
