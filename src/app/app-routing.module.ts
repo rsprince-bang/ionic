@@ -6,7 +6,8 @@ const routes: Routes = [
 
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
   
-  { path: '', loadChildren: () => import('./user_pages/tabs/tabs.module').then(m => m.TabsPageModule)},
+  //{ path: '', loadChildren: () => import('./user_pages/tabs/tabs.module').then(m => m.TabsPageModule)},
+  { path: '', loadChildren: './user_pages/tabs/tabs.module#TabsPageModule', canActivate:[AuthGuard] },
 
   //public paths
   { path: 'login', loadChildren: './public_pages/login/login.module#LoginPageModule' },
