@@ -31,7 +31,7 @@ $fontGrayColor : rgb(67, 66, 66);
 }
 
 .chart {
-	width:52%;
+	width: 95%;
 
     ion-progress-bar {
 		width: 100%;
@@ -39,7 +39,7 @@ $fontGrayColor : rgb(67, 66, 66);
 }
 
 .daily-progress {
-	padding: 1rem 0;
+	padding: 7px 0;
     width: 100%;
 	display: flex;
 	align-items: center;
@@ -75,16 +75,12 @@ $fontGrayColor : rgb(67, 66, 66);
     text-align: center;
     font-size: 20px;
     font-weight: 600;
-    border-bottom: 3px solid #3880ff;
+    // border-bottom: 3px solid #3880ff;
     width: fit-content;
     margin: auto;
 }
-svg {
-    height: 100 !important;
-    width: 100 !important;
-}
 .progressBack {
-	background-color: #e2e2e2;
+	background-color:#f1f1f1;
     width: 100%;
     height: auto;
 }
@@ -98,4 +94,7 @@ svg {
 	   --buffer-background: #e2e2e2 ;
 	   --progress-background:#0417c2 ;
 	 }
+   }
+   .ColorChange{
+	   color: #0417c2;
    }

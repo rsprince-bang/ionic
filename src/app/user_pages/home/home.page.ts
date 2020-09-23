@@ -55,12 +55,15 @@ export class HomePage implements OnInit {
   pieChartType: ChartType;
   pieChartLegend: boolean;
   pieChartPlugins = [];
+  onBodyFatSelect = false
+  onBodyMassSelect = false;
+  OnWeightSelecr = true
   public pieChartColors = [
     {
       backgroundColor: ['rgba(0,0,255,1.0)', 'rgba(255,165,0,1.0)', 'rgba(0,255,0,1.0)'],
     },
   ];
-  data ='100g \r\n of PROTEIN'
+  data =[' ','100g',' ','of PROTEIN',' ']
 
   constructor(
     private router: Router, 
@@ -365,21 +368,21 @@ export class HomePage implements OnInit {
           legend: {
             display: true,
             position: "bottom",
-            labels:{
-              fontColor:'white'
-            }
+            // labels:{
+            //   fontColor:'white'
+            // }
           },
           scales: {
             xAxes: [{ 
               
                 gridLines: {
                     display: true,
-                    color: "#CCC",
+                    // color: "#CCC",
                   drawBorder:true,
                   drawTicks:false
                 },
                 ticks: {
-                  fontColor: "#CCC",
+                  // fontColor: "#CCC",
                   padding:10
                 },
             }],
@@ -387,20 +390,36 @@ export class HomePage implements OnInit {
                 display: true,
                 gridLines: {
                     display: true,
-                    color: "#CCC",
+                    // color: "#CCC",
                   drawBorder:true,
-                  drawTicks:false
+                  drawTicks:false,
+                  tickMarkLength: 15  
 
                 },
                 ticks: {
-                  fontColor: "#CCC",
-                  padding:10
+                  // fontColor: "#CCC",
+                  padding:20
                 },
             }],
         }
         }
     });
 
+}
+clickOnBodyFat() {
+  this.onBodyFatSelect = true
+ this.onBodyMassSelect = false;
+  this.OnWeightSelecr = false
+}
+clickOnBodyMass() {
+  this.onBodyFatSelect = false
+ this.onBodyMassSelect = true;
+  this.OnWeightSelecr = false
+}
+clickOnWeight() {
+  this.onBodyFatSelect = false
+ this.onBodyMassSelect = false;
+  this.OnWeightSelecr = true
 }
   
 }
