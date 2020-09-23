@@ -10,6 +10,25 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+html, body {
+  color: black;
+}
+
+.close-icon {
+	font-size: 48px;
+	position: fixed;
+	top:10px;
+	left: 10px;
+}
+
+.profile-picture {
+	width: 100px;
+	height: 100px;
+	border: 1px solid black;
+	background: pink;
+	border-radius: 50%;
+	margin: auto;
+}
 
 $fontBold : bold;
 $lightGrey : #c9ccd0;

@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      { path: 'home/:day', loadChildren: '../home/home.module#HomePageModule', canActivate:[AuthGuard] },
+      // { path: 'home/:day', loadChildren: './home/home.module#HomePageModule', canActivate:[AuthGuard] },
       // { path: 'home', loadChildren: '../../user_pages/home/home.module#HomePageModule', canActivate:[AuthGuard] },
 
       { path: 'home', loadChildren: '../home/home.module#HomePageModule', canActivate:[AuthGuard] },
