@@ -52,7 +52,7 @@ h1 {
 ion-header ion-toolbar { 
     text-transform: uppercase;
     color: rgb(255, 255, 255);
-    --background: #000e1e;
+    --background: #0140C2;
 }
 // Logo
 ion-img.nav-logo.hydrated {
@@ -388,4 +388,16 @@ svg:not(:root) {
     overflow: hidden;
     width: 100%;
     height: 100%;
+}
+.sc-ion-card-md-h {
+    /* --background: var(--ion-item-background,transparent); */
+    /* --color: var(--ion-color-step-550,#737373); */
+    /* margin-left: 10px; */
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    /* -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
+     box-shadow: unset !important
 }
