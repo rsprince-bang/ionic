@@ -16,7 +16,7 @@ import { GlobalServicesService } from './global-services.service';
 export class ApiCallService {
 
   private headers = new HttpHeaders({
-    //'Content-Type': 'application/json'  //this one is default
+    'Content-Type': 'application/json'  //this one is default
     //'Content-Type': 'application/x-www-form-urlencoded'
   });
   private options = { headers: this.headers };
