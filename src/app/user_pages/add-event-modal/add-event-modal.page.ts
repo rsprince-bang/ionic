@@ -29,7 +29,6 @@ export class AddEventModalPage implements OnInit {
     for(let i=start; i <= end; i+= 5) {
       this.weightRange.push(i);
     }
-    console.log(this.weightRange);
     return this.weightRange;
   }
 
