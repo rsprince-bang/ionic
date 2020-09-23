@@ -1,14 +1,188 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Search for food</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button type="button" defaultHref="/track-meal"></ion-back-button>
+  </ion-buttons>
+    <ion-title>Meals</ion-title>
     <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
   </ion-toolbar>
+  <div div style="background-image: url(../../../assets/img/meal-footer-background.jpg);
+  object-fit: cover;
+  background-repeat: no-repeat;    background-size: 100% 100%;
+    height: 100%;">
+    <img src="">
+    <ion-card style="margin:0px;padding:0px;"> 
+      <div class="row">
+        <ion-searchbar style="padding-top: 52px;" (search)="searchChanged($event)" [(ngModel)]="searchTerm" (ionClear)="clearSearch()" placeholder="Enter a quesry like '10 oz ribeye with a side of french fries' to see how it works."></ion-searchbar>
+      <div style="    padding-top: 65px;
+      z-index: 9999;
+      margin-left: -40px;">
+        <ion-icon ios="ios-barcode" md="md-barcode"></ion-icon>
+      </div>
+      </div>
+    </ion-card>
+  </div>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
+  <div style="margin-top: 40px;">
 
-  <ion-searchbar (search)="searchChanged($event)" [(ngModel)]="searchTerm" (ionClear)="clearSearch()" placeholder="Enter a quesry like '10 oz ribeye with a side of french fries' to see how it works."></ion-searchbar>
+  </div>
+<ion-card style="z-index: 99;
+background-color: white;border-radius: 15px;
+margin: 0px;">
+  <div style="margin:10px;font-size: 16px;font-weight: 600;color: black;">
+    Your meals
+  </div>
+  <ion-card style="background-color:#f1f1f1;border-radius: 10px;margin: 10px;">
+    <ion-row  style="background-color: #0417c2;padding: 10px 0px;">
+      <ion-col size="10" style="text-align:center;color: white;">
+        TODAY'S FOOD LIST
+      </ion-col>
+      <!-- <ion-col size="2">
+        <ion-icon ios="ios-more" md="md-more" style="color:white"></ion-icon>
+      </ion-col> -->
 
+    </ion-row>
+    <ion-row style="border-bottom: 1px solid white;padding: 10px 0px;color: black;">
+      <ion-col size="7.5" style="text-align: left;margin: auto;font-weight: 600;">
+        10 Ounces of Ribeye
+      </ion-col>
+      <ion-col size="3.5" style="text-align: right;margin: auto;">
+        769 cal.
+      </ion-col>
+      <ion-col size="1" style="text-align: right;margin: auto;color: #0417c2;">
+        <ion-icon name="close-circle"></ion-icon>
+        </ion-col>
+
+    </ion-row>
+    <ion-row style="border-bottom: 1px solid white;padding: 10px 0px;color: black;">
+      <ion-col size="7.5" style="text-align: left;margin: auto;font-weight: 600;">
+        2 Ounces of Broccoli
+      </ion-col>
+      <ion-col size="3.5" style="text-align: right;margin: auto;">
+        80 cal.
+      </ion-col>
+      <ion-col size="1" style="text-align: right;margin: auto;color: #0417c2;">
+        <ion-icon name="close-circle"></ion-icon>
+        </ion-col>
+    </ion-row>
+    <ion-row style="padding: 10px 0px;color: black;">
+      <ion-col size="7.5" style="text-align: left;margin: auto;font-weight: 600;">
+        1 Ounces of Cheese
+      </ion-col>
+      <ion-col size="3.5" style="text-align: right;margin: auto;">
+        100 cal.
+      </ion-col>
+      <ion-col size="1" style="text-align: right;margin: auto;color: #0417c2;">
+        <ion-icon name="close-circle"></ion-icon>
+        </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-card>
+<ion-row>
+  <ion-col style="font-size: 15px;">
+    <b>
+      Daily Calories Progress
+    </b>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col style="border-right: 1px solid gainsboro;text-align:center;margin:auto;">
+    <div style="color: #ffa500;">
+      <b>
+        58g
+      </b>
+    </div>
+    <div>
+      <small style="font-weight: 600;">OF FAT(49%)</small>
+    </div>
+  </ion-col>
+  <ion-col style="border-right: 1px solid gainsboro;text-align:center;margin:auto;">
+    <div style="color: rgba(0,0,255,1.0);">
+      <b>
+       100g
+      </b>
+    </div>
+    <div>
+     <small style="font-weight: 600;">
+      OF PROTEIN(65%)
+     </small>
+    </div>
+  </ion-col>
+  <ion-col style="text-align: center;margin: auto;">
+    <div style="color: rgba(0,255,0,1.0);">
+      <b>
+        15g
+      </b>
+    </div>
+    <div>
+      <small style="font-weight: 600;">OF CARBS(48%)</small>
+    </div>
+  </ion-col>
+</ion-row>
+  <ion-row style="margin-top:10px;">
+    <ion-col size="9" style="text-align: left;margin: 0px 15px;
+    font-size: 15px;">
+      <b><span>You ate</span><span style="color: #0417c2;margin: 0px 5px;">797 calories</span><span>today</span></b>
+    </ion-col>
+    <ion-col style="text-align: right;color: #0417c2;margin-right: 15px;"><b>27%</b></ion-col>
+  </ion-row>
+ 
+      <div class="daily-progress" style="margin-top: -5px;">
+        <!-- <div class="text">DAY {{dayNumber}}</div> -->
+          <div class="row" style="margin: 0px 15px;"><div class="chart quizz-progress">
+            <ion-progress-bar value="0.6" style="height: 20px;"></ion-progress-bar>
+          </div>
+          <div style="font-size: 10px;background-color:#f1f1f1;height:20px;">
+            <div style="text-align: right;text-align: right;
+            margin: 4px 0px;
+        ">XX REMAINING</div>
+          </div>
+          
+        </div>
+      </div>
+    <ion-row>
+      <ion-col style="font-size: 15px;">
+        <b>Meals Suggestions</b> 
+      </ion-col>
+    </ion-row>
+  <div style="background-color:#f1f1f1;border-radius: 10px;margin:10px;">
+    <ion-row style="border-bottom: 1px solid white;padding: 10px 0px;color: black;">
+      <ion-col size="6" style="text-align: left;margin: auto;font-weight: 600;">
+        5 Ounces of Tuna
+      </ion-col>
+      <ion-col size="5" style="text-align: right;margin: auto;">
+        xxg of Protein
+      </ion-col>
+      <ion-col size="1" style="text-align: right;margin: auto;color: #0417c2;">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-col>
+
+    </ion-row>
+    <ion-row style="border-bottom: 1px solid white;padding: 10px 0px;color: black;">
+      <ion-col size="6" style="text-align: left;margin: auto;font-weight: 600;">
+       One slice of Rye
+      </ion-col>
+      <ion-col size="5" style="text-align: right;margin: auto;">
+       xxg of Carbs
+      </ion-col>
+      <ion-col size="1" style="text-align: right;margin: auto;color: #0417c2;">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-col>
+    </ion-row>
+    <ion-row style="padding: 10px 0px;color: black;">
+      <ion-col size="6" style="text-align: left;margin: auto;font-weight: 600;">
+        Half Avocado
+      </ion-col>
+      <ion-col size="5" style="text-align: right;margin: auto;">
+       xxg of Fat
+      </ion-col>
+      <ion-col size="1" style="text-align: right;margin: auto;color: #0417c2;">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-col>
+    </ion-row>
+  </div>
   <!-- <ion-list *ngIf="suggestedSupplements?.supplement?.hasOwnProperty('name')">
     <ion-list-header>
       <ion-label>Suggestions:</ion-label>
@@ -20,7 +194,7 @@
 
 
   <!--for Nutritionix -->
-  <ion-list>
+  <!-- <ion-list>
     <h2 *ngIf="searchResults.message" >{{searchResults.message}}</h2>
     <div *ngFor="let food of searchResults.foods">
         <ion-card>
@@ -34,14 +208,14 @@
     </div>
     <ion-button *ngIf="searchResults.foods?.length > 0" slot="end" size="small" (click)="nutritionixAddMeal(searchResults.foods)" >Add</ion-button>
     
-  </ion-list>
+  </ion-list> -->
 
 
 </ion-content>
 
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
     <ion-button expand="full" (click)="cancelModal()">Back</ion-button>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/today', pathMatch: 'full' },
 
   //public paths
   { path: 'login', loadChildren: './public_pages/login/login.module#LoginPageModule' },
