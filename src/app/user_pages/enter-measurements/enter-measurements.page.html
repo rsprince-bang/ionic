@@ -1,65 +1,209 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{action}} Measurements</ion-title>
-    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
-  </ion-toolbar>
+<ion-header [translucent]="true" class="profile-header">
+  <div class="profile-img-bg">
+    <div class="row" style="padding-top: 23px">
+      <div
+        style="margin-top: auto; margin-bottom: auto; margin-left: 10px"
+        (click)="goBackToHome()"
+      >
+        <ion-icon
+          ios="ios-close"
+          md="md-close"
+          style="color: white; color: white; font-size: 38px"
+        ></ion-icon>
+      </div>
+      <div
+        style="
+          z-index: -1 !important;
+          color: white;
+          font-size: 23px;
+          margin: auto;
+          margin-bottom: auto;
+        "
+      >
+        ENTER MEASUREMENTS
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <ion-avatar class="profile-img">
+      <input
+        type="file"
+        id="imageUpload"
+        accept=".png, .jpg, .jpeg"
+        #fileInput
+        (change)="uploadFile($event.target.files)"
+        style="display: none"
+      />
+      <img
+        alt="Avatar"
+        class="image"
+        src="{{imageUrl}}"
+        style="border: 2px solid #3880ff"
+      />
+    </ion-avatar>
+  </div>
+  <div style="text-align: center">
+    <ion-label
+      *ngIf="!isImageUploaded"
+      style="
+        font-family: unset;
+        font-weight: bolder;
+        font-size: 17px;
+        text-align: center;
+        color: black;
+      "
+      (click)="fileInput.click()"
+    >
+      Upload Photo
+    </ion-label>
+  </div>
 </ion-header>
-
 <ion-content padding>
+  <form
+    [formGroup]="measurementsForm"
+    (ngSubmit)="submitMeasurements()"
+    class="measurements-form"
+  >
+    <ion-grid
+      style="
+        padding-inline-end: 0px;
+        padding-inline-start: 0px;
+        padding: 0px;
+        --padding-start: 0px;
+        --padding-end: 0px;
+        --padding-top: 0px;
+        margin: unset;
+        --padding-bottom: 0px;
+      "
+    >
+      <ion-row style="margin-top: 40px">
+        <ion-col size="8">
+          <ion-label for="heightFeet" style="padding: 5px;">Height</ion-label>
+          <ion-row>
+            <ion-col size="5" style="font-size: smaller">
+              <ion-select
+                add
+                class="form-control"
+                placeholder="Feet"
+                name="heightFeet"
+                formControlName="heightFeet"
+              >
+                <ion-select-option
+                  *ngFor="let option of heightFeetOptions"
+                  value="option"
+                  >{{option}}</ion-select-option
+                >
+              </ion-select>
+            </ion-col>
+            <ion-col size="5" style="font-size: smaller">
+              <ion-select
+                class="form-control"
+                placeholder="Inches"
+                name="heightInches"
+                formControlName="heightInches"
+              >
+                <ion-select-option
+                  *ngFor="let option of heightInchesOptions"
+                  value="option"
+                  >{{option}}</ion-select-option
+                >
+              </ion-select>
+            </ion-col>
+           
+          </ion-row>
+        </ion-col>
+        <ion-col size="4">
+          <ion-label for="age" style="padding: 5px;">Age</ion-label>
+          <ion-input
+            type="number"
+            min="0"
+            max="1000"
+            name="weight"
+            formControlName="weight"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
+     
 
-  <form [formGroup]="measurementsForm" (ngSubmit)="submitMeasurements()">
+      <ion-row>
+        <ion-col col-6>
+          <div for="weight" style="margin: 5px 0px">Weight (lbs)</div>
+          <ion-input
+            type="number"
+            min="0"
+            max="1000"
+            name="weight"
+            formControlName="weight"
+          ></ion-input>
+        </ion-col>
 
-    <fieldset>
-      <label for="heightFeet">Height</label>
-      <input type="number" min="0" max="9" name="heightFeet" formControlName="heightFeet"> ft
-      <input type="number" min="0" max="12" name="heightInches" formControlName="heightInches"> in
-    </fieldset>
+        <ion-col col-6>
+          <div for="target_weight" style="margin: 5px 0px">
+            Target Weight (lbs)
+          </div>
+          <ion-input
+            type="number"
+            min="0"
+            max="1000"
+            name="target_weight"
+            formControlName="target_weight"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
 
-    <fieldset>
-      <label for="weight">Weight (lbs)</label>
-      <input type="number" min="0" max="1000" name="weight" formControlName="weight">
-    </fieldset>
+      <ion-row>
+        <ion-col col-6>
+          <div for="gender">Gender</div>
+          <ion-select
+            name="gender"
+            formControlName="gender"
+            placeholder="Select"
+          >
+            <ion-select-option value="M">Male</ion-select-option>
+            <ion-select-option value="F">Female</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col col-6>
+          <ion-label for="plan">Plan</ion-label>
+          <ion-select name="plan" formControlName="plan" placeholder="Select">
+            <ion-select-option value="7">7 week</ion-select-option>
+            <ion-select-option value="12">12 week</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
 
-    <fieldset>
-      <label for="target_weight">Target Weight (lbs)</label>
-      <input type="number" min="0" max="1000" name="target_weight" formControlName="target_weight">
-    </fieldset>
+      <ion-row>
+        <ion-col col-12>
+          <ion-label for="activity">Activity Level</ion-label>
+          <ion-select
+            name="activity"
+            formControlName="activity"
+            placeholder="Select"
+          >
+            <ion-select-option value="1.2000">Sedentary</ion-select-option>
+            <ion-select-option value="1.3750"
+              >Light Exercise 1-3 days/w</ion-select-option
+            >
+            <ion-select-option value="1.5500"
+              >Moderate Exercise 3-5 days/w</ion-select-option
+            >
+            <ion-select-option value="1.7250"
+              >Hardcore Exercise or Sports 6-7 days/w</ion-select-option
+            >
+            <ion-select-option value="1.9000"
+              >Hardcore Exercise 6-7 days/w + labor intensive
+              job</ion-select-option
+            >
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <fieldset>
-      <label for="age">Age</label>
-      <input type="number" min="0" max="150" name="age" formControlName="age">
-    </fieldset>
-
-    <fieldset>
-      <label for="gender">Gender</label>
-      <select name="gender" formControlName="gender" >
-        <option value="M">Male</option>
-        <option value="F">Female</option>
-      </select>
-    </fieldset>
-
-    <fieldset>
-      <label for="activity">Activity Level</label>
-      <select name="activity" formControlName="activity">
-        <option value="1.2000">Sedentary</option>
-        <option value="1.3750">Light Exercise 1-3 days/w</option>
-        <option value="1.5500">Moderate Exercise 3-5 days/w</option>
-        <option value="1.7250">Hardcore Exercise or Sports 6-7 days/w</option>
-        <option value="1.9000">Hardcore Exercise 6-7 days/w + labor intensive job</option>
-      </select>
-    </fieldset>
-
-    <fieldset>
-      <label for="plan">Plan</label>
-      <select name="plan" formControlName="plan">
-        <option value="7">7 week</option>
-        <option value="12">12 week</option>
-      </select>
-    </fieldset>
-
-    <ion-button expand="full" type="submit" [disabled]="!measurementsForm.valid">{{action}}</ion-button>
-    <ion-button *ngIf="action == 'update'" expand="full" (click)="goBack()">Cancel</ion-button>
-
-  </form>
-
-</ion-content>
+    <ion-button expand="full" type="submit" class="action-button"
+      >{{action}}</ion-button
+    >
+    <ion-button *ngIf="action == 'update'" expand="full" (click)="goBack()"
+      >Cancel</ion-button
+    >
+  </form></ion-content
+>

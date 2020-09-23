@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ApiCallService } from 'src/app/services/api-call.service';
@@ -10,6 +10,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
 import { reduce } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 import * as pluginLabels from 'chartjs-plugin-labels';
+import { Chart } from "chart.js";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ import * as pluginLabels from 'chartjs-plugin-labels';
 })
 
 export class HomePage implements OnInit {
-
+  @ViewChild("barCanvas") barCanvas: ElementRef;
+  private barChart: Chart;
   day = null;
   date = null;
   dayNumber = null;
@@ -58,6 +60,7 @@ export class HomePage implements OnInit {
       backgroundColor: ['rgba(0,0,255,1.0)', 'rgba(255,165,0,1.0)', 'rgba(0,255,0,1.0)'],
     },
   ];
+  data ='100g \r\n of PROTEIN'
 
   constructor(
     private router: Router, 
@@ -71,10 +74,11 @@ export class HomePage implements OnInit {
   ngOnInit() {
     
     // PIE CHART SETTINGS
+    this.updateChart()
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
     this.pieChartData = [50.4, 33.6, 15.9];
-    this.pieChartType = 'pie';
+    this.pieChartType = 'doughnut';
     this.pieChartLegend = true;
     this.pieChartPlugins = [pluginLabels];
 
@@ -348,9 +352,60 @@ export class HomePage implements OnInit {
     return progressPercentage;
 
   }
-  
+  updateChart() {
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
+        type:'line',
+        data:{
+            labels:['Sun','MON', 'TUE','WED','THU','FRI','SAT'], 
+            datasets:[{
+                label:'LAST WEEK',
+                data:[130,100,75,80.25,116,67,67],
+                fill:false,borderColor:'#00ff00',backgroundColor:'#00ff00'},
+                {label:'THIS WEEK',
+                data:[27.5,27.5,27.5,27.5,50,55,60],
+                fill:false,borderColor:'rgb(255,165,0)',backgroundColor:'rgb(255,165,0)'
+            }]
+        },
+        options: {
+          legend: {
+            display: true,
+            position: "bottom",
+            labels:{
+              fontColor:'white'
+            }
+          },
+          scales: {
+            xAxes: [{ 
+              
+                gridLines: {
+                    display: true,
+                    color: "#CCC",
+                  drawBorder:true,
+                  drawTicks:false
+                },
+                ticks: {
+                  fontColor: "#CCC",
+                  padding:10
+                },
+            }],
+            yAxes: [{
+                display: true,
+                gridLines: {
+                    display: true,
+                    color: "#CCC",
+                  drawBorder:true,
+                  drawTicks:false
+
+                },
+                ticks: {
+                  fontColor: "#CCC",
+                  padding:10
+                },
+            }],
+        }
+        }
+    });
+
+}
   
 }
-
-
-
