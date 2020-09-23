@@ -1,0 +1,78 @@
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="1" (click)="dismiss()">
+        <ion-icon class="ion-text-left close-icon" name="close"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <h1>Today</h1>
+        <small>September 23, 2020</small>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <div class="profile-picture"></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Weight</ion-label>
+          <ion-select name="weight" [(ngModel)]="todayWeight" okText="OK" cancelText="Cancel">
+            <ion-select-option 
+              *ngFor="let item of weightRange"
+              [value]="item">
+                {{ item }} lbs.
+              </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>BMI</ion-label>
+          <ion-select name="bmi" [(ngModel)]="todayBMI" okText="OK" cancelText="Cancel">
+            <ion-select-option 
+              *ngFor="let item of bmiRange"
+              [value]="item">
+                {{ item }}
+              </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Body Fat</ion-label>
+          <ion-select name="bmi" [(ngModel)]="todayFat" okText="OK" cancelText="Cancel">
+            <ion-select-option 
+              *ngFor="let item of fatRange"
+              [value]="item">
+                {{ item }}
+              </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button expand="block" color="primary" size="large">Add Meal</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button expand="block" color="primary" size="large">Add Workout</button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer class="ion-no-border ion-text-center">
+  <button>Update</button>
+</ion-footer>
