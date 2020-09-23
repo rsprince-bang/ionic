@@ -1,14 +1,13 @@
 <ion-app>
 
-  <ion-menu side="start" menuId="first">
+  <!-- <ion-menu side="start" menuId="first">
     <ion-header>
       <ion-toolbar style="--background: #000314; color:white">
         <ion-title >MENU</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content style="--background: #F0FBFF;">
-      <ion-list >
-        
+      <ion-list>     
         <ion-menu-toggle>
             <ion-item [routerLink]="['/home', 'today']" ><ion-icon name="home" style="color:rgb(25, 0, 65);"></ion-icon></ion-item>
         </ion-menu-toggle>
@@ -31,13 +30,12 @@
         <ion-menu-toggle>
           <ion-item [routerLink]="['/profile']" >Profile</ion-item>
         </ion-menu-toggle>
-
         <ion-menu-toggle>
           <ion-item  *ngIf="loggedin" (click)="logout()" >Log out  &nbsp; <ion-icon name="log-out" style="color:rgb(40, 0, 0); width: 20px;" > </ion-icon>  </ion-item>
       </ion-menu-toggle>
       </ion-list>
     </ion-content>
-  </ion-menu>
+  </ion-menu> -->
 
   
   <ion-router-outlet main></ion-router-outlet>

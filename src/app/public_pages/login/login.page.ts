@@ -73,7 +73,7 @@ export class LoginPage implements OnInit {
             localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
             localStorage.setItem("lastFeedback", result.success.lastFeedback);
             localStorage.setItem('diet_plan_length', result.success.plan_length);
-            this.router.navigateByUrl("/home/today");
+            this.router.navigateByUrl("tabs/home");
           }
         }
         else{
@@ -152,7 +152,7 @@ export class LoginPage implements OnInit {
             localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
             localStorage.setItem("lastFeedback", result.success.lastFeedback);
             localStorage.setItem('diet_plan_length', result.success.plan_length );
-            this.router.navigateByUrl("/home/today");
+            this.router.navigateByUrl("tabs/home");
           }
         }
         else{
