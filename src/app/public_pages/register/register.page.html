@@ -42,14 +42,20 @@
       <ion-input type="password" placeholder="Verify Password" formControlName="password_verify"></ion-input>
     </ion-item>
 
+    <ion-button class="btn btn-primary btn-register" expand="block" type="submit" [disabled]="!registerForm.valid">
+      Register
+    </ion-button>
+
   </form >
 
-  <p class="register-text text-white">I agree to the <a class="register-link"[routerLink]="['/terms']">terms and privacy policy.</a></p>
+  <ion-item>
+    <small>
+      I agree to the 
+      <a class="register-link"[routerLink]="['/terms']">
+        terms and privacy policy.
+      </a>
+    </small>
+    <ion-checkbox slot="start" color="primary"></ion-checkbox>
+  </ion-item>
 
 </ion-content>
-
-<ion-footer class="register">
-  <ion-button class="btn btn-primary btn-register" expand="block" type="submit" [disabled]="!registerForm.valid">
-    Register
-  </ion-button>
-</ion-footer>
