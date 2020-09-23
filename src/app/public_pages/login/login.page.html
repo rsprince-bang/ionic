@@ -10,13 +10,11 @@
         <ion-grid>
           <h1>Login</h1>
           <ion-row align-items-end>
-            <!-- <ion-col size="1" align-self-bottom>
-              <ion-icon name="person" size="large"></ion-icon>
-            </ion-col> -->
             <ion-col>
               <ion-item class="" lines="full">
-                <!-- <ion-label position="floating">Email Address</ion-label> -->
-                <ion-input type="email" formControlName="email" placeholder="Email Address" required></ion-input>
+                <ion-input type="email" formControlName="email" placeholder="Email Address" required>
+                  <ion-icon name="person" size="large"></ion-icon>
+                </ion-input>
               </ion-item>
               <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
                 Email address is required.
@@ -25,19 +23,30 @@
           </ion-row>
 
           <ion-row align-items-end>
-            <!-- <ion-col size="1" align-self-bottom>
-              <ion-icon name="lock" size="large"></ion-icon>
-            </ion-col> -->
             <ion-col>
               <ion-item class="" lines="full">
-                <!-- <ion-label position="floating">Password</ion-label> -->
-                <ion-input type="email" placeholder="Password" formControlName="password" required></ion-input>
+                <ion-input type="email" placeholder="Password" formControlName="password" required>
+                  <ion-icon name="lock" size="large"></ion-icon>
+                </ion-input>
               </ion-item>
               <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
                 Password is required.
               </span>
             </ion-col>
           </ion-row>
+          <ion-row>
+            <ion-col class="text-right">
+              <small>Forgot password?</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="text-right">
+              <small>Don't have an account? 
+                <a class="register-link" [routerLink]="['/register']">Register</a>
+              </small>
+            </ion-col>
+          </ion-row>
+          
           <ion-row>
             <ion-col class="ion-text-center">
               <ion-button
@@ -65,8 +74,6 @@
           </ion-row>
         </ion-grid>
       </form>
-      
-      <p class="register-text">Dont have an account? <a class="register-link"[routerLink]="['/register']">Register</a></p>
 
     </div>
   </div>
