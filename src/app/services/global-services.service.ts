@@ -61,6 +61,7 @@ export class GlobalServicesService {
   }
 
   swipeRight(url) {
+    console.log("url",url)
     // let options: NativeTransitionOptions = {
     //   direction: 'right',
     //   duration: 400,

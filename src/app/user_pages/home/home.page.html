@@ -59,9 +59,17 @@
         [chartType]="pieChartType"
         [options]="pieChartOptions"
         [plugins]="pieChartPlugins"
-        [legend]="pieChartLegend"
-        [colors]="pieChartColors" style="width:250px;height:220px">
+        [colors]="pieChartColors" height="230" style="width:250px;height:220px">
       </canvas>
+      <!-- <ion-card-content class="cls-chart-card">
+        <ion-row class="ion-justify-content-center">
+            <ion-col size=12 size-md="8" size-lg="6" size-xl="4">
+                <div class="chart-container">
+                    <canvas #doughnutCanvas id="doughnutCanvas" ></canvas>
+                </div>
+            </ion-col>
+        </ion-row>
+        </ion-card-content> -->
     </div>
 
     <!-- Workout Status -->
@@ -162,14 +170,14 @@
       </ion-col>
     </ion-row>
     <div>
-      <div class="text" style="color: #0417c2;font-weight:600;margin-left: 10px;">DAY {{dayNumber}}</div>
+      <div class="text" style="color: black;font-weight:600;margin-left: 10px;">Day {{dayNumber}}</div>
       <div class="daily-progress" style="margin-left: 10px;">
         
           <div style="width: 100%;" ><div class="chart quizz-progress">
             <ion-progress-bar value="0.3" style="height: 22px;"></ion-progress-bar>
           </div>
           <div style="font-size: 12px;">
-            <div style="text-align: right;text-align: right;width: 95%;
+            <div style="text-align: right;text-align: right;width: 95%; margin-top: 5px;
             
         ">97Days Remaining</div>
           </div>
@@ -180,8 +188,8 @@
     </div>
     <div style="font-weight: 600;font-size: 16px;padding: 10px 10px;">March 1-7</div>
 
-    <ion-card-content style="background-color:white;padding: 10px;border-radius: 15px;">
-      <ion-row>
+    <ion-card-content style="background-color:#0417c2;margin: 0px 10px;border-radius: 15px;">
+      <ion-row style="color:white">
         <ion-col size="2.4" [ngClass]="{'ColorChange' : OnWeightSelecr}" (click)="clickOnWeight()">
           <ion-text style="font-size: 15px;">
             Weight
@@ -201,7 +209,7 @@
         </ion-col>
         <ion-col size="3.2" style="margin: auto;">
           <select style="border: none;background: transparent;font-size: 15px;">
-            <option>WEEEKLY</option>
+            <option>Weekly</option>
           </select>
         </ion-col>
       </ion-row>

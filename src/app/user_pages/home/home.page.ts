@@ -88,7 +88,7 @@ export class HomePage implements OnInit {
     this.date = this.globalServices.getDate(this.day);
 
     if (!this.globalServices.hasDailyCaloriesIntake()) {
-      this.router.navigateByUrl("/enter-measurements");
+      // this.router.navigateByUrl("/enter-measurements");
     }
     
   }
@@ -103,8 +103,14 @@ export class HomePage implements OnInit {
                 render: 'percentage',
                 fontColor: ['white', 'white', 'white'],
                 precision: 0
-              }
+              },
+              
           },
+          legend: {
+            labels: {
+              usePointStyle: true
+            }
+          }
     };
   }
 
@@ -368,21 +374,22 @@ export class HomePage implements OnInit {
           legend: {
             display: true,
             position: "bottom",
-            // labels:{
-            //   fontColor:'white'
-            // }
+            labels:{
+              fontColor:'white',
+              usePointStyle: true
+            }
           },
           scales: {
             xAxes: [{ 
               
                 gridLines: {
                     display: true,
-                    // color: "#CCC",
+                    color: "#CCC",
                   drawBorder:true,
                   drawTicks:false
                 },
                 ticks: {
-                  // fontColor: "#CCC",
+                  fontColor: "#CCC",
                   padding:10
                 },
             }],
@@ -390,14 +397,14 @@ export class HomePage implements OnInit {
                 display: true,
                 gridLines: {
                     display: true,
-                    // color: "#CCC",
+                    color: "#CCC",
                   drawBorder:true,
                   drawTicks:false,
                   tickMarkLength: 15  
 
                 },
                 ticks: {
-                  // fontColor: "#CCC",
+                  fontColor: "#CCC",
                   padding:20
                 },
             }],
