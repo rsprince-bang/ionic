@@ -12,6 +12,7 @@ export class AddEventModalPage implements OnInit {
   weightRange: number[] = [];
   todayBMI: string;
   todayFat: string;
+  todayDate = new Date(); 
   bmiRange = ['below 18', '19 - 24', '25 - 29', '30 - 34', '35 - 39', 'above 40'];
   fatRange = ['below 18', '19 - 24', '25 - 29', '30 - 34', '35 - 39', 'above 40'];
 
@@ -30,6 +31,20 @@ export class AddEventModalPage implements OnInit {
       this.weightRange.push(i);
     }
     return this.weightRange;
+  }
+
+  addMeal() {
+    console.log("Add Meal");
+  }
+
+  addWorkout() {
+    console.log("Add Workout");
+  }
+
+  sendData() {
+    console.log(this.todayWeight);
+    console.log(this.todayBMI);
+    console.log(this.todayFat);
   }
 
 }
