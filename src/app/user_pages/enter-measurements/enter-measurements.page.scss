@@ -22,7 +22,7 @@ fieldset {
 }
 
 .profile-header {
-  height: 25%;
+  height: 15%;
 }
 .measurement-table {
   border: none;
@@ -36,23 +36,23 @@ fieldset {
     position: sticky;
     color: white;
     font-weight: bolder;
-    height: 92%;
+    height:100%;
     background: #0417c2;
     clear: both;
     text-align: center;
     border-bottom-left-radius: 1000px 0px;
     border-bottom-right-radius: 1000px 0px;
 }
-.profile-img {
-  text-align: center !important;
-  margin: 0 auto;
-  margin-top: -4em;
-  visibility: auto;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100px !important; //any size
-  max-height: 100px !important;
-}
+// .profile-img {
+//   text-align: center !important;
+//   margin: 0 auto;
+//   margin-top: -4em;
+//   visibility: auto;
+//   width: 100% !important;
+//   height: 100% !important;
+//   max-width: 100px !important; //any size
+//   max-height: 100px !important;
+// }
 .measurements-form {
   display: flex;
   flex-direction: column;

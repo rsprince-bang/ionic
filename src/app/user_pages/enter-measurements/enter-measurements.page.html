@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" class="profile-header">
   <div class="profile-img-bg">
-    <div class="row" style="padding-top: 23px">
-      <div
+    <div class="row" style="padding-top: 33px">
+      <!-- <div
         style="margin-top: auto; margin-bottom: auto; margin-left: 10px"
         (click)="goBackToHome()"
       >
@@ -10,7 +10,10 @@
           md="md-close"
           style="color: white; color: white; font-size: 38px"
         ></ion-icon>
-      </div>
+      </div> -->
+      <ion-buttons slot="start" style="width: 10%;">
+        <ion-back-button type="button" defaultHref="/home/today"></ion-back-button>
+    </ion-buttons>
       <div
         style="
           z-index: -1 !important;
@@ -20,11 +23,11 @@
           margin-bottom: auto;
         "
       >
-        ENTER MEASUREMENTS
+      ENTER MEASUREMENTS
       </div>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <ion-avatar class="profile-img">
       <input
         type="file"
@@ -41,8 +44,8 @@
         style="border: 2px solid #3880ff"
       />
     </ion-avatar>
-  </div>
-  <div style="text-align: center">
+  </div> -->
+  <!-- <div style="text-align: center">
     <ion-label
       *ngIf="!isImageUploaded"
       style="
@@ -56,9 +59,9 @@
     >
       Upload Photo
     </ion-label>
-  </div>
+  </div> -->
 </ion-header>
-<ion-content padding>
+<ion-content padding style="--padding-top:0px">
   <form
     [formGroup]="measurementsForm"
     (ngSubmit)="submitMeasurements()"
@@ -76,11 +79,11 @@
         --padding-bottom: 0px;
       "
     >
-      <ion-row style="margin-top: 40px">
-        <ion-col size="8">
+      <ion-row style="margin-top: 20px">
+        <ion-col>
           <ion-label for="heightFeet" style="padding: 5px;">Height</ion-label>
           <ion-row>
-            <ion-col size="5" style="font-size: smaller">
+            <ion-col style="font-size: smaller" size="6">
               <ion-select
                 add
                 class="form-control"
@@ -95,7 +98,7 @@
                 >
               </ion-select>
             </ion-col>
-            <ion-col size="5" style="font-size: smaller">
+            <ion-col  style="font-size: smaller">
               <ion-select
                 class="form-control"
                 placeholder="Inches"
@@ -118,15 +121,15 @@
             type="number"
             min="0"
             max="1000"
-            name="weight"
-            formControlName="weight"
+            name="weight" placeholder ="Age"
+            formControlName="weight" style="margin-top: 5px;"
           ></ion-input>
         </ion-col>
       </ion-row>
      
 
       <ion-row>
-        <ion-col col-6>
+        <ion-col >
           <div for="weight" style="margin: 5px 0px">Weight (lbs)</div>
           <ion-input
             type="number"
@@ -137,7 +140,7 @@
           ></ion-input>
         </ion-col>
 
-        <ion-col col-6>
+        <!-- <ion-col col-6>
           <div for="target_weight" style="margin: 5px 0px">
             Target Weight (lbs)
           </div>
@@ -148,7 +151,7 @@
             name="target_weight"
             formControlName="target_weight"
           ></ion-input>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
 
       <ion-row>
@@ -198,12 +201,18 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
+<ion-row>
+  
+  <ion-col >
     <ion-button expand="full" type="submit" class="action-button"
-      >{{action}}</ion-button
-    >
-    <ion-button *ngIf="action == 'update'" expand="full" (click)="goBack()"
-      >Cancel</ion-button
-    >
+      >{{action}}</ion-button>
+  </ion-col>
+  <ion-col >
+    <ion-button expand="full" (click)="onClickDiet()" class="action-button"
+      >Next</ion-button>
+  </ion-col>
+</ion-row>
+    <!-- <ion-button *ngIf="action == 'update'" expand="full" (click)="goBack()"
+      >Cancel</ion-button -->
   </form></ion-content
 >

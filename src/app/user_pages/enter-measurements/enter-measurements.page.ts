@@ -105,4 +105,7 @@ export class EnterMeasurementsPage implements OnInit {
   goBackToHome() {
     this.router.navigateByUrl("/home/today");
   }
+  onClickDiet() {
+    this.router.navigateByUrl("/set-goals");
+  }
 }

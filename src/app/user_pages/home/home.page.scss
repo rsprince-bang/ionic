@@ -93,8 +93,10 @@ $fontGrayColor : rgb(67, 66, 66);
 	   --background: green;
 	   --buffer-background: #e2e2e2 ;
 	   --progress-background:#0417c2 ;
+	   border-radius: 30px;
 	 }
    }
    .ColorChange{
-	   color: #0417c2;
+	   color: white;
+	   border-bottom: 1px solid white;
    }
