@@ -8,19 +8,19 @@
     <ion-row>
       <ion-col class="ion-text-center">
         <h1>Today</h1>
-        <small>September 23, 2020</small>
+        <small>{{ todayDate | date: 'longDate' }}</small>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col class="ion-text-center">
-        <div class="profile-picture"></div>
+        <img class="profile-picture" src="assets/img/profile-pic.jpg">
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-item>
           <ion-label>Weight</ion-label>
-          <ion-select name="weight" [(ngModel)]="todayWeight" okText="OK" cancelText="Cancel">
+          <ion-select name="todayWeight" [(ngModel)]="todayWeight" okText="OK" cancelText="Cancel">
             <ion-select-option 
               *ngFor="let item of weightRange"
               [value]="item">
@@ -34,7 +34,7 @@
       <ion-col>
         <ion-item>
           <ion-label>BMI</ion-label>
-          <ion-select name="bmi" [(ngModel)]="todayBMI" okText="OK" cancelText="Cancel">
+          <ion-select name="todayBMI" [(ngModel)]="todayBMI" okText="OK" cancelText="Cancel">
             <ion-select-option 
               *ngFor="let item of bmiRange"
               [value]="item">
@@ -49,7 +49,7 @@
       <ion-col>
         <ion-item>
           <ion-label>Body Fat</ion-label>
-          <ion-select name="bmi" [(ngModel)]="todayFat" okText="OK" cancelText="Cancel">
+          <ion-select name="todayFat" [(ngModel)]="todayFat" okText="OK" cancelText="Cancel">
             <ion-select-option 
               *ngFor="let item of fatRange"
               [value]="item">
@@ -61,11 +61,15 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <button ion-button expand="block" color="primary" size="large">Add Meal</button>
+      <ion-col size-sm="6" size="6" class="ion-text-center">
+        <ion-button (click)="addMeal()" expand="block" color="primary" class="ion-text-wrap min-max-width">
+          Add Meal
+        </ion-button>
       </ion-col>
-      <ion-col>
-        <button ion-button expand="block" color="primary" size="large">Add Workout</button>
+      <ion-col size-sm="6" size="6" class="ion-text-center">
+        <ion-button (click)="addWorkout()" expand="expand" color="primary" class="ion-text-wrap min-max-width">
+          Add Workout
+        </ion-button>
       </ion-col>
     </ion-row>
 
@@ -73,6 +77,6 @@
 
 </ion-content>
 
-<ion-footer class="ion-no-border ion-text-center">
-  <button>Update</button>
+<ion-footer padding class="ion-no-border ion-text-center">
+  <ion-button expand="block" color="primary" (click)="sendData()">Update</ion-button>
 </ion-footer>

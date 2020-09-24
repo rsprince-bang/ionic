@@ -22,6 +22,5 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [AddEventModalPage],
-  entryComponents: [ AddEventModalPage ]
 })
 export class AddEventModalPageModule {}
