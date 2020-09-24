@@ -81,7 +81,7 @@ export class EnterMeasurementsPage implements OnInit {
           this.router.navigateByUrl("/profile");
         }
         else{
-          this.router.navigateByUrl("/home/today");
+          this.router.navigateByUrl("tabs/home");
         }
       }
     });

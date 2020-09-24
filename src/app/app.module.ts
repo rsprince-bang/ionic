@@ -27,6 +27,7 @@ import { File } from '@ionic-native/file/ngx'; //it seems file transfer works as
 import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-modal.module';
 
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { AddEventModalPageModule } from './user_pages/add-event-modal/add-event-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,7 +44,8 @@ import { Facebook } from '@ionic-native/facebook/ngx';
       AddPhotoModalPageModule,
       NgCircleProgressModule.forRoot(),
       NgCalendarModule,
-      ChartsModule
+      ChartsModule,
+      AddEventModalPageModule
     ],
   providers: [
     StatusBar,
