@@ -17,25 +17,22 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     //initialize and set form values
     this.registerForm = this.formBuilder.group({
-      first_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-      last_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      full_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+ [a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(1)]],
-      password_verify: ['', [Validators.required, Validators.minLength(1)]]
+      //password_verify: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
 
   register() {
-    if (this.registerForm.value.password == this.registerForm.value.password_verify) {
+    //if (this.registerForm.value.password == this.registerForm.value.password_verify) {
       this.myAPI.makeAPIcall(
         "login",
         {
           "action": "register",
           "form": this.registerForm.value,
-          "today": this.globalServices.getDate("today"),
-          "fromIonic": "yes"
+          "today": this.globalServices.getDate("today")
         }
       ).subscribe(
         (result) => {
@@ -52,10 +49,10 @@ export class RegisterPage implements OnInit {
           }
         }
       );
-    }
-    else {
-      this.myAPI.presentToastWithOptions("Password does not match.");
-    }
+    //}
+    // else {
+    //   this.myAPI.presentToastWithOptions("Password does not match.");
+    // }
 
   }
   
