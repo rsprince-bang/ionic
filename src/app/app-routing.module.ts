@@ -13,9 +13,9 @@ const routes: Routes = [
 
   { path: 'welcome', loadChildren: './public_pages/welcome/welcome.module#WelcomePageModule', canActivate:[AuthGuard] },
   { path: 'set-goals', loadChildren: './user_pages/set-goals/set-goals.module#SetGoalsPageModule',  canActivate:[AuthGuard] },
-  { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] },
   { path: 'add-event-modal', loadChildren: './user_pages/add-event-modal/add-event-modal.module#AddEventModalPageModule' },
-  
+  { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] },
+
 ];
 @NgModule({
   imports: [

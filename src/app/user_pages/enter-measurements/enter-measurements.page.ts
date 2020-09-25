@@ -15,6 +15,7 @@ export class EnterMeasurementsPage implements OnInit {
 
   measurementsForm: FormGroup;
   action = "save";
+  heightin:any
   heightFeetOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   heightInchesOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   currentUserMeasurements = {
@@ -45,7 +46,7 @@ export class EnterMeasurementsPage implements OnInit {
 
   ngOnInit() {
     this.measurementsForm = this.formBuilder.group({
-      heightFeet: [ this.currentUserMeasurements.feet, [ Validators.required, Validators.pattern('[0-9]{1}') ]], 
+      heightFeet: [ this.currentUserMeasurements.feet, [ Validators.required ]], 
       heightInches: [this.currentUserMeasurements.inches, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(11) ]],
       month: [this.currentUserMeasurements.month, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(12) ]],
       date: [this.currentUserMeasurements.date, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(31) ]],
@@ -61,6 +62,7 @@ export class EnterMeasurementsPage implements OnInit {
   }
 
   submitMeasurements(){
+    console.log("this.measurementsForm",this.measurementsForm)
     this.myAPI.makeAPIcall(
       "users.php", 
       {

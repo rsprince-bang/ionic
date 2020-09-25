@@ -85,7 +85,6 @@
           <ion-row>
             <ion-col style="font-size: smaller" size="6">
               <ion-select
-                add
                 class="form-control"
                 placeholder="Feet"
                 name="heightFeet"
@@ -93,7 +92,7 @@
               >
                 <ion-select-option
                   *ngFor="let option of heightFeetOptions"
-                  value="option"
+                  value="{{option}}"
                   >{{option}}</ion-select-option
                 >
               </ion-select>
@@ -107,7 +106,7 @@
               >
                 <ion-select-option
                   *ngFor="let option of heightInchesOptions"
-                  value="option"
+                  value="{{option}}"
                   >{{option}}</ion-select-option
                 >
               </ion-select>
@@ -121,8 +120,8 @@
             type="number"
             min="0"
             max="1000"
-            name="weight" placeholder ="Age"
-            formControlName="weight" style="margin-top: 5px;"
+            name="age" placeholder ="Age"
+            formControlName="age" style="margin-top: 5px;"
           ></ion-input>
         </ion-col>
       </ion-row>
