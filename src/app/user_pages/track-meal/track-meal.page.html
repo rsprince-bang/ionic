@@ -11,12 +11,12 @@
     
     <ion-title> Meal</ion-title>
     
-    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
+    <!-- <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img> -->
 
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="track-meal">
+<ion-content class="track-meal">
 
   <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -46,7 +46,8 @@
         <ion-icon class="arrow-forward" *ngIf="!today" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
     </ion-card>
   </ion-toolbar> --> 
-  <ion-card style="background-color:#f1f1f1;margin: 15px 0px;">
+  <ion-card style="background-color:#f1f1f1;margin: 0px;
+  padding: 10px 0px;">
     <ion-row>
       <ion-col size="4">
         <div style="margin: auto ;height: 100%;">
@@ -85,25 +86,25 @@
         <div class="row" style="margin: auto;text-align: center;">
           <div style="margin: auto;font-size: x-large;">
             <ion-icon style="color: #0417c2;" name="arrow-back"  
-            (click)="handleSwipeRight()"></ion-icon>
+            (click)="handleSwipeRight()" *ngIf="dayNumberVal != 17"></ion-icon>
           </div>
           <div style="margin: auto;">
             <div style="text-transform: uppercase;color: black;
             font-weight: 600;font-size:19px"><b>
-              DAY {{dayNumber}}
+              DAY {{dayNumberVal}}
             </b></div>
             <div style="color: black;
-            font-weight: 500;">March 4,2020</div>
+            font-weight: 500;">March {{dateVal}},2020</div>
           </div>
           <div  style="margin: auto;font-size: x-large;">
             <ion-icon style="color: #0417c2;" name="arrow-forward" 
-            (click)="handleSwipeLeft()" ></ion-icon>
+            (click)="handleSwipeLeft()" *ngIf="dayNumberVal != 19"></ion-icon>
           </div>
         </div>
       </ion-col>
     </ion-row>
   </ion-card>
-
+<div style="margin: 0px 10px;">
   <!-- Diet Breakdown by Category Bar Chart -->
   <div style="width:100%">
     <canvas baseChart *ngIf="pieChartData"
@@ -113,7 +114,7 @@
       [options]="pieChartOptions"
       [plugins]="pieChartPlugins"
       [legend]="pieChartLegend"
-      [colors]="pieChartColors">
+      [colors]="pieChartColors" height="230">
     </canvas>
     <ion-row>
       <ion-col size="4" style="border-right: 1px solid gainsboro;">
@@ -135,25 +136,27 @@
           <div class="row"><div class="chart quizz-progress">
             <ion-progress-bar value="0.6" style="height: 20px;"></ion-progress-bar>
           </div>
-          <div style="font-size: 10px;background-color: #e2e2e2;height:20px">
-            <div style="text-align: right;text-align: right;
-            margin: 5px 0px;
-        ">XX CALORIES REMAINING</div>
-          </div>
+          
           
         </div>
+        
+      </div>
+      <div style="font-size: 10px;height:20px;border-top-right-radius:30px;border-bottom-right-radius:30px">
+        <div style="text-align: right;text-align: right;
+        margin: 5px 0px;
+    ">XX CALORIES REMAINING</div>
       </div>
     <ion-row>
       <ion-col style="font-weight:600">Your meals</ion-col>
     </ion-row>
     <ion-card style="background-color:#f1f1f1;border-radius: 10px;margin: 0px;">
       <ion-row  style="background-color: #0417c2;padding: 10px 0px;">
-        <ion-col size="10" style="text-align:center;color: white;">
+        <ion-col  style="text-align:center;color: white;">
           TODAY'S FOOD LIST
         </ion-col>
-        <ion-col size="2">
+        <!-- <ion-col size="2">
           <ion-icon ios="ios-more" md="md-more" style="color:white"></ion-icon>
-        </ion-col>
+        </ion-col> -->
 
       </ion-row>
       <ion-row style="border-bottom: 1px solid white;padding: 10px 0px;color: black;">
@@ -219,6 +222,7 @@
     </div>
 
   </section> -->
+</div>
 </div>
 </ion-content>
 <ion-footer>
