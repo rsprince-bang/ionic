@@ -17,16 +17,17 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     //initialize and set form values
     this.registerForm = this.formBuilder.group({
-      full_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+ [a-zA-Z]+')]],
+      first_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      last_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(1)]],
-      //password_verify: ['', [Validators.required, Validators.minLength(1)]]
+      password_verify: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
 
 
   register() {
-    //if (this.registerForm.value.password == this.registerForm.value.password_verify) {
+    if (this.registerForm.value.password == this.registerForm.value.password_verify) {
       this.myAPI.makeAPIcall(
         "login",
         {
@@ -49,10 +50,10 @@ export class RegisterPage implements OnInit {
           }
         }
       );
-    //}
-    // else {
-    //   this.myAPI.presentToastWithOptions("Password does not match.");
-    // }
+    }
+    else {
+      this.myAPI.presentToastWithOptions("Password does not match.");
+    }
 
   }
   

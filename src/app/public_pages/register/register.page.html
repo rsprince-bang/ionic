@@ -7,7 +7,13 @@
 
     <h1>Signup</h1>
     <ion-item>
-      <ion-input type="text" placeholder="Full Name" formControlName="full_name">
+      <ion-input type="text" placeholder="First Name" formControlName="first_name">
+        <ion-icon name="person" size="large"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Last Name" formControlName="last_name">
         <ion-icon name="person" size="large"></ion-icon>
       </ion-input>
     </ion-item>
@@ -24,6 +30,11 @@
       </ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-input type="password" placeholder="Verify Password" formControlName="password_verify">
+        <ion-icon name="lock" size="large"></ion-icon>
+      </ion-input>
+    </ion-item>
 
     <ion-item>
       <small>
