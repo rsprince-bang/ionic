@@ -26,8 +26,8 @@
         </div>
         <div text-center *ngFor="let item of days; let i of index"
           class="day-selector"
-          [class.day-selected]="item.selected"
-          (click)="select(i)">
+          [class.day-selected]="item.day == weighinDay"
+          (click)="select(item.day)">
           {{ item.day }}
         </div>
       </ion-col>
