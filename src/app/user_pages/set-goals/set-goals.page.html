@@ -22,12 +22,12 @@
     <ion-row>
       <ion-col>
         <div class="text-center">
-          <strong>Weigh-in Days</strong>
+          <strong>Weigh-in Day</strong>
         </div>
         <div text-center *ngFor="let item of days; let i of index"
           class="day-selector"
-          [class.day-selected]="item.selected"
-          (click)="select(i)">
+          [class.day-selected]="item.day == weighinDay"
+          (click)="select(item.day)">
           {{ item.day }}
         </div>
       </ion-col>
@@ -44,7 +44,7 @@
 
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<ion-footer class="ion-no-border" padding>
   <ion-button expand="block" class="button icon icon-right ion-home" (click)="continue()">
     Continue
   </ion-button>
