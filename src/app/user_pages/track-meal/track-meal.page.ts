@@ -34,7 +34,10 @@ export class TrackMealPage implements OnInit {
   caloriesFromFatAsP:number =0;
   planLength_weeks;
   suggestedSupplements;
-
+  dayNumberVal = 18
+  dayCount = 18
+  dateVal = 4
+  dateCount = 4
   // PIE CHART VARIABLES
   pieChartOptions: ChartOptions;
   pieChartLabels: Label[];
@@ -48,26 +51,27 @@ export class TrackMealPage implements OnInit {
     },
   ];
 
-  constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,
-    private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
+  constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,public router: Router
+   , private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
 
   ngOnInit() {
     // PIE CHART SETTINGS
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
     this.pieChartData = [50.4, 33.6, 15.9];
-    this.pieChartType = 'pie';
+    this.pieChartType = 'doughnut';
     this.pieChartLegend = true;
     this.pieChartPlugins = [pluginLabels];
-
+    this.day = this.activatedRoute.snapshot.paramMap.get('day');
+    this.date = this.globalServices.getDate(this.day);
     this.date = this.activatedRoute.snapshot.paramMap.get('day');
     if( this.date == '' ){
       this.date = this.date = this.globalServices.getTodayDate();
     }
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
-    if( this.date == this.globalServices.getTodayDate() ){
+    if( this.date === this.globalServices.getTodayDate() ){
       if(this.today = true){
-        this.day = "TODAY"
+        // this.day = "TODAY"
       }
     }
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
@@ -87,6 +91,11 @@ export class TrackMealPage implements OnInit {
                 precision: 0
               }
           },
+          legend: {
+            labels: {
+              usePointStyle: true
+            }
+          }
     };
   }
 
@@ -96,17 +105,45 @@ export class TrackMealPage implements OnInit {
   }
 
   handleSwipeLeft() {
+    this.dayNumberVal = this.dayNumberVal + 1
+      this.dateVal = this.dateVal + 1
+    // if(this.dayNumberVal == 17) {
+    //   this.dayNumberVal = this.dayNumberVal + 1
+    //   this.dateVal = this.dateVal + 1
+    // }else if(this.dayNumberVal == 19){
+    //   this.dayNumberVal = this.dayNumberVal + 1
+    //   this.dateVal = this.dateVal + 1
+    // }else if(this.dayNumberVal == 18) {
+    //   this.dayNumberVal = this.dayCount + 1
+    //   this.dateVal = this.dateCount + 1
+    //   }
+    
     if(this.today){
       //won't swipe left tomorrow
     }else{
-      this.globalServices.swipeLeft("/track-meal/" + this.globalServices.getNextDate(this.date));
+     
+      this.globalServices.swipeLeft("/track-meal/" );
     }
 
   }
 
   handleSwipeRight() {
+    this.dayNumberVal = this.dayNumberVal - 1
+    this.dateVal = this.dateVal - 1
+    // if(this.dayNumberVal == 17) {
+    //   this.dayNumberVal = this.dayCount - 1
+    //   this.dateVal = this.dateCount - 1
+    // }else if(this.dayNumberVal == 19){
+    //   this.dayNumberVal = this.dayNumberVal - 1
+    //   this.dateVal = this.dateVal - 1
+    // }else if(this.dayNumberVal == 18) {
+    //   this.dayNumberVal = this.dayCount - 1
+    //   this.dateVal = this.dateCount - 1
+    // }
     if( this.dayNumber > 1 ){
-      this.globalServices.swipeRight("/track-meal/" + this.globalServices.getPreviousDate(this.date));
+      // this.dayNumberVal = this.dayCount - 1
+      // this.dateVal = this.dateCount - 1
+      this.globalServices.swipeRight("/track-meal/");
     }
   }
 
@@ -132,19 +169,20 @@ export class TrackMealPage implements OnInit {
   }
 
   async openFoodModal(){
-    const modal = await this.modalController.create({
-      component: HomeAddFoodModalPage,
-      componentProps: { date: this.date }
-    });
+    // const modal = await this.modalController.create({
+    //   component: HomeAddFoodModalPage,
+    //   componentProps: { date: this.date }
+    // });
 
-    modal.onDidDismiss()
-      .then((response) => {
-        if( response.data ){
-          this.loadMeals();
-        }        
-    });
+    // modal.onDidDismiss()
+    //   .then((response) => {
+    //     if( response.data ){
+    //       this.loadMeals();
+    //     }        
+    // });
 
-    return await modal.present();
+    // return await modal.present();
+    this.router.navigateByUrl('/home-add')
   }
 
   removeMeal(meal_id) {
@@ -185,9 +223,4 @@ export class TrackMealPage implements OnInit {
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }
 
-
 }
-
-
-
-
