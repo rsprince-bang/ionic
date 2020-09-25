@@ -44,20 +44,20 @@
       </ion-input>
     </ion-item>
 
+    <ion-item>
+      <small>
+        I agree to the 
+        <a class="register-link"[routerLink]="['/terms']">
+          terms and privacy policy.
+        </a>
+      </small>
+      <ion-checkbox slot="start" color="primary"></ion-checkbox>
+    </ion-item>
+
     <ion-button class="btn btn-primary btn-register" expand="block" type="submit" [disabled]="!registerForm.valid">
       Signup
     </ion-button>
 
-  </form >
-
-  <ion-item>
-    <small>
-      I agree to the 
-      <a class="register-link"[routerLink]="['/terms']">
-        terms and privacy policy.
-      </a>
-    </small>
-    <ion-checkbox slot="start" color="primary"></ion-checkbox>
-  </ion-item>
+  </form>
 
 </ion-content>

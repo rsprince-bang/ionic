@@ -12,7 +12,9 @@ export class SetGoalsPage implements OnInit {
     {day:'tue', selected: false},
     {day:'wed', selected: false},
     {day:'thu', selected: false},
-    {day:'fri', selected: false}
+    {day:'fri', selected: false},
+    {day:'sat', selected: false},
+    {day:'sun', selected: false}
   ];
   lossOptions = [
     {name: "5 pounds", value: 5},
@@ -21,6 +23,7 @@ export class SetGoalsPage implements OnInit {
     {name: "20 pounds", value: 20}
   ]
   lossGoal: number;
+  weighinDay: string;
 
   date = new Date(); 
   currentDateTime: String = new Date(this.date.getTime() - this.date.getTimezoneOffset()*60000).toISOString();
@@ -33,13 +36,18 @@ export class SetGoalsPage implements OnInit {
     this.lossGoal = 5;
   }
 
+  // select(item) {
+  //   item.selected = !item.selected;
+  //   console.log(item.selected);
+  //   // item.selected = true;   
+  // }
+
   select(item) {
-    item.selected = !item.selected;
-    // item.selected = true;   
+    this.weighinDay = item;
   }
 
   isActive(item) {
-    // return this.selected === item;
+    return item.selected === item;
   };
 
   continue() {
@@ -48,7 +56,8 @@ export class SetGoalsPage implements OnInit {
   }
 
   sendData() {
-    console.log('weighinDays: ', this.days);
+    // console.log('weighinDays: ', this.days);
+    console.log(this.weighinDay);
     console.log('lossGoal: ', this.lossGoal);
     console.log('weighTime: ', this.currentDateTime);
   }

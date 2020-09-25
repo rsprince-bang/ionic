@@ -28,7 +28,7 @@ html, body {
 	// width: 100px;
 	// height: 100px;
 	// border: 1px solid black;
-	// background: pink;
+	// background: url();
 	// border-radius: 50%;
 	// margin: auto;
 }
@@ -38,8 +38,8 @@ $lightGrey : #c9ccd0;
 $darkBlue : #000e1e;
 $primary : #0417c2;
 
-h1 {
-	font-weight: bold;
+h1, h2 {
+	font-weight: 900;
 }
 
 .logo-img-sml {
