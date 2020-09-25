@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
         else if(this.userInfo.success){
           localStorage.setItem("token", this.userInfo.success.token);
           localStorage.setItem("user_id", this.userInfo.success.user_id);
-          this.events.publish("user logged in", 1111, 2222); //test passsing args
+          //this.events.publish("user logged in", 1111, 2222); //test passsing args
 
           if( this.userInfo.success.user.goals.length == 0 ){
             //user never filled out goals

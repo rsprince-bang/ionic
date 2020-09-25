@@ -32,7 +32,7 @@ export class EnterMeasurementsPage implements OnInit {
      private foodSuggestionsService: FoodSuggestionsService) {
 
     this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
+      if ( this.router.getCurrentNavigation().extras && this.router.getCurrentNavigation().extras.state) {
         this.action = this.router.getCurrentNavigation().extras.state.action; // has value of "update" because it is coming from profile page
                                                                               //or has value of "confirm" if coming from reset diet redirect
         this.currentUserMeasurements = this.router.getCurrentNavigation().extras.state.userMeasurements;
@@ -48,12 +48,12 @@ export class EnterMeasurementsPage implements OnInit {
     this.measurementsForm = this.formBuilder.group({
       heightFeet: [ this.currentUserMeasurements.feet, [ Validators.required ]], 
       heightInches: [this.currentUserMeasurements.inches, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(11) ]],
-      month: [this.currentUserMeasurements.month, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(12) ]],
-      date: [this.currentUserMeasurements.date, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(31) ]],
-      year: [this.currentUserMeasurements.year, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(4) ]],
+      // month: [this.currentUserMeasurements.month, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(12) ]],
+      // date: [this.currentUserMeasurements.date, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(31) ]],
+      // year: [this.currentUserMeasurements.year, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(4) ]],
       
       weight: [this.currentUserMeasurements.weight_lbs, [ Validators.required, Validators.pattern('[0-9]+') ]],
-      target_weight: [this.currentUserMeasurements.target_weight_lbs, [ Validators.required, Validators.pattern('[0-9]+') ]],
+      //target_weight: [this.currentUserMeasurements.target_weight_lbs, [ Validators.required, Validators.pattern('[0-9]+') ]],
       age: [this.currentUserMeasurements.age, [ Validators.required, Validators.pattern('[0-9]+') ]],
       gender: [this.currentUserMeasurements.gender, [ Validators.required ]],
       activity: [this.currentUserMeasurements.activity_level, [ Validators.required ]],
@@ -62,9 +62,8 @@ export class EnterMeasurementsPage implements OnInit {
   }
 
   submitMeasurements(){
-    console.log("this.measurementsForm",this.measurementsForm)
     this.myAPI.makeAPIcall(
-      "users.php", 
+      "user", 
       {
         "action": "submitMeasurements",
         "form": this.measurementsForm.value
@@ -75,6 +74,8 @@ export class EnterMeasurementsPage implements OnInit {
         this.myAPI.handleMyAPIError(result.error);
       }
       else{
+        return;
+        
         localStorage.setItem("dailyCaloriesIntake", result.success.dailyCaloriesIntake);
         localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
         localStorage.setItem("diet_plan_length", this.measurementsForm.value.plan);

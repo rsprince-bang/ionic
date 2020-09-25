@@ -80,6 +80,7 @@ export class SetGoalsPage implements OnInit {
           this.myAPI.handleMyAPIError(result.error);
         }
         else{
+          localStorage.setItem("goals", JSON.stringify(result.success));
           this.router.navigateByUrl("/enter-measurements");
         }
       }
