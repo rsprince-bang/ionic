@@ -15,7 +15,7 @@ const routes: Routes = [
       //{ path: 'track-workout', loadChildren: '../track-workout/track-workout.module#TrackWorkoutPageModule', canActivate:[AuthGuard] },
       //{ path: 'profile', loadChildren: '../profile/profile.module#ProfilePageModule',  canActivate:[AuthGuard] },  
       {
-        path: 'home',
+        path: 'home/:day',
         children: [
           {
             path: '',

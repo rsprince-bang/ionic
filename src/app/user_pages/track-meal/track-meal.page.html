@@ -17,40 +17,10 @@
 </ion-header>
 
 <ion-content class="track-meal">
-
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
-
-  <!-- Day Change Slider -->
-  <!-- <ion-toolbar class="day-change-slider" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
-    <ion-card>
-        <ion-icon class="arrow-back" *ngIf="dayNumber > 1" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
-        <section>      
-            <ion-card-header>
-                <ion-card-title class="dc-slider-title-label">{{day}} <span *ngIf="!day">DAY {{dayNumber}}</span></ion-card-title>
-            </ion-card-header>
-            
-            <!-- <ion-card-content class="CurrentProgress dc-slider-title" [ngStyle]="{ 'color' : circlecolor}"> -->
-            <!-- <ion-card-content class="dc-slider-title current-progress">
-              <strong> Current progress <br/> <span>{{status}} </span></strong> 
-            </ion-card-content>
-
-            <ng-template #templateName>
-                <ion-card-content class="dc-slider-title">
-                    <div class="dayNumber">DAY {{dayNumber}}</div>
-                </ion-card-content>
-            </ng-template>
-
-        </section>
-        <ion-icon class="arrow-forward" *ngIf="!today" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
-    </ion-card>
-  </ion-toolbar> --> 
-  <ion-card style="background-color:#f1f1f1;margin: 0px;
-  padding: 10px 0px;">
+  <ion-card class="ion-card">
     <ion-row>
       <ion-col size="4">
-        <div style="margin: auto ;height: 100%;">
+        <div class="progress-div">
           <!-- <img class="imgBacStyle" src="../../../assets/img/track-workout-footer-background.jpg"> -->
           <circle-progress
             [percent]="58"
@@ -81,32 +51,29 @@
         <div class="nameStyle">
           JHON DOE
         </div>
-        <div style="margin: auto;margin-top: 10px;text-align: center;color: black;
-        font-weight: 600;">Your Daily Tracking Report</div>
-        <div class="row" style="margin: auto;text-align: center;">
-          <div style="margin: auto;font-size: x-large;">
-            <ion-icon style="color: #0417c2;" name="arrow-back"  
+        <div class="dailyTracking">Your Daily Tracking Report</div>
+        <div class="row dateDiv">
+          <div class="backArrow">
+            <ion-icon class="icon-color" name="arrow-back"  
             (click)="handleSwipeRight()" *ngIf="dayNumberVal != 17"></ion-icon>
           </div>
-          <div style="margin: auto;">
-            <div style="text-transform: uppercase;color: black;
-            font-weight: 600;font-size:19px"><b>
+          <div class="margin-auto">
+            <div class="daySytle"><b>
               DAY {{dayNumberVal}}
             </b></div>
-            <div style="color: black;
-            font-weight: 500;">March {{dateVal}},2020</div>
+            <div class="day-val">March {{dateVal}},2020</div>
           </div>
-          <div  style="margin: auto;font-size: x-large;">
-            <ion-icon style="color: #0417c2;" name="arrow-forward" 
+          <div  class="backArrow">
+            <ion-icon class="icon-color" name="arrow-forward" 
             (click)="handleSwipeLeft()" *ngIf="dayNumberVal != 19"></ion-icon>
           </div>
         </div>
       </ion-col>
     </ion-row>
   </ion-card>
-<div style="margin: 0px 10px;">
+<div class="margin-left-right">
   <!-- Diet Breakdown by Category Bar Chart -->
-  <div style="width:100%">
+  <div class=".width-100">
     <canvas baseChart *ngIf="pieChartData"
       [data]="pieChartData" 
       [labels]="pieChartLabels" 
@@ -117,41 +84,39 @@
       [colors]="pieChartColors" height="230">
     </canvas>
     <ion-row>
-      <ion-col size="4" style="border-right: 1px solid gainsboro;">
-        <div class="remaingName" style="color:#0417c2;">950</div>
-        <div style="font: 12px;text-align: center;">REMAINING</div>
+      <ion-col size="4" class="border-right">
+        <div class="remaingName remainingColor">950</div>
+        <div class="div-font">REMAINING</div>
       </ion-col>
-      <ion-col size="4" style="border-right: 1px solid gainsboro;">
+      <ion-col size="4" class="border-right">
         <div class="remaingName">3</div>
-        <div style="font: 12px;text-align: center;">FOOD</div>
+        <div class="div-font">FOOD</div>
       </ion-col>
       <ion-col size="4">
         <div class="remaingName">3</div>
-        <div style="font: 12px;text-align: center;">EXERCISES</div>
+        <div class="div-font">EXERCISES</div>
       </ion-col>
     </ion-row>
     
       <div class="daily-progress">
         <!-- <div class="text">DAY {{dayNumber}}</div> -->
           <div class="row"><div class="chart quizz-progress">
-            <ion-progress-bar value="0.6" style="height: 20px;"></ion-progress-bar>
+            <ion-progress-bar value="0.6" class="height-20"></ion-progress-bar>
           </div>
           
           
         </div>
         
       </div>
-      <div style="font-size: 10px;height:20px;border-top-right-radius:30px;border-bottom-right-radius:30px">
-        <div style="text-align: right;text-align: right;
-        margin: 5px 0px;
-    ">XX CALORIES REMAINING</div>
+      <div class="calories-mainClass">
+        <div class="calories-subClass">XX CALORIES REMAINING</div>
       </div>
     <ion-row>
-      <ion-col style="font-weight:600">Your meals</ion-col>
+      <ion-col class="font-weight-600">Your meals</ion-col>
     </ion-row>
-    <ion-card style="background-color:#f1f1f1;border-radius: 10px;margin: 0px;">
-      <ion-row  style="background-color: #0417c2;padding: 10px 0px;">
-        <ion-col  style="text-align:center;color: white;">
+    <ion-card class="todays-food-card">
+      <ion-row  class="today-food-row">
+        <ion-col  class="today-food-col">
           TODAY'S FOOD LIST
         </ion-col>
         <!-- <ion-col size="2">
@@ -159,73 +124,36 @@
         </ion-col> -->
 
       </ion-row>
-      <ion-row style="border-bottom: 1px solid white;padding: 10px 0px;color: black;">
-        <ion-col size="8" style="text-align: left;margin: auto;">
+      <ion-row class="table-card">
+        <ion-col size="8" class="col-left">
           10 Ounces of Ribeye
         </ion-col>
-        <ion-col size="4" style="text-align: right;margin: auto;">
+        <ion-col size="4" class="col-right">
           769 cal.
         </ion-col>
       </ion-row>
-      <ion-row style="border-bottom: 1px solid white;padding: 10px 0px;color: black;">
-        <ion-col size="8" style="text-align: left;margin: auto;">
+      <ion-row class="table-card">
+        <ion-col size="8" class="col-left">
           2 Ounces of Broccoli
         </ion-col>
-        <ion-col size="4" style="text-align: right;margin: auto;">
+        <ion-col size="4" class="col-right">
           80 cal.
         </ion-col>
       </ion-row>
-      <ion-row style="padding: 10px 0px;color: black;">
-        <ion-col size="8" style="text-align: left;margin: auto;">
+      <ion-row class="tableCard">
+        <ion-col size="8" class="col-left">
           1 Ounces of Cheese
         </ion-col>
-        <ion-col size="4" style="text-align: right;margin: auto;">
+        <ion-col size="4" class="col-right">
           100 cal.
         </ion-col>
       </ion-row>
     </ion-card>
-    <!-- <div class="namePercentt">
-      <span class="name_percent"> <strong> Protein </strong> <br/>{{caloriesFromProteinAsP}}%</span>  
-      <br/><span class="name_percent"> <strong> Carbs </strong> <br/>{{caloriesFromCarbsAsP}}% </span>
-      <br/><span class="name_percent"> <strong> Fat </strong> <br/>{{caloriesFromFatAsP}}%</span>
-    </div>
-
-    <p class="total-calories-daily text-center">Total Calories Eaten Today: <span style="font-weight: bold; color: #0417c2;" class="value">{{caloriesConsumed}}</span></p>
-
-  </div> -->
-   
-  <!-- Food List -->
-  <!-- <ion-list class="foodList">
-
-    <ion-item *ngIf="meals.length > 0" class="list-header">
-      <h3 class="text-center text-white">Food List</h3>
-    </ion-item>
-
-    <ion-item-sliding *ngFor="let meal of meals">
-      <ion-item class="foodListBg">
-        <ion-label class= "meal">{{meal.meal_name}} <span>{{meal.calories}} cal</span></ion-label>
-      </ion-item>
-
-      <ion-item-options *ngIf="today" side="end">
-        <ion-item-option color="danger" (click)="removeMeal(meal.id)"><ion-icon name="trash"></ion-icon></ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-
-  <section class="content-footer"> -->
     
-    
-
-    <!-- See https://www.npmjs.com/package/ng-circle-progress for settings -->
-    <!-- <div class = "circleProgress">
-      <circle-progress [backgroundColor]="circlecolor" [percent]="percent" [subtitle]="circlesubtitle" ></circle-progress>
-    </div>
-
-  </section> -->
 </div>
 </div>
 </ion-content>
 <ion-footer>
-  <ion-button style="margin: 10px;" expand="block" class="addFood btn btn-primary block-center" *ngIf="today" (click)="openFoodModal()" class="button">Add Food</ion-button>
+  <ion-button  expand="block" class="addFood btn btn-primary block-center margin-10" *ngIf="today" (click)="openFoodModal()" class="button">Add Food</ion-button>
 
 </ion-footer>

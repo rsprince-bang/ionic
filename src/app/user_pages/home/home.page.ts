@@ -133,40 +133,59 @@ export class HomePage implements OnInit {
   }
 
   handleSwipeLeft() {
-    switch (this.day) {
-      case "yesterday": {
-        this.globalServices.swipeLeft("/home/today");
-        break;
-      }
-      case "today": {
-        this.globalServices.swipeLeft("/home/tomorrow");
-        break;
-      }
-      default: {
-       // cant swipe after tomorrow 
-        break;
-      }
-    }
+    console.log("this.day",this.day)
+    this.dayNumber = this.dayNumber+1
+    if(this.dayNumber == 20) {
+      this.day = 'tomorrow'
+      // this.globalServices.swipeLeft("/tabs/home/tomorrow");
+    }else if(this.dayNumber == 19) {
+      console.log("today")
+      this.day = 'today'
+      // this.globalServices.swipeLeft("/tabs/home/today");
+     }
+    // switch (this.day) {
+    //   case "yesterday": {
+    //     this.globalServices.swipeLeft("/tabs/home/yesterday");
+    //     break;
+    //   }
+    //   case "today": {
+    //     this.globalServices.swipeLeft("/tabs/home/today");
+    //     break;
+    //   }
+    //   default: {
+    //    // cant swipe after tomorrow 
+    //     break;
+    //   }
+    // }
   }
 
   handleSwipeRight() {
-    switch (this.day) {
-      case "today": {
-        if (this.dayNumber > 1) {
-          //if its not your first day, then you can see previous day
-          this.globalServices.swipeRight("/home/yesterday");
-        }
-        break;
-      }
-      case "tomorrow": {
-        this.globalServices.swipeRight("/home/today");
-        break;
-      }
-      default: {
-        //cant swipe before yesterday 
-        break;
-      }
-    }
+    this.dayNumber = this.dayNumber-1
+    if(this.dayNumber == 18) {
+      this.day = 'yesterday'
+      // this.globalServices.swipeLeft("/tabs/home/yesterday");
+    }else if(this.dayNumber == 19) {
+      this.day = 'today'
+      console.log("today")
+      // this.globalServices.swipeLeft("/tabs/home/today");
+     }
+    // switch (this.day) {
+    //   case "today": {
+    //     if (this.dayNumber > 1) {
+    //       //if its not your first day, then you can see previous day
+    //       this.globalServices.swipeRight("/tabs/home/today");
+    //     }
+    //     break;
+    //   }
+    //   case "tomorrow": {
+    //     this.globalServices.swipeRight("/tabs/home/tomorrow");
+    //     break;
+    //   }
+    //   default: {
+    //     //cant swipe before yesterday 
+    //     break;
+    //   }
+    // }
   }
 
   doRefresh(event) {
