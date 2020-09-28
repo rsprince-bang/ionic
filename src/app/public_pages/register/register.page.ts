@@ -20,7 +20,6 @@ export class RegisterPage implements OnInit {
       first_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       last_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(1)]],
       password_verify: ['', [Validators.required, Validators.minLength(1)]]
     });
@@ -30,12 +29,11 @@ export class RegisterPage implements OnInit {
   register() {
     if (this.registerForm.value.password == this.registerForm.value.password_verify) {
       this.myAPI.makeAPIcall(
-        "login.php",
+        "login",
         {
           "action": "register",
           "form": this.registerForm.value,
-          "today": this.globalServices.getDate("today"),
-          "fromIonic": "yes"
+          "today": this.globalServices.getDate("today")
         }
       ).subscribe(
         (result) => {
@@ -43,9 +41,21 @@ export class RegisterPage implements OnInit {
             this.myAPI.presentToastWithOptions(result.error);
           }
           else if (result.success) {
-            this.router.navigateByUrl("/login"); // not work ???
-            this.myAPI.presentToastWithOptions("Account has been created.");
-            
+            localStorage.setItem("token", result.success.token);
+            localStorage.setItem("user_id", result.success.user_id);
+  
+            if( !result.success.user.goals || result.success.user.goals.length == 0 ){
+              //user never filled out goals
+              //this.router.navigateByUrl("/set-goals");
+              this.router.navigateByUrl("/welcome");
+            }
+            else if( !result.success.user.measurements || result.success.user.measurements.length == 0 ){
+              //user never filled out measurements
+              this.router.navigateByUrl("/enter-measurements");
+            }
+            else{
+              this.router.navigateByUrl("tabs/home");
+            }
           }
           else {
             this.myAPI.presentToastWithOptions("Something went wrong, please try again later.");

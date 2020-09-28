@@ -36,7 +36,7 @@ export class TrackWorkoutPage implements OnInit {
       this.day = "Today"
     }
 
-    this.loadExercises();
+    //this.loadExercises();
   }
 
   doRefresh(event) {

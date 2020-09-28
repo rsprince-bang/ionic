@@ -6,7 +6,9 @@ export const environment = {
 
   production: false,
 
-  API_URL: "https://bang-us-new.bangstg.com/md-app/"
+  API_URL: "https://melt-down-app-api.bangstg.com/api/",
+  //API_URL: "http://localhost:8013/api/",
+  API_Signature: "2e108d187c467fbc92485117d7f3e36"
 };
 
 /*

@@ -30,7 +30,7 @@ export class ProfilePage implements OnInit {
     this.date = this.globalServices.getTodayDate();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
 
-    this.getProfileDetails();
+    //this.getProfileDetails();
   }
 
   getProfileDetails() {

@@ -89,13 +89,7 @@ export class HomePage implements OnInit {
     if(!this.day) {
       this.day = 'today';
     }
-    console.log('Day: ', this.day);
     this.date = this.globalServices.getDate(this.day);
-
-    if (!this.globalServices.hasDailyCaloriesIntake()) {
-      // this.router.navigateByUrl("/enter-measurements");
-    }
-    
   }
 
   // PIE CHART OPTIONS
@@ -128,8 +122,8 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.updatepage();
-    this.getFeedback();
+    //this.updatepage();
+    //this.getFeedback();
   }
 
   handleSwipeLeft() {

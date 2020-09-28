@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
   login() {
     this.isSubmitted = true;
     this.myAPI.makeAPIcall(
-      "login.php", 
+      "login", 
       {
         "action": "login",
         "email": this.credentialsForm.value.email,
@@ -62,11 +62,16 @@ export class LoginPage implements OnInit {
         else if(this.userInfo.success){
           localStorage.setItem("token", this.userInfo.success.token);
           localStorage.setItem("user_id", this.userInfo.success.user_id);
-          this.events.publish("user logged in", 1111, 2222); //test passsing args
-          localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
+          //this.events.publish("user logged in", 1111, 2222); //test passsing args
 
-          if( this.userInfo.success.first_time_user && this.userInfo.success.first_time_user == "yes" ){
+          if( !this.userInfo.success.user.goals || this.userInfo.success.user.goals.length == 0 ){
+            //user never filled out goals
+            //this.router.navigateByUrl("/set-goals");
             this.router.navigateByUrl("/welcome");
+          }
+          else if( !this.userInfo.success.user.measurements || this.userInfo.success.user.measurements.length == 0 ){
+            //user never filled out measurements
+            this.router.navigateByUrl("/enter-measurements");
           }
           else{
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
