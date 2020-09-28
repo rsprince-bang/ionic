@@ -76,7 +76,7 @@ export class TrackMealPage implements OnInit {
     }
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
     this.suggestedSupplements = this.foodSuggestionsService.getSupplementSuggestions(this.date, this.planLength_weeks);
-    this.loadMeals();
+    //this.loadMeals();
   }
 
   // PIE CHART OPTIONS

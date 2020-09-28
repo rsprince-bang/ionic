@@ -44,21 +44,16 @@ export class RegisterPage implements OnInit {
             localStorage.setItem("token", result.success.token);
             localStorage.setItem("user_id", result.success.user_id);
   
-            if( result.success.user.goals.length == 0 ){
+            if( !result.success.user.goals || result.success.user.goals.length == 0 ){
               //user never filled out goals
               //this.router.navigateByUrl("/set-goals");
               this.router.navigateByUrl("/welcome");
             }
-            else if( result.success.user.measurements.length == 0 ){
+            else if( !result.success.user.measurements || result.success.user.measurements.length == 0 ){
               //user never filled out measurements
               this.router.navigateByUrl("/enter-measurements");
             }
             else{
-              //localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
-              //localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
-              //localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
-              //localStorage.setItem("lastFeedback", result.success.lastFeedback);
-              //localStorage.setItem('diet_plan_length', result.success.plan_length);
               this.router.navigateByUrl("tabs/home");
             }
           }

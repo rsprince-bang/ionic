@@ -34,7 +34,7 @@ export class SetGoalsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.lossGoal = 5;
+    this.lossGoal = 15;
   }
 
   // select(item) {
@@ -51,18 +51,13 @@ export class SetGoalsPage implements OnInit {
     return item.selected === item;
   };
 
-  // continue() {
-  //   this.sendData();
-  //   this.router.navigateByUrl("/enter-measurements");
-  // }
-
-  // sendData() {
-  //   console.log('weighinDays: ', this.days);
-  //   console.log('lossGoal: ', this.lossGoal);
-  //   console.log('weighTime: ', this.currentDateTime);
-  // }
 
   continue() {
+    // console.log('weighinDays: ', this.days);
+    // console.log('lossGoal: ', this.lossGoal);
+    // console.log('weighTime: ', this.currentDateTime);
+    // return;
+
     this.myAPI.makeAPIcall(
       "user", 
       {

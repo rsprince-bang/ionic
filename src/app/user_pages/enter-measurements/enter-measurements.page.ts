@@ -5,6 +5,7 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
+import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 @Component({
   selector: 'app-enter-measurements',
@@ -29,7 +30,7 @@ export class EnterMeasurementsPage implements OnInit {
     imageUrl:any='../../../assets/icon/plaindp.png';
     isImageUploaded = false;
   constructor(private formBuilder: FormBuilder, private myAPI: ApiCallService, private route: ActivatedRoute, private router: Router, private navCtrl: NavController,
-     private foodSuggestionsService: FoodSuggestionsService) {
+     private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService) {
 
     this.route.queryParams.subscribe(params => {
       if ( this.router.getCurrentNavigation().extras && this.router.getCurrentNavigation().extras.state) {
@@ -66,7 +67,8 @@ export class EnterMeasurementsPage implements OnInit {
       "user", 
       {
         "action": "submitMeasurements",
-        "form": this.measurementsForm.value
+        "form": this.measurementsForm.value,
+        "today": this.globalServices.getDate("today")
       },
       true
     ).subscribe((result)=>{
@@ -74,12 +76,14 @@ export class EnterMeasurementsPage implements OnInit {
         this.myAPI.handleMyAPIError(result.error);
       }
       else{
-        return;
-        
-        localStorage.setItem("dailyCaloriesIntake", result.success.dailyCaloriesIntake);
-        localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
+        localStorage.setItem("measurements", JSON.stringify(result.success.measurements));
+        localStorage.setItem("diet", JSON.stringify(result.success.diet));
+        localStorage.setItem("dailyCaloriesIntake", result.success.measurements.dailyCaloriesIntake);
+        localStorage.setItem("currentCaloriesIntake", result.success.diet.cur_calories_intake);
         localStorage.setItem("diet_plan_length", this.measurementsForm.value.plan);
-        
+        localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet.diet_start_date));
+        localStorage.setItem("lastFeedback", result.success.diet.feedback_for_week);
+
         if( this.action == "update" ){
           this.router.navigateByUrl("/profile");
         }

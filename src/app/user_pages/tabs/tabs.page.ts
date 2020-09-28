@@ -15,7 +15,6 @@ export class TabsPage implements OnInit {
 
   ngOnInit() {
     // this.dismiss();
-    console.log("Tabs");
   }
 
   async openModal() {
