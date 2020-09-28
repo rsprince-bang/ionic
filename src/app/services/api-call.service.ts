@@ -16,7 +16,7 @@ import { GlobalServicesService } from './global-services.service';
 export class ApiCallService {
 
   private headers = new HttpHeaders({
-    //'Content-Type': 'application/json'  //this one is default
+    'Content-Type': 'application/json'  //this one is default
     //'Content-Type': 'application/x-www-form-urlencoded'
   });
   private options = { headers: this.headers };
@@ -29,6 +29,8 @@ export class ApiCallService {
 
 
   makeAPIcall(page, data, auth_needed = false): Observable<any> {
+
+    data.signature = environment.API_Signature;
 
     if (auth_needed) {
       data.token = localStorage.getItem("token");
@@ -58,6 +60,8 @@ export class ApiCallService {
 
   makeSilentCall(page, data, auth_needed = false) {
 
+    data.signature = environment.API_Signature;
+    
     if (auth_needed) {
       data.token = localStorage.getItem("token");
       data.user_id = localStorage.getItem("user_id");

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiCallService } from 'src/app/services/api-call.service';
 
 @Component({
   selector: 'set-goals',
@@ -29,11 +30,11 @@ export class SetGoalsPage implements OnInit {
   currentDateTime: String = new Date(this.date.getTime() - this.date.getTimezoneOffset()*60000).toISOString();
 
   constructor(
-    private router: Router
+    private router: Router, private myAPI: ApiCallService
   ) { }
 
   ngOnInit() {
-    this.lossGoal = 5;
+    this.lossGoal = 15;
   }
 
   // select(item) {
@@ -50,17 +51,35 @@ export class SetGoalsPage implements OnInit {
     return item.selected === item;
   };
 
+
   continue() {
-    this.sendData();
-    this.router.navigateByUrl("/enter-measurements");
-  }
-
-  sendData() {
     // console.log('weighinDays: ', this.days);
-    console.log(this.weighinDay);
-    console.log('lossGoal: ', this.lossGoal);
-    console.log('weighTime: ', this.currentDateTime);
-  }
+    // console.log('lossGoal: ', this.lossGoal);
+    // console.log('weighTime: ', this.currentDateTime);
+    // return;
 
+    this.myAPI.makeAPIcall(
+      "user", 
+      {
+        "action": "saveGoals",
+        "pounds_to_loose": 15, //make dynamic
+        "weight_in_day": "mon", //make dynamic
+        "weight_in_time": "9:00" //make dynamic
+      },
+      true
+    )
+    .subscribe(
+      (result) => {
+
+        if( result.error ){
+          this.myAPI.handleMyAPIError(result.error);
+        }
+        else{
+          localStorage.setItem("goals", JSON.stringify(result.success));
+          this.router.navigateByUrl("/enter-measurements");
+        }
+      }
+    );
+  }
 
 }
