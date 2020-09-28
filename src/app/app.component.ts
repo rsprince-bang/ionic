@@ -42,7 +42,22 @@ export class AppComponent {
 
       if( this.globalservice.isLoggedIn() ){
         this.loggedin = true;
-        this.router.navigateByUrl("/home/today");
+        let goals = localStorage.getItem("goals");
+        let measurements = localStorage.getItem("measurements");
+
+        if( !goals ){
+          this.router.navigateByUrl("/welcome");
+        }
+        else if( !measurements ){
+          this.router.navigateByUrl("/enter-measurements");
+        }
+        else{
+          this.router.navigateByUrl("tabs/home/today");
+        }
+      } 
+      else {
+        this.loggedin = false;
+        this.router.navigateByUrl("login");
       }
 
     });

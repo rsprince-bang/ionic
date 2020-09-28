@@ -93,8 +93,87 @@ $fontGrayColor : rgb(67, 66, 66);
 	   --background: green;
 	   --buffer-background: #e2e2e2 ;
 	   --progress-background:#0417c2 ;
+	   border-radius: 30px;
 	 }
    }
    .ColorChange{
-	   color: #0417c2;
+	   color: white;
+	   border-bottom: 1px solid white;
    }
+.ionCardStyle {
+	background-color:#f1f1f1;margin: 0px 0px;
+}
+.padding-15{padding:15px 0px}
+.divName {
+	margin: auto ;height: 100%;
+}
+.yourDaily {
+	margin: auto;margin-top: 10px;text-align: center;color: black;
+    font-weight: 600;
+}
+.dateDiv {
+	margin: auto;text-align: center;
+}
+.dateSubDiv {
+	margin: auto;font-size: x-large;
+}
+.dateIconColor {
+	color: #3880ff;
+}
+.margin-auto{
+	margin: auto;
+}
+.dayStyle {
+	text-transform: uppercase;color: black;
+    font-weight: 600;font-size:19px
+}
+.dayNum {
+	color: black;
+    font-weight: 500;
+}
+.width-100{
+	width: 100%;
+}
+.doughChart {
+	width:250px;height:220px
+}
+.lineChart {
+	height: 250px;width: 100%;
+}
+.daily-calories {
+	font-weight: 600;margin: 15px 10px;
+}
+.rowAlign {
+	margin-right: 20px;
+    margin-top: -20px;
+}
+.day-num {
+	color: black;font-weight:600;margin-left: 10px;
+}
+.margin-left-10{
+	margin-left: 10px;
+}
+.height-22{
+	height: 22px;
+}
+.font-size-12{
+	font-size: 12px;
+}
+.remainingDays {
+	text-align: right;text-align: right;width: 95%; margin-top: 5px;
+}
+.monthStyle {
+	font-weight: 600;font-size: 16px;padding: 10px 10px;
+}
+.lineChartBac {
+	background-color:#0417c2;margin: 0px 10px;border-radius: 15px;
+}
+.lineChartHeader {
+	color:white
+}
+.font-size-15{
+	font-size: 15px;
+}
+.select-line {
+	border: none;background: transparent;font-size: 15px;
+}

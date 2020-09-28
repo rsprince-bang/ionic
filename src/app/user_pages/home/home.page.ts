@@ -75,6 +75,7 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     // PIE CHART SETTINGS
     this.updateChart()
     this.pieChartOptions = this.createOptions();
@@ -85,12 +86,10 @@ export class HomePage implements OnInit {
     this.pieChartPlugins = [pluginLabels];
 
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
-    this.date = this.globalServices.getDate(this.day);
-
-    if (!this.globalServices.hasDailyCaloriesIntake()) {
-      this.router.navigateByUrl("/enter-measurements");
+    if(!this.day) {
+      this.day = 'today';
     }
-    
+    this.date = this.globalServices.getDate(this.day);
   }
 
   // PIE CHART OPTIONS
@@ -103,8 +102,14 @@ export class HomePage implements OnInit {
                 render: 'percentage',
                 fontColor: ['white', 'white', 'white'],
                 precision: 0
-              }
+              },
+              
           },
+          legend: {
+            labels: {
+              usePointStyle: true
+            }
+          }
     };
   }
 
@@ -117,45 +122,64 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.updatepage();
-    this.getFeedback();
+    //this.updatepage();
+    //this.getFeedback();
   }
 
   handleSwipeLeft() {
-    switch (this.day) {
-      case "yesterday": {
-        this.globalServices.swipeLeft("/home/today");
-        break;
-      }
-      case "today": {
-        this.globalServices.swipeLeft("/home/tomorrow");
-        break;
-      }
-      default: {
-       // cant swipe after tomorrow 
-        break;
-      }
-    }
+    console.log("this.day",this.day)
+    this.dayNumber = this.dayNumber+1
+    if(this.dayNumber == 20) {
+      this.day = 'tomorrow'
+      // this.globalServices.swipeLeft("/tabs/home/tomorrow");
+    }else if(this.dayNumber == 19) {
+      console.log("today")
+      this.day = 'today'
+      // this.globalServices.swipeLeft("/tabs/home/today");
+     }
+    // switch (this.day) {
+    //   case "yesterday": {
+    //     this.globalServices.swipeLeft("/tabs/home/yesterday");
+    //     break;
+    //   }
+    //   case "today": {
+    //     this.globalServices.swipeLeft("/tabs/home/today");
+    //     break;
+    //   }
+    //   default: {
+    //    // cant swipe after tomorrow 
+    //     break;
+    //   }
+    // }
   }
 
   handleSwipeRight() {
-    switch (this.day) {
-      case "today": {
-        if (this.dayNumber > 1) {
-          //if its not your first day, then you can see previous day
-          this.globalServices.swipeRight("/home/yesterday");
-        }
-        break;
-      }
-      case "tomorrow": {
-        this.globalServices.swipeRight("/home/today");
-        break;
-      }
-      default: {
-        //cant swipe before yesterday 
-        break;
-      }
-    }
+    this.dayNumber = this.dayNumber-1
+    if(this.dayNumber == 18) {
+      this.day = 'yesterday'
+      // this.globalServices.swipeLeft("/tabs/home/yesterday");
+    }else if(this.dayNumber == 19) {
+      this.day = 'today'
+      console.log("today")
+      // this.globalServices.swipeLeft("/tabs/home/today");
+     }
+    // switch (this.day) {
+    //   case "today": {
+    //     if (this.dayNumber > 1) {
+    //       //if its not your first day, then you can see previous day
+    //       this.globalServices.swipeRight("/tabs/home/today");
+    //     }
+    //     break;
+    //   }
+    //   case "tomorrow": {
+    //     this.globalServices.swipeRight("/tabs/home/tomorrow");
+    //     break;
+    //   }
+    //   default: {
+    //     //cant swipe before yesterday 
+    //     break;
+    //   }
+    // }
   }
 
   doRefresh(event) {
@@ -368,21 +392,22 @@ export class HomePage implements OnInit {
           legend: {
             display: true,
             position: "bottom",
-            // labels:{
-            //   fontColor:'white'
-            // }
+            labels:{
+              fontColor:'white',
+              usePointStyle: true
+            }
           },
           scales: {
             xAxes: [{ 
               
                 gridLines: {
                     display: true,
-                    // color: "#CCC",
+                    color: "#CCC",
                   drawBorder:true,
                   drawTicks:false
                 },
                 ticks: {
-                  // fontColor: "#CCC",
+                  fontColor: "#CCC",
                   padding:10
                 },
             }],
@@ -390,14 +415,14 @@ export class HomePage implements OnInit {
                 display: true,
                 gridLines: {
                     display: true,
-                    // color: "#CCC",
+                    color: "#CCC",
                   drawBorder:true,
                   drawTicks:false,
                   tickMarkLength: 15  
 
                 },
                 ticks: {
-                  // fontColor: "#CCC",
+                  fontColor: "#CCC",
                   padding:20
                 },
             }],
