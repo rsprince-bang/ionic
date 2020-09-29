@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-event-modal',
@@ -16,7 +16,7 @@ export class AddEventModalPage implements OnInit {
   bmiRange = ['below 18', '19 - 24', '25 - 29', '30 - 34', '35 - 39', 'above 40'];
   fatRange = ['below 18', '19 - 24', '25 - 29', '30 - 34', '35 - 39', 'above 40'];
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController,public router:Router) { }
 
   ngOnInit() {
     this.generateWeight(90, 300);
@@ -35,6 +35,8 @@ export class AddEventModalPage implements OnInit {
 
   addMeal() {
     console.log("Add Meal");
+    this.modalController.dismiss();
+    this.router.navigateByUrl('/home-add');
   }
 
   addWorkout() {
