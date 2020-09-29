@@ -74,10 +74,15 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl("/enter-measurements");
           }
           else{
-            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
-            localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
-            localStorage.setItem("lastFeedback", result.success.lastFeedback);
-            localStorage.setItem('diet_plan_length', result.success.plan_length);
+            localStorage.setItem("goals", JSON.stringify(this.userInfo.success.user.goals));
+            localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
+            localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
+            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
+            localStorage.setItem("currentCaloriesIntake", this.userInfo.success.user.diet.cur_calories_intake);
+            localStorage.setItem("diet_plan_length", this.userInfo.success.user.diet.plan_length);
+            localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
+            localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
+
             this.router.navigateByUrl("/tabs/home/today");
           }
         }
