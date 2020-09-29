@@ -1,5 +1,5 @@
 .chart {
-	width:78%;
+	width: 92%;
 
     ion-progress-bar {
 		width: 100%;
@@ -7,9 +7,9 @@
 }
 
 .daily-progress {
-	padding: 1rem 0;
+	// padding: 1rem 0;
     width: 100%;
-	display: flex;
+	// display: flex;
 	align-items: center;
 	justify-content: center;
 
@@ -21,7 +21,123 @@
 .quizz-progress {
 	ion-progress-bar {
 	   --background: green;
-	   --buffer-background: #e2e2e2 ;
+	   --buffer-background:#f1f1f1 ;
 	   --progress-background:#0417c2 ;
+	   border-radius:30px;
 	 }
+}
+.searchbar-input.sc-ion-searchbar-md {
+    padding-left: unset;
+    padding-right: unset;
+    -webkit-padding-start: 55px;
+    padding-inline-start: 55px;
+    -webkit-padding-end: 55px;
+    padding-inline-end: 55px;
+    border-radius: 30px !important;
+}
+.background-img {
+	background-image: url(../../../assets/img/meal-footer-background.jpg);
+	object-fit: cover;
+	background-repeat: no-repeat;    background-size: 100% 100%;
+    height: 100%;
+}
+.no-padding {
+	margin:0px;padding:0px;
+}
+.padding-top-52 {
+	padding-top: 52px;
+}
+.barcode-css {
+	padding-top: 65px;
+      z-index: 9999;
+      margin-left: -40px;
+}
+.margin-top-40 {
+	margin-top: 40px;
+}
+.your-meals-card {
+	z-index: 99;
+	background-color: white;border-radius: 15px;
+	margin: 0px;
+}
+.your-meals-div {
+	margin:10px;font-size: 16px;font-weight: 600;color: black;
+}
+.food-list-card {
+	background-color:#f1f1f1;border-radius: 10px;margin: 10px;
+}
+.food-list-row {
+	background-color: #0417c2;padding: 10px 0px;
+}
+.food-list-col {
+	text-align:center;color: white;
+}
+.table-row {
+	border-bottom: 1px solid white;padding: 10px 0px;color: black;
+}
+.table-col-left-align {
+	text-align: left;margin: auto;font-weight: 600;
+}
+.table-col-right-align {
+	text-align: right;margin: auto;
+}
+.table-col-icon-align {
+	text-align: right;margin: auto;color: #0417c2;
+}
+.table-row-no-border {
+	padding: 10px 0px;color: black;
+}
+.font-size-15 {
+	font-size: 15px;
+}
+.dcp-col {
+	border-right: 1px solid gainsboro;text-align:center;margin:auto;
+}
+.fat-color {
+	color: #ffa500;
+}
+.font-weight-600 {
+	font-weight: 600;
+}
+.protein-color {
+	color: rgba(0,0,255,1.0);
+}
+.align-center {
+	text-align: center;margin: auto;
+}
+.carbs-color {
+	color: rgba(0,255,0,1.0);
+}
+.margin-top-10 {
+	margin-top:10px;
+}
+.you-ate-css {
+	text-align: left;margin: 0px 15px;
+    font-size: 15px;
+}
+.calories-css {
+	color: #0417c2;margin: 0px 5px;
+}
+.you-ate-per {
+	text-align: right;color: #0417c2;margin-right: 17px;
+}
+.margin-top-neg-5 {
+	margin-top: -5px;
+}
+.margin-0-15 {
+	margin: 0px 15px;
+}
+.height-20 {
+	height: 20px;
+}
+.div-remaining {
+	font-size: 10px;height:20px;
+	width: 93%;
+}
+.div-sub-remaining {
+	text-align: right;text-align: right;
+    margin: 4px 0px;
+}
+.table-back {
+	background-color:#f1f1f1;border-radius: 10px;margin:10px;
 }

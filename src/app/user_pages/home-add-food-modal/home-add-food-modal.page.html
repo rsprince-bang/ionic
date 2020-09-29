@@ -1,14 +1,175 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Search for food</ion-title>
-    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
+    <ion-buttons slot="start">
+      <ion-back-button type="button" defaultHref="/tabs/track-meal"></ion-back-button>
+  </ion-buttons>
+    <ion-title>Meals</ion-title>
+    <!-- <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img> -->
   </ion-toolbar>
+  <div div class="background-img">
+    <img src="">
+    <ion-card class="no-padding"> 
+      <div class="row">
+        <ion-searchbar class="padding-top-52 " (search)="searchChanged($event)" [(ngModel)]="searchTerm" (ionClear)="clearSearch()" placeholder="Enter a quesry like '10 oz ribeye with a side of french fries' to see how it works."></ion-searchbar>
+      <div class="barcode-css">
+        <ion-icon ios="ios-barcode" md="md-barcode"></ion-icon>
+      </div>
+      </div>
+    </ion-card>
+  </div>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
+  <div class="margin-top-40">
 
-  <ion-searchbar (search)="searchChanged($event)" [(ngModel)]="searchTerm" (ionClear)="clearSearch()" placeholder="Enter a quesry like '10 oz ribeye with a side of french fries' to see how it works."></ion-searchbar>
+  </div>
+<ion-card class="your-meals-card">
+  <div class="your-meals-div">
+    Your meals
+  </div>
+  <ion-card class="food-list-card">
+    <ion-row  class="food-list-row">
+      <ion-col size="10" class="food-list-col">
+        TODAY'S FOOD LIST
+      </ion-col>
+    </ion-row>
+    <ion-row class="table-row">
+      <ion-col size="7.5" class="table-col-left-align">
+        10 Ounces of Ribeye
+      </ion-col>
+      <ion-col size="3.5" class="table-col-right-align">
+        769 cal.
+      </ion-col>
+      <ion-col size="1" class="table-col-icon-align">
+        <ion-icon name="close-circle"></ion-icon>
+        </ion-col>
 
+    </ion-row>
+    <ion-row class="table-row">
+      <ion-col size="7.5" class="table-col-left-align">
+        2 Ounces of Broccoli
+      </ion-col>
+      <ion-col size="3.5" class="table-col-right-align">
+        80 cal.
+      </ion-col>
+      <ion-col size="1" class="table-col-icon-align">
+        <ion-icon name="close-circle"></ion-icon>
+        </ion-col>
+    </ion-row>
+    <ion-row class="table-row-no-border">
+      <ion-col size="7.5" class="table-col-left-align">
+        1 Ounces of Cheese
+      </ion-col>
+      <ion-col size="3.5" class="table-col-right-align">
+        100 cal.
+      </ion-col>
+      <ion-col size="1" class="table-col-icon-align">
+        <ion-icon name="close-circle"></ion-icon>
+        </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-card>
+<ion-row>
+  <ion-col class="font-size-15">
+    <b>
+      Daily Calories Progress
+    </b>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col class="dcp-col">
+    <div class="fat-color">
+      <b>
+        58g
+      </b>
+    </div>
+    <div>
+      <small class="font-weight-600">OF FAT(49%)</small>
+    </div>
+  </ion-col>
+  <ion-col class="dcp-col">
+    <div class="protein-color">
+      <b>
+       100g
+      </b>
+    </div>
+    <div>
+     <small class="font-weight-600">
+      OF PROTEIN(65%)
+     </small>
+    </div>
+  </ion-col>
+  <ion-col class="align-center">
+    <div class="carbs-color">
+      <b>
+        15g
+      </b>
+    </div>
+    <div>
+      <small class="font-weight-600">OF CARBS(48%)</small>
+    </div>
+  </ion-col>
+</ion-row>
+  <ion-row class="margin-top-10">
+    <ion-col size="8" class="you-ate-css">
+      <b><span>You ate</span><span class="calories-css">797 calories</span><span>today</span></b>
+    </ion-col>
+    <ion-col class="you-ate-per"><b>27%</b></ion-col>
+  </ion-row>
+ 
+      <div class="daily-progress margin-top-neg-5">
+        <!-- <div class="text">DAY {{dayNumber}}</div> -->
+          <div class="row margin-0-15">
+            <div class="chart quizz-progress">
+            <ion-progress-bar value="0.3" class="height-20"></ion-progress-bar>
+          </div>
+        </div>
+        
+      </div>
+      <div class="div-remaining">
+        <div class="div-sub-remaining">XX REMAINING</div>
+      </div>
+    <ion-row>
+      <ion-col class="font-size-15">
+        <b>Meals Suggestions</b> 
+      </ion-col>
+    </ion-row>
+  <div class="table-back">
+    <ion-row class="table-row">
+      <ion-col size="6" class="table-col-left-align">
+        5 Ounces of Tuna
+      </ion-col>
+      <ion-col size="5" class="table-col-right-align">
+        xxg of Protein
+      </ion-col>
+      <ion-col size="1" class="table-col-icon-align">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-col>
+
+    </ion-row>
+    <ion-row class="table-row">
+      <ion-col size="6" class="table-col-left-align">
+       One slice of Rye
+      </ion-col>
+      <ion-col size="5" class="table-col-right-align">
+       xxg of Carbs
+      </ion-col>
+      <ion-col size="1" class="table-col-icon-align">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-col>
+    </ion-row>
+    <ion-row class="table-row-no-border">
+      <ion-col size="6" class="table-col-left-align">
+        Half Avocado
+      </ion-col>
+      <ion-col size="5" class="table-col-right-align">
+       xxg of Fat
+      </ion-col>
+      <ion-col size="1" class="table-col-icon-align">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-col>
+    </ion-row>
+  </div>
   <!-- <ion-list *ngIf="suggestedSupplements?.supplement?.hasOwnProperty('name')">
     <ion-list-header>
       <ion-label>Suggestions:</ion-label>
@@ -20,7 +181,7 @@
 
 
   <!--for Nutritionix -->
-  <ion-list>
+  <!-- <ion-list>
     <h2 *ngIf="searchResults.message" >{{searchResults.message}}</h2>
     <div *ngFor="let food of searchResults.foods">
         <ion-card>
@@ -34,14 +195,7 @@
     </div>
     <ion-button *ngIf="searchResults.foods?.length > 0" slot="end" size="small" (click)="nutritionixAddMeal(searchResults.foods)" >Add</ion-button>
     
-  </ion-list>
+  </ion-list> -->
 
-
+<div class="padding-top-52"></div>
 </ion-content>
-
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-button expand="full" (click)="cancelModal()">Back</ion-button>
-  </ion-toolbar>
-</ion-footer>
