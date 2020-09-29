@@ -138,3 +138,45 @@ ion-input {
   border: 0.1px solid #6363;
   border-radius: 12px;
 }
+.padding-33{
+  padding-top: 33px
+}
+.title {
+  z-index: -1 !important;
+  color: white;
+  font-size: 23px;
+  margin: auto;
+  margin-bottom: auto;      
+
+}
+.grid-style {
+  padding-inline-end: 0px;
+  padding-inline-start: 0px;
+  padding: 0px;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --padding-top: 0px;
+  margin: unset;
+  --padding-bottom: 0px;
+}
+.margin-20 {
+  margin-top: 20px
+}
+.fontSizeSmall {
+  font-size: smaller
+}
+.padding-5{
+  padding: 5px;
+}
+.width-10Per{
+  width: 10%;
+}
+.--padding-top-0{
+  --padding-top:0px
+}
+.margin-top-5{
+  margin-top: 5px;
+}
+.margin-5{
+  margin: 5px 0px
+}

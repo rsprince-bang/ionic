@@ -52,7 +52,7 @@ export class AppComponent {
           this.router.navigateByUrl("/enter-measurements");
         }
         else{
-          this.router.navigateByUrl("tabs/home");
+          this.router.navigateByUrl("tabs/home/today");
         }
       } 
       else {

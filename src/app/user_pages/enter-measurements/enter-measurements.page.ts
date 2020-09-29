@@ -88,7 +88,7 @@ export class EnterMeasurementsPage implements OnInit {
           this.router.navigateByUrl("/profile");
         }
         else{
-          this.router.navigateByUrl("tabs/home");
+          this.router.navigateByUrl("/tabs/home/today");
         }
       }
     });
@@ -110,7 +110,7 @@ export class EnterMeasurementsPage implements OnInit {
     }
   }
   goBackToHome() {
-    this.router.navigateByUrl("/home/today");
+    this.router.navigateByUrl("/tabs/home/today");
   }
   onClickDiet() {
     this.router.navigateByUrl("/set-goals");
