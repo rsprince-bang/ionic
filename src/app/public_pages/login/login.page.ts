@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { Events, ToastController, LoadingController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
 import { GlobalServicesService } from 'src/app/services/global-services.service';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-
+import { Plugins } from '@capacitor/core';
+import { FacebookLoginResponse } from '@capacitor-community/facebook-login';
+const { FacebookLogin } = Plugins;
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -19,10 +21,11 @@ export class LoginPage implements OnInit {
   credentialsForm: FormGroup;
   userInfo = null;
   isSubmitted = false;
+  
 
   constructor(
     private myAPI: ApiCallService, private router: Router, public events: Events, private formBuilder: FormBuilder, public toastController: ToastController,
-    private globalServices: GlobalServicesService, private facebook: Facebook, public loadingController: LoadingController) { 
+    private globalServices: GlobalServicesService, public loadingController: LoadingController, private http: HttpClient) { 
 
   }
 
@@ -106,30 +109,32 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-	async doFbLogIn(){
-    this.myAPI.presentLoading();
-    this.facebook.login(["public_profile", "email"])
-    .then( (response:FacebookLoginResponse) =>{
-			let userId = response.authResponse.userID;
-			//Getting name and gender properties
-			this.facebook.api("/me?fields=name,email,id,first_name,last_name", [])
-			.then(user =>{
-        this.myAPI.dismissLoading();
-        this.loginWithFB(user);
-			},error=>{
-        this.myAPI.dismissLoading();
+
+  async doFbLogIn(): Promise<void> {
+    const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
+    const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    if (result && result.accessToken) {     
+      this.http.get('https://graph.facebook.com/'+result.accessToken.userId
+      +'?fields=name,email,id,first_name,last_name&access_token='+result.accessToken.token).subscribe((response) => {
+        this.loginWithFB(response);
+      },
+      (error) => {
         this.presentToastWithOptions("Something went wrong, please try again later.");
-      })
-		}, error =>{
-      //alert("error");
-      //alert(JSON.stringify(error));
-      this.myAPI.dismissLoading();
+      });
+    }
+    else{
       this.presentToastWithOptions("Something went wrong, please try again later.");
-		});
+    }
+
+return;
+
   }
-  
+ 
 
   loginWithFB(fbuser) {
+    alert(11);
+    alert(JSON.stringify(fbuser));
+    return;
     this.myAPI.makeAPIcall(
       "login.php", 
       {
@@ -172,18 +177,5 @@ export class LoginPage implements OnInit {
     );
   }
 
-
-  doFbLogout(){
-    //do we really need this function? Not sure. it might log us out of facebook as well.....
-
-/* 		this.fb.logout()
-		.then(res =>{
-			//user logged out so we will remove him from the NativeStorage
-			this.nativeStorage.remove('facebook_user');
-			this.router.navigate(["/login"]);
-		}, error =>{
-			console.log(error);
-		}); */
-	}
 
 }

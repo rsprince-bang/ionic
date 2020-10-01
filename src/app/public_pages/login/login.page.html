@@ -57,18 +57,14 @@
                Login
              </ion-button>
              <div class="text-center text-white" style="font-size: 0.72rem;">OR</div>
-             <!-- <ion-button  class="btn btn-login-facebook btn-round" expand="full" type="submit" (click)="doFbLogIn()" tabIcon="fab fa-facebook" shape="round">
-               <ion-icon slot="start" name="logo-facebook"></ion-icon>
-               continue with Facebook
-             </ion-button> -->
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="ion-text-center">
               <img class="social-icons" src="assets/img/thefixicon.png">
               <img class="social-icons" src="assets/img/twittericon.png">
-              <img class="social-icons" src="assets/img/instagramicon.png">
-              <img class="social-icons" src="assets/img/facebookicon.png">
+              <img class="social-icons" src="assets/img/instagramicon.png" >
+              <img class="social-icons" src="assets/img/facebookicon.png" (click)="doFbLogIn()">
               <img class="social-icons" src="assets/img/googleicon.png">
             </ion-col>
           </ion-row>

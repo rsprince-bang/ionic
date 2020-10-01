@@ -43,4 +43,4 @@ Update the URL in the Environment's file to match your test/development environm
 
 - The ionic app is now updated to use capacitor instead of cordova.
 
-- Facebook account for "login with facebook" is stoyan.raychev@bangenergy.com, B@ngFacebook!
+- TODO Update Facebook account for "login with facebook" to stoyan.raychev@bangenergy.com, B@ngFacebook!
