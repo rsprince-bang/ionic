@@ -111,7 +111,7 @@ export class LoginPage implements OnInit {
 
 
   async doFbLogIn(): Promise<void> {
-    const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
+    const FACEBOOK_PERMISSIONS = ['public_profile', 'email', 'user_birthday', 'user_photos', 'user_gender'];
     const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
     if (result && result.accessToken) {     
       this.http.get('https://graph.facebook.com/'+result.accessToken.userId
