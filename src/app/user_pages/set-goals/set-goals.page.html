@@ -1,14 +1,26 @@
-<ion-content padding>
-  <div class="logo-img-sml">
-    <img src="assets/img/login-logo-new.png">
-  </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        text=""
+        icon="arrow-round-back">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content padding>
   <ion-grid>
-    <h1>Set Diet Goals</h1>
+    <ion-row>
+      <ion-col>
+        <h1>Set Goals</h1>
+      </ion-col>
+    </ion-row>
+    
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label>Pounds to Lose</ion-label>
+          <ion-label>Body Sculpting Goal</ion-label>
           <ion-select name="lossgoal" [(ngModel)]="lossGoal" okText="OK" cancelText="Cancel">
             <ion-select-option 
               *ngFor="let item of lossOptions"
@@ -19,19 +31,21 @@
         </ion-item>
       </ion-col>
     </ion-row>
+
     <ion-row>
       <ion-col>
-        <div class="text-center">
-          <strong>Weigh-in Day</strong>
-        </div>
-        <div text-center *ngFor="let item of days; let i of index"
-          class="day-selector"
-          [class.day-selected]="item.day == weighinDay"
-          (click)="select(item.day)">
-          {{ item.day }}
+        Weigh-in Day
+        <div class="day-select-wrapper">
+          <div text-center *ngFor="let item of days; let i of index"
+            class="day-selector"
+            [class.day-selected]="item.code == weighinDay"
+            (click)="select(item.code)">
+            {{ item.day }}
+          </div>
         </div>
       </ion-col>
     </ion-row>
+    
     <ion-row>
       <ion-col>
         <ion-item>
@@ -40,12 +54,24 @@
         </ion-item>
       </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <small>
+          NOTE: The best time to weigh yourself is fasted, upon waking after you empty your bladder, nude. [need to rewrite this and add jacks one day recommendation]
+        </small>
+      </ion-col>
+    </ion-row>
+
   </ion-grid>
 
 </ion-content>
 
 <ion-footer class="ion-no-border" padding>
-  <ion-button expand="block" class="button icon icon-right ion-home" (click)="continue()">
+  <ion-button 
+    expand="block" 
+    shape="round" 
+    (click)="continue()">
     Continue
   </ion-button>
 </ion-footer>
