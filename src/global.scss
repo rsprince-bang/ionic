@@ -10,8 +10,41 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+$fontBold: bold;
+$lightGrey: #c9ccd0;
+$darkBlue: #000e1e;
+$primary: #0140C2;
+
 html, body {
-  color: black;
+
+}
+
+:host {
+	border: none;
+}
+
+.form ion-input {
+	color: #2c2c2c;
+	background: #EAEEF8;
+	height: 50px;
+}
+
+.icon-large {
+	color: #777;
+	background: #EAEEF8;
+	padding: 0 4px 0 4px;
+}
+
+ion-input.ion-invalid {
+  border: 1px solid red;
+}
+
+ion-input.ion-valid {
+  border: 1px solid lime;
+}
+
+small {
+	margin-bottom: 5px;
 }
 
 .close-icon {
@@ -22,21 +55,10 @@ html, body {
 }
 
 .profile-picture {
-    clip-path: circle(60px at center);
-    outline: none;
-    border: none;
-	// width: 100px;
-	// height: 100px;
-	// border: 1px solid black;
-	// background: url();
-	// border-radius: 50%;
-	// margin: auto;
+  clip-path: circle(60px at center);
+  outline: none;
+  border: none;
 }
-
-$fontBold : bold;
-$lightGrey : #c9ccd0;
-$darkBlue : #000e1e;
-$primary : #0417c2;
 
 h1, h2 {
 	font-weight: 900;
@@ -112,39 +134,15 @@ The disabled date */
     color: black !important;
 }
 
-
 app-home {
     position: relative;
 }
 
-
-
-/**
- * App Menu
- *
- * @desc Styles for the primary menu
- *
- */
-// app-home > ion-content:after{
-//     content: "";
-//     display: block;
-//     width: 100%;
-//     height: 100%;
-//     background-color: rgba(0,0,0,0.81);
-//     z-index: 11;
-//     transform: translateZ(10px);
-//     opacity: 0;
-//     transition: opacity .36s ease-in-out;
-// }
-// .backdrop-no-scroll app-home > ion-content:after{
-//     opacity: 1;
-// }
-
-
 ion-button { 
-    color: rgb(255, 255, 255) !important;
-    text-transform: uppercase;
-    --background: #0417c2;
+    --color: white;
+    --text-transform: capitalize;
+		--background: #0140C2;
+		--margin-bottom: 10px;
 }
 .header-md:after {
     background-image: none;
@@ -158,18 +156,6 @@ ion-content {
     background-position: center;
     background-size: cover;
 }
-
-// .img {
-//     position: absolute;
-//     bottom: 0px;
-//     max-width: none;
-// }
-// .footer ion-button {
-//     font-weight: $fontBold;
-// }
-// .day_box {
-//     --background: rgb(226, 246, 250);
-// }
 
 @media only screen and (min-width: 700px) {
     ion-content { 
@@ -335,7 +321,6 @@ ion-toolbar.day-change-slider {
 }
 
 
-
 .btn {
 
     &.btn-primary {
@@ -357,21 +342,11 @@ ion-toolbar.day-change-slider {
         left: calc(50% - (150px / 2));
     }
 }
-.icon-large {
-  color: #777;
-}
-
-.form.form-app-login ion-label, .form.form-app-login ion-input {
-  font-size: 1.0rem !important;
-  font-weight: 300 !important;
-	padding-left: 10px !important;
-    border-bottom: 0 !important;
-    background: #f1f1f1;
-}
 
 .error {
     color: red;
-    font-size: 12px;
+		font-size: 12px;
+		margin-bottom: 5px;
 }
 .row {
     display: -webkit-box;
