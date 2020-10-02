@@ -66,9 +66,15 @@ small {
   border: none;
 }
 
-h1, h2 {
+h1 {
 	font-weight: 900;
 	text-transform: uppercase;
+	margin-bottom: 16px;
+	margin-left: -4px;
+}
+
+h2 {
+	font-weight: 900;
 	margin-bottom: 16px;
 	margin-left: -4px;
 }
