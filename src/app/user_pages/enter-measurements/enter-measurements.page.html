@@ -1,142 +1,128 @@
-<ion-header [translucent]="true" class="profile-header">
-  <div class="profile-img-bg">
-    <div class="row padding-33">
-      <ion-buttons slot="start" class="width-10Per">
-        <ion-back-button type="button" defaultHref="/tabs/home/today"></ion-back-button>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        text=""
+        icon="arrow-round-back">
+      </ion-back-button>
     </ion-buttons>
-      <div class="title">
-      ENTER MEASUREMENTS
-      </div>
-    </div>
-  </div>
+  </ion-toolbar>
 </ion-header>
-<ion-content padding class="--padding-top-0">
+
+<ion-content padding class="extra-padding">
   <form
     [formGroup]="measurementsForm"
     (ngSubmit)="submitMeasurements()"
     class="measurements-form"
   >
-    <ion-grid class="grid-style">
-      <ion-row class="margin-20">
+    <ion-grid>
+      <ion-row>
         <ion-col>
-          <ion-label for="heightFeet" class="padding-5">Height</ion-label>
-          <ion-row>
-            <ion-col class="fontSizeSmall" size="6">
-              <ion-select
-                class="form-control"
-                placeholder="Feet"
-                name="heightFeet"
-                formControlName="heightFeet"
-              >
-                <ion-select-option
-                  *ngFor="let option of heightFeetOptions"
-                  value="{{option}}"
-                  >{{option}}</ion-select-option
-                >
-              </ion-select>
-            </ion-col>
-            <ion-col  class="fontSizeSmall">
-              <ion-select
-                class="form-control"
-                placeholder="Inches"
-                name="heightInches"
-                formControlName="heightInches"
-              >
-                <ion-select-option
-                  *ngFor="let option of heightInchesOptions"
-                  value="{{option}}"
-                  >{{option}}</ion-select-option
-                >
-              </ion-select>
-            </ion-col>
-           
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-label for="age" class="padding-5">Age</ion-label>
-          <ion-input
-            type="number"
-            min="0"
-            max="1000"
-            name="age" placeholder ="Age"
-            formControlName="age" class="margin-top-5"
-          ></ion-input>
-        </ion-col>
-      </ion-row>
-     
-
-      <ion-row>
-        <ion-col >
-          <div for="weight" class="margin-5">Weight (lbs)</div>
-          <ion-input
-            type="number"
-            min="0"
-            max="1000"
-            name="weight"
-            formControlName="weight"
-          ></ion-input>
+          <h1>Enter Measurements</h1>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col col-6>
-          <div for="gender">Gender</div>
-          <ion-select
-            name="gender"
-            formControlName="gender"
-            placeholder="Select"
-          >
-            <ion-select-option value="M">Male</ion-select-option>
-            <ion-select-option value="F">Female</ion-select-option>
-          </ion-select>
-        </ion-col>
-        <ion-col col-6>
-          <ion-label for="plan">Plan</ion-label>
-          <ion-select name="plan" formControlName="plan" placeholder="Select">
-            <ion-select-option value="7">7 week</ion-select-option>
-            <ion-select-option value="12">12 week</ion-select-option>
-          </ion-select>
+        <ion-col>
+          <ion-item>
+            <ion-label>Age</ion-label>
+            <ion-select name="age" [(ngModel)]="age" okText="OK" cancelText="Cancel">
+              <ion-select-option 
+                *ngFor="let item of ageOptions"
+                [value]="item.value">
+                  {{ item.name}}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col col-12>
-          <ion-label for="activity">Activity Level</ion-label>
-          <ion-select
-            name="activity"
-            formControlName="activity"
-            placeholder="Select"
-          >
-            <ion-select-option value="1.2000">Sedentary</ion-select-option>
-            <ion-select-option value="1.3750"
-              >Light Exercise 1-3 days/w</ion-select-option
-            >
-            <ion-select-option value="1.5500"
-              >Moderate Exercise 3-5 days/w</ion-select-option
-            >
-            <ion-select-option value="1.7250"
-              >Hardcore Exercise or Sports 6-7 days/w</ion-select-option
-            >
-            <ion-select-option value="1.9000"
-              >Hardcore Exercise 6-7 days/w + labor intensive
-              job</ion-select-option
-            >
-          </ion-select>
+        <ion-col>
+          <ion-item>
+            <ion-label>Gender</ion-label>
+            <ion-select name="gender" [(ngModel)]="gender" okText="OK" cancelText="Cancel">
+              <ion-select-option 
+                *ngFor="let item of genderOptions"
+                [value]="item.value">
+                  {{ item.name}}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
         </ion-col>
       </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Height</ion-label>
+            <ion-select name="height" [(ngModel)]="height" okText="OK" cancelText="Cancel">
+              <ion-select-option 
+                *ngFor="let item of heightOptions"
+                [value]="item.value">
+                  {{ item.name}}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Weight</ion-label>
+            <ion-select name="weight" [(ngModel)]="weight" okText="OK" cancelText="Cancel">
+              <ion-select-option 
+                *ngFor="let item of weightOptions"
+                [value]="item.value">
+                  {{ item.name}}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Activity Level</ion-label>
+            <ion-select name="activity" [(ngModel)]="activity" okText="OK" cancelText="Cancel">
+              <ion-select-option 
+                *ngFor="let item of activityOptions"
+                [value]="item.value">
+                  {{ item.name}}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Diet Plan</ion-label>
+            <ion-select name="plan" [(ngModel)]="plan" okText="OK" cancelText="Cancel">
+              <ion-select-option 
+                *ngFor="let item of planOptions"
+                [value]="item.value">
+                  {{ item.name}}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button 
+            expand="block"
+            type="submit"  
+            shape="round">
+            Save
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
     </ion-grid>
-<ion-row>
-  
-  <ion-col >
-    <ion-button expand="full" type="submit" class="action-button"
-      >{{action}}</ion-button>
-  </ion-col>
-  <ion-col >
-    <ion-button expand="full" (click)="onClickDiet()" class="action-button"
-      >Next</ion-button>
-  </ion-col>
-</ion-row>
-    <!-- <ion-button *ngIf="action == 'update'" expand="full" (click)="goBack()"
-      >Cancel</ion-button -->
-  </form></ion-content
->
+  </form>
+</ion-content>
