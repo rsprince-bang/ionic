@@ -125,18 +125,12 @@ export class LoginPage implements OnInit {
     else{
       this.presentToastWithOptions("Something went wrong, please try again later.");
     }
-
-return;
-
   }
  
 
   loginWithFB(fbuser) {
-    alert(11);
-    alert(JSON.stringify(fbuser));
-    return;
     this.myAPI.makeAPIcall(
-      "login.php", 
+      "login", 
       {
         "action": "loginWfb",
         "fbuser": fbuser,
@@ -156,17 +150,27 @@ return;
         else if(this.userInfo.success){
           localStorage.setItem("token", this.userInfo.success.token);
           localStorage.setItem("user_id", this.userInfo.success.user_id);
-          this.events.publish("user logged in", 1111, 2222); //test passsing args
-          localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
+          //this.events.publish("user logged in", 1111, 2222); //test passsing args
 
-          if( this.userInfo.success.first_time_user && this.userInfo.success.first_time_user == "yes" ){
+          if( !this.userInfo.success.user.goals || this.userInfo.success.user.goals.length == 0 ){
+            //user never filled out goals
+            //this.router.navigateByUrl("/set-goals");
+            this.router.navigateByUrl("/welcome");
+          }
+          else if( !this.userInfo.success.user.measurements || this.userInfo.success.user.measurements.length == 0 ){
+            //user never filled out measurements
             this.router.navigateByUrl("/enter-measurements");
           }
           else{
-            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
-            localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
-            localStorage.setItem("lastFeedback", result.success.lastFeedback);
-            localStorage.setItem('diet_plan_length', result.success.plan_length );
+            localStorage.setItem("goals", JSON.stringify(this.userInfo.success.user.goals));
+            localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
+            localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
+            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
+            localStorage.setItem("currentCaloriesIntake", this.userInfo.success.user.diet.cur_calories_intake);
+            localStorage.setItem("diet_plan_length", this.userInfo.success.user.diet.plan_length);
+            localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
+            localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
+
             this.router.navigateByUrl("/tabs/home/today");
           }
         }
