@@ -15,12 +15,10 @@ $lightGrey: #c9ccd0;
 $darkBlue: #000e1e;
 $primary: #0140C2;
 
-html, body {
 
-}
-
-.item-native {
-	padding-left: 0;
+ion-item {
+    margin-left: -12px;
+    margin-bottom: 10px;
 }
 
 :host {
@@ -67,7 +65,7 @@ small {
 }
 
 h1 {
-	font-weight: 900;
+	font-weight: bold;
 	text-transform: uppercase;
 	margin-bottom: 16px;
 	margin-left: -4px;
