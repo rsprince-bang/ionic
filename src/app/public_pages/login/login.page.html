@@ -2,82 +2,81 @@
   <img src="assets/img/login-header.png">
 </ion-header>
 
-<ion-content padding class="extra-padding">
-  <div class="">     
-    <form class="form form-app-login" [formGroup]="credentialsForm" (ngSubmit)="login()">
-      <ion-grid>
-        <ion-row align-items-end>
-          <ion-col>
-            <ion-item>
-              <ion-label position="stacked">Email</ion-label>
-              <ion-input type="email" formControlName="email" placeholder="Enter your email" required>
-                <ion-icon name="mail" size="large"></ion-icon>
-              </ion-input>
-            </ion-item>
-            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
-              Email address is required.
-            </span>
-          </ion-col>
-        </ion-row>
+<ion-content padding class="extra-padding">    
+  <form class="form" [formGroup]="credentialsForm" (ngSubmit)="login()">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col>
 
-        <ion-row align-items-end>
-          <ion-col>
-            <ion-item>
-              <ion-label position="stacked">Password</ion-label>
-              <ion-input type="password" placeholder="Enter your password" formControlName="password" required>
-                <ion-icon name="lock" size="large"></ion-icon>
-              </ion-input>
-            </ion-item>
-            <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
-              Password is required.
-            </span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <small> 
-              <a class="register-link" [routerLink]="['/register']">Register</a>
-               with your email
-            </small>
-          </ion-col>
-          <ion-col class="text-right">
-            <small>Forgot password?</small>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="text-right">
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input type="email" formControlName="email" placeholder="Enter your email" required>
+              <ion-icon name="mail" size="large"></ion-icon>
+            </ion-input>
+ 
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+            Email address is required.
+          </span>
+        </ion-col>
+      </ion-row>
 
-          </ion-col>
-        </ion-row>
-        
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <ion-button
-            expand="block"
-            type="submit"  
-            shape="round">
-            <!-- class="btn btn-login btn-round ion-text-center"  -->
-            <!-- [disabled]="!credentialsForm.valid" -->
-              Login
-            </ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <small>or connect with</small>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-text-center">
-            <img class="social-icons" src="assets/img/appleicon.png">
-            <img class="social-icons" src="assets/img/googleicon.png">
-            <img class="social-icons" src="assets/img/facebookicon.png">
-            <img class="social-icons" src="assets/img/twittericon.png">         
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </form>
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password" placeholder="Enter your password" formControlName="password" required>
+            <ion-icon name="lock" size="large"></ion-icon>
+          </ion-input>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+            Password is required.
+          </span>
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col>
+          <small> 
+            <a class="register-link" [routerLink]="['/register']">Register</a>
+              with your email
+          </small>
+        </ion-col>
+        <ion-col class="text-right">
+          <small>Forgot password?</small>
+        </ion-col>
+      </ion-row>
 
-  </div>
+      <ion-row>
+        <ion-col class="text-right">
+
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button
+          expand="block"
+          type="submit"  
+          shape="round">
+          <!-- class="btn btn-login btn-round ion-text-center"  -->
+          <!-- [disabled]="!credentialsForm.valid" -->
+            Login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <small>or connect with</small>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <img class="social-icons" src="assets/img/appleicon.png">
+          <img class="social-icons" src="assets/img/googleicon.png">
+          <img class="social-icons" src="assets/img/facebookicon.png">
+          <img class="social-icons" src="assets/img/twittericon.png">         
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
 </ion-content>

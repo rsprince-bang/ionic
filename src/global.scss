@@ -19,14 +19,20 @@ html, body {
 
 }
 
+.item-native {
+	padding-left: 0;
+}
+
 :host {
 	border: none;
+	--padding-start: 0 !important;
 }
 
 .form ion-input {
 	color: #2c2c2c;
 	background: #EAEEF8;
 	height: 50px;
+	margin-bottom: 10px;
 }
 
 .icon-large {
@@ -62,6 +68,9 @@ small {
 
 h1, h2 {
 	font-weight: 900;
+	text-transform: uppercase;
+	margin-bottom: 16px;
+	margin-left: -4px;
 }
 
 .logo-img-sml {
@@ -77,8 +86,13 @@ h1, h2 {
 ion-header ion-toolbar { 
     text-transform: uppercase;
     color: rgb(255, 255, 255);
-    --background: #0140C2;
+    --background: $primary;
 }
+
+ion-header ion-toolbar.public-toolbar { 
+	--background: none;
+}
+
 // Logo
 ion-img.nav-logo.hydrated {
     max-width: 2rem;
