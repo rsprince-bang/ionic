@@ -29,6 +29,20 @@ export class EnterMeasurementsPage implements OnInit {
     fileData1
     imageUrl:any='../../../assets/icon/plaindp.png';
     isImageUploaded = false;
+
+    ageOptions = [];
+    genderOptions = ['Male', 'Female'];
+    weightOptions = [];
+    planOptions =  ['7 week', '12 week'];
+    activityOptions = [
+      {level: 'Sedentary', value: 1.2000},
+      {level: 'Light Exercise 1-3 days/week', value: 1.3750},
+      {level: 'Moderate Exercise 3-5 days/week', value: 1.5500},
+      {level: 'Hardcore Exercise or Sports 6-7 days/week', value: 1.7250},
+      {level: 'Hardcore Exercise or Sports 6-7 days/week  + labor intensive job', value: 1.9000}
+    ];
+    heightOptions = [];
+
   constructor(private formBuilder: FormBuilder, private myAPI: ApiCallService, private route: ActivatedRoute, private router: Router, private navCtrl: NavController,
      private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService) {
 
@@ -60,6 +74,10 @@ export class EnterMeasurementsPage implements OnInit {
       activity: [this.currentUserMeasurements.activity_level, [ Validators.required ]],
       plan: [this.currentUserMeasurements.plan_length, [ Validators.required, Validators.pattern('[0-9]+') ]]
     });
+
+    this.generateAges(18, 100);
+    this.generateWeights(90, 300);
+    this.generateHeights(3, 6);
   }
 
   submitMeasurements(){
@@ -115,4 +133,27 @@ export class EnterMeasurementsPage implements OnInit {
   onClickDiet() {
     this.router.navigateByUrl("/set-goals");
   }
+
+  generateAges(start, end) {
+    for(let i = start; i <= end; i++){
+      this.ageOptions.push(i);
+    }
+  }
+
+  generateHeights(start, end) {
+    for(let feet = start; feet <= end; feet++){
+      for(let inches = 0; inches <= 12; inches++) {
+        let height = feet + "' " + inches + '"';
+        let value = (feet * 12) + inches;
+        this.heightOptions.push({option: height, valueInches: value});
+      }
+    }
+  }
+
+  generateWeights(start, end) {
+    for(let i = start; i <= end; i++){
+      this.weightOptions.push(i);
+    }
+  }
+
 }

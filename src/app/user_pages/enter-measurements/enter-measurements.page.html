@@ -29,8 +29,8 @@
             <ion-select name="age" [(ngModel)]="age" okText="OK" cancelText="Cancel">
               <ion-select-option 
                 *ngFor="let item of ageOptions"
-                [value]="item.value">
-                  {{ item.name}}
+                [value]="item">
+                  {{ item }}
                 </ion-select-option>
             </ion-select>
           </ion-item>
@@ -44,8 +44,8 @@
             <ion-select name="gender" [(ngModel)]="gender" okText="OK" cancelText="Cancel">
               <ion-select-option 
                 *ngFor="let item of genderOptions"
-                [value]="item.value">
-                  {{ item.name}}
+                [value]="item">
+                  {{ item }}
                 </ion-select-option>
             </ion-select>
           </ion-item>
@@ -59,8 +59,8 @@
             <ion-select name="height" [(ngModel)]="height" okText="OK" cancelText="Cancel">
               <ion-select-option 
                 *ngFor="let item of heightOptions"
-                [value]="item.value">
-                  {{ item.name}}
+                [value]="item.valueInches">
+                  {{ item.option }}
                 </ion-select-option>
             </ion-select>
           </ion-item>
@@ -74,8 +74,8 @@
             <ion-select name="weight" [(ngModel)]="weight" okText="OK" cancelText="Cancel">
               <ion-select-option 
                 *ngFor="let item of weightOptions"
-                [value]="item.value">
-                  {{ item.name}}
+                [value]="item">
+                  {{ item }}
                 </ion-select-option>
             </ion-select>
           </ion-item>
@@ -90,7 +90,7 @@
               <ion-select-option 
                 *ngFor="let item of activityOptions"
                 [value]="item.value">
-                  {{ item.name}}
+                  {{ item.level }}
                 </ion-select-option>
             </ion-select>
           </ion-item>
@@ -104,8 +104,8 @@
             <ion-select name="plan" [(ngModel)]="plan" okText="OK" cancelText="Cancel">
               <ion-select-option 
                 *ngFor="let item of planOptions"
-                [value]="item.value">
-                  {{ item.name}}
+                [value]="item">
+                  {{ item }}
                 </ion-select-option>
             </ion-select>
           </ion-item>

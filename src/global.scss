@@ -159,8 +159,9 @@ app-home {
 ion-button { 
     --color: white;
     --text-transform: capitalize;
-		--background: #0140C2;
-		--margin-bottom: 10px;
+	--background: #0140C2;
+    --margin-bottom: 10px;
+    margin-top: 40px;
 }
 .header-md:after {
     background-image: none;
