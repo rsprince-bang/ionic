@@ -1,55 +1,92 @@
-<ion-content padding>
-  <div class="logo-img-sml">
-    <img src="assets/img/login-logo-new.png">
-  </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        text=""
+        icon="arrow-round-back">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <form class="form form-app-login" [formGroup]="registerForm" (ngSubmit)="register()">
+<ion-content padding class="extra-padding">
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
+    <ion-grid>
 
-    <h1>Signup</h1>
-    <ion-item>
-      <ion-input type="text" placeholder="First Name" formControlName="first_name">
-        <ion-icon name="person" size="large"></ion-icon>
-      </ion-input>
-    </ion-item>
+      <ion-row>
+        <ion-col>
+          <h1>Register</h1>
+        </ion-col>
+      </ion-row>
 
-    <ion-item>
-      <ion-input type="text" placeholder="Last Name" formControlName="last_name">
-        <ion-icon name="person" size="large"></ion-icon>
-      </ion-input>
-    </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">First Name</ion-label>
+          <ion-input type="text" placeholder="Enter first name" formControlName="first_name">
+            <ion-icon name="person" size="large"></ion-icon>
+          </ion-input>
+        </ion-col>
+      </ion-row>
 
-    <ion-item>
-      <ion-input type="email" placeholder="Email" formControlName="email">
-        <ion-icon name="mail" size="large"></ion-icon>
-      </ion-input>
-    </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">Last Name</ion-label>
+          <ion-input type="text" placeholder="Enter last name" formControlName="last_name">
+            <ion-icon name="person" size="large"></ion-icon>
+          </ion-input>
+        </ion-col>
+      </ion-row>
 
-    <ion-item>
-      <ion-input type="password" placeholder="Password" formControlName="password">
-        <ion-icon name="lock" size="large"></ion-icon>
-      </ion-input>
-    </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email" placeholder="Enter email" formControlName="email">
+            <ion-icon name="mail" size="large"></ion-icon>
+          </ion-input>
+        </ion-col>
+      </ion-row>
 
-    <ion-item>
-      <ion-input type="password" placeholder="Verify Password" formControlName="password_verify">
-        <ion-icon name="lock" size="large"></ion-icon>
-      </ion-input>
-    </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password" placeholder="Enter password" formControlName="password">
+            <ion-icon name="lock" size="large"></ion-icon>
+          </ion-input>
+        </ion-col>
+      </ion-row>
 
-    <ion-item>
-      <small>
-        I agree to the 
-        <a class="register-link"[routerLink]="['/terms']">
-          terms and privacy policy.
-        </a>
-      </small>
-      <ion-checkbox slot="start" color="primary"></ion-checkbox>
-    </ion-item>
+      <ion-row>
+        <ion-col>
+          <small>Password must contain at least 8 characters</small>
+        </ion-col>
+      </ion-row>
 
-    <ion-button class="btn btn-primary btn-register" expand="block" type="submit" [disabled]="!registerForm.valid">
-      Signup
-    </ion-button>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <small>
+              I agree to the 
+              <a class="register-link"[routerLink]="['/terms']">
+                terms and privacy policy.
+              </a>
+            </small>
+            <ion-checkbox slot="start" color="primary"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col>
+          <ion-button 
+            expand="block"
+            type="submit"  
+            shape="round">
+          <!-- [disabled]="!registerForm.valid" -->
+            Create Account
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
   </form>
-
 </ion-content>

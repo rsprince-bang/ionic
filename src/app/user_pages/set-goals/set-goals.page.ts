@@ -9,13 +9,13 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 })
 export class SetGoalsPage implements OnInit {
   days: any[] = [
-    {day:'mon', selected: false},
-    {day:'tue', selected: false},
-    {day:'wed', selected: false},
-    {day:'thu', selected: false},
-    {day:'fri', selected: false},
-    {day:'sat', selected: false},
-    {day:'sun', selected: false}
+    {day:'S', code: 'sun', selected: false},
+    {day:'M', code: 'mon', selected: false},
+    {day:'T', code: 'tue', selected: false},
+    {day:'W', code: 'wed', selected: false},
+    {day:'T', code: 'thu', selected: false},
+    {day:'F', code: 'fri', selected: false},
+    {day:'S', code: 'sat', selected: false}
   ];
   lossOptions = [
     {name: "5 pounds", value: 5},

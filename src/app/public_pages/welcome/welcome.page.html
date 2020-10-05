@@ -1,28 +1,51 @@
-<ion-content padding>
-  <div class="logo-img-sml">
-    <img src="assets/img/login-logo-new.png">
-  </div>
+<ion-content padding class="extra-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>Welcome to the Bang Anti-Diet</h1> 
+      </ion-col>
+    </ion-row>
 
-  <h1>Welcome!</h1>
-  <p>
-    In my Bang Anti Diet book, I dispel the Lactic acid myth. Many people refer to lactic acid as a "waste product" and say that it "causes muscle soreness". The truth is that Lactate is used as an energy source by the muscles, heart, and brain. Muscles soreness is a result of muscle damage, not Lactate. 
-  </p>
-  <h2>What You'll Need</h2>
-  <ul>
-    <li>Food Scale</li>
-    <li>Smart Bathroom Scale</li>
-  </ul>
+    <ion-row>
+      <ion-col>
+        The Bang Anti-Diet is not a diet and is a super flexible eating, training and supplement protocol so it can be adapted to almost everybody’s bio-individual needs keeping in mind that compliance is king when it comes to consistent Rapid Body Remodeling success.
+      </ion-col>
+    </ion-row>
 
-  <div class="text-center position-with-img">
-    <ion-button class="button ion-home ion-text-center" (click)="begin()">
-      Let's Begin
-    </ion-button>
-  </div>
+    <ion-row>
+      <ion-col>
+        <h3>What You'll Need</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <img src="./madison.jpg" />
+          <ion-card-content>
+            The Bang Anti-Diet Starter Pack<br />
+            $XXX.00
+          </ion-card-content>
+          <ion-card-header>
+            <p>
+              <a href="" class="global-link">Order Now</a>
+            </p>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button 
+          expand="block"
+          shape="round" 
+          (click)="begin()">
+          Let's Begin
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>
-
-<ion-footer class="ion-no-border ion-text-center">
-  <div>
-    <img class="jack-img" src="assets/img/Jack-with-chain.png">
-  </div>
-</ion-footer>
