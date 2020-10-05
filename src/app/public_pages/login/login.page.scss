@@ -1,27 +1,23 @@
 // Page Content Container
-.login-screen {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 360px;
+.extra-padding {
+    padding: 0 24px !important;
 }
-
 .social-icons {
-  padding-right: 12px;
-  width: 60px;
+	padding-right: 2px;
+	width: 60px;
+	box-shadow: 0 2px 12px 0 rgba(0,0,255,0.25);
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	height: 60px;
+	margin: 6px;
+	outline: none;
 }
 
 
 // Additional Container Styles
 ion-content.hydrated {
     color: black;
-    // --ion-background-color: rgba(235, 251, 255, 0.0);
-    // background-repeat: no-repeat;
-    // background-position: center;
-    // background-size: cover;
-    // background-image: url("../../../assets/img/blue-background.png");
+
 }
 
 
@@ -47,30 +43,12 @@ ion-item {
 
 // The Primary Login Form
 .form.form-app-login {
-    margin-top: 10px;
-
-
-    // Style the Ionic Input Wrapper
-    ion-input {
-        border-bottom: solid 1px black;
-        color: black;
-        margin-bottom: 1px;
-    }
-
-
     // Set the Input Icons
     .input-icon.input-icon-left {
         margin-right: 1rem;
     }
     .input-icon.input-icon-right {
         margin-left: 1rem;
-    }
-
-
-    // Styles for Input Labels
-    ion-label {
-        font-weight: bold;
-        font-size: 0.81rem;
     }
 }
 

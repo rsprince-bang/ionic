@@ -30,25 +30,17 @@ npm install
 
 Launch the App
 ```
-ionic serve --devapp
+ionic serve
 ```
 
 
-## Setup
+## Changelog
 ### Change API URL in 
-Update the URL in the Environment's file to match your test/development environment on the development server. This URL should point to a test Bang website where you have access to the database. This is the URL & database that the app will use to store all of it's data.
+- The app is pointing to a standalone laravel project (https://github.com/BangWebGit/melt-down-app-API) that will serve as an API.
+By default the app is connected to the staging API so no further setup is required.
 
-Open the file with nano or other editor:
-```
-sudo nano src/app/environments/environment.ts
-```
+Update the URL in the Environment's file to match your test/development environment for API testing. This is the URL & database that the app will use to store all of it's data.
 
-Change The Following Line To Match Your Dev URL:
-```
-API_URL: "https://bang-us-new.bangstg.com/md-app/"
-```
+- The ionic app is now updated to use capacitor instead of cordova.
 
-### Add Database Tables
-The following database tables will need to be added to the WordPress install you linked to in the previous step. In the future, this step will be semi-automated, for now this will be a manual process.
-
-[Download SQL Database Tables Here](http://10.220.0.4/~csteurer/_db/md_app_tables.sql)
+- TODO Update Facebook account for "login with facebook" to stoyan.raychev@bangenergy.com, B@ngFacebook!

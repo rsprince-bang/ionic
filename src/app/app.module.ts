@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
-// import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertsPickerModalPageModule } from './user_pages/alerts-picker-modal/alerts-picker-modal.module';
@@ -26,7 +25,6 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx'; //it seems file transfer works as long as we have the cordova-plugin-file added, but lets import it
 import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-modal.module';
 
-import { Facebook } from '@ionic-native/facebook/ngx';
 import { AddEventModalPageModule } from './user_pages/add-event-modal/add-event-modal.module';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
@@ -57,10 +55,8 @@ import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
     Camera,
     File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    // NativePageTransitions,
     LocalNotifications,
     InAppBrowser,
-    Facebook
   ],
   bootstrap: [AppComponent]
 })

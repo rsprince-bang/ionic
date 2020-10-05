@@ -27,7 +27,7 @@ export class RegisterPage implements OnInit {
 
 
   register() {
-    if (this.registerForm.value.password == this.registerForm.value.password_verify) {
+    // if (this.registerForm.value.password == this.registerForm.value.password_verify) {
       this.myAPI.makeAPIcall(
         "login",
         {
@@ -63,11 +63,9 @@ export class RegisterPage implements OnInit {
         }
       );
     }
-    else {
-      this.myAPI.presentToastWithOptions("Password does not match.");
-    }
-
-  }
-  
+  //   else {
+  //     this.myAPI.presentToastWithOptions("Password does not match.");
+  //   }
+  // }
 
 }
