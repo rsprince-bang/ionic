@@ -10,7 +10,7 @@
 
             <ion-label position="stacked">Email</ion-label>
             <ion-input type="email" formControlName="email" placeholder="Enter your email" required>
-              <ion-icon name="mail" size="large"></ion-icon>
+              <ion-icon ios="ios-mail-outline" md="md-mail" size="small"></ion-icon>
             </ion-input>
  
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
@@ -23,7 +23,7 @@
         <ion-col>
           <ion-label position="stacked">Password</ion-label>
           <ion-input type="password" placeholder="Enter your password" formControlName="password" required>
-            <ion-icon name="lock" size="large"></ion-icon>
+            <ion-icon ios="ios-lock-outline" md="md-lock" size="small"></ion-icon>
           </ion-input>
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
             Password is required.

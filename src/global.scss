@@ -15,10 +15,17 @@ $lightGrey: #c9ccd0;
 $darkBlue: #000e1e;
 $primary: #0140C2;
 
+.extra-padding {
+  padding: 0 24px !important;
+}
+
+.back-button {
+  color: black;
+}
 
 ion-item {
-    margin-left: -12px;
-    margin-bottom: 10px;
+  margin-left: -12px;
+  margin-bottom: 10px;
 }
 
 :host {
@@ -26,12 +33,22 @@ ion-item {
 	--padding-start: 0 !important;
 }
 
+ion-header button {
+    color: black;
+}
+
 .form ion-input {
 	color: #2c2c2c;
 	background: #EAEEF8;
 	height: 50px;
-	margin-bottom: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+    ion-icon {
+        padding: 0 6px;
+    }
 }
+
 
 .icon-large {
 	color: #777;

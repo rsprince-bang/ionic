@@ -1,7 +1,8 @@
-<ion-header>
+<ion-header padding class="extra-padding">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
+      <ion-back-button 
+        class="back-button"
         text=""
         icon="arrow-round-back">
       </ion-back-button>
@@ -10,7 +11,10 @@
 </ion-header>
 
 <ion-content padding class="extra-padding">
-  <form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
+  <form 
+    class="form" 
+    [formGroup]="registerForm" 
+    (ngSubmit)="register()">
     <ion-grid>
 
       <ion-row>
@@ -23,7 +27,7 @@
         <ion-col>
           <ion-label position="stacked">First Name</ion-label>
           <ion-input type="text" placeholder="Enter first name" formControlName="first_name">
-            <ion-icon name="person" size="large"></ion-icon>
+            <ion-icon ios="ios-person-outline" md="md-person" size="small"></ion-icon>
           </ion-input>
         </ion-col>
       </ion-row>
@@ -32,7 +36,7 @@
         <ion-col>
           <ion-label position="stacked">Last Name</ion-label>
           <ion-input type="text" placeholder="Enter last name" formControlName="last_name">
-            <ion-icon name="person" size="large"></ion-icon>
+            <ion-icon ios="ios-person-outline" md="md-person" size="small"></ion-icon>
           </ion-input>
         </ion-col>
       </ion-row>
@@ -41,7 +45,7 @@
         <ion-col>
           <ion-label position="stacked">Email</ion-label>
           <ion-input type="email" placeholder="Enter email" formControlName="email">
-            <ion-icon name="mail" size="large"></ion-icon>
+            <ion-icon ios="ios-mail-outline" md="md-mail" size="small"></ion-icon>
           </ion-input>
         </ion-col>
       </ion-row>
@@ -50,7 +54,7 @@
         <ion-col>
           <ion-label position="stacked">Password</ion-label>
           <ion-input type="password" placeholder="Enter password" formControlName="password">
-            <ion-icon name="lock" size="large"></ion-icon>
+            <ion-icon ios="ios-lock-outline" md="md-lock" size="small"></ion-icon>
           </ion-input>
         </ion-col>
       </ion-row>
