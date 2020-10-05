@@ -1,96 +1,154 @@
-<ion-header>
+<ion-header style="padding: 0px 15px;">
   <ion-toolbar>
-    
     <ion-buttons slot="start">
-      <ion-menu-toggle>
-        <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
+      <ion-button class="button-bac">
+        <ion-icon style="color: black;"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
+       </ion-button>
+      </ion-buttons>
+    <ion-title class="title">Me</ion-title>
+    <ion-buttons slot="end">
+        <ion-button class="button-bac">
+          <ion-icon style="color: black;" name="settings"></ion-icon>
         </ion-button>
-      </ion-menu-toggle>
-    </ion-buttons>
-
-    <ion-title>Profile</ion-title>
-
-    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
-    
+        </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
-  <!-- Profile Header -->
-  <section class="profile-header">
-
-    <ion-avatar class="profileImage">
-      <ion-img  [src]="profileImageURL"></ion-img>
-    </ion-avatar>
-
-    <ion-item classs="update-image">
-      <label class="myFakeUploadButton" for="myFileInput">Edit Photo</label>
-      <ion-input id="myFileInput"  type="file" accept="image/*" (change)="uploadPicture($event)" ></ion-input>
-    </ion-item>
-
-    <h1 class="text-center">John Doe</h1>
-    <h2 class="text-center">DAY {{dayNumber}}</h2>
-
-  </section>
-
-  <!-- Profile Highlights -->
-  <section class="profile-highlights">
-    
-    <ion-grid>
-      <ion-row>
-        
-        <ion-col class="profile-highlight">
-          <h3 class="label">Start Date</h3>
-          <div class="value">{{startInfo.date}}</div>
+<ion-content >
+  <div class="padding-20" style="background-color: #FAFAFA;padding-bottom: 20px;">
+    <ion-row >
+      <ion-col size="3" class="margin-0 margin-auto">
+        <div >
+          <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
+          <!-- <ion-card class="camera-div">
+            <ion-icon ios="ios-camera" md="md-camera" class="color-icon camera-icon"></ion-icon>
+        </ion-card> -->
+        </div>
         </ion-col>
-
-        <ion-col class="profile-highlight">
-          <h3 class="label">Height</h3>
-          <div class="value">{{startInfo.height}}</div>
-        </ion-col>
-
-        <ion-col class="profile-highlight">
-          <h3 class="label">Weight</h3>
-          <div class="value">{{startInfo.weight}} lbs.</div>
-        </ion-col>
-
+        <ion-col size="9" class="margin-top-10">
+          <div>
+            <h2 class="margin-0 margin-to-7">
+              Good Morning, Jack.
+            </h2>
+            <p class="margin-0 font-size-14">Dont forget to add your gaines today!</p>
+          </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-16">
+      <ion-col >
+        <h2>Your Progress</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-10">
+      <ion-col size="5.5" class="goal-weight">
+        <div class="row">
+          <h1 class="margin-left">150</h1><p class="margin-right" style="font-weight: bold;margin-top: 7px;">Ibs</p>
+        </div>
+        <div>Goal Weight</div>
+      </ion-col>
+      <ion-col size="5.5" class="current-weight">
+        <div class="row">
+          <h1 class="margin-left">165</h1>
+          <p class="margin-right" style="font-weight: bold;margin-top: 7px;">Ibs</p>
+        </div>
+        <div>Current Weight</div>
+      </ion-col>
       </ion-row>
-    </ion-grid>
-
-    <ion-button expand="full" (click)="redirectToUpdatePage()" class="btn btn-rounded" shape="round">Update My Measurements</ion-button>
-
-  </section>
-  
-  
-  <!-- Profile Overview -->
-  <section class="profile-overview">
-    <ion-grid>
-      <ion-row>
-        
-        <ion-col class="progress">
-          <h3 class="label">The Bang Anti Diet</h3>
-          <div class="value">Phase 3 : Week 1</div>
+    <ion-row class="margin-top-10">
+      <ion-col>
+        <p class="weigh-in"> Weigh in</p>
+      </ion-col>
+  </ion-row>
+    <ion-row class="margin-top-20">
+    <ion-col>
+      <h2>The Bang Anti-Diet</h2>
+    </ion-col>
+    </ion-row>
+    <ion-row class=" margin-0 margin-top-10">
+      <ion-col class="margin-0">
+        <p class="margin-0 phase">Phase 2/Week 1</p>
+      </ion-col>
+    </ion-row>
+    <div class="row">
+    <h1 class="margin-0"><span class="per-color">20% </span><span>Completed</span></h1>
+    </div>
+    <div class="chart quizz-progress">
+      <ion-progress-bar value="0.3" class="height-22"></ion-progress-bar>
+    </div>
+  </div>
+  <div class="padding-20" style="background-color:#FFFFFF;padding-top:20px;padding-bottom: 20px;">
+    <ion-row >
+      <ion-col size="9.5">
+        <h2 class="margin-0">Progress Photos</h2>
+        <p class="margin-0">Add a photo to keep track of your body sculpting journey</p>
+      </ion-col>
+      <ion-col size="2.5" class="margin-auto">
+        <ion-icon class="plus-icon" name="add-circle"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-15">
+      <ion-col size="5.8" class="margin-0" (click)="viewImg('../../../assets/img/Capture-bang.PNG',' September 29, 2020')">
+        <ion-card class="margin-0" style="margin-inline-start: 0px;
+        margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;">
+          <img class="workout-img"  src="../../../assets/img/Capture-bang.PNG">
+        <ion-card class="margin-0 date-css " style="color: #FFFFFF;text-align: center;"><div>
+          September 29, 2020
+        </div></ion-card>
+        </ion-card>
+      </ion-col>
+      <ion-col size="0.2"></ion-col>
+      <ion-col size="5.8" class="margin-0" (click)="viewImg('../../../assets/img/Bang-prof.jpg',' September 29, 2020')">
+        <ion-card class="margin-0" style="margin-inline-start: 0px;
+        margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;">
+          <img class="workout-img" src="../../../assets/img/Bang-prof.jpg">
+        <ion-card class="margin-0 date-css" style="color: #FFFFFF;text-align: center;"><div>
+          September 29, 2020
+        </div></ion-card>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-10">
+      <ion-col class="view-all">
+        View all photos
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="padding-20" style="padding-top:20px;background-color: #FAFAFA;">
+    <ion-row >
+      <ion-col size="9.5">
+        <h2 class="margin-0">Your 7 Day Schedule</h2>
+        <p class="margin-0">[Add something about being consistent]</p>
+      </ion-col>
+      <ion-col size="2.5" class="margin-auto">
+        <ion-icon class="plus-icon" name="add-circle"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <div class="margin-top-15">
+      <ion-row >
+        <ion-col class="week-border" *ngFor="let day of weekDays;let i = index;" [ngClass]="{'on-select-day week-border' :day.selected,'week-border':!day.selected}">
+          <div (click)="onClickDate(day,i)" style="text-align: center;">{{day.name}}</div>
         </ion-col>
-
-        <ion-col class="completion-chart">
-          <!-- <circle-progress [backgroundColor]="blue" [percent]="70" [subtitle]="Completed"></circle-progress> -->
-        </ion-col>
-
       </ion-row>
-    </ion-grid>
-  </section>
-
-  <!-- Profile Reset -->
-  <ion-button class="reset" [disabled]="dayNumber==1" (click)="confirmReset()">Reset diet</ion-button><br/>
-
-  <ion-list>
-    <ion-item *ngFor="let diet of previousDiets">
-      <ion-label>{{diet.diet_start_date}} to {{diet.diet_end_date}}</ion-label>
-      <ion-button slot="end" size="small" (click)="viewOldDiet(diet.diet_start_date, diet.diet_end_date)">View
-      </ion-button>
-    </ion-item>
-  </ion-list>
-
+    </div>
+    <ion-row class="margin-top-15">
+      <ion-col>
+        <div >
+          September 29, 2020
+        </div>
+        <div> Today's List:</div>
+      </ion-col>
+    </ion-row>
+    <div class="margin-top-15">
+      <ion-item *ngFor="let date of todaysList;let i=index;" class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0" style="width: 100%;">
+          <ion-col size="11">
+            <span class="text-color">{{date.time}} </span><span> - {{date.name}}</span>
+          </ion-col>
+          <ion-col size="1" (click)="deleteItem(i)">
+            <ion-icon style="color: red;" name="trash"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+  </div>
 </ion-content>
