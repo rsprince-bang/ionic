@@ -73,5 +73,24 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fb678900402721437</string>
+    </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>678900402721437</string>
+<key>FacebookDisplayName</key>
+<string>Melt Down</string>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fbauth2</string>
+</array>
 </dict>
 </plist>
