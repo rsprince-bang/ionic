@@ -26,6 +26,8 @@ import { File } from '@ionic-native/file/ngx'; //it seems file transfer works as
 import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-modal.module';
 
 import { AddEventModalPageModule } from './user_pages/add-event-modal/add-event-modal.module';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,7 +45,9 @@ import { AddEventModalPageModule } from './user_pages/add-event-modal/add-event-
       NgCircleProgressModule.forRoot(),
       NgCalendarModule,
       ChartsModule,
-      AddEventModalPageModule
+      AddEventModalPageModule,
+      CalendarModule,
+      ViewImgModule
     ],
   providers: [
     StatusBar,

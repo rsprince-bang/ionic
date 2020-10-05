@@ -5,14 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfilePage } from './profile.page';
-import { NgCircleProgressModule } from 'ng-circle-progress';
-import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { ViewImg } from './view-img';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
+    component: ViewImg
   }
 ];
 
@@ -21,10 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    NgCircleProgressModule,
-    RouterModule.forChild(routes),
-    CalendarModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [ProfilePage]
+  declarations: [ViewImg]
 })
-export class ProfilePageModule {}
+export class ViewImgModule {}
