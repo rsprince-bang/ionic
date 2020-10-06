@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { environment } from 'src/environments/environment';
 import { Router, NavigationExtras } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController,ModalController } from '@ionic/angular';
+import { CalendarComponent } from '@syncfusion/ej2-angular-calendars';
+import * as moment from 'moment-timezone';
+import {ViewImg} from "../modals/view-img/view-img"
 
 @Component({
   selector: 'app-profile',
@@ -12,16 +15,29 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
+  @ViewChild('calendar')
+    public calendar: CalendarComponent;
+    value: Date;
   dayNumber = null;
   date = null;
   previousDiets = [];
   startInfo = { date: "...", height: "...", weight: "..." };
   profileImageURL = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y";
   userMeasurements = null;
-
+  dateVal = moment(new Date()).format('dddd,MMMM DD, YYYY')
+  weekDays =[{'name':'S',selected:false},
+  {'name':'M',selected:false},
+  {'name':'T',selected:true},
+  {'name':'W',selected:false},
+  {'name':'T',selected:false},
+  {'name':'F',selected:false},
+  {'name':'S',selected:false}]
+  todaysList = [{time:'8:00 AM',name:"Weigh in"},
+  {time:'9:00 AM',name:"Workout 1"},
+  {time:'12:00 PM',name:"Light Snack"},
+  {time:'2:00 PM',name:"Nap time, body!"}]
   constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router: Router, 
-    private alertController: AlertController) { }
+    private alertController: AlertController,public modalController:ModalController) { }
 
   ngOnInit() {
   }
@@ -138,5 +154,29 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['enter-measurements'], navigationExtras);
   }
 
-
+  deposit() {
+    this.value = this.calendar.value; 
+    this.dateVal = moment(this.calendar.value).format('dddd,MMMM DD, YYYY')
+    console.log("moment(this.calendar.value).format('dddd,MMMM DD, yyyy')",)
+  }
+  onClickDate(data,i) {
+    this.weekDays.forEach((item,index) =>{
+      if(index == i) {
+        data.selected = true
+      }else {
+        item.selected = false
+      }
+    })
+  }
+  async viewImg(imgurl,date) {
+    const modal = await this.modalController.create({
+        component: ViewImg,
+        cssClass : 'my-custom-modal-year-css',
+        componentProps: { imgurlData:imgurl ,date:date }
+        });
+        await modal.present();
+  }
+  deleteItem(index) {
+    this.todaysList.splice(index,1)
+  }
 }

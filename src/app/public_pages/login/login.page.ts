@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { Events, ToastController, LoadingController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
 import { GlobalServicesService } from 'src/app/services/global-services.service';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-
+import { Plugins } from '@capacitor/core';
+import { FacebookLoginResponse } from '@capacitor-community/facebook-login';
+const { FacebookLogin } = Plugins;
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -19,10 +21,11 @@ export class LoginPage implements OnInit {
   credentialsForm: FormGroup;
   userInfo = null;
   isSubmitted = false;
+  
 
   constructor(
     private myAPI: ApiCallService, private router: Router, public events: Events, private formBuilder: FormBuilder, public toastController: ToastController,
-    private globalServices: GlobalServicesService, private facebook: Facebook, public loadingController: LoadingController) { 
+    private globalServices: GlobalServicesService, public loadingController: LoadingController, private http: HttpClient) { 
 
   }
 
@@ -106,32 +109,28 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-	async doFbLogIn(){
-    this.myAPI.presentLoading();
-    this.facebook.login(["public_profile", "email"])
-    .then( (response:FacebookLoginResponse) =>{
-			let userId = response.authResponse.userID;
-			//Getting name and gender properties
-			this.facebook.api("/me?fields=name,email,id,first_name,last_name", [])
-			.then(user =>{
-        this.myAPI.dismissLoading();
-        this.loginWithFB(user);
-			},error=>{
-        this.myAPI.dismissLoading();
+
+  async doFbLogIn(): Promise<void> {
+    const FACEBOOK_PERMISSIONS = ['public_profile', 'email'];
+    const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    if (result && result.accessToken) {     
+      this.http.get('https://graph.facebook.com/'+result.accessToken.userId
+      +'?fields=name,email,id,first_name,last_name&access_token='+result.accessToken.token).subscribe((response) => {
+        this.loginWithFB(response);
+      },
+      (error) => {
         this.presentToastWithOptions("Something went wrong, please try again later.");
-      })
-		}, error =>{
-      //alert("error");
-      //alert(JSON.stringify(error));
-      this.myAPI.dismissLoading();
+      });
+    }
+    else{
       this.presentToastWithOptions("Something went wrong, please try again later.");
-		});
+    }
   }
-  
+ 
 
   loginWithFB(fbuser) {
     this.myAPI.makeAPIcall(
-      "login.php", 
+      "login", 
       {
         "action": "loginWfb",
         "fbuser": fbuser,
@@ -151,17 +150,27 @@ export class LoginPage implements OnInit {
         else if(this.userInfo.success){
           localStorage.setItem("token", this.userInfo.success.token);
           localStorage.setItem("user_id", this.userInfo.success.user_id);
-          this.events.publish("user logged in", 1111, 2222); //test passsing args
-          localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
+          //this.events.publish("user logged in", 1111, 2222); //test passsing args
 
-          if( this.userInfo.success.first_time_user && this.userInfo.success.first_time_user == "yes" ){
+          if( !this.userInfo.success.user.goals || this.userInfo.success.user.goals.length == 0 ){
+            //user never filled out goals
+            //this.router.navigateByUrl("/set-goals");
+            this.router.navigateByUrl("/welcome");
+          }
+          else if( !this.userInfo.success.user.measurements || this.userInfo.success.user.measurements.length == 0 ){
+            //user never filled out measurements
             this.router.navigateByUrl("/enter-measurements");
           }
           else{
-            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.dailyCaloriesIntake);
-            localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
-            localStorage.setItem("lastFeedback", result.success.lastFeedback);
-            localStorage.setItem('diet_plan_length', result.success.plan_length );
+            localStorage.setItem("goals", JSON.stringify(this.userInfo.success.user.goals));
+            localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
+            localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
+            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
+            localStorage.setItem("currentCaloriesIntake", this.userInfo.success.user.diet.cur_calories_intake);
+            localStorage.setItem("diet_plan_length", this.userInfo.success.user.diet.plan_length);
+            localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
+            localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
+
             this.router.navigateByUrl("/tabs/home/today");
           }
         }
@@ -172,18 +181,5 @@ export class LoginPage implements OnInit {
     );
   }
 
-
-  doFbLogout(){
-    //do we really need this function? Not sure. it might log us out of facebook as well.....
-
-/* 		this.fb.logout()
-		.then(res =>{
-			//user logged out so we will remove him from the NativeStorage
-			this.nativeStorage.remove('facebook_user');
-			this.router.navigate(["/login"]);
-		}, error =>{
-			console.log(error);
-		}); */
-	}
 
 }
