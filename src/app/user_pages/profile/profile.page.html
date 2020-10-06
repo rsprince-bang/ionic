@@ -1,154 +1,245 @@
-<ion-header style="padding: 0px 15px;">
+<ion-header style="padding: 0px 15px;border-bottom: 2px solid gainsboro;">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button class="button-bac">
         <ion-icon style="color: black;"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
        </ion-button>
       </ion-buttons>
-    <ion-title class="title">Me</ion-title>
-    <ion-buttons slot="end">
+    <ion-title class="title">{{title}}</ion-title>
+    <ion-buttons slot="end" *ngIf="isProfilePage" (click)="onSttingsClick()">
         <ion-button class="button-bac">
           <ion-icon style="color: black;" name="settings"></ion-icon>
         </ion-button>
-        </ion-buttons>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="isSettingsPage">
+      <ion-button class="button-bac">
+        <div class="text-colo" style="text-transform: capitalize;font-size: 18px;">Edit</div>
+      </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content >
-  <div class="padding-20" style="background-color: #FAFAFA;padding-bottom: 20px;">
-    <ion-row >
-      <ion-col size="3" class="margin-0 margin-auto">
-        <div >
-          <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
-          <!-- <ion-card class="camera-div">
-            <ion-icon ios="ios-camera" md="md-camera" class="color-icon camera-icon"></ion-icon>
-        </ion-card> -->
-        </div>
-        </ion-col>
-        <ion-col size="9" class="margin-top-10">
-          <div>
-            <h2 class="margin-0 margin-to-7">
-              Good Morning, Jack.
-            </h2>
-            <p class="margin-0 font-size-14">Dont forget to add your gaines today!</p>
+  <div *ngIf="isProfilePage">
+    <div class="padding-20" style="background-color: #FAFAFA;padding-bottom: 20px;">
+      <ion-row >
+        <ion-col size="3" class="margin-0 margin-auto">
+          <div >
+            <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
+            <!-- <ion-card class="camera-div">
+              <ion-icon ios="ios-camera" md="md-camera" class="color-icon camera-icon"></ion-icon>
+          </ion-card> -->
           </div>
-      </ion-col>
+          </ion-col>
+          <ion-col size="9" class="margin-top-10">
+            <div>
+              <h2 class="margin-0 margin-to-7">
+                Good Morning, Jack.
+              </h2>
+              <p class="margin-0 font-size-14">Dont forget to add your gaines today!</p>
+            </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-16">
+        <ion-col >
+          <h2>Your Progress</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-10">
+        <ion-col size="5.5" class="goal-weight">
+          <div class="row">
+            <h1 class="margin-left">150</h1><p class="margin-right" style="font-weight: bold;margin-top: 7px;">Ibs</p>
+          </div>
+          <div>Goal Weight</div>
+        </ion-col>
+        <ion-col size="5.5" class="current-weight">
+          <div class="row">
+            <h1 class="margin-left">165</h1>
+            <p class="margin-right" style="font-weight: bold;margin-top: 7px;">Ibs</p>
+          </div>
+          <div>Current Weight</div>
+        </ion-col>
+        </ion-row>
+      <ion-row class="margin-top-10">
+        <ion-col>
+          <p class="weigh-in"> Weigh in</p>
+        </ion-col>
     </ion-row>
-    <ion-row class="margin-top-16">
-      <ion-col >
-        <h2>Your Progress</h2>
-      </ion-col>
-    </ion-row>
-    <ion-row class="margin-top-10">
-      <ion-col size="5.5" class="goal-weight">
-        <div class="row">
-          <h1 class="margin-left">150</h1><p class="margin-right" style="font-weight: bold;margin-top: 7px;">Ibs</p>
-        </div>
-        <div>Goal Weight</div>
-      </ion-col>
-      <ion-col size="5.5" class="current-weight">
-        <div class="row">
-          <h1 class="margin-left">165</h1>
-          <p class="margin-right" style="font-weight: bold;margin-top: 7px;">Ibs</p>
-        </div>
-        <div>Current Weight</div>
+      <ion-row class="margin-top-20">
+      <ion-col>
+        <h2>The Bang Anti-Diet</h2>
       </ion-col>
       </ion-row>
-    <ion-row class="margin-top-10">
-      <ion-col>
-        <p class="weigh-in"> Weigh in</p>
-      </ion-col>
-  </ion-row>
-    <ion-row class="margin-top-20">
-    <ion-col>
-      <h2>The Bang Anti-Diet</h2>
-    </ion-col>
-    </ion-row>
-    <ion-row class=" margin-0 margin-top-10">
-      <ion-col class="margin-0">
-        <p class="margin-0 phase">Phase 2/Week 1</p>
-      </ion-col>
-    </ion-row>
-    <div class="row">
-    <h1 class="margin-0"><span class="per-color">20% </span><span>Completed</span></h1>
+      <ion-row class=" margin-0 margin-top-10">
+        <ion-col class="margin-0">
+          <p class="margin-0 phase">Phase 2/Week 1</p>
+        </ion-col>
+      </ion-row>
+      <div class="row">
+      <h1 class="margin-0"><span class="per-color">20% </span><span>Completed</span></h1>
+      </div>
+      <div class="chart quizz-progress">
+        <ion-progress-bar value="0.3" class="height-22"></ion-progress-bar>
+      </div>
     </div>
-    <div class="chart quizz-progress">
-      <ion-progress-bar value="0.3" class="height-22"></ion-progress-bar>
+    <div class="padding-20" style="background-color:#FFFFFF;padding-top:20px;padding-bottom: 20px;">
+      <ion-row >
+        <ion-col size="9.5">
+          <h2 class="margin-0">Progress Photos</h2>
+          <p class="margin-0">Add a photo to keep track of your body sculpting journey</p>
+        </ion-col>
+        <ion-col size="2.5" class="margin-auto">
+          <ion-icon class="plus-icon" name="add-circle"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-15">
+        <ion-col size="5.8" class="margin-0" (click)="viewImg('../../../assets/img/Capture-bang.PNG',' September 29, 2020')">
+          <ion-card class="margin-0" style="margin-inline-start: 0px;
+          margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;">
+            <img class="workout-img"  src="../../../assets/img/Capture-bang.PNG">
+          <ion-card class="margin-0 date-css " style="color: #FFFFFF;text-align: center;"><div>
+            September 29, 2020
+          </div></ion-card>
+          </ion-card>
+        </ion-col>
+        <ion-col size="0.2"></ion-col>
+        <ion-col size="5.8" class="margin-0" (click)="viewImg('../../../assets/img/Bang-prof.jpg',' September 29, 2020')">
+          <ion-card class="margin-0" style="margin-inline-start: 0px;
+          margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;">
+            <img class="workout-img" src="../../../assets/img/Bang-prof.jpg">
+          <ion-card class="margin-0 date-css" style="color: #FFFFFF;text-align: center;"><div>
+            September 29, 2020
+          </div></ion-card>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-10">
+        <ion-col class="view-all">
+          View all photos
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="padding-20" style="padding-top:20px;background-color: #FAFAFA;">
+      <ion-row >
+        <ion-col size="9.5">
+          <h2 class="margin-0">Your 7 Day Schedule</h2>
+          <p class="margin-0">[Add something about being consistent]</p>
+        </ion-col>
+        <ion-col size="2.5" class="margin-auto">
+          <ion-icon class="plus-icon" name="add-circle"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <div class="margin-top-15">
+        <ion-row >
+          <ion-col class="week-border" *ngFor="let day of weekDays;let i = index;" [ngClass]="{'on-select-day week-border' :day.selected,'week-border':!day.selected}">
+            <div (click)="onClickDate(day,i)" style="text-align: center;">{{day.name}}</div>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-row class="margin-top-15">
+        <ion-col>
+          <div >
+            September 29, 2020
+          </div>
+          <div> Today's List:</div>
+        </ion-col>
+      </ion-row>
+      <div class="margin-top-15">
+        <ion-item *ngFor="let date of todaysList;let i=index;" class="margin-0 ion-item-css" >
+          <ion-row  class="margin-0" style="width: 100%;">
+            <ion-col size="11">
+              <span class="text-color">{{date.time}} </span><span> - {{date.name}}</span>
+            </ion-col>
+            <ion-col size="1" (click)="deleteItem(i)">
+              <ion-icon style="color: red;" name="trash"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
     </div>
   </div>
-  <div class="padding-20" style="background-color:#FFFFFF;padding-top:20px;padding-bottom: 20px;">
-    <ion-row >
-      <ion-col size="9.5">
-        <h2 class="margin-0">Progress Photos</h2>
-        <p class="margin-0">Add a photo to keep track of your body sculpting journey</p>
-      </ion-col>
-      <ion-col size="2.5" class="margin-auto">
-        <ion-icon class="plus-icon" name="add-circle"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <ion-row class="margin-top-15">
-      <ion-col size="5.8" class="margin-0" (click)="viewImg('../../../assets/img/Capture-bang.PNG',' September 29, 2020')">
-        <ion-card class="margin-0" style="margin-inline-start: 0px;
-        margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;">
-          <img class="workout-img"  src="../../../assets/img/Capture-bang.PNG">
-        <ion-card class="margin-0 date-css " style="color: #FFFFFF;text-align: center;"><div>
-          September 29, 2020
-        </div></ion-card>
-        </ion-card>
-      </ion-col>
-      <ion-col size="0.2"></ion-col>
-      <ion-col size="5.8" class="margin-0" (click)="viewImg('../../../assets/img/Bang-prof.jpg',' September 29, 2020')">
-        <ion-card class="margin-0" style="margin-inline-start: 0px;
-        margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;">
-          <img class="workout-img" src="../../../assets/img/Bang-prof.jpg">
-        <ion-card class="margin-0 date-css" style="color: #FFFFFF;text-align: center;"><div>
-          September 29, 2020
-        </div></ion-card>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row class="margin-top-10">
-      <ion-col class="view-all">
-        View all photos
-      </ion-col>
-    </ion-row>
-  </div>
-  <div class="padding-20" style="padding-top:20px;background-color: #FAFAFA;">
-    <ion-row >
-      <ion-col size="9.5">
-        <h2 class="margin-0">Your 7 Day Schedule</h2>
-        <p class="margin-0">[Add something about being consistent]</p>
-      </ion-col>
-      <ion-col size="2.5" class="margin-auto">
-        <ion-icon class="plus-icon" name="add-circle"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <div class="margin-top-15">
+  <div *ngIf="isSettingsPage">
+    <div class="padding-20" style="background-color: #FAFAFA;">
+      <ion-row >
+        <ion-col size="3" class="margin-0 margin-auto">
+          <div >
+            <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
+          </div>
+          </ion-col>
+          <ion-col size="9" class="margin-top-10">
+            <div>
+              <h2 class="margin-0 margin-to-7">
+                Jack Owoc
+              </h2>
+              <p class="margin-0 font-size-14">CEO@bangenergy.com</p>
+            </div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div style="padding: 0px 20px;">
+      <ion-row class="margin-top-15">
+        <ion-col>
+          <h2 class="margin-0">General</h2>
+        </ion-col>
+      </ion-row>
+      <ion-item class="margin-0 ion-item-css ionItem-css" style="width:100%">
+        <ion-row style="width: 100%;">
+          <ion-col size="9" class="text-align-left">
+            Measurement Units (Ibs)
+          </ion-col>
+          <ion-col size="3" style="text-align:right;">
+            <ion-toggle checked style="--handle-background-checked: white;"></ion-toggle>
+          </ion-col>
+        </ion-row >
+      </ion-item>
+      <ion-item class="margin-0 ion-item-css ionItem-css" style="width:100%">
+        <ion-row style="width: 100%;">
+          <ion-col size="9" class="text-align-left">
+            Notifications
+          </ion-col>
+          <ion-col size="3" style="text-align:right;">
+            <ion-toggle checked style="--handle-background-checked: white;"></ion-toggle>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-row class="margin-top-20">
+        <ion-col>
+          <h2 class="margin-0">Body Sculpting Goals</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-10">
+        <ion-col >Weigh In Days</ion-col>
+      </ion-row>
       <ion-row >
         <ion-col class="week-border" *ngFor="let day of weekDays;let i = index;" [ngClass]="{'on-select-day week-border' :day.selected,'week-border':!day.selected}">
           <div (click)="onClickDate(day,i)" style="text-align: center;">{{day.name}}</div>
         </ion-col>
       </ion-row>
-    </div>
-    <ion-row class="margin-top-15">
-      <ion-col>
-        <div >
-          September 29, 2020
-        </div>
-        <div> Today's List:</div>
-      </ion-col>
-    </ion-row>
-    <div class="margin-top-15">
-      <ion-item *ngFor="let date of todaysList;let i=index;" class="margin-0 ion-item-css" >
-        <ion-row  class="margin-0" style="width: 100%;">
-          <ion-col size="11">
-            <span class="text-color">{{date.time}} </span><span> - {{date.name}}</span>
-          </ion-col>
-          <ion-col size="1" (click)="deleteItem(i)">
-            <ion-icon style="color: red;" name="trash"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-item>
+      <div class="margin-top-15">
+        <ion-item *ngFor="let date of settingWeighList;let i=index;" class="margin-0 ion-item-css" >
+          <ion-row  class="margin-0" style="width: 100%;">
+            <ion-col size="8" style="text-align: left;margin: auto;">
+              <span >{{date.name}} </span>
+            </ion-col>
+            <ion-col size="4" (click)="deleteItem(i)">
+              <div class="row">
+                <div style="width: 80%;">{{date.time}}</div>
+                <ion-icon name="arrow-down" style="margin-left: 8px;margin: auto;"></ion-icon>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
+      <ion-row class="margin-top-20">
+        <ion-col size="6" class="margin-auto" style="text-align: left;font-size:20px" >
+          <b>End Diet</b>
+        </ion-col>
+        <ion-col size="6" class="margin-auto " style="text-align: right;font-size:20px;color: #003CCA"
+        (click)="logout()">
+         <b>Logout</b>
+        </ion-col>
+      </ion-row>
     </div>
   </div>
 </ion-content>
+<ion-footer style="border-bottom: 2px solid gainsboro;"></ion-footer>

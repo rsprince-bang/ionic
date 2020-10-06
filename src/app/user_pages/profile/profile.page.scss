@@ -151,6 +151,9 @@
 .margin-top-15 {
     margin-top: 15px;
 }
+.margin-top-20 {
+    margin-top: 20px;
+}
 .view-all {
     color: #003CCA;
     font-weight: bold;
@@ -442,6 +445,16 @@
     font-weight: 500;
     font-size: 22px;
     margin: auto;
+    text-align: center;
+}
+.text-align-left {
+    text-align: left;
+    margin: auto;
+}
+.ionItem-css {
+    padding-inline-start: 0px;
+    padding-inline-end: 0px;
+    --inner-padding-end: 0px;
 }
 
 /* end of custom generated icons styles */
