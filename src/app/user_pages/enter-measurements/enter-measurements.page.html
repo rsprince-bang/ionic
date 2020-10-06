@@ -45,8 +45,8 @@
             <ion-select name="gender" formControlName="gender" okText="OK" cancelText="Cancel">
               <ion-select-option 
                 *ngFor="let item of genderOptions"
-                [value]="item">
-                  {{ item }}
+                [value]="item.value">
+                  {{ item.option }}
                 </ion-select-option>
             </ion-select>
           </ion-item>
@@ -57,7 +57,7 @@
         <ion-col>
           <ion-item>
             <ion-label>Height</ion-label>
-            <ion-select name="heightInches" formControlName="heightInches" okText="OK" cancelText="Cancel">
+            <ion-select name="height" formControlName="height" okText="OK" cancelText="Cancel">
               <ion-select-option 
                 *ngFor="let item of heightOptions"
                 [value]="item.valueInches">
@@ -105,8 +105,8 @@
             <ion-select name="plan" formControlName="plan" okText="OK" cancelText="Cancel">
               <ion-select-option 
                 *ngFor="let item of planOptions"
-                [value]="item">
-                  {{ item }}
+                [value]="item.value">
+                  {{ item.option }}
                 </ion-select-option>
             </ion-select>
           </ion-item>

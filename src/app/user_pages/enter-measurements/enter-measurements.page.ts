@@ -19,16 +19,22 @@ export class EnterMeasurementsPage implements OnInit {
     weight: "", 
     age:"", 
     gender:"", 
-		plan_length:""
+		plan:""
   };
     fileData1: any;
     imageUrl: any = '../../../assets/icon/plaindp.png';
     isImageUploaded: boolean = false;
 
     ageOptions = [];
-    genderOptions = ['Male', 'Female'];
+    genderOptions = [
+			{option: 'Male', value: 'M'},
+			{option: 'Female', value: 'F'}
+		];
     weightOptions = [];
-    planOptions =  ['7 week', '12 week'];
+    planOptions =  [
+			{option: '7 week', value: 7},
+			{option: '12 week', value: 12}
+		];
     // activityOptions = [
     //   {level: 'Sedentary', value: 1.2000},
     //   {level: 'Light Exercise 1-3 days/week', value: 1.3750},
@@ -51,9 +57,9 @@ export class EnterMeasurementsPage implements OnInit {
     this.measurementsForm = this.formBuilder.group({
       age: [this.currentUserMeasurements.age, [ Validators.required, Validators.pattern('[0-9]+') ]],
       gender: [this.currentUserMeasurements.gender, [ Validators.required ]],
-      heightInches: [ this.currentUserMeasurements.inches, [ Validators.required ]],
+      height: [ this.currentUserMeasurements.inches, [ Validators.required ]],
       weight: [this.currentUserMeasurements.weight, [ Validators.required, Validators.pattern('[0-9]+') ]],
-			plan: [this.currentUserMeasurements.plan_length, [ Validators.required, Validators.pattern('[0-9]+') ]]
+			plan: [this.currentUserMeasurements.plan, [ Validators.required, Validators.pattern('[0-9]+') ]]
     });
 
     this.generateAges(18, 100);
