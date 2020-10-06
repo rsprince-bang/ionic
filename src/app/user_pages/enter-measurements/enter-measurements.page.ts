@@ -49,19 +49,7 @@ export class EnterMeasurementsPage implements OnInit {
 		private navCtrl: NavController,
 		private foodSuggestionsService: FoodSuggestionsService, 
 		private globalServices: GlobalServicesService
-	) {
-
-    this.route.queryParams.subscribe(params => {
-      if ( this.router.getCurrentNavigation().extras && this.router.getCurrentNavigation().extras.state) {
-        this.action = this.router.getCurrentNavigation().extras.state.action; // has value of "update" because it is coming from profile page
-                                                                              //or has value of "confirm" if coming from reset diet redirect
-        this.currentUserMeasurements = this.router.getCurrentNavigation().extras.state.userMeasurements;
-        this.currentUserMeasurements.heightInches = "" + Math.floor(this.router.getCurrentNavigation().extras.state.userMeasurements.height_inches/12);
-        this.currentUserMeasurements.plan = this.foodSuggestionsService.getDietPlanWeeks().toString();
-      }
-    });
-    
-  }
+	) { }
 
   ngOnInit() {
     this.measurementsForm = this.formBuilder.group({
