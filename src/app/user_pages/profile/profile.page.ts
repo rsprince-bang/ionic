@@ -16,8 +16,8 @@ import {ViewImg} from "../modals/view-img/view-img"
 })
 export class ProfilePage implements OnInit {
   @ViewChild('calendar')
-    public calendar: CalendarComponent;
-    value: Date;
+  public calendar: CalendarComponent;
+  value: Date;
   dayNumber = null;
   date = null;
   previousDiets = [];
@@ -36,6 +36,10 @@ export class ProfilePage implements OnInit {
   {time:'9:00 AM',name:"Workout 1"},
   {time:'12:00 PM',name:"Light Snack"},
   {time:'2:00 PM',name:"Nap time, body!"}]
+  isProfilePage = true;
+  isSettingsPage = false;
+  title ="Me"
+  settingWeighList = [{name : 'Weigh In Days',time:'9:00 AM'},{name: 'Pounds To Lose',time:'15 Ibs'}]
   constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router: Router, 
     private alertController: AlertController,public modalController:ModalController) { }
 
@@ -178,5 +182,13 @@ export class ProfilePage implements OnInit {
   }
   deleteItem(index) {
     this.todaysList.splice(index,1)
+  }
+  onSttingsClick() {
+    this.isProfilePage = false;
+    this.isSettingsPage = true;
+    this.title = "Settings"
+  }
+  logout() {
+    this.router.navigateByUrl('/login')
   }
 }
