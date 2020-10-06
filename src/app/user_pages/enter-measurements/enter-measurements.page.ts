@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
-import { PickerController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 @Component({
@@ -13,16 +11,15 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
   styleUrls: ['./enter-measurements.page.scss'],
 })
 export class EnterMeasurementsPage implements OnInit {
-
   measurementsForm: FormGroup;
   action = "save";
   height: any;
   currentUserMeasurements = {
-    heightInches:"",  
+    inches:"",  
     weight: "", 
     age:"", 
     gender:"", 
-    plan:"" 
+		plan_length:""
   };
     fileData1: any;
     imageUrl: any = '../../../assets/icon/plaindp.png';
@@ -47,7 +44,6 @@ export class EnterMeasurementsPage implements OnInit {
 		private route: ActivatedRoute, 
 		private router: Router, 
 		private navCtrl: NavController,
-		private foodSuggestionsService: FoodSuggestionsService, 
 		private globalServices: GlobalServicesService
 	) { }
 
@@ -55,9 +51,9 @@ export class EnterMeasurementsPage implements OnInit {
     this.measurementsForm = this.formBuilder.group({
       age: [this.currentUserMeasurements.age, [ Validators.required, Validators.pattern('[0-9]+') ]],
       gender: [this.currentUserMeasurements.gender, [ Validators.required ]],
-      height: [ this.currentUserMeasurements.heightInches, [ Validators.required ]],
+      heightInches: [ this.currentUserMeasurements.inches, [ Validators.required ]],
       weight: [this.currentUserMeasurements.weight, [ Validators.required, Validators.pattern('[0-9]+') ]],
-      plan: [this.currentUserMeasurements.plan, [ Validators.required, Validators.pattern('[0-9]+') ]]
+			plan: [this.currentUserMeasurements.plan_length, [ Validators.required, Validators.pattern('[0-9]+') ]]
     });
 
     this.generateAges(18, 100);
@@ -66,6 +62,7 @@ export class EnterMeasurementsPage implements OnInit {
   }
 
   submitMeasurements(){
+		console.log(this.measurementsForm);
     this.myAPI.makeAPIcall(
       "user", 
       {
