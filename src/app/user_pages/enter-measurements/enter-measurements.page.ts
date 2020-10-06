@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
-import { PickerController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 @Component({
@@ -13,56 +11,64 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
   styleUrls: ['./enter-measurements.page.scss'],
 })
 export class EnterMeasurementsPage implements OnInit {
-
   measurementsForm: FormGroup;
   action = "save";
-  heightin:any
-  heightFeetOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  heightInchesOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  height: any;
   currentUserMeasurements = {
-    feet:"", 
-    inches:"", 
-    month: '', 
-    date: '', 
-    year: '',
-    weight_lbs:"", target_weight_lbs:"", age:"", gender:"", activity_level:"", plan_length:"" };
-    fileData1
-    imageUrl:any='../../../assets/icon/plaindp.png';
-    isImageUploaded = false;
-  constructor(private formBuilder: FormBuilder, private myAPI: ApiCallService, private route: ActivatedRoute, private router: Router, private navCtrl: NavController,
-     private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService) {
+    inches:"",  
+    weight: "", 
+    age:"", 
+    gender:"", 
+		plan:""
+  };
+    fileData1: any;
+    imageUrl: any = '../../../assets/icon/plaindp.png';
+    isImageUploaded: boolean = false;
 
-    this.route.queryParams.subscribe(params => {
-      if ( this.router.getCurrentNavigation().extras && this.router.getCurrentNavigation().extras.state) {
-        this.action = this.router.getCurrentNavigation().extras.state.action; // has value of "update" because it is coming from profile page
-                                                                              //or has value of "confirm" if coming from reset diet redirect
-        this.currentUserMeasurements = this.router.getCurrentNavigation().extras.state.userMeasurements;
-        this.currentUserMeasurements.feet = ""+Math.floor(this.router.getCurrentNavigation().extras.state.userMeasurements.height_inches/12);
-        this.currentUserMeasurements.inches = ""+this.router.getCurrentNavigation().extras.state.userMeasurements.height_inches%12;
-        this.currentUserMeasurements.plan_length = this.foodSuggestionsService.getDietPlanWeeks().toString();
-      }
-    });
-    
-  }
+    ageOptions = [];
+    genderOptions = [
+			{option: 'Male', value: 'M'},
+			{option: 'Female', value: 'F'}
+		];
+    weightOptions = [];
+    planOptions =  [
+			{option: '7 week', value: 7},
+			{option: '12 week', value: 12}
+		];
+    // activityOptions = [
+    //   {level: 'Sedentary', value: 1.2000},
+    //   {level: 'Light Exercise 1-3 days/week', value: 1.3750},
+    //   {level: 'Moderate Exercise 3-5 days/week', value: 1.5500},
+    //   {level: 'Hardcore Exercise or Sports 6-7 days/week', value: 1.7250},
+    //   {level: 'Hardcore Exercise or Sports 6-7 days/week  + labor intensive job', value: 1.9000}
+    // ];
+    heightOptions = [];
+
+  constructor(
+		private formBuilder: FormBuilder, 
+		private myAPI: ApiCallService, 
+		private route: ActivatedRoute, 
+		private router: Router, 
+		private navCtrl: NavController,
+		private globalServices: GlobalServicesService
+	) { }
 
   ngOnInit() {
     this.measurementsForm = this.formBuilder.group({
-      heightFeet: [ this.currentUserMeasurements.feet, [ Validators.required ]], 
-      heightInches: [this.currentUserMeasurements.inches, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(11) ]],
-      // month: [this.currentUserMeasurements.month, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(12) ]],
-      // date: [this.currentUserMeasurements.date, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(2), Validators.max(31) ]],
-      // year: [this.currentUserMeasurements.year, [ Validators.required, Validators.pattern('[0-9]+'), Validators.maxLength(4) ]],
-      
-      weight: [this.currentUserMeasurements.weight_lbs, [ Validators.required, Validators.pattern('[0-9]+') ]],
-      //target_weight: [this.currentUserMeasurements.target_weight_lbs, [ Validators.required, Validators.pattern('[0-9]+') ]],
       age: [this.currentUserMeasurements.age, [ Validators.required, Validators.pattern('[0-9]+') ]],
       gender: [this.currentUserMeasurements.gender, [ Validators.required ]],
-      activity: [this.currentUserMeasurements.activity_level, [ Validators.required ]],
-      plan: [this.currentUserMeasurements.plan_length, [ Validators.required, Validators.pattern('[0-9]+') ]]
+      height: [ this.currentUserMeasurements.inches, [ Validators.required ]],
+      weight: [this.currentUserMeasurements.weight, [ Validators.required, Validators.pattern('[0-9]+') ]],
+			plan: [this.currentUserMeasurements.plan, [ Validators.required, Validators.pattern('[0-9]+') ]]
     });
+
+    this.generateAges(18, 100);
+    this.generateWeights(90, 300);
+    this.generateHeights(4, 6);
   }
 
   submitMeasurements(){
+		console.log(this.measurementsForm);
     this.myAPI.makeAPIcall(
       "user", 
       {
@@ -75,7 +81,7 @@ export class EnterMeasurementsPage implements OnInit {
       if( result.error ){
         this.myAPI.handleMyAPIError(result.error);
       }
-      else{
+      else {
         localStorage.setItem("measurements", JSON.stringify(result.success.measurements));
         localStorage.setItem("diet", JSON.stringify(result.success.diet));
         localStorage.setItem("dailyCaloriesIntake", result.success.measurements.dailyCaloriesIntake);
@@ -93,10 +99,7 @@ export class EnterMeasurementsPage implements OnInit {
       }
     });
   }
-
-  goBack(){
-    this.navCtrl.navigateBack('/profile');
-  }
+	
   uploadFile(files: FileList) {
     this.isImageUploaded = true;
     let reader = new FileReader(); // HTML5 FileReader API
@@ -109,10 +112,30 @@ export class EnterMeasurementsPage implements OnInit {
       }
     }
   }
-  goBackToHome() {
-    this.router.navigateByUrl("/tabs/home/today");
+
+  generateAges(start, end) {
+    for(let i = start; i <= end; i++){
+      this.ageOptions.push(i);
+		}
+		return true;
   }
-  onClickDiet() {
-    this.router.navigateByUrl("/set-goals");
+
+  generateHeights(start, end) {
+    for(let feet = start; feet <= end; feet++){
+      for(let inches = 0; inches <= 11; inches++) {
+        let height = feet + "' " + inches + '"';
+        let value = (feet * 12) + inches;
+        this.heightOptions.push({option: height, valueInches: value});
+      }
+		}
+		return true;
   }
+
+  generateWeights(start, end) {
+    for(let i = start; i <= end; i++){
+      this.weightOptions.push(i);
+		}
+		return true;
+  }
+
 }
