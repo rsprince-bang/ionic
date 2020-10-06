@@ -57,7 +57,6 @@ ion-header button {
     }
 }
 
-
 .icon-large {
 	color: #777;
 	background: #EAEEF8;
@@ -83,6 +82,10 @@ small {
     left: 10px;
 }
 
+.close-icon-margin {
+  margin-bottom: 30px;
+}
+
 .profile-picture {
   clip-path: circle(60px at center);
   outline: none;
@@ -106,6 +109,28 @@ h2 {
 	width: 60%;
 	display: block;
 	margin: 0 auto 2.1rem;
+}
+
+/* NEW BANG CARD PROMO STYLES */
+.ion-card {
+	color: white;
+	background: $primary;
+
+	ion-card-header ion-card-title, ion-card-subtitle {
+		color: white;
+	}
+
+	.global-link {
+		color: white;
+		margin-top: 10px;
+		text-decoration: none;
+		font-size: 20px;
+		font-weight: 500;
+	}
+}
+
+.vert-center {
+	margin: auto;
 }
 
 /* 
