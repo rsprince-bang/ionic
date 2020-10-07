@@ -28,7 +28,9 @@ $primary: #0140C2;
 }
 
 .back-button {
-  color: black;
+	color: black;
+	--icon-font-size: 48px;
+	--icon-margin-start: -12px;
 }
 
 ion-item {
