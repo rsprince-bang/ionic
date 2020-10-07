@@ -1,80 +1,72 @@
-<ion-content padding>
+<ion-content padding class="extra-padding">
   <ion-grid>
-    <ion-row>
+    <ion-row class="close-icon-margin">
       <ion-col size="1" (click)="dismiss()">
         <ion-icon class="ion-text-left close-icon" name="close"></ion-icon>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <h1>Today</h1>
-        <small>{{ todayDate | date: 'longDate' }}</small>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <img class="profile-picture" src="assets/img/profile-pic.jpg">
-      </ion-col>
-    </ion-row>
+
     <ion-row>
       <ion-col>
-        <ion-item>
-          <ion-label>Weight</ion-label>
-          <ion-select name="todayWeight" [(ngModel)]="todayWeight" okText="OK" cancelText="Cancel">
-            <ion-select-option 
-              *ngFor="let item of weightRange"
-              [value]="item">
-                {{ item }} lbs.
-              </ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label>BMI</ion-label>
-          <ion-select name="todayBMI" [(ngModel)]="todayBMI" okText="OK" cancelText="Cancel">
-            <ion-select-option 
-              *ngFor="let item of bmiRange"
-              [value]="item">
-                {{ item }}
-              </ion-select-option>
-          </ion-select>
-        </ion-item>
+        <h1>Add a Meal</h1>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-item>
-          <ion-label>Body Fat</ion-label>
-          <ion-select name="todayFat" [(ngModel)]="todayFat" okText="OK" cancelText="Cancel">
-            <ion-select-option 
-              *ngFor="let item of fatRange"
-              [value]="item">
-                {{ item }}
-              </ion-select-option>
-          </ion-select>
-        </ion-item>
+        <!-- <ion-label position="stacked">Search</ion-label> -->
+        <ion-input 
+          type="text" 
+          placeholder="Enter a search term" 
+          name="searchTerm"
+          [(ngModel)]="searchTerm">
+        <ion-icon ios="ios-search-outline" md="md-search" size="small"></ion-icon>
+        </ion-input>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col size-sm="6" size="6" class="ion-text-center">
-        <ion-button 
-          (click)="addMeal()" 
-          expand="block" 
-          class="btn btn-login btn-round ion-text-center ion-text-wrap min-max-width">
-          Add Meal
-        </ion-button>
+      <ion-col class="ion-text-center">
+        <small>
+          No meals added yet.For a low calorie experience try:
+        </small>
       </ion-col>
-      <ion-col size-sm="6" size="6" class="ion-text-center">
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-card">
+          <ion-row>
+            <ion-col size="3" class="vert-center">
+              <img src="assets/img/bang-can.png" />
+            </ion-col>
+            <ion-col size="9">
+              <ion-card-header>
+                <ion-card-title>
+                  The perfect <br /> 
+                  0 cal. drink.
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Bang Energy 12-Pack <br />
+                $1.99
+                <p class="global-link-wrapper">
+                  <a href="" class="global-link">Order Now</a>
+                </p>
+              </ion-card-content>
+            </ion-col>            
+          </ion-row>
+        </ion-card>   
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
         <ion-button 
-          (click)="addWorkout()" 
-          expand="expand" 
-          class="btn btn-login btn-round ion-text-center ion-text-wrap min-max-width">
-          Add Workout
+        expand="block" 
+        shape="round" 
+        (click)="sendData()">
+          Save
         </ion-button>
       </ion-col>
     </ion-row>
@@ -83,6 +75,3 @@
 
 </ion-content>
 
-<ion-footer padding class="ion-no-border ion-text-center">
-  <ion-button expand="block" class="btn btn-login btn-round ion-text-center" (click)="sendData()">Update</ion-button>
-</ion-footer>
