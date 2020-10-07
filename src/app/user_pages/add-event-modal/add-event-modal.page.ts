@@ -12,7 +12,6 @@ export class AddEventModalPage implements OnInit {
   constructor(public modalController: ModalController,public router:Router) { }
 
   ngOnInit() {
-    this.generateWeight(90, 300);
   }
 
   dismiss() {
