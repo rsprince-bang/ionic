@@ -14,18 +14,14 @@
 
     <ion-row>
       <ion-col>
-        <form 
-        class="form"  
-        (ngSubmit)="search()">
-          <ion-label position="stacked">Search</ion-label>
-          <ion-input 
-            type="text" 
-            placeholder="Enter a search term" 
-            name="searchTerm"
-            [(ngModel)]="searchTerm">
-          <ion-icon ios="ios-search" md="md-search" size="small"></ion-icon>
+        <!-- <ion-label position="stacked">Search</ion-label> -->
+        <ion-input 
+          type="text" 
+          placeholder="Enter a search term" 
+          name="searchTerm"
+          [(ngModel)]="searchTerm">
+        <ion-icon ios="ios-search-outline" md="md-search" size="small"></ion-icon>
         </ion-input>
-        </form>
       </ion-col>
     </ion-row>
 
@@ -36,6 +32,7 @@
         </small>
       </ion-col>
     </ion-row>
+
     <ion-row>
       <ion-col>
         <ion-card class="ion-card">
@@ -53,7 +50,7 @@
               <ion-card-content>
                 Bang Energy 12-Pack <br />
                 $1.99
-                <p>
+                <p class="global-link-wrapper">
                   <a href="" class="global-link">Order Now</a>
                 </p>
               </ion-card-content>

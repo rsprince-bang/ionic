@@ -115,14 +115,23 @@ h2 {
 .ion-card {
 	color: white;
 	background: $primary;
+	margin:	15px 0 0 0;
+
+	ion-card-header {
+		padding: 10px;
+	}
 
 	ion-card-header ion-card-title, ion-card-subtitle {
 		color: white;
 	}
 
+	.global-link-wrapper {
+		margin-top: 10px;
+	}
+
+
 	.global-link {
 		color: white;
-		margin-top: 10px;
 		text-decoration: none;
 		font-size: 20px;
 		font-weight: 500;
