@@ -16,6 +16,11 @@
         <div class="text-colo" style="text-transform: capitalize;font-size: 18px;">Edit</div>
       </ion-button>
       </ion-buttons>
+      <ion-buttons slot="end" *ngIf="isUploadData">
+        <ion-button class="button-bac" (click)="closeUpload()">
+          <div class="text-colo" style="text-transform: capitalize;font-size: 18px;">Exit</div>
+        </ion-button>
+        </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -88,7 +93,7 @@
           <h2 class="margin-0">Progress Photos</h2>
           <p class="margin-0">Add a photo to keep track of your body sculpting journey</p>
         </ion-col>
-        <ion-col size="2.5" class="margin-auto">
+        <ion-col size="2.5" class="margin-auto" (click)="uploadPhoto()">
           <ion-icon class="plus-icon" name="add-circle"></ion-icon>
         </ion-col>
       </ion-row>
@@ -221,9 +226,9 @@
             <ion-col size="8" style="text-align: left;margin: auto;">
               <span >{{date.name}} </span>
             </ion-col>
-            <ion-col size="4" (click)="deleteItem(i)">
+            <ion-col size="4" >
               <div class="row">
-                <div style="width: 80%;">{{date.time}}</div>
+                <div style="width: 80%;text-align: right;">{{date.time}}</div>
                 <ion-icon name="arrow-down" style="margin-left: 8px;margin: auto;"></ion-icon>
               </div>
             </ion-col>
@@ -240,6 +245,97 @@
         </ion-col>
       </ion-row>
     </div>
+  </div>
+  <div *ngIf="isUploadData" class="padding-20">
+    <ion-row class="margin-top-30">
+      <ion-col >
+        <h1>UPLOAD PHOTO</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-15">
+      <ion-col>
+        <div class="avatar-upload" >
+          <div class="avatar-edit">
+              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput 
+              (change)="uploadFile($event.target.files)" />
+            </div>
+            
+            <div class="avatar-preview circular--square-preview">
+                <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                </div>
+            </div>
+        </div>
+        <ion-card *ngIf="!imageUrl" style="text-align: center;" class="tapToUpload" (click)="fileInput.click()">
+          <ion-icon style="font-size: 24px;" name="image"></ion-icon>
+          <div>Tap to upload</div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <div style="margin-top: 95px;" *ngIf="!imageUrl"></div>
+    <div class="margin-top-15">
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0" style="width: 100%;">
+          <ion-col size="8" style="text-align: left;margin: auto;">
+            <span > Body Fat</span>
+          </ion-col>
+          <ion-col size="4" >
+            <div class="row">
+              <ion-select name="todayBodyFat" [(ngModel)]="todayBodyFat" okText="OK" cancelText="Cancel" style="max-width:100%">
+                <ion-select-option 
+                  *ngFor="let item of bodyfatRange"
+                  [value]="item">
+                    {{ item }}%
+                  </ion-select-option>
+                  <ion-select-option >Above 49</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0" style="width: 100%;">
+          <ion-col size="8" style="text-align: left;margin: auto;">
+            <span > Body Mass</span>
+          </ion-col>
+          <ion-col size="4" >
+            <div class="row">
+              <ion-select name="todayBodyMass" [(ngModel)]="todayBodyMass" okText="OK" cancelText="Cancel" style="max-width:100%">
+                <ion-select-option 
+                  *ngFor="let item of bodyfatMass"
+                  [value]="item">
+                    {{ item }}%
+                  </ion-select-option>
+                  <ion-select-option >Above 49</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0" style="width: 100%;">
+          <ion-col size="8" style="text-align: left;margin: auto;">
+            <span >Weight</span>
+          </ion-col>
+          <ion-col size="4" >
+            <div class="row">
+              <ion-select name="todayWeight" [(ngModel)]="todayWeight" okText="OK" cancelText="Cancel" style="max-width:100%">
+                <ion-select-option 
+                  *ngFor="let item of weightRange"
+                  >
+                    {{ item }} lbs.
+                  </ion-select-option>
+                  <ion-select-option>Above 50</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+    <ion-row class="margin-top-15">
+      <ion-col>
+        <ion-button expand="block" mode="md" style="text-transform: capitalize;--border-radius: 30px;margin: 0px;" (click)="closeUpload()">Save</ion-button>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>
 <ion-footer style="border-bottom: 2px solid gainsboro;"></ion-footer>
