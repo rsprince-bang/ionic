@@ -1,16 +1,14 @@
-<ion-header>
-  <img src="assets/img/login-header.png">
-</ion-header>
+<ion-content>
+  <img class="book-img" src="assets/img/login-header.png">
 
-<ion-content padding class="extra-padding">    
-  <form class="form" [formGroup]="credentialsForm" (ngSubmit)="login()">
+  <form class="form extra-padding" [formGroup]="credentialsForm" (ngSubmit)="login()">
     <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col>
 
             <ion-label position="stacked">Email</ion-label>
             <ion-input type="email" formControlName="email" placeholder="Enter your email" required>
-              <ion-icon ios="ios-mail-outline" md="md-mail" size="small"></ion-icon>
+              <ion-icon name="mail" size="small"></ion-icon>
             </ion-input>
  
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
@@ -23,7 +21,7 @@
         <ion-col>
           <ion-label position="stacked">Password</ion-label>
           <ion-input type="password" placeholder="Enter your password" formControlName="password" required>
-            <ion-icon ios="ios-lock-outline" md="md-lock" size="small"></ion-icon>
+            <ion-icon name="lock" size="small"></ion-icon>
           </ion-input>
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
             Password is required.
