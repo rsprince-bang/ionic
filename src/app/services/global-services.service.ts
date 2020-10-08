@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { NavController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Plugins } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class GlobalServicesService {
   }
 
 
-  logOut() {
+  async logOut() {
 
     //I cant include the API service in this file because
     //circular includes happen...
@@ -42,8 +43,8 @@ export class GlobalServicesService {
       //do nothing
     });
 
-
     localStorage.clear();
+    await this.clearAlerts();
     this.router.navigateByUrl("/login");
   }
 
@@ -194,6 +195,122 @@ export class GlobalServicesService {
     */
 
    const browser = this.iab.create(link, type);
+  }
+
+  formatDate( date:Date): string{
+
+    var dayN = date.getDate();
+    var dayS = "";
+    if( dayN < 10){
+      dayS = "0" + dayN.toString();
+    }
+    else{
+      dayS = dayN.toString();
+    }
+
+    var monthN = date.getMonth() + 1;
+    var monthS = "";
+    if( monthN < 10 ){
+      monthS = "0" + monthN.toString();
+    }
+    else{
+      monthS = monthN.toString();
+    }
+
+    var year = date.getFullYear();
+
+    return `${year}-${monthS}-${dayS}`;
+  }
+
+
+  formatTime( date:Date): string{
+
+    var hourN = date.getHours();
+    var hourS = "";
+    if( hourN < 10 ){
+      hourS = "0" + hourN.toString();
+    }
+    else{
+      hourS = hourN.toString();
+    }
+
+    var minutesN = date.getMinutes();
+    var minutesS = "";
+    if( minutesN < 10 ){
+      minutesS = "0" + minutesN.toString();
+    }
+    else{
+      minutesS = minutesN.toString();
+    }
+
+    return `${hourS}:${minutesS}`;
+  }
+
+  //Alerts will be save in database and local storage, so we have a list of them. THey will need to be wiped when user logs out.
+  //and reset when user logs in
+  // addAlert(date, time, weekly_repeat:boolean){
+    
+  //   var alerts = localStorage.getItem("alerts");
+  //   if( !alerts ){
+  //     var arr = [{date:date, time:time, weekly_repeat:weekly_repeat}];
+  //     localStorage.setItem("alerts", JSON.stringify(arr));
+  //   }
+  //   else{
+  //     var alertsarr = JSON.parse(alerts);
+  //     alertsarr.push({date:date, time:time, weekly_repeat:weekly_repeat});
+  //     localStorage.setItem("alerts", JSON.stringify(alertsarr));
+  //   }
+  // }
+
+  async syncAlerts(alertsJson){
+    const device = await Plugins.Device.getInfo();
+    if( device.platform == 'android' || device.platform == 'ios' ){
+      //first clear existing alerts
+      await this.clearAlerts();
+
+      for(var i=0;i< alertsJson.length; i++){
+        //add local notifications
+        var splitted_date = alertsJson[i].date.split("-", 3);
+        var alert_year = Number( splitted_date[0] );
+        var alert_month = Number( splitted_date[1].replace(/^0+/, '') );
+        var alert_day = Number( splitted_date[2].replace(/^0+/, '') );
+
+        var splitted_time = alertsJson[i].time.split(":", 2);
+        var alert_hour = Number( splitted_time[0].replace(/^0+/, '') );
+        var alert_time = Number( splitted_time[1].replace(/^0+/, '') );
+
+        const notifs = await Plugins.LocalNotifications.schedule({
+          notifications: [
+            {
+              title: "Reminder",
+              body: "Time to weight in",
+              id: alertsJson[i].id,
+              schedule: { 
+                on: {
+                  year: alert_year,
+                  month: alert_month,
+                  day: alert_day,
+                  hour: alert_hour,
+                  minute: alert_time
+                },
+                repeats: alertsJson[i].weekly_repeat,
+                every: 'week'
+              }
+            }
+          ]
+        });
+      }
+    }
+  }
+
+  async clearAlerts(){
+    const device = await Plugins.Device.getInfo();
+    if( device.platform == 'android' || device.platform == 'ios' ){
+      const pending = await Plugins.LocalNotifications.getPending();
+      if( pending.notifications.length > 0 ){
+        await Plugins.LocalNotifications.cancel(pending);
+      }
+    }  
   }
 
 }

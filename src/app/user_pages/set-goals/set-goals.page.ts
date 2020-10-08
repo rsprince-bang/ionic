@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { GlobalServicesService } from 'src/app/services/global-services.service';
 
 @Component({
   selector: 'set-goals',
@@ -27,14 +28,15 @@ export class SetGoalsPage implements OnInit {
   weighinDay: string;
 
   date = new Date(); 
-  currentDateTime: String = new Date(this.date.getTime() - this.date.getTimezoneOffset()*60000).toISOString();
+  selected_time = null;
 
   constructor(
-    private router: Router, private myAPI: ApiCallService
+    private router: Router, private myAPI: ApiCallService, private globalServices: GlobalServicesService
   ) { }
 
   ngOnInit() {
     this.lossGoal = 15;
+    this.selected_time = this.globalServices.formatTime(this.date);
   }
 
   // select(item) {
@@ -53,18 +55,14 @@ export class SetGoalsPage implements OnInit {
 
 
   continue() {
-    // console.log('weighinDays: ', this.days);
-    // console.log('lossGoal: ', this.lossGoal);
-    // console.log('weighTime: ', this.currentDateTime);
-    // return;
-
     this.myAPI.makeAPIcall(
       "user", 
       {
         "action": "saveGoals",
-        "pounds_to_loose": 15, //make dynamic
-        "weight_in_day": "mon", //make dynamic
-        "weight_in_time": "9:00" //make dynamic
+        "pounds_to_loose": this.lossGoal,
+        "date": this.globalServices.getTodayDate(),
+        "time": this.selected_time,
+        "weekly_repeat": true
       },
       true
     )
@@ -75,7 +73,10 @@ export class SetGoalsPage implements OnInit {
           this.myAPI.handleMyAPIError(result.error);
         }
         else{
-          localStorage.setItem("goals", JSON.stringify(result.success));
+          localStorage.setItem("goals", JSON.stringify(result.success.goals));
+          localStorage.setItem("alerts", JSON.stringify(result.success.alerts));
+          this.globalServices.syncAlerts(result.success.alerts);
+
           this.router.navigateByUrl("/enter-measurements");
         }
       }

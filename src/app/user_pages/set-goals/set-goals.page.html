@@ -51,7 +51,7 @@
       <ion-col>
         <ion-item>
           <ion-label>Weigh-in Time</ion-label>
-          <ion-datetime displayFormat="h:mm a" pickerFormat="HH:mm" [(ngModel)]="currentDateTime"></ion-datetime>
+          <ion-datetime [(ngModel)]="selected_time" display-format="h:mm A" picker-format="h mm A"></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
