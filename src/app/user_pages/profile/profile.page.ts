@@ -223,7 +223,7 @@ weighInDaysList= []
     const modal = await this.modalController.create({
         component: ViewImg,
         cssClass : 'my-custom-modal-year-css',
-        componentProps: { imgurlData:imgurl ,date:date }
+        componentProps: { imgurlData:imgurl ,date:date,page:'viewImg' }
         });
         await modal.present();
   }
@@ -288,5 +288,18 @@ weighInDaysList= []
     });
 
     await alert.present();
+  }
+  async viewAllPhotos() {
+    const modal = await this.modalController.create({
+      component: ViewImg,
+      cssClass : 'my-custom-modal-year-css',
+      componentProps: {  }
+      });
+      await modal.present();
+      const { data } = await modal.onWillDismiss();
+    if (data != undefined) { 
+      this.uploadPhoto()
+
+    }
   }
 }

@@ -27,4 +27,57 @@
     -ms-flex-align: center !important;
     align-items: center !important;
   }
+  .margin-20 {
+    margin:24px;
+  }
+  .margin-0 {
+    margin: 0px;
+    padding:0px
+  }
+  .margin-auto {
+    text-align: center;
+    margin:auto
+  }
+  .margin-top-15 {
+    margin-top: 15px;
+  }
+  .margin-top-10 {
+    margin-top: 10px;
+  }
+  .bodyFat {
+    color: #54A21A
+  }
+  .bodyMass {
+    color: #3DB6FF
+  }
+  .weight {
+    color: #EE1DC5
+  }
+  .plus-icon {
+    font-size: 50px;
+    color: #0140C2;;
+}
+.align-left {
+  text-align: left;
+    margin: auto;
+}
+.ionRow {
+  flex-wrap: unset;
+  overflow: auto;
+  height: 350px;
+}
+.img-css {
+  height: 350px;
+  object-fit: cover;
+          width: 100%;
+}
+.icon-css {
+  display: grid;
+    margin-bottom: -34px;
+    text-align: right;
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 25px;
+    color: white;
+}
   
