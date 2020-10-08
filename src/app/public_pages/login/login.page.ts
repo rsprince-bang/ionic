@@ -78,6 +78,8 @@ export class LoginPage implements OnInit {
           }
           else{
             localStorage.setItem("goals", JSON.stringify(this.userInfo.success.user.goals));
+            localStorage.setItem("alerts", JSON.stringify(this.userInfo.success.user.alerts));
+            this.globalServices.syncAlerts(this.userInfo.success.user.alerts);
             localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
             localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
@@ -163,6 +165,8 @@ export class LoginPage implements OnInit {
           }
           else{
             localStorage.setItem("goals", JSON.stringify(this.userInfo.success.user.goals));
+            localStorage.setItem("alerts", JSON.stringify(this.userInfo.success.user.alerts));
+            this.globalServices.syncAlerts(this.userInfo.success.user.alerts);
             localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
             localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
             localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
