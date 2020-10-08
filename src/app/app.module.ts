@@ -34,7 +34,7 @@ import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
   entryComponents: [],
   imports: [
     BrowserModule,
-     IonicModule.forRoot(),
+     IonicModule.forRoot({animated: true}),
       AppRoutingModule,
       HttpClientModule,
       AlertsPickerModalPageModule,
