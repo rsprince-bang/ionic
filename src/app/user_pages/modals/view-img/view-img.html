@@ -1,13 +1,62 @@
-<ion-row>
+<ion-row *ngIf="page == 'viewImg'">
   <ion-col size="10"></ion-col>
   <ion-col size="2" (click)="closeModal()" style="margin: 0px;padding:0px;margin-top:20px" >
     <ion-icon ios="ios-close" style="font-size: 40px;" md="md-close"></ion-icon>
   </ion-col>
 </ion-row>
-<ion-content>
+<ion-content *ngIf="page == 'viewImg'">
   <div style="padding:10px;padding-top:0px;">
     <img [src]="imgUrl"  style="    object-fit: cover;
     width: 100%;">
     <div style="font-weight: 500;font-size: 20px;padding-top:5px">{{date}}</div>
   </div>
 </ion-content>
+<ion-row class="margin-20" *ngIf="page != 'viewImg'">
+    <ion-col size="3" (click)="closeModal()" style="margin: 0px;padding:0px;margin-top:20px">
+      <ion-icon name="arrow-round-back" style="font-size: 40px;"></ion-icon>
+    </ion-col>
+    <ion-col size="9"  >
+    </ion-col>
+  </ion-row>
+  <ion-content *ngIf="page != 'viewImg'">
+    <div class="margin-20">
+      <ion-row class="margin-20">
+        <ion-col size="9.5" class="align-left">
+          <h2 class="margin-0">PHOTOS</h2>
+        </ion-col>
+        <ion-col size="2.5" class="margin-auto" (click)="uploadPhoto()">
+          <ion-icon class="plus-icon" name="add-circle"></ion-icon>
+        </ion-col>
+        </ion-row>
+        <ion-row class="ionRow">
+          <ion-col size="8" *ngFor="let img of imgList" style="flex-grow: unset;">
+            <ion-icon name="expand" class="icon-css" (click)="expandimg(img)"></ion-icon>
+            <img [src]="img" class="img-css">
+          </ion-col>
+        </ion-row>
+        <ion-row class="margin-top-10">
+          <ion-col>
+            <h3>September 29, 2020</h3>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" class="margin-auto">
+            <p>Body Fat</p>
+            <h3 class="bodyFat">{{bodyFat}}</h3>
+          </ion-col>
+          <ion-col size="4" class="margin-auto">
+            <p>Body Mass</p>
+            <h3 class="bodyMass">{{bodymass}}</h3>
+          </ion-col>
+          <ion-col size="4" class="margin-auto">
+            <p>Weight</p>
+            <h3 class="weight">{{weight}}<small>lbs</small></h3>
+          </ion-col>
+        </ion-row>
+        <ion-row class="margin-top-15">
+          <ion-col style="color: #003CCA;
+          font-weight: bold;">Edit</ion-col>
+        </ion-row>
+    </div>
+    
+  </ion-content>
