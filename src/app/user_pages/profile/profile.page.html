@@ -221,22 +221,46 @@
         </ion-col>
       </ion-row>
       <div class="margin-top-15">
-        <ion-item *ngFor="let date of settingWeighList;let i=index;" class="margin-0 ion-item-css" >
+        <ion-item class="margin-0 ion-item-css" >
           <ion-row  class="margin-0" style="width: 100%;">
             <ion-col size="8" style="text-align: left;margin: auto;">
-              <span >{{date.name}} </span>
+              <span >Weigh In Days</span>
             </ion-col>
             <ion-col size="4" >
               <div class="row">
-                <div style="width: 80%;text-align: right;">{{date.time}}</div>
-                <ion-icon name="arrow-down" style="margin-left: 8px;margin: auto;"></ion-icon>
+                <ion-select name="weighInDays" [(ngModel)]="weighInDays" okText="OK" cancelText="Cancel" style="max-width:100%">
+                  <ion-select-option 
+                    *ngFor="let item of weighInDaysList"
+                    >
+                      {{ item }}
+                    </ion-select-option>
+                </ion-select>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item class="margin-0 ion-item-css" >
+          <ion-row  class="margin-0" style="width: 100%;">
+            <ion-col size="8" style="text-align: left;margin: auto;">
+              <span >Pounds To Lose</span>
+            </ion-col>
+            <ion-col size="4" >
+              <div class="row">
+                <ion-select name="weighWeight" [(ngModel)]="weighWeight" okText="OK" cancelText="Cancel" style="max-width:100%">
+                  <ion-select-option 
+                    *ngFor="let item of weightRange"
+                    >
+                      {{ item }} lbs.
+                    </ion-select-option>
+                    <ion-select-option>Above 50</ion-select-option>
+                </ion-select>
               </div>
             </ion-col>
           </ion-row>
         </ion-item>
       </div>
       <ion-row class="margin-top-20">
-        <ion-col size="6" class="margin-auto" style="text-align: left;font-size:20px" >
+        <ion-col size="6" class="margin-auto" style="text-align: left;font-size:20px" (click)="presentAlertConfirm()">
           <b>End Diet</b>
         </ion-col>
         <ion-col size="6" class="margin-auto " style="text-align: right;font-size:20px;color: #003CCA"

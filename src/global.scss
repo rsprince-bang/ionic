@@ -554,5 +554,21 @@ svg:not(:root) {
     position: absolute; 
     display: block;  
  }
-
+ .alert-title.sc-ion-alert-ios {
+    margin-top: 8px;
+    color: #003CCA;
+    font-size: 17px;
+    font-weight: 600;
+}
+.secondary {
+    color: black !important;
+    font-weight: 500;
+}
+.endDiet {
+    color: #003CCA !important;
+}
+.alert-message.sc-ion-alert-ios {
+    max-height: 240px;
+    font-weight: 500;
+}
 /* end of custom generated icons styles */
