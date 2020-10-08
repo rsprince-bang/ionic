@@ -23,12 +23,18 @@ $lightGrey: #c9ccd0;
 $darkBlue: #000e1e;
 $primary: #0140C2;
 
+html, body, ion-header, ion-content, ion-footer {
+	background: white;
+}
+
 .extra-padding {
   padding: 0 24px !important;
 }
 
 .back-button {
-  color: black;
+	color: black;
+	--icon-font-size: 48px;
+	--icon-margin-start: -12px;
 }
 
 ion-item {
@@ -101,7 +107,7 @@ h1 {
 	font-weight: bold;
 	text-transform: uppercase;
 	margin-bottom: 16px;
-	margin-left: -4px;
+	// margin-left: -4px;
 }
 
 h2 {
@@ -167,37 +173,11 @@ ion-img.nav-logo.hydrated {
     margin-right: 0.81rem;
 }
 
-// Register Text
-.register-text {
-    margin-top: 1.5rem;
-    font-weight: 400;
-    text-align: center;
-    font-size: 0.72rem;
-
-    .register-link {
-        color: orange;
-        font-weight: bold;
-        text-decoration: none;
-    }
+.register-link {
+	color: $primary;
+	font-weight: bold;
+	text-decoration: none;
 }
-
-////////////////////////////////////////
-//calender CSS override
-
-/* monthview-primary-with-event
-The date that is in current month and having events
-
-monthview-secondary-with-event
-The date that is in previous/next month and having events
-
-monthview-selected
-The selected date
-
-monthview-current
-The current date
-
-monthview-disabled
-The disabled date */
 
 .monthview-current.monthview-current {
     background-color: rgb(199, 198, 198) !important;
@@ -225,7 +205,7 @@ ion-button {
     --text-transform: capitalize;
 	--background: #0140C2;
     --margin-bottom: 10px;
-    margin-top: 40px;
+    margin: 40px 0;
 }
 .header-md:after {
     background-image: none;

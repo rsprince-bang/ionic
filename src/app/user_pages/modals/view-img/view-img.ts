@@ -12,7 +12,12 @@ public items: any[];
 public imgurlData:any;
 public page:any;
 public imgUrl:any
-date;
+date ="September 29, 2020";
+bodyFat = "15%"
+bodymass = "20%"
+weight = "150"
+imgList =['../../../../assets/img/Capture-bang.PNG','../../../../assets/img/Bang-prof.jpg']
+isExpandImg = false
   constructor(public modalController: ModalController) { }
 
   ngOnInit() {
@@ -24,7 +29,18 @@ date;
   }
   closeModal() {
     console.log("inside dismiss");
+    if(this.isExpandImg ) {
+      this.page =""
+    }else {
     this.modalController.dismiss();
+    }
   }
-
+  uploadPhoto() {
+    this.modalController.dismiss({data:true});
+  }
+  expandimg(img) {
+    this.page = 'viewImg'
+    this.imgUrl = img
+    this.isExpandImg = true
+  }
 }
