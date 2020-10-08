@@ -52,6 +52,9 @@ export class ProfilePage implements OnInit {
   todayWeight= '150 lbs'
   bodyfatRange =[]
   bodyfatMass = []
+  weighWeight
+  weighInDays
+weighInDaysList= []
   constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router: Router, 
     private alertController: AlertController,public modalController:ModalController,private cd: ChangeDetectorRef,) { 
       this._routeListener = router.events.pipe(
@@ -71,6 +74,14 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     for (let i=0;i<=50 ;i++) {
       this.weightRange.push(i)
+    }
+    this.weighInDaysList.push(12+' AM')
+    for (let i=1;i<=11 ;i++) {
+      this.weighInDaysList.push(i +' AM')
+    }
+    this.weighInDaysList.push(12 +' PM')
+    for (let i=1;i<=11 ;i++) {
+      this.weighInDaysList.push(i +' PM')
     }
     for (let i=0;i<=49 ;i++) {
       this.bodyfatRange.push(i)
@@ -251,5 +262,31 @@ export class ProfilePage implements OnInit {
     this.isProfilePage = true;
     this.isSettingsPage = false
     this.title = "Me"
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ENDING DIET ?',
+      message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequuntur odit rerum quam repellat maxime, quidem nobis modi, quaerat culpa assumenda sint non asperiores quod dolore adipisci vero, fuga facere.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'END DIET',
+          cssClass: 'endDiet',
+          handler: () => {
+            this.router.navigateByUrl('/login')
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
