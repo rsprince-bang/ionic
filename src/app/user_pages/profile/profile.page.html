@@ -16,7 +16,7 @@
         <div class="text-colo" style="text-transform: capitalize;font-size: 18px;">Edit</div>
       </ion-button>
       </ion-buttons>
-      <ion-buttons slot="end" *ngIf="isUploadData">
+      <ion-buttons slot="end" *ngIf="isUploadData || isEditPhoto">
         <ion-button class="button-bac" (click)="closeUpload()">
           <div class="text-colo" style="text-transform: capitalize;font-size: 18px;">Exit</div>
         </ion-button>
@@ -361,6 +361,102 @@
     <ion-row class="margin-top-15">
       <ion-col>
         <ion-button expand="block" mode="md" style="text-transform: capitalize;--border-radius: 30px;margin: 0px;" (click)="closeUpload()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="isEditPhoto" class="padding-24">
+    <ion-row class="margin-top-30">
+      <ion-col >
+        <h1>EDIT PHOTO</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-15">
+      <ion-col>
+        <img class="edit-img" src="{{editImg}}">
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-10">
+      <ion-col>
+        <h2>September 29, 2020</h2>
+      </ion-col>
+    </ion-row>
+    <div class="margin-top-15">
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="8" style="text-align: left;margin: auto;">
+            <span > Body Fat</span>
+          </ion-col>
+          <ion-col size="4" >
+            <div class="row">
+              <ion-select name="todayBodyFat" [(ngModel)]="todayBodyFat" okText="OK" cancelText="Cancel" 
+              style="max-width:100%" (ngModelChange)="onChangeFat(todayBodyFat)">
+                <ion-select-option 
+                  *ngFor="let item of bodyfatRange"
+                  [value]="item">
+                    {{ item }}%
+                  </ion-select-option>
+                  <ion-select-option >Above 49</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0" style="width: 100%;">
+          <ion-col size="8" style="text-align: left;margin: auto;">
+            <span > Body Mass</span>
+          </ion-col>
+          <ion-col size="4" >
+            <div class="row">
+              <ion-select name="todayBodyMass" [(ngModel)]="todayBodyMass" okText="OK" cancelText="Cancel" 
+              style="max-width:100%" (ngModelChange)="onChangeMass(todayBodyMass)">
+                <ion-select-option 
+                  *ngFor="let item of bodyfatMass"
+                  [value]="item">
+                    {{ item }}%
+                  </ion-select-option>
+                  <ion-select-option >Above 49</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0" style="width: 100%;">
+          <ion-col size="8" style="text-align: left;margin: auto;">
+            <span >Weight</span>
+          </ion-col>
+          <ion-col size="4" >
+            <div class="row">
+              <ion-select name="todayWeight" [(ngModel)]="todayWeight" okText="OK" cancelText="Cancel" 
+              (ngModelChange)="onChangeWeight(todayWeight)" style="max-width:100%">
+                <ion-select-option 
+                  *ngFor="let item of weightRange"
+                  >
+                    {{ item }} lbs.
+                  </ion-select-option>
+                  <ion-select-option>Above 50</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+    <ion-row class="margin-top-15">
+      <ion-col>
+        <ion-button expand="block" mode="md" style="text-transform: capitalize;--border-radius: 30px;
+        margin: 0px;" (click)="closeUpload()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-15">
+      <ion-col style="margin: auto;">
+       <div class="row" (click)="closeUpload()">
+        <div style="margin-left: auto;">
+          <ion-icon style="color: red;font-size:xx-large" name="trash"></ion-icon>
+        </div>
+        <div style="margin-right: auto;"><p style="font-weight: bold;margin: 0px;
+          margin-top: 6px;">Delete Photo</p></div>
+       </div>
       </ion-col>
     </ion-row>
   </div>

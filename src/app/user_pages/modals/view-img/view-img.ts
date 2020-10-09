@@ -16,8 +16,9 @@ date ="September 29, 2020";
 bodyFat = "15"
 bodymass = "20"
 weight = "150"
-imgList =['../../../../assets/img/Capture-bang.PNG','../../../../assets/img/Bang-prof.jpg']
+imgList =[{url :'../../../../assets/img/Capture-bang.PNG',selected:false},{url:'../../../../assets/img/Bang-prof.jpg',selected:false}]
 isExpandImg = false
+selectedImg = ""
 constructor(public modalController: ModalController) { }
 
   ngOnInit() {
@@ -49,7 +50,25 @@ constructor(public modalController: ModalController) { }
   }
   expandimg(img) {
     this.page = 'viewImg'
-    this.imgUrl = img
+    this.imgUrl = img.url
     this.isExpandImg = true
+  }
+  editPhoto() {
+    if(this.selectedImg) {
+      this.modalController.dismiss({data:'edit',img : this.selectedImg})
+    }else {
+      this.modalController.dismiss({data:'edit',img:this.imgList[0].url})
+    }
+    
+  }
+  onClickOnImg(img) {
+    this.selectedImg = img.url
+    this.imgList.forEach(item =>{
+      if(item.url == img.url) {
+        item.selected = true
+      }else{
+        item.selected = false;
+      }
+    })
   }
 }
