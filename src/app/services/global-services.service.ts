@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { NavController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Plugins } from '@capacitor/core';
+import { Plugins, LocalNotification } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -248,36 +248,35 @@ export class GlobalServicesService {
 
   //Alerts will be save in database and local storage, so we have a list of them. THey will need to be wiped when user logs out.
   //and reset when user logs in
-  // addAlert(date, time, weekly_repeat:boolean){
-    
-  //   var alerts = localStorage.getItem("alerts");
-  //   if( !alerts ){
-  //     var arr = [{date:date, time:time, weekly_repeat:weekly_repeat}];
-  //     localStorage.setItem("alerts", JSON.stringify(arr));
-  //   }
-  //   else{
-  //     var alertsarr = JSON.parse(alerts);
-  //     alertsarr.push({date:date, time:time, weekly_repeat:weekly_repeat});
-  //     localStorage.setItem("alerts", JSON.stringify(alertsarr));
-  //   }
-  // }
-
   async syncAlerts(alertsJson){
     const device = await Plugins.Device.getInfo();
     if( device.platform == 'android' || device.platform == 'ios' ){
+      await Plugins.LocalNotifications.requestPermission();
+
       //first clear existing alerts
       await this.clearAlerts();
 
+      //TODO set alerts in loop based on set diet plan,
+      //if no diet plan then set one alert, then call this function again when diet plan is set to (7,12)
+      alert( JSON.stringify( localStorage.getItem("alerts") ) );
+      alert( localStorage.getItem("diet_plan_length") );
+      return;
+
       for(var i=0;i< alertsJson.length; i++){
         //add local notifications
-        var splitted_date = alertsJson[i].date.split("-", 3);
-        var alert_year = Number( splitted_date[0] );
-        var alert_month = Number( splitted_date[1].replace(/^0+/, '') );
-        var alert_day = Number( splitted_date[2].replace(/^0+/, '') );
+        let dateString = alertsJson[i].date+'T'+alertsJson[i].time;
+        let alarmDateTime = new Date(dateString);
 
-        var splitted_time = alertsJson[i].time.split(":", 2);
-        var alert_hour = Number( splitted_time[0].replace(/^0+/, '') );
-        var alert_time = Number( splitted_time[1].replace(/^0+/, '') );
+        //local notifications won't trigger if date is in the past even though it is set to e re-occuring, fml
+        var nowDateTime = new Date();
+        var alarmDateTimeInMS = alarmDateTime.getTime(); //returns the number of milliseconds since midnight, January 1, 1970.
+        var nowDateTimeMS = nowDateTime.getTime(); //returns the number of milliseconds since midnight, January 1, 1970.
+
+        //if alarm is in the past keep adding 7 days until we get a date in the future
+        while (alarmDateTimeInMS < nowDateTimeMS) {
+          alarmDateTime.setDate(alarmDateTime.getDate() + 7);
+          alarmDateTimeInMS = alarmDateTime.getTime();
+        }
 
         const notifs = await Plugins.LocalNotifications.schedule({
           notifications: [
@@ -286,21 +285,18 @@ export class GlobalServicesService {
               body: "Time to weight in",
               id: alertsJson[i].id,
               schedule: { 
-                on: {
-                  year: alert_year,
-                  month: alert_month,
-                  day: alert_day,
-                  hour: alert_hour,
-                  minute: alert_time
-                },
-                repeats: alertsJson[i].weekly_repeat,
-                every: 'week'
+                at: alarmDateTime,
               }
             }
           ]
         });
       }
     }
+
+    //testing
+    Plugins.LocalNotifications.addListener('localNotificationReceived', (notification: LocalNotification) =>{
+      alert(notification.title);
+    });
   }
 
   async clearAlerts(){
