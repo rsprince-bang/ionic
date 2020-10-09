@@ -302,4 +302,17 @@ weighInDaysList= []
 
     }
   }
+  onChangeFat(todayBodyFat) {
+    localStorage.setItem('todayBodyMass',JSON.stringify(todayBodyFat))
+    console.log("todayBodyFat",todayBodyFat)
+  }
+  onChangeMass(todayBodyMass) {
+    localStorage.setItem('todayBodyMass',JSON.stringify(todayBodyMass))
+    console.log("todayBodyMass",todayBodyMass)
+  }
+  onChangeWeight(todayWeight){
+    var data = todayWeight.split(' ')
+    localStorage.setItem('todayWeight',JSON.stringify(data[1]))
+    console.log("todayWeight",todayWeight,data)
+  }
 }

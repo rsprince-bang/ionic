@@ -8,7 +8,9 @@
   <div style="padding:10px;padding-top:0px;">
     <img [src]="imgUrl"  style="    object-fit: cover;
     width: 100%;">
-    <div style="font-weight: 500;font-size: 20px;padding-top:5px">{{date}}</div>
+    <div style="padding-top:10px">
+      <h2>{{date}}</h2>
+    </div>
   </div>
 </ion-content>
 <ion-row class="margin-20" *ngIf="page != 'viewImg'">
@@ -20,7 +22,7 @@
   </ion-row>
   <ion-content *ngIf="page != 'viewImg'">
     <div class="margin-20">
-      <ion-row class="margin-20">
+      <ion-row class="margin-20" style="margin: 20px 0px;">
         <ion-col size="9.5" class="align-left">
           <h2 class="margin-0">PHOTOS</h2>
         </ion-col>
@@ -42,11 +44,11 @@
         <ion-row>
           <ion-col size="4" class="margin-auto">
             <p>Body Fat</p>
-            <h3 class="bodyFat">{{bodyFat}}</h3>
+            <h3 class="bodyFat">{{bodyFat}}%</h3>
           </ion-col>
           <ion-col size="4" class="margin-auto">
             <p>Body Mass</p>
-            <h3 class="bodyMass">{{bodymass}}</h3>
+            <h3 class="bodyMass">{{bodymass}}%</h3>
           </ion-col>
           <ion-col size="4" class="margin-auto">
             <p>Weight</p>

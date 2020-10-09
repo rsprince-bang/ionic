@@ -13,15 +13,24 @@ public imgurlData:any;
 public page:any;
 public imgUrl:any
 date ="September 29, 2020";
-bodyFat = "15%"
-bodymass = "20%"
+bodyFat = "15"
+bodymass = "20"
 weight = "150"
 imgList =['../../../../assets/img/Capture-bang.PNG','../../../../assets/img/Bang-prof.jpg']
 isExpandImg = false
-  constructor(public modalController: ModalController) { }
+constructor(public modalController: ModalController) { }
 
   ngOnInit() {
-      this.imgUrl = this.imgurlData;
+    if(localStorage.getItem('todayBodyFat')) {
+      this.bodyFat = JSON.parse(localStorage.getItem('todayBodyFat'))
+    }
+    if(localStorage.getItem('todayBodyMass')) {
+      this.bodymass = JSON.parse(localStorage.getItem('todayBodyMass'))
+    }
+    if(localStorage.getItem('todayWeight')) {
+      this.weight = JSON.parse(localStorage.getItem('todayWeight'))
+    }
+    this.imgUrl = this.imgurlData;
     this.page = this.page
     //   console.log("this.imgUrl",this.imgUrl)
     //   console.log("this.imgUrl",this.imgurlData)
