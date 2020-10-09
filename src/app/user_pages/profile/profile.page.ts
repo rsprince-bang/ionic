@@ -237,7 +237,7 @@ weighInDaysList= []
     this.isUploadData = false;
   }
   logout() {
-    this.router.navigateByUrl('/login')
+    this.globalServices.logOut();
   }
   uploadFile(files: FileList) {
     let reader = new FileReader(); // HTML5 FileReader API
