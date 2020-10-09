@@ -65,14 +65,18 @@
         </ion-col>
       </ion-row>
 
+
       <ion-row>
         <ion-col>
+          <small>
+            <a class="register-link" [routerLink]="['/terms']">
+              Terms & Conditions
+            </a>
+          </small>
+          <br />
           <ion-item>
             <small>
-              I agree to the 
-              <a class="register-link"[routerLink]="['/terms']">
-                terms and privacy policy.
-              </a>
+              I agree. 
             </small>
             <ion-checkbox slot="start" color="primary"></ion-checkbox>
           </ion-item>
