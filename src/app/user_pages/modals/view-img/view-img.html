@@ -33,7 +33,7 @@
         <ion-row class="ionRow">
           <ion-col size="8" *ngFor="let img of imgList" style="flex-grow: unset;">
             <ion-icon name="expand" class="icon-css" (click)="expandimg(img)"></ion-icon>
-            <img [src]="img" class="img-css">
+            <img [src]="img.url" class="img-css" [ngClass]="{'im-border':img.selected}" (click)="onClickOnImg(img)">
           </ion-col>
         </ion-row>
         <ion-row class="margin-top-10">
@@ -57,7 +57,7 @@
         </ion-row>
         <ion-row class="margin-top-15">
           <ion-col style="color: #003CCA;
-          font-weight: bold;">Edit</ion-col>
+          font-weight: bold;" (click)="editPhoto()">Edit</ion-col>
         </ion-row>
     </div>
     
