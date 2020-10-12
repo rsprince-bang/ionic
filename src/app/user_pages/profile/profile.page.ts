@@ -9,6 +9,7 @@ import { CalendarComponent } from '@syncfusion/ej2-angular-calendars';
 import * as moment from 'moment-timezone';
 import {ViewImg} from "../modals/view-img/view-img"
 import { filter } from 'rxjs/operators';
+import { title } from 'process';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -40,6 +41,7 @@ export class ProfilePage implements OnInit {
   isSettingsPage = false;
   title ="Me"
   isUploadData = false;
+  isEditPhoto = false
   imageUrl:any
   settingWeighList = [{name : 'Weigh In Days',time:'9:00 AM'},{name: 'Pounds To Lose',time:'15 Ibs'}]
   uploadphotoList =  [{name : 'Body Fat',time:'15%'},{name: 'Body Mass',time:'20%'},{name: 'Weight',time:'150 Ibs'}]
@@ -55,6 +57,7 @@ export class ProfilePage implements OnInit {
   weighWeight
   weighInDays
 weighInDaysList= []
+editImg = ""
   constructor(private foodSuggestionsService: FoodSuggestionsService, private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router: Router, 
     private alertController: AlertController,public modalController:ModalController,private cd: ChangeDetectorRef,) { 
       this._routeListener = router.events.pipe(
@@ -91,6 +94,7 @@ weighInDaysList= []
     this.isSettingsPage = false;
     this.title ="Me"
     this.isUploadData = false;
+    this.isEditPhoto = false
   }
 
   ionViewWillEnter() {
@@ -226,6 +230,11 @@ weighInDaysList= []
         componentProps: { imgurlData:imgurl ,date:date,page:'viewImg' }
         });
         await modal.present();
+        const { data } = await modal.onWillDismiss();
+        console.log("data t",data)
+    if (data != undefined) { 
+      
+    }
   }
   deleteItem(index) {
     this.todaysList.splice(index,1)
@@ -235,6 +244,7 @@ weighInDaysList= []
     this.isSettingsPage = true;
     this.title = "Settings"
     this.isUploadData = false;
+    this.isEditPhoto = false
   }
   logout() {
     this.globalServices.logOut();
@@ -256,11 +266,13 @@ weighInDaysList= []
     this.isSettingsPage = false
     this.title = "Upload Photo"
     this.imageUrl =""
+    this.isEditPhoto = false
   }
   closeUpload() {
     this.isUploadData = false;
     this.isProfilePage = true;
-    this.isSettingsPage = false
+    this.isSettingsPage = false;
+    this.isEditPhoto = false
     this.title = "Me"
   }
   async presentAlertConfirm() {
@@ -298,12 +310,23 @@ weighInDaysList= []
       await modal.present();
       const { data } = await modal.onWillDismiss();
     if (data != undefined) { 
-      this.uploadPhoto()
+      
+      if(data.data == 'edit') {
+        this.isEditPhoto = true;
+        this.isProfilePage = false;
+        this.isSettingsPage=  false;
+        this.isUploadData=  false;
+        this.title = 'Edit Photo'
+        this.editImg = data.img
+        console.log("editImg",this.editImg)
+      }else {
+        this.uploadPhoto()
+      }
 
     }
   }
   onChangeFat(todayBodyFat) {
-    localStorage.setItem('todayBodyMass',JSON.stringify(todayBodyFat))
+    localStorage.setItem('todayBodyFat',JSON.stringify(todayBodyFat))
     console.log("todayBodyFat",todayBodyFat)
   }
   onChangeMass(todayBodyMass) {

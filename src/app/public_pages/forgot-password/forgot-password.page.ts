@@ -12,4 +12,8 @@ export class ForgotPasswordPage implements OnInit {
   ngOnInit() {
   }
 
+  resetPassword() {
+    console.log("Reset Password");
+  }
+
 }
