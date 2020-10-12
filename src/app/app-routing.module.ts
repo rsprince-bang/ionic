@@ -17,7 +17,9 @@ const routes: Routes = [
   { path: 'add-event-modal', loadChildren: './user_pages/add-event-modal/add-event-modal.module#AddEventModalPageModule' },
   { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] },
   {path: 'home-add', loadChildren:'./user_pages/home-add-food-modal/home-add-food-modal.module#HomeAddFoodModalPageModule', canActivate:[AuthGuard]},
-  { path: 'policies', loadChildren: './public_pages/policies/policies.module#PoliciesPageModule' }
+  { path: 'policies', loadChildren: './public_pages/policies/policies.module#PoliciesPageModule' },
+  { path: 'reset-password', loadChildren: './user_pages/reset-password/reset-password.module#ResetPasswordPageModule'  }
+
 
 ];
 @NgModule({
