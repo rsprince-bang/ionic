@@ -266,19 +266,9 @@ export class GlobalServicesService {
       var todayDate = new Date();
 
       if( alerts && diet_plan_length ){
-alert( todayDate );
-alert( todayDate.getTime() );
-
-alert( dietEndDate );
-alert( dietEndDate.getTime() );
-
         if( todayDate.getTime() < dietEndDate.getTime() ){ //only et alerts if we havent met diet end date
           //get permissions
-alert('before local notifications');
           await LocalNotifications.requestPermission();
-alert('after request');
-const areEnabled = await LocalNotifications.areEnabled();
-alert('are notifications enabled? '+ areEnabled.value);
 
           //first clear existing alerts
           await this.clearAlerts();
