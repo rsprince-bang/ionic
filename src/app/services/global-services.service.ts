@@ -268,6 +268,9 @@ export class GlobalServicesService {
 alert( todayDate );
 alert( todayDate.getTime() );
 
+alert( dietEndDate );
+alert( dietEndDate.getTime() );
+
         if( todayDate.getTime() < dietEndDate.getTime() ){ //only et alerts if we havent met diet end date
           //get permissions
 alert('before local notifications');
