@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { NavController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Plugins, LocalNotification } from '@capacitor/core';
+import { AlertsPageModule } from '../user_pages/alerts/alerts.module';
 
 @Injectable({
   providedIn: 'root'
@@ -248,55 +249,82 @@ export class GlobalServicesService {
 
   //Alerts will be save in database and local storage, so we have a list of them. THey will need to be wiped when user logs out.
   //and reset when user logs in
-  async syncAlerts(alertsJson){
+  //call this function when user logs in or set diet goals and diet plan (7 or 12)
+  async syncAlerts(){
     const device = await Plugins.Device.getInfo();
     if( device.platform == 'android' || device.platform == 'ios' ){
-      await Plugins.LocalNotifications.requestPermission();
+      var alerts = JSON.parse(localStorage.getItem("alerts"));
+      JSON.parse(localStorage.getItem('todayBodyMass'))
+      var diet_plan_length = localStorage.getItem("diet_plan_length");
+      //var dietStarDate = new Date( localStorage.getItem("diet_start_date") );
+      var dietEndDate = new Date( localStorage.getItem("diet_start_date") );
+      dietEndDate.setDate(dietEndDate.getDate() + Number(diet_plan_length) * 7);
+      var todayDate = new Date();
 
-      //first clear existing alerts
-      await this.clearAlerts();
+      if( alerts && diet_plan_length ){
+        if( todayDate.getTime() < dietEndDate.getTime() ){ //only et alerts if we havent met diet end date
+          //get permissions
+          await Plugins.LocalNotifications.requestPermission();
 
-      //TODO set alerts in loop based on set diet plan,
-      //if no diet plan then set one alert, then call this function again when diet plan is set to (7,12)
-      alert( JSON.stringify( localStorage.getItem("alerts") ) );
-      alert( localStorage.getItem("diet_plan_length") );
-      return;
+          //first clear existing alerts
+          await this.clearAlerts();
 
-      for(var i=0;i< alertsJson.length; i++){
-        //add local notifications
-        let dateString = alertsJson[i].date+'T'+alertsJson[i].time;
-        let alarmDateTime = new Date(dateString);
-
-        //local notifications won't trigger if date is in the past even though it is set to e re-occuring, fml
-        var nowDateTime = new Date();
-        var alarmDateTimeInMS = alarmDateTime.getTime(); //returns the number of milliseconds since midnight, January 1, 1970.
-        var nowDateTimeMS = nowDateTime.getTime(); //returns the number of milliseconds since midnight, January 1, 1970.
-
-        //if alarm is in the past keep adding 7 days until we get a date in the future
-        while (alarmDateTimeInMS < nowDateTimeMS) {
-          alarmDateTime.setDate(alarmDateTime.getDate() + 7);
-          alarmDateTimeInMS = alarmDateTime.getTime();
-        }
-
-        const notifs = await Plugins.LocalNotifications.schedule({
-          notifications: [
-            {
-              title: "Reminder",
-              body: "Time to weight in",
-              id: alertsJson[i].id,
-              schedule: { 
-                at: alarmDateTime,
-              }
+          //set alerts in loop
+          for(var i=0;i< alerts.length; i++){
+            //add local notifications
+            var daynum = null;
+            switch (alerts[i].day) {
+              case "sun":
+                  daynum = 0;
+                  break;
+              case "mon":
+                  daynum = 1;
+                  break;
+              case 'tue':
+                  daynum = 2;
+                  break;
+              case "wed":
+                  daynum = 3;
+                  break;
+              case "thu":
+                  daynum = 4;
+                  break;
+              case "fri":
+                  daynum = 5;
+                  break;
+              case "sat":
+                  daynum = 6;
+                  break;
+              default:
+                  //console.log("No such day exists!");
+                  break;
             }
-          ]
-        });
+            //so far we have an alarm set for daynum of the week
+            //get when is the next such day of week, i.e. get next monday
+            //use today as starting point
+            var nextAlarmDate =  new Date( this.getTodayDate()+'T'+alerts[i].time ); //set time
+            //now get the actual next date
+            nextAlarmDate = this.getNextDayOfWeek(nextAlarmDate, daynum); //this is when the alarm should be
+            while ( nextAlarmDate.getTime() < dietEndDate.getTime() ) {
+              var id = ""+nextAlarmDate.getFullYear()+nextAlarmDate.getMonth()+nextAlarmDate.getDate()+nextAlarmDate.getHours()+nextAlarmDate.getMinutes();
+              var notifs = await Plugins.LocalNotifications.schedule({
+                notifications: [
+                  {
+                    title: "Reminder",
+                    body: "Time to weight in",
+                    id: Number(id),
+                    schedule: { 
+                      at: nextAlarmDate,
+                    }
+                  }
+                ]
+              });
+              nextAlarmDate.setDate(nextAlarmDate.getDate() + 7); //keep adding 7 days until we reach diet end
+            }
+          }
+        }
       }
     }
-
-    //testing
-    Plugins.LocalNotifications.addListener('localNotificationReceived', (notification: LocalNotification) =>{
-      alert(notification.title);
-    });
   }
 
   async clearAlerts(){
@@ -307,6 +335,12 @@ export class GlobalServicesService {
         await Plugins.LocalNotifications.cancel(pending);
       }
     }  
+  }
+
+  getNextDayOfWeek(date, dayOfWeek) {
+    var resultDate = new Date(date.getTime());
+    resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
+    return resultDate;
   }
 
 }
