@@ -5,8 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { NavController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Plugins, LocalNotification } from '@capacitor/core';
+import { Plugins } from '@capacitor/core';
 import { AlertsPageModule } from '../user_pages/alerts/alerts.module';
+const {LocalNotifications} = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -252,9 +253,9 @@ export class GlobalServicesService {
   //call this function when user logs in or set diet goals and diet plan (7 or 12)
   async syncAlerts(){
     const device = await Plugins.Device.getInfo();
-alert(device.platform);
+
     if( device.platform == 'android' || device.platform == 'ios' ){
-alert('inside platform');
+
       var alerts = JSON.parse(localStorage.getItem("alerts"));
       JSON.parse(localStorage.getItem('todayBodyMass'))
       var diet_plan_length = localStorage.getItem("diet_plan_length");
@@ -262,14 +263,14 @@ alert('inside platform');
       var dietEndDate = new Date( localStorage.getItem("diet_start_date") );
       dietEndDate.setDate(dietEndDate.getDate() + Number(diet_plan_length) * 7);
       var todayDate = new Date();
-alert(alerts);
-alert(diet_plan_length);
+
       if( alerts && diet_plan_length ){
-alert('inside alerts and diet plan if statement'); 
         if( todayDate.getTime() < dietEndDate.getTime() ){ //only et alerts if we havent met diet end date
           //get permissions
-          await Plugins.LocalNotifications.requestPermission();
-const areEnabled = await Plugins.LocalNotifications.areEnabled();
+alert('before local notifications');
+          await LocalNotifications.requestPermission();
+alert('after request');
+const areEnabled = await LocalNotifications.areEnabled();
 alert('are notifications enabled? '+ areEnabled.value);
 
           //first clear existing alerts
@@ -313,7 +314,7 @@ alert('are notifications enabled? '+ areEnabled.value);
             nextAlarmDate = this.getNextDayOfWeek(nextAlarmDate, daynum); //this is when the alarm should be
             while ( nextAlarmDate.getTime() < dietEndDate.getTime() ) {
               var id = ""+nextAlarmDate.getFullYear()+nextAlarmDate.getMonth()+nextAlarmDate.getDate()+nextAlarmDate.getHours()+nextAlarmDate.getMinutes();
-              var notifs = await Plugins.LocalNotifications.schedule({
+              var notifs = await LocalNotifications.schedule({
                 notifications: [
                   {
                     title: "Reminder",
@@ -336,9 +337,9 @@ alert('are notifications enabled? '+ areEnabled.value);
   async clearAlerts(){
     const device = await Plugins.Device.getInfo();
     if( device.platform == 'android' || device.platform == 'ios' ){
-      const pending = await Plugins.LocalNotifications.getPending();
+      const pending = await LocalNotifications.getPending();
       if( pending.notifications.length > 0 ){
-        await Plugins.LocalNotifications.cancel(pending);
+        await LocalNotifications.cancel(pending);
       }
     }  
   }
