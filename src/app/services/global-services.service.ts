@@ -260,7 +260,8 @@ export class GlobalServicesService {
       JSON.parse(localStorage.getItem('todayBodyMass'))
       var diet_plan_length = localStorage.getItem("diet_plan_length");
       //var dietStarDate = new Date( localStorage.getItem("diet_start_date") );
-      var dietEndDate = new Date( localStorage.getItem("diet_start_date") );
+      var diet_start_date = JSON.parse( localStorage.getItem("diet_start_date") )+"T00:00:00";
+      var dietEndDate = new Date( diet_start_date );
       dietEndDate.setDate(dietEndDate.getDate() + Number(diet_plan_length) * 7);
       var todayDate = new Date();
 
