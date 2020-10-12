@@ -252,7 +252,9 @@ export class GlobalServicesService {
   //call this function when user logs in or set diet goals and diet plan (7 or 12)
   async syncAlerts(){
     const device = await Plugins.Device.getInfo();
+alert(device.platform);
     if( device.platform == 'android' || device.platform == 'ios' ){
+alert('inside platform');
       var alerts = JSON.parse(localStorage.getItem("alerts"));
       JSON.parse(localStorage.getItem('todayBodyMass'))
       var diet_plan_length = localStorage.getItem("diet_plan_length");
@@ -260,13 +262,15 @@ export class GlobalServicesService {
       var dietEndDate = new Date( localStorage.getItem("diet_start_date") );
       dietEndDate.setDate(dietEndDate.getDate() + Number(diet_plan_length) * 7);
       var todayDate = new Date();
-
+alert(alerts);
+alert(diet_plan_length);
       if( alerts && diet_plan_length ){
+alert('inside alerts and diet plan if statement'); 
         if( todayDate.getTime() < dietEndDate.getTime() ){ //only et alerts if we havent met diet end date
           //get permissions
           await Plugins.LocalNotifications.requestPermission();
-    const areEnabled = await Plugins.LocalNotifications.areEnabled();
-    alert('are notifications enabled? '+ areEnabled.value);
+const areEnabled = await Plugins.LocalNotifications.areEnabled();
+alert('are notifications enabled? '+ areEnabled.value);
 
           //first clear existing alerts
           await this.clearAlerts();
