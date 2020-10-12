@@ -265,6 +265,8 @@ export class GlobalServicesService {
         if( todayDate.getTime() < dietEndDate.getTime() ){ //only et alerts if we havent met diet end date
           //get permissions
           await Plugins.LocalNotifications.requestPermission();
+    const areEnabled = await Plugins.LocalNotifications.areEnabled();
+    alert('are notifications enabled? '+ areEnabled.value);
 
           //first clear existing alerts
           await this.clearAlerts();
