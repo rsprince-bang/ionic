@@ -265,6 +265,9 @@ export class GlobalServicesService {
       var todayDate = new Date();
 
       if( alerts && diet_plan_length ){
+alert( todayDate );
+alert( todayDate.getTime() );
+
         if( todayDate.getTime() < dietEndDate.getTime() ){ //only et alerts if we havent met diet end date
           //get permissions
 alert('before local notifications');
