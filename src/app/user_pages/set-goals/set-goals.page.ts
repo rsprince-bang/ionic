@@ -60,7 +60,7 @@ export class SetGoalsPage implements OnInit {
       {
         "action": "saveGoals",
         "pounds_to_loose": this.lossGoal,
-        "date": this.globalServices.getTodayDate(),
+        "day": this.weighinDay,
         "time": this.selected_time,
         "weekly_repeat": true
       },
@@ -75,7 +75,7 @@ export class SetGoalsPage implements OnInit {
         else{
           localStorage.setItem("goals", JSON.stringify(result.success.goals));
           localStorage.setItem("alerts", JSON.stringify(result.success.alerts));
-          this.globalServices.syncAlerts(result.success.alerts);
+          this.globalServices.syncAlerts();
 
           this.router.navigateByUrl("/enter-measurements");
         }
