@@ -1,187 +1,265 @@
-<ion-header>
+<ion-header class="header-css">
     <ion-toolbar>
-        
-        <ion-buttons slot="start">
-            <ion-menu-toggle>
-                <ion-button class="bg-color">
-                    <ion-icon slot="icon-only" name="menu"></ion-icon>
-                </ion-button>
-            </ion-menu-toggle>
-        </ion-buttons>
-        
+      <ion-buttons slot="start" >
+      <ion-button class="button-bac">
+        <ion-icon class="color-black"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
+       </ion-button>
+      </ion-buttons>
+ 
         <ion-title>Home</ion-title>
-        
-        <!-- <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img> -->
-
+        <ion-buttons slot="end" >
+          <ion-button class="button-bac">
+            <ion-icon class="color-black" name="settings"></ion-icon>
+          </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content >
-    <div >
-  
-    <ion-card class="ionCardStyle">
-      <ion-row class="padding-15">
-        <ion-col size="4">
-          <div class="divName">
-            <img class="imgBacStyle" src="../../../assets/img/track-workout-footer-background.jpg"></div>
-          </ion-col>
-          <ion-col>
-            <div class="nameStyle">
-              JHON DOE
-            </div>
-            <div class="yourDaily">Your Daily Tracking Report</div>
-            <div class="row dateDiv">
-              <div class="dateSubDiv">
-                <ion-icon class="dateIconColor"  name="arrow-back" *ngIf="dayNumber != 18" 
-                (click)="handleSwipeRight()"></ion-icon>
+  <div class="padding-20 content-div" >
+    <ion-row >
+      <ion-col size="3" class="margin-0 margin-auto">
+        <div >
+          <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
+          <!-- <ion-card class="camera-div">
+            <ion-icon ios="ios-camera" md="md-camera" class="color-icon camera-icon"></ion-icon>
+        </ion-card> -->
+        </div>
+        </ion-col>
+        <ion-col size="9" class="margin-top-10">
+          <div>
+            <h2 class="margin-0 margin-to-7">
+              Good Morning, Jack.
+            </h2>
+            <p class="margin-0 font-size-14">Here's your daily tracking report.</p>
           </div>
-          <div class="margin-auto">
-            <div class="dayStyle"><b>
-              {{day}}
-            </b></div>
-            <div class="dayNum">DAY {{dayNumber}}</div>
-          </div>
-          <div  class="dateSubDiv">
-            <ion-icon class="dateIconColor" name="arrow-forward" *ngIf=" dayNumber != 20" 
-            (click)="handleSwipeLeft()" ></ion-icon>
-          </div>
+      </ion-col>
+    </ion-row>
+  </div>
+    <div class="paddin-20">
+    <ion-row class="margin-top-15">
+      <ion-col size="5" class="progress-height">
+        <circle-progress
+          [percent]="39"
+          [showInnerStroke]="true" [radius]="150"
+            [outerStrokeWidth]="30"
+            [innerStrokeWidth]="35"
+            [space]="-23"
+            [outerStrokeColor]="'#0417c2'"
+            [innerStrokeColor] = "'gainsboro'"
+            [backgroundStroke]="'white'"
+            [animation]="true"
+            [showTitle] = "true"
+            [animationDuration]="300" [title]="['39 %']"
+            [outerStrokeGradientStopColor] ="'white'"
+            [backgroundGradientStopColor] = "'white'"
+            [titleFontSize] = "70"
+            [subtitle] = "'Completed'"
+            [showSubtitle] ="true"
+            [subtitleColor] = "'black'"
+            [subtitleFontSize]="40"
+            [titleColor] = "'#0417c2'"
+            [titleFontWeight] = "600"
+          ></circle-progress>
+      </ion-col>
+      <ion-col size="7">
+        <div class="color-black"><h2>The Bang Anti-Diet</h2></div>
+        <div class="color-black"><p>Week 1 of 7</p></div>
+        <div class="color-black"><p>Current Weight: 165 lbs</p></div>
+        <div class="color-black"><p>Goal Weight: 150 lbs</p></div>
+        <div class="color-text margin-top-5"><p>Weigh In</p></div>
+      </ion-col>
+    </ion-row>
+    <ion-card class="margin-top-20 water-intake">
+      <ion-row class="paddinleft-right-5 margin-top-10">
+        <ion-col size="7">
+          <h3 class="color-black">Water Intake</h3>
+        </ion-col>
+        <ion-col size="5" class="color-text align-left">
+          <p >Add Intake</p>
+        </ion-col>
+      </ion-row >
+      <ion-row class="paddinleft-right-5">
+        <ion-col>
+          <p class="color-black margin-top-5">Today's Intake/Recommended</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="paddinleft-right-5">
+        <ion-col>
+          <div class="row">
+            <h2 class="color-text">16</h2><h2 class="color-black">/70oz</h2>
           </div>
         </ion-col>
       </ion-row>
+      <ion-row class="margin-left-right-15">
+        <ion-col size="7">
+        </ion-col>
+        <ion-col size="5" class="paddinleft-right-5 text-align-right">
+          <select class="select-line color-white">
+            <option>Weekly</option>
+          </select>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col size=12 size-md="12" size-lg="8" size-xl="4" class="pad-left-right-15">
+            <div class='chart-container-big'>
+              <!-- <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+              </canvas> -->
+                <canvas #barIntakeCanvas height="200" ></canvas> 
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-row class="margin-auto color-white"><ion-col><p claas="color-white">Week</p></ion-col></ion-row>
     </ion-card>
-    <div class="width-100">
-      <canvas baseChart *ngIf="pieChartData"
-        [data]="pieChartData" 
-        [labels]="pieChartLabels" 
-        [chartType]="pieChartType"
-        [options]="pieChartOptions"
-        [plugins]="pieChartPlugins"
-        [colors]="pieChartColors" height="230" class="doughChart">
-      </canvas>
-      
-    </div>
-    <ion-row>
-      <ion-col class="daily-calories">
-        Daily calories progress
+    <ion-card class="margin-top-20 Add-sleep">
+      <ion-row class="paddinleft-right-5">
+        <ion-col size="7">
+          <h3 class="color-white">Sleep</h3>
+        </ion-col>
+        <ion-col size="5" class="color-white align-left">
+          <p >Add Sleep</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="paddinleft-right-5">
+        <ion-col>
+          <h2 class="color-white">8hrs last night</h2>
+          <div class="color-white"><p>Remember, insufficient sleep</p></div>
+           <div class="color-white"><p>Undermines, dietary efforts.</p></div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-left-right-15">
+        <ion-col size="7">
+        </ion-col>
+        <ion-col size="5" class="paddinleft-right-5" class="text-align-right">
+          <select class="select-line color-white">
+            <option>Weekly</option>
+          </select>
+        </ion-col>
+      </ion-row>
+      <ion-row class="pad-left-right-15">
+        <ion-col size=12 size-md="12" size-lg="8" size-xl="4">
+            <div class='chart-container-big'>
+                <canvas #barSleepCanvas height="200" ></canvas> 
+            </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-auto color-white"><ion-col><p claas="color-white">Week</p></ion-col></ion-row>
+      <div class="margin-top-15"></div>
+    </ion-card>
+    <ion-card class="margin-top-10 ion-card-progress">
+      <ion-row class="margin-top-15">
+        <ion-col size="2" class="align-center">
+          <ion-icon class="icon-size" ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+        </ion-col>
+        <ion-col size="8" class="align-center">
+          <div><p>September 29, 2020</p></div>
+          <div><h3>DAY 18/49</h3></div>
+        </ion-col>
+        <ion-col size="2" class="align-center">
+          <ion-icon class="icon-size" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-20">
+        <ion-col>
+          <h2 class="colo-black">Calorie Breakdown</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-15">
+        <ion-col>
+          <div class="colo-black">Fat Intake/Recommended</div>
+          <div class="row">
+            <h2 class="fat-color">58</h2><h2 class="colo-black">/100g</h2>
+          </div>
+          <div class="chart fat-progress">
+            <ion-progress-bar value="0.58" class="height-22"></ion-progress-bar>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-15">
+        <ion-col>
+          <div class="colo-black">Protein Intake/Recommended</div>
+          <div class="row">
+            <h2 class="protein-color">400</h2><h2 class="colo-black">/500g</h2>
+          </div>
+          <div class="chart protein-progress">
+            <ion-progress-bar value="0.9" class="height-22"></ion-progress-bar>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-15">
+        <ion-col>
+          <div class="colo-black">Crab Intake/Recommended</div>
+          <div class="row">
+            <h2 class="crab-color">100</h2><h2 class="colo-black">/200g</h2>
+          </div>
+          <div class="chart crab-progress">
+            <ion-progress-bar value="0.50" class="height-22"></ion-progress-bar>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div class="margin-top-15"></div>
+    </ion-card>
+    <ion-row class="margin-top-10 margin-left-right-15">
+      <ion-col>
+        <ion-card class="ion-card">
+          <ion-row>
+            <ion-col size="3" class="vert-center">
+              <img src="assets/img/bang-can.png" />
+            </ion-col>
+            <ion-col size="9">
+              <ion-card-header>
+                <ion-card-title>
+                  Let's get you on <br /> 
+                  track today.
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Bang Energy 12-Pack <br />
+                $31.00
+                <p class="global-link-wrapper">
+                  <a href="" class="global-link">Order Now</a>
+                </p>
+              </ion-card-content>
+            </ion-col>            
+          </ion-row>
+        </ion-card>   
       </ion-col>
     </ion-row>
-    <ion-row class="rowAlign">
-      <ion-col size="4">
-        <ion-card class="progressBack">
-          <circle-progress
-            [percent]="58"
-            [showInnerStroke]="true" [radius]="200"
-              [outerStrokeWidth]="16"
-              [innerStrokeWidth]="16"
-              [space]="-14"
-              [outerStrokeColor]="'#00ff00'"
-              [innerStrokeColor] = "'white'"
-              [backgroundStroke]="'white'"
-              [animation]="true"
-              [showTitle] = "true"
-              [animationDuration]="300" [title]="[' ','58g',' ', 'of FAT',' ']"
-              [outerStrokeGradientStopColor] ="'white'"
-              [backgroundGradientStopColor] = "'white'"
-              [titleFontSize] = "50"
-              [subtitle] = "'xxxg remaining'"
-              [showSubtitle] ="true"
-              [subtitleColor] = "'black'"
-              [subtitleFontSize]="40"
-              [titleColor] = "'#00ff00'"
-              [titleFontWeight] = "600"
-            ></circle-progress>
-        </ion-card>
-      </ion-col>
-      <ion-col size="4">
-        <ion-card class="progressBack">
-          <circle-progress
-          [percent]="100"
-          [showInnerStroke]="true" [radius]="200"
-          [outerStrokeWidth]="16"
-          [innerStrokeWidth]="16"
-          [space]="-14"
-          [outerStrokeColor]="'#0417c2'"
-          [innerStrokeColor] = "'white'"
-          [backgroundStroke]="'white'"
-          [animation]="false"
-          [showTitle] = "true"
-          [animationDuration]="300" [title]="data"
-          [outerStrokeGradientStopColor] ="'white'"
-          [backgroundGradientStopColor] = "'white'"
-          [titleColor] = "'#0417c2'"
-          [titleFontSize] = "50"
-          [subtitle] = "'xxxg remaining'"
-          [showSubtitle] ="true"
-          [subtitleColor] = "'black'"
-          [subtitleFontSize]="40"
-          [showBackground] ="false"
-          [titleFontWeight] ="600"
-          ></circle-progress>
-        </ion-card>
-      </ion-col>
-      <ion-col size="4">
-        <ion-card class="progressBack">
-          <circle-progress
-          [percent]="58"
-          [showInnerStroke]="true" [radius]="200"
-          [outerStrokeWidth]="16"
-          [innerStrokeWidth]="16"
-          [space]="-14"
-          [outerStrokeColor]="'#ffa500'"
-          [innerStrokeColor] = "'white'"
-          [backgroundStroke]="'white'"
-          [animation]="true"
-          [showTitle] = "true"
-          [animationDuration]="300" [title]="[' ','58g',' ',' of CARBS',' ']"
-          [outerStrokeGradientStopColor] ="'white'"
-          [backgroundGradientStopColor] = "'white'"
-          [titleColor] = "'#ffa500'"
-          [titleFontSize] = "50"
-          [subtitle] = "'xxxg remaining'"
-          [showSubtitle] ="true"
-          [subtitleColor] = "'black'"
-          [subtitleFontSize]="40"
-          [titleFontWeight] ="600"
-          ></circle-progress>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <div>
-      <div class="text day-num">Day {{dayNumber}}</div>
-      <div class="daily-progress margin-left-10">
-        
-          <div class="width-100">
-            <div class="chart quizz-progress">
-            <ion-progress-bar value="0.3" class="height-22"></ion-progress-bar>
-          </div>
-          <div class="font-size-12">
-            <div class="remainingDays">97Days Remaining</div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-    <div class="monthStyle">March 1-7</div>
 
-    <ion-card-content class="lineChartBac">
+    <div class="margin-top-10"></div>
+  </div>
+    <ion-card-content class="lineChartBac margin-top-15">
+      <ion-row class="margin-top-15 color-white" >
+        <ion-col>
+          <ion-card-header class="margin-0">
+            <ion-card-title class="color-white">
+              Let's track your  <br /> 
+              7 week progress
+            </ion-card-title>
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
       <ion-row class="lineChartHeader">
-        <ion-col size="2.4" [ngClass]="{'ColorChange' : OnWeightSelecr}" (click)="clickOnWeight()">
-          <ion-text class="font-size-15">
-            Weight
-
-          </ion-text>
+        <ion-col size="3.5" >
+          <div class="row">
+            <!-- <div class="weight-dot"></div><ion-text class="font-size-15">
+              Weight
+            </ion-text> -->
+          </div>
+          
         </ion-col>
-        <ion-col size="3.3" [ngClass]="{'ColorChange' : onBodyMassSelect}" (click)="clickOnBodyMass()">
-          <ion-text  class="font-size-15">
-           Body Mass
-          </ion-text>
+        <ion-col size="4.5" (click)="clickOnBodyFat()">
+          <div class="row">
+            <!-- <div class="body-fat-dot"></div><ion-text class="font-size-15">
+              Body Fat
+            </ion-text> -->
+          </div>
         </ion-col>
-        <ion-col size="3" (click)="clickOnBodyFat()">
-          <ion-text class="font-size-15" [ngClass]="{'ColorChange' : onBodyFatSelect}">
-            Body Fat
-
-          </ion-text>
-        </ion-col>
-        <ion-col size="3.2" class="margin-auto">
+        <ion-col size="4" class="margin-auto text-align-right">
           <select class="select-line">
             <option>Weekly</option>
           </select>
@@ -190,11 +268,10 @@
       <ion-row>
           <ion-col size=12 size-md="12" size-lg="8" size-xl="4" class="dateDiv">
               <div class='chart-container-big'>
-                  <canvas #barCanvas height="200" class="lineChart"></canvas> 
+                  <canvas #barCanvas height="250"  width="350" class="lineChart-bar"></canvas> 
               </div>
           </ion-col>
       </ion-row>
+      <ion-row class="margin-auto color-white"><ion-col><p claas="color-white">Week</p></ion-col></ion-row>
   </ion-card-content>
-  
-</div>
 </ion-content>

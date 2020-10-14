@@ -96,6 +96,30 @@ $fontGrayColor : rgb(67, 66, 66);
 	   border-radius: 30px;
 	 }
    }
+.fat-progress {
+	ion-progress-bar {
+		--background: green;
+		--buffer-background: #e2e2e2 ;
+		--progress-background: #2CA500;
+		border-radius: 30px;
+	  }
+}
+.protein-progress {
+	ion-progress-bar {
+		--background: green;
+		--buffer-background: #e2e2e2 ;
+		--progress-background: #00B8FF;
+		border-radius: 30px;
+	  }
+}
+.crab-progress {
+	ion-progress-bar {
+		--background: green;
+		--buffer-background: #e2e2e2 ;
+		--progress-background: #FF00CB;
+		border-radius: 30px;
+	  }
+}
    .ColorChange{
 	   color: white;
 	   border-bottom: 1px solid white;
@@ -138,7 +162,7 @@ $fontGrayColor : rgb(67, 66, 66);
 	width:250px;height:220px
 }
 .lineChart {
-	height: 250px;width: 100%;
+	height: 300px;width: 365px !important;
 }
 .daily-calories {
 	font-weight: 600;margin: 15px 10px;
@@ -166,7 +190,7 @@ $fontGrayColor : rgb(67, 66, 66);
 	font-weight: 600;font-size: 16px;padding: 10px 10px;
 }
 .lineChartBac {
-	background-color:#0417c2;margin: 0px 10px;border-radius: 15px;
+	background-color:#0417c2;
 }
 .lineChartHeader {
 	color:white
@@ -176,4 +200,157 @@ $fontGrayColor : rgb(67, 66, 66);
 }
 .select-line {
 	border: none;background: transparent;font-size: 15px;
+}
+.padding-20 {
+	padding: 20px
+}
+.padding-bottom-20 {
+	padding-bottom: 20px;
+}
+.margin-top-15 {
+	margin-top:15px
+}
+.color-text {
+	color: #003CCA ;
+	font-weight: bold;
+}
+.margin-top-20 {
+	margin-top:20px;
+}
+.water-intake {
+	background: linear-gradient(136.08deg, #99E7F7 0%, #00B0FF 100%);
+}
+p{
+	margin: 0px;
+	padding:0px;
+}
+h1 {
+	margin: 0px;
+	padding:0px;
+}
+h2 {
+	margin: 0px;
+	padding:0px;
+}
+h3 {
+	margin: 0px;
+	padding:0px;
+}
+.margin-0 {
+	margin : 0px;
+	padding:0px;
+} 
+.margin-auto{
+	text-align: center;
+	margin: auto;
+}
+.imgBacStyle{
+	margin: auto;
+    border-radius: 50%;
+    width: 71px;
+    height: 71px;
+	object-fit: cover;
+	margin-top: 5px;
+	border: 2px solid gainsboro;
+}
+.margin-top-7 {
+    margin-top: 7px;
+}
+.margin-top-10 {
+	margin-top: 10px
+}
+.color-black {
+	color: black;
+}
+.align-left {
+	text-align: right;
+	margin: auto;
+}
+.paddinleft-right-5 {
+	margin: 0px 5px;
+}
+.color-white {
+	color: white;
+}
+.Add-sleep {
+	background: linear-gradient(136.08deg, #0152C4 0%, #003347 100%)
+}
+.margin-top-25 {
+	margin-top: 25px;
+}
+.fat-color {
+	color: #2CA500; 
+}
+.align-center {
+	text-align: center;
+	margin: auto;
+}
+.protein-color {
+	color:#00B8FF;
+}
+.crab-color {
+	color:#FF00CB;
+}
+.margin-15 {
+	margin: 15px;
+}
+.icon-size {
+	font-size: -webkit-xxx-large;
+	color: black;
+}
+.button-bac {
+    background-color: transparent;
+    --background: transparent;
+}
+.margin-top-5 {
+	margin-top: 5px;
+}
+.ion-card-progress {
+	--box-shadow : unset;
+	box-shadow: unset;border: 2px solid gainsboro;
+}
+.weight-dot {
+	margin: 0px 5px;
+    background: #9FFF93;
+    color: #9FFF93;
+    border: 2px solid #9FFF93;
+    border-radius: 46px;
+    height: 12px;
+    width: 10px;
+    padding: 7px;
+    font-size: 11px;
+}
+.body-fat-dot {
+	margin: 0px 5px;
+    background: #FF8C57;
+    color:#FF8C57;
+    border: 2px solid #FF8C57;
+    border-radius: 46px;
+    height: 12px;
+    width: 10px;
+    padding: 7px;
+    font-size: 11px;
+}
+.content-div {
+	background-color: #FAFAFA;padding-bottom: 20px;
+}
+.progress-height {
+	height:110px
+}
+.margin-left-right-15 {
+	margin: 0px 15px;
+}
+.text-align-right {
+	text-align: right;margin-left: auto;
+}
+.pad-left-right-15 {
+	padding:0px 15px
+}
+.lineChart-bar {
+	height: 250px;width: 373px !important;
+	margin-left: -38px;
+	margin-top: -36px;
+}
+.header-css {
+    padding: 0px 15px;border-bottom: 2px solid gainsboro;
 }
