@@ -1,3 +1,4 @@
+import { title } from 'process';
 import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
@@ -20,7 +21,11 @@ import { Chart } from "chart.js";
 
 export class HomePage implements OnInit {
   @ViewChild("barCanvas") barCanvas: ElementRef;
+  @ViewChild("barIntakeCanvas") barIntakeCanvas: ElementRef
+  @ViewChild("barSleepCanvas") barSleepCanvas:ElementRef
+  private barIntake: Chart
   private barChart: Chart;
+  private barSleep: Chart;
   day = null;
   date = null;
   dayNumber = null;
@@ -64,7 +69,14 @@ export class HomePage implements OnInit {
     },
   ];
   data =[' ','100g',' ','of PROTEIN',' ']
-
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels = [];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  public barChartData = [];
   constructor(
     private router: Router, 
     private globalServices: GlobalServicesService, 
@@ -99,7 +111,6 @@ export class HomePage implements OnInit {
           maintainAspectRatio: true,
           plugins: {
               labels: {
-                render: 'percentage',
                 fontColor: ['white', 'white', 'white'],
                 precision: 0
               },
@@ -378,23 +389,23 @@ export class HomePage implements OnInit {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
         type:'line',
         data:{
-            labels:['Sun','MON', 'TUE','WED','THU','FRI','SAT'], 
+            labels:['1','2', '3','4','5','6','7','8','9'], 
             datasets:[{
-                label:'LAST WEEK',
-                data:[130,100,75,80.25,116,67,67],
+                label:'Weight',
+                data:[13,10,35,30.25,30,37,27,40,25],
                 fill:false,borderColor:'#00ff00',backgroundColor:'#00ff00'},
-                {label:'THIS WEEK',
-                data:[27.5,27.5,27.5,27.5,50,55,60],
+                {label:'Body Fat',
+                data:[27.5,27.5,27.5,27.5,40,35,30,20,25],
                 fill:false,borderColor:'rgb(255,165,0)',backgroundColor:'rgb(255,165,0)'
             }]
         },
         options: {
           legend: {
             display: true,
-            position: "bottom",
+            position: "top",
             labels:{
               fontColor:'white',
-              usePointStyle: true
+              usePointStyle: true,boxWidth:8
             }
           },
           scales: {
@@ -423,12 +434,155 @@ export class HomePage implements OnInit {
                 },
                 ticks: {
                   fontColor: "#CCC",
-                  padding:20
+                  padding:20,
+                  min: 0,
+                  max: 45,// Your absolute max value
+                  callback: function (value) {
+                    return value + '%'; // convert it to percentage
+                  },
+                },
+                scaleLabel: {
+                  display: true,
                 },
             }],
         }
         }
-    });
+    }); 
+    this.barIntakeCanvas.nativeElement.height = 200;
+    this.barIntakeCanvas.nativeElement.width = 300;
+    var gradientStroke = this.barIntakeCanvas.nativeElement.getContext('2d').createLinearGradient(0,0,0,300);
+    gradientStroke.addColorStop(0, "#375DFF");
+    gradientStroke.addColorStop(1, "#B02BEB");
+    this.barChartLabels = ['1','2', '3','4','5','6','7','8','9']
+    this.barChartData = [
+      {data: [20,30,75,80.25,50,67,67], label: 'WEEK',fill:false,borderColor:'red',backgroundColor:'red'},
+    ];
+    this.barIntake = new Chart(this.barIntakeCanvas.nativeElement, {
+      type:'bar',
+      data:{
+          labels:['1','2', '3','4','5','6','7','8','9'], 
+          datasets:[{
+              data:[20,30,75,80.25,50,67,67],
+              fill:true,borderColor:gradientStroke,backgroundColor:gradientStroke,
+              datalabels: {
+                display : false
+              }},
+              ],
+              
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        plugins: {
+          datalabels: {
+              display: false,
+          },
+          labels: {
+            render: () => {}
+          }
+      },
+        scales: {
+          xAxes: [{ 
+            
+              gridLines: {
+                  display: true,
+                  color: "white",
+                drawBorder:true,
+                drawTicks:false
+              },
+              ticks: {
+                fontColor: "white",
+                padding:10
+              },
+          }],
+          yAxes: [{
+              display: true,
+              gridLines: {
+                  display: true,
+                  color: "white",
+                drawBorder:true,
+                drawTicks:false,
+                tickMarkLength: 15  
+
+              },
+              ticks: {
+                fontColor: "white",
+                padding:20
+              },
+          }],
+      }
+      }
+  });
+  this.barSleepCanvas.nativeElement.height = 200;
+  this.barSleepCanvas.nativeElement.width = 300;
+  var gradientStroke2 = this.barSleepCanvas.nativeElement.getContext('2d').createLinearGradient(0,0,0,300);
+  gradientStroke2.addColorStop(0, "#37C2F5");
+  gradientStroke2.addColorStop(1, "#FF79E6");
+  this.barSleep = new Chart(this.barSleepCanvas.nativeElement, {
+    type:'bar',
+    data:{
+        labels:['1','2', '3','4','5','6','7','8','9'], 
+        datasets:[{
+            label:' WEEK',
+            data:[4,6,7,6.9,6,10,11,10,0,0],
+            fill:false,
+            borderColor:gradientStroke2,backgroundColor:gradientStroke2,datalabels:{
+            }}
+            
+      ]
+    },
+    options: {
+      legend: {
+        display: false,
+        position: "bottom",
+        labels:{
+          fontColor:'white',
+          usePointStyle: true
+        }
+      },
+      plugins: {
+        datalabels: {
+            display: false,
+        },
+        labels: {
+          render: () => {}
+        }
+    },
+      scales: {
+        
+        xAxes: [{ 
+            gridLines: {
+                display: true,
+                color: "white",
+              drawBorder:true,
+              drawTicks:false,
+              drawOnChartArea: true
+            },
+            ticks: {
+              fontColor: "white",
+              padding:10
+            },
+        }],
+        yAxes: [{
+            display: true,
+            gridLines: {
+                display: true,
+                color: "white",
+              drawBorder:true,
+              drawTicks:false,
+
+            },
+            scaleLabel: {
+              display: false,},
+            ticks: {
+              fontColor: "white",
+              padding:20
+            },
+        }],
+    }
+    }
+});
 
 }
 clickOnBodyFat() {

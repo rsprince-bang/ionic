@@ -1,24 +1,24 @@
-<ion-header style="padding: 0px 15px;border-bottom: 2px solid gainsboro;">
+<ion-header class="header-css">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button class="button-bac">
-        <ion-icon style="color: black;"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
+        <ion-icon class="color-black"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
        </ion-button>
       </ion-buttons>
     <ion-title class="title">{{title}}</ion-title>
     <ion-buttons slot="end" *ngIf="isProfilePage" (click)="onSttingsClick()">
         <ion-button class="button-bac">
-          <ion-icon style="color: black;" name="settings"></ion-icon>
+          <ion-icon class="color-black" name="settings"></ion-icon>
         </ion-button>
     </ion-buttons>
     <ion-buttons slot="end" *ngIf="isSettingsPage">
       <ion-button class="button-bac">
-        <div class="text-colo" style="text-transform: capitalize;font-size: 18px;">Edit</div>
+        <div class="text-colo edit-exit" >Edit</div>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end" *ngIf="isUploadData || isEditPhoto">
         <ion-button class="button-bac" (click)="closeUpload()">
-          <div class="text-colo" style="text-transform: capitalize;font-size: 18px;">Exit</div>
+          <div class="text-colo edit-exit" >Exit</div>
         </ion-button>
         </ion-buttons>
   </ion-toolbar>
@@ -26,14 +26,11 @@
 
 <ion-content >
   <div *ngIf="isProfilePage">
-    <div class="padding-20" style="background-color: #FAFAFA;padding-bottom: 20px;">
+    <div class="padding-20 profile-jack">
       <ion-row >
         <ion-col size="3" class="margin-0 margin-auto">
           <div >
             <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
-            <!-- <ion-card class="camera-div">
-              <ion-icon ios="ios-camera" md="md-camera" class="color-icon camera-icon"></ion-icon>
-          </ion-card> -->
           </div>
           </ion-col>
           <ion-col size="9" class="margin-top-10">
@@ -53,14 +50,14 @@
       <ion-row class="margin-top-10">
         <ion-col size="5.5" class="goal-weight">
           <div class="row">
-            <h1 class="margin-left">150</h1><p class="margin-right" style="font-weight: bold;margin-top: 7px;">Ibs</p>
+            <h1 class="margin-left">150</h1><p class="margin-right lbs-css">lbs</p>
           </div>
           <div>Goal Weight</div>
         </ion-col>
         <ion-col size="5.5" class="current-weight">
           <div class="row">
             <h1 class="margin-left">165</h1>
-            <p class="margin-right" style="font-weight: bold;margin-top: 7px;">Ibs</p>
+            <p class="margin-right lbs-css">lbs</p>
           </div>
           <div>Current Weight</div>
         </ion-col>
@@ -87,7 +84,7 @@
         <ion-progress-bar value="0.3" class="height-22"></ion-progress-bar>
       </div>
     </div>
-    <div class="padding-20" style="background-color:#FFFFFF;padding-top:20px;padding-bottom: 20px;">
+    <div class="padding-20 progress-photos-back">
       <ion-row >
         <ion-col size="9.5">
           <h2 class="margin-0">Progress Photos</h2>
@@ -99,20 +96,18 @@
       </ion-row>
       <ion-row class="margin-top-15">
         <ion-col size="5.8" class="margin-0" (click)="viewImg('../../../assets/img/Capture-bang.PNG',' September 29, 2020')">
-          <ion-card class="margin-0" style="margin-inline-start: 0px;
-          margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;">
+          <ion-card class="margin-0 date-card">
             <img class="workout-img"  src="../../../assets/img/Capture-bang.PNG">
-          <ion-card class="margin-0 date-css " style="color: #FFFFFF;text-align: center;"><div>
+          <ion-card class="margin-0 date-css date-center"><div>
             September 29, 2020
           </div></ion-card>
           </ion-card>
         </ion-col>
         <ion-col size="0.2"></ion-col>
         <ion-col size="5.8" class="margin-0" (click)="viewImg('../../../assets/img/Bang-prof.jpg',' September 29, 2020')">
-          <ion-card class="margin-0" style="margin-inline-start: 0px;
-          margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;">
+          <ion-card class="margin-0 date-card">
             <img class="workout-img" src="../../../assets/img/Bang-prof.jpg">
-          <ion-card class="margin-0 date-css" style="color: #FFFFFF;text-align: center;"><div>
+          <ion-card class="margin-0 date-css date-center"><div>
             September 29, 2020
           </div></ion-card>
           </ion-card>
@@ -124,7 +119,7 @@
         </ion-col>
       </ion-row>
     </div>
-    <div class="padding-20" style="padding-top:20px;background-color: #FAFAFA;">
+    <div class="padding-20 div-schedule">
       <ion-row >
         <ion-col size="9.5">
           <h2 class="margin-0">Your 7 Day Schedule</h2>
@@ -137,7 +132,7 @@
       <div class="margin-top-15">
         <ion-row >
           <ion-col class="week-border" *ngFor="let day of weekDays;let i = index;" [ngClass]="{'on-select-day week-border' :day.selected,'week-border':!day.selected}">
-            <div (click)="onClickDate(day,i)" style="text-align: center;">{{day.name}}</div>
+            <div (click)="onClickDate(day,i)"  class="text-align-center">{{day.name}}</div>
           </ion-col>
         </ion-row>
       </div>
@@ -151,12 +146,12 @@
       </ion-row>
       <div class="margin-top-15">
         <ion-item *ngFor="let date of todaysList;let i=index;" class="margin-0 ion-item-css" >
-          <ion-row  class="margin-0" style="width: 100%;">
+          <ion-row  class="margin-0 width-100">
             <ion-col size="11">
               <span class="text-color">{{date.time}} </span><span> - {{date.name}}</span>
             </ion-col>
             <ion-col size="1" (click)="deleteItem(i)">
-              <ion-icon style="color: red;" name="trash"></ion-icon>
+              <ion-icon class="color-red" name="trash"></ion-icon>
             </ion-col>
           </ion-row>
         </ion-item>
@@ -164,7 +159,7 @@
     </div>
   </div>
   <div *ngIf="isSettingsPage">
-    <div class="padding-20" style="background-color: #FAFAFA;">
+    <div class="padding-20 background-colo-white">
       <ion-row >
         <ion-col size="3" class="margin-0 margin-auto">
           <div >
@@ -187,23 +182,23 @@
           <h2 class="margin-0">General</h2>
         </ion-col>
       </ion-row>
-      <ion-item class="margin-0 ion-item-css ionItem-css" style="width:100%">
-        <ion-row style="width: 100%;">
+      <ion-item class="margin-0 ion-item-css ionItem-css width-100">
+        <ion-row  class="width-100">
           <ion-col size="9" class="text-align-left">
             Measurement Units (Ibs)
           </ion-col>
-          <ion-col size="3" style="text-align:right;">
-            <ion-toggle checked style="--handle-background-checked: white;"></ion-toggle>
+          <ion-col size="3" class="text-align-right">
+            <ion-toggle checked class="toggle-css"></ion-toggle>
           </ion-col>
         </ion-row >
       </ion-item>
-      <ion-item class="margin-0 ion-item-css ionItem-css" style="width:100%">
-        <ion-row style="width: 100%;">
+      <ion-item class="margin-0 ion-item-css ionItem-css width-100">
+        <ion-row  class="width-100">
           <ion-col size="9" class="text-align-left">
             Notifications
           </ion-col>
-          <ion-col size="3" style="text-align:right;">
-            <ion-toggle checked style="--handle-background-checked: white;"></ion-toggle>
+          <ion-col size="3" class="text-align-right">
+            <ion-toggle checked class="toggle-css"></ion-toggle>
           </ion-col>
         </ion-row>
       </ion-item>
@@ -217,18 +212,18 @@
       </ion-row>
       <ion-row >
         <ion-col class="week-border" *ngFor="let day of weekDays;let i = index;" [ngClass]="{'on-select-day week-border' :day.selected,'week-border':!day.selected}">
-          <div (click)="onClickDate(day,i)" style="text-align: center;">{{day.name}}</div>
+          <div (click)="onClickDate(day,i)"  class="text-align-center">{{day.name}}</div>
         </ion-col>
       </ion-row>
       <div class="margin-top-15">
         <ion-item class="margin-0 ion-item-css" >
-          <ion-row  class="margin-0" style="width: 100%;">
-            <ion-col size="8" style="text-align: left;margin: auto;">
+          <ion-row  class="margin-0 width-100">
+            <ion-col size="8"  class="text-margin-left">
               <span >Weigh In Days</span>
             </ion-col>
             <ion-col size="4" >
               <div class="row">
-                <ion-select name="weighInDays" [(ngModel)]="weighInDays" okText="OK" cancelText="Cancel" style="max-width:100%">
+                <ion-select name="weighInDays" [(ngModel)]="weighInDays" okText="OK" cancelText="Cancel" class="max-width-100">
                   <ion-select-option 
                     *ngFor="let item of weighInDaysList"
                     >
@@ -240,13 +235,13 @@
           </ion-row>
         </ion-item>
         <ion-item class="margin-0 ion-item-css" >
-          <ion-row  class="margin-0" style="width: 100%;">
-            <ion-col size="8" style="text-align: left;margin: auto;">
+          <ion-row  class="margin-0 width-100">
+            <ion-col size="8"  class="text-margin-left">
               <span >Pounds To Lose</span>
             </ion-col>
             <ion-col size="4" >
               <div class="row">
-                <ion-select name="weighWeight" [(ngModel)]="weighWeight" okText="OK" cancelText="Cancel" style="max-width:100%">
+                <ion-select name="weighWeight" [(ngModel)]="weighWeight" okText="OK" cancelText="Cancel" class="max-width-100">
                   <ion-select-option 
                     *ngFor="let item of weightRange"
                     >
@@ -260,10 +255,10 @@
         </ion-item>
       </div>
       <ion-row class="margin-top-20">
-        <ion-col size="6" class="margin-auto" style="text-align: left;font-size:20px" (click)="presentAlertConfirm()">
+        <ion-col size="6" class="margin-auto end-diet-css" (click)="presentAlertConfirm()">
           <b>End Diet</b>
         </ion-col>
-        <ion-col size="6" class="margin-auto " style="text-align: right;font-size:20px;color: #003CCA"
+        <ion-col size="6" class="margin-auto  logout"
         (click)="logout()">
          <b>Logout</b>
         </ion-col>
@@ -289,23 +284,23 @@
                 </div>
             </div>
         </div>
-        <ion-card *ngIf="!imageUrl" style="text-align: center;" class="tapToUpload" (click)="fileInput.click()">
+        <ion-card *ngIf="!imageUrl"  class="text-align-center" class="tapToUpload" (click)="fileInput.click()">
           <ion-icon style="font-size: 24px;" name="image"></ion-icon>
           <div>Tap to upload</div>
         </ion-card>
       </ion-col>
     </ion-row>
-    <div style="margin-top: 95px;" *ngIf="!imageUrl"></div>
+    <div class="margin-top-95" *ngIf="!imageUrl"></div>
     <div class="margin-top-15">
       <ion-item  class="margin-0 ion-item-css" >
-        <ion-row  class="margin-0" style="width: 100%;">
-          <ion-col size="8" style="text-align: left;margin: auto;">
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="8"  class="text-margin-left">
             <span > Body Fat</span>
           </ion-col>
           <ion-col size="4" >
             <div class="row">
               <ion-select name="todayBodyFat" [(ngModel)]="todayBodyFat" okText="OK" cancelText="Cancel" 
-              style="max-width:100%" (ngModelChange)="onChangeFat(todayBodyFat)">
+              class="max-width-100" (ngModelChange)="onChangeFat(todayBodyFat)">
                 <ion-select-option 
                   *ngFor="let item of bodyfatRange"
                   [value]="item">
@@ -318,14 +313,14 @@
         </ion-row>
       </ion-item>
       <ion-item  class="margin-0 ion-item-css" >
-        <ion-row  class="margin-0" style="width: 100%;">
-          <ion-col size="8" style="text-align: left;margin: auto;">
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="8"  class="text-margin-left">
             <span > Body Mass</span>
           </ion-col>
           <ion-col size="4" >
             <div class="row">
               <ion-select name="todayBodyMass" [(ngModel)]="todayBodyMass" okText="OK" cancelText="Cancel" 
-              style="max-width:100%" (ngModelChange)="onChangeMass(todayBodyMass)">
+              class="max-width-100" (ngModelChange)="onChangeMass(todayBodyMass)">
                 <ion-select-option 
                   *ngFor="let item of bodyfatMass"
                   [value]="item">
@@ -338,14 +333,14 @@
         </ion-row>
       </ion-item>
       <ion-item  class="margin-0 ion-item-css" >
-        <ion-row  class="margin-0" style="width: 100%;">
-          <ion-col size="8" style="text-align: left;margin: auto;">
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="8"  class="text-margin-left">
             <span >Weight</span>
           </ion-col>
           <ion-col size="4" >
             <div class="row">
               <ion-select name="todayWeight" [(ngModel)]="todayWeight" okText="OK" cancelText="Cancel" 
-              (ngModelChange)="onChangeWeight(todayWeight)" style="max-width:100%">
+              (ngModelChange)="onChangeWeight(todayWeight)" class="max-width-100">
                 <ion-select-option 
                   *ngFor="let item of weightRange"
                   >
@@ -360,7 +355,7 @@
     </div>
     <ion-row class="margin-top-15">
       <ion-col>
-        <ion-button expand="block" mode="md" style="text-transform: capitalize;--border-radius: 30px;margin: 0px;" (click)="closeUpload()">Save</ion-button>
+        <ion-button expand="block" mode="md" class="save-button" (click)="closeUpload()">Save</ion-button>
       </ion-col>
     </ion-row>
   </div>
@@ -383,13 +378,13 @@
     <div class="margin-top-15">
       <ion-item  class="margin-0 ion-item-css" >
         <ion-row  class="margin-0 width-100">
-          <ion-col size="8" style="text-align: left;margin: auto;">
+          <ion-col size="8"  class="text-margin-left">
             <span > Body Fat</span>
           </ion-col>
           <ion-col size="4" >
             <div class="row">
               <ion-select name="todayBodyFat" [(ngModel)]="todayBodyFat" okText="OK" cancelText="Cancel" 
-              style="max-width:100%" (ngModelChange)="onChangeFat(todayBodyFat)">
+              class="max-width-100" (ngModelChange)="onChangeFat(todayBodyFat)">
                 <ion-select-option 
                   *ngFor="let item of bodyfatRange"
                   [value]="item">
@@ -402,14 +397,14 @@
         </ion-row>
       </ion-item>
       <ion-item  class="margin-0 ion-item-css" >
-        <ion-row  class="margin-0" style="width: 100%;">
-          <ion-col size="8" style="text-align: left;margin: auto;">
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="8"  class="text-margin-left">
             <span > Body Mass</span>
           </ion-col>
           <ion-col size="4" >
             <div class="row">
               <ion-select name="todayBodyMass" [(ngModel)]="todayBodyMass" okText="OK" cancelText="Cancel" 
-              style="max-width:100%" (ngModelChange)="onChangeMass(todayBodyMass)">
+               class="max-width-100" (ngModelChange)="onChangeMass(todayBodyMass)">
                 <ion-select-option 
                   *ngFor="let item of bodyfatMass"
                   [value]="item">
@@ -422,14 +417,14 @@
         </ion-row>
       </ion-item>
       <ion-item  class="margin-0 ion-item-css" >
-        <ion-row  class="margin-0" style="width: 100%;">
-          <ion-col size="8" style="text-align: left;margin: auto;">
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="8"  class="text-margin-left">
             <span >Weight</span>
           </ion-col>
           <ion-col size="4" >
             <div class="row">
               <ion-select name="todayWeight" [(ngModel)]="todayWeight" okText="OK" cancelText="Cancel" 
-              (ngModelChange)="onChangeWeight(todayWeight)" style="max-width:100%">
+              (ngModelChange)="onChangeWeight(todayWeight)"  class="max-width-100">
                 <ion-select-option 
                   *ngFor="let item of weightRange"
                   >
@@ -444,21 +439,19 @@
     </div>
     <ion-row class="margin-top-15">
       <ion-col>
-        <ion-button expand="block" mode="md" style="text-transform: capitalize;--border-radius: 30px;
-        margin: 0px;" (click)="closeUpload()">Save</ion-button>
+        <ion-button expand="block" mode="md" class="save-button" (click)="closeUpload()">Save</ion-button>
       </ion-col>
     </ion-row>
     <ion-row class="margin-top-15">
-      <ion-col style="margin: auto;">
+      <ion-col class="margin-auto">
        <div class="row" (click)="closeUpload()">
-        <div style="margin-left: auto;">
-          <ion-icon style="color: red;font-size:xx-large" name="trash"></ion-icon>
+        <div class="margin-left-auto">
+          <ion-icon class="trash-css" name="trash"></ion-icon>
         </div>
-        <div style="margin-right: auto;"><p style="font-weight: bold;margin: 0px;
-          margin-top: 6px;">Delete Photo</p></div>
+        <div class="margin-right-auto"><p class="delete-photo">Delete Photo</p></div>
        </div>
       </ion-col>
     </ion-row>
   </div>
 </ion-content>
-<ion-footer style="border-bottom: 2px solid gainsboro;"></ion-footer>
+<ion-footer class="footer-border"></ion-footer>
