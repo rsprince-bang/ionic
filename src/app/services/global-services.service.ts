@@ -6,6 +6,8 @@ import { environment } from '../../environments/environment';
 import { NavController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Plugins } from '@capacitor/core';
+import { AlertsPageModule } from '../user_pages/alerts/alerts.module';
+const {LocalNotifications} = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -248,57 +250,83 @@ export class GlobalServicesService {
 
   //Alerts will be save in database and local storage, so we have a list of them. THey will need to be wiped when user logs out.
   //and reset when user logs in
-  // addAlert(date, time, weekly_repeat:boolean){
-    
-  //   var alerts = localStorage.getItem("alerts");
-  //   if( !alerts ){
-  //     var arr = [{date:date, time:time, weekly_repeat:weekly_repeat}];
-  //     localStorage.setItem("alerts", JSON.stringify(arr));
-  //   }
-  //   else{
-  //     var alertsarr = JSON.parse(alerts);
-  //     alertsarr.push({date:date, time:time, weekly_repeat:weekly_repeat});
-  //     localStorage.setItem("alerts", JSON.stringify(alertsarr));
-  //   }
-  // }
-
-  async syncAlerts(alertsJson){
+  //call this function when user logs in or set diet goals and diet plan (7 or 12)
+  async syncAlerts(){
     const device = await Plugins.Device.getInfo();
+
     if( device.platform == 'android' || device.platform == 'ios' ){
-      //first clear existing alerts
-      await this.clearAlerts();
 
-      for(var i=0;i< alertsJson.length; i++){
-        //add local notifications
-        var splitted_date = alertsJson[i].date.split("-", 3);
-        var alert_year = Number( splitted_date[0] );
-        var alert_month = Number( splitted_date[1].replace(/^0+/, '') );
-        var alert_day = Number( splitted_date[2].replace(/^0+/, '') );
+      var alerts = JSON.parse(localStorage.getItem("alerts"));
+      JSON.parse(localStorage.getItem('todayBodyMass'))
+      var diet_plan_length = localStorage.getItem("diet_plan_length");
+      //var dietStarDate = new Date( localStorage.getItem("diet_start_date") );
+      var diet_start_date = JSON.parse( localStorage.getItem("diet_start_date") )+"T00:00:00";
+      var dietEndDate = new Date( diet_start_date );
+      dietEndDate.setDate(dietEndDate.getDate() + Number(diet_plan_length) * 7);
+      var todayDate = new Date();
 
-        var splitted_time = alertsJson[i].time.split(":", 2);
-        var alert_hour = Number( splitted_time[0].replace(/^0+/, '') );
-        var alert_time = Number( splitted_time[1].replace(/^0+/, '') );
+      if( alerts && diet_plan_length ){
+        if( todayDate.getTime() < dietEndDate.getTime() ){ //only et alerts if we havent met diet end date
+          //get permissions
+          await LocalNotifications.requestPermission();
 
-        const notifs = await Plugins.LocalNotifications.schedule({
-          notifications: [
-            {
-              title: "Reminder",
-              body: "Time to weight in",
-              id: alertsJson[i].id,
-              schedule: { 
-                on: {
-                  year: alert_year,
-                  month: alert_month,
-                  day: alert_day,
-                  hour: alert_hour,
-                  minute: alert_time
-                },
-                repeats: alertsJson[i].weekly_repeat,
-                every: 'week'
-              }
+          //first clear existing alerts
+          await this.clearAlerts();
+
+          //set alerts in loop
+          for(var i=0;i< alerts.length; i++){
+            //add local notifications
+            var daynum = null;
+            switch (alerts[i].day) {
+              case "sun":
+                  daynum = 0;
+                  break;
+              case "mon":
+                  daynum = 1;
+                  break;
+              case 'tue':
+                  daynum = 2;
+                  break;
+              case "wed":
+                  daynum = 3;
+                  break;
+              case "thu":
+                  daynum = 4;
+                  break;
+              case "fri":
+                  daynum = 5;
+                  break;
+              case "sat":
+                  daynum = 6;
+                  break;
+              default:
+                  //console.log("No such day exists!");
+                  break;
             }
-          ]
-        });
+            //so far we have an alarm set for daynum of the week
+            //get when is the next such day of week, i.e. get next monday
+            //use today as starting point
+            var nextAlarmDate =  new Date( this.getTodayDate()+'T'+alerts[i].time ); //set time
+            //now get the actual next date
+            nextAlarmDate = this.getNextDayOfWeek(nextAlarmDate, daynum); //this is when the alarm should be
+            while ( nextAlarmDate.getTime() < dietEndDate.getTime() ) {
+              var id = ""+nextAlarmDate.getFullYear()+nextAlarmDate.getMonth()+nextAlarmDate.getDate()+nextAlarmDate.getHours()+nextAlarmDate.getMinutes();
+              var notifs = await LocalNotifications.schedule({
+                notifications: [
+                  {
+                    title: "Reminder",
+                    body: "Time to weight in",
+                    id: Number(id),
+                    schedule: { 
+                      at: nextAlarmDate,
+                    }
+                  }
+                ]
+              });
+              nextAlarmDate.setDate(nextAlarmDate.getDate() + 7); //keep adding 7 days until we reach diet end
+            }
+          }
+        }
       }
     }
   }
@@ -306,11 +334,17 @@ export class GlobalServicesService {
   async clearAlerts(){
     const device = await Plugins.Device.getInfo();
     if( device.platform == 'android' || device.platform == 'ios' ){
-      const pending = await Plugins.LocalNotifications.getPending();
+      const pending = await LocalNotifications.getPending();
       if( pending.notifications.length > 0 ){
-        await Plugins.LocalNotifications.cancel(pending);
+        await LocalNotifications.cancel(pending);
       }
     }  
+  }
+
+  getNextDayOfWeek(date, dayOfWeek) {
+    var resultDate = new Date(date.getTime());
+    resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
+    return resultDate;
   }
 
 }

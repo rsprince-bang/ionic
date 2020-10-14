@@ -7,24 +7,35 @@
         <ion-col>
 
             <ion-label position="stacked">Email</ion-label>
-            <ion-input type="email" formControlName="email" placeholder="Enter your email" required>
+            <ion-input 
+              [class.ion-input.ion-valid]="credentialsForm.pristine"
+              type="email" 
+              formControlName="email" 
+              placeholder="Enter your email" 
+              required>
               <ion-icon name="mail" size="small"></ion-icon>
             </ion-input>
  
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
-            Email address is required.
+            Please enter your email address.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.email">
+            Please provide a properly formatted email address.
           </span>
         </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row> 
         <ion-col>
           <ion-label position="stacked">Password</ion-label>
           <ion-input type="password" placeholder="Enter your password" formControlName="password" required>
             <ion-icon name="lock" size="small"></ion-icon>
           </ion-input>
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
-            Password is required.
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+            Please enter your password.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.minlength">
+            Your password does not meet length requirements
           </span>
         </ion-col>
       </ion-row>
@@ -62,7 +73,6 @@
           expand="block"
           type="submit"  
           shape="round">
-          <!-- class="btn btn-login btn-round ion-text-center"  -->
           <!-- [disabled]="!credentialsForm.valid" -->
             Login
           </ion-button>
