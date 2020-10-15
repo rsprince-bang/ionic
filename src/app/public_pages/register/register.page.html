@@ -95,8 +95,16 @@
             <small>
               I agree. 
             </small>
-            <ion-checkbox slot="start" color="primary"></ion-checkbox>
+            <ion-checkbox 
+              type="checkbox"
+              formControlName="agree"
+              slot="start" 
+              color="primary">
+            </ion-checkbox>
           </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.agree.errors?.required">
+            Please check to agree to terms & conditions.
+          </span>
         </ion-col>
       </ion-row>
 
