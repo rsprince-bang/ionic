@@ -39,19 +39,21 @@ export class SetGoalsPage implements OnInit {
     this.selected_time = this.globalServices.formatTime(this.date);
   }
 
+  // function to select multiple weigh in days
   // select(item) {
   //   item.selected = !item.selected;
   //   console.log(item.selected);
   //   // item.selected = true;   
   // }
 
+  // isActive(item) {
+  //   return item.selected === item;
+  // };
+
+  // function to select one weighin day.
   select(item) {
     this.weighinDay = item;
   }
-
-  isActive(item) {
-    return item.selected === item;
-  };
 
 
   continue() {

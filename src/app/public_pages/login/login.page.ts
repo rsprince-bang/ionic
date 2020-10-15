@@ -97,7 +97,7 @@ export class LoginPage implements OnInit {
               localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
               localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
               this.globalServices.syncAlerts();
-              
+
               this.router.navigateByUrl("/tabs/home/today");
             }
           }
@@ -114,7 +114,7 @@ export class LoginPage implements OnInit {
       message: message,
       showCloseButton: false,
       position: 'bottom',
-      closeButtonText: 'OK',
+      closeButtonText: '',
       duration: 3000,
       translucent: false,
       color: "dark"

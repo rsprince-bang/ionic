@@ -12,7 +12,14 @@ import { Router } from '@angular/router';
 export class RegisterPage implements OnInit {
 
   registerForm: FormGroup;
-  constructor(private router: Router, private formBuilder: FormBuilder, private myAPI: ApiCallService, private globalServices: GlobalServicesService) { }
+  isSubmitted = false;
+
+  constructor(
+    private router: Router, 
+    private formBuilder: FormBuilder, 
+    private myAPI: ApiCallService, 
+    private globalServices: GlobalServicesService
+  ) { }
 
   ngOnInit() {
     //initialize and set form values
@@ -20,14 +27,13 @@ export class RegisterPage implements OnInit {
       first_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       last_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(1)]],
-      password_verify: ['', [Validators.required, Validators.minLength(1)]]
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
-
   register() {
-    // if (this.registerForm.value.password == this.registerForm.value.password_verify) {
+    this.isSubmitted = true;
+    if (this.registerForm.valid) {
       this.myAPI.makeAPIcall(
         "login",
         {
@@ -63,9 +69,9 @@ export class RegisterPage implements OnInit {
         }
       );
     }
-  //   else {
-  //     this.myAPI.presentToastWithOptions("Password does not match.");
-  //   }
-  // }
+  }
 
+  get errorControl() {
+    return this.registerForm.controls;
+  }
 }
