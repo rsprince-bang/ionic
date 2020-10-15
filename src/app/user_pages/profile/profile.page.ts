@@ -236,8 +236,31 @@ editImg = ""
       
     }
   }
-  deleteItem(index) {
-    this.todaysList.splice(index,1)
+ 
+  async deleteItem(index) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Do you want to delete the Item?',
+      message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequuntur odit rerum quam repellat maxime, quidem nobis modi, quaerat culpa assumenda sint non asperiores quod dolore adipisci vero, fuga facere.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          cssClass: 'endDiet',
+          handler: () => {
+            this.todaysList.splice(index,1)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
   onSttingsClick() {
     this.isProfilePage = false;
