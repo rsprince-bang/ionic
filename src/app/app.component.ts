@@ -4,7 +4,6 @@ import { Platform, Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-
 import { Router } from '@angular/router';
 import { ApiCallService } from './services/api-call.service';
 import { GlobalServicesService } from './services/global-services.service';
@@ -25,7 +24,8 @@ export class AppComponent {
     private ApiCallService: ApiCallService,
     private router: Router,
     private globalservice: GlobalServicesService,
-    public events: Events
+    public events: Events,
+    
   ) {
     this.initializeApp();
     this.events.subscribe( 'user logged in', (a, b)=> {
@@ -37,7 +37,9 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       //maybe check if token is valid
-      this.statusBar.styleDefault();
+      // this.statusBar.styleDefault();
+      this.statusBar.overlaysWebView(true);
+      this.statusBar.backgroundColorByHexString('#ff0000');
       this.splashScreen.hide();
 
       if( this.globalservice.isLoggedIn() ){

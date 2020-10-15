@@ -115,6 +115,7 @@ export class EnterMeasurementsPage implements OnInit {
     }
   }
 
+  // generates age options
   generateAges(start, end) {
     for(let i = start; i <= end; i++){
       this.ageOptions.push(i);
@@ -122,6 +123,7 @@ export class EnterMeasurementsPage implements OnInit {
 		return true;
   }
 
+  // generates height options
   generateHeights(start, end) {
     for(let feet = start; feet <= end; feet++){
       for(let inches = 0; inches <= 11; inches++) {
@@ -133,6 +135,7 @@ export class EnterMeasurementsPage implements OnInit {
 		return true;
   }
 
+  // generate weight options
   generateWeights(start, end) {
     for(let i = start; i <= end; i++){
       this.weightOptions.push(i);
