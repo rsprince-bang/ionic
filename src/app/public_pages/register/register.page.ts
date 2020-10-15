@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ export class RegisterPage implements OnInit {
 
   registerForm: FormGroup;
   isSubmitted = false;
+  isChecked = true;
 
   constructor(
     private router: Router, 
@@ -27,7 +28,8 @@ export class RegisterPage implements OnInit {
       first_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       last_name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      agree: [false, Validators.requiredTrue]
     });
   }
 
@@ -74,4 +76,5 @@ export class RegisterPage implements OnInit {
   get errorControl() {
     return this.registerForm.controls;
   }
+
 }
