@@ -57,6 +57,17 @@ ion-header button {
 }
 
 .form ion-input, ion-input {
+	color: #2c2c2c !important;
+	background: #EAEEF8 !important;
+	height: 50px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+    ion-icon {
+        padding: 0 6px;
+    }
+}
+ion-input {
 	color: #2c2c2c;
 	background: #EAEEF8;
 	height: 50px;

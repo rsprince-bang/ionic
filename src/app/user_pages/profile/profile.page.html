@@ -6,7 +6,7 @@
        </ion-button>
       </ion-buttons>
     <ion-title class="title">{{title}}</ion-title>
-    <ion-buttons slot="end" *ngIf="isProfilePage" (click)="onSttingsClick()">
+    <ion-buttons slot="end" *ngIf="isProfilePage" (click)="onSettingsClick()">
         <ion-button class="button-bac">
           <ion-icon class="color-black" name="settings"></ion-icon>
         </ion-button>
@@ -16,7 +16,7 @@
         <div class="text-colo edit-exit" >Edit</div>
       </ion-button>
       </ion-buttons>
-      <ion-buttons slot="end" *ngIf="isUploadData || isEditPhoto">
+      <ion-buttons slot="end" *ngIf="isUploadData || isEditPhoto || isSchedulePage">
         <ion-button class="button-bac" (click)="closeUpload()">
           <div class="text-colo edit-exit" >Exit</div>
         </ion-button>
@@ -38,7 +38,7 @@
               <h2 class="margin-0 margin-to-7">
                 Good Morning, Jack.
               </h2>
-              <p class="margin-0 font-size-14">Dont forget to add your gaines today!</p>
+              <p class="margin-0 font-size-14">Don't forget to add your gaines today!</p>
             </div>
         </ion-col>
       </ion-row>
@@ -125,7 +125,7 @@
           <h2 class="margin-0">Your 7 Day Schedule</h2>
           <p class="margin-0">[Add something about being consistent]</p>
         </ion-col>
-        <ion-col size="2.5" class="margin-auto">
+        <ion-col size="2.5" class="margin-auto" (click)="onClickAddSchedule()">
           <ion-icon class="plus-icon" name="add-circle"></ion-icon>
         </ion-col>
       </ion-row>
@@ -302,7 +302,7 @@
               <ion-select name="todayBodyFat" [(ngModel)]="todayBodyFat" okText="OK" cancelText="Cancel" 
               class="max-width-100" (ngModelChange)="onChangeFat(todayBodyFat)">
                 <ion-select-option 
-                  *ngFor="let item of bodyfatRange"
+                  *ngFor="let item of bodyFatRange"
                   [value]="item">
                     {{ item }}%
                   </ion-select-option>
@@ -322,7 +322,7 @@
               <ion-select name="todayBodyMass" [(ngModel)]="todayBodyMass" okText="OK" cancelText="Cancel" 
               class="max-width-100" (ngModelChange)="onChangeMass(todayBodyMass)">
                 <ion-select-option 
-                  *ngFor="let item of bodyfatMass"
+                  *ngFor="let item of bodyFatMass"
                   [value]="item">
                     {{ item }}%
                   </ion-select-option>
@@ -386,7 +386,7 @@
               <ion-select name="todayBodyFat" [(ngModel)]="todayBodyFat" okText="OK" cancelText="Cancel" 
               class="max-width-100" (ngModelChange)="onChangeFat(todayBodyFat)">
                 <ion-select-option 
-                  *ngFor="let item of bodyfatRange"
+                  *ngFor="let item of bodyFatRange"
                   [value]="item">
                     {{ item }}%
                   </ion-select-option>
@@ -406,7 +406,7 @@
               <ion-select name="todayBodyMass" [(ngModel)]="todayBodyMass" okText="OK" cancelText="Cancel" 
                class="max-width-100" (ngModelChange)="onChangeMass(todayBodyMass)">
                 <ion-select-option 
-                  *ngFor="let item of bodyfatMass"
+                  *ngFor="let item of bodyFatMass"
                   [value]="item">
                     {{ item }}%
                   </ion-select-option>
@@ -450,6 +450,91 @@
        <div class="margin-right-auto"><p class="delete-photo">Delete Photo</p></div>
       </div>
      </ion-col>
+  </div>
+  <div *ngIf="isSchedulePage" class="padding-20">
+    <ion-row class="margin-top-30">
+      <ion-col >
+        <h1>SCHEDULE</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-15">
+      <ion-col>
+        <div>Title</div>
+        <div class="margin-top-10">
+          <ion-input type="text" placeholder="Workout..." class="form"></ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+    <div class="margin-top-15">
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="7"  class="text-margin-left">
+            <span > Alert Day</span>
+          </ion-col>
+          <ion-col size="5" >
+            <div class="row">
+              <ion-select name="startDay" [(ngModel)]="startDay" okText="OK" cancelText="Cancel" 
+              class="max-width-100 margin-left-auto" (ngModelChange)="onChangeStartDay(startDay)">
+                <ion-select-option 
+                  *ngFor="let item of startDayList"
+                  [value]="item">
+                    {{ item }}
+                  </ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="7"  class="text-margin-left">
+            <span > Start Time</span>
+          </ion-col>
+          <ion-col size="5" >
+            <div class="row">
+              <ion-select name="startTime" [(ngModel)]="startTime" okText="OK" cancelText="Cancel" 
+              class="max-width-100 margin-left-auto" (ngModelChange)="onChangeStartTime(startTime)">
+                <ion-select-option 
+                  *ngFor="let item of weighInDaysList"
+                  [value]="item">
+                    {{ item }}
+                  </ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item  class="margin-0 ion-item-css" >
+        <ion-row  class="margin-0 width-100">
+          <ion-col size="7"  class="text-margin-left">
+            <span >End Time</span>
+          </ion-col>
+          <ion-col size="5" >
+            <div class="row">
+              <ion-select name="endTime" [(ngModel)]="endTime" okText="OK" cancelText="Cancel" 
+              (ngModelChange)="onChangeEndTime(endTime)" class="max-width-100 margin-left-auto">
+                <ion-select-option *ngFor="let item of weighInDaysList">
+                    {{ item }}
+                  </ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <div class="margin-top-15">
+        <div>Repeat</div>
+        <ion-row class="margin-top-10">
+          <ion-col class="week-border" *ngFor="let day of weekDaysList;let i = index;" [ngClass]="{'on-select-day week-border' :day.selected,'week-border':!day.selected}">
+            <div (click)="onClickWeekDay(day,i)"  class="text-align-center">{{day.name}}</div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+    <ion-row class="margin-top-15">
+      <ion-col>
+        <ion-button expand="block" mode="md" class="save-button" (click)="closeUpload()">Save</ion-button>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>
 <ion-footer class="footer-border"></ion-footer>
