@@ -653,4 +653,17 @@
 .text-align-left {
     text-align: left;
 }
+.cs-border-sub {
+    --background:whitesmoke;
+    border: 1px solid whitesmoke;
+    --color: black;
+    --placeholder-opacity: 1;
+    --padding-start: 0;
+    border-radius: 7px;
+    margin: auto;
+    font-size: 90%;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+}
 /* end of custom generated icons styles */
