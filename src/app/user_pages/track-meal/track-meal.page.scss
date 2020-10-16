@@ -139,7 +139,7 @@ svg {
 	min-height:auto;
 	width: 100%;
 }
-.quizz-progress {
+.ionBar-progress {
 	ion-progress-bar {
 	   --background: green;
 	   --buffer-background: #e2e2e2 ;
@@ -148,7 +148,7 @@ svg {
     //    border-bottom-left-radius: 30px;
 	 }
 }
-.remaingName {
+.remainingName {
     font-size: 20px;
     font-weight: 600;
     text-align: center;
@@ -174,10 +174,7 @@ svg {
 		color: #0417c2;
 	}
 }
-.ion-card {
-    background-color:#f1f1f1;margin: 0px;
-    padding: 10px 0px;
-}
+
 .progress-div {
     margin: auto ;height: 100%;
 }
@@ -257,3 +254,51 @@ svg {
  .margin-10 {
     margin: 10px;
  }
+ .meal-progress {
+	ion-progress-bar {
+	   --background: green;
+	   --buffer-background: #e2e2e2 ;
+	   --progress-background:#0417c2 ;
+	   border-radius: 30px;
+	 }
+   }
+.icon-size {
+	font-size: -webkit-xxx-large;
+	color: black;
+}
+.ion-card-no-padding {
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+}
+.align-center {
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+.zeroCard {
+    background: linear-gradient(117.92deg, #01C2B2 0%, #00287C 100%) !important;
+}
+.header-css {
+    padding: 0px 15px;border-bottom: 2px solid gainsboro;
+}
+.grid1-background {
+    background-color:  #FAFAFA;
+}
+.current-weight {
+    background: linear-gradient(162.34deg,
+    #02E3D6 0%, #0140C2 100%);
+    box-shadow: 0 2px 34px 0 rgba(0,0,0,0.2);
+    padding: 22px 0px;
+    text-align: center;
+    margin: auto;
+    color:white;
+}
+.goal-weight {
+    background: linear-gradient(162.34deg, #F200D7 0%,
+    #9625C1 100%);
+    box-shadow: 0 2px 34px 0 rgba(0,0,0,0.2);
+    padding: 22px 0px;
+    text-align: center;
+    margin: auto;
+    color:white;
+}

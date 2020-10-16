@@ -47,10 +47,15 @@ export class TrackMealPage implements OnInit {
   pieChartPlugins = [];
   pieChartColors = [
     {
-      backgroundColor: ['rgba(0,0,255,1.0)', 'rgba(255,165,0,1.0)', 'rgba(0,255,0,1.0)'],
+      backgroundColor: ['#00B8FF', '#FF00CB', '#2CA500'],
     },
   ];
-
+  todaysMealsList = [{name: '10 Ounces of ribeye', cal: '769 cal.', selected: false},
+  {name: '2 Ounces of broccoli', cal: '80 cal.', selected: false},
+  {name: '1 Ounces of cheese', cal: '100 cal.', selected: false}]
+  suggestionList =  [{name: 'Bang Keto Coffee- BCB', cal: '120 cal.', selected: false},
+  {name: 'Pristine Protein WPI ', cal: '90 cal.', selected: false},
+  {name: '8 KETO ZERO CARB', cal: '50 cal.', selected: false}]
   constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,public router: Router
    , private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
 
@@ -222,5 +227,7 @@ export class TrackMealPage implements OnInit {
     }
     this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }
-
+  expandRow(data) {
+    data.selected = !data.selected;
+  }
 }

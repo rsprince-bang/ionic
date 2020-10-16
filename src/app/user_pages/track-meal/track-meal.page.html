@@ -1,159 +1,270 @@
-<ion-header>
+<ion-header class="header-css">
   <ion-toolbar>
-    
-    <ion-buttons slot="start">
-      <ion-menu-toggle>
-        <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-button>
-      </ion-menu-toggle>
+    <ion-buttons slot="start" >
+    <ion-button class="button-bac">
+      <ion-icon class="color-black"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
+     </ion-button>
     </ion-buttons>
-    
-    <ion-title> Meal</ion-title>
-    
-    <!-- <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img> -->
 
-  </ion-toolbar>
+      <ion-title class="text-capitalize">Meals</ion-title>
+      <ion-buttons slot="end" >
+        <ion-button class="button-bac">
+          <ion-icon class="color-black" name="settings"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+</ion-toolbar>
 </ion-header>
-
 <ion-content class="track-meal">
-  <ion-card class="ion-card">
+  <ion-grid class="padding-20 grid1-background" >
     <ion-row>
-      <ion-col size="4">
-        <div class="progress-div">
-          <!-- <img class="imgBacStyle" src="../../../assets/img/track-workout-footer-background.jpg"> -->
-          <circle-progress
-            [percent]="58"
-            [showInnerStroke]="true" [radius]="200"
-              [outerStrokeWidth]="16"
-              [innerStrokeWidth]="19"
-              [space]="-14"
-              [outerStrokeColor]="'#0417c2'"
-              [innerStrokeColor] = "'white'"
-              [backgroundStroke]="'white'"
-              [animation]="true"
-              [showTitle] = "true"
-              [animationDuration]="300" [title]="[' ','27%','Completed',' ']"
-              [outerStrokeGradientStopColor] ="'white'"
-              [backgroundGradientStopColor] = "'white'"
-              [titleColor] = "'#0417c2'"
-              [titleFontSize] = "60"
-              [subtitle] = "'767/2804'"
-              [showSubtitle] ="true"
-              [subtitleColor] = "'black'"
-              [subtitleFontSize]="40"
-              [subtitleFontWeight] ="600"
-              [titleFontWeight]='800'
-            ></circle-progress>
-        </div>
+      <ion-col size="8">
+        <h2>Today's Nutrition</h2>
       </ion-col>
-      <ion-col>
-        <div class="nameStyle">
-          JHON DOE
-        </div>
-        <div class="dailyTracking">Your Daily Tracking Report</div>
-        <div class="row dateDiv">
-          <div class="backArrow">
-            <ion-icon class="icon-color" name="arrow-back"  
-            (click)="handleSwipeRight()" *ngIf="dayNumberVal != 17"></ion-icon>
-          </div>
-          <div class="margin-auto">
-            <div class="daySytle"><b>
-              DAY {{dayNumberVal}}
-            </b></div>
-            <div class="day-val">March {{dateVal}},2020</div>
-          </div>
-          <div  class="backArrow">
-            <ion-icon class="icon-color" name="arrow-forward" 
-            (click)="handleSwipeLeft()" *ngIf="dayNumberVal != 19"></ion-icon>
-          </div>
-        </div>
+      <ion-col class="color-text text-align-right-auto">
+        <p>Add Meal</p>
       </ion-col>
     </ion-row>
-  </ion-card>
-<div class="margin-left-right">
-  <!-- Diet Breakdown by Category Bar Chart -->
-  <div class=".width-100">
-    <canvas baseChart *ngIf="pieChartData"
-      [data]="pieChartData" 
-      [labels]="pieChartLabels" 
-      [chartType]="pieChartType"
-      [options]="pieChartOptions"
-      [plugins]="pieChartPlugins"
-      [legend]="pieChartLegend"
-      [colors]="pieChartColors" height="230">
-    </canvas>
-    <ion-row>
-      <ion-col size="4" class="border-right">
-        <div class="remaingName remainingColor">950</div>
-        <div class="div-font">REMAINING</div>
-      </ion-col>
-      <ion-col size="4" class="border-right">
-        <div class="remaingName">3</div>
-        <div class="div-font">FOOD</div>
-      </ion-col>
-      <ion-col size="4">
-        <div class="remaingName">3</div>
-        <div class="div-font">EXERCISES</div>
-      </ion-col>
-    </ion-row>
-    
-      <div class="daily-progress">
-        <!-- <div class="text">DAY {{dayNumber}}</div> -->
-          <div class="row"><div class="chart quizz-progress">
+    <ion-row class="margin-top-10">
+      <ion-col>Calorie intake/recommended
+        <div class="row">
+          <h1 class="color-text">800</h1><h1>/2000</h1>
+        </div>
+        <div class="daily-progress">
+          <div class="row"><div class="chart ionBar-progress">
             <ion-progress-bar value="0.6" class="height-20"></ion-progress-bar>
           </div>
-          
-          
+        </div>
+      </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-10">
+      <ion-col size="4">
+        <div>Fat(grams)</div>
+        <div class="row">
+          <h2 class="fat-color">58 </h2><h2 class="colo-black padding-left-5"> /100</h2>
+        </div>
+      </ion-col>
+      <ion-col size="4" style="padding: 0px;
+      margin: auto;">
+        <div>Protein(grams)</div>
+        <div class="row">
+          <h2 class="protein-color">400 </h2><h2 class="colo-black padding-left-5"> /500</h2>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div>Carbs(grams)</div>
+        <div class="row">
+          <h2 class="crab-color">100 </h2><h2 class="colo-black padding-left-5"> /200</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-15">
+      <ion-col size="5.5" class="goal-weight">
+        <div class="row">
+          <h1 class="align-center">1200</h1>
+        </div>
+        <div>Calories Remaining</div>
+      </ion-col>
+      <ion-col size="5.5" class="current-weight">
+        <div class="row">
+          <h1 class="align-center" >5</h1>
+        </div>
+        <div>Meals Consumed</div>
+      </ion-col>
+    </ion-row>
+    <div class="margin-top-15"></div>
+    <ion-card class="margin-top-10 ion-card-no-padding" style="padding: 0px 10px">
+      <ion-row class="margin-top-10">
+        <ion-col size="2" class="align-center">
+          <ion-icon class="icon-size" ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+        </ion-col>
+        <ion-col size="8" class="align-center">
+          <div><p>September 29, 2020</p></div>
+          <div><h3>DAY 18/49</h3></div>
+        </ion-col>
+        <ion-col size="2" class="align-center">
+          <ion-icon class="icon-size" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-15">
+        <ion-col size="8">
+          <h2>Today's Meals</h2>
+        </ion-col>
+        <ion-col class="color-text text-align-right-auto">
+          <p>Add Meal</p>
+        </ion-col>
+      </ion-row>
+      <div class="margin-top-10">
+        <div *ngFor="let data of todaysMealsList" style="margin:10px 0px;border-bottom:1px solid gainsboro">
+            <ion-row >
+              <ion-col size="0.5" (click)="expandRow(data)">
+                <ion-icon name="arrow-down" *ngIf="data.selected"></ion-icon>
+                <ion-icon name="arrow-forward" *ngIf="!data.selected"></ion-icon>
+              </ion-col>
+              <ion-col size="7" class="text-align-left-auto" (click)="expandRow(data)">{{data.name}}</ion-col>
+              <ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(data)">
+               {{data.cal}}
+              </ion-col>
+              <ion-col size="1" class="text-align-left-auto">
+                <ion-icon class="color-red" name="trash"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row class="margin-top-10" *ngIf="data.selected">
+              <ion-col size="4" class="align-center">
+                <div>Fat(grams)</div>
+                <div class="align-center">
+                  <h2 class="fat-color">58</h2>
+                </div>
+              </ion-col>
+              <ion-col size="4" class="align-center">
+                <div>Protein(grams)</div>
+                <div class="align-center">
+                  <h2 class="protein-color">300</h2>
+                </div>
+              </ion-col>
+              <ion-col size="4" class="align-center">
+                <div>Carbs(grams)</div>
+                <div class="align-center">
+                  <h2 class="crab-color">300</h2>
+                </div>
+              </ion-col>
+            </ion-row>
         </div>
         
       </div>
-      <div class="calories-mainClass">
-        <div class="calories-subClass">XX CALORIES REMAINING</div>
-      </div>
-    <ion-row>
-      <ion-col class="font-weight-600">Your meals</ion-col>
-    </ion-row>
-    <ion-card class="todays-food-card">
-      <ion-row  class="today-food-row">
-        <ion-col  class="today-food-col">
-          TODAY'S FOOD LIST
-        </ion-col>
-        <!-- <ion-col size="2">
-          <ion-icon ios="ios-more" md="md-more" style="color:white"></ion-icon>
-        </ion-col> -->
-
-      </ion-row>
-      <ion-row class="table-card">
-        <ion-col size="8" class="col-left">
-          10 Ounces of Ribeye
-        </ion-col>
-        <ion-col size="4" class="col-right">
-          769 cal.
-        </ion-col>
-      </ion-row>
-      <ion-row class="table-card">
-        <ion-col size="8" class="col-left">
-          2 Ounces of Broccoli
-        </ion-col>
-        <ion-col size="4" class="col-right">
-          80 cal.
-        </ion-col>
-      </ion-row>
-      <ion-row class="tableCard">
-        <ion-col size="8" class="col-left">
-          1 Ounces of Cheese
-        </ion-col>
-        <ion-col size="4" class="col-right">
-          100 cal.
-        </ion-col>
-      </ion-row>
+      
+      <div class="margin-top-10"></div>
     </ion-card>
-    
-</div>
-</div>
+    <ion-row class="margin-top-10 margin-left-right-15">
+      <ion-col>
+        <ion-card class="ion-card">
+          <ion-row>
+            <ion-col size="3" class="vert-center">
+              <img src="assets/img/bang-can.png" />
+            </ion-col>
+            <ion-col size="9">
+              <ion-card-header>
+                <ion-card-title>
+                  Let's get you on <br /> 
+                  track today.
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Bang Energy 12-Pack <br />
+                $31.00
+                <p class="global-link-wrapper">
+                  <a href="" class="global-link">Order Now</a>
+                </p>
+              </ion-card-content>
+            </ion-col>            
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="padding-20">
+    <ion-row>
+      <ion-col>
+        <h1 class="text-capitalize">Calorie Ratio</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>Based on your rapid body sculpting goals, we recommended the following calorie breakdown:</div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-15">
+      <ion-col><canvas baseChart *ngIf="pieChartData"
+        [data]="pieChartData" 
+        [labels]="pieChartLabels" 
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend"
+        [colors]="pieChartColors" height="230">
+      </canvas></ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="padding-20">
+    <ion-row>
+      <ion-col>
+        <h2>Supplement Suggestions </h2>
+      </ion-col>
+    </ion-row>
+    <div class="margin-top-10">
+      <div *ngFor="let data of suggestionList" style="margin:10px 0px;border-bottom:1px solid gainsboro">
+          <ion-row  style="width:100%">
+            <ion-col size="0.5" (click)="expandRow(data)">
+              <ion-icon name="arrow-down" *ngIf="data.selected"></ion-icon>
+              <ion-icon name="arrow-forward" *ngIf="!data.selected"></ion-icon>
+            </ion-col>
+            <ion-col size="7" class="text-align-left-auto" (click)="expandRow(data)">{{data.name}}</ion-col>
+            <ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(data)">
+             {{data.cal}}
+            </ion-col>
+            <ion-col size="1" class="text-align-left-auto">
+              <ion-icon name="add-circle"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <div *ngIf="data.selected">
+            <ion-row class="margin-top-10" >
+              <ion-col size="4" class="align-center">
+                <div>Fat(grams)</div>
+                <div class="align-center">
+                  <h2 class="fat-color">58</h2>
+                </div>
+              </ion-col>
+              <ion-col size="4" style="padding: 0px;" class="align-center">
+                <div>Protein(grams)</div>
+                <div class="align-center">
+                  <h2 class="protein-color">300</h2>
+                </div>
+              </ion-col>
+              <ion-col size="4" class="align-center">
+                <div>Carbs(grams)</div>
+                <div class="align-center">
+                  <h2 class="crab-color">300</h2>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="margin-top-10">
+              <ion-col class="color-text" style="text-align: right;">
+                Order Now
+              </ion-col>
+            </ion-row>
+          </div>
+      </div>
+    </div>
+    <ion-row class="margin-top-10 margin-left-right-15">
+      <ion-col>
+        <ion-card class="ion-card zeroCard">
+          <ion-row>
+            <ion-col size="3" class="vert-center">
+              <img src="assets/img/BangCanMeals.png" />
+            </ion-col>
+            <ion-col size="9">
+              <ion-card-header>
+                <ion-card-title class="font-size-24">
+                  The perfect <br /> 
+                  ZERO-calorie drink!
+                </ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                Bang Energy 12-Pack <br />
+                $31.00
+                <p class="global-link-wrapper">
+                  <a href="" class="global-link">Order Now</a>
+                </p>
+              </ion-card-content>
+            </ion-col>            
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-<ion-footer>
+<!-- <ion-footer>
   <ion-button  expand="block" class="addFood btn btn-primary block-center margin-10" *ngIf="today" (click)="openFoodModal()" class="button">Add Food</ion-button>
 
-</ion-footer>
+</ion-footer> -->
