@@ -14,6 +14,7 @@ export class WelcomePage implements OnInit {
   }
 
   begin() {
+    console.log({welcomeRead: true});
     this.router.navigateByUrl("/set-goals");
   }
 
