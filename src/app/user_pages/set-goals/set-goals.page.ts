@@ -68,7 +68,8 @@ export class SetGoalsPage implements OnInit {
       //   "action": "saveGoals",
       //   "lossGoal": this.lossGoal,
       //   "weighinDays": this.weighinDays, // array of codes: 'sun','mon','tue','wed','thu','fri','sat'
-      //   "time": this.selected_time
+      //   "time": this.selected_time,
+      //   "weekly_repeat": true
       // },
       {
         "action": "saveGoals",

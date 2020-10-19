@@ -35,6 +35,9 @@
                 </ion-select-option>
             </ion-select>
           </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.age.errors?.required">
+            Please select your age.
+          </span>
         </ion-col>
       </ion-row>
 
@@ -50,6 +53,9 @@
                 </ion-select-option>
             </ion-select>
           </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.gender.errors?.required">
+            Please select your gender.
+          </span>
         </ion-col>
       </ion-row>
 
@@ -65,6 +71,9 @@
                 </ion-select-option>
             </ion-select>
           </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.height.errors?.required">
+            Please select your height.
+          </span>
         </ion-col>
       </ion-row>
 
@@ -80,23 +89,11 @@
                 </ion-select-option>
             </ion-select>
           </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+            Please select your weight.
+          </span>
         </ion-col>
       </ion-row>
-
-      <!-- <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Activity Level</ion-label>
-            <ion-select name="activity" formControlName="activity" okText="OK" cancelText="Cancel">
-              <ion-select-option 
-                *ngFor="let item of activityOptions"
-                [value]="item.value">
-                  {{ item.level }}
-                </ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row> -->
 
       <ion-row>
         <ion-col>
@@ -110,6 +107,9 @@
                 </ion-select-option>
             </ion-select>
           </ion-item>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.plan.errors?.required">
+            Please select your plan.
+          </span>
         </ion-col>
       </ion-row>
 
