@@ -10,7 +10,7 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 })
 export class SetGoalsPage implements OnInit {
   days: any[] = [
-    {day:'S', code: 'sun', selected: false},
+    {day:'S', code: 'sun', selected: true},
     {day:'M', code: 'mon', selected: false},
     {day:'T', code: 'tue', selected: false},
     {day:'W', code: 'wed', selected: false},
@@ -25,7 +25,7 @@ export class SetGoalsPage implements OnInit {
     {name: "20 pounds", value: 20}
   ]
   lossGoal: number;
-  weighinDay: string;
+  weighinDays: string[] = [];
 
   date = new Date(); 
   selected_time = null;
@@ -35,34 +35,46 @@ export class SetGoalsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.lossGoal = 15;
+    this.lossGoal = 5;
     this.selected_time = this.globalServices.formatTime(this.date);
   }
 
   // function to select multiple weigh in days
-  // select(item) {
-  //   item.selected = !item.selected;
-  //   console.log(item.selected);
-  //   // item.selected = true;   
-  // }
-
-  // isActive(item) {
-  //   return item.selected === item;
-  // };
-
-  // function to select one weighin day.
   select(item) {
-    this.weighinDay = item;
+    item.selected = !item.selected;  
   }
 
+  isActive(item) {
+    return item.selected === item;
+  };
+
+  // function to select one weighin day.
+  // select(item) {
+  //   this.weighinDay = item;
+  // }
 
   continue() {
+    this.days.forEach(item => {
+      if(item.selected) {
+        this.weighinDays.push(item.code);
+      }
+    });
+    console.log({ lossGoal: this.lossGoal, weighinDays: this.weighinDays, time: this.selected_time });
+
     this.myAPI.makeAPIcall(
       "user", 
+      // NEW PAYLOAD
+      // {
+      //   "action": "saveGoals",
+      //   "lossGoal": this.lossGoal,
+      //   "weighinDays": this.weighinDays, // array of codes: 'sun','mon','tue','wed','thu','fri','sat'
+      //   "time": this.selected_time,
+      //   "weekly_repeat": true
+      // },
       {
         "action": "saveGoals",
         "pounds_to_loose": this.lossGoal,
-        "day": this.weighinDay,
+        "day": 'sun',
         "time": this.selected_time,
         "weekly_repeat": true
       },

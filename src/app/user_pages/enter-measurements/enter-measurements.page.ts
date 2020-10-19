@@ -21,28 +21,22 @@ export class EnterMeasurementsPage implements OnInit {
     gender:"", 
 		plan:""
   };
-    fileData1: any;
-    imageUrl: any = '../../../assets/icon/plaindp.png';
-    isImageUploaded: boolean = false;
+  fileData1: any;
+  imageUrl: any = '../../../assets/icon/plaindp.png';
+  isImageUploaded: boolean = false;
 
-    ageOptions = [];
-    genderOptions = [
-			{option: 'Male', value: 'M'},
-			{option: 'Female', value: 'F'}
-		];
-    weightOptions = [];
-    planOptions =  [
-			{option: '7 week', value: 7},
-			{option: '12 week', value: 12}
-		];
-    // activityOptions = [
-    //   {level: 'Sedentary', value: 1.2000},
-    //   {level: 'Light Exercise 1-3 days/week', value: 1.3750},
-    //   {level: 'Moderate Exercise 3-5 days/week', value: 1.5500},
-    //   {level: 'Hardcore Exercise or Sports 6-7 days/week', value: 1.7250},
-    //   {level: 'Hardcore Exercise or Sports 6-7 days/week  + labor intensive job', value: 1.9000}
-    // ];
-    heightOptions = [];
+  ageOptions = [];
+  genderOptions = [
+		{option: 'Male', value: 'M'},
+		{option: 'Female', value: 'F'}
+	];
+  weightOptions = [];
+  planOptions =  [
+		{option: '7 week', value: 7},
+		{option: '12 week', value: 12}
+	];
+  heightOptions = [];
+  isSubmitted = false;
 
   constructor(
 		private formBuilder: FormBuilder, 
@@ -55,11 +49,11 @@ export class EnterMeasurementsPage implements OnInit {
 
   ngOnInit() {
     this.measurementsForm = this.formBuilder.group({
-      age: [this.currentUserMeasurements.age, [ Validators.required, Validators.pattern('[0-9]+') ]],
+      age: [this.currentUserMeasurements.age, [ Validators.required ]],
       gender: [this.currentUserMeasurements.gender, [ Validators.required ]],
       height: [ this.currentUserMeasurements.inches, [ Validators.required ]],
-      weight: [this.currentUserMeasurements.weight, [ Validators.required, Validators.pattern('[0-9]+') ]],
-			plan: [this.currentUserMeasurements.plan, [ Validators.required, Validators.pattern('[0-9]+') ]]
+      weight: [this.currentUserMeasurements.weight, [ Validators.required ]],
+			plan: [this.currentUserMeasurements.plan, [ Validators.required ]]
     });
 
     this.generateAges(18, 100);
@@ -68,38 +62,41 @@ export class EnterMeasurementsPage implements OnInit {
   }
 
   submitMeasurements(){
-		console.log(this.measurementsForm);
-    this.myAPI.makeAPIcall(
-      "user", 
-      {
-        "action": "submitMeasurements",
-        "form": this.measurementsForm.value,
-        "today": this.globalServices.getDate("today")
-      },
-      true
-    ).subscribe((result)=>{
-      if( result.error ){
-        this.myAPI.handleMyAPIError(result.error);
-      }
-      else {
-        localStorage.setItem("measurements", JSON.stringify(result.success.measurements));
-        localStorage.setItem("diet", JSON.stringify(result.success.diet));
-        localStorage.setItem("dailyCaloriesIntake", result.success.measurements.dailyCaloriesIntake);
-        localStorage.setItem("currentCaloriesIntake", result.success.diet.cur_calories_intake);
-        localStorage.setItem("diet_plan_length", this.measurementsForm.value.plan);
-        //after we have or update the diet plan sync alerts
-        this.globalServices.syncAlerts();
-        localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet.diet_start_date));
-        localStorage.setItem("lastFeedback", result.success.diet.feedback_for_week);
-
-        if( this.action == "update" ){
-          this.router.navigateByUrl("/profile");
+    console.log(this.measurementsForm.value);
+    this.isSubmitted = true;
+    if(this.measurementsForm.valid) {
+      this.myAPI.makeAPIcall(
+        "user", 
+        {
+          "action": "submitMeasurements",
+          "form": this.measurementsForm.value,
+          "today": this.globalServices.getDate("today")
+        },
+        true
+      ).subscribe( (result) => {
+        if( result.error ){
+          this.myAPI.handleMyAPIError(result.error);
         }
-        else{
-          this.router.navigateByUrl("/tabs/home/today");
+        else {
+          localStorage.setItem("measurements", JSON.stringify(result.success.measurements));
+          localStorage.setItem("diet", JSON.stringify(result.success.diet));
+          localStorage.setItem("dailyCaloriesIntake", result.success.measurements.dailyCaloriesIntake);
+          localStorage.setItem("currentCaloriesIntake", result.success.diet.cur_calories_intake);
+          localStorage.setItem("diet_plan_length", this.measurementsForm.value.plan);
+          //after we have or update the diet plan sync alerts
+          this.globalServices.syncAlerts();
+          localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet.diet_start_date));
+          localStorage.setItem("lastFeedback", result.success.diet.feedback_for_week);
+  
+          if( this.action == "update" ){
+            this.router.navigateByUrl("/profile");
+          }
+          else{
+            this.router.navigateByUrl("/tabs/home/today");
+          }
         }
-      }
-    });
+      });
+    }
   }
 	
   uploadFile(files: FileList) {
@@ -141,6 +138,11 @@ export class EnterMeasurementsPage implements OnInit {
       this.weightOptions.push(i);
 		}
 		return true;
+  }
+
+  // used for validation
+  get errorControl() {
+    return this.measurementsForm.controls;
   }
 
 }
