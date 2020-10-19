@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
@@ -9,6 +9,7 @@ import { HomeAddFoodModalPage } from '../home-add-food-modal/home-add-food-modal
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import * as pluginLabels from 'chartjs-plugin-labels';
+import { AddEventModalPage } from '../add-event-modal/add-event-modal.page';
 
 @Component({
   selector: 'app-track-meal',
@@ -24,9 +25,9 @@ export class TrackMealPage implements OnInit {
   exercises = [];
   status = "";
   percent:number = 0;
-  circlesubtitle = "";
-  circlecolor = "#c0c0c0"; //gray atr first
-  dayNutritionInfo = {"phase":null, "phaseday":null, "daynutrition":{"protein":null, "carbs":null, "fat":null}};
+  circleSubtitle = "";
+  circleColor = '#c0c0c0'; //gray atr first
+  dayNutritionInfo = {'phase':null, phaseday:null, daynutrition:{protein:null, carbs:null, fat:null}};
   dietCaloriesIntake = null;
   caloriesConsumed:number = 0;
   caloriesFromProteinAsP:number =0;
@@ -56,7 +57,8 @@ export class TrackMealPage implements OnInit {
   suggestionList =  [{name: 'Bang Keto Coffee- BCB', cal: '120 cal.', selected: false},
   {name: 'Pristine Protein WPI ', cal: '90 cal.', selected: false},
   {name: '8 KETO ZERO CARB', cal: '50 cal.', selected: false}]
-  constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,public router: Router
+  constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,
+    public router: Router, public alertController: AlertController
    , private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
 
   ngOnInit() {
@@ -215,19 +217,51 @@ export class TrackMealPage implements OnInit {
     this.percent = info.percent;
 
     if( info.color == "red" ){
-      this.circlecolor = "#CA1616";
+      this.circleColor = "#CA1616";
       this.status = "BAD";
     }
     else if (this.caloriesConsumed == 0){
       this.status = "NO INFO";
     }
     else {
-      this.circlecolor = "rgb(56, 129, 255";
+      this.circleColor = "rgb(56, 129, 255";
       this.status ="GOOD";
     }
-    this.circlesubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
+    this.circleSubtitle = this.caloriesConsumed+"/"+this.dietCaloriesIntake;
   }
+  // function to expand today's meals list item 
   expandRow(data) {
     data.selected = !data.selected;
+  }
+  // function to open add meal modal
+  async openModal() {
+    const modal = await this.modalController.create({component: AddEventModalPage});
+    return await modal.present();
+  }
+  // Alert to delete today's meals list
+  async deleteItem() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Do you want to delete the Item?',
+      message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequuntur odit rerum quam repellat maxime, quidem nobis modi, quaerat culpa assumenda sint non asperiores quod dolore adipisci vero, fuga facere.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          cssClass: 'endDiet',
+          handler: () => {
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

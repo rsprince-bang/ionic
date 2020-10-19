@@ -20,7 +20,7 @@
       <ion-col size="8">
         <h2>Today's Nutrition</h2>
       </ion-col>
-      <ion-col class="color-text text-align-right-auto">
+      <ion-col class="color-text text-align-right-auto" (click)="openModal()">
         <p>Add Meal</p>
       </ion-col>
     </ion-row>
@@ -90,7 +90,7 @@
         <ion-col size="8">
           <h2>Today's Meals</h2>
         </ion-col>
-        <ion-col class="color-text text-align-right-auto">
+        <ion-col class="color-text text-align-right-auto" (click)="openModal()">
           <p>Add Meal</p>
         </ion-col>
       </ion-row>
@@ -105,7 +105,7 @@
               <ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(data)">
                {{data.cal}}
               </ion-col>
-              <ion-col size="1" class="text-align-left-auto">
+              <ion-col size="1" class="text-align-left-auto" (click)="deleteItem()">
                 <ion-icon class="color-red" name="trash"></ion-icon>
               </ion-col>
             </ion-row>
@@ -186,7 +186,7 @@
 
     </ion-row>
   </ion-grid>
-  <ion-grid class="padding-20">
+  <ion-grid class="padding-20 grid1-background">
     <ion-row>
       <ion-col>
         <h2>Supplement Suggestions </h2>
