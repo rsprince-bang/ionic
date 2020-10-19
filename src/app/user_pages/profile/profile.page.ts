@@ -418,6 +418,7 @@ export class ProfilePage implements OnInit {
   }
   onChangeEndTime(endTime) {
   }
+  // function to select weekday
   onClickWeekDay(day, i) {
     day.selected = !day.selected;
   }
