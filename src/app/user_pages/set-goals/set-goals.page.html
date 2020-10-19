@@ -39,8 +39,8 @@
         <div class="day-select-wrapper">
           <div text-center *ngFor="let item of days; let i of index"
             class="day-selector"
-            [class.day-selected]="item.code == weighinDay"
-            (click)="select(item.code)">
+            [class.day-selected]="item.selected"
+            (click)="select(item)">
             {{ item.day }}
           </div>
         </div>
