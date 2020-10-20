@@ -28,6 +28,8 @@ import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-
 import { AddEventModalPageModule } from './user_pages/add-event-modal/add-event-modal.module';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
+import { AddSleepModalPageModule } from './user_pages/add-sleep-modal/add-sleep-modal.module';
+import { AddWaterModalPageModule } from './user_pages/add-water-modal/add-water-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,7 +49,9 @@ import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
       ChartsModule,
       AddEventModalPageModule,
       CalendarModule,
-      ViewImgModule
+      ViewImgModule,
+      AddSleepModalPageModule,
+      AddWaterModalPageModule
     ],
   providers: [
     StatusBar,

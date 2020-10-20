@@ -13,6 +13,10 @@ import { AlertController } from '@ionic/angular';
 import * as pluginLabels from 'chartjs-plugin-labels';
 import { Chart } from "chart.js";
 
+import { ModalController } from '@ionic/angular';
+import { AddSleepModalPage } from '../add-sleep-modal/add-sleep-modal.page';
+import { AddWaterModalPage } from '../add-water-modal/add-water-modal.page';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -83,7 +87,8 @@ export class HomePage implements OnInit {
     private activatedRoute: ActivatedRoute, 
     private myAPI: ApiCallService,
     private foodSuggestionsService: FoodSuggestionsService, 
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -585,20 +590,33 @@ export class HomePage implements OnInit {
 });
 
 }
+
 clickOnBodyFat() {
   this.onBodyFatSelect = true
  this.onBodyMassSelect = false;
   this.OnWeightSelecr = false
 }
+
 clickOnBodyMass() {
   this.onBodyFatSelect = false
  this.onBodyMassSelect = true;
   this.OnWeightSelecr = false
 }
+
 clickOnWeight() {
   this.onBodyFatSelect = false
  this.onBodyMassSelect = false;
   this.OnWeightSelecr = true
 }
-  
+
+  async openSleepModal() {
+    const modal = await this.modalController.create({component: AddSleepModalPage});
+    return await modal.present();
+	}
+	
+	async openWaterModal() {
+    const modal = await this.modalController.create({component: AddWaterModalPage});
+    return await modal.present();
+	}	
+
 }
