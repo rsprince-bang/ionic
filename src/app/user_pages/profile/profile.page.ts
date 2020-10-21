@@ -342,23 +342,19 @@ export class ProfilePage implements OnInit {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'ENDING DIET ?',
-      message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequuntur odit rerum quam repellat maxime, quidem nobis modi, quaerat culpa assumenda sint non asperiores quod dolore adipisci vero, fuga facere.',
+      header: 'Reset Diet',
+      message: 'Are you sure you want to reset your diet? This cannot be undone.',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'END DIET',
+          text: 'OK',
           cssClass: 'endDiet',
-          handler: () => {
-            this.router.navigateByUrl('/login')
-            console.log('Confirm Okay');
-          }
+          handler: () => this.router.navigateByUrl('/reset-diet')
         }
       ]
     });
