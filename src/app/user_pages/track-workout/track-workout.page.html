@@ -1,34 +1,223 @@
-<ion-header>
+<ion-header class="header-css">
   <ion-toolbar>
-    
-    <ion-buttons slot="start">
-      <ion-menu-toggle>
-        <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-button>
-      </ion-menu-toggle>
+    <ion-buttons slot="start" >
+    <ion-button class="button-bac">
+      <ion-icon class="color-black"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
+     </ion-button>
     </ion-buttons>
 
-    <ion-title>Workout</ion-title>
-
-    <ion-img class="nav-logo" src="../../../assets/img/logo-bang-small.png" slot="end"></ion-img>
-  </ion-toolbar>
+      <ion-title class="text-capitalize" style="font-weight: 500;">Workout</ion-title>
+      <ion-buttons slot="end" >
+        <ion-button class="button-bac">
+          <ion-icon class="color-black" name="settings"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+</ion-toolbar>
 </ion-header>
-
-
-
-<ion-content padding>
-
-
+<ion-content>
+  <ion-grid class= "padding-20 container-1">
+    <ion-row>
+      <ion-col>
+        <h2>Your Daily Workout Report</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-15">
+      <ion-col size="5" class="progress-height">
+        <circle-progress
+          [percent]="39"
+          [showInnerStroke]="true" [radius]="150"
+            [outerStrokeWidth]="30"
+            [innerStrokeWidth]="35"
+            [space]="-29"
+            [outerStrokeColor]="'#0417c2'"
+            [innerStrokeColor] = "'gainsboro'"
+            [backgroundStroke]="'white'"
+            [animation]="true"
+            [showTitle] = "true"
+            [animationDuration]="300" [title]="['3/5']"
+            [outerStrokeGradientStopColor] ="'white'"
+            [backgroundGradientStopColor] = "'white'"
+            [titleFontSize] = "70"
+            [subtitle] = "'Completed'"
+            [showSubtitle] ="true"
+            [subtitleColor] = "'black'"
+            [subtitleFontSize]="40"
+            [titleColor] = "'#0417c2'"
+            [titleFontWeight] = "600"
+          ></circle-progress>
+      </ion-col>
+      <ion-col size="7" class="margin-top-10">
+        <div class="color-black"><p>Week 1 of 7</p></div>
+        <div class="color-black"><p>Current Weight: 165 lbs</p></div>
+        <div class="color-black"><p>Goal Weight: 150 lbs</p></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="padding-20 container-2">
+    <ion-row>
+      <ion-col>
+        <h2>Today's Workout List</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-10">
+      <ion-col>
+        <div>To really quick your Rapid Body Remodeling into overdrive,try implementing the following exercises(the video will show you exactly how they're done). </div>
+      </ion-col>
+    </ion-row>
+    <!-- week day selection  -->
+    <ion-row class="margin-top-15">
+      <ion-col class="week-border" *ngFor="let day of weekDays;let i = index;" [ngClass]="{'on-select-day week-border' :day.selected,'week-border':!day.selected}">
+        <div (click)="onClickDate(day,i)"  class="text-align-center">{{day.name}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-top-10">
+      <ion-col><h3 class="margin-0">September 29, 2020</h3></ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="padding-20 container-3">
+    <ion-card class="ion-card-no-padding back-ground-white">
+      <ion-row>
+        <ion-col class="margin-0" size="5">
+          <ion-thumbnail style="width:100%;height: 180px;" (click)="viewVideo('../../../assets/img/RPReplay_Final1603126974 2.mov')">
+            <div class="video ">
+              <video class="video-css" controls  #videoPlayer>
+                  <source src="../../../assets/img/RPReplay_Final1603126974 2.mov" type="video/mp4" />
+                  Browser not supported
+              </video>
+            </div>
+            <div class="btnMore">
+              <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+            </div>
+          </ion-thumbnail>
+        </ion-col>
+         <ion-col size="0.2"></ion-col> 
+        <ion-col style="margin-left:10px" >
+          <div class="color-text">
+            <div class="margin-top-10 font-size-18">Workout Name</div>
+          </div>
+          <div class="margin-top-7 row">Short Description</div>
+          <div class="row margin-top-5 no-padding" >
+            <div class="padding-1"><ion-icon ios="ios-clipboard" md="md-clipboard"></ion-icon></div>
+            <div class="padding-left-5">Number of sets</div>
+          </div>
+          <div class="row margin-top-5 row no-padding">
+            <div  class="padding-1"><ion-icon ios="ios-stopwatch" md="md-stopwatch"></ion-icon></div>
+            <div class="padding-left-5">Length of time</div>
+          </div>
+          <div class="margin-top-10 row no-padding">
+           <div  class="padding-1"> <ion-icon class="color-text" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon></div>
+            <div class="padding-left-5">Completed</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-card class="ion-card-no-padding margin-pto-10 video-card">
+      <ion-row>
+        <ion-col size="5" class="margin-0">
+          <ion-thumbnail style="width:100%;height: 180px;" >
+            <div class="video ">
+              <img  class="video-css" src= "../../../assets/img/track-workout-footer-background.jpg">
+            </div>
+            <div class="btnMore">
+              <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+            </div>
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col style="margin-left:10px">
+          <div class="color-text">
+            <div class="margin-top-10 font-size-18">Workout Name</div>
+          </div>
+          <div class="margin-top-7 row">Short Description</div>
+          <div class="row margin-top-5 no-padding" >
+            <div class="padding-1"><ion-icon ios="ios-clipboard" md="md-clipboard"></ion-icon></div>
+            <div class="padding-left-5">Number of sets</div>
+          </div>
+          <div class="row margin-top-5 row no-padding">
+            <div  class="padding-1"><ion-icon ios="ios-stopwatch" md="md-stopwatch"></ion-icon></div>
+            <div class="padding-left-5">Length of time</div>
+          </div>
+          <div class="margin-top-10 row no-padding">
+           <div  class="padding-1"> <ion-icon class="color-text" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon></div>
+            <div class="padding-left-5">Completed</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-card class="ion-card-no-padding margin-pto-10 video-card">
+      <ion-row>
+        <ion-col size="5" class="margin-0">
+          <ion-thumbnail style="width:100%;height: 180px;" >
+            <div class="video ">
+              <img  class="video-css" src= "../../../assets/img/track-workout-footer-background.jpg">
+            </div>
+            <div class="btnMore">
+              <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+            </div>
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col style="margin-left:10px">
+          <div class="color-text">
+            <div class="margin-top-10 font-size-18">Workout Name</div>
+          </div>
+          <div class="margin-top-7 row">Short Description</div>
+          <div class="row margin-top-5 no-padding" >
+            <div class="padding-1"><ion-icon ios="ios-clipboard" md="md-clipboard"></ion-icon></div>
+            <div class="padding-left-5">Number of sets</div>
+          </div>
+          <div class="row margin-top-5 row no-padding">
+            <div  class="padding-1"><ion-icon ios="ios-stopwatch" md="md-stopwatch"></ion-icon></div>
+            <div class="padding-left-5">Length of time</div>
+          </div>
+          <div class="margin-top-10 row no-padding">
+           <div  class="padding-1"> <ion-icon class="color-text" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon></div>
+            <div class="padding-left-5">Completed</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-card class="ion-card-no-padding margin-pto-10 video-card">
+      <ion-row>
+        <ion-col size="5" class="margin-0">
+          <ion-thumbnail style="width:100%;height: 180px;" >
+            <div class="video ">
+              <img  class="video-css" src= "../../../assets/img/track-workout-footer-background.jpg">
+            </div>
+            <div class="btnMore">
+              <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+            </div>
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col style="margin-left:10px">
+          <div class="color-text">
+            <div class="margin-top-10 font-size-18">Workout Name</div>
+          </div>
+          <div class="margin-top-7 row">Short Description</div>
+          <div class="row margin-top-5 no-padding" >
+            <div class="padding-1"><ion-icon ios="ios-clipboard" md="md-clipboard"></ion-icon></div>
+            <div class="padding-left-5">Number of sets</div>
+          </div>
+          <div class="row margin-top-5 row no-padding">
+            <div  class="padding-1"><ion-icon ios="ios-stopwatch" md="md-stopwatch"></ion-icon></div>
+            <div class="padding-left-5">Length of time</div>
+          </div>
+          <div class="margin-top-10 row no-padding">
+           <div  class="padding-1"> <ion-icon class="color-text" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon></div>
+            <div class="padding-left-5">Completed</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    
+  </ion-grid>
   <!-- Ion Refresher -->
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+  </ion-refresher> -->
 
 
 
   <!-- Day Change Slider -->
-  <ion-toolbar class="day-change-slider" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
+  <!-- <ion-toolbar class="day-change-slider" (swipeleft)="handleSwipeLeft()" (swiperight)="handleSwipeRight()">
       <ion-card>
           <ion-icon class="arrow-back" *ngIf="dayNumber > 1" (click)="handleSwipeRight()" name="arrow-back" slot="start"></ion-icon>
           <section>
@@ -42,11 +231,11 @@
           <ion-icon class="arrow-forward" *ngIf="!today" (click)="handleSwipeLeft()" name="arrow-forward" slot="end"></ion-icon>
       </ion-card>
   </ion-toolbar>
-
+ -->
 
 
   <!-- Title Bar -->
-  <div class="title-bar">
+  <!-- <div class="title-bar">
 
     <h3>Workout List</h3>
     <div class="icons">
@@ -54,12 +243,12 @@
       <ion-icon class="icon heart" name="heart"></ion-icon>
     </div>
     
-  </div>
+  </div> -->
 
 
 
   <!-- Workout List -->
-  <ion-list class="workoutList">
+  <!-- <ion-list class="workoutList">
 
     <ion-item *ngIf="exercises.length > 0" class="list-header">
       <h3 class="text-center text-white">Total Calories Burned Today: <strong>333</strong></h3>
@@ -75,13 +264,13 @@
       </ion-item-options>
     </ion-item-sliding>
 
-  </ion-list>
-
+  </ion-list> 
+ -->
 
   <!-- Footer Section -->
-  <section class="content-footer">
+  <!-- <section class="content-footer">
     <ion-button expand="full" (click)="openExerciseModal()" class="btn btn-round" shape="round">Add workout</ion-button>
-  </section>
+  </section> -->
 
 
 

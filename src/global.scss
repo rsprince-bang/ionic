@@ -636,3 +636,41 @@ svg:not(:root) {
 .font-size-24 {
     font-size: 24px;
 }
+.header-css {
+    padding: 0px 15px;border-bottom: 2px solid gainsboro;
+}
+.color-black {
+	color: black;
+}
+.on-select-day {
+    background-color: #003CCA;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 22px;
+}
+.week-border {
+    border: 1px solid gainsboro;
+    text-align: center;
+    font-size: 22px;
+    border: 1px solid gainsboro;
+    text-align: center;
+    padding: 10px;
+}
+.ion-card-no-padding {
+    margin: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.margin-top-5 {
+    margin-top: 5px;
+}
+.no-padding {
+    padding: 0px
+}
+.padding-1 {
+    padding: 1px;
+}
+.padding-left-5 {
+    padding-left: 5px;
+}
