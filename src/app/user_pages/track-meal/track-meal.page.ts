@@ -264,4 +264,8 @@ export class TrackMealPage implements OnInit {
 
     await alert.present();
   }
+  
+  showSettings() {
+    this.router.navigateByUrl('/settings');
+  }
 }

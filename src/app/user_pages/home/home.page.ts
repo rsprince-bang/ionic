@@ -617,6 +617,10 @@ clickOnWeight() {
 	async openWaterModal() {
     const modal = await this.modalController.create({component: AddWaterModalPage});
     return await modal.present();
-	}	
+  }
+  
+  showSettings() {
+    this.router.navigateByUrl('/settings');
+  }
 
 }
