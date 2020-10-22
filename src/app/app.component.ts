@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { ApiCallService } from './services/api-call.service';
 import { GlobalServicesService } from './services/global-services.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class AppComponent {
     private router: Router,
     private globalservice: GlobalServicesService,
     public events: Events,
+    private screenOrientation: ScreenOrientation
     
   ) {
     this.initializeApp();
@@ -36,11 +38,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      //maybe check if token is valid
-      // this.statusBar.styleDefault();
-      this.statusBar.overlaysWebView(true);
-      this.statusBar.backgroundColorByHexString('#ff0000');
-      this.splashScreen.hide();
+      this.setPortrait();
 
       if( this.globalservice.isLoggedIn() ){
         this.loggedin = true;
@@ -66,8 +64,12 @@ export class AppComponent {
   }
 
   logout(){
-
     this.loggedin = false;
     this.globalservice.logOut();
+  }
+
+  setPortrait(){
+    // set to portrait orientation
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 }
