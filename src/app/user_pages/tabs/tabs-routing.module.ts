@@ -9,11 +9,6 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-
-      //{ path: 'home', loadChildren: '../home/home.module#HomePageModule', canActivate:[AuthGuard] },
-      //{ path: 'track-meal', loadChildren: '../../user_pages/track-meal/track-meal.module#TrackMealPageModule', canActivate:[AuthGuard] },
-      //{ path: 'track-workout', loadChildren: '../track-workout/track-workout.module#TrackWorkoutPageModule', canActivate:[AuthGuard] },
-      //{ path: 'profile', loadChildren: '../profile/profile.module#ProfilePageModule',  canActivate:[AuthGuard] },  
       {
         path: 'home/:day',
         children: [

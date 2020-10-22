@@ -270,12 +270,13 @@ export class ProfilePage implements OnInit {
     await alert.present();
   }
   onSettingsClick() {
-    this.isProfilePage = false;
-    this.isSettingsPage = true;
-    this.title = 'Settings';
-    this.isSchedulePage = false;
-    this.isUploadData = false;
-    this.isEditPhoto = false;
+    this.router.navigateByUrl('/settings');
+    // this.isProfilePage = false;
+    // this.isSettingsPage = true;
+    // this.title = 'Settings';
+    // this.isSchedulePage = false;
+    // this.isUploadData = false;
+    // this.isEditPhoto = false;
   }
   logout() {
     this.globalServices.logOut();
