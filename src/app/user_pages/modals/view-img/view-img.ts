@@ -19,6 +19,7 @@ weight = "150"
 imgList =[{url :'../../../../assets/img/Capture-bang.PNG',selected:false},{url:'../../../../assets/img/Bang-prof.jpg',selected:false}]
 isExpandImg = false
 selectedImg = ""
+imgUrlData
 constructor(public modalController: ModalController) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ constructor(public modalController: ModalController) { }
     if(localStorage.getItem('todayWeight')) {
       this.weight = JSON.parse(localStorage.getItem('todayWeight'))
     }
-    this.imgUrl = this.imgurlData;
+    this.imgUrl = this.imgUrlData;
     this.page = this.page
     //   console.log("this.imgUrl",this.imgUrl)
     //   console.log("this.imgUrl",this.imgurlData)
@@ -41,7 +42,9 @@ constructor(public modalController: ModalController) { }
     console.log("inside dismiss");
     if(this.isExpandImg ) {
       this.page =""
+      this.isExpandImg = false;
     }else {
+      /* closing modal */
     this.modalController.dismiss();
     }
   }

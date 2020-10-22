@@ -28,6 +28,7 @@ import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-
 import { AddEventModalPageModule } from './user_pages/add-event-modal/add-event-modal.module';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
+import {ViewVideoModule} from "./user_pages/modals/view-video/view-video.module"
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,7 +48,7 @@ import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
       ChartsModule,
       AddEventModalPageModule,
       CalendarModule,
-      ViewImgModule
+      ViewImgModule,ViewVideoModule
     ],
   providers: [
     StatusBar,

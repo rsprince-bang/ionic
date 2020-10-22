@@ -1,0 +1,90 @@
+.image-full {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    margin: auto
+  }
+  .img-modal .scroll {
+    cursor: auto;
+    height: 100% !important;
+    background-color: black !important;
+    display: -webkit-box !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+    -webkit-box-direction: normal !important;
+    -moz-box-direction: normal !important;
+    -webkit-box-orient: horizontal !important;
+    -moz-box-orient: horizontal !important;
+    -webkit-flex-direction: row !important;
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
+    -webkit-box-align: center !important;
+    -moz-box-align: center !important;
+    -webkit-align-items: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .margin-20 {
+    margin:24px;
+  }
+  .margin-0 {
+    margin: 0px;
+    padding:0px
+  }
+  .margin-auto {
+    text-align: center;
+    margin:auto
+  }
+  .margin-top-15 {
+    margin-top: 15px;
+  }
+  .margin-top-10 {
+    margin-top: 10px;
+  }
+  .bodyFat {
+    color: #54A21A
+  }
+  .bodyMass {
+    color: #3DB6FF
+  }
+  .weight {
+    color: #EE1DC5
+  }
+  .plus-icon {
+    font-size: 50px;
+    color: #0140C2;;
+}
+.align-left {
+  text-align: left;
+    margin: auto;
+}
+.ionRow {
+  flex-wrap: unset;
+  overflow: auto;
+  height: 350px;
+}
+.img-css {
+  height: 350px;
+  object-fit: cover;
+          width: 100%;
+}
+.icon-css {
+  display: grid;
+    margin-bottom: -34px;
+    text-align: right;
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 25px;
+    color: white;
+}
+.im-border {
+  border:5px solid #0140C2;
+  border-top: 8px solid #0140C2;}
+.video-css {
+  width: 100%;
+    height: -webkit-fill-available;
+}
+  
