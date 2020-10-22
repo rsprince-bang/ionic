@@ -36,15 +36,17 @@
     <ion-row>
       <ion-col>
         Weigh-in Day
-        <div class="day-select-wrapper">
-          <div text-center *ngFor="let item of days; let i of index"
-            class="day-selector"
-            [class.day-selected]="item.selected"
-            (click)="select(item)">
-            {{ item.day }}
-          </div>
-        </div>
       </ion-col>
+    </ion-row>
+    <ion-row>
+			<div class="day-select-wrapper">
+				<ion-col text-center *ngFor="let item of days; let i of index"
+					class="day-selector"
+					[class.day-selected]="item.selected"
+					(click)="select(item)">
+					{{ item.day }}
+				</ion-col>
+			</div>
     </ion-row>
     
     <ion-row>

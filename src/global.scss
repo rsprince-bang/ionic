@@ -81,17 +81,9 @@ ion-input {
 
 .icon-large {
 	color: #777;
-	background: #EAEEF8;
+	background: none;
 	padding: 0 4px 0 4px;
 }
-
-// ion-input.ion-invalid {
-//   border: 1px solid red;
-// }
-
-// ion-input.ion-valid {
-//   border: 1px solid lime;
-// }
 
 small {
 	margin-bottom: 5px;
@@ -163,6 +155,15 @@ h2 {
 .vert-center {
 	margin: auto;
 }
+
+.counter-display {
+    font-size: 30px;
+    color: #0140C2;
+    background: #c9ccd0;
+    padding: 10px;
+    margin: 10px auto;
+    width: 120px;
+  }
 
 /* 
  * Navigation Styles

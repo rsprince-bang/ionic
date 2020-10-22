@@ -16,9 +16,13 @@ const routes: Routes = [
   { path: 'set-goals', loadChildren: './user_pages/set-goals/set-goals.module#SetGoalsPageModule',  canActivate:[AuthGuard] },
   { path: 'add-event-modal', loadChildren: './user_pages/add-event-modal/add-event-modal.module#AddEventModalPageModule' },
   { path: 'enter-measurements', loadChildren: './user_pages/enter-measurements/enter-measurements.module#EnterMeasurementsPageModule', canActivate:[AuthGuard] },
-  {path: 'home-add', loadChildren:'./user_pages/home-add-food-modal/home-add-food-modal.module#HomeAddFoodModalPageModule', canActivate:[AuthGuard]},
+  { path: 'home-add', loadChildren:'./user_pages/home-add-food-modal/home-add-food-modal.module#HomeAddFoodModalPageModule', canActivate:[AuthGuard]},
   { path: 'policies', loadChildren: './public_pages/policies/policies.module#PoliciesPageModule' },
-  { path: 'reset-password', loadChildren: './user_pages/reset-password/reset-password.module#ResetPasswordPageModule'  }
+  { path: 'reset-password', loadChildren: './user_pages/reset-password/reset-password.module#ResetPasswordPageModule'  },
+  { path: 'add-water-modal', loadChildren: './user_pages/add-water-modal/add-water-modal.module#AddWaterModalPageModule' },
+  { path: 'add-sleep-modal', loadChildren: './user_pages/add-sleep-modal/add-sleep-modal.module#AddSleepModalPageModule' },
+  { path: 'reset-diet', loadChildren: './user_pages/reset-diet/reset-diet.module#ResetDietPageModule' }
+
 
 
 ];
