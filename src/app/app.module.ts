@@ -31,6 +31,7 @@ import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
 import {ViewVideoModule} from "./user_pages/modals/view-video/view-video.module"
 import { AddSleepModalPageModule } from './user_pages/add-sleep-modal/add-sleep-modal.module';
 import { AddWaterModalPageModule } from './user_pages/add-water-modal/add-water-modal.module';
+import { UserInfoPageModule } from './user_pages/user-info/user-info.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -53,7 +54,8 @@ import { AddWaterModalPageModule } from './user_pages/add-water-modal/add-water-
       ViewImgModule,
       ViewVideoModule,
       AddSleepModalPageModule,
-      AddWaterModalPageModule
+      AddWaterModalPageModule,
+      UserInfoPageModule
     ],
   providers: [
     StatusBar,

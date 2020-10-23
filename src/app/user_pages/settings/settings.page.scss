@@ -1,0 +1,674 @@
+ion-buttons ion-button.toolbar-text-button {
+  --color: blue;
+  --background: none;
+}
+
+.profile-header {
+
+  .profileImage {
+      width: 100%;
+      height: auto;
+
+      ion-img {
+          max-width: 150px;
+          width: auto;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+      }
+  }
+
+  .myFakeUploadButton {
+      margin: 0 auto;
+      padding: 5px;
+      font-size: 0.72rem;
+  }
+
+  #myFileInput {
+      position: absolute;
+      opacity: 0;
+  }
+
+  .update-image {}
+
+  h1,
+  h2 {
+      text-align: center;
+      color: #0716c1;
+      font-weight: bold;
+      text-transform: uppercase;
+  }
+
+  h1 {
+      font-size: 1.8rem;
+      line-height: 1.8rem;
+      margin-bottom: 0;
+  }
+
+  h2 {
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      margin-top: 0;
+  }
+
+}
+
+
+.profile-highlights {
+
+  h3.label {
+      font-size: 1.05rem;
+      line-height: 1.05rem;
+      text-align: center;
+      margin-bottom: 0.12rem;
+      color: #0716c1;
+      text-transform: uppercase;
+  }
+
+  .value {
+      text-align: center;
+      color: #5a5a5a;
+  }
+
+  ion-button {
+      max-width: 260px;
+      display: block;
+      margin: 0.5rem auto 1rem;
+      --border-radius: 6px;
+  }
+
+}
+
+
+.profile-overview {
+
+  margin-left: -16px;
+  margin-right: -16px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../../../assets/img/footer-background.jpg");
+
+  .progress {
+      text-align: center;
+      text-transform: uppercase;
+
+      .label {
+          color: #fff;
+          font-size: 1.05rem;
+          margin-bottom: 0;
+      }
+
+      .value {
+          color: #d8d8d8;
+          font-size: 0.81rem;
+      }
+  }
+
+  .completion-chart {}
+}
+.ionCardStyle {
+background-color:#f1f1f1;margin: 0px 0px;
+}
+.padding-top-15{padding-top:15px;}
+.divName {
+margin: auto ;height: 100%;
+}
+.nameStyle {
+color: #0716c1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  // border-bottom: 3px solid #3880ff;
+  width: fit-content;
+  margin: auto;
+}
+.goal-weight {
+  color:  #0716c1;
+  font-weight: 600;
+}
+.align-center {
+  text-align: center;
+  margin: auto;
+}
+.border-right {
+  border-right: 1px solid gainsboro;
+}
+.color-icon {
+  color: white;
+}
+.imgBacStyle{
+margin: auto;
+  border-radius: 50%;
+  width: 71px;
+  height: 71px;
+object-fit: cover;
+margin-top: 5px;
+border: 2px solid gainsboro;
+}
+.color-icon {
+  color: white;
+}
+.margin-top-7 {
+  margin-top: 7px;
+}
+.margin-top-15 {
+  margin-top: 15px;
+}
+.margin-top-20 {
+  margin-top: 20px;
+}
+.view-all {
+  color: #003CCA;
+  font-weight: bold;
+}
+.on-select-day {
+  background-color: #003CCA;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 22px;
+}
+.week-border {
+  border: 1px solid gainsboro;
+  text-align: center;
+  font-size: 22px;
+  border: 1px solid gainsboro;
+  text-align: center;
+  padding: 10px;
+}
+.announce-img {
+  width: 30px;
+  height: 20px;
+}
+
+
+.reset {
+  --background: #CA1616;
+  display: block;
+}
+.background-img-profile {
+background-image: url(../../../assets/img/profile-footer-background.jpg);
+object-fit: cover;
+background-repeat: no-repeat;    background-size: 100% 100%;
+  height: 31%;
+}
+.circle-progress {
+  max-width: 33%;
+  margin-left: auto;
+}
+.the-bang-diet {
+  font-size: 20px;
+  font-weight: 600;
+}
+.camera-icon {
+  margin: auto;
+  font-size: 20px;
+  text-align: center;
+  display: block;
+  z-index: 99;
+  padding-top: 3px;
+}
+.camera-div {
+  text-align: right;
+  background-color: #0716c1;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-top: -27px;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  z-index: 999;
+}
+.your-meals-card-profile {
+z-index: 99;
+  background-color: white;
+  border-radius: 15px;
+  margin: 0px;
+  margin-top: -34px;
+  padding: 0px 10px;
+  padding-top: 10px;
+}
+.border-bottom {
+  border-bottom: 2px solid #0716c1;
+  padding: 0px;
+  margin: 0px 5px;
+}
+.text-colo {
+  color: #0716c1;
+}
+.progress-img {
+  width: 130px;
+  height: 115px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.progress {
+  color: black;
+}
+.tex-bold {
+
+}
+.border-lorem {
+  border-bottom: 1px solid #f1f1f1;
+  margin: 5px 0px;
+}
+#control_wrapper {
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+.control-section {
+  margin: 25px auto;
+}
+
+#selected {
+  height: 50px;
+  width: 248px;
+  display: block;
+  font-weight: inherit;
+  line-height: 50px;
+  color: rgba(0, 0, 0, 0.58);
+}
+
+.bootstrap4 .e-customStyle span.e-icons.highlight:before {
+  vertical-align: none;
+}
+
+.bootstrap4 .e-customStyle span.e-icons.highlight {
+  margin-bottom: 3px;
+}
+
+.e-selected span.e-icons.highlight:before {
+  color: #fff;
+}
+
+.e-customStyle span.e-icons.highlight,
+.e-customStyle span.e-icons.highlight:before {
+  color: rgb(0, 0, 255);
+}
+
+.e-customStyle .e-other-month span.e-icons.highlight:before {
+  content: "";
+}
+
+.e-customStyle span.e-icons.highlight:before {
+  content: "\e190";
+  vertical-align: middle;
+  margin-right: 3px;
+  font-size: 4px;
+  position: relative;
+  top: -1px;
+  font-weight: normal;
+}
+
+.e-customStyle .e-selected span.e-icons.highlight:before {
+  color: #fff;
+}
+
+.e-customStyle span.e-icons.highlight {
+  margin-top: -11px;
+  display: block;
+  margin-left: 4px;
+}
+
+.e-customStyle .e-calendar .e-content span.special,
+.e-customStyle .e-calendar .e-content span.daycell {
+  font-weight: bold;
+}
+
+.e-customStyle .e-calendar .e-content span.special {
+  border-radius: 50%;
+}
+
+.e-customStyle span.e-icons.highlight,
+.e-customStyle span.e-icons.highlight:before {
+  color: rgb(0, 0, 255);
+}
+
+/* custom generated icons styles */
+
+@font-face {
+  font-family: 'e-icons';
+  src: url(data:application/x-font-ttf;charset=utf-8;base64,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) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.e-calendar .e-header .e-title, .e-bigger.e-small .e-calendar .e-header .e-title {
+  color: rgb(0, 0, 255) !important;
+}
+.border-line {
+  border-bottom: 1px solid #f1f1f1;
+}
+.padding-20 {
+  padding: 20px;
+}
+.margin-top-16 {
+  margin-top: 16px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.current-weight {
+  background: linear-gradient(162.34deg,
+  #02E3D6 0%, #0140C2 100%);
+  box-shadow: 0 2px 34px 0 rgba(0,0,0,0.2);
+  padding: 15px 0px;
+  text-align: center;
+  margin: auto;
+  color:white;
+}
+.goal-weight {
+  background: linear-gradient(162.34deg, #F200D7 0%,
+  #9625C1 100%);
+  box-shadow: 0 2px 34px 0 rgba(0,0,0,0.2);
+  padding: 15px 0px;
+  text-align: center;
+  margin: auto;
+  color:white;
+}
+.weigh-in {
+  font-weight: bold;
+  color: #003CCA ;
+}
+.per-color {
+  color: #0140C2
+}
+.chart {
+width: 95%;
+
+  ion-progress-bar {
+  width: 100%;
+}
+}
+.quizz-progress {
+ion-progress-bar {
+   --background: green;
+   --buffer-background: #E6E6E6  ;
+   --progress-background :#0140C2;
+   border-radius: 30px;
+ }
+}
+.margin-top-40 {
+  margin-top: 40px;
+}
+.margin-left {
+  margin: 0px;
+  margin-left: auto;
+}
+.margin-right {
+  margin: 0px;
+  margin-right: auto;
+}
+.margin-0 {
+  margin: 0px;
+  padding: 0px;
+}
+.phase {
+  margin-left:5px ;
+}
+.height-22 {
+  height: 22px;
+}
+.plus-icon {
+  font-size: 50px;
+  color: #0140C2;;
+}
+.margin-auto {
+  margin: auto;
+  text-align: center;
+}
+.workout-img {
+  height: 272px;
+  width: 100%;
+  object-fit: cover;
+}
+.date-css {
+  margin-top: -54px;
+  color: white;
+}
+.button-bac {
+  background-color: transparent;
+  --background: transparent;
+}
+.ion-item-css {
+  border-bottom: 2px solid gainsboro;
+  --padding-start:0px;
+  --padding-end:0px
+}
+.font-size-14 {
+  font-size: 14px;
+}
+.text-color {
+  color: #0716c1;
+  font-weight: 600;
+}
+.title {
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 22px;
+  margin: auto;
+  text-align: center;
+}
+.text-align-left {
+  text-align: left;
+  margin: auto;
+}
+.ionItem-css {
+  padding-inline-start: 0px;
+  padding-inline-end: 0px;
+  --inner-padding-end: 0px;
+}
+.margin-top-30 {
+  margin-top: 30px
+}
+.avatar-upload {
+  position: relative;
+  max-width: 100%;
+  margin: 0px 5px;
+}
+
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 19px;
+  z-index: 1;
+  top: 13px;
+}
+
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+
+.avatar-upload .avatar-edit .custom-label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #3efc78;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+
+.avatar-upload .avatar-edit .upload-image {
+  background: #3efc78;
+}
+
+.avatar-upload .avatar-edit .remove-image {
+  background: #E91E63;
+}
+
+.avatar-upload .avatar-edit .custom-label:hover {
+  opacity: 1;
+}
+
+.avatar-upload .avatar-edit .custom-label:after {
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  top: 8px;
+  right: 0;
+  left: 2px;
+  width: 18px;
+}
+
+// .avatar-upload .avatar-edit .upload-image:after {
+//   content: url('/assets/edit.svg');
+// }
+
+// .avatar-upload .avatar-edit .remove-image:after {
+//   content: url('/assets/close.svg');
+//   left: 0px !important;
+// }
+
+.avatar-upload .avatar-preview {
+  box-sizing: border-box;
+  height: 250px;
+  width: 100%;
+  /* border: 1px solid #1C54C8; */
+  background-color: #EAEEF8;
+  box-shadow: 0 2px 34px 0 rgba(0,0,0,0.04);
+  padding: 4px;
+}
+
+.avatar-upload .avatar-preview>div {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  object-fit: cover;width: 100%;
+  height: 100%;
+  // border-radius: 50%;
+  // background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#control_wrapper {
+  margin: 0 auto;
+  max-width: 100%;
+}
+.tapToUpload {
+  text-align: center;
+  background-color: transparent;
+  margin-top: -144px;
+  box-shadow: unset;
+}
+.button-native {
+  border-radius: 30px !important;
+}
+.alert-title.sc-ion-alert-ios {
+  margin-top: 8px;
+  color: #003CCA;
+  font-size: 17px;
+  font-weight: 600;
+}
+.edit-img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+.padding-24 {
+  padding: 24px;
+}
+.width-100 {
+  width: 100%;
+}
+.color-black {
+  color: black;
+}
+.header-css {
+  padding: 0px 15px;border-bottom: 2px solid gainsboro;
+}
+.edit-exit {
+  text-transform: capitalize;font-size: 18px;
+}
+.profile-jack {
+  background-color: #FAFAFA;padding-bottom: 20px;
+}
+.lbs-css {
+  font-weight: bold;margin-top: 7px;
+}
+.progress-photos-back {
+  background-color:#FFFFFF;padding-top:20px;padding-bottom: 20px;
+}
+.date-center {
+  color: #FFFFFF;text-align: center;
+}
+.date-card {
+  margin-inline-start: 0px;margin-inline-end: 0px;padding: 0px;padding-bottom: 24px;
+}
+.div-schedule {
+  padding-top:20px;background-color: #FAFAFA;
+}
+.color-red {
+  color: red;
+}
+.background-colo-white {
+  background-color: #FAFAFA;
+}
+.toggle-css {
+  --handle-background-checked: white;
+}
+.text-margin-left {
+  text-align: left;margin: auto;
+}
+.max-width-100 {
+  max-width:100%
+}
+.logout {
+  text-align: right;font-size:20px;color: #003CCA
+}
+.end-diet-css {
+  text-align: left;font-size:20px 
+}
+.save-button {
+  text-transform: capitalize;--border-radius: 30px;margin: 0px;
+}
+.text-align-center {
+  text-align: center;
+}
+.margin-top-95 {
+  margin-top: 95px;
+}
+.delete-photo {
+  font-weight: bold;margin: 0px;margin-top: 6px;
+}
+.trash-css {
+  color: red;font-size:xx-large
+}
+.footer-border {
+  border-bottom: 2px solid gainsboro;
+}
+.margin-left-auto {
+  margin-left: auto;
+}
+.margin-right-auto {
+  margin-right: auto;
+}
+.text-align-right {
+  text-align:right;
+}
+.text-align-left {
+  text-align: left;
+}
+.cs-border-sub {
+  --background:whitesmoke;
+  border: 1px solid whitesmoke;
+  --color: black;
+  --placeholder-opacity: 1;
+  --padding-start: 0;
+  border-radius: 7px;
+  margin: auto;
+  font-size: 90%;
+  font-weight: 600;
+  text-align: center;
+  display: block;
+}
+/* end of custom generated icons styles */

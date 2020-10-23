@@ -1,18 +1,20 @@
 <ion-header class="header-css">
-    <ion-toolbar>
-      <ion-buttons slot="start" >
-      <ion-button class="button-bac">
-        <ion-icon class="color-black"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
-       </ion-button>
-      </ion-buttons>
- 
-        <ion-title>Home</ion-title>
-        <ion-buttons slot="end" >
-          <ion-button class="button-bac">
-            <ion-icon class="color-black" name="settings"></ion-icon>
-          </ion-button>
-      </ion-buttons>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons slot="start" >
+		<ion-button class="button-bac">
+			<ion-icon class="color-black" 
+				slot="icon-only" 
+				name="ios-notifications-outline">
+			</ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title>Home</ion-title>
+		<ion-buttons slot="end" (click)="showSettings()">
+			<ion-button class="button-bac">
+				<ion-icon class="color-black" name="settings"></ion-icon>
+			</ion-button>
+	</ion-buttons>
+</ion-toolbar>
 </ion-header>
 <ion-content >
   <div class="padding-20 content-div" >

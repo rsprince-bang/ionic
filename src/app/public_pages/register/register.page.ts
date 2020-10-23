@@ -34,7 +34,7 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
+    //console.log(this.registerForm.value);
     this.isSubmitted = true;
     if (this.registerForm.valid) {
       this.myAPI.makeAPIcall(

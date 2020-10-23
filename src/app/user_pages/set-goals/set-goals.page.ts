@@ -54,27 +54,20 @@ export class SetGoalsPage implements OnInit {
   // }
 
   continue() {
+    this.weighinDays = [];
     this.days.forEach(item => {
       if(item.selected) {
         this.weighinDays.push(item.code);
       }
     });
-    console.log({ lossGoal: this.lossGoal, weighinDays: this.weighinDays, time: this.selected_time });
+    //console.log({ lossGoal: this.lossGoal, weighinDays: this.weighinDays, time: this.selected_time });
 
     this.myAPI.makeAPIcall(
       "user", 
-      // NEW PAYLOAD
-      // {
-      //   "action": "saveGoals",
-      //   "lossGoal": this.lossGoal,
-      //   "weighinDays": this.weighinDays, // array of codes: 'sun','mon','tue','wed','thu','fri','sat'
-      //   "time": this.selected_time,
-      //   "weekly_repeat": true
-      // },
       {
         "action": "saveGoals",
         "pounds_to_loose": this.lossGoal,
-        "day": 'sun',
+        "weighinDays": this.weighinDays,
         "time": this.selected_time,
         "weekly_repeat": true
       },
