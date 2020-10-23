@@ -28,9 +28,10 @@ export class TrackWorkoutPage implements OnInit {
   {'name': 'F', selected: false},
   {'name': 'S', selected: false}];
   isShow: boolean;
+  isSetsCompleted = false;
 
-
-  constructor(private activatedRoute: ActivatedRoute, private globalServices: GlobalServicesService, private modalController: ModalController,
+  constructor(private activatedRoute: ActivatedRoute, private globalServices: GlobalServicesService,
+    private modalController: ModalController,
     private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService) { }
 
   ngOnInit() {
@@ -133,6 +134,8 @@ export class TrackWorkoutPage implements OnInit {
         await modal.present();
         const { data } = await modal.onWillDismiss();
         console.log('data t', data);
-    if (data !== undefined) { }
+    if (data !== undefined) {
+      this.isSetsCompleted = data.isSetsDone;
+     }
   }
 }

@@ -85,6 +85,47 @@
   border-top: 8px solid #0140C2;}
 .video-css {
   width: 100%;
-    height: -webkit-fill-available;
+  object-fit: cover;
+    height: 100%;
 }
+video::-webkit-media-controls-fullscreen-button {
+  display: none;
+}
+video::-webkit-media-controls-panel {
+ width: 70%;
+ max-width: 70%;
+ margin-top: auto;
+ margin-right: auto;
+ margin-left: 40px;
+text-align: left;
+}
+.ion-fabButton {
+  background-color: transparent;
+  margin: 15px;
+  z-index: 9999;
+  --background : transparent;
+  width: 30px;
+  height: 30px;
+  margin-left: -51px;
+}
+.margin-top-neg-7 {
+  margin-top: -7px;
+}
+.margin-top-12 {
+  margin-top: 12px;
+}
+.ion-size {
+  font-size: xx-large
+}
+.header {
+  z-index: 9999;
+  margin-bottom: -80px;
+  color: white;
+}
+.margin-top-20 {
+  margin-top: 20px;
+}
+.font-size-25 {
+  font-size: 25px;
+} 
   
