@@ -223,10 +223,7 @@ ion-button {
     background-image: none;
 }
 ion-content {
-    // --ion-background-color: rgba(235, 251, 255, 0.79);
     --ion-background-color: rgba(235, 251, 255, 0);
-    // background-image:url("./assets/img/book-smoke-mobile.jpg");
-    // background-image: url("./assets/img/app-background.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -234,7 +231,6 @@ ion-content {
 
 @media only screen and (min-width: 700px) {
     ion-content { 
-        background-image:url("./assets/img/book-smoke-ipad.jpg") ;
         background-repeat: no-repeat;
         background-position-y: bottom;
         background-size: contain;
