@@ -105,8 +105,9 @@
             <div class="padding-left-5">Length of time</div>
           </div>
           <div class="margin-top-10 row no-padding">
-           <div  class="padding-1"> <ion-icon class="color-text" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon></div>
-            <div class="padding-left-5">Completed</div>
+           <div  class="padding-1" *ngIf="isSetsCompleted"> <ion-icon class="color-text" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon></div>
+            <div class="padding-left-5" *ngIf="isSetsCompleted">Completed</div>
+            <div class="row" *ngIf="!isSetsCompleted">In Progress ..</div>
           </div>
         </ion-col>
       </ion-row>

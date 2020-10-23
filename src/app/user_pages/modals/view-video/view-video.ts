@@ -19,7 +19,11 @@ weight = "150"
 imgList =[{url :'../../../../assets/img/Capture-bang.PNG',selected:false},{url:'../../../../assets/img/Bang-prof.jpg',selected:false}]
 isExpandImg = false
 selectedImg = ""
-url
+url;
+isFirstSelected = false;
+isForthSelected = false;
+isThirdSelected = false;
+isSecondSelected = false;
 constructor(public modalController: ModalController) { }
 
   ngOnInit() {
@@ -39,37 +43,23 @@ constructor(public modalController: ModalController) { }
     
   }
   closeModal() {
-    console.log("inside dismiss");
-    if(this.isExpandImg ) {
-      this.page =""
-    }else {
-    this.modalController.dismiss();
+    let data = false;
+     if (this.isFirstSelected && this.isSecondSelected && this.isThirdSelected && this.isForthSelected) {
+      data = true;
     }
+    this.modalController.dismiss({isSetsDone : data});
   }
-  uploadPhoto() {
-    this.modalController.dismiss({data:true});
+ 
+  onClickOfFirstSet() {
+    this.isFirstSelected = !this.isFirstSelected;
   }
-  expandimg(img) {
-    this.page = 'viewImg'
-    this.imgUrl = img.url
-    this.isExpandImg = true
+  onClickOfSecondSet() {
+    this.isSecondSelected = !this.isSecondSelected;
   }
-  editPhoto() {
-    if(this.selectedImg) {
-      this.modalController.dismiss({data:'edit',img : this.selectedImg})
-    }else {
-      this.modalController.dismiss({data:'edit',img:this.imgList[0].url})
-    }
-    
+  onClickOfThirdSet() {
+    this.isThirdSelected = !this.isThirdSelected;
   }
-  onClickOnImg(img) {
-    this.selectedImg = img.url
-    this.imgList.forEach(item =>{
-      if(item.url == img.url) {
-        item.selected = true
-      }else{
-        item.selected = false;
-      }
-    })
+  onClickOfFourthSet() {
+    this.isForthSelected = !this.isForthSelected;
   }
 }
