@@ -671,4 +671,24 @@ ion-progress-bar {
   text-align: center;
   display: block;
 }
-/* end of custom generated icons styles */
+
+.day-select-wrapper {
+  margin-bottom: 10px;
+  padding: 6px;
+}
+
+.day-selector {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 32px;
+  font-size: 24px;
+  color: black;
+  border: 1px solid #ccc;
+  text-transform: uppercase;
+}
+
+.day-selected {
+  color: white;
+  background: #0140C2;
+}

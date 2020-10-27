@@ -1,0 +1,5 @@
+{
+  "lossGoal": 5,
+  "weighindays": ["mon", "wed", "sat"],
+  "notifications": true
+}
