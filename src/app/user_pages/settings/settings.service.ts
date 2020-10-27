@@ -15,8 +15,4 @@ export class SettingsService {
     return this.data;
   }
 
-  setData() {
-
-  }
-
 }

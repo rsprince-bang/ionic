@@ -105,7 +105,7 @@ export class SettingsPage implements OnInit {
     this.myAPI.makeAPIcall(
       "settings",
       {
-        "action": "settings",
+        "action": "saveSettings",
         "notifications": this.notifications,
         "lossGoal": this.lossGoal,
         "weighinDays": this.setWeighinDays()
