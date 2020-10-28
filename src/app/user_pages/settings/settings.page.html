@@ -3,12 +3,11 @@
     <ion-buttons slot="start">
 			<ion-back-button 
 			class="back-button"
-			text=""
-			icon="arrow-round-back">
+			text="">
 		</ion-back-button>
     </ion-buttons>
     <ion-title>settings</ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" (click)="onSave()">
       <ion-button class="toolbar-text-button">
         <div class="text-colo edit-exit" >Save</div>
       </ion-button>
@@ -30,7 +29,7 @@
               Jack Owoc
             </h2>
 						<p class="margin-0 font-size-14">CEO@bangenergy.com</p>
-						<p (click)="openUserInfoModal()"><small>Edit</small></p>
+						<p (click)="openUserInfoModal()">Edit</p>
           </div>
       </ion-col>
     </ion-row>
@@ -41,77 +40,54 @@
         <h2 class="margin-0">General</h2>
       </ion-col>
     </ion-row>
-    <ion-item class="margin-0 ion-item-css ionItem-css width-100">
-      <ion-row  class="width-100">
-        <ion-col size="9" class="text-align-left">
-          Measurement Units (lbs)
-        </ion-col>
-        <ion-col size="3" class="text-align-right">
-          <ion-toggle checked class="toggle-css"></ion-toggle>
-        </ion-col>
-      </ion-row >
-    </ion-item>
+
     <ion-item class="margin-0 ion-item-css ionItem-css width-100">
       <ion-row  class="width-100">
         <ion-col size="9" class="text-align-left">
           Notifications
         </ion-col>
         <ion-col size="3" class="text-align-right">
-          <ion-toggle checked class="toggle-css"></ion-toggle>
+          <ion-toggle [(ngModel)]="notifications" checked class="toggle-css"></ion-toggle>
         </ion-col>
       </ion-row>
     </ion-item>
+
     <ion-row class="margin-top-20">
       <ion-col>
         <h2 class="margin-0">Body Sculpting Goals</h2>
       </ion-col>
     </ion-row>
+
     <ion-row class="margin-top-10">
       <ion-col >Weigh In Days</ion-col>
     </ion-row>
-    <ion-row >
-      <ion-col class="week-border" *ngFor="let day of weekDays;let i = index;" [ngClass]="{'on-select-day week-border' :day.selected,'week-border':!day.selected}">
-        <div (click)="onClickDate(day,i)"  class="text-align-center">{{day.name}}</div>
+
+    <ion-row>
+			<div class="day-select-wrapper">
+				<ion-col text-center *ngFor="let item of days"
+					class="day-selector"
+					[class.day-selected]="item.selected"
+					(click)="select(item)">
+					{{ item.day }}
+				</ion-col>
+			</div>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Pounds to Lose</ion-label>
+          <ion-select name="lossgoal" [(ngModel)]="lossGoal" okText="OK" cancelText="Cancel">
+            <ion-select-option 
+              *ngFor="let item of lossOptions"
+              [value]="item.value">
+                {{ item.name}}
+              </ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-col>
     </ion-row>
-    <div class="margin-top-15">
-      <ion-item class="margin-0 ion-item-css" >
-        <ion-row  class="margin-0 width-100">
-          <ion-col size="8"  class="text-margin-left">
-            <span >Weigh In Days</span>
-          </ion-col>
-          <ion-col size="4" >
-            <div class="row">
-              <ion-select name="weighInDays" [(ngModel)]="weighInDays" okText="OK" cancelText="Cancel" class="max-width-100">
-                <ion-select-option 
-                  *ngFor="let item of weighInDaysList">
-                    {{ item }}
-                  </ion-select-option>
-              </ion-select>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item class="margin-0 ion-item-css" >
-        <ion-row  class="margin-0 width-100">
-          <ion-col size="8"  class="text-margin-left">
-            <span >Pounds To Lose</span>
-          </ion-col>
-          <ion-col size="4" >
-            <div class="row">
-              <ion-select name="weighWeight" [(ngModel)]="weighWeight" okText="OK" cancelText="Cancel" class="max-width-100">
-                <ion-select-option 
-                  *ngFor="let item of weightRange"
-                  >
-                    {{ item }} lbs.
-                  </ion-select-option>
-                  <ion-select-option>Above 50</ion-select-option>
-              </ion-select>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-    </div>
+
     <ion-row class="margin-top-20">
       <ion-col size="6" class="margin-auto end-diet-css" (click)="resetDiet()">
         <b>Reset Diet</b>
