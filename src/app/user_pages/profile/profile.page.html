@@ -25,8 +25,86 @@
 </ion-header>
 
 <ion-content >
-  <div *ngIf="isProfilePage">
-    <div class="padding-20 profile-jack">
+  <div [hidden] ="isSettingsPage || isUploadData || isEditPhoto || isSchedulePage ">
+    <ion-grid class="grid-background padding-20">
+      <ion-row>
+        <ion-col class= "color-white">
+          <h3 class="h-style">The Bang Anti-Diet</h3>
+          <h3 class="h-style">7 Week Plan</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-10">
+        <ion-col>
+          <p class="color-white">Week 1 of 7</p>
+          <h2 class="h-style color-white">20% Completed</h2>
+          <div class="chart fat-progress margin-top-10">
+            <!-- ion progress bar  -->
+            <ion-progress-bar value="0.30" class="height-22"></ion-progress-bar>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-10">
+        <ion-col size="5.5" class="goal-weight">
+          <div class="row">
+            <h1 class="margin-left">150</h1><p class="margin-right lbs-css">lbs</p>
+          </div>
+          <div>Goal Weight</div>
+          <small>(in pounds)</small>
+        </ion-col>
+        <ion-col size="5.5" class="current-weight">
+          <div class="row">
+            <h1 class="margin-left">165</h1>
+            <p class="margin-right lbs-css">lbs</p>
+          </div>
+          <div>Current Weight</div>
+          <small>(in pounds)</small>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-10">
+        <ion-col>
+          <div class="row">
+            <div><ion-icon class="color-white icon-weigh" name="add-circle-outline"></ion-icon>
+            </div>
+            <p class="color-white p-style"> Weigh in</p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="margin-top-15">
+        <h3 class="color-white">Goal Tracker</h3>
+      </ion-row>
+      <ion-row class="lineChartHeader">
+        <ion-col size="3.5" >
+          <div class="row">
+            <!-- <div class="weight-dot"></div><ion-text class="font-size-15">
+              Weight
+            </ion-text> -->
+          </div>
+          
+        </ion-col>
+        <ion-col size="4.5">
+          <div class="row">
+            <!-- <div class="body-fat-dot"></div><ion-text class="font-size-15">
+              Body Fat
+            </ion-text> -->
+          </div>
+        </ion-col>
+        <ion-col size="4" class="margin-auto text-align-right">
+          <select class="select-line">
+            <option>Weekly</option>
+          </select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size=12 size-md="12" size-lg="8" size-xl="4" class="dateDiv">
+            <div class='chart-container-big'>
+              <!-- line chart  -->
+                <canvas #lineCanvas height="250"  width="350" class="lineChart-bar"></canvas> 
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-row class="margin-auto color-white"><ion-col><p claas="color-white">Week</p></ion-col></ion-row>
+    </ion-grid>
+    <!-- <div class="padding-20 profile-jack">
       <ion-row >
         <ion-col size="3" class="margin-0 margin-auto">
           <div >
@@ -62,11 +140,7 @@
           <div>Current Weight</div>
         </ion-col>
         </ion-row>
-      <ion-row class="margin-top-10">
-        <ion-col>
-          <p class="weigh-in"> Weigh in</p>
-        </ion-col>
-    </ion-row>
+      
       <ion-row class="margin-top-20">
       <ion-col>
         <h2>The Bang Anti-Diet</h2>
@@ -83,7 +157,7 @@
       <div class="chart quizz-progress">
         <ion-progress-bar value="0.3" class="height-22"></ion-progress-bar>
       </div>
-    </div>
+    </div> -->
     <div class="padding-20 progress-photos-back">
       <ion-row >
         <ion-col size="9.5">
