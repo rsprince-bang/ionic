@@ -139,13 +139,13 @@ color: #0716c1;
   color: white;
 }
 .imgBacStyle{
-margin: auto;
+  margin: auto;
   border-radius: 50%;
   width: 71px;
   height: 71px;
-object-fit: cover;
-margin-top: 5px;
-border: 2px solid gainsboro;
+  object-fit: cover;
+  margin-top: 5px;
+  border: 2px solid gainsboro;
 }
 .color-icon {
   color: white;
@@ -613,7 +613,7 @@ ion-progress-bar {
 .background-colo-white {
   background-color: #FAFAFA;
 }
-.toggle-css {
+.toggle {
   --handle-background-checked: white;
 }
 .text-margin-left {
