@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef} from '@angular/core';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ApiCallService } from 'src/app/services/api-call.service';
@@ -10,12 +10,14 @@ import * as moment from 'moment-timezone';
 import {ViewImg} from '../modals/view-img/view-img';
 import { filter } from 'rxjs/operators';
 import { title } from 'process';
+import { Chart } from 'chart.js';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  @ViewChild('lineCanvas') lineCanvas: ElementRef;
   @ViewChild('calendar')
   public calendar: CalendarComponent;
   value: Date;
@@ -64,6 +66,7 @@ export class ProfilePage implements OnInit {
   startTime: any;
   endTime: any;
   weekDaysList: any;
+  private barChart: Chart;
   constructor(private foodSuggestionsService: FoodSuggestionsService,
    private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router: Router,
     private alertController: AlertController, public modalController: ModalController, private cd: ChangeDetectorRef,) { 
@@ -82,6 +85,7 @@ export class ProfilePage implements OnInit {
     }
 
   ngOnInit() {
+    this.updateChart();
     this.weekDaysList = this.weekDays;
     for (let i = 0; i <= 50; i++) {
       this.weightRange.push(i);
@@ -379,10 +383,9 @@ export class ProfilePage implements OnInit {
         this.isSettingsPage=  false;
         this.isUploadData=  false;
         this.title = 'Edit Photo'
-        this.editImg = data.img
-        console.log("editImg",this.editImg)
-      }else {
-        this.uploadPhoto()
+        this.editImg = data.img;
+      } else {
+        this.uploadPhoto();
       }
 
     }
@@ -418,5 +421,70 @@ export class ProfilePage implements OnInit {
   // function to select weekday
   onClickWeekDay(day, i) {
     day.selected = !day.selected;
+  }
+  /* function to load goal tracker chart */
+  updateChart() {
+    this.barChart = new Chart(this.lineCanvas.nativeElement, {
+        type: 'line',
+        data: {
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+            datasets: [{
+                label: 'Goal Weight',
+                data: [150, 150, 150, 150,150, 150, 150, 150, 150],
+                fill: false, borderColor: '#FF08E3', backgroundColor: '#FF08E3'},
+                {label: 'Current Weight',
+                data: [170, 167, 170, 160, 164, 163, 155, 152, 150],
+                fill: false, borderColor: '#73FFF8', backgroundColor: '#73FFF8'
+            }]
+        },
+        options: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              fontColor: 'white',
+              fontSize: 12,
+              usePointStyle: true, boxWidth: 6
+            }
+          },
+          scales: {
+            xAxes: [{
+                gridLines: {
+                    display: true,
+                    color: 'white',
+                  drawBorder: true,
+                  drawTicks: false
+                },
+                ticks: {
+                  fontColor: 'white',
+                  padding: 10
+                },
+            }],
+            yAxes: [{
+                display: true,
+                gridLines: {
+                    display: true,
+                    color: 'white',
+                  drawBorder: true,
+                  drawTicks: false,
+                  tickMarkLength: 15,
+                },
+                ticks: {
+                  fontColor: 'white',
+                  padding: 20,
+                  fontSize: 12,
+                  min: 110,
+                  max: 190, // Your absolute max value
+                  // callback: function (value) {
+                  //   return value + '%'; // convert it to percentage
+                  // },
+                },
+                scaleLabel: {
+                  display: true,
+                },
+            }],
+        }
+        }
+    });
   }
 }

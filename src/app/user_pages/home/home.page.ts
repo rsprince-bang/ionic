@@ -11,7 +11,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
 import { reduce } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 import * as pluginLabels from 'chartjs-plugin-labels';
-import { Chart } from "chart.js";
+import { Chart } from 'chart.js';
 
 import { ModalController } from '@ionic/angular';
 import { AddSleepModalPage } from '../add-sleep-modal/add-sleep-modal.page';
