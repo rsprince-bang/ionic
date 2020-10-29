@@ -225,7 +225,7 @@ export class LoginPage implements OnInit {
   loginWithApple(appleid_user) {
     //console.log(appleid_user.givenName);
     //console.log(appleid_user.familyName);
-    //console.log(appleid_user);
+    //console.log(appleid_user.email);
     this.myAPI.makeAPIcall(
       "login", 
       {
