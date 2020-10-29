@@ -1,20 +1,18 @@
 <ion-header class="header-css">
-	<ion-toolbar>
-		<ion-buttons slot="start" >
-		<ion-button class="button-bac">
-			<ion-icon class="color-black" 
-				slot="icon-only" 
-				name="ios-notifications-outline">
-			</ion-icon>
-			</ion-button>
-		</ion-buttons>
-		<ion-title>Home</ion-title>
-		<ion-buttons slot="end" (click)="showSettings()">
-			<ion-button class="button-bac">
-				<ion-icon class="color-black" name="settings"></ion-icon>
-			</ion-button>
-	</ion-buttons>
-</ion-toolbar>
+    <ion-toolbar>
+      <ion-buttons slot="start" >
+      <ion-button class="button-bac">
+        <ion-icon class="color-black"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
+       </ion-button>
+      </ion-buttons>
+ 
+        <ion-title>Home</ion-title>
+        <ion-buttons slot="end" >
+          <ion-button class="button-bac">
+            <ion-icon class="color-black" name="settings"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 <ion-content >
   <div class="padding-20 content-div" >
@@ -77,7 +75,7 @@
           <h3 class="color-black">Water Intake</h3>
         </ion-col>
         <ion-col size="5" class="color-text align-left">
-          <p (click)="openWaterModal()" >Add Water</p>
+          <p >Add Intake</p>
         </ion-col>
       </ion-row >
       <ion-row class="paddinleft-right-5">
@@ -104,13 +102,6 @@
       <ion-row >
         <ion-col size=12 size-md="12" size-lg="8" size-xl="4" class="pad-left-right-15">
             <div class='chart-container-big'>
-              <!-- <canvas baseChart
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [chartType]="barChartType">
-              </canvas> -->
                 <canvas #barIntakeCanvas height="200" ></canvas> 
             </div>
         </ion-col>
@@ -123,7 +114,7 @@
           <h3 class="color-white">Sleep</h3>
         </ion-col>
         <ion-col size="5" class="color-white align-left">
-          <p (click)="openSleepModal()" >Add Sleep</p>
+          <p >Add Sleep</p>
         </ion-col>
       </ion-row>
       <ion-row class="paddinleft-right-5">
