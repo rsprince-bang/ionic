@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { UserInfoPage } from '../user-info/user-info.page';
-import { SettingsService } from './settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -36,8 +36,8 @@ export class SettingsPage implements OnInit {
   constructor(
     private router: Router,
     private modalController: ModalController,
-    private settingsService: SettingsService,
-    private myAPI: ApiCallService
+    private myAPI: ApiCallService,
+    private globalServices: GlobalServicesService
   ) { }
 
   ngOnInit() {
@@ -66,7 +66,7 @@ export class SettingsPage implements OnInit {
     this.updateSettings();
   }
 
-  // Loop thru each day, check if its code is in weighinCodes, 
+  // For getSettings(). Loop thru each day, check if its code is in weighinCodes, 
   // set selected to true.
   getWeighinDays() {
     this.days.forEach(item => {
@@ -77,7 +77,11 @@ export class SettingsPage implements OnInit {
     });
   }
 
+<<<<<<< HEAD
 	// loop thru 'days', push the selected items to weighInDays array.
+=======
+	// For updateSettings(). Loop thru 'days', push the selected items to weighInDays array.
+>>>>>>> origin
 	setWeighinDays() {
 		this.weighinCodes = [];
 		this.days.forEach(item => {
@@ -88,15 +92,22 @@ export class SettingsPage implements OnInit {
 		return this.weighinCodes;
 	}
 
+	// gets current settings from the endpoint
   getCurrentSettings() {
+<<<<<<< HEAD
     console.log("Getting current settings");
     this.myAPI.makeAPIcall(
       "settings",
+=======
+    this.myAPI.makeAPIcall(
+      "setting",
+>>>>>>> origin
       {"action": "loadSettings"},
       true
     )
     .subscribe(
       response => {
+<<<<<<< HEAD
         // handle error
         if( response.error ){
           this.myAPI.handleMyAPIError(response.error);
@@ -111,6 +122,16 @@ export class SettingsPage implements OnInit {
           console.log(this.weighinCodes);
           this.getWeighinDays(); // uses weighinCode to set "days", array of objects
           console.log(this.days);
+=======
+        if( response.error ){
+          this.myAPI.handleMyAPIError(response.error);
+        } else {
+					// set response values to local values
+          this.notifications = response.notifications;
+          this.lossGoal = response.lossGoal;
+          this.weighinCodes = response.weighindays;
+          this.getWeighinDays(); // converts weighinCodes to Days control
+>>>>>>> origin
         }
       },
       error => console.log(error)
@@ -133,6 +154,15 @@ export class SettingsPage implements OnInit {
       response => {
         if( response.error ){
           this.myAPI.handleMyAPIError(response.error);
+        } else {
+          localStorage.setItem("goals", JSON.stringify(response.success.goals));
+          if(this.notifications) {
+            localStorage.setItem("alerts", JSON.stringify(response.success.alerts));
+            this.globalServices.syncAlerts();
+          } else {
+            localStorage.removeItem("alerts");
+            this.globalServices.clearAlerts();
+          }
         }
       }    
     )
