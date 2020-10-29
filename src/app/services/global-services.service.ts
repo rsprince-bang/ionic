@@ -9,6 +9,7 @@ import { Plugins } from '@capacitor/core';
 import { AlertsPageModule } from '../user_pages/alerts/alerts.module';
 const {LocalNotifications} = Plugins;
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -345,6 +346,13 @@ export class GlobalServicesService {
     var resultDate = new Date(date.getTime());
     resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
     return resultDate;
+  }
+
+  async getDeviceInfo(){
+
+    let device = await Plugins.Device.getInfo();
+    //console.log(device);
+    return device;
   }
 
 }
