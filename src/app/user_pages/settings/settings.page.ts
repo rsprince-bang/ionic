@@ -70,38 +70,55 @@ export class SettingsPage implements OnInit {
   // set selected to true.
   getWeighinDays() {
     this.days.forEach(item => {
-      if(this.weighinCodes.includes(item.code)) {
+      if(this.weighinCodes && this.weighinCodes.includes(item.code)) {
         item.selected = true;
       }
+      console.log("weighinDays: ", this.days);
     });
   }
 
-    // loop thru 'days', push the selected items to weighInDays array.
-    setWeighinDays() {
-      this.weighinCodes = [];
-      this.days.forEach(item => {
-        if(item.selected) {
-          this.weighinCodes.push(item.code);
-        }
-      });
-      return this.weighinCodes;
-    }
+	// loop thru 'days', push the selected items to weighInDays array.
+	setWeighinDays() {
+		this.weighinCodes = [];
+		this.days.forEach(item => {
+			if(item.selected) {
+				this.weighinCodes.push(item.code);
+			}
+		});
+		return this.weighinCodes;
+	}
 
   getCurrentSettings() {
-    this.settingsService.getData()
+    console.log("Getting current settings");
+    this.myAPI.makeAPIcall(
+      "settings",
+      {"action": "loadSettings"},
+      true
+    )
     .subscribe(
-      data => {
-        this.notifications = data.notifications;
-        this.lossGoal = data.lossGoal;
-        this.weighinCodes = data.weighindays;
-        this.getWeighinDays();
+      response => {
+        // handle error
+        if( response.error ){
+          this.myAPI.handleMyAPIError(response.error);
+        } 
+        // successful response
+        else {
+          let data = response.success;
+          console.log(response);
+          this.notifications = data.notifications;
+          this.lossGoal = data.lossGoal;
+          this.weighinCodes = data.weighinDays;
+          console.log(this.weighinCodes);
+          this.getWeighinDays(); // uses weighinCode to set "days", array of objects
+          console.log(this.days);
+        }
       },
       error => console.log(error)
     )
   }
 
   updateSettings() {
-    console.log(this.notifications, this.lossGoal, this.setWeighinDays());
+    console.log("updateSettings");
     this.myAPI.makeAPIcall(
       "settings",
       {
