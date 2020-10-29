@@ -15,42 +15,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="padding-20 background-colo-white">
+<ion-content padding>
+  <div>
     <ion-row>
       <ion-col size="3" class="margin-0 margin-auto">
-        <div>
-          <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
-        </div>
-        </ion-col>
-        <ion-col size="9" class="margin-top-10">
-          <div>
-            <h2 class="margin-0 margin-to-7">
-              Jack Owoc
-            </h2>
-						<p class="margin-0 font-size-14">CEO@bangenergy.com</p>
-						<p (click)="openUserInfoModal()">Edit</p>
-          </div>
+        <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
+      </ion-col>
+      <ion-col size="9" class="margin-top-10">
+        <h2 class="margin-0 margin-to-7">
+          Jack Owoc
+        </h2>
+        <p class="margin-0 font-size-14">CEO@bangenergy.com</p>
+        <p (click)="openUserInfoModal()">Edit</p>
       </ion-col>
     </ion-row>
   </div>
-  <div style="padding: 0px 20px;">
-    <ion-row class="margin-top-15">
+  <div>
+    <ion-row>
       <ion-col>
-        <h2 class="margin-0">General</h2>
+        <h2>General</h2>
       </ion-col>
     </ion-row>
 
-    <ion-item class="margin-0 ion-item-css ionItem-css width-100">
-      <ion-row  class="width-100">
-        <ion-col size="9" class="text-align-left">
-          Notifications
-        </ion-col>
-        <ion-col size="3" class="text-align-right">
-          <ion-toggle [(ngModel)]="notifications" checked class="toggle-css"></ion-toggle>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            Notifications
+          </ion-label>
+          <ion-toggle [(ngModel)]="notifications" checked class="toggle"></ion-toggle>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
     <ion-row class="margin-top-20">
       <ion-col>
