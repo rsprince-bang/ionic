@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
   @ViewChild("barCanvas") barCanvas: ElementRef;
   @ViewChild("barIntakeCanvas") barIntakeCanvas: ElementRef
   @ViewChild("barSleepCanvas") barSleepCanvas:ElementRef
-  private barIntake: Chart
+  private barIntake: Chart;
   private barChart: Chart;
   private barSleep: Chart;
   day = null;
@@ -386,62 +386,61 @@ export class HomePage implements OnInit {
    */
   calculateDayCompletionPercentage() {
 
-    let progressPercentage = ( this.dayNumber / this.planLength_days );
+    const progressPercentage = ( this.dayNumber / this.planLength_days );
     return progressPercentage;
 
   }
   updateChart() {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
-        type:'line',
+        type: 'line',
         data:{
-            labels:['1','2', '3','4','5','6','7','8','9'], 
-            datasets:[{
-                label:'Weight',
-                data:[13,10,35,30.25,30,37,27,40,25],
-                fill:false,borderColor:'#00ff00',backgroundColor:'#00ff00'},
-                {label:'Body Fat',
-                data:[27.5,27.5,27.5,27.5,40,35,30,20,25],
-                fill:false,borderColor:'rgb(255,165,0)',backgroundColor:'rgb(255,165,0)'
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+            datasets: [{
+                label: 'Weight',
+                data: [13, 10, 35, 30.25, 30, 37, 27, 40, 25],
+                fill: false, borderColor: '#00ff00', backgroundColor: '#00ff00'},
+                {label: 'Body Fat',
+                data: [27.5, 27.5, 27.5, 27.5, 40, 35, 30, 20, 25],
+                fill: false, borderColor: 'rgb(255,165,0)', backgroundColor: 'rgb(255,165,0)'
             }]
         },
         options: {
           legend: {
             display: true,
-            position: "top",
-            labels:{
-              fontColor:'white',
-              usePointStyle: true,boxWidth:8
+            position: 'top',
+            labels: {
+              fontColor: 'white',
+              usePointStyle: true, boxWidth: 8
             }
           },
           scales: {
-            xAxes: [{ 
-              
+            xAxes: [{
                 gridLines: {
                     display: true,
-                    color: "#CCC",
-                  drawBorder:true,
-                  drawTicks:false
+                    color: '#CCC',
+                  drawBorder: true,
+                  drawTicks: false
                 },
                 ticks: {
-                  fontColor: "#CCC",
-                  padding:10
+                  fontColor: '#CCC',
+                  padding: 10
                 },
             }],
             yAxes: [{
                 display: true,
                 gridLines: {
                     display: true,
-                    color: "#CCC",
-                  drawBorder:true,
-                  drawTicks:false,
-                  tickMarkLength: 15  
+                    color: '#CCC',
+                  drawBorder: true,
+                  drawTicks: false,
+                  tickMarkLength: 15
 
                 },
                 ticks: {
-                  fontColor: "#CCC",
-                  padding:20,
+                  fontColor: '#CCC',
+                  padding: 20,
                   min: 0,
-                  max: 45,// Your absolute max value
+                  max: 45, // Your absolute max value
                   callback: function (value) {
                     return value + '%'; // convert it to percentage
                   },
@@ -452,28 +451,27 @@ export class HomePage implements OnInit {
             }],
         }
         }
-    }); 
+    });
     this.barIntakeCanvas.nativeElement.height = 200;
     this.barIntakeCanvas.nativeElement.width = 300;
-    var gradientStroke = this.barIntakeCanvas.nativeElement.getContext('2d').createLinearGradient(0,0,0,300);
-    gradientStroke.addColorStop(0, "#375DFF");
-    gradientStroke.addColorStop(1, "#B02BEB");
-    this.barChartLabels = ['1','2', '3','4','5','6','7','8','9']
+    const gradientStroke = this.barIntakeCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 300);
+    gradientStroke.addColorStop(0, '#375DFF');
+    gradientStroke.addColorStop(1, '#B02BEB');
+    this.barChartLabels = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
     this.barChartData = [
-      {data: [20,30,75,80.25,50,67,67], label: 'WEEK',fill:false,borderColor:'red',backgroundColor:'red'},
+      {data: [20, 30, 75, 80.25, 50, 67, 67], label: 'WEEK', fill: false, borderColor: 'red', backgroundColor: 'red'},
     ];
     this.barIntake = new Chart(this.barIntakeCanvas.nativeElement, {
-      type:'bar',
-      data:{
-          labels:['1','2', '3','4','5','6','7','8','9'], 
-          datasets:[{
-              data:[20,30,75,80.25,50,67,67],
-              fill:true,borderColor:gradientStroke,backgroundColor:gradientStroke,
-              datalabels: {
-                display : false
-              }},
-              ],
-              
+      type: 'bar',
+      data: {
+        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+        datasets: [{
+          data: [20, 30, 75, 80.25, 50, 67, 67],
+          fill: true, borderColor: gradientStroke, backgroundColor: gradientStroke,
+          datalabels: {
+            display : false
+          }},
+        ],
       },
       options: {
         legend: {
@@ -488,32 +486,31 @@ export class HomePage implements OnInit {
           }
       },
         scales: {
-          xAxes: [{ 
-            
+          xAxes: [{
               gridLines: {
                   display: true,
-                  color: "white",
-                drawBorder:true,
-                drawTicks:false
+                  color: 'white',
+                drawBorder: true,
+                drawTicks: false
               },
               ticks: {
-                fontColor: "white",
-                padding:10
+                fontColor: 'white',
+                padding: 10
               },
           }],
           yAxes: [{
               display: true,
               gridLines: {
                   display: true,
-                  color: "white",
-                drawBorder:true,
-                drawTicks:false,
-                tickMarkLength: 15  
+                  color: 'white',
+                drawBorder: true,
+                drawTicks: false,
+                tickMarkLength: 15
 
               },
               ticks: {
-                fontColor: "white",
-                padding:20
+                fontColor: 'white',
+                padding: 20
               },
           }],
       }
@@ -521,12 +518,12 @@ export class HomePage implements OnInit {
   });
   this.barSleepCanvas.nativeElement.height = 200;
   this.barSleepCanvas.nativeElement.width = 300;
-  var gradientStroke2 = this.barSleepCanvas.nativeElement.getContext('2d').createLinearGradient(0,0,0,300);
-  gradientStroke2.addColorStop(0, "#37C2F5");
-  gradientStroke2.addColorStop(1, "#FF79E6");
+  const gradientStroke2 = this.barSleepCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 300);
+  gradientStroke2.addColorStop(0, '#37C2F5');
+  gradientStroke2.addColorStop(1, '#FF79E6');
   this.barSleep = new Chart(this.barSleepCanvas.nativeElement, {
-    type:'bar',
-    data:{
+    type: 'bar',
+    data: {
         labels:['1','2', '3','4','5','6','7','8','9'], 
         datasets:[{
             label:' WEEK',
