@@ -12,14 +12,14 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 export class UserInfoPage implements OnInit {
 	userInfoForm: FormGroup;
   isSubmitted = false;
-	isChecked = true;
 	
 	userInfo = {
-		first: 'Jack',
-		last: 'Owoc',
-		email: 'jack@bangenergy.com',
-		password: '12345678',
-		newpassword: ''
+		first: '',
+		last: '',
+		email: '',
+		password: '',
+		newpassword: '',
+		social_login: ''
 	}
 
   constructor(
@@ -54,7 +54,7 @@ export class UserInfoPage implements OnInit {
 
 	// gets current user info from the endpoint
 	getCurrentUserInfo() {
-		console.log("Gettin user info...")
+		console.log("Getting user info...");
 		this.myAPI.makeAPIcall(
 			"user-info",
 			{"action": "loadUserInfo"},
@@ -62,14 +62,17 @@ export class UserInfoPage implements OnInit {
 		)
 		.subscribe(
 			response => {
+				// handle error
 				if( response.error ){
 					this.myAPI.handleMyAPIError(response.error);
-				} else {
-					// set response values to local values
-					this.userInfo.first = response.first_name;
-					this.userInfo.last = response.last_name;
-					this.userInfo.email = response.email;
-					this.userInfo.password = response.password;
+				} 
+				// set response values to local values
+				else {
+					let data = response.success;
+					this.userInfo.first = data.first_name;
+					this.userInfo.last = data.last_name;
+					this.userInfo.email = data.email;
+					this.userInfo.password = data.password;
 				}
 			},
 			error => console.log(error)
@@ -77,8 +80,8 @@ export class UserInfoPage implements OnInit {
 	}
 
 	// Updates user info
-	updatetUserInfo() {
-		console.log("Gettin user info...")
+	updateUserInfo() {
+		console.log("Updating user info...")
 		this.myAPI.makeAPIcall(
 			"user-info",
 			{"action": "saveUserInfo"},
@@ -93,5 +96,9 @@ export class UserInfoPage implements OnInit {
 			error => console.log(error)
 		)
 	}
+
+	get errorControl() {
+    return this.userInfoForm.controls;
+  }
 
 }

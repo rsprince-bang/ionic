@@ -21,9 +21,9 @@
     </ion-row>
 
     <form 
-    class="form" 
-    [formGroup]="userInfoForm" 
-    (ngSubmit)="onSave()">
+			class="form" 
+			[formGroup]="userInfoForm" 
+			(ngSubmit)="updateUserInfo()">
 
       <ion-row>
         <ion-col>
@@ -76,35 +76,41 @@
         </ion-col>
       </ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-label position="stacked">Current Password</ion-label>
-          <ion-input clear-input="true" type="password" placeholder="Enter password" formControlName="password">
-            <ion-icon name="lock" size="small"></ion-icon>
-          </ion-input>
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
-            Please enter your password.
-          </span>
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.minlength">
-            Your password does not meet length requirements.
-          </span>
-        </ion-col>
-      </ion-row>
+		<ng-container *ngIf="!userInfo.social_login">
+			<ion-row>
+				<ion-col>
+					<ion-label position="stacked">Current Password</ion-label>
+					<ion-input clear-input="true" type="password" placeholder="Enter password" formControlName="password">
+						<ion-icon name="lock" size="small"></ion-icon>
+					</ion-input>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+						Please enter your password.
+					</span>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.minlength">
+						Your password does not meet length requirements.
+					</span>
+				</ion-col>
+			</ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-label position="stacked">New Password</ion-label>
-          <ion-input clear-input="true" type="password" placeholder="Enter password" formControlName="newpassword">
-            <ion-icon name="lock" size="small"></ion-icon>
-          </ion-input>
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
-            Please enter your password.
-          </span>
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.minlength">
-            Your password does not meet length requirements.
-          </span>
-        </ion-col>
-      </ion-row>
+			<ion-row>
+				<ion-col>
+					<ion-label position="stacked">New Password</ion-label>
+					<ion-input 
+						clear-input="true" 
+						type="password" 
+						placeholder="Enter password" 
+						formControlName="newpassword">
+						<ion-icon name="lock" size="small"></ion-icon>
+					</ion-input>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+						Please enter your password.
+					</span>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.minlength">
+						Your password does not meet length requirements.
+					</span>
+				</ion-col>
+			</ion-row>
+		</ng-container>
 
       <ion-row>
         <ion-col>
@@ -116,7 +122,7 @@
           </ion-button>
         </ion-col>
       </ion-row>
-  </form>
+  	</form>
 
   </ion-grid>
 

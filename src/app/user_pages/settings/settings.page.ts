@@ -73,10 +73,11 @@ export class SettingsPage implements OnInit {
       if(this.weighinCodes && this.weighinCodes.includes(item.code)) {
         item.selected = true;
       }
+      console.log("weighinDays: ", this.days);
     });
   }
 
-	// For updateSettings(). Loop thru 'days', push the selected items to weighInDays array.
+	// loop thru 'days', push the selected items to weighInDays array.
 	setWeighinDays() {
 		this.weighinCodes = [];
 		this.days.forEach(item => {
@@ -89,21 +90,28 @@ export class SettingsPage implements OnInit {
 
 	// gets current settings from the endpoint
   getCurrentSettings() {
+    console.log("Getting current settings");
     this.myAPI.makeAPIcall(
-      "setting",
+      "settings",
       {"action": "loadSettings"},
       true
     )
     .subscribe(
       response => {
+        // handle error
         if( response.error ){
           this.myAPI.handleMyAPIError(response.error);
-        } else {
-					// set response values to local values
-          this.notifications = response.notifications;
-          this.lossGoal = response.lossGoal;
-          this.weighinCodes = response.weighindays;
-          this.getWeighinDays(); // converts weighinCodes to Days control
+        } 
+        // successful response
+        else {
+          let data = response.success;
+          console.log(response);
+          this.notifications = data.notifications;
+          this.lossGoal = data.lossGoal;
+          this.weighinCodes = data.weighinDays;
+          console.log(this.weighinCodes);
+          this.getWeighinDays(); // uses weighinCode to set "days", array of objects
+          console.log(this.days);
         }
       },
       error => console.log(error)
@@ -111,7 +119,7 @@ export class SettingsPage implements OnInit {
   }
 
   updateSettings() {
-    console.log(this.notifications, this.lossGoal, this.setWeighinDays());
+    console.log("updateSettings");
     this.myAPI.makeAPIcall(
       "settings",
       {
