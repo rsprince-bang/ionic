@@ -21,6 +21,7 @@ export class LoginPage implements OnInit {
   credentialsForm: FormGroup;
   userInfo = null;
   isSubmitted = false;
+  device = null;
   
 
   constructor(
@@ -42,6 +43,10 @@ export class LoginPage implements OnInit {
     this.credentialsForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]], 
       password: ['', [Validators.required, Validators.minLength(8)]]
+    });
+
+    this.globalServices.getDeviceInfo().then(data => {
+      this.device = data;
     });
   }
 
@@ -193,6 +198,23 @@ export class LoginPage implements OnInit {
         // }
       }
     );
+  }
+
+  doAppleLogIn(){
+    Plugins.SignInWithApple.Authorize()
+      .then(async (res) => {
+        if (res.response && res.response.identityToken) {
+          console.log('ok');
+          console.log(res.response);
+        } 
+        else {
+          console.log('not ok');
+        }
+      })
+      .catch((response) => {
+        console.log('catch');
+        console.log(response);
+      });
   }
 
   async presentAlert(alertMsg) {
