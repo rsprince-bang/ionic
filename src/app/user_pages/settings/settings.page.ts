@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController,PopoverController } from '@ionic/angular';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { UserInfoPage } from '../user-info/user-info.page';
 import { SettingsService } from './settings.service';
-
+import {NotificationModal} from '../modals/notification-modal/notification-modal';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -37,7 +37,8 @@ export class SettingsPage implements OnInit {
     private router: Router,
     private modalController: ModalController,
     private settingsService: SettingsService,
-    private myAPI: ApiCallService
+    private myAPI: ApiCallService,
+    public popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -120,5 +121,13 @@ export class SettingsPage implements OnInit {
       }    
     )
   }
-
+  async handleButtonClick(ev) {
+    const popover = await this.popoverController.create({
+       component: NotificationModal,
+       event: ev,
+       translucent: true,
+     });
+     await popover.present();
+     const { data } = await popover.onWillDismiss();
+   }
 }

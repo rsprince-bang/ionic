@@ -4,18 +4,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
-
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label, SingleDataSet } from 'ng2-charts';
 import { reduce } from 'rxjs/operators';
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import * as pluginLabels from 'chartjs-plugin-labels';
 import { Chart } from 'chart.js';
-
 import { ModalController } from '@ionic/angular';
 import { AddSleepModalPage } from '../add-sleep-modal/add-sleep-modal.page';
 import { AddWaterModalPage } from '../add-water-modal/add-water-modal.page';
+import {NotificationModal} from '../modals/notification-modal/notification-modal';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +34,7 @@ export class HomePage implements OnInit {
   dayNumber = null;
   planLength_weeks = null;
   planLength_days = null;
-  warnText= {proteinText:"...", carbsText:"...", fatText:"..."};
+  warnText = {proteinText: '...', carbsText: '...', fatText: '...'};
   segment_choice = 'nutrition';
   dailyCaloriesIntake = null;
   dietCaloriesIntake = null;
@@ -88,7 +87,8 @@ export class HomePage implements OnInit {
     private myAPI: ApiCallService,
     private foodSuggestionsService: FoodSuggestionsService, 
     private alertController: AlertController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -589,35 +589,42 @@ export class HomePage implements OnInit {
 }
 
 clickOnBodyFat() {
-  this.onBodyFatSelect = true
+  this.onBodyFatSelect = true;
  this.onBodyMassSelect = false;
-  this.OnWeightSelecr = false
+  this.OnWeightSelecr = false;
 }
 
 clickOnBodyMass() {
-  this.onBodyFatSelect = false
+  this.onBodyFatSelect = false;
  this.onBodyMassSelect = true;
-  this.OnWeightSelecr = false
+  this.OnWeightSelecr = false;
 }
 
 clickOnWeight() {
-  this.onBodyFatSelect = false
+  this.onBodyFatSelect = false;
  this.onBodyMassSelect = false;
-  this.OnWeightSelecr = true
+  this.OnWeightSelecr = true;
 }
 
   async openSleepModal() {
     const modal = await this.modalController.create({component: AddSleepModalPage});
     return await modal.present();
-	}
-	
+  }
+  
 	async openWaterModal() {
     const modal = await this.modalController.create({component: AddWaterModalPage});
     return await modal.present();
   }
-  
   showSettings() {
     this.router.navigateByUrl('/settings');
   }
-
+  async handleButtonClick(ev) {
+    const popover = await this.popoverController.create({
+       component: NotificationModal,
+       event: ev,
+       translucent: true,
+     });
+     await popover.present();
+     const { data } = await popover.onWillDismiss();
+   }
 }

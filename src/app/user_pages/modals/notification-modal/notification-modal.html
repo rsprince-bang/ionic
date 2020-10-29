@@ -1,0 +1,22 @@
+  <ion-header>
+    <ion-toolbar>
+      <ion-title class="padding-left" >Notifications</ion-title>
+      <ion-buttons slot="end">
+          <ion-button (click)="closeModal()" class="button-bac">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+          </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content class="hideScroll">
+<div class="div-height">
+    <div *ngFor="let data of notificationList;">
+        
+        <ion-row class="borderClass">
+            <ion-col >
+                <div>{{data.desc}}</div>
+            </ion-col>
+        </ion-row>
+    </div>
+</div>
+</ion-content>

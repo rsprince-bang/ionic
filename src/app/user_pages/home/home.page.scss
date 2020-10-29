@@ -202,7 +202,7 @@ $fontGrayColor : rgb(67, 66, 66);
 	border: none;background: transparent;font-size: 15px;
 }
 .padding-20 {
-	padding: 20px
+	padding: 20px;
 }
 .padding-bottom-20 {
 	padding-bottom: 20px;
@@ -353,4 +353,8 @@ h3 {
 }
 .header-css {
     padding: 0px 15px;border-bottom: 2px solid gainsboro;
+}
+.profile-background {
+	background: linear-gradient(144.62deg, #0274E3 0%, #0274E3 0%);
+	color: white;
 }
