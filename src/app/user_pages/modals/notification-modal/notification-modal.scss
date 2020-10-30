@@ -149,6 +149,17 @@ text-align: left;
   min-height: 300px;
 }
 .padding-left {
-  padding-left: 10px;
-  margin-left: -40px
+    -webkit-padding-start: 0;
+    padding-inline-start: 0;
+    width: fit-content;
+    margin-left: 10px;
+}
+.border-none {
+  border: none;
+}
+.checkMark-color {
+  color: #6c757d;
+}
+.selected-check-color {
+  color: #28a745;
 }

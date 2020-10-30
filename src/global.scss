@@ -749,3 +749,21 @@ ion-fab-button[data-desc]::after {
         margin-left: 16px !important;
     }
 }
+.ion-item-css {
+    border-bottom: 1px solid gainsboro;
+    --padding-start:0px;
+    --padding-end:0px
+}
+.width-100 {
+    width: 100%;
+}
+.text-color {
+    color: #0716c1;
+    font-weight: 600;
+}
+.padding-10 {
+    padding: 10px !important;
+}
+.font-size-15 {
+    font-size: 23px;
+}

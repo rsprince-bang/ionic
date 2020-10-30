@@ -13,10 +13,10 @@ public items: any[];
 public imgUrlData: any;
 public page: any;
 public imgUrl: any;
-notificationList: any = [{desc: '8:00 AM - Weigh in', color: ''},
-{desc: '9:00 AM - Workout 1', color: ''},
-{desc: '12:00 PM - Light Snack', color: ''},
-{desc: '2:00 PM - Nap time, body!', color: ''}];
+notificationList: any = [{time: '8:00 AM', name: 'Weigh in', selected: false},
+{time: '9:00 AM', name: 'Workout 1', selected: false},
+{time: '12:00 PM', name: 'Light Snack', selected: false},
+{time: '2:00 PM', name: 'Nap time, body!', selected: false}];
 showLoader = false;
 colorList = ['#FFE9BF', '#D5F9D5', '#c9e5ee', '#f5dae6', '#c3c0e5'];
   constructor(public modalController: PopoverController, private rd: Renderer2) { }
@@ -29,7 +29,12 @@ colorList = ['#FFE9BF', '#D5F9D5', '#c9e5ee', '#f5dae6', '#c3c0e5'];
   closeModal() {
     this.modalController.dismiss();
   }
-  changeColour(i, backgroundColor) {
-    this.rd.setStyle(this.backgroundColor.nativeElement, 'background-color', this.notificationList[i].color);
+  /* To remove viewed notification
+  @input -object and  index*/
+  clickOnNotification(dataObj, index) {
+    dataObj.selected = !dataObj.selected;
+    setTimeout(eve => {
+      this.notificationList.splice(index, 1);
+    }, 2000);
   }
 }
