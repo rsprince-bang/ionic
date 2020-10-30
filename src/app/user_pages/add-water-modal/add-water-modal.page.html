@@ -15,7 +15,7 @@
     <ion-row>
       <ion-col>
         Today's intake/recommended
-        <h2>16/70 ounces</h2>
+        <h2>{{ water.intake }}/{{ water.recommended}} ounces</h2>
       </ion-col>
     </ion-row>
 
@@ -45,26 +45,10 @@
     </ion-row>
 
     <ion-row>
-      <!-- <ion-col class="ion-text-right">
-        <ion-icon 
-          name="remove-circle-outline" 
-          size="large"
-          (click)="decrementCounter()">
-        </ion-icon>
-      </ion-col> -->
       <ion-col class="ion-text-center">
         <div class="counter-display">{{ waterAmount }} oz.</div>
       </ion-col>
-      <!-- <ion-col>
-        <ion-icon 
-          name="add-circle-outline" 
-          size="large"
-          (click)="incrementCounter()">
-        </ion-icon>
-      </ion-col> -->
     </ion-row>
-
-
 
     <ion-row>
       <ion-col>
