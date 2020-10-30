@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController,PopoverController } from '@ionic/angular';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { HomeAddWorkoutModalPage } from '../home-add-workout-modal/home-add-workout-modal.page';
 import {ViewVideo} from '../modals/view-video/view-video';
+import {NotificationModal} from '../modals/notification-modal/notification-modal';
 // import { url } from 'inspector';
 
 @Component({
@@ -32,7 +33,8 @@ export class TrackWorkoutPage implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private globalServices: GlobalServicesService,
     private modalController: ModalController,
-    private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService) { }
+    private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService,
+    public popoverController: PopoverController) { }
 
   ngOnInit() {
     this.date = this.activatedRoute.snapshot.paramMap.get('day');
@@ -138,4 +140,13 @@ export class TrackWorkoutPage implements OnInit {
       this.isSetsCompleted = data.isSetsDone;
      }
   }
+  async handleButtonClick(ev) {
+    const popover = await this.popoverController.create({
+       component: NotificationModal,
+       event: ev,
+       translucent: true,
+     });
+     await popover.present();
+     const { data } = await popover.onWillDismiss();
+   }
 }

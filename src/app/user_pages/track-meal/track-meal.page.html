@@ -1,9 +1,11 @@
 <ion-header class="header-css">
   <ion-toolbar>
     <ion-buttons slot="start" >
-    <ion-button class="button-bac">
-      <ion-icon class="color-black"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
-     </ion-button>
+      <ion-button class="button-bac" (click)="handleButtonClick($event)">
+        <ion-icon class="color-black"  slot="icon-only" name="ios-notifications-outline"></ion-icon>
+        <ion-badge  color="danger" class="ion-badge">2
+        </ion-badge>
+       </ion-button>
     </ion-buttons>
 
       <ion-title class="text-capitalize">Meals</ion-title>

@@ -82,5 +82,32 @@
 }
 .im-border {
   border:5px solid #0140C2;
-  border-top: 8px solid #0140C2;}
+  border-top: 8px solid #0140C2;
+}
+.closeModal {
+  margin: 0px;padding:0px;margin-top:20px
+}
+.font-size-40 {
+  font-size: 40px;
+}
+.padding-10-top-0 {
+  padding:10px;padding-top:0px;
+}
+.img-style {
+  object-fit: cover;
+  width: 100%;
+}
+.padding-top-10 {
+  padding-top:10px
+}
+.margin-top-bottom-20 {
+  margin: 20px 0px;
+}
+.imgList-css {
+  flex-grow: unset;
+}
+.edit-button {
+  color: #003CCA;
+  font-weight: bold;
+}
   
