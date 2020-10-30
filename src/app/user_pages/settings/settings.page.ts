@@ -149,6 +149,7 @@ export class SettingsPage implements OnInit {
       }    
     )
   }
+
   async handleButtonClick(ev) {
     const popover = await this.popoverController.create({
        component: NotificationModal,
@@ -158,4 +159,8 @@ export class SettingsPage implements OnInit {
      await popover.present();
      const { data } = await popover.onWillDismiss();
    }
+
+   logout() {
+    this.globalServices.logOut();
+  }
 }

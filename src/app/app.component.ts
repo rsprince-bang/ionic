@@ -69,7 +69,11 @@ export class AppComponent {
   }
 
   setPortrait(){
-    // set to portrait orientation
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    this.globalservice.getDeviceInfo().then(device => {
+      if( device.platform == 'ios' || device.platform == 'android' ){
+        // set to portrait orientation only if real device
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      }
+    });
   }
 }
