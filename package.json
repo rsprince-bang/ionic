@@ -38,6 +38,7 @@
     "@ionic/pro": "2.0.4",
     "@ionic/storage": "^2.2.0",
     "@syncfusion/ej2-angular-calendars": "^18.2.56",
+    "capacitor-apple-login": "git+https://github.com/rlfrahm/capacitor-apple-login.git",
     "chart.js": "^2.8.0",
     "chartjs-plugin-datalabels": "^0.6.0",
     "chartjs-plugin-labels": "^1.1.0",

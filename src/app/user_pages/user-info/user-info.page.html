@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content padding>
   <ion-grid>
     <ion-row class="close-icon-margin">
       <ion-col size="1" (click)="dismiss()">
@@ -11,6 +11,118 @@
         <h1>Edit User Info</h1>
       </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-col size="3" class="ion-text-center">
+          <img class="profile-pic" src="../../../assets/img/Jack-with-chain.png">
+        </ion-col>
+      </ion-col>
+    </ion-row>
+
+    <form 
+			class="form" 
+			[formGroup]="userInfoForm" 
+			(ngSubmit)="updateUserInfo()">
+
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">
+						First Name
+					</ion-label>
+					<ion-input 
+						clear-input="true" 
+						type="text" 
+						placeholder="Enter first name" 
+						formControlName="first_name">
+            <ion-icon name="person" size="small"></ion-icon>
+          </ion-input>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.first_name.errors?.required">
+            Please enter your first name.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.first_name.errors?.pattern">
+            Please use letters.
+          </span>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">Last Name</ion-label>
+          <ion-input clear-input="true" type="text" placeholder="Enter last name" formControlName="last_name">
+            <ion-icon name="person" size="small"></ion-icon>
+          </ion-input>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.last_name.errors?.required">
+            Please enter your last name.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.last_name.errors?.pattern">
+            Please use letters.
+          </span>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input clear-input="true" type="email" placeholder="Enter email" formControlName="email">
+            <ion-icon name="mail" size="small"></ion-icon>
+          </ion-input>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+            Please enter your email address.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.email">
+            Please provide a properly formatted email address.
+          </span>
+        </ion-col>
+      </ion-row>
+
+		<ng-container *ngIf="!userInfo.social_login">
+			<ion-row>
+				<ion-col>
+					<ion-label position="stacked">Current Password</ion-label>
+					<ion-input clear-input="true" type="password" placeholder="Enter password" formControlName="password">
+						<ion-icon name="lock" size="small"></ion-icon>
+					</ion-input>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+						Please enter your password.
+					</span>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.minlength">
+						Your password does not meet length requirements.
+					</span>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-label position="stacked">New Password</ion-label>
+					<ion-input 
+						clear-input="true" 
+						type="password" 
+						placeholder="Enter password" 
+						formControlName="newpassword">
+						<ion-icon name="lock" size="small"></ion-icon>
+					</ion-input>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+						Please enter your password.
+					</span>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.minlength">
+						Your password does not meet length requirements.
+					</span>
+				</ion-col>
+			</ion-row>
+		</ng-container>
+
+      <ion-row>
+        <ion-col>
+          <ion-button 
+            expand="block"
+            type="submit"  
+            shape="round">
+            	Save
+          </ion-button>
+        </ion-col>
+      </ion-row>
+  	</form>
 
   </ion-grid>
 

@@ -12,10 +12,10 @@
 <div class="div-height">
   <ion-item *ngFor="let date of notificationList;let i=index;" class="margin-0 ion-item-css padding-10 border-none" >
     <ion-row  class="margin-0 width-100">
-      <ion-col size="11">
+      <ion-col size="10" class="align-left">
         <span class="text-color">{{date.time}} </span><span> - {{date.name}}</span>
       </ion-col>
-      <ion-col size="1" (click)= "clickOnNotification(date, i)" >
+      <ion-col size="2" (click)= "clickOnNotification(date, i)" >
         <ion-icon [ngClass]="{'checkMark-color' : !date.selected, 'selected-check-color': date.selected }" name="checkmark"></ion-icon>
       </ion-col>
     </ion-row>
