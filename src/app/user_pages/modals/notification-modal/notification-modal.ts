@@ -35,6 +35,6 @@ colorList = ['#FFE9BF', '#D5F9D5', '#c9e5ee', '#f5dae6', '#c3c0e5'];
     dataObj.selected = !dataObj.selected;
     setTimeout(eve => {
       this.notificationList.splice(index, 1);
-    }, 2000);
+    }, 1000);
   }
 }
