@@ -73,7 +73,6 @@ export class SettingsPage implements OnInit {
       if(this.weighinCodes && this.weighinCodes.includes(item.code)) {
         item.selected = true;
       }
-      console.log("weighinDays: ", this.days);
     });
   }
 
@@ -107,7 +106,6 @@ export class SettingsPage implements OnInit {
           this.notifications = data.notifications;
           this.lossGoal = data.lossGoal;
           this.weighinCodes = data.weighinDays;
-          console.log(this.weighinCodes);
           this.getWeighinDays(); // uses weighinCode to set "days" object array
         }
       },
