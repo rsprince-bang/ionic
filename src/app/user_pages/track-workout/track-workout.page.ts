@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { ModalController,PopoverController } from '@ionic/angular';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
@@ -21,20 +21,25 @@ export class TrackWorkoutPage implements OnInit {
   date = null;
   meals = [];
   exercises = [];
-  weekDays = [{'name': 'S', selected: false},
-  {'name': 'M', selected: false},
-  {'name': 'T', selected: true},
-  {'name': 'W', selected: false},
-  {'name': 'T', selected: false},
-  {'name': 'F', selected: false},
-  {'name': 'S', selected: false}];
+  weekDays = [
+    {'name': 'S', selected: false},
+    {'name': 'M', selected: false},
+    {'name': 'T', selected: true},
+    {'name': 'W', selected: false},
+    {'name': 'T', selected: false},
+    {'name': 'F', selected: false},
+    {'name': 'S', selected: false}
+  ];
   isShow: boolean;
   isSetsCompleted = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private globalServices: GlobalServicesService,
+  constructor(private activatedRoute: ActivatedRoute, 
+    private globalServices: GlobalServicesService,
     private modalController: ModalController,
-    private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService,
-    public popoverController: PopoverController) { }
+    private foodSuggestionsService: FoodSuggestionsService, 
+    private myAPI: ApiCallService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.date = this.activatedRoute.snapshot.paramMap.get('day');
@@ -115,6 +120,7 @@ export class TrackWorkoutPage implements OnInit {
       true
     );
   }
+
   onClickDate(data, i) {
     this.weekDays.forEach((item, index) => {
       if (index === i) {
@@ -124,9 +130,11 @@ export class TrackWorkoutPage implements OnInit {
       }
     });
   }
+
   videocontorl(url) {
     this.isShow = !this.isShow;
   }
+
   async viewVideo(url) {
     const modal = await this.modalController.create({
         component: ViewVideo,
@@ -140,13 +148,8 @@ export class TrackWorkoutPage implements OnInit {
       this.isSetsCompleted = data.isSetsDone;
      }
   }
-  async handleButtonClick(ev) {
-    const popover = await this.popoverController.create({
-       component: NotificationModal,
-       event: ev,
-       translucent: true,
-     });
-     await popover.present();
-     const { data } = await popover.onWillDismiss();
-   }
+
+  showSettings() {
+    this.router.navigateByUrl('/settings');
+  }
 }

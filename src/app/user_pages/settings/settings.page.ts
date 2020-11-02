@@ -75,7 +75,6 @@ export class SettingsPage implements OnInit {
       if(this.weighinCodes && this.weighinCodes.includes(item.code)) {
         item.selected = true;
       }
-      console.log("weighinDays: ", this.days);
     });
   }
 
@@ -92,7 +91,6 @@ export class SettingsPage implements OnInit {
 
 	// gets current settings from the endpoint
   getCurrentSettings() {
-    console.log("Getting current settings");
     this.myAPI.makeAPIcall(
       "settings",
       {"action": "loadSettings"},
@@ -107,13 +105,10 @@ export class SettingsPage implements OnInit {
         // successful response
         else {
           let data = response.success;
-          console.log(response);
           this.notifications = data.notifications;
           this.lossGoal = data.lossGoal;
           this.weighinCodes = data.weighinDays;
-          console.log(this.weighinCodes);
-          this.getWeighinDays(); // uses weighinCode to set "days", array of objects
-          console.log(this.days);
+          this.getWeighinDays(); // uses weighinCode to set "days" object array
         }
       },
       error => console.log(error)
