@@ -33,6 +33,7 @@ import { AddSleepModalPageModule } from './user_pages/add-sleep-modal/add-sleep-
 import { AddWaterModalPageModule } from './user_pages/add-water-modal/add-water-modal.module';
 import { UserInfoPageModule } from './user_pages/user-info/user-info.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -67,7 +68,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
     LocalNotifications,
     InAppBrowser,
     ScreenOrientation,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

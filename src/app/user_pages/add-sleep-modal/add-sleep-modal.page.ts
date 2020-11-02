@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ApiCallService } from 'src/app/services/api-call.service';
@@ -10,10 +11,13 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 export class AddSleepModalPage implements OnInit {
   sleepAmount: number = 0;
 	sleep = {intake: 15, recommended: 60 };
+	today = new Date();
+	date = this.datePipe.transform(this.today, 'yyyy-MM-dd');
 
   constructor(
     public modalController: ModalController,
-    private myAPI: ApiCallService
+		private myAPI: ApiCallService,
+		private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -33,7 +37,7 @@ export class AddSleepModalPage implements OnInit {
 
 	sendData() {
     console.log(this.sleepAmount);
-    // this.updateSleep();
+    this.updateSleep();
   }
   
   	// update water intake
@@ -42,7 +46,8 @@ export class AddSleepModalPage implements OnInit {
 			"sleep",
 			{
 				"action": "saveSleep",
-				"waterAmount": this.sleepAmount
+				"date": this.date,
+				"sleepAmount": this.sleepAmount
 			},
 			true
 		)
@@ -51,6 +56,10 @@ export class AddSleepModalPage implements OnInit {
 				// handle error
 				if( response.error ){
 					this.myAPI.handleMyAPIError(response.error);
+				}
+				else {
+					let data = response.success;
+					// set return values here if needed.
 				}
 			},
 			error => console.log(error)
