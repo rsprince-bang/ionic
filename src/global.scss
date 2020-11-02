@@ -628,12 +628,17 @@ svg:not(:root) {
 }
 .text-capitalize {
     text-transform: capitalize;
+    font-weight: 500;
+}
+ion-title {
+    text-transform: capitalize;
+    font-weight: 500;
 }
 .font-size-24 {
     font-size: 24px;
 }
 .header-css {
-    padding: 0px 15px;border-bottom: 2px solid gainsboro;
+    padding: 0px 15px;border-bottom: 0.2px solid gainsboro;
 }
 .color-black {
 	color: black;
@@ -693,4 +698,72 @@ ion-fab-button[data-desc]::after {
         padding-right: 81px;
         margin-bottom: -13px;
         font-size: 15px;
+}
+.ion-badge {
+    border-radius: 0px;
+    font-size: 11px;
+}
+.popover-content.sc-ion-popover-md {
+    border-radius: 4px;
+    width: 84% !important;
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+}
+.popover-content.sc-ion-popover-ios {
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 76%  !important;
+    min-width: 76% !important;
+    max-width: var(--max-width);
+    height: var(--height);
+    min-height: var(--min-height);
+    max-height: var(--max-height);
+    background: var(--background);
+    -webkit-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
+    overflow: auto;
+    z-index: 10;
+    margin-left: 6px !important;
+}
+@media (min-width: 600px) { 
+    .popover-content.sc-ion-popover-ios {
+        display: -ms-flexbox;
+        display: flex;
+        position: absolute;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        width: 76%  !important;
+        min-width: 76% !important;
+        max-width: var(--max-width);
+        height: var(--height);
+        min-height: var(--min-height);
+        max-height: var(--max-height);
+        background: var(--background);
+        -webkit-box-shadow: var(--box-shadow);
+        box-shadow: var(--box-shadow);
+        overflow: auto;
+        z-index: 10;
+        margin-left: 16px !important;
+    }
+}
+.ion-item-css {
+    border-bottom: 1px solid gainsboro;
+    --padding-start:0px;
+    --padding-end:0px
+}
+.width-100 {
+    width: 100%;
+}
+.text-color {
+    color: #0716c1;
+    font-weight: 600;
+}
+.padding-10 {
+    padding: 10px !important;
+}
+.font-size-15 {
+    font-size: 23px;
 }

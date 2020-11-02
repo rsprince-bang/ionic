@@ -4,13 +4,14 @@ import { GlobalServicesService } from 'src/app/services/global-services.service'
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { environment } from 'src/environments/environment';
 import { Router, RouterEvent, NavigationExtras } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController} from '@ionic/angular';
 import { CalendarComponent } from '@syncfusion/ej2-angular-calendars';
 import * as moment from 'moment-timezone';
 import {ViewImg} from '../modals/view-img/view-img';
 import { filter } from 'rxjs/operators';
 import { title } from 'process';
 import { Chart } from 'chart.js';
+import {NotificationModal} from '../modals/notification-modal/notification-modal';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -69,7 +70,8 @@ export class ProfilePage implements OnInit {
   private barChart: Chart;
   constructor(private foodSuggestionsService: FoodSuggestionsService,
    private globalServices: GlobalServicesService, private myAPI: ApiCallService, private router: Router,
-    private alertController: AlertController, public modalController: ModalController, private cd: ChangeDetectorRef,) { 
+    private alertController: AlertController, public modalController: ModalController,
+    private cd: ChangeDetectorRef, public popoverController: PopoverController) {
       this._routeListener = router.events.pipe(
         filter(e => e instanceof RouterEvent)
         ).subscribe((e: any) => {
@@ -487,4 +489,13 @@ export class ProfilePage implements OnInit {
         }
     });
   }
+  async handleButtonClick(ev) {
+    const popover = await this.popoverController.create({
+       component: NotificationModal,
+       event: ev,
+       translucent: true,
+     });
+     await popover.present();
+     const { data } = await popover.onWillDismiss();
+   }
 }

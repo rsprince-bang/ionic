@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, PopoverController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
@@ -10,7 +10,7 @@ import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import * as pluginLabels from 'chartjs-plugin-labels';
 import { AddEventModalPage } from '../add-event-modal/add-event-modal.page';
-
+import {NotificationModal} from '../modals/notification-modal/notification-modal';
 @Component({
   selector: 'app-track-meal',
   templateUrl: './track-meal.page.html',
@@ -59,7 +59,8 @@ export class TrackMealPage implements OnInit {
   {name: '8 KETO ZERO CARB', cal: '50 cal.', selected: false}]
   constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,
     public router: Router, public alertController: AlertController
-   , private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService, private modalController: ModalController ) { }
+   , private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService,
+  private modalController: ModalController, public popoverController: PopoverController) { }
 
   ngOnInit() {
     // PIE CHART SETTINGS
@@ -268,4 +269,13 @@ export class TrackMealPage implements OnInit {
   showSettings() {
     this.router.navigateByUrl('/settings');
   }
+  async handleButtonClick(ev) {
+    const popover = await this.popoverController.create({
+       component: NotificationModal,
+       event: ev,
+       translucent: true,
+     });
+     await popover.present();
+     const { data } = await popover.onWillDismiss();
+   }
 }

@@ -27,13 +27,17 @@ import { AddPhotoModalPageModule } from './user_pages/add-photo-modal/add-photo-
 
 import { AddEventModalPageModule } from './user_pages/add-event-modal/add-event-modal.module';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
-import {ViewImgModule} from "./user_pages/modals/view-img/view-img.module"
-import {ViewVideoModule} from "./user_pages/modals/view-video/view-video.module"
+import {ViewImgModule} from './user_pages/modals/view-img/view-img.module';
+import {ViewVideoModule} from './user_pages/modals/view-video/view-video.module';
 import { AddSleepModalPageModule } from './user_pages/add-sleep-modal/add-sleep-modal.module';
 import { AddWaterModalPageModule } from './user_pages/add-water-modal/add-water-modal.module';
 import { UserInfoPageModule } from './user_pages/user-info/user-info.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+<<<<<<< HEAD
 import { DatePipe } from '@angular/common';
+=======
+import { NotificationModalModule} from './user_pages/modals/notification-modal/notification-modal.module';
+>>>>>>> origin
 
 @NgModule({
   declarations: [AppComponent],
@@ -57,7 +61,8 @@ import { DatePipe } from '@angular/common';
       ViewVideoModule,
       AddSleepModalPageModule,
       AddWaterModalPageModule,
-      UserInfoPageModule
+      UserInfoPageModule,
+      NotificationModalModule
     ],
   providers: [
     StatusBar,

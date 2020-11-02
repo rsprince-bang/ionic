@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController,PopoverController } from '@ionic/angular';
 import { FoodSuggestionsService } from 'src/app/services/food-suggestions.service';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { HomeAddWorkoutModalPage } from '../home-add-workout-modal/home-add-workout-modal.page';
 import {ViewVideo} from '../modals/view-video/view-video';
+import {NotificationModal} from '../modals/notification-modal/notification-modal';
 // import { url } from 'inspector';
 
 @Component({

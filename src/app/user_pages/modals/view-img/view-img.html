@@ -1,28 +1,27 @@
 <ion-row *ngIf="page == 'viewImg'">
   <ion-col size="10"></ion-col>
-  <ion-col size="2" (click)="closeModal()" style="margin: 0px;padding:0px;margin-top:20px" >
-    <ion-icon ios="ios-close" style="font-size: 40px;" md="md-close"></ion-icon>
+  <ion-col size="2" (click)="closeModal()" class="closeModal" >
+    <ion-icon ios="ios-close" md="md-close" class="font-size-40"></ion-icon>
   </ion-col>
 </ion-row>
 <ion-content *ngIf="page == 'viewImg'">
-  <div style="padding:10px;padding-top:0px;">
-    <img [src]="imgUrl"  style="    object-fit: cover;
-    width: 100%;">
-    <div style="padding-top:10px">
+  <div class="padding-10-top-0">
+    <img [src]="imgUrl"  class="img-style">
+    <div class="padding-top-10">
       <h2>{{date}}</h2>
     </div>
   </div>
 </ion-content>
 <ion-row class="margin-20" *ngIf="page != 'viewImg'">
-    <ion-col size="3" (click)="closeModal()" style="margin: 0px;padding:0px;margin-top:20px">
-      <ion-icon name="arrow-round-back" style="font-size: 40px;"></ion-icon>
+    <ion-col size="3" (click)="closeModal()" class="closeModal">
+      <ion-icon name="arrow-round-back" class="font-size-40"></ion-icon>
     </ion-col>
     <ion-col size="9"  >
     </ion-col>
   </ion-row>
   <ion-content *ngIf="page != 'viewImg'">
     <div class="margin-20">
-      <ion-row class="margin-20" style="margin: 20px 0px;">
+      <ion-row class="margin-20 margin-top-bottom-20">
         <ion-col size="9.5" class="align-left">
           <h2 class="margin-0">PHOTOS</h2>
         </ion-col>
@@ -31,7 +30,7 @@
         </ion-col>
         </ion-row>
         <ion-row class="ionRow">
-          <ion-col size="8" *ngFor="let img of imgList" style="flex-grow: unset;">
+          <ion-col size="8" *ngFor="let img of imgList" class="imgList-css">
             <ion-icon name="expand" class="icon-css" (click)="expandimg(img)"></ion-icon>
             <img [src]="img.url" class="img-css" [ngClass]="{'im-border':img.selected}" (click)="onClickOnImg(img)">
           </ion-col>
@@ -56,8 +55,7 @@
           </ion-col>
         </ion-row>
         <ion-row class="margin-top-15">
-          <ion-col style="color: #003CCA;
-          font-weight: bold;" (click)="editPhoto()">Edit</ion-col>
+          <ion-col class="edit-button" (click)="editPhoto()">Edit</ion-col>
         </ion-row>
     </div>
     

@@ -27,6 +27,9 @@
     -ms-flex-align: center !important;
     align-items: center !important;
   }
+  .hideScroll {
+    --overflow: hidden;
+  }
   .margin-20 {
     margin:24px;
   }
@@ -37,6 +40,10 @@
   .margin-auto {
     text-align: center;
     margin:auto
+  }
+  .borderClass {
+    border-bottom: 1px solid gainsboro;
+    padding: 20px 10px;
   }
   .margin-top-15 {
     margin-top: 15px;
@@ -133,4 +140,28 @@ text-align: left;
 }
 .font-size-56 {
   font-size: 56px;
+}
+.div-height {
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  max-height: 642px;
+  margin-top: 76px;
+  min-height: 300px;
+}
+.padding-left {
+    -webkit-padding-start: 0;
+    padding-inline-start: 0;
+    width: fit-content;
+    margin-left: 10px;
+}
+.border-none {
+  border: none;
+}
+.checkMark-color {
+  color: #6c757d;
+  font-size: xx-large;
+}
+.selected-check-color {
+  color: #28a745;
+  font-size: xx-large;
 }
