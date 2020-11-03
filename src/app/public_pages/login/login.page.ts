@@ -4,10 +4,12 @@ import { Router } from '@angular/router';
 import { Events, ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'; //in order to use forms I had to import "ReactiveFormsModule" in this page's module
 import { GlobalServicesService } from 'src/app/services/global-services.service';
+import "@codetrix-studio/capacitor-google-auth";
 import { Plugins } from '@capacitor/core';
 import { FacebookLoginResponse } from '@capacitor-community/facebook-login';
 const { FacebookLogin } = Plugins;
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 
 @Component({
@@ -278,6 +280,15 @@ export class LoginPage implements OnInit {
         // }
       }
     );
+  }
+
+  async doGoogleLogIn(){
+    console.log('test 4');
+    let googleUser = await Plugins.GoogleAuth.signIn(null);
+    alert( JSON.stringify(googleUser) );
+    console.log("user: ", googleUser);
+    //const credential = auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
+    //return this.afAuth.auth.signInAndRetrieveDataWithCredential(credential);
   }
 
   async presentAlert(alertMsg) {
