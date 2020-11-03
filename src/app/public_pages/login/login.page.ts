@@ -283,10 +283,8 @@ export class LoginPage implements OnInit {
   }
 
   async doGoogleLogIn(){
-    console.log('test 4');
     let googleUser = await Plugins.GoogleAuth.signIn(null);
-    alert( JSON.stringify(googleUser) );
-    console.log("user: ", googleUser);
+    console.log(googleUser);
     //const credential = auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
     //return this.afAuth.auth.signInAndRetrieveDataWithCredential(credential);
   }

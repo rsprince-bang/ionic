@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "425638098273",
+    "firebase_url": "https://meltdown-app-294519.firebaseio.com",
+    "project_id": "meltdown-app-294519",
+    "storage_bucket": "meltdown-app-294519.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425638098273:android:9ada63fcffdaac8ac68120",
+        "android_client_info": {
+          "package_name": "com.bangenergy.meltdown"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425638098273-4kngen3ib07uc02nubf70452ec3vn6f6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bangenergy.meltdown",
+            "certificate_hash": "b840a4dddcad416d4264ec5c9235bdda7613a4a6"
+          }
+        },
+        {
+          "client_id": "425638098273-f3utdo9q59pgmuqa2fmuq0pplvellcdh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0cKdRuAIxLX8s8e8GiCebSQK2_vMH_CQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425638098273-f3utdo9q59pgmuqa2fmuq0pplvellcdh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
