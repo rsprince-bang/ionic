@@ -283,10 +283,71 @@ export class LoginPage implements OnInit {
   }
 
   async doGoogleLogIn(){
-    let googleUser = await Plugins.GoogleAuth.signIn(null);
-    alert( JSON.stringify(googleUser) );
-    //const credential = auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
-    //return this.afAuth.auth.signInAndRetrieveDataWithCredential(credential);
+    let googleUser = await Plugins.GoogleAuth.signIn(null) as any;
+
+    if( googleUser && googleUser.hasOwnProperty('email') ){
+      if( googleUser.email && googleUser.email != '' ){
+        this.loginWithGoogle(googleUser);
+      }
+    }
+  }
+
+  loginWithGoogle(googleUser) {
+    // console.log(googleUser.givenName);
+    // console.log(googleUser.familyName);
+    // console.log(googleUser.email);
+    this.myAPI.makeAPIcall(
+      "login", 
+      {
+        "action": "loginWithGoogle",
+        "googleUser": googleUser,
+        //in case its a returning user lets load the meals as well
+        "yesterday": this.globalServices.getDate("yesterday"),
+        "today": this.globalServices.getDate("today"),
+        "tomorrow": this.globalServices.getDate("tomorrow")
+      }
+    )
+    .subscribe(
+      (result) => {
+        this.userInfo = result;
+
+        if( this.userInfo.error ){
+          this.presentToastWithOptions(this.userInfo.error);
+        }
+        else if(this.userInfo.success){
+          localStorage.setItem("token", this.userInfo.success.token);
+          localStorage.setItem("user_id", this.userInfo.success.user_id);
+          //this.events.publish("user logged in", 1111, 2222); //test passsing args
+
+          if( !this.userInfo.success.user.goals || this.userInfo.success.user.goals.length == 0 ){
+            //user never filled out goals
+            //this.router.navigateByUrl("/set-goals");
+            this.router.navigateByUrl("/welcome");
+          }
+          else if( !this.userInfo.success.user.measurements || this.userInfo.success.user.measurements.length == 0 ){
+            //user never filled out measurements
+            this.router.navigateByUrl("/enter-measurements");
+          }
+          else{
+            localStorage.setItem("goals", JSON.stringify(this.userInfo.success.user.goals));
+            localStorage.setItem("alerts", JSON.stringify(this.userInfo.success.user.alerts));
+            localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
+            localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
+            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
+            localStorage.setItem("currentCaloriesIntake", this.userInfo.success.user.diet.cur_calories_intake);
+            localStorage.setItem("diet_plan_length", this.userInfo.success.user.diet.plan_length);
+            localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
+            localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
+            this.globalServices.syncAlerts();
+
+            this.router.navigateByUrl("/tabs/home/today");
+          }
+        }
+        // else{
+        //   this.presentToastWithOptions("Something went wrong, please try again later.");
+        // }
+      }
+    );
   }
 
   async presentAlert(alertMsg) {

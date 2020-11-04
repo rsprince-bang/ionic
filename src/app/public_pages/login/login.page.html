@@ -86,7 +86,7 @@
       <ion-row>
         <ion-col class="ion-text-center">
           <img class="social-icons" src="assets/img/appleicon.png" *ngIf=" device && device.platform == 'ios' " (click)="doAppleLogIn()">
-          <img class="social-icons" src="assets/img/googleicon.png" *ngIf=" device && device.platform == 'android' " (click)="doGoogleLogIn()">
+          <img class="social-icons" src="assets/img/googleicon.png" *ngIf=" device && (device.platform == 'android' || device.platform == 'web') " (click)="doGoogleLogIn()">
           <img class="social-icons" src="assets/img/facebookicon.png" (click)="doFbLogIn()">
           <img class="social-icons" src="assets/img/twittericon.png">         
         </ion-col>
