@@ -6,4 +6,5 @@
     <string name="custom_url_scheme">com.bangenergy.meltdown</string>
     <string name="facebook_app_id">678900402721437</string>
     <string name="fb_login_protocol_scheme">fb678900402721437</string>
+    <string name="server_client_id">425638098273-f3utdo9q59pgmuqa2fmuq0pplvellcdh.apps.googleusercontent.com</string>
 </resources>
