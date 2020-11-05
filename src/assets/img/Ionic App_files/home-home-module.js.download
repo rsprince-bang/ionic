@@ -1,0 +1,757 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["home-home-module"],{
+
+/***/ "./src/app/user_pages/home/home.module.ts":
+/*!************************************************!*\
+  !*** ./src/app/user_pages/home/home.module.ts ***!
+  \************************************************/
+/*! exports provided: HomePageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageModule", function() { return HomePageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home.page */ "./src/app/user_pages/home/home.page.ts");
+/* harmony import */ var ng_circle_progress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ng-circle-progress */ "./node_modules/ng-circle-progress/fesm5/ng-circle-progress.js");
+/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng2-charts */ "./node_modules/ng2-charts/fesm5/ng2-charts.js");
+
+
+
+
+
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _home_page__WEBPACK_IMPORTED_MODULE_6__["HomePage"]
+    }
+];
+var HomePageModule = /** @class */ (function () {
+    function HomePageModule() {
+    }
+    HomePageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes),
+                ng_circle_progress__WEBPACK_IMPORTED_MODULE_7__["NgCircleProgressModule"].forRoot({
+                    "radius": 60,
+                    "maxPercent": 100,
+                    "unitsColor": "#ffffff",
+                    "outerStrokeWidth": 5,
+                    "outerStrokeColor": "#FFFFFF",
+                    "innerStrokeColor": "#FFFFFF",
+                    "titleColor": "#ffffff",
+                    "subtitleColor": "#ffffff",
+                    "showInnerStroke": false,
+                    "startFromZero": false,
+                    "showZeroOuterStroke": false
+                }),
+                ng2_charts__WEBPACK_IMPORTED_MODULE_8__["ChartsModule"]
+            ],
+            declarations: [_home_page__WEBPACK_IMPORTED_MODULE_6__["HomePage"]]
+        })
+    ], HomePageModule);
+    return HomePageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/user_pages/home/home.page.html":
+/*!************************************************!*\
+  !*** ./src/app/user_pages/home/home.page.html ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header class=\"header-css\">\r\n    <ion-toolbar>\r\n      <ion-buttons slot=\"start\" >\r\n      <ion-button class=\"button-bac\" (click)=\"handleButtonClick($event)\">\r\n        <ion-icon class=\"color-black\"  slot=\"icon-only\" name=\"ios-notifications-outline\"></ion-icon>\r\n        <ion-badge  color=\"danger\" class=\"ion-badge\">2\r\n        </ion-badge>\r\n       </ion-button>\r\n      </ion-buttons>\r\n \r\n        <ion-title>Home</ion-title>\r\n        <ion-buttons slot=\"end\" >\r\n          <ion-button class=\"button-bac\">\r\n            <ion-icon class=\"color-black\" name=\"settings\"></ion-icon>\r\n          </ion-button>\r\n      </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content >\r\n  <div class=\"padding-20 content-div profile-background\" >\r\n    <ion-row>\r\n      <ion-col size=\"3\" class=\"margin-0 margin-auto\">\r\n        <div >\r\n          <img class=\"imgBacStyle\" src=\"../../../assets/img/Jack-with-chain.png\">\r\n          <!-- <ion-card class=\"camera-div\">\r\n            <ion-icon ios=\"ios-camera\" md=\"md-camera\" class=\"color-icon camera-icon\"></ion-icon>\r\n        </ion-card> -->\r\n        </div>\r\n        </ion-col>\r\n        <ion-col size=\"9\" class=\"margin-top-10\">\r\n          <div>\r\n            <h2 class=\"margin-0 margin-to-7\">\r\n              Good Morning, Jack.\r\n            </h2>\r\n            <p class=\"margin-0 font-size-14\">Here's your daily tracking report.</p>\r\n          </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </div>\r\n    <div class=\"paddin-20\">\r\n    <ion-row class=\"margin-top-15\">\r\n      <ion-col size=\"5\" class=\"progress-height\">\r\n        <circle-progress\r\n          [percent]=\"39\"\r\n          [showInnerStroke]=\"true\" [radius]=\"150\"\r\n            [outerStrokeWidth]=\"30\"\r\n            [innerStrokeWidth]=\"35\"\r\n            [space]=\"-29\"\r\n            [outerStrokeColor]=\"'#0417c2'\"\r\n            [innerStrokeColor] = \"'gainsboro'\"\r\n            [backgroundStroke]=\"'white'\"\r\n            [animation]=\"true\"\r\n            [showTitle] = \"true\"\r\n            [animationDuration]=\"300\" [title]=\"['39 %']\"\r\n            [outerStrokeGradientStopColor] =\"'white'\"\r\n            [backgroundGradientStopColor] = \"'white'\"\r\n            [titleFontSize] = \"70\"\r\n            [subtitle] = \"'Completed'\"\r\n            [showSubtitle] =\"true\"\r\n            [subtitleColor] = \"'black'\"\r\n            [subtitleFontSize]=\"40\"\r\n            [titleColor] = \"'#0417c2'\"\r\n            [titleFontWeight] = \"600\"\r\n          ></circle-progress>\r\n      </ion-col>\r\n      <ion-col size=\"7\">\r\n        <div class=\"color-black\"><h2>The Bang Anti-Diet</h2></div>\r\n        <div class=\"color-black\"><p>Week 1 of 7</p></div>\r\n        <div class=\"color-black\"><p>Current Weight: 165 lbs</p></div>\r\n        <div class=\"color-black\"><p>Goal Weight: 150 lbs</p></div>\r\n        <div class=\"color-text margin-top-5\"><p>Weigh In</p></div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-card class=\"margin-top-20 water-intake\">\r\n      <ion-row class=\"paddinleft-right-5 margin-top-10\">\r\n        <ion-col size=\"7\">\r\n          <h3 class=\"color-black\">Water Intake</h3>\r\n        </ion-col>\r\n        <ion-col size=\"5\" class=\"color-text align-left\">\r\n          <p >Add Intake</p>\r\n        </ion-col>\r\n      </ion-row >\r\n      <ion-row class=\"paddinleft-right-5\">\r\n        <ion-col>\r\n          <p class=\"color-black margin-top-5\">Today's Intake/Recommended</p>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"paddinleft-right-5\">\r\n        <ion-col>\r\n          <div class=\"row\">\r\n            <h2 class=\"color-text\">16</h2><h2 class=\"color-black\">/70oz</h2>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-left-right-15\">\r\n        <ion-col size=\"7\">\r\n        </ion-col>\r\n        <ion-col size=\"5\" class=\"paddinleft-right-5 text-align-right\">\r\n          <select class=\"select-line color-white\">\r\n            <option>Weekly</option>\r\n          </select>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row >\r\n        <ion-col size=12 size-md=\"12\" size-lg=\"8\" size-xl=\"4\" class=\"pad-left-right-15\">\r\n            <div class='chart-container-big'>\r\n                <canvas #barIntakeCanvas height=\"200\" ></canvas> \r\n            </div>\r\n        </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"margin-auto color-white\"><ion-col><p claas=\"color-white\">Week</p></ion-col></ion-row>\r\n    </ion-card>\r\n    <ion-card class=\"margin-top-20 Add-sleep\">\r\n      <ion-row class=\"paddinleft-right-5\">\r\n        <ion-col size=\"7\">\r\n          <h3 class=\"color-white\">Sleep</h3>\r\n        </ion-col>\r\n        <ion-col size=\"5\" class=\"color-white align-left\">\r\n          <p >Add Sleep</p>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"paddinleft-right-5\">\r\n        <ion-col>\r\n          <h2 class=\"color-white\">8hrs last night</h2>\r\n          <div class=\"color-white\"><p>Remember, insufficient sleep</p></div>\r\n           <div class=\"color-white\"><p>Undermines, dietary efforts.</p></div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-left-right-15\">\r\n        <ion-col size=\"7\">\r\n        </ion-col>\r\n        <ion-col size=\"5\" class=\"paddinleft-right-5\" class=\"text-align-right\">\r\n          <select class=\"select-line color-white\">\r\n            <option>Weekly</option>\r\n          </select>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"pad-left-right-15\">\r\n        <ion-col size=12 size-md=\"12\" size-lg=\"8\" size-xl=\"4\">\r\n            <div class='chart-container-big'>\r\n                <canvas #barSleepCanvas height=\"200\" ></canvas> \r\n            </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-auto color-white\"><ion-col><p claas=\"color-white\">Week</p></ion-col></ion-row>\r\n      <div class=\"margin-top-15\"></div>\r\n    </ion-card>\r\n    <ion-card class=\"margin-top-10 ion-card-progress\">\r\n      <ion-row class=\"margin-top-15\">\r\n        <ion-col size=\"2\" class=\"align-center\">\r\n          <ion-icon class=\"icon-size\" ios=\"ios-arrow-round-back\" md=\"md-arrow-round-back\"></ion-icon>\r\n        </ion-col>\r\n        <ion-col size=\"8\" class=\"align-center\">\r\n          <div><p>September 29, 2020</p></div>\r\n          <div><h3>DAY 18/49</h3></div>\r\n        </ion-col>\r\n        <ion-col size=\"2\" class=\"align-center\">\r\n          <ion-icon class=\"icon-size\" ios=\"ios-arrow-round-forward\" md=\"md-arrow-round-forward\"></ion-icon>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-top-20\">\r\n        <ion-col>\r\n          <h2 class=\"colo-black\">Calorie Breakdown</h2>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-top-15\">\r\n        <ion-col>\r\n          <div class=\"colo-black\">Fat Intake/Recommended</div>\r\n          <div class=\"row\">\r\n            <h2 class=\"fat-color\">58</h2><h2 class=\"colo-black\">/100g</h2>\r\n          </div>\r\n          <div class=\"chart fat-progress\">\r\n            <ion-progress-bar value=\"0.58\" class=\"height-22\"></ion-progress-bar>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-top-15\">\r\n        <ion-col>\r\n          <div class=\"colo-black\">Protein Intake/Recommended</div>\r\n          <div class=\"row\">\r\n            <h2 class=\"protein-color\">400</h2><h2 class=\"colo-black\">/500g</h2>\r\n          </div>\r\n          <div class=\"chart protein-progress\">\r\n            <ion-progress-bar value=\"0.9\" class=\"height-22\"></ion-progress-bar>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-top-15\">\r\n        <ion-col>\r\n          <div class=\"colo-black\">Carbs Intake/Recommended</div>\r\n          <div class=\"row\">\r\n            <h2 class=\"crab-color\">100</h2><h2 class=\"colo-black\">/200g</h2>\r\n          </div>\r\n          <div class=\"chart crab-progress\">\r\n            <ion-progress-bar value=\"0.50\" class=\"height-22\"></ion-progress-bar>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <div class=\"margin-top-15\"></div>\r\n    </ion-card>\r\n    <ion-row class=\"margin-top-10 margin-left-right-15\">\r\n      <ion-col>\r\n        <ion-card class=\"ion-card\">\r\n          <ion-row>\r\n            <ion-col size=\"3\" class=\"vert-center\">\r\n              <img src=\"assets/img/bang-can.png\" />\r\n            </ion-col>\r\n            <ion-col size=\"9\">\r\n              <ion-card-header>\r\n                <ion-card-title>\r\n                  Let's get you on <br /> \r\n                  track today.\r\n                </ion-card-title>\r\n              </ion-card-header>\r\n              <ion-card-content>\r\n                Bang Energy 12-Pack <br />\r\n                $31.00\r\n                <p class=\"global-link-wrapper\">\r\n                  <a href=\"\" class=\"global-link\">Order Now</a>\r\n                </p>\r\n              </ion-card-content>\r\n            </ion-col>            \r\n          </ion-row>\r\n        </ion-card>   \r\n      </ion-col>\r\n    </ion-row>\r\n\r\n    <div class=\"margin-top-10\"></div>\r\n  </div>\r\n    <ion-card-content class=\"lineChartBac margin-top-15\">\r\n      <ion-row class=\"margin-top-15 color-white\" >\r\n        <ion-col>\r\n          <ion-card-header class=\"margin-0\">\r\n            <ion-card-title class=\"color-white\">\r\n              Let's track your  <br /> \r\n              7 week progress\r\n            </ion-card-title>\r\n          </ion-card-header>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"lineChartHeader\">\r\n        <ion-col size=\"3.5\" >\r\n          <div class=\"row\">\r\n            <!-- <div class=\"weight-dot\"></div><ion-text class=\"font-size-15\">\r\n              Weight\r\n            </ion-text> -->\r\n          </div>\r\n          \r\n        </ion-col>\r\n        <ion-col size=\"4.5\" (click)=\"clickOnBodyFat()\">\r\n          <div class=\"row\">\r\n            <!-- <div class=\"body-fat-dot\"></div><ion-text class=\"font-size-15\">\r\n              Body Fat\r\n            </ion-text> -->\r\n          </div>\r\n        </ion-col>\r\n        <ion-col size=\"4\" class=\"margin-auto text-align-right\">\r\n          <select class=\"select-line\">\r\n            <option>Weekly</option>\r\n          </select>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n          <ion-col size=12 size-md=\"12\" size-lg=\"8\" size-xl=\"4\" class=\"dateDiv\">\r\n              <div class='chart-container-big'>\r\n                  <canvas #barCanvas height=\"250\"  width=\"350\" class=\"lineChart-bar\"></canvas> \r\n              </div>\r\n          </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-auto color-white\"><ion-col><p claas=\"color-white\">Week</p></ion-col></ion-row>\r\n  </ion-card-content>\r\n</ion-content>"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/home/home.page.scss":
+/*!************************************************!*\
+  !*** ./src/app/user_pages/home/home.page.scss ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".workout,\n.maxCalories {\n  font-weight: 500; }\n\n.maxCalories {\n  color: #434242; }\n\n.heart {\n  color: #d30000; }\n\n.dayNumber_2 {\n  font-size: 18px;\n  font-weight: bold; }\n\n.totalDayProgram {\n  font-size: 12px;\n  font-weight: bold; }\n\n.daily-dietary-needs {\n  list-style: none;\n  margin: 0;\n  padding: 1rem 0; }\n\n.chart {\n  width: 95%; }\n\n.chart ion-progress-bar {\n    width: 100%; }\n\n.daily-progress {\n  padding: 7px 0;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n.daily-progress .text {\n    width: 4.5rem;\n    color: #0417c2; }\n\n.content-footer {\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n  background-image: url('footer-background.jpg');\n  margin-left: -16px;\n  margin-right: -16px;\n  margin-bottom: -16px; }\n\n.imgBacStyle {\n  margin: auto;\n  border-radius: 50%;\n  width: 100px;\n  height: 100px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-top: 5px;\n  border: 3px solid white; }\n\n.nameStyle {\n  color: #3880ff;\n  text-align: center;\n  font-size: 20px;\n  font-weight: 600;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  margin: auto; }\n\n.progressBack {\n  background-color: #f1f1f1;\n  width: 100%;\n  height: auto; }\n\n.chart-container-big {\n  min-height: auto;\n  width: 100%; }\n\n.quizz-progress ion-progress-bar {\n  --background: green;\n  --buffer-background: #e2e2e2 ;\n  --progress-background:#0417c2 ;\n  border-radius: 30px; }\n\n.fat-progress ion-progress-bar {\n  --background: green;\n  --buffer-background: #e2e2e2 ;\n  --progress-background: #2CA500;\n  border-radius: 30px; }\n\n.protein-progress ion-progress-bar {\n  --background: green;\n  --buffer-background: #e2e2e2 ;\n  --progress-background: #00B8FF;\n  border-radius: 30px; }\n\n.crab-progress ion-progress-bar {\n  --background: green;\n  --buffer-background: #e2e2e2 ;\n  --progress-background: #FF00CB;\n  border-radius: 30px; }\n\n.ColorChange {\n  color: white;\n  border-bottom: 1px solid white; }\n\n.ionCardStyle {\n  background-color: #f1f1f1;\n  margin: 0px 0px; }\n\n.padding-15 {\n  padding: 15px 0px; }\n\n.divName {\n  margin: auto;\n  height: 100%; }\n\n.yourDaily {\n  margin: auto;\n  margin-top: 10px;\n  text-align: center;\n  color: black;\n  font-weight: 600; }\n\n.dateDiv {\n  margin: auto;\n  text-align: center; }\n\n.dateSubDiv {\n  margin: auto;\n  font-size: x-large; }\n\n.dateIconColor {\n  color: #3880ff; }\n\n.margin-auto {\n  margin: auto; }\n\n.dayStyle {\n  text-transform: uppercase;\n  color: black;\n  font-weight: 600;\n  font-size: 19px; }\n\n.dayNum {\n  color: black;\n  font-weight: 500; }\n\n.width-100 {\n  width: 100%; }\n\n.doughChart {\n  width: 250px;\n  height: 220px; }\n\n.lineChart {\n  height: 300px;\n  width: 365px !important; }\n\n.daily-calories {\n  font-weight: 600;\n  margin: 15px 10px; }\n\n.rowAlign {\n  margin-right: 20px;\n  margin-top: -20px; }\n\n.day-num {\n  color: black;\n  font-weight: 600;\n  margin-left: 10px; }\n\n.margin-left-10 {\n  margin-left: 10px; }\n\n.height-22 {\n  height: 22px; }\n\n.font-size-12 {\n  font-size: 12px; }\n\n.remainingDays {\n  text-align: right;\n  text-align: right;\n  width: 95%;\n  margin-top: 5px; }\n\n.monthStyle {\n  font-weight: 600;\n  font-size: 16px;\n  padding: 10px 10px; }\n\n.lineChartBac {\n  background-color: #0417c2; }\n\n.lineChartHeader {\n  color: white; }\n\n.font-size-15 {\n  font-size: 15px; }\n\n.select-line {\n  border: none;\n  background: transparent;\n  font-size: 15px; }\n\n.padding-20 {\n  padding: 20px; }\n\n.padding-bottom-20 {\n  padding-bottom: 20px; }\n\n.margin-top-15 {\n  margin-top: 15px; }\n\n.color-text {\n  color: #003CCA;\n  font-weight: bold; }\n\n.margin-top-20 {\n  margin-top: 20px; }\n\n.water-intake {\n  background: linear-gradient(136.08deg, #99E7F7 0%, #00B0FF 100%); }\n\np {\n  margin: 0px;\n  padding: 0px; }\n\nh1 {\n  margin: 0px;\n  padding: 0px; }\n\nh2 {\n  margin: 0px;\n  padding: 0px; }\n\nh3 {\n  margin: 0px;\n  padding: 0px; }\n\n.margin-0 {\n  margin: 0px;\n  padding: 0px; }\n\n.margin-auto {\n  text-align: center;\n  margin: auto; }\n\n.imgBacStyle {\n  margin: auto;\n  border-radius: 50%;\n  width: 71px;\n  height: 71px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-top: 5px;\n  border: 2px solid gainsboro; }\n\n.margin-top-7 {\n  margin-top: 7px; }\n\n.margin-top-10 {\n  margin-top: 10px; }\n\n.color-black {\n  color: black; }\n\n.align-left {\n  text-align: right;\n  margin: auto; }\n\n.paddinleft-right-5 {\n  margin: 0px 5px; }\n\n.color-white {\n  color: white; }\n\n.Add-sleep {\n  background: linear-gradient(136.08deg, #0152C4 0%, #003347 100%); }\n\n.margin-top-25 {\n  margin-top: 25px; }\n\n.fat-color {\n  color: #2CA500; }\n\n.align-center {\n  text-align: center;\n  margin: auto; }\n\n.protein-color {\n  color: #00B8FF; }\n\n.crab-color {\n  color: #FF00CB; }\n\n.margin-15 {\n  margin: 15px; }\n\n.icon-size {\n  font-size: -webkit-xxx-large;\n  color: black; }\n\n.button-bac {\n  background-color: transparent;\n  --background: transparent; }\n\n.margin-top-5 {\n  margin-top: 5px; }\n\n.ion-card-progress {\n  --box-shadow: unset;\n  box-shadow: unset;\n  border: 2px solid gainsboro; }\n\n.weight-dot {\n  margin: 0px 5px;\n  background: #9FFF93;\n  color: #9FFF93;\n  border: 2px solid #9FFF93;\n  border-radius: 46px;\n  height: 12px;\n  width: 10px;\n  padding: 7px;\n  font-size: 11px; }\n\n.body-fat-dot {\n  margin: 0px 5px;\n  background: #FF8C57;\n  color: #FF8C57;\n  border: 2px solid #FF8C57;\n  border-radius: 46px;\n  height: 12px;\n  width: 10px;\n  padding: 7px;\n  font-size: 11px; }\n\n.content-div {\n  background-color: #FAFAFA;\n  padding-bottom: 20px; }\n\n.progress-height {\n  height: 110px; }\n\n.margin-left-right-15 {\n  margin: 0px 15px; }\n\n.text-align-right {\n  text-align: right;\n  margin-left: auto; }\n\n.pad-left-right-15 {\n  padding: 0px 15px; }\n\n.lineChart-bar {\n  height: 250px;\n  width: 373px !important;\n  margin-left: -38px;\n  margin-top: -36px; }\n\n.header-css {\n  padding: 0px 15px;\n  border-bottom: 2px solid gainsboro; }\n\n.profile-background {\n  background: linear-gradient(144.62deg, #0274E3 0%, #0274E3 0%);\n  color: white; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlcl9wYWdlcy9ob21lL0M6XFxVc2Vyc1xcUmljaGFyZC5TcHJpbmNlXFxEb2N1bWVudHNcXG1lbHQtZG93bi1hcHAvc3JjXFxhcHBcXHVzZXJfcGFnZXNcXGhvbWVcXGhvbWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUdBOztFQUVDLGdCQUFnQixFQUFBOztBQUdqQjtFQUNDLGNBVCtCLEVBQUE7O0FBWWhDO0VBQ0MsY0FBcUIsRUFBQTs7QUFHdEI7RUFDQyxlQUFlO0VBQ2YsaUJBQWlCLEVBQUE7O0FBR2xCO0VBQ0MsZUFBZTtFQUNmLGlCQUFpQixFQUFBOztBQUdsQjtFQUNDLGdCQUFnQjtFQUNoQixTQUFTO0VBQ1QsZUFBZSxFQUFBOztBQUdoQjtFQUNDLFVBQVUsRUFBQTs7QUFEWDtJQUlFLFdBQVcsRUFBQTs7QUFJYjtFQUNDLGNBQWM7RUFDWCxXQUFXO0VBQ2QsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQix1QkFBdUIsRUFBQTs7QUFMeEI7SUFRRSxhQUFhO0lBQ2IsY0FBYyxFQUFBOztBQUloQjtFQUNDLDRCQUE0QjtFQUN6QiwyQkFBMkI7RUFDM0Isc0JBQXNCO0VBQ3pCLDhDQUFrRTtFQUVsRSxrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLG9CQUFvQixFQUFBOztBQUVyQjtFQUNDLFlBQVk7RUFDVCxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGFBQWE7RUFDaEIsb0JBQWlCO0tBQWpCLGlCQUFpQjtFQUNqQixlQUFlO0VBQ2YsdUJBQXVCLEVBQUE7O0FBRXhCO0VBQ0MsY0FBYztFQUNYLGtCQUFrQjtFQUNsQixlQUFlO0VBQ2YsZ0JBQWdCO0VBRWhCLDBCQUFrQjtFQUFsQix1QkFBa0I7RUFBbEIsa0JBQWtCO0VBQ2xCLFlBQVksRUFBQTs7QUFFaEI7RUFDQyx5QkFBd0I7RUFDckIsV0FBVztFQUNYLFlBQVksRUFBQTs7QUFFaEI7RUFDQyxnQkFBZTtFQUNmLFdBQVcsRUFBQTs7QUFFWjtFQUVJLG1CQUFhO0VBQ2IsNkJBQW9CO0VBQ3BCLDhCQUFzQjtFQUN0QixtQkFBbUIsRUFBQTs7QUFHdkI7RUFFRSxtQkFBYTtFQUNiLDZCQUFvQjtFQUNwQiw4QkFBc0I7RUFDdEIsbUJBQW1CLEVBQUE7O0FBR3JCO0VBRUUsbUJBQWE7RUFDYiw2QkFBb0I7RUFDcEIsOEJBQXNCO0VBQ3RCLG1CQUFtQixFQUFBOztBQUdyQjtFQUVFLG1CQUFhO0VBQ2IsNkJBQW9CO0VBQ3BCLDhCQUFzQjtFQUN0QixtQkFBbUIsRUFBQTs7QUFHbEI7RUFDQyxZQUFZO0VBQ1osOEJBQThCLEVBQUE7O0FBRWxDO0VBQ0MseUJBQXdCO0VBQUMsZUFBZSxFQUFBOztBQUV6QztFQUFZLGlCQUFnQixFQUFBOztBQUM1QjtFQUNDLFlBQWE7RUFBQyxZQUFZLEVBQUE7O0FBRTNCO0VBQ0MsWUFBWTtFQUFDLGdCQUFnQjtFQUFDLGtCQUFrQjtFQUFDLFlBQVk7RUFDMUQsZ0JBQWdCLEVBQUE7O0FBRXBCO0VBQ0MsWUFBWTtFQUFDLGtCQUFrQixFQUFBOztBQUVoQztFQUNDLFlBQVk7RUFBQyxrQkFBa0IsRUFBQTs7QUFFaEM7RUFDQyxjQUFjLEVBQUE7O0FBRWY7RUFDQyxZQUFZLEVBQUE7O0FBRWI7RUFDQyx5QkFBeUI7RUFBQyxZQUFZO0VBQ25DLGdCQUFnQjtFQUFDLGVBQ3JCLEVBQUE7O0FBQ0E7RUFDQyxZQUFZO0VBQ1QsZ0JBQWdCLEVBQUE7O0FBRXBCO0VBQ0MsV0FBVyxFQUFBOztBQUVaO0VBQ0MsWUFBVztFQUFDLGFBQ2IsRUFBQTs7QUFDQTtFQUNDLGFBQWE7RUFBQyx1QkFBdUIsRUFBQTs7QUFFdEM7RUFDQyxnQkFBZ0I7RUFBQyxpQkFBaUIsRUFBQTs7QUFFbkM7RUFDQyxrQkFBa0I7RUFDZixpQkFBaUIsRUFBQTs7QUFFckI7RUFDQyxZQUFZO0VBQUMsZ0JBQWU7RUFBQyxpQkFBaUIsRUFBQTs7QUFFL0M7RUFDQyxpQkFBaUIsRUFBQTs7QUFFbEI7RUFDQyxZQUFZLEVBQUE7O0FBRWI7RUFDQyxlQUFlLEVBQUE7O0FBRWhCO0VBQ0MsaUJBQWlCO0VBQUMsaUJBQWlCO0VBQUMsVUFBVTtFQUFFLGVBQWUsRUFBQTs7QUFFaEU7RUFDQyxnQkFBZ0I7RUFBQyxlQUFlO0VBQUMsa0JBQWtCLEVBQUE7O0FBRXBEO0VBQ0MseUJBQXdCLEVBQUE7O0FBRXpCO0VBQ0MsWUFDRCxFQUFBOztBQUNBO0VBQ0MsZUFBZSxFQUFBOztBQUVoQjtFQUNDLFlBQVk7RUFBQyx1QkFBdUI7RUFBQyxlQUFlLEVBQUE7O0FBRXJEO0VBQ0MsYUFBYSxFQUFBOztBQUVkO0VBQ0Msb0JBQW9CLEVBQUE7O0FBRXJCO0VBQ0MsZ0JBQ0QsRUFBQTs7QUFDQTtFQUNDLGNBQWU7RUFDZixpQkFBaUIsRUFBQTs7QUFFbEI7RUFDQyxnQkFBZSxFQUFBOztBQUVoQjtFQUNDLGdFQUFnRSxFQUFBOztBQUVqRTtFQUNDLFdBQVc7RUFDWCxZQUFXLEVBQUE7O0FBRVo7RUFDQyxXQUFXO0VBQ1gsWUFBVyxFQUFBOztBQUVaO0VBQ0MsV0FBVztFQUNYLFlBQVcsRUFBQTs7QUFFWjtFQUNDLFdBQVc7RUFDWCxZQUFXLEVBQUE7O0FBRVo7RUFDQyxXQUFZO0VBQ1osWUFBVyxFQUFBOztBQUVaO0VBQ0Msa0JBQWtCO0VBQ2xCLFlBQVksRUFBQTs7QUFFYjtFQUNDLFlBQVk7RUFDVCxrQkFBa0I7RUFDbEIsV0FBVztFQUNYLFlBQVk7RUFDZixvQkFBaUI7S0FBakIsaUJBQWlCO0VBQ2pCLGVBQWU7RUFDZiwyQkFBMkIsRUFBQTs7QUFFNUI7RUFDSSxlQUFlLEVBQUE7O0FBRW5CO0VBQ0MsZ0JBQ0QsRUFBQTs7QUFDQTtFQUNDLFlBQVksRUFBQTs7QUFFYjtFQUNDLGlCQUFpQjtFQUNqQixZQUFZLEVBQUE7O0FBRWI7RUFDQyxlQUFlLEVBQUE7O0FBRWhCO0VBQ0MsWUFBWSxFQUFBOztBQUViO0VBQ0MsZ0VBQWdFLEVBQUE7O0FBRWpFO0VBQ0MsZ0JBQWdCLEVBQUE7O0FBRWpCO0VBQ0MsY0FBYyxFQUFBOztBQUVmO0VBQ0Msa0JBQWtCO0VBQ2xCLFlBQVksRUFBQTs7QUFFYjtFQUNDLGNBQWEsRUFBQTs7QUFFZDtFQUNDLGNBQWEsRUFBQTs7QUFFZDtFQUNDLFlBQVksRUFBQTs7QUFFYjtFQUNDLDRCQUE0QjtFQUM1QixZQUFZLEVBQUE7O0FBRWI7RUFDSSw2QkFBNkI7RUFDN0IseUJBQWEsRUFBQTs7QUFFakI7RUFDQyxlQUFlLEVBQUE7O0FBRWhCO0VBQ0MsbUJBQWM7RUFDZCxpQkFBaUI7RUFBQywyQkFBMkIsRUFBQTs7QUFFOUM7RUFDQyxlQUFlO0VBQ1osbUJBQW1CO0VBQ25CLGNBQWM7RUFDZCx5QkFBeUI7RUFDekIsbUJBQW1CO0VBQ25CLFlBQVk7RUFDWixXQUFXO0VBQ1gsWUFBWTtFQUNaLGVBQWUsRUFBQTs7QUFFbkI7RUFDQyxlQUFlO0VBQ1osbUJBQW1CO0VBQ25CLGNBQWE7RUFDYix5QkFBeUI7RUFDekIsbUJBQW1CO0VBQ25CLFlBQVk7RUFDWixXQUFXO0VBQ1gsWUFBWTtFQUNaLGVBQWUsRUFBQTs7QUFFbkI7RUFDQyx5QkFBeUI7RUFBQyxvQkFBb0IsRUFBQTs7QUFFL0M7RUFDQyxhQUNELEVBQUE7O0FBQ0E7RUFDQyxnQkFBZ0IsRUFBQTs7QUFFakI7RUFDQyxpQkFBaUI7RUFBQyxpQkFBaUIsRUFBQTs7QUFFcEM7RUFDQyxpQkFDRCxFQUFBOztBQUNBO0VBQ0MsYUFBYTtFQUFDLHVCQUF1QjtFQUNyQyxrQkFBa0I7RUFDbEIsaUJBQWlCLEVBQUE7O0FBRWxCO0VBQ0ksaUJBQWlCO0VBQUMsa0NBQWtDLEVBQUE7O0FBRXhEO0VBQ0MsOERBQThEO0VBQzlELFlBQVksRUFBQSIsImZpbGUiOiJzcmMvYXBwL3VzZXJfcGFnZXMvaG9tZS9ob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiRmb250R3JheUNvbG9yIDogcmdiKDY3LCA2NiwgNjYpO1xyXG5cclxuXHJcbi53b3Jrb3V0LCBcclxuLm1heENhbG9yaWVzIHtcclxuXHRmb250LXdlaWdodDogNTAwOyBcclxufVxyXG5cclxuLm1heENhbG9yaWVzIHtcclxuXHRjb2xvcjogJGZvbnRHcmF5Q29sb3I7XHJcbn1cclxuXHJcbi5oZWFydCB7XHJcblx0Y29sb3I6IHJnYigyMTEsIDAsIDApO1xyXG59XHJcblxyXG4uZGF5TnVtYmVyXzIge1xyXG5cdGZvbnQtc2l6ZTogMThweDtcclxuXHRmb250LXdlaWdodDogYm9sZDtcclxufVxyXG5cclxuLnRvdGFsRGF5UHJvZ3JhbSB7XHJcblx0Zm9udC1zaXplOiAxMnB4O1xyXG5cdGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcblxyXG4uZGFpbHktZGlldGFyeS1uZWVkcyB7XHJcblx0bGlzdC1zdHlsZTogbm9uZTtcclxuXHRtYXJnaW46IDA7XHJcblx0cGFkZGluZzogMXJlbSAwO1xyXG59XHJcblxyXG4uY2hhcnQge1xyXG5cdHdpZHRoOiA5NSU7XHJcblxyXG4gICAgaW9uLXByb2dyZXNzLWJhciB7XHJcblx0XHR3aWR0aDogMTAwJTtcclxuXHR9XHJcbn1cclxuXHJcbi5kYWlseS1wcm9ncmVzcyB7XHJcblx0cGFkZGluZzogN3B4IDA7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuXHRkaXNwbGF5OiBmbGV4O1xyXG5cdGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcblx0anVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcblxyXG5cdC50ZXh0IHtcclxuXHRcdHdpZHRoOiA0LjVyZW07XHJcblx0XHRjb2xvcjogIzA0MTdjMjtcclxuXHR9XHJcbn1cclxuXHJcbi5jb250ZW50LWZvb3RlciB7XHJcblx0YmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcclxuICAgIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XHJcblx0YmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL2ltZy9mb290ZXItYmFja2dyb3VuZC5qcGdcIik7XHJcblxyXG5cdG1hcmdpbi1sZWZ0OiAtMTZweDtcclxuXHRtYXJnaW4tcmlnaHQ6IC0xNnB4O1xyXG5cdG1hcmdpbi1ib3R0b206IC0xNnB4O1xyXG59XHJcbi5pbWdCYWNTdHlsZXtcclxuXHRtYXJnaW46IGF1dG87XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICB3aWR0aDogMTAwcHg7XHJcbiAgICBoZWlnaHQ6IDEwMHB4O1xyXG5cdG9iamVjdC1maXQ6IGNvdmVyO1xyXG5cdG1hcmdpbi10b3A6IDVweDtcclxuXHRib3JkZXI6IDNweCBzb2xpZCB3aGl0ZTtcclxufVxyXG4ubmFtZVN0eWxlIHtcclxuXHRjb2xvcjogIzM4ODBmZjtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICAgIGZvbnQtd2VpZ2h0OiA2MDA7XHJcbiAgICAvLyBib3JkZXItYm90dG9tOiAzcHggc29saWQgIzM4ODBmZjtcclxuICAgIHdpZHRoOiBmaXQtY29udGVudDtcclxuICAgIG1hcmdpbjogYXV0bztcclxufVxyXG4ucHJvZ3Jlc3NCYWNrIHtcclxuXHRiYWNrZ3JvdW5kLWNvbG9yOiNmMWYxZjE7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogYXV0bztcclxufVxyXG4uY2hhcnQtY29udGFpbmVyLWJpZ3tcclxuXHRtaW4taGVpZ2h0OmF1dG87XHJcblx0d2lkdGg6IDEwMCU7XHJcbn1cclxuLnF1aXp6LXByb2dyZXNzIHtcclxuXHRpb24tcHJvZ3Jlc3MtYmFyIHtcclxuXHQgICAtLWJhY2tncm91bmQ6IGdyZWVuO1xyXG5cdCAgIC0tYnVmZmVyLWJhY2tncm91bmQ6ICNlMmUyZTIgO1xyXG5cdCAgIC0tcHJvZ3Jlc3MtYmFja2dyb3VuZDojMDQxN2MyIDtcclxuXHQgICBib3JkZXItcmFkaXVzOiAzMHB4O1xyXG5cdCB9XHJcbiAgIH1cclxuLmZhdC1wcm9ncmVzcyB7XHJcblx0aW9uLXByb2dyZXNzLWJhciB7XHJcblx0XHQtLWJhY2tncm91bmQ6IGdyZWVuO1xyXG5cdFx0LS1idWZmZXItYmFja2dyb3VuZDogI2UyZTJlMiA7XHJcblx0XHQtLXByb2dyZXNzLWJhY2tncm91bmQ6ICMyQ0E1MDA7XHJcblx0XHRib3JkZXItcmFkaXVzOiAzMHB4O1xyXG5cdCAgfVxyXG59XHJcbi5wcm90ZWluLXByb2dyZXNzIHtcclxuXHRpb24tcHJvZ3Jlc3MtYmFyIHtcclxuXHRcdC0tYmFja2dyb3VuZDogZ3JlZW47XHJcblx0XHQtLWJ1ZmZlci1iYWNrZ3JvdW5kOiAjZTJlMmUyIDtcclxuXHRcdC0tcHJvZ3Jlc3MtYmFja2dyb3VuZDogIzAwQjhGRjtcclxuXHRcdGJvcmRlci1yYWRpdXM6IDMwcHg7XHJcblx0ICB9XHJcbn1cclxuLmNyYWItcHJvZ3Jlc3Mge1xyXG5cdGlvbi1wcm9ncmVzcy1iYXIge1xyXG5cdFx0LS1iYWNrZ3JvdW5kOiBncmVlbjtcclxuXHRcdC0tYnVmZmVyLWJhY2tncm91bmQ6ICNlMmUyZTIgO1xyXG5cdFx0LS1wcm9ncmVzcy1iYWNrZ3JvdW5kOiAjRkYwMENCO1xyXG5cdFx0Ym9yZGVyLXJhZGl1czogMzBweDtcclxuXHQgIH1cclxufVxyXG4gICAuQ29sb3JDaGFuZ2V7XHJcblx0ICAgY29sb3I6IHdoaXRlO1xyXG5cdCAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCB3aGl0ZTtcclxuICAgfVxyXG4uaW9uQ2FyZFN0eWxlIHtcclxuXHRiYWNrZ3JvdW5kLWNvbG9yOiNmMWYxZjE7bWFyZ2luOiAwcHggMHB4O1xyXG59XHJcbi5wYWRkaW5nLTE1e3BhZGRpbmc6MTVweCAwcHh9XHJcbi5kaXZOYW1lIHtcclxuXHRtYXJnaW46IGF1dG8gO2hlaWdodDogMTAwJTtcclxufVxyXG4ueW91ckRhaWx5IHtcclxuXHRtYXJnaW46IGF1dG87bWFyZ2luLXRvcDogMTBweDt0ZXh0LWFsaWduOiBjZW50ZXI7Y29sb3I6IGJsYWNrO1xyXG4gICAgZm9udC13ZWlnaHQ6IDYwMDtcclxufVxyXG4uZGF0ZURpdiB7XHJcblx0bWFyZ2luOiBhdXRvO3RleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG4uZGF0ZVN1YkRpdiB7XHJcblx0bWFyZ2luOiBhdXRvO2ZvbnQtc2l6ZTogeC1sYXJnZTtcclxufVxyXG4uZGF0ZUljb25Db2xvciB7XHJcblx0Y29sb3I6ICMzODgwZmY7XHJcbn1cclxuLm1hcmdpbi1hdXRve1xyXG5cdG1hcmdpbjogYXV0bztcclxufVxyXG4uZGF5U3R5bGUge1xyXG5cdHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7Y29sb3I6IGJsYWNrO1xyXG4gICAgZm9udC13ZWlnaHQ6IDYwMDtmb250LXNpemU6MTlweFxyXG59XHJcbi5kYXlOdW0ge1xyXG5cdGNvbG9yOiBibGFjaztcclxuICAgIGZvbnQtd2VpZ2h0OiA1MDA7XHJcbn1cclxuLndpZHRoLTEwMHtcclxuXHR3aWR0aDogMTAwJTtcclxufVxyXG4uZG91Z2hDaGFydCB7XHJcblx0d2lkdGg6MjUwcHg7aGVpZ2h0OjIyMHB4XHJcbn1cclxuLmxpbmVDaGFydCB7XHJcblx0aGVpZ2h0OiAzMDBweDt3aWR0aDogMzY1cHggIWltcG9ydGFudDtcclxufVxyXG4uZGFpbHktY2Fsb3JpZXMge1xyXG5cdGZvbnQtd2VpZ2h0OiA2MDA7bWFyZ2luOiAxNXB4IDEwcHg7XHJcbn1cclxuLnJvd0FsaWduIHtcclxuXHRtYXJnaW4tcmlnaHQ6IDIwcHg7XHJcbiAgICBtYXJnaW4tdG9wOiAtMjBweDtcclxufVxyXG4uZGF5LW51bSB7XHJcblx0Y29sb3I6IGJsYWNrO2ZvbnQtd2VpZ2h0OjYwMDttYXJnaW4tbGVmdDogMTBweDtcclxufVxyXG4ubWFyZ2luLWxlZnQtMTB7XHJcblx0bWFyZ2luLWxlZnQ6IDEwcHg7XHJcbn1cclxuLmhlaWdodC0yMntcclxuXHRoZWlnaHQ6IDIycHg7XHJcbn1cclxuLmZvbnQtc2l6ZS0xMntcclxuXHRmb250LXNpemU6IDEycHg7XHJcbn1cclxuLnJlbWFpbmluZ0RheXMge1xyXG5cdHRleHQtYWxpZ246IHJpZ2h0O3RleHQtYWxpZ246IHJpZ2h0O3dpZHRoOiA5NSU7IG1hcmdpbi10b3A6IDVweDtcclxufVxyXG4ubW9udGhTdHlsZSB7XHJcblx0Zm9udC13ZWlnaHQ6IDYwMDtmb250LXNpemU6IDE2cHg7cGFkZGluZzogMTBweCAxMHB4O1xyXG59XHJcbi5saW5lQ2hhcnRCYWMge1xyXG5cdGJhY2tncm91bmQtY29sb3I6IzA0MTdjMjtcclxufVxyXG4ubGluZUNoYXJ0SGVhZGVyIHtcclxuXHRjb2xvcjp3aGl0ZVxyXG59XHJcbi5mb250LXNpemUtMTV7XHJcblx0Zm9udC1zaXplOiAxNXB4O1xyXG59XHJcbi5zZWxlY3QtbGluZSB7XHJcblx0Ym9yZGVyOiBub25lO2JhY2tncm91bmQ6IHRyYW5zcGFyZW50O2ZvbnQtc2l6ZTogMTVweDtcclxufVxyXG4ucGFkZGluZy0yMCB7XHJcblx0cGFkZGluZzogMjBweDtcclxufVxyXG4ucGFkZGluZy1ib3R0b20tMjAge1xyXG5cdHBhZGRpbmctYm90dG9tOiAyMHB4O1xyXG59XHJcbi5tYXJnaW4tdG9wLTE1IHtcclxuXHRtYXJnaW4tdG9wOjE1cHhcclxufVxyXG4uY29sb3ItdGV4dCB7XHJcblx0Y29sb3I6ICMwMDNDQ0EgO1xyXG5cdGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbi5tYXJnaW4tdG9wLTIwIHtcclxuXHRtYXJnaW4tdG9wOjIwcHg7XHJcbn1cclxuLndhdGVyLWludGFrZSB7XHJcblx0YmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDEzNi4wOGRlZywgIzk5RTdGNyAwJSwgIzAwQjBGRiAxMDAlKTtcclxufVxyXG5we1xyXG5cdG1hcmdpbjogMHB4O1xyXG5cdHBhZGRpbmc6MHB4O1xyXG59XHJcbmgxIHtcclxuXHRtYXJnaW46IDBweDtcclxuXHRwYWRkaW5nOjBweDtcclxufVxyXG5oMiB7XHJcblx0bWFyZ2luOiAwcHg7XHJcblx0cGFkZGluZzowcHg7XHJcbn1cclxuaDMge1xyXG5cdG1hcmdpbjogMHB4O1xyXG5cdHBhZGRpbmc6MHB4O1xyXG59XHJcbi5tYXJnaW4tMCB7XHJcblx0bWFyZ2luIDogMHB4O1xyXG5cdHBhZGRpbmc6MHB4O1xyXG59IFxyXG4ubWFyZ2luLWF1dG97XHJcblx0dGV4dC1hbGlnbjogY2VudGVyO1xyXG5cdG1hcmdpbjogYXV0bztcclxufVxyXG4uaW1nQmFjU3R5bGV7XHJcblx0bWFyZ2luOiBhdXRvO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gICAgd2lkdGg6IDcxcHg7XHJcbiAgICBoZWlnaHQ6IDcxcHg7XHJcblx0b2JqZWN0LWZpdDogY292ZXI7XHJcblx0bWFyZ2luLXRvcDogNXB4O1xyXG5cdGJvcmRlcjogMnB4IHNvbGlkIGdhaW5zYm9ybztcclxufVxyXG4ubWFyZ2luLXRvcC03IHtcclxuICAgIG1hcmdpbi10b3A6IDdweDtcclxufVxyXG4ubWFyZ2luLXRvcC0xMCB7XHJcblx0bWFyZ2luLXRvcDogMTBweFxyXG59XHJcbi5jb2xvci1ibGFjayB7XHJcblx0Y29sb3I6IGJsYWNrO1xyXG59XHJcbi5hbGlnbi1sZWZ0IHtcclxuXHR0ZXh0LWFsaWduOiByaWdodDtcclxuXHRtYXJnaW46IGF1dG87XHJcbn1cclxuLnBhZGRpbmxlZnQtcmlnaHQtNSB7XHJcblx0bWFyZ2luOiAwcHggNXB4O1xyXG59XHJcbi5jb2xvci13aGl0ZSB7XHJcblx0Y29sb3I6IHdoaXRlO1xyXG59XHJcbi5BZGQtc2xlZXAge1xyXG5cdGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMzYuMDhkZWcsICMwMTUyQzQgMCUsICMwMDMzNDcgMTAwJSlcclxufVxyXG4ubWFyZ2luLXRvcC0yNSB7XHJcblx0bWFyZ2luLXRvcDogMjVweDtcclxufVxyXG4uZmF0LWNvbG9yIHtcclxuXHRjb2xvcjogIzJDQTUwMDsgXHJcbn1cclxuLmFsaWduLWNlbnRlciB7XHJcblx0dGV4dC1hbGlnbjogY2VudGVyO1xyXG5cdG1hcmdpbjogYXV0bztcclxufVxyXG4ucHJvdGVpbi1jb2xvciB7XHJcblx0Y29sb3I6IzAwQjhGRjtcclxufVxyXG4uY3JhYi1jb2xvciB7XHJcblx0Y29sb3I6I0ZGMDBDQjtcclxufVxyXG4ubWFyZ2luLTE1IHtcclxuXHRtYXJnaW46IDE1cHg7XHJcbn1cclxuLmljb24tc2l6ZSB7XHJcblx0Zm9udC1zaXplOiAtd2Via2l0LXh4eC1sYXJnZTtcclxuXHRjb2xvcjogYmxhY2s7XHJcbn1cclxuLmJ1dHRvbi1iYWMge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XHJcbiAgICAtLWJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG59XHJcbi5tYXJnaW4tdG9wLTUge1xyXG5cdG1hcmdpbi10b3A6IDVweDtcclxufVxyXG4uaW9uLWNhcmQtcHJvZ3Jlc3Mge1xyXG5cdC0tYm94LXNoYWRvdyA6IHVuc2V0O1xyXG5cdGJveC1zaGFkb3c6IHVuc2V0O2JvcmRlcjogMnB4IHNvbGlkIGdhaW5zYm9ybztcclxufVxyXG4ud2VpZ2h0LWRvdCB7XHJcblx0bWFyZ2luOiAwcHggNXB4O1xyXG4gICAgYmFja2dyb3VuZDogIzlGRkY5MztcclxuICAgIGNvbG9yOiAjOUZGRjkzO1xyXG4gICAgYm9yZGVyOiAycHggc29saWQgIzlGRkY5MztcclxuICAgIGJvcmRlci1yYWRpdXM6IDQ2cHg7XHJcbiAgICBoZWlnaHQ6IDEycHg7XHJcbiAgICB3aWR0aDogMTBweDtcclxuICAgIHBhZGRpbmc6IDdweDtcclxuICAgIGZvbnQtc2l6ZTogMTFweDtcclxufVxyXG4uYm9keS1mYXQtZG90IHtcclxuXHRtYXJnaW46IDBweCA1cHg7XHJcbiAgICBiYWNrZ3JvdW5kOiAjRkY4QzU3O1xyXG4gICAgY29sb3I6I0ZGOEM1NztcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICNGRjhDNTc7XHJcbiAgICBib3JkZXItcmFkaXVzOiA0NnB4O1xyXG4gICAgaGVpZ2h0OiAxMnB4O1xyXG4gICAgd2lkdGg6IDEwcHg7XHJcbiAgICBwYWRkaW5nOiA3cHg7XHJcbiAgICBmb250LXNpemU6IDExcHg7XHJcbn1cclxuLmNvbnRlbnQtZGl2IHtcclxuXHRiYWNrZ3JvdW5kLWNvbG9yOiAjRkFGQUZBO3BhZGRpbmctYm90dG9tOiAyMHB4O1xyXG59XHJcbi5wcm9ncmVzcy1oZWlnaHQge1xyXG5cdGhlaWdodDoxMTBweFxyXG59XHJcbi5tYXJnaW4tbGVmdC1yaWdodC0xNSB7XHJcblx0bWFyZ2luOiAwcHggMTVweDtcclxufVxyXG4udGV4dC1hbGlnbi1yaWdodCB7XHJcblx0dGV4dC1hbGlnbjogcmlnaHQ7bWFyZ2luLWxlZnQ6IGF1dG87XHJcbn1cclxuLnBhZC1sZWZ0LXJpZ2h0LTE1IHtcclxuXHRwYWRkaW5nOjBweCAxNXB4XHJcbn1cclxuLmxpbmVDaGFydC1iYXIge1xyXG5cdGhlaWdodDogMjUwcHg7d2lkdGg6IDM3M3B4ICFpbXBvcnRhbnQ7XHJcblx0bWFyZ2luLWxlZnQ6IC0zOHB4O1xyXG5cdG1hcmdpbi10b3A6IC0zNnB4O1xyXG59XHJcbi5oZWFkZXItY3NzIHtcclxuICAgIHBhZGRpbmc6IDBweCAxNXB4O2JvcmRlci1ib3R0b206IDJweCBzb2xpZCBnYWluc2Jvcm87XHJcbn1cclxuLnByb2ZpbGUtYmFja2dyb3VuZCB7XHJcblx0YmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDE0NC42MmRlZywgIzAyNzRFMyAwJSwgIzAyNzRFMyAwJSk7XHJcblx0Y29sb3I6IHdoaXRlO1xyXG59Il19 */"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/home/home.page.ts":
+/*!**********************************************!*\
+  !*** ./src/app/user_pages/home/home.page.ts ***!
+  \**********************************************/
+/*! exports provided: HomePage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/global-services.service */ "./src/app/services/global-services.service.ts");
+/* harmony import */ var src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/api-call.service */ "./src/app/services/api-call.service.ts");
+/* harmony import */ var src_app_services_food_suggestions_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/food-suggestions.service */ "./src/app/services/food-suggestions.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var chartjs_plugin_labels__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! chartjs-plugin-labels */ "./node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js");
+/* harmony import */ var chartjs_plugin_labels__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(chartjs_plugin_labels__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _add_sleep_modal_add_sleep_modal_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../add-sleep-modal/add-sleep-modal.page */ "./src/app/user_pages/add-sleep-modal/add-sleep-modal.page.ts");
+/* harmony import */ var _add_water_modal_add_water_modal_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../add-water-modal/add-water-modal.page */ "./src/app/user_pages/add-water-modal/add-water-modal.page.ts");
+/* harmony import */ var _modals_notification_modal_notification_modal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../modals/notification-modal/notification-modal */ "./src/app/user_pages/modals/notification-modal/notification-modal.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+var HomePage = /** @class */ (function () {
+    function HomePage(router, globalServices, activatedRoute, myAPI, foodSuggestionsService, alertController, modalController, popoverController) {
+        this.router = router;
+        this.globalServices = globalServices;
+        this.activatedRoute = activatedRoute;
+        this.myAPI = myAPI;
+        this.foodSuggestionsService = foodSuggestionsService;
+        this.alertController = alertController;
+        this.modalController = modalController;
+        this.popoverController = popoverController;
+        this.day = null;
+        this.date = null;
+        this.dayNumber = null;
+        this.planLength_weeks = null;
+        this.planLength_days = null;
+        this.warnText = { proteinText: '...', carbsText: '...', fatText: '...' };
+        this.segment_choice = 'nutrition';
+        this.dailyCaloriesIntake = null;
+        this.dietCaloriesIntake = null;
+        this.caloriesConsumed = 0;
+        this.caloriesFromProteinAsP = 0;
+        this.caloriesFromCarbsAsP = 0;
+        this.caloriesFromFatAsP = 0;
+        this.warnCaloriesFromProteinAsP = 0;
+        this.warnCaloriesFromCarbsAsP = 0;
+        this.warnCaloriesFromFatAsP = 0;
+        this.meals = [];
+        this.exercises = [];
+        this.workout_completed = false;
+        this.workout_completed_msn = "";
+        this.percent = 0;
+        this.circlesubtitle = "";
+        this.circlecolor = "#2b2b2b"; //gray atr first
+        this.dayNutritionInfo = { "phase": null, "phaseday": null, "phasename": null, "daynutrition": { "protein": null, "carbs": null, "fat": null } };
+        this.score = 0;
+        this.progressPercentage = 0;
+        this.pieChartPlugins = [];
+        this.onBodyFatSelect = false;
+        this.onBodyMassSelect = false;
+        this.OnWeightSelecr = true;
+        this.pieChartColors = [
+            {
+                backgroundColor: ['rgba(0,0,255,1.0)', 'rgba(255,165,0,1.0)', 'rgba(0,255,0,1.0)'],
+            },
+        ];
+        this.data = [' ', '100g', ' ', 'of PROTEIN', ' '];
+        this.barChartOptions = {
+            scaleShowVerticalLines: false,
+            responsive: true
+        };
+        this.barChartLabels = [];
+        this.barChartType = 'bar';
+        this.barChartLegend = true;
+        this.barChartData = [];
+    }
+    HomePage.prototype.ngOnInit = function () {
+        // PIE CHART SETTINGS
+        this.updateChart();
+        this.pieChartOptions = this.createOptions();
+        this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
+        this.pieChartData = [50.4, 33.6, 15.9];
+        this.pieChartType = 'doughnut';
+        this.pieChartLegend = true;
+        this.pieChartPlugins = [chartjs_plugin_labels__WEBPACK_IMPORTED_MODULE_7__];
+        this.day = this.activatedRoute.snapshot.paramMap.get('day');
+        if (!this.day) {
+            this.day = 'today';
+        }
+        this.date = this.globalServices.getDate(this.day);
+    };
+    // PIE CHART OPTIONS
+    HomePage.prototype.createOptions = function () {
+        return {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                labels: {
+                    fontColor: ['white', 'white', 'white'],
+                    precision: 0
+                },
+            },
+            legend: {
+                labels: {
+                    usePointStyle: true
+                }
+            }
+        };
+    };
+    HomePage.prototype.getAverages = function (array) {
+        var sum = 0;
+        var pieChartAvgs = [];
+        array.forEach(function (item) { return sum += item; });
+        array.forEach(function (item) { return pieChartAvgs.push((item / sum) * 100); });
+        return pieChartAvgs;
+    };
+    HomePage.prototype.ionViewWillEnter = function () {
+        //this.updatepage();
+        //this.getFeedback();
+    };
+    HomePage.prototype.handleSwipeLeft = function () {
+        console.log("this.day", this.day);
+        this.dayNumber = this.dayNumber + 1;
+        if (this.dayNumber == 20) {
+            this.day = 'tomorrow';
+            // this.globalServices.swipeLeft("/tabs/home/tomorrow");
+        }
+        else if (this.dayNumber == 19) {
+            console.log("today");
+            this.day = 'today';
+            // this.globalServices.swipeLeft("/tabs/home/today");
+        }
+        // switch (this.day) {
+        //   case "yesterday": {
+        //     this.globalServices.swipeLeft("/tabs/home/yesterday");
+        //     break;
+        //   }
+        //   case "today": {
+        //     this.globalServices.swipeLeft("/tabs/home/today");
+        //     break;
+        //   }
+        //   default: {
+        //    // cant swipe after tomorrow 
+        //     break;
+        //   }
+        // }
+    };
+    HomePage.prototype.handleSwipeRight = function () {
+        this.dayNumber = this.dayNumber - 1;
+        if (this.dayNumber == 18) {
+            this.day = 'yesterday';
+            // this.globalServices.swipeLeft("/tabs/home/yesterday");
+        }
+        else if (this.dayNumber == 19) {
+            this.day = 'today';
+            console.log("today");
+            // this.globalServices.swipeLeft("/tabs/home/today");
+        }
+        // switch (this.day) {
+        //   case "today": {
+        //     if (this.dayNumber > 1) {
+        //       //if its not your first day, then you can see previous day
+        //       this.globalServices.swipeRight("/tabs/home/today");
+        //     }
+        //     break;
+        //   }
+        //   case "tomorrow": {
+        //     this.globalServices.swipeRight("/tabs/home/tomorrow");
+        //     break;
+        //   }
+        //   default: {
+        //     //cant swipe before yesterday 
+        //     break;
+        //   }
+        // }
+    };
+    HomePage.prototype.doRefresh = function (event) {
+        this.updatepage();
+        event.target.complete();
+    };
+    HomePage.prototype.updatepage = function () {
+        var _this = this;
+        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+        this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+        this.planLength_days = this.planLength_weeks * 7;
+        this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
+        // this.pieChartLabels = ['Protein' + this.dayNutritionInfo.daynutrition.protein +'%', this.dayNutritionInfo.daynutrition.carbs+'%', this.daynutritionOfFat()];
+        this.myAPI.makeAPIcall("meals.php", {
+            "action": "getDayInfo",
+            "date": this.date
+        }, true).subscribe(function (result) {
+            if (result.error) {
+                _this.myAPI.handleMyAPIError(result.error);
+            }
+            else {
+                _this.meals = result.success.dayInfo.meals;
+                _this.exercises = result.success.dayInfo.exercises;
+                _this.workout_completed = _this.foodSuggestionsService.getWorkoutStatus(_this.exercises);
+                _this.workoutCompleted();
+                _this.calculateCaloriesConsumed();
+            }
+        });
+        this.progressPercentage = this.calculateDayCompletionPercentage();
+    };
+    HomePage.prototype.calculateCaloriesConsumed = function () {
+        var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
+        // this.barChartData[0].data = [Math.round(info.caloriesFromProtein), Math.round(info.caloriesFromCarbs), Math.round(info.caloriesFromFat)];
+        // this.barChartData[1].data = [Math.round(info.targetCaloriesFromProtein), Math.round(info.targetCaloriesFromCarbs), Math.round(info.targetCaloriesFromFat)];
+        this.caloriesConsumed = info.caloriesConsumed;
+        this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
+        this.caloriesFromCarbsAsP = info.caloriesFromCarbsAsP;
+        this.caloriesFromFatAsP = info.caloriesFromFatAsP;
+        this.dietCaloriesIntake = info.dietCaloriesIntake;
+        this.percent = info.percent;
+        this.warnText.proteinText = this.warnTextFunction(info.targetCaloriesFromProtein, info.caloriesFromProtein);
+        this.warnText.carbsText = this.warnTextFunction(info.targetCaloriesFromCarbs, info.caloriesFromCarbs);
+        this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
+        if (info.color == "red") {
+            this.circlecolor = "#CA1616";
+        }
+        else {
+            this.circlecolor = "rgb(56, 129, 255";
+        }
+        this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
+        //this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
+    };
+    HomePage.prototype.workoutCompleted = function () {
+        if (this.workout_completed) {
+            this.workout_completed_msn = " Workout Completed";
+        }
+        else {
+            this.workout_completed_msn = "Need Workout";
+        }
+    };
+    HomePage.prototype.warnTextFunction = function (target, current) {
+        var text = '';
+        var difference = Math.floor(target - current);
+        if (target > current && this.caloriesConsumed > this.dietCaloriesIntake) {
+            text = "missing " + difference + " Calories";
+        }
+        else if (target > current) {
+            text = "need " + difference + " Calories";
+        }
+        else if (target < current) {
+            text = "consumed too much " + difference + " Calories";
+        }
+        return text;
+    };
+    HomePage.prototype.daynutritionOfFat = function () {
+        var text = null;
+        if (this.dayNutritionInfo.daynutrition.fat == undefined) {
+            text = '5%';
+        }
+        else {
+            text = this.dayNutritionInfo.daynutrition.fat + '%';
+        }
+        return text;
+    };
+    HomePage.prototype.chartOptionsfontSize = function () {
+        var windowSize = window.matchMedia('(min-width: 700px)');
+        var fontSize = null;
+        if (windowSize.matches) {
+            fontSize = 16;
+        }
+        else {
+            fontSize = 11;
+        }
+        return fontSize;
+    };
+    HomePage.prototype.getFeedback = function () {
+        //this.dayNumber is stored in lcoal storage so it will be available at the time this functino gets called 
+        if (this.dayNumber > 7) {
+            var current_week = Math.ceil(this.dayNumber / 7);
+            var lastFeedback = parseInt(localStorage.getItem("lastFeedback"));
+            //after first week reduce calories by 200
+            if (Number.isNaN(lastFeedback)) {
+                this.updateFeedback('no', 2);
+            }
+            //every week after that ask if happy
+            else if (lastFeedback < current_week) {
+                this.showFeedbackConfirm(current_week);
+            }
+        }
+    };
+    HomePage.prototype.showFeedbackConfirm = function (current_week) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var alert;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertController.create({
+                            header: 'Confirm',
+                            message: 'Are you happy with your progress so far?',
+                            buttons: [
+                                {
+                                    text: 'Yes',
+                                    handler: function () {
+                                        _this.updateFeedback('yes', current_week);
+                                    }
+                                },
+                                {
+                                    text: 'No',
+                                    handler: function () {
+                                        _this.updateFeedback('no', current_week);
+                                    }
+                                }
+                            ]
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    HomePage.prototype.updateFeedback = function (feedback, weeknum) {
+        var _this = this;
+        this.myAPI.makeAPIcall("users.php", {
+            "action": "updateFeedback",
+            "feedback": feedback,
+            "weeknum": weeknum
+        }, true)
+            .subscribe(function (result) {
+            if (result.error) {
+                _this.myAPI.handleMyAPIError(result.error);
+            }
+            else if (result.success) {
+                localStorage.setItem("lastFeedback", result.success.weeknum);
+                localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
+                _this.calculateCaloriesConsumed();
+            }
+        });
+    };
+    /*
+     * Calculate Day Completion Percentage
+     *
+     * @desc Calculate the percentage of days that a user has completed. This
+     *  number is used to create the Days Completed / Days Remaining progress bar.
+     *
+     * @return (float) progressPercentage The percentage of days that have been completed.
+     *
+     */
+    HomePage.prototype.calculateDayCompletionPercentage = function () {
+        var progressPercentage = (this.dayNumber / this.planLength_days);
+        return progressPercentage;
+    };
+    HomePage.prototype.updateChart = function () {
+        this.barChart = new chart_js__WEBPACK_IMPORTED_MODULE_8__["Chart"](this.barCanvas.nativeElement, {
+            type: 'line',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+                datasets: [{
+                        label: 'Weight',
+                        data: [13, 10, 35, 30.25, 30, 37, 27, 40, 25],
+                        fill: false, borderColor: '#00ff00', backgroundColor: '#00ff00'
+                    },
+                    { label: 'Body Fat',
+                        data: [27.5, 27.5, 27.5, 27.5, 40, 35, 30, 20, 25],
+                        fill: false, borderColor: 'rgb(255,165,0)', backgroundColor: 'rgb(255,165,0)'
+                    }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        fontColor: 'white',
+                        usePointStyle: true, boxWidth: 8
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                            gridLines: {
+                                display: true,
+                                color: '#CCC',
+                                drawBorder: true,
+                                drawTicks: false
+                            },
+                            ticks: {
+                                fontColor: '#CCC',
+                                padding: 10
+                            },
+                        }],
+                    yAxes: [{
+                            display: true,
+                            gridLines: {
+                                display: true,
+                                color: '#CCC',
+                                drawBorder: true,
+                                drawTicks: false,
+                                tickMarkLength: 15
+                            },
+                            ticks: {
+                                fontColor: '#CCC',
+                                padding: 20,
+                                min: 0,
+                                max: 45,
+                                callback: function (value) {
+                                    return value + '%'; // convert it to percentage
+                                },
+                            },
+                            scaleLabel: {
+                                display: true,
+                            },
+                        }],
+                }
+            }
+        });
+        this.barIntakeCanvas.nativeElement.height = 200;
+        this.barIntakeCanvas.nativeElement.width = 300;
+        var gradientStroke = this.barIntakeCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 300);
+        gradientStroke.addColorStop(0, '#375DFF');
+        gradientStroke.addColorStop(1, '#B02BEB');
+        this.barChartLabels = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        this.barChartData = [
+            { data: [20, 30, 75, 80.25, 50, 67, 67], label: 'WEEK', fill: false, borderColor: 'red', backgroundColor: 'red' },
+        ];
+        this.barIntake = new chart_js__WEBPACK_IMPORTED_MODULE_8__["Chart"](this.barIntakeCanvas.nativeElement, {
+            type: 'bar',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+                datasets: [{
+                        data: [20, 30, 75, 80.25, 50, 67, 67],
+                        fill: true, borderColor: gradientStroke, backgroundColor: gradientStroke,
+                        datalabels: {
+                            display: false
+                        }
+                    },
+                ],
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                plugins: {
+                    datalabels: {
+                        display: false,
+                    },
+                    labels: {
+                        render: function () { }
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                            gridLines: {
+                                display: true,
+                                color: 'white',
+                                drawBorder: true,
+                                drawTicks: false
+                            },
+                            ticks: {
+                                fontColor: 'white',
+                                padding: 10
+                            },
+                        }],
+                    yAxes: [{
+                            display: true,
+                            gridLines: {
+                                display: true,
+                                color: 'white',
+                                drawBorder: true,
+                                drawTicks: false,
+                                tickMarkLength: 15
+                            },
+                            ticks: {
+                                fontColor: 'white',
+                                padding: 20
+                            },
+                        }],
+                }
+            }
+        });
+        this.barSleepCanvas.nativeElement.height = 200;
+        this.barSleepCanvas.nativeElement.width = 300;
+        var gradientStroke2 = this.barSleepCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 300);
+        gradientStroke2.addColorStop(0, '#37C2F5');
+        gradientStroke2.addColorStop(1, '#FF79E6');
+        this.barSleep = new chart_js__WEBPACK_IMPORTED_MODULE_8__["Chart"](this.barSleepCanvas.nativeElement, {
+            type: 'bar',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+                datasets: [{
+                        label: ' WEEK',
+                        data: [4, 6, 7, 6.9, 6, 10, 11, 10, 0, 0],
+                        fill: false,
+                        borderColor: gradientStroke2, backgroundColor: gradientStroke2, datalabels: {}
+                    }
+                ]
+            },
+            options: {
+                legend: {
+                    display: false,
+                    position: "bottom",
+                    labels: {
+                        fontColor: 'white',
+                        usePointStyle: true
+                    }
+                },
+                plugins: {
+                    datalabels: {
+                        display: false,
+                    },
+                    labels: {
+                        render: function () { }
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                            gridLines: {
+                                display: true,
+                                color: "white",
+                                drawBorder: true,
+                                drawTicks: false,
+                                drawOnChartArea: true
+                            },
+                            ticks: {
+                                fontColor: "white",
+                                padding: 10
+                            },
+                        }],
+                    yAxes: [{
+                            display: true,
+                            gridLines: {
+                                display: true,
+                                color: "white",
+                                drawBorder: true,
+                                drawTicks: false,
+                            },
+                            scaleLabel: {
+                                display: false,
+                            },
+                            ticks: {
+                                fontColor: "white",
+                                padding: 20
+                            },
+                        }],
+                }
+            }
+        });
+    };
+    HomePage.prototype.clickOnBodyFat = function () {
+        this.onBodyFatSelect = true;
+        this.onBodyMassSelect = false;
+        this.OnWeightSelecr = false;
+    };
+    HomePage.prototype.clickOnBodyMass = function () {
+        this.onBodyFatSelect = false;
+        this.onBodyMassSelect = true;
+        this.OnWeightSelecr = false;
+    };
+    HomePage.prototype.clickOnWeight = function () {
+        this.onBodyFatSelect = false;
+        this.onBodyMassSelect = false;
+        this.OnWeightSelecr = true;
+    };
+    HomePage.prototype.openSleepModal = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalController.create({ component: _add_sleep_modal_add_sleep_modal_page__WEBPACK_IMPORTED_MODULE_9__["AddSleepModalPage"] })];
+                    case 1:
+                        modal = _a.sent();
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    HomePage.prototype.openWaterModal = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalController.create({ component: _add_water_modal_add_water_modal_page__WEBPACK_IMPORTED_MODULE_10__["AddWaterModalPage"] })];
+                    case 1:
+                        modal = _a.sent();
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    HomePage.prototype.showSettings = function () {
+        this.router.navigateByUrl('/settings');
+    };
+    HomePage.prototype.handleButtonClick = function (ev) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var popover, data;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.popoverController.create({
+                            component: _modals_notification_modal_notification_modal__WEBPACK_IMPORTED_MODULE_11__["NotificationModal"],
+                            event: ev,
+                            translucent: true,
+                        })];
+                    case 1:
+                        popover = _a.sent();
+                        return [4 /*yield*/, popover.present()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, popover.onWillDismiss()];
+                    case 3:
+                        data = (_a.sent()).data;
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("barCanvas"),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+    ], HomePage.prototype, "barCanvas", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("barIntakeCanvas"),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+    ], HomePage.prototype, "barIntakeCanvas", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("barSleepCanvas"),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+    ], HomePage.prototype, "barSleepCanvas", void 0);
+    HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-home',
+            template: __webpack_require__(/*! ./home.page.html */ "./src/app/user_pages/home/home.page.html"),
+            styles: [__webpack_require__(/*! ./home.page.scss */ "./src/app/user_pages/home/home.page.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_3__["GlobalServicesService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_4__["ApiCallService"],
+            src_app_services_food_suggestions_service__WEBPACK_IMPORTED_MODULE_5__["FoodSuggestionsService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ModalController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["PopoverController"]])
+    ], HomePage);
+    return HomePage;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=home-home-module.js.map

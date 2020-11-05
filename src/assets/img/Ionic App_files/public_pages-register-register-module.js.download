@@ -1,0 +1,176 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["public_pages-register-register-module"],{
+
+/***/ "./src/app/public_pages/register/register.module.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/public_pages/register/register.module.ts ***!
+  \**********************************************************/
+/*! exports provided: RegisterPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterPageModule", function() { return RegisterPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _register_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./register.page */ "./src/app/public_pages/register/register.page.ts");
+
+
+
+
+
+
+
+var routes = [
+    { path: '', component: _register_page__WEBPACK_IMPORTED_MODULE_6__["RegisterPage"] }
+];
+var RegisterPageModule = /** @class */ (function () {
+    function RegisterPageModule() {
+    }
+    RegisterPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes),
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]
+            ],
+            declarations: [_register_page__WEBPACK_IMPORTED_MODULE_6__["RegisterPage"]]
+        })
+    ], RegisterPageModule);
+    return RegisterPageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/public_pages/register/register.page.html":
+/*!**********************************************************!*\
+  !*** ./src/app/public_pages/register/register.page.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header padding class=\"extra-padding\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button \r\n        class=\"back-button\"\r\n        text=\"\"\r\n        icon=\"arrow-round-back\">\r\n      </ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding class=\"extra-padding\">\r\n  <form \r\n    class=\"form\" \r\n    [formGroup]=\"registerForm\" \r\n    (ngSubmit)=\"register()\">\r\n    <ion-grid>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1>Register</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-label position=\"stacked\">First Name</ion-label>\r\n          <ion-input type=\"text\" placeholder=\"Enter first name\" formControlName=\"first_name\">\r\n            <ion-icon name=\"person\" size=\"small\"></ion-icon>\r\n          </ion-input>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.first_name.errors?.required\">\r\n            Please enter your first name.\r\n          </span>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.first_name.errors?.pattern\">\r\n            Please use letters.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-label position=\"stacked\">Last Name</ion-label>\r\n          <ion-input type=\"text\" placeholder=\"Enter last name\" formControlName=\"last_name\">\r\n            <ion-icon name=\"person\" size=\"small\"></ion-icon>\r\n          </ion-input>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.last_name.errors?.required\">\r\n            Please enter your last name.\r\n          </span>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.last_name.errors?.pattern\">\r\n            Please use letters.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-label position=\"stacked\">Email</ion-label>\r\n          <ion-input type=\"email\" placeholder=\"Enter email\" formControlName=\"email\">\r\n            <ion-icon name=\"mail\" size=\"small\"></ion-icon>\r\n          </ion-input>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.email.errors?.required\">\r\n            Please enter your email address.\r\n          </span>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.email.errors?.email\">\r\n            Please provide a properly formatted email address.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-label position=\"stacked\">Password</ion-label>\r\n          <ion-input type=\"password\" placeholder=\"Enter password\" formControlName=\"password\">\r\n            <ion-icon name=\"lock\" size=\"small\"></ion-icon>\r\n          </ion-input>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.password.errors?.required\">\r\n            Please enter your password.\r\n          </span>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.password.errors?.minlength\">\r\n            Your password does not meet length requirements.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <small>\r\n            <a class=\"register-link\" [routerLink]=\"['/terms']\">\r\n              Terms & Conditions\r\n            </a>\r\n          </small>\r\n          <br />\r\n          <ion-item>\r\n            <small>\r\n              I agree. \r\n            </small>\r\n            <ion-checkbox \r\n              type=\"checkbox\"\r\n              formControlName=\"agree\"\r\n              slot=\"start\" \r\n              color=\"primary\">\r\n            </ion-checkbox>\r\n          </ion-item>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.agree.errors?.required\">\r\n            Please check to agree to terms & conditions.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-button \r\n            expand=\"block\"\r\n            type=\"submit\"  \r\n            shape=\"round\">\r\n            Create Account\r\n          </ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n      \r\n    </ion-grid>\r\n  </form>\r\n</ion-content>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/public_pages/register/register.page.scss":
+/*!**********************************************************!*\
+  !*** ./src/app/public_pages/register/register.page.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3B1YmxpY19wYWdlcy9yZWdpc3Rlci9yZWdpc3Rlci5wYWdlLnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/public_pages/register/register.page.ts":
+/*!********************************************************!*\
+  !*** ./src/app/public_pages/register/register.page.ts ***!
+  \********************************************************/
+/*! exports provided: RegisterPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterPage", function() { return RegisterPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/api-call.service */ "./src/app/services/api-call.service.ts");
+/* harmony import */ var src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/global-services.service */ "./src/app/services/global-services.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+ //in order to use forms I had to import "ReactiveFormsModule" in this page's module
+
+
+
+var RegisterPage = /** @class */ (function () {
+    function RegisterPage(router, formBuilder, myAPI, globalServices) {
+        this.router = router;
+        this.formBuilder = formBuilder;
+        this.myAPI = myAPI;
+        this.globalServices = globalServices;
+        this.isSubmitted = false;
+        this.isChecked = true;
+    }
+    RegisterPage.prototype.ngOnInit = function () {
+        //initialize and set form values
+        this.registerForm = this.formBuilder.group({
+            first_name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('[a-zA-Z]+')]],
+            last_name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].pattern('[a-zA-Z]+')]],
+            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]],
+            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8)]],
+            agree: [false, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].requiredTrue]
+        });
+    };
+    RegisterPage.prototype.register = function () {
+        var _this = this;
+        //console.log(this.registerForm.value);
+        this.isSubmitted = true;
+        if (this.registerForm.valid) {
+            this.myAPI.makeAPIcall("login", {
+                "action": "register",
+                "form": this.registerForm.value,
+                "today": this.globalServices.getDate("today")
+            }).subscribe(function (result) {
+                if (result.error) {
+                    _this.myAPI.presentToastWithOptions(result.error);
+                }
+                else if (result.success) {
+                    localStorage.setItem("token", result.success.token);
+                    localStorage.setItem("user_id", result.success.user_id);
+                    if (!result.success.user.goals || result.success.user.goals.length == 0) {
+                        //user never filled out goals
+                        //this.router.navigateByUrl("/set-goals");
+                        _this.router.navigateByUrl("/welcome");
+                    }
+                    else if (!result.success.user.measurements || result.success.user.measurements.length == 0) {
+                        //user never filled out measurements
+                        _this.router.navigateByUrl("/enter-measurements");
+                    }
+                    else {
+                        _this.router.navigateByUrl("/tabs/home/today");
+                    }
+                }
+                else {
+                    _this.myAPI.presentToastWithOptions("Something went wrong, please try again later.");
+                }
+            });
+        }
+    };
+    Object.defineProperty(RegisterPage.prototype, "errorControl", {
+        get: function () {
+            return this.registerForm.controls;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    RegisterPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-register',
+            template: __webpack_require__(/*! ./register.page.html */ "./src/app/public_pages/register/register.page.html"),
+            styles: [__webpack_require__(/*! ./register.page.scss */ "./src/app/public_pages/register/register.page.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
+            src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_3__["ApiCallService"],
+            src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_4__["GlobalServicesService"]])
+    ], RegisterPage);
+    return RegisterPage;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=public_pages-register-register-module.js.map

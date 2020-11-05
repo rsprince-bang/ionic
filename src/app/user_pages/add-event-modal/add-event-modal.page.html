@@ -19,7 +19,8 @@
           type="text" 
           placeholder="Enter a search term" 
           name="searchTerm"
-          [(ngModel)]="searchTerm">
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="searchMeals()">
         <ion-icon ios="ios-search-outline" md="md-search" size="small"></ion-icon>
         </ion-input>
       </ion-col>

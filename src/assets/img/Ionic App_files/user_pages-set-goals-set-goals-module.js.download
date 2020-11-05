@@ -1,0 +1,180 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["user_pages-set-goals-set-goals-module"],{
+
+/***/ "./src/app/user_pages/set-goals/set-goals.module.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/user_pages/set-goals/set-goals.module.ts ***!
+  \**********************************************************/
+/*! exports provided: SetGoalsPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetGoalsPageModule", function() { return SetGoalsPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _set_goals_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./set-goals.page */ "./src/app/user_pages/set-goals/set-goals.page.ts");
+
+
+
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _set_goals_page__WEBPACK_IMPORTED_MODULE_6__["SetGoalsPage"]
+    }
+];
+var SetGoalsPageModule = /** @class */ (function () {
+    function SetGoalsPageModule() {
+    }
+    SetGoalsPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
+            ],
+            declarations: [_set_goals_page__WEBPACK_IMPORTED_MODULE_6__["SetGoalsPage"]]
+        })
+    ], SetGoalsPageModule);
+    return SetGoalsPageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/user_pages/set-goals/set-goals.page.html":
+/*!**********************************************************!*\
+  !*** ./src/app/user_pages/set-goals/set-goals.page.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header padding class=\"extra-padding\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button \r\n        class=\"back-button\"\r\n        text=\"\"\r\n        icon=\"arrow-round-back\">\r\n      </ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col>\r\n        <h1>Set Goals</h1>\r\n      </ion-col>\r\n    </ion-row>\r\n    \r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-item>\r\n          <ion-label>Body Sculpting Goal</ion-label>\r\n          <ion-select name=\"lossgoal\" [(ngModel)]=\"lossGoal\" okText=\"OK\" cancelText=\"Cancel\">\r\n            <ion-select-option \r\n              *ngFor=\"let item of lossOptions\"\r\n              [value]=\"item.value\">\r\n                {{ item.name}}\r\n              </ion-select-option>\r\n          </ion-select>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n    <ion-row>\r\n      <ion-col>\r\n        Weigh-in Day\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n\t\t\t<div class=\"day-select-wrapper\">\r\n\t\t\t\t<ion-col text-center *ngFor=\"let item of days; let i of index\"\r\n\t\t\t\t\tclass=\"day-selector\"\r\n\t\t\t\t\t[class.day-selected]=\"item.selected\"\r\n\t\t\t\t\t(click)=\"select(item)\">\r\n\t\t\t\t\t{{ item.day }}\r\n\t\t\t\t</ion-col>\r\n\t\t\t</div>\r\n    </ion-row>\r\n    \r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-item>\r\n          <ion-label>Weigh-in Time</ion-label>\r\n          <ion-datetime [(ngModel)]=\"selected_time\" display-format=\"h:mm A\" picker-format=\"h mm A\"></ion-datetime>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n    <ion-row>\r\n      <ion-col>\r\n        <small>\r\n          NOTE: The best time to weigh yourself is fasted, upon waking after you empty your bladder, nude. [need to rewrite this and add jacks one day recommendation]\r\n        </small>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-button \r\n        expand=\"block\" \r\n        shape=\"round\" \r\n        (click)=\"continue()\">\r\n        Continue\r\n      </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-grid>\r\n\r\n</ion-content>\r\n\r\n<ion-footer class=\"ion-no-border\" padding>\r\n\r\n</ion-footer>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/set-goals/set-goals.page.scss":
+/*!**********************************************************!*\
+  !*** ./src/app/user_pages/set-goals/set-goals.page.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".day-select-wrapper {\n  margin-bottom: 10px;\n  padding: 6px; }\n\n.day-selector {\n  display: inline-block;\n  width: 44px;\n  height: 44px;\n  line-height: 32px;\n  font-size: 24px;\n  color: black;\n  border: 1px solid #ccc;\n  text-transform: uppercase; }\n\n.day-selected {\n  color: white;\n  background: #0140C2; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlcl9wYWdlcy9zZXQtZ29hbHMvQzpcXFVzZXJzXFxSaWNoYXJkLlNwcmluY2VcXERvY3VtZW50c1xcbWVsdC1kb3duLWFwcC9zcmNcXGFwcFxcdXNlcl9wYWdlc1xcc2V0LWdvYWxzXFxzZXQtZ29hbHMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBQ0UsbUJBQW1CO0VBQ25CLFlBQVksRUFBQTs7QUFHZDtFQUNFLHFCQUFxQjtFQUNyQixXQUFXO0VBQ1gsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixlQUFlO0VBQ2YsWUFBWTtFQUNaLHNCQUFzQjtFQUN0Qix5QkFBeUIsRUFBQTs7QUFHM0I7RUFDRSxZQUFZO0VBQ1osbUJBQW1CLEVBQUEiLCJmaWxlIjoic3JjL2FwcC91c2VyX3BhZ2VzL3NldC1nb2Fscy9zZXQtZ29hbHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5kYXktc2VsZWN0LXdyYXBwZXIge1xyXG4gIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbiAgcGFkZGluZzogNnB4O1xyXG59XHJcblxyXG4uZGF5LXNlbGVjdG9yIHtcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgd2lkdGg6IDQ0cHg7XHJcbiAgaGVpZ2h0OiA0NHB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAzMnB4O1xyXG4gIGZvbnQtc2l6ZTogMjRweDtcclxuICBjb2xvcjogYmxhY2s7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgI2NjYztcclxuICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG59XHJcblxyXG4uZGF5LXNlbGVjdGVkIHtcclxuICBjb2xvcjogd2hpdGU7XHJcbiAgYmFja2dyb3VuZDogIzAxNDBDMjtcclxufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/set-goals/set-goals.page.ts":
+/*!********************************************************!*\
+  !*** ./src/app/user_pages/set-goals/set-goals.page.ts ***!
+  \********************************************************/
+/*! exports provided: SetGoalsPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetGoalsPage", function() { return SetGoalsPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/api-call.service */ "./src/app/services/api-call.service.ts");
+/* harmony import */ var src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/global-services.service */ "./src/app/services/global-services.service.ts");
+
+
+
+
+
+var SetGoalsPage = /** @class */ (function () {
+    function SetGoalsPage(router, myAPI, globalServices) {
+        this.router = router;
+        this.myAPI = myAPI;
+        this.globalServices = globalServices;
+        this.days = [
+            { day: 'S', code: 'sun', selected: true },
+            { day: 'M', code: 'mon', selected: false },
+            { day: 'T', code: 'tue', selected: false },
+            { day: 'W', code: 'wed', selected: false },
+            { day: 'T', code: 'thu', selected: false },
+            { day: 'F', code: 'fri', selected: false },
+            { day: 'S', code: 'sat', selected: false }
+        ];
+        this.lossOptions = [
+            { name: "5 pounds", value: 5 },
+            { name: "10 pounds", value: 10 },
+            { name: "15 pounds", value: 15 },
+            { name: "20 pounds", value: 20 }
+        ];
+        this.weighinDays = [];
+        this.date = new Date();
+        this.selected_time = null;
+    }
+    SetGoalsPage.prototype.ngOnInit = function () {
+        this.lossGoal = 5;
+        this.selected_time = this.globalServices.formatTime(this.date);
+    };
+    // function to select multiple weigh in days
+    SetGoalsPage.prototype.select = function (item) {
+        item.selected = !item.selected;
+    };
+    SetGoalsPage.prototype.isActive = function (item) {
+        return item.selected === item;
+    };
+    ;
+    // function to select one weighin day.
+    // select(item) {
+    //   this.weighinDay = item;
+    // }
+    SetGoalsPage.prototype.continue = function () {
+        var _this = this;
+        this.weighinDays = [];
+        this.days.forEach(function (item) {
+            if (item.selected) {
+                _this.weighinDays.push(item.code);
+            }
+        });
+        //console.log({ lossGoal: this.lossGoal, weighinDays: this.weighinDays, time: this.selected_time });
+        this.myAPI.makeAPIcall("user", {
+            "action": "saveGoals",
+            "pounds_to_loose": this.lossGoal,
+            "weighinDays": this.weighinDays,
+            "time": this.selected_time,
+            "weekly_repeat": true
+        }, true)
+            .subscribe(function (result) {
+            if (result.error) {
+                _this.myAPI.handleMyAPIError(result.error);
+            }
+            else {
+                localStorage.setItem("goals", JSON.stringify(result.success.goals));
+                localStorage.setItem("alerts", JSON.stringify(result.success.alerts));
+                _this.globalServices.syncAlerts();
+                _this.router.navigateByUrl("/enter-measurements");
+            }
+        });
+    };
+    SetGoalsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'set-goals',
+            template: __webpack_require__(/*! ./set-goals.page.html */ "./src/app/user_pages/set-goals/set-goals.page.html"),
+            styles: [__webpack_require__(/*! ./set-goals.page.scss */ "./src/app/user_pages/set-goals/set-goals.page.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_3__["ApiCallService"], src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_4__["GlobalServicesService"]])
+    ], SetGoalsPage);
+    return SetGoalsPage;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=user_pages-set-goals-set-goals-module.js.map

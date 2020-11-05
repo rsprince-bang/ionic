@@ -1,0 +1,244 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["user_pages-enter-measurements-enter-measurements-module"],{
+
+/***/ "./src/app/user_pages/enter-measurements/enter-measurements.module.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/user_pages/enter-measurements/enter-measurements.module.ts ***!
+  \****************************************************************************/
+/*! exports provided: EnterMeasurementsPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EnterMeasurementsPageModule", function() { return EnterMeasurementsPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _enter_measurements_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./enter-measurements.page */ "./src/app/user_pages/enter-measurements/enter-measurements.page.ts");
+
+
+
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _enter_measurements_page__WEBPACK_IMPORTED_MODULE_6__["EnterMeasurementsPage"]
+    }
+];
+var EnterMeasurementsPageModule = /** @class */ (function () {
+    function EnterMeasurementsPageModule() {
+    }
+    EnterMeasurementsPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes),
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]
+            ],
+            declarations: [_enter_measurements_page__WEBPACK_IMPORTED_MODULE_6__["EnterMeasurementsPage"]]
+        })
+    ], EnterMeasurementsPageModule);
+    return EnterMeasurementsPageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/user_pages/enter-measurements/enter-measurements.page.html":
+/*!****************************************************************************!*\
+  !*** ./src/app/user_pages/enter-measurements/enter-measurements.page.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header padding class=\"extra-padding\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button \r\n        class=\"back-button\"\r\n        text=\"\"\r\n        icon=\"arrow-round-back\">\r\n      </ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding class=\"extra-padding\">\r\n  <form\r\n    [formGroup]=\"measurementsForm\"\r\n    (ngSubmit)=\"submitMeasurements()\"\r\n    class=\"form\"\r\n  >\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h1>Enter Your Measurements</h1>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label>Age</ion-label>\r\n            <ion-select name=\"age\" formControlName=\"age\" okText=\"OK\" cancelText=\"Cancel\">\r\n              <ion-select-option \r\n                *ngFor=\"let item of ageOptions\"\r\n                [value]=\"item\">\r\n                  {{ item }}\r\n                </ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.age.errors?.required\">\r\n            Please select your age.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label>Gender</ion-label>\r\n            <ion-select name=\"gender\" formControlName=\"gender\" okText=\"OK\" cancelText=\"Cancel\">\r\n              <ion-select-option \r\n                *ngFor=\"let item of genderOptions\"\r\n                [value]=\"item.value\">\r\n                  {{ item.option }}\r\n                </ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.gender.errors?.required\">\r\n            Please select your gender.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label>Height</ion-label>\r\n            <ion-select name=\"height\" formControlName=\"height\" okText=\"OK\" cancelText=\"Cancel\">\r\n              <ion-select-option \r\n                *ngFor=\"let item of heightOptions\"\r\n                [value]=\"item.valueInches\">\r\n                  {{ item.option }}\r\n                </ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.height.errors?.required\">\r\n            Please select your height.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label>Weight</ion-label>\r\n            <ion-select name=\"weight\" formControlName=\"weight\" okText=\"OK\" cancelText=\"Cancel\">\r\n              <ion-select-option \r\n                *ngFor=\"let item of weightOptions\"\r\n                [value]=\"item\">\r\n                  {{ item }}\r\n                </ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.weight.errors?.required\">\r\n            Please select your weight.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-item>\r\n            <ion-label>Diet Plan</ion-label>\r\n            <ion-select name=\"plan\" formControlName=\"plan\" okText=\"OK\" cancelText=\"Cancel\">\r\n              <ion-select-option \r\n                *ngFor=\"let item of planOptions\"\r\n                [value]=\"item.value\">\r\n                  {{ item.option }}\r\n                </ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n          <span class=\"error ion-padding\" *ngIf=\"isSubmitted && errorControl.plan.errors?.required\">\r\n            Please select your plan.\r\n          </span>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-button \r\n            expand=\"block\"\r\n            type=\"submit\"  \r\n            shape=\"round\">\r\n            Save\r\n          </ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n\r\n    </ion-grid>\r\n  </form>\r\n</ion-content>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/enter-measurements/enter-measurements.page.scss":
+/*!****************************************************************************!*\
+  !*** ./src/app/user_pages/enter-measurements/enter-measurements.page.scss ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3VzZXJfcGFnZXMvZW50ZXItbWVhc3VyZW1lbnRzL2VudGVyLW1lYXN1cmVtZW50cy5wYWdlLnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/enter-measurements/enter-measurements.page.ts":
+/*!**************************************************************************!*\
+  !*** ./src/app/user_pages/enter-measurements/enter-measurements.page.ts ***!
+  \**************************************************************************/
+/*! exports provided: EnterMeasurementsPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EnterMeasurementsPage", function() { return EnterMeasurementsPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/api-call.service */ "./src/app/services/api-call.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/global-services.service */ "./src/app/services/global-services.service.ts");
+
+
+
+
+
+
+
+var EnterMeasurementsPage = /** @class */ (function () {
+    function EnterMeasurementsPage(formBuilder, myAPI, route, router, navCtrl, globalServices) {
+        this.formBuilder = formBuilder;
+        this.myAPI = myAPI;
+        this.route = route;
+        this.router = router;
+        this.navCtrl = navCtrl;
+        this.globalServices = globalServices;
+        this.action = "save";
+        this.currentUserMeasurements = {
+            inches: "",
+            weight: "",
+            age: "",
+            gender: "",
+            plan: ""
+        };
+        this.imageUrl = '../../../assets/icon/plaindp.png';
+        this.isImageUploaded = false;
+        this.ageOptions = [];
+        this.genderOptions = [
+            { option: 'Male', value: 'M' },
+            { option: 'Female', value: 'F' }
+        ];
+        this.weightOptions = [];
+        this.planOptions = [
+            { option: '7 week', value: 7 },
+            { option: '12 week', value: 12 }
+        ];
+        this.heightOptions = [];
+        this.isSubmitted = false;
+    }
+    EnterMeasurementsPage.prototype.ngOnInit = function () {
+        this.measurementsForm = this.formBuilder.group({
+            age: [this.currentUserMeasurements.age, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
+            gender: [this.currentUserMeasurements.gender, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
+            height: [this.currentUserMeasurements.inches, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
+            weight: [this.currentUserMeasurements.weight, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
+            plan: [this.currentUserMeasurements.plan, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]]
+        });
+        this.generateAges(18, 100);
+        this.generateWeights(90, 300);
+        this.generateHeights(4, 6);
+    };
+    EnterMeasurementsPage.prototype.submitMeasurements = function () {
+        var _this = this;
+        console.log(this.measurementsForm.value);
+        this.isSubmitted = true;
+        if (this.measurementsForm.valid) {
+            this.myAPI.makeAPIcall("user", {
+                "action": "submitMeasurements",
+                "form": this.measurementsForm.value,
+                "today": this.globalServices.getDate("today")
+            }, true).subscribe(function (result) {
+                if (result.error) {
+                    _this.myAPI.handleMyAPIError(result.error);
+                }
+                else {
+                    localStorage.setItem("measurements", JSON.stringify(result.success.measurements));
+                    localStorage.setItem("diet", JSON.stringify(result.success.diet));
+                    localStorage.setItem("dailyCaloriesIntake", result.success.measurements.dailyCaloriesIntake);
+                    localStorage.setItem("currentCaloriesIntake", result.success.diet.cur_calories_intake);
+                    localStorage.setItem("diet_plan_length", _this.measurementsForm.value.plan);
+                    //after we have or update the diet plan sync alerts
+                    _this.globalServices.syncAlerts();
+                    localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet.diet_start_date));
+                    localStorage.setItem("lastFeedback", result.success.diet.feedback_for_week);
+                    if (_this.action == "update") {
+                        _this.router.navigateByUrl("/profile");
+                    }
+                    else {
+                        _this.router.navigateByUrl("/tabs/home/today");
+                    }
+                }
+            });
+        }
+    };
+    EnterMeasurementsPage.prototype.uploadFile = function (files) {
+        var _this = this;
+        this.isImageUploaded = true;
+        var reader = new FileReader(); // HTML5 FileReader API
+        var file = files[0];
+        this.fileData1 = file;
+        if (files[0]) {
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                _this.imageUrl = reader.result;
+            };
+        }
+    };
+    // generates age options
+    EnterMeasurementsPage.prototype.generateAges = function (start, end) {
+        for (var i = start; i <= end; i++) {
+            this.ageOptions.push(i);
+        }
+        return true;
+    };
+    // generates height options
+    EnterMeasurementsPage.prototype.generateHeights = function (start, end) {
+        for (var feet = start; feet <= end; feet++) {
+            for (var inches = 0; inches <= 11; inches++) {
+                var height = feet + "' " + inches + '"';
+                var value = (feet * 12) + inches;
+                this.heightOptions.push({ option: height, valueInches: value });
+            }
+        }
+        return true;
+    };
+    // generate weight options
+    EnterMeasurementsPage.prototype.generateWeights = function (start, end) {
+        for (var i = start; i <= end; i++) {
+            this.weightOptions.push(i);
+        }
+        return true;
+    };
+    Object.defineProperty(EnterMeasurementsPage.prototype, "errorControl", {
+        // used for validation
+        get: function () {
+            return this.measurementsForm.controls;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    EnterMeasurementsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-enter-measurements',
+            template: __webpack_require__(/*! ./enter-measurements.page.html */ "./src/app/user_pages/enter-measurements/enter-measurements.page.html"),
+            styles: [__webpack_require__(/*! ./enter-measurements.page.scss */ "./src/app/user_pages/enter-measurements/enter-measurements.page.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
+            src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_3__["ApiCallService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"],
+            src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_6__["GlobalServicesService"]])
+    ], EnterMeasurementsPage);
+    return EnterMeasurementsPage;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=user_pages-enter-measurements-enter-measurements-module.js.map

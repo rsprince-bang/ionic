@@ -1,0 +1,391 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["track-meal-track-meal-module"],{
+
+/***/ "./src/app/user_pages/track-meal/track-meal.module.ts":
+/*!************************************************************!*\
+  !*** ./src/app/user_pages/track-meal/track-meal.module.ts ***!
+  \************************************************************/
+/*! exports provided: TrackMealPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrackMealPageModule", function() { return TrackMealPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _track_meal_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./track-meal.page */ "./src/app/user_pages/track-meal/track-meal.page.ts");
+/* harmony import */ var ng_circle_progress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ng-circle-progress */ "./node_modules/ng-circle-progress/fesm5/ng-circle-progress.js");
+/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng2-charts */ "./node_modules/ng2-charts/fesm5/ng2-charts.js");
+
+
+
+
+
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _track_meal_page__WEBPACK_IMPORTED_MODULE_6__["TrackMealPage"]
+    }
+];
+var TrackMealPageModule = /** @class */ (function () {
+    function TrackMealPageModule() {
+    }
+    TrackMealPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes),
+                ng_circle_progress__WEBPACK_IMPORTED_MODULE_7__["NgCircleProgressModule"].forRoot({
+                    "radius": 60,
+                    "maxPercent": 100,
+                    "unitsColor": "#ffffff",
+                    "outerStrokeWidth": 5,
+                    "outerStrokeColor": "#FFFFFF",
+                    "innerStrokeColor": "#FFFFFF",
+                    "titleColor": "#ffffff",
+                    "subtitleColor": "#ffffff",
+                    "showInnerStroke": false,
+                    "startFromZero": false,
+                    "showZeroOuterStroke": false
+                }),
+                ng2_charts__WEBPACK_IMPORTED_MODULE_8__["ChartsModule"]
+            ],
+            declarations: [_track_meal_page__WEBPACK_IMPORTED_MODULE_6__["TrackMealPage"]]
+        })
+    ], TrackMealPageModule);
+    return TrackMealPageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/user_pages/track-meal/track-meal.page.html":
+/*!************************************************************!*\
+  !*** ./src/app/user_pages/track-meal/track-meal.page.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header class=\"header-css\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\" >\r\n      <ion-button class=\"button-bac\" (click)=\"handleButtonClick($event)\">\r\n        <ion-icon class=\"color-black\"  slot=\"icon-only\" name=\"ios-notifications-outline\"></ion-icon>\r\n        <ion-badge  color=\"danger\" class=\"ion-badge\">2\r\n        </ion-badge>\r\n       </ion-button>\r\n    </ion-buttons>\r\n\r\n      <ion-title class=\"text-capitalize\">Meals</ion-title>\r\n      <ion-buttons slot=\"end\" (click)=\"showSettings()\">\r\n        <ion-button class=\"button-bac\">\r\n          <ion-icon class=\"color-black\" name=\"settings\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n</ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"track-meal\">\r\n  <ion-grid class=\"padding-20 grid1-background\" >\r\n    <ion-row>\r\n      <ion-col size=\"8\">\r\n        <h2>Today's Nutrition</h2>\r\n      </ion-col>\r\n      <ion-col class=\"color-text text-align-right-auto\" (click)=\"openModal()\">\r\n        <p>Add Meal</p>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"margin-top-10\">\r\n      <ion-col>Calorie intake/recommended\r\n        <div class=\"row\">\r\n          <h1 class=\"color-text\">{{ todaysCalories.intake }}</h1><h1>/{{ todaysCalories.recommended }}</h1>\r\n        </div>\r\n        <div class=\"daily-progress\">\r\n          <div class=\"row\"><div class=\"chart ionBar-progress\">\r\n            <ion-progress-bar value=\"0.6\" class=\"height-20\"></ion-progress-bar>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"margin-top-10\">\r\n      <ion-col size=\"4\">\r\n        <div>Fat(grams)</div>\r\n        <div class=\"row\">\r\n          <h2 class=\"fat-color\">58 </h2><h2 class=\"colo-black padding-left-5\"> /100</h2>\r\n        </div>\r\n      </ion-col>\r\n      <ion-col size=\"4\" style=\"padding: 0px;\r\n      margin: auto;\">\r\n        <div>Protein(grams)</div>\r\n        <div class=\"row\">\r\n          <h2 class=\"protein-color\">400 </h2><h2 class=\"colo-black padding-left-5\"> /500</h2>\r\n        </div>\r\n      </ion-col>\r\n      <ion-col size=\"4\">\r\n        <div>Carbs(grams)</div>\r\n        <div class=\"row\">\r\n          <h2 class=\"crab-color\">100 </h2><h2 class=\"colo-black padding-left-5\"> /200</h2>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"margin-top-15\">\r\n      <ion-col size=\"5.5\" class=\"goal-weight\">\r\n        <div class=\"row\">\r\n          <h1 class=\"align-center\">1200</h1>\r\n        </div>\r\n        <div>Calories Remaining</div>\r\n      </ion-col>\r\n      <ion-col size=\"5.5\" class=\"current-weight\">\r\n        <div class=\"row\">\r\n          <h1 class=\"align-center\" >5</h1>\r\n        </div>\r\n        <div>Meals Consumed</div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <div class=\"margin-top-15\"></div>\r\n    <ion-card class=\"margin-top-10 ion-card-no-padding\" style=\"padding: 0px 10px\">\r\n      <ion-row class=\"margin-top-10\">\r\n        <ion-col size=\"2\" class=\"align-center\">\r\n          <ion-icon class=\"icon-size\" ios=\"ios-arrow-round-back\" md=\"md-arrow-round-back\"></ion-icon>\r\n        </ion-col>\r\n        <ion-col size=\"8\" class=\"align-center\">\r\n          <div><p>September 29, 2020</p></div>\r\n          <div><h3>DAY 18/49</h3></div>\r\n        </ion-col>\r\n        <ion-col size=\"2\" class=\"align-center\">\r\n          <ion-icon class=\"icon-size\" ios=\"ios-arrow-round-forward\" md=\"md-arrow-round-forward\"></ion-icon>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"margin-top-15\">\r\n        <ion-col size=\"8\">\r\n          <h2>Today's Meals</h2>\r\n        </ion-col>\r\n        <ion-col class=\"color-text text-align-right-auto\" (click)=\"openModal()\">\r\n          <p>Add Meal</p>\r\n        </ion-col>\r\n      </ion-row>\r\n      <div class=\"margin-top-10\">\r\n        <div *ngFor=\"let data of todaysMealsList\" style=\"margin:10px 0px;border-bottom:1px solid gainsboro\">\r\n            <ion-row >\r\n              <ion-col size=\"0.5\" (click)=\"expandRow(data)\">\r\n                <ion-icon name=\"arrow-down\" *ngIf=\"data.selected\"></ion-icon>\r\n                <ion-icon name=\"arrow-forward\" *ngIf=\"!data.selected\"></ion-icon>\r\n              </ion-col>\r\n              <ion-col size=\"7\" class=\"text-align-left-auto\" (click)=\"expandRow(data)\">{{data.name}}</ion-col>\r\n              <ion-col size=\"2.5\" class=\"text-align-right-auto\" (click)=\"expandRow(data)\">\r\n               {{data.cal}}\r\n              </ion-col>\r\n              <ion-col size=\"1\" class=\"text-align-left-auto\" (click)=\"deleteItem()\">\r\n                <ion-icon class=\"color-red\" name=\"trash\"></ion-icon>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"margin-top-10\" *ngIf=\"data.selected\">\r\n              <ion-col size=\"4\" class=\"align-center\">\r\n                <div>Fat(grams)</div>\r\n                <div class=\"align-center\">\r\n                  <h2 class=\"fat-color\">58</h2>\r\n                </div>\r\n              </ion-col>\r\n              <ion-col size=\"4\" class=\"align-center\">\r\n                <div>Protein(grams)</div>\r\n                <div class=\"align-center\">\r\n                  <h2 class=\"protein-color\">300</h2>\r\n                </div>\r\n              </ion-col>\r\n              <ion-col size=\"4\" class=\"align-center\">\r\n                <div>Carbs(grams)</div>\r\n                <div class=\"align-center\">\r\n                  <h2 class=\"crab-color\">300</h2>\r\n                </div>\r\n              </ion-col>\r\n            </ion-row>\r\n        </div>\r\n        \r\n      </div>\r\n      \r\n      <div class=\"margin-top-10\"></div>\r\n    </ion-card>\r\n    <ion-row class=\"margin-top-10 margin-left-right-15\">\r\n      <ion-col>\r\n        <ion-card class=\"ion-card\">\r\n          <ion-row>\r\n            <ion-col size=\"3\" class=\"vert-center\">\r\n              <img src=\"assets/img/bang-can.png\" />\r\n            </ion-col>\r\n            <ion-col size=\"9\">\r\n              <ion-card-header>\r\n                <ion-card-title>\r\n                  Let's get you on <br /> \r\n                  track today.\r\n                </ion-card-title>\r\n              </ion-card-header>\r\n              <ion-card-content>\r\n                Bang Energy 12-Pack <br />\r\n                $31.00\r\n                <p class=\"global-link-wrapper\">\r\n                  <a href=\"\" class=\"global-link\">Order Now</a>\r\n                </p>\r\n              </ion-card-content>\r\n            </ion-col>            \r\n          </ion-row>\r\n        </ion-card>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <ion-grid class=\"padding-20\">\r\n    <ion-row>\r\n      <ion-col>\r\n        <h1 class=\"text-capitalize\">Calorie Ratio</h1>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col>\r\n        <div>Based on your rapid body sculpting goals, we recommended the following calorie breakdown:</div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"margin-top-15\">\r\n      <ion-col><canvas baseChart *ngIf=\"pieChartData\"\r\n        [data]=\"pieChartData\" \r\n        [labels]=\"pieChartLabels\" \r\n        [chartType]=\"pieChartType\"\r\n        [options]=\"pieChartOptions\"\r\n        [plugins]=\"pieChartPlugins\"\r\n        [legend]=\"pieChartLegend\"\r\n        [colors]=\"pieChartColors\" height=\"230\">\r\n      </canvas></ion-col>\r\n\r\n    </ion-row>\r\n  </ion-grid>\r\n  <ion-grid class=\"padding-20 grid1-background\">\r\n    <ion-row>\r\n      <ion-col>\r\n        <h2>Supplement Suggestions </h2>\r\n      </ion-col>\r\n    </ion-row>\r\n    <div class=\"margin-top-10\">\r\n      <div *ngFor=\"let data of suggestionList\" style=\"margin:10px 0px;border-bottom:1px solid gainsboro\">\r\n          <ion-row  style=\"width:100%\">\r\n            <ion-col size=\"0.5\" (click)=\"expandRow(data)\">\r\n              <ion-icon name=\"arrow-down\" *ngIf=\"data.selected\"></ion-icon>\r\n              <ion-icon name=\"arrow-forward\" *ngIf=\"!data.selected\"></ion-icon>\r\n            </ion-col>\r\n            <ion-col size=\"7\" class=\"text-align-left-auto\" (click)=\"expandRow(data)\">{{data.name}}</ion-col>\r\n            <ion-col size=\"2.5\" class=\"text-align-right-auto\" (click)=\"expandRow(data)\">\r\n             {{data.cal}}\r\n            </ion-col>\r\n            <ion-col size=\"1\" class=\"text-align-left-auto\">\r\n              <ion-icon name=\"add-circle\"></ion-icon>\r\n            </ion-col>\r\n          </ion-row>\r\n          <div *ngIf=\"data.selected\">\r\n            <ion-row class=\"margin-top-10\" >\r\n              <ion-col size=\"4\" class=\"align-center\">\r\n                <div>Fat(grams)</div>\r\n                <div class=\"align-center\">\r\n                  <h2 class=\"fat-color\">58</h2>\r\n                </div>\r\n              </ion-col>\r\n              <ion-col size=\"4\" style=\"padding: 0px;\" class=\"align-center\">\r\n                <div>Protein(grams)</div>\r\n                <div class=\"align-center\">\r\n                  <h2 class=\"protein-color\">300</h2>\r\n                </div>\r\n              </ion-col>\r\n              <ion-col size=\"4\" class=\"align-center\">\r\n                <div>Carbs(grams)</div>\r\n                <div class=\"align-center\">\r\n                  <h2 class=\"crab-color\">300</h2>\r\n                </div>\r\n              </ion-col>\r\n            </ion-row>\r\n            <ion-row class=\"margin-top-10\">\r\n              <ion-col class=\"color-text\" style=\"text-align: right;\">\r\n                Order Now\r\n              </ion-col>\r\n            </ion-row>\r\n          </div>\r\n      </div>\r\n    </div>\r\n    <ion-row class=\"margin-top-10 margin-left-right-15\">\r\n      <ion-col>\r\n        <ion-card class=\"ion-card zeroCard\">\r\n          <ion-row>\r\n            <ion-col size=\"3\" class=\"vert-center\">\r\n              <img src=\"assets/img/BangCanMeals.png\" />\r\n            </ion-col>\r\n            <ion-col size=\"9\">\r\n              <ion-card-header>\r\n                <ion-card-title class=\"font-size-24\">\r\n                  The perfect <br /> \r\n                  ZERO-calorie drink!\r\n                </ion-card-title>\r\n              </ion-card-header>\r\n              <ion-card-content>\r\n                Bang Energy 12-Pack <br />\r\n                $31.00\r\n                <p class=\"global-link-wrapper\">\r\n                  <a href=\"\" class=\"global-link\">Order Now</a>\r\n                </p>\r\n              </ion-card-content>\r\n            </ion-col>            \r\n          </ion-row>\r\n        </ion-card>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>\r\n<!-- <ion-footer>\r\n  <ion-button  expand=\"block\" class=\"addFood btn btn-primary block-center margin-10\" *ngIf=\"today\" (click)=\"openFoodModal()\" class=\"button\">Add Food</ion-button>\r\n\r\n</ion-footer> -->"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/track-meal/track-meal.page.scss":
+/*!************************************************************!*\
+  !*** ./src/app/user_pages/track-meal/track-meal.page.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".arrow-back, .arrow-forward {\n  color: #434242;\n  font-size: 25px; }\n\n.dayNumber {\n  color: #434242; }\n\n.dayNumber,\n.current-progress {\n  text-align: center;\n  font-weight: bold; }\n\n.current-progress span {\n  font-size: 20px; }\n\n.track-meal {\n  margin: 0 auto; }\n\n.namePercentt {\n  display: flex;\n  justify-content: space-between;\n  text-align: center;\n  margin-top: 15px; }\n\n.meal {\n  text-transform: capitalize;\n  display: flex;\n  justify-content: space-between;\n  color: #434242;\n  font-size: 0.81rem;\n  padding-left: 0.72rem;\n  font-weight: bold; }\n\n.meal span {\n  font-weight: normal; }\n\n.addFood {\n  width: 100%; }\n\n.foodList {\n  background-color: #fff;\n  border-radius: 9px;\n  border: solid 2px #c7c7c7;\n  padding: 0.12rem; }\n\n.foodListBg {\n  --background: none;\n  --ion-safe-area-left:0;\n  --padding-start: 0; }\n\n.circleProgress {\n  height: 200px;\n  margin: 10px; }\n\nion-toolbar.day-change-slider ion-card section .dc-slider-title.current-progress {\n  font-size: 1.08rem;\n  line-height: 1.08rem;\n  color: #fff; }\n\n.list-header {\n  background-color: #0417c2;\n  border-top-left-radius: 6px;\n  border-top-right-radius: 6px; }\n\n.list-header h3 {\n    display: block;\n    width: 100%;\n    margin: 0.25rem 0;\n    text-transform: uppercase;\n    font-size: 1rem; }\n\nsection.content-footer {\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n  background-image: url('meal-footer-background.jpg');\n  margin-left: -16px;\n  margin-right: -16px;\n  margin-bottom: -16px;\n  margin-top: -3rem;\n  padding: 3.5rem 0.5rem 0.5rem; }\n\nsection.content-footer ion-button {\n    max-width: 210px;\n    border-radius: 9px;\n    font-weight: bold;\n    display: block;\n    margin: 0 auto 0.5rem; }\n\n.nameStyle {\n  color: #0417c2;\n  text-align: center;\n  font-size: 20px;\n  font-weight: 600;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  margin: auto; }\n\nsvg {\n  height: 100 !important;\n  width: 100 !important; }\n\n.progressBack {\n  background-color: #e2e2e2;\n  width: 100%;\n  height: auto; }\n\n.chart-container-big {\n  min-height: auto;\n  width: 100%; }\n\n.ionBar-progress ion-progress-bar {\n  --background: green;\n  --buffer-background: #e2e2e2 ;\n  --progress-background:#0417c2 ;\n  border-radius: 30px; }\n\n.remainingName {\n  font-size: 20px;\n  font-weight: 600;\n  text-align: center; }\n\n.chart {\n  width: 110%; }\n\n.chart ion-progress-bar {\n    width: 100%; }\n\n.daily-progress {\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n.daily-progress .text {\n    width: 4.5rem;\n    color: #0417c2; }\n\n.progress-div {\n  margin: auto;\n  height: 100%; }\n\n.dailyTracking {\n  margin: auto;\n  margin-top: 10px;\n  text-align: center;\n  color: black;\n  font-weight: 600; }\n\n.dateDiv {\n  margin: auto;\n  text-align: center; }\n\n.backArrow {\n  margin: auto;\n  font-size: x-large; }\n\n.icon-color {\n  color: #0417c2; }\n\n.daySytle {\n  text-transform: uppercase;\n  color: black;\n  font-weight: 600;\n  font-size: 19px; }\n\n.margin-auto {\n  margin: auto; }\n\n.day-val {\n  color: black;\n  font-weight: 500; }\n\n.margin-left-right {\n  margin: 0px 10px; }\n\n.width-100 {\n  width: 100%; }\n\n.border-right {\n  border-right: 1px solid gainsboro; }\n\n.remainingColor {\n  color: #0417c2; }\n\n.div-font {\n  font: 12px;\n  text-align: center; }\n\n.height-20 {\n  height: 20px; }\n\n.calories-mainClass {\n  font-size: 10px;\n  height: 20px;\n  border-top-right-radius: 30px;\n  border-bottom-right-radius: 30px; }\n\n.calories-subClass {\n  text-align: right;\n  text-align: right;\n  margin: 5px 0px; }\n\n.font-weight-600 {\n  font-weight: 600; }\n\n.todays-food-card {\n  background-color: #f1f1f1;\n  border-radius: 10px;\n  margin: 0px; }\n\n.today-food-row {\n  background-color: #0417c2;\n  padding: 10px 0px; }\n\n.today-food-col {\n  text-align: center;\n  color: white; }\n\n.table-card {\n  border-bottom: 1px solid white;\n  padding: 10px 0px;\n  color: black; }\n\n.col-left {\n  text-align: left;\n  margin: auto; }\n\n.col-right {\n  text-align: right;\n  margin: auto; }\n\n.tableCard {\n  padding: 10px 0px;\n  color: black; }\n\n.margin-10 {\n  margin: 10px; }\n\n.meal-progress ion-progress-bar {\n  --background: green;\n  --buffer-background: #e2e2e2 ;\n  --progress-background:#0417c2 ;\n  border-radius: 30px; }\n\n.icon-size {\n  font-size: -webkit-xxx-large;\n  color: black; }\n\n.ion-card-no-padding {\n  -webkit-margin-end: 0px;\n          margin-inline-end: 0px;\n  -webkit-margin-start: 0px;\n          margin-inline-start: 0px; }\n\n.align-center {\n  text-align: center;\n  margin: auto;\n  display: block; }\n\n.zeroCard {\n  background: linear-gradient(117.92deg, #01C2B2 0%, #00287C 100%) !important; }\n\n.grid1-background {\n  background-color: #FAFAFA; }\n\n.current-weight {\n  background: linear-gradient(162.34deg, #02E3D6 0%, #0140C2 100%);\n  box-shadow: 0 2px 34px 0 rgba(0, 0, 0, 0.2);\n  padding: 22px 0px;\n  text-align: center;\n  margin: auto;\n  color: white; }\n\n.goal-weight {\n  background: linear-gradient(162.34deg, #F200D7 0%, #9625C1 100%);\n  box-shadow: 0 2px 34px 0 rgba(0, 0, 0, 0.2);\n  padding: 22px 0px;\n  text-align: center;\n  margin: auto;\n  color: white; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlcl9wYWdlcy90cmFjay1tZWFsL0M6XFxVc2Vyc1xcUmljaGFyZC5TcHJpbmNlXFxEb2N1bWVudHNcXG1lbHQtZG93bi1hcHAvc3JjXFxhcHBcXHVzZXJfcGFnZXNcXHRyYWNrLW1lYWxcXHRyYWNrLW1lYWwucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQU9BO0VBQ0ksY0FOeUI7RUFPekIsZUFBZSxFQUFBOztBQUduQjtFQUNJLGNBWHlCLEVBQUE7O0FBYzdCOztFQUVJLGtCQUFpQjtFQUNqQixpQkFoQlksRUFBQTs7QUFtQmhCO0VBQ0ksZUFBZSxFQUFBOztBQUduQjtFQUNJLGNBQWMsRUFBQTs7QUFHbEI7RUFDSSxhQUFhO0VBQ2IsOEJBQThCO0VBQzlCLGtCQUFrQjtFQUNsQixnQkFBZ0IsRUFBQTs7QUFHcEI7RUFDSSwwQkFBMEI7RUFDMUIsYUFBYTtFQUNiLDhCQUE4QjtFQUM5QixjQXZDeUI7RUF3Q3pCLGtCQUFrQjtFQUNsQixxQkFBcUI7RUFDckIsaUJBQWlCLEVBQUE7O0FBRXJCO0VBQ0ksbUJBQW1CLEVBQUE7O0FBR3ZCO0VBQ0ksV0FBVyxFQUFBOztBQUtmO0VBQ0ksc0JBQXNCO0VBQ3RCLGtCQUFrQjtFQUNsQix5QkFBeUI7RUFDekIsZ0JBQWdCLEVBQUE7O0FBR3BCO0VBQ0ksa0JBQWE7RUFDYixzQkFBcUI7RUFDckIsa0JBQWdCLEVBQUE7O0FBSXBCO0VBQ0ksYUFBWTtFQUNaLFlBQVksRUFBQTs7QUFJaEI7RUFDSSxrQkFBa0I7RUFDbEIsb0JBQW9CO0VBQ3BCLFdBQVcsRUFBQTs7QUFHZjtFQUNJLHlCQS9FYztFQWdGZCwyQkFBMkI7RUFDM0IsNEJBQTRCLEVBQUE7O0FBSGhDO0lBTVEsY0FBYztJQUNkLFdBQVc7SUFDWCxpQkFBaUI7SUFDakIseUJBQXlCO0lBQ3pCLGVBQWUsRUFBQTs7QUFNdkI7RUFFSSw0QkFBNEI7RUFDNUIsMkJBQTJCO0VBQzNCLHNCQUFzQjtFQUN0QixtREFBdUU7RUFF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O0VBQ0ksZ0VBQ2E7RUFDYiwyQ0FBd0M7RUFDeEMsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixZQUFZO0VBQ1osWUFBVyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvdXNlcl9wYWdlcy90cmFjay1tZWFsL3RyYWNrLW1lYWwucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbiRiYWNrZ3JvdW5kQ29sb3IgOiByZ2IoMjI2LCAyNDYsIDI1MCk7XHJcbiRmcm9udENvbG9yIDogcmdiKDY3LCA2NiwgNjYpO1xyXG4kZm9udEJvbGQgOiBib2xkO1xyXG4kcHJpbWFyeSA6ICMwNDE3YzI7XHJcblxyXG5cclxuLmFycm93LWJhY2ssIC5hcnJvdy1mb3J3YXJke1xyXG4gICAgY29sb3I6ICRmcm9udENvbG9yO1xyXG4gICAgZm9udC1zaXplOiAyNXB4O1xyXG59XHJcblxyXG4uZGF5TnVtYmVye1xyXG4gICAgY29sb3IgOiAkZnJvbnRDb2xvcjtcclxufVxyXG5cclxuLmRheU51bWJlciwgXHJcbi5jdXJyZW50LXByb2dyZXNze1xyXG4gICAgdGV4dC1hbGlnbjpjZW50ZXI7XHJcbiAgICBmb250LXdlaWdodDogJGZvbnRCb2xkO1xyXG59XHJcblxyXG4uY3VycmVudC1wcm9ncmVzcyBzcGFue1xyXG4gICAgZm9udC1zaXplOiAyMHB4O1xyXG59XHJcblxyXG4udHJhY2stbWVhbHtcclxuICAgIG1hcmdpbjogMCBhdXRvO1xyXG59XHJcblxyXG4ubmFtZVBlcmNlbnR0e1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIG1hcmdpbi10b3A6IDE1cHg7XHJcbn1cclxuXHJcbi5tZWFse1xyXG4gICAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemU7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG4gICAgY29sb3I6ICRmcm9udENvbG9yO1xyXG4gICAgZm9udC1zaXplOiAwLjgxcmVtO1xyXG4gICAgcGFkZGluZy1sZWZ0OiAwLjcycmVtO1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuLm1lYWwgc3BhbiB7XHJcbiAgICBmb250LXdlaWdodDogbm9ybWFsO1xyXG59XHJcblxyXG4uYWRkRm9vZHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcblxyXG5cclxuXHJcbi5mb29kTGlzdHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmY7XHJcbiAgICBib3JkZXItcmFkaXVzOiA5cHg7XHJcbiAgICBib3JkZXI6IHNvbGlkIDJweCAjYzdjN2M3O1xyXG4gICAgcGFkZGluZzogMC4xMnJlbTtcclxufVxyXG5cclxuLmZvb2RMaXN0Qmd7XHJcbiAgICAtLWJhY2tncm91bmQ6IG5vbmU7XHJcbiAgICAtLWlvbi1zYWZlLWFyZWEtbGVmdDowO1xyXG4gICAgLS1wYWRkaW5nLXN0YXJ0OiAwO1xyXG5cclxufVxyXG5cclxuLmNpcmNsZVByb2dyZXNze1xyXG4gICAgaGVpZ2h0OjIwMHB4OyBcclxuICAgIG1hcmdpbjogMTBweDtcclxufVxyXG5cclxuXHJcbmlvbi10b29sYmFyLmRheS1jaGFuZ2Utc2xpZGVyIGlvbi1jYXJkIHNlY3Rpb24gLmRjLXNsaWRlci10aXRsZS5jdXJyZW50LXByb2dyZXNzIHtcclxuICAgIGZvbnQtc2l6ZTogMS4wOHJlbTtcclxuICAgIGxpbmUtaGVpZ2h0OiAxLjA4cmVtO1xyXG4gICAgY29sb3I6ICNmZmY7XHJcbn1cclxuXHJcbi5saXN0LWhlYWRlciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkcHJpbWFyeTtcclxuICAgIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDZweDtcclxuICAgIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiA2cHg7XHJcblxyXG4gICAgaDMge1xyXG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIG1hcmdpbjogMC4yNXJlbSAwO1xyXG4gICAgICAgIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XHJcbiAgICAgICAgZm9udC1zaXplOiAxcmVtO1xyXG4gICAgfVxyXG5cclxufVxyXG5cclxuXHJcbnNlY3Rpb24uY29udGVudC1mb290ZXIge1xyXG5cclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xyXG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL2ltZy9tZWFsLWZvb3Rlci1iYWNrZ3JvdW5kLmpwZ1wiKTtcclxuXHJcbiAgICBtYXJnaW4tbGVmdDogLTE2cHg7XHJcbiAgICBtYXJnaW4tcmlnaHQ6IC0xNnB4O1xyXG4gICAgbWFyZ2luLWJvdHRvbTogLTE2cHg7XHJcbiAgICBtYXJnaW4tdG9wOiAtM3JlbTtcclxuICAgIHBhZGRpbmc6IDMuNXJlbSAwLjVyZW0gMC41cmVtO1xyXG5cclxuICAgIGlvbi1idXR0b24ge1xyXG4gICAgICAgIG1heC13aWR0aDogMjEwcHg7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogOXB4O1xyXG4gICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgICAgIG1hcmdpbjogMCBhdXRvIDAuNXJlbTtcclxuICAgIH1cclxufVxyXG4ubmFtZVN0eWxlIHtcclxuXHRjb2xvcjogIzA0MTdjMiA7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgICBmb250LXdlaWdodDogNjAwO1xyXG4gICAgLy8gYm9yZGVyLWJvdHRvbTogM3B4IHNvbGlkICMwNDE3YzIgO1xyXG4gICAgd2lkdGg6IGZpdC1jb250ZW50O1xyXG4gICAgbWFyZ2luOiBhdXRvO1xyXG59XHJcbnN2ZyB7XHJcbiAgICBoZWlnaHQ6IDEwMCAhaW1wb3J0YW50O1xyXG4gICAgd2lkdGg6IDEwMCAhaW1wb3J0YW50O1xyXG59XHJcbi5wcm9ncmVzc0JhY2sge1xyXG5cdGJhY2tncm91bmQtY29sb3I6ICNlMmUyZTI7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogYXV0bztcclxufVxyXG4uY2hhcnQtY29udGFpbmVyLWJpZ3tcclxuXHRtaW4taGVpZ2h0OmF1dG87XHJcblx0d2lkdGg6IDEwMCU7XHJcbn1cclxuLmlvbkJhci1wcm9ncmVzcyB7XHJcblx0aW9uLXByb2dyZXNzLWJhciB7XHJcblx0ICAgLS1iYWNrZ3JvdW5kOiBncmVlbjtcclxuXHQgICAtLWJ1ZmZlci1iYWNrZ3JvdW5kOiAjZTJlMmUyIDtcclxuICAgICAgIC0tcHJvZ3Jlc3MtYmFja2dyb3VuZDojMDQxN2MyIDtcclxuICAgICAgIGJvcmRlci1yYWRpdXM6IDMwcHg7XHJcbiAgICAvLyAgICBib3JkZXItYm90dG9tLWxlZnQtcmFkaXVzOiAzMHB4O1xyXG5cdCB9XHJcbn1cclxuLnJlbWFpbmluZ05hbWUge1xyXG4gICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDYwMDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLmNoYXJ0IHtcclxuXHR3aWR0aDoxMTAlO1xyXG5cclxuICAgIGlvbi1wcm9ncmVzcy1iYXIge1xyXG5cdFx0d2lkdGg6IDEwMCU7XHJcblx0fVxyXG59XHJcblxyXG4uZGFpbHktcHJvZ3Jlc3Mge1xyXG5cdC8vIHBhZGRpbmc6IDVweCAwO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcblx0ZGlzcGxheTogZmxleDtcclxuXHRhbGlnbi1pdGVtczogY2VudGVyO1xyXG5cdGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG5cclxuXHQudGV4dCB7XHJcblx0XHR3aWR0aDogNC41cmVtO1xyXG5cdFx0Y29sb3I6ICMwNDE3YzI7XHJcblx0fVxyXG59XHJcblxyXG4ucHJvZ3Jlc3MtZGl2IHtcclxuICAgIG1hcmdpbjogYXV0byA7aGVpZ2h0OiAxMDAlO1xyXG59XHJcbi5kYWlseVRyYWNraW5nIHtcclxuICAgIG1hcmdpbjogYXV0bzttYXJnaW4tdG9wOiAxMHB4O3RleHQtYWxpZ246IGNlbnRlcjtjb2xvcjogYmxhY2s7XHJcbiAgICBmb250LXdlaWdodDogNjAwO1xyXG59XHJcbi5kYXRlRGl2IHtcclxuICAgIG1hcmdpbjogYXV0bzt0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuLmJhY2tBcnJvdyB7XHJcbiAgICBtYXJnaW46IGF1dG87Zm9udC1zaXplOiB4LWxhcmdlO1xyXG59XHJcbi5pY29uLWNvbG9yIHtcclxuICAgIGNvbG9yOiAjMDQxN2MyO1xyXG59XHJcbi5kYXlTeXRsZSB7XHJcbiAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO2NvbG9yOiBibGFjaztcclxuICAgICBmb250LXdlaWdodDogNjAwO2ZvbnQtc2l6ZToxOXB4XHJcbn1cclxuLm1hcmdpbi1hdXRvIHtcclxuICAgIG1hcmdpbjogYXV0bztcclxufVxyXG4uZGF5LXZhbCB7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBmb250LXdlaWdodDogNTAwO1xyXG59XHJcbi5tYXJnaW4tbGVmdC1yaWdodCB7XHJcbiAgICBtYXJnaW46IDBweCAxMHB4O1xyXG59XHJcbi53aWR0aC0xMDB7XHJcbiAgICB3aWR0aDoxMDAlXHJcbn1cclxuLmJvcmRlci1yaWdodCB7XHJcbiAgICBib3JkZXItcmlnaHQ6IDFweCBzb2xpZCBnYWluc2Jvcm87XHJcbn1cclxuLnJlbWFpbmluZ0NvbG9yIHtcclxuICAgIGNvbG9yOiMwNDE3YzI7XHJcbn1cclxuLmRpdi1mb250IHtcclxuICAgIGZvbnQ6IDEycHg7dGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcbi5oZWlnaHQtMjAge1xyXG4gICAgaGVpZ2h0OiAyMHB4O1xyXG59XHJcbi5jYWxvcmllcy1tYWluQ2xhc3Mge1xyXG4gICAgZm9udC1zaXplOiAxMHB4O2hlaWdodDoyMHB4O2JvcmRlci10b3AtcmlnaHQtcmFkaXVzOjMwcHg7Ym9yZGVyLWJvdHRvbS1yaWdodC1yYWRpdXM6MzBweFxyXG59XHJcbi5jYWxvcmllcy1zdWJDbGFzcyB7XHJcbiAgICB0ZXh0LWFsaWduOiByaWdodDt0ZXh0LWFsaWduOiByaWdodDtcclxuICAgIG1hcmdpbjogNXB4IDBweDtcclxuIH1cclxuIC5mb250LXdlaWdodC02MDAge1xyXG4gICAgZm9udC13ZWlnaHQ6NjAwXHJcbiB9XHJcbiAudG9kYXlzLWZvb2QtY2FyZCB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiNmMWYxZjE7Ym9yZGVyLXJhZGl1czogMTBweDttYXJnaW46IDBweDtcclxuIH1cclxuIC50b2RheS1mb29kLXJvdyB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDQxN2MyO3BhZGRpbmc6IDEwcHggMHB4O1xyXG4gfVxyXG4gLnRvZGF5LWZvb2QtY29sIHtcclxuICAgIHRleHQtYWxpZ246Y2VudGVyO2NvbG9yOiB3aGl0ZTtcclxuIH1cclxuIC50YWJsZS1jYXJkIHtcclxuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCB3aGl0ZTtwYWRkaW5nOiAxMHB4IDBweDtjb2xvcjogYmxhY2s7XHJcbiB9XHJcbiAuY29sLWxlZnQge1xyXG4gICAgdGV4dC1hbGlnbjogbGVmdDttYXJnaW46IGF1dG87XHJcbiB9XHJcbiAuY29sLXJpZ2h0IHtcclxuICAgIHRleHQtYWxpZ246IHJpZ2h0O21hcmdpbjogYXV0bztcclxuIH1cclxuIC50YWJsZUNhcmQge1xyXG4gICAgcGFkZGluZzogMTBweCAwcHg7Y29sb3I6IGJsYWNrO1xyXG4gfVxyXG4gLm1hcmdpbi0xMCB7XHJcbiAgICBtYXJnaW46IDEwcHg7XHJcbiB9XHJcbiAubWVhbC1wcm9ncmVzcyB7XHJcblx0aW9uLXByb2dyZXNzLWJhciB7XHJcblx0ICAgLS1iYWNrZ3JvdW5kOiBncmVlbjtcclxuXHQgICAtLWJ1ZmZlci1iYWNrZ3JvdW5kOiAjZTJlMmUyIDtcclxuXHQgICAtLXByb2dyZXNzLWJhY2tncm91bmQ6IzA0MTdjMiA7XHJcblx0ICAgYm9yZGVyLXJhZGl1czogMzBweDtcclxuXHQgfVxyXG4gICB9XHJcbi5pY29uLXNpemUge1xyXG5cdGZvbnQtc2l6ZTogLXdlYmtpdC14eHgtbGFyZ2U7XHJcblx0Y29sb3I6IGJsYWNrO1xyXG59XHJcbi5pb24tY2FyZC1uby1wYWRkaW5nIHtcclxuICAgIG1hcmdpbi1pbmxpbmUtZW5kOiAwcHg7XHJcbiAgICBtYXJnaW4taW5saW5lLXN0YXJ0OiAwcHg7XHJcbn1cclxuLmFsaWduLWNlbnRlciB7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBtYXJnaW46IGF1dG87XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxufVxyXG4uemVyb0NhcmQge1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDExNy45MmRlZywgIzAxQzJCMiAwJSwgIzAwMjg3QyAxMDAlKSAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4uZ3JpZDEtYmFja2dyb3VuZCB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAgI0ZBRkFGQTtcclxufVxyXG4uY3VycmVudC13ZWlnaHQge1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDE2Mi4zNGRlZyxcclxuICAgICMwMkUzRDYgMCUsICMwMTQwQzIgMTAwJSk7XHJcbiAgICBib3gtc2hhZG93OiAwIDJweCAzNHB4IDAgcmdiYSgwLDAsMCwwLjIpO1xyXG4gICAgcGFkZGluZzogMjJweCAwcHg7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBtYXJnaW46IGF1dG87XHJcbiAgICBjb2xvcjp3aGl0ZTtcclxufVxyXG4uZ29hbC13ZWlnaHQge1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDE2Mi4zNGRlZywgI0YyMDBENyAwJSxcclxuICAgICM5NjI1QzEgMTAwJSk7XHJcbiAgICBib3gtc2hhZG93OiAwIDJweCAzNHB4IDAgcmdiYSgwLDAsMCwwLjIpO1xyXG4gICAgcGFkZGluZzogMjJweCAwcHg7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBtYXJnaW46IGF1dG87XHJcbiAgICBjb2xvcjp3aGl0ZTtcclxufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/track-meal/track-meal.page.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/user_pages/track-meal/track-meal.page.ts ***!
+  \**********************************************************/
+/*! exports provided: TrackMealPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrackMealPage", function() { return TrackMealPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/global-services.service */ "./src/app/services/global-services.service.ts");
+/* harmony import */ var src_app_services_food_suggestions_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/food-suggestions.service */ "./src/app/services/food-suggestions.service.ts");
+/* harmony import */ var src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/api-call.service */ "./src/app/services/api-call.service.ts");
+/* harmony import */ var chartjs_plugin_labels__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! chartjs-plugin-labels */ "./node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js");
+/* harmony import */ var chartjs_plugin_labels__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(chartjs_plugin_labels__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _add_event_modal_add_event_modal_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../add-event-modal/add-event-modal.page */ "./src/app/user_pages/add-event-modal/add-event-modal.page.ts");
+/* harmony import */ var _modals_notification_modal_notification_modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../modals/notification-modal/notification-modal */ "./src/app/user_pages/modals/notification-modal/notification-modal.ts");
+
+
+
+
+
+
+
+
+
+
+var TrackMealPage = /** @class */ (function () {
+    function TrackMealPage(globalServices, activatedRoute, router, alertController, foodSuggestionsService, myAPI, modalController, popoverController) {
+        this.globalServices = globalServices;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
+        this.alertController = alertController;
+        this.foodSuggestionsService = foodSuggestionsService;
+        this.myAPI = myAPI;
+        this.modalController = modalController;
+        this.popoverController = popoverController;
+        this.day = "";
+        this.today = false;
+        this.dayNumber = null;
+        this.date = null;
+        this.meals = [];
+        this.exercises = [];
+        this.status = "";
+        this.percent = 0;
+        this.circleSubtitle = "";
+        this.circleColor = '#c0c0c0'; //gray atr first
+        this.dayNutritionInfo = { 'phase': null, phaseday: null, daynutrition: { protein: null, carbs: null, fat: null } };
+        this.dietCaloriesIntake = null;
+        this.caloriesConsumed = 0;
+        this.caloriesFromProteinAsP = 0;
+        this.caloriesFromCarbsAsP = 0;
+        this.caloriesFromFatAsP = 0;
+        this.dayNumberVal = 18;
+        this.dayCount = 18;
+        this.dateVal = 4;
+        this.dateCount = 4;
+        this.pieChartPlugins = [];
+        this.pieChartColors = [
+            {
+                backgroundColor: ['#00B8FF', '#FF00CB', '#2CA500'],
+            },
+        ];
+        this.todaysMealsList = [{ name: '10 Ounces of ribeye', cal: '769 cal.', selected: false },
+            { name: '2 Ounces of broccoli', cal: '80 cal.', selected: false },
+            { name: '1 Ounces of cheese', cal: '100 cal.', selected: false }];
+        this.suggestionList = [{ name: 'Bang Keto Coffee- BCB', cal: '120 cal.', selected: false },
+            { name: 'Pristine Protein WPI ', cal: '90 cal.', selected: false },
+            { name: '8 KETO ZERO CARB', cal: '50 cal.', selected: false }];
+        // TO DO: new variables, functions
+        this.todaysCalories = { intake: 750, recommended: 2200 };
+    }
+    TrackMealPage.prototype.getTodaysCalories = function () {
+        // call API to get calories
+    };
+    TrackMealPage.prototype.ngOnInit = function () {
+        // PIE CHART SETTINGS
+        this.pieChartOptions = this.createOptions();
+        this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
+        this.pieChartData = [50.4, 33.6, 15.9];
+        this.pieChartType = 'doughnut';
+        this.pieChartLegend = true;
+        this.pieChartPlugins = [chartjs_plugin_labels__WEBPACK_IMPORTED_MODULE_7__];
+        this.day = this.activatedRoute.snapshot.paramMap.get('day');
+        this.date = this.globalServices.getDate(this.day);
+        this.date = this.activatedRoute.snapshot.paramMap.get('day');
+        if (this.date == '') {
+            this.date = this.date = this.globalServices.getTodayDate();
+        }
+        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+        if (this.date === this.globalServices.getTodayDate()) {
+            if (this.today = true) {
+                // this.day = "TODAY"
+            }
+        }
+        this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
+        this.suggestedSupplements = this.foodSuggestionsService.getSupplementSuggestions(this.date, this.planLength_weeks);
+        //this.loadMeals();
+    };
+    // PIE CHART OPTIONS
+    TrackMealPage.prototype.createOptions = function () {
+        return {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                labels: {
+                    render: 'percentage',
+                    fontColor: ['white', 'white', 'white'],
+                    precision: 0
+                }
+            },
+            legend: {
+                labels: {
+                    usePointStyle: true
+                }
+            }
+        };
+    };
+    TrackMealPage.prototype.doRefresh = function (event) {
+        this.ngOnInit();
+        event.target.complete();
+    };
+    TrackMealPage.prototype.handleSwipeLeft = function () {
+        this.dayNumberVal = this.dayNumberVal + 1;
+        this.dateVal = this.dateVal + 1;
+        if (this.today) {
+            //won't swipe left tomorrow
+        }
+        else {
+            this.globalServices.swipeLeft("/track-meal/");
+        }
+    };
+    TrackMealPage.prototype.handleSwipeRight = function () {
+        this.dayNumberVal = this.dayNumberVal - 1;
+        this.dateVal = this.dateVal - 1;
+        if (this.dayNumber > 1) {
+            this.globalServices.swipeRight("/track-meal/");
+        }
+    };
+    TrackMealPage.prototype.loadMeals = function () {
+        var _this = this;
+        this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
+        this.myAPI.makeAPIcall("meals.php", {
+            "action": "getDayInfo",
+            "date": this.date
+        }, true).subscribe(function (result) {
+            if (result.error) {
+                _this.myAPI.handleMyAPIError(result.error);
+            }
+            else {
+                _this.meals = result.success.dayInfo.meals;
+                _this.exercises = result.success.dayInfo.exercises;
+                _this.calculateCaloriesConsumed();
+            }
+        });
+    };
+    TrackMealPage.prototype.openFoodModal = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.router.navigateByUrl('/home-add');
+                return [2 /*return*/];
+            });
+        });
+    };
+    TrackMealPage.prototype.removeMeal = function (meal_id) {
+        this.meals = this.meals.filter(function (el) { return el.id != meal_id; });
+        this.calculateCaloriesConsumed();
+        this.myAPI.makeSilentCall("meals.php", {
+            "action": "removeMeal",
+            "meal_id": meal_id
+        }, true);
+    };
+    TrackMealPage.prototype.calculateCaloriesConsumed = function () {
+        var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
+        this.caloriesConsumed = info.caloriesConsumed;
+        this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
+        this.caloriesFromCarbsAsP = info.caloriesFromCarbsAsP;
+        this.caloriesFromFatAsP = info.caloriesFromFatAsP;
+        this.dietCaloriesIntake = info.dietCaloriesIntake;
+        this.percent = info.percent;
+        if (info.color == "red") {
+            this.circleColor = "#CA1616";
+            this.status = "BAD";
+        }
+        else if (this.caloriesConsumed == 0) {
+            this.status = "NO INFO";
+        }
+        else {
+            this.circleColor = "rgb(56, 129, 255";
+            this.status = "GOOD";
+        }
+        this.circleSubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
+    };
+    // function to expand today's meals list item 
+    TrackMealPage.prototype.expandRow = function (data) {
+        data.selected = !data.selected;
+    };
+    // function to open add meal modal
+    TrackMealPage.prototype.openModal = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalController.create({ component: _add_event_modal_add_event_modal_page__WEBPACK_IMPORTED_MODULE_8__["AddEventModalPage"] })];
+                    case 1:
+                        modal = _a.sent();
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    // Alert to delete today's meals list
+    TrackMealPage.prototype.deleteItem = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var alert;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertController.create({
+                            cssClass: 'my-custom-class',
+                            header: 'Do you want to delete the Item?',
+                            message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequuntur odit rerum quam repellat maxime, quidem nobis modi, quaerat culpa assumenda sint non asperiores quod dolore adipisci vero, fuga facere.',
+                            buttons: [
+                                {
+                                    text: 'Cancel',
+                                    role: 'cancel',
+                                    cssClass: 'secondary',
+                                    handler: function (blah) {
+                                        console.log('Confirm Cancel: blah');
+                                    }
+                                }, {
+                                    text: 'Ok',
+                                    cssClass: 'endDiet',
+                                    handler: function () {
+                                    }
+                                }
+                            ]
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TrackMealPage.prototype.showSettings = function () {
+        this.router.navigateByUrl('/settings');
+    };
+    TrackMealPage.prototype.handleButtonClick = function (ev) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var popover, data;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.popoverController.create({
+                            component: _modals_notification_modal_notification_modal__WEBPACK_IMPORTED_MODULE_9__["NotificationModal"],
+                            event: ev,
+                            translucent: true,
+                        })];
+                    case 1:
+                        popover = _a.sent();
+                        return [4 /*yield*/, popover.present()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, popover.onWillDismiss()];
+                    case 3:
+                        data = (_a.sent()).data;
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TrackMealPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-track-meal',
+            template: __webpack_require__(/*! ./track-meal.page.html */ "./src/app/user_pages/track-meal/track-meal.page.html"),
+            styles: [__webpack_require__(/*! ./track-meal.page.scss */ "./src/app/user_pages/track-meal/track-meal.page.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_4__["GlobalServicesService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
+            src_app_services_food_suggestions_service__WEBPACK_IMPORTED_MODULE_5__["FoodSuggestionsService"], src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_6__["ApiCallService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["PopoverController"]])
+    ], TrackMealPage);
+    return TrackMealPage;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=track-meal-track-meal-module.js.map

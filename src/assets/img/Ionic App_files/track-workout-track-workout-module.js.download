@@ -1,0 +1,270 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["track-workout-track-workout-module"],{
+
+/***/ "./src/app/user_pages/track-workout/track-workout.module.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/user_pages/track-workout/track-workout.module.ts ***!
+  \******************************************************************/
+/*! exports provided: TrackWorkoutPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrackWorkoutPageModule", function() { return TrackWorkoutPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var ng_circle_progress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-circle-progress */ "./node_modules/ng-circle-progress/fesm5/ng-circle-progress.js");
+/* harmony import */ var _track_workout_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./track-workout.page */ "./src/app/user_pages/track-workout/track-workout.page.ts");
+
+
+
+
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _track_workout_page__WEBPACK_IMPORTED_MODULE_7__["TrackWorkoutPage"]
+    }
+];
+var TrackWorkoutPageModule = /** @class */ (function () {
+    function TrackWorkoutPageModule() {
+    }
+    TrackWorkoutPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes),
+                ng_circle_progress__WEBPACK_IMPORTED_MODULE_6__["NgCircleProgressModule"]
+            ],
+            declarations: [_track_workout_page__WEBPACK_IMPORTED_MODULE_7__["TrackWorkoutPage"]]
+        })
+    ], TrackWorkoutPageModule);
+    return TrackWorkoutPageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/user_pages/track-workout/track-workout.page.html":
+/*!******************************************************************!*\
+  !*** ./src/app/user_pages/track-workout/track-workout.page.html ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header class=\"header-css\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\" >\r\n      <ion-button class=\"button-bac\" (click)=\"handleButtonClick($event)\">\r\n        <ion-icon class=\"color-black\"  slot=\"icon-only\" name=\"ios-notifications-outline\"></ion-icon>\r\n        <ion-badge  color=\"danger\" class=\"ion-badge\">2\r\n        </ion-badge>\r\n       </ion-button>\r\n    </ion-buttons>\r\n\r\n      <ion-title class=\"text-capitalize\">Workout</ion-title>\r\n      <ion-buttons slot=\"end\" (click)=\"showSettings()\">\r\n        <ion-button class=\"button-bac\">\r\n          <ion-icon class=\"color-black\" name=\"settings\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n</ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <ion-grid class= \"padding-20 container-1\">\r\n    <ion-row>\r\n      <ion-col>\r\n        <h2>Your Daily Workout Report</h2>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"margin-top-15\">\r\n      <ion-col size=\"5\" class=\"progress-height\">\r\n        <circle-progress\r\n          [percent]=\"39\"\r\n          [showInnerStroke]=\"true\" [radius]=\"150\"\r\n            [outerStrokeWidth]=\"30\"\r\n            [innerStrokeWidth]=\"35\"\r\n            [space]=\"-29\"\r\n            [outerStrokeColor]=\"'#0417c2'\"\r\n            [innerStrokeColor] = \"'gainsboro'\"\r\n            [backgroundStroke]=\"'white'\"\r\n            [animation]=\"true\"\r\n            [showTitle] = \"true\"\r\n            [animationDuration]=\"300\" [title]=\"['3/5']\"\r\n            [outerStrokeGradientStopColor] =\"'white'\"\r\n            [backgroundGradientStopColor] = \"'white'\"\r\n            [titleFontSize] = \"70\"\r\n            [subtitle] = \"'Completed'\"\r\n            [showSubtitle] =\"true\"\r\n            [subtitleColor] = \"'black'\"\r\n            [subtitleFontSize]=\"40\"\r\n            [titleColor] = \"'#0417c2'\"\r\n            [titleFontWeight] = \"600\"\r\n          ></circle-progress>\r\n      </ion-col>\r\n      <ion-col size=\"7\" class=\"margin-top-10\">\r\n        <div class=\"color-black\"><p>Week 1 of 7</p></div>\r\n        <div class=\"color-black\"><p>Current Weight: 165 lbs</p></div>\r\n        <div class=\"color-black\"><p>Goal Weight: 150 lbs</p></div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <ion-grid class=\"padding-20 container-2\">\r\n    <ion-row>\r\n      <ion-col>\r\n        <h2>Today's Workout List</h2>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"margin-top-10\">\r\n      <ion-col>\r\n        <div>To really quick your Rapid Body Remodeling into overdrive,try implementing the following exercises(the video will show you exactly how they're done). </div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <!-- week day selection  -->\r\n    <ion-row class=\"margin-top-15\">\r\n      <ion-col class=\"week-border\" *ngFor=\"let day of weekDays;let i = index;\" [ngClass]=\"{'on-select-day week-border' :day.selected,'week-border':!day.selected}\">\r\n        <div (click)=\"onClickDate(day,i)\"  class=\"text-align-center\">{{day.name}}</div>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row class=\"margin-top-10\">\r\n      <ion-col><h3 class=\"margin-0\">September 29, 2020</h3></ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n  <ion-grid class=\"padding-20 container-3\">\r\n    <ion-card class=\"ion-card-no-padding back-ground-white\">\r\n      <ion-row>\r\n        <ion-col class=\"margin-0\" size=\"5\">\r\n          <ion-thumbnail style=\"width:100%;height: 180px;\" (click)=\"viewVideo('../../../assets/img/RPReplay_Final1603126974 2.mov')\">\r\n            <div class=\"video \">\r\n              <video class=\"video-css\" controls  #videoPlayer>\r\n                  <source src=\"../../../assets/img/RPReplay_Final1603126974 2.mov\" type=\"video/mp4\" />\r\n                  Browser not supported\r\n              </video>\r\n            </div>\r\n            <div class=\"btnMore\">\r\n              <ion-icon ios=\"ios-arrow-dropright-circle\" md=\"md-arrow-dropright-circle\"></ion-icon>\r\n            </div>\r\n          </ion-thumbnail>\r\n        </ion-col>\r\n         <ion-col size=\"0.2\"></ion-col> \r\n        <ion-col style=\"margin-left:10px\" >\r\n          <div class=\"color-text\">\r\n            <div class=\"margin-top-10 font-size-18\">Workout Name</div>\r\n          </div>\r\n          <div class=\"margin-top-7 row\">Short Description</div>\r\n          <div class=\"row margin-top-5 no-padding\" >\r\n            <div class=\"padding-1\"><ion-icon ios=\"ios-clipboard\" md=\"md-clipboard\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Number of sets</div>\r\n          </div>\r\n          <div class=\"row margin-top-5 row no-padding\">\r\n            <div  class=\"padding-1\"><ion-icon ios=\"ios-stopwatch\" md=\"md-stopwatch\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Length of time</div>\r\n          </div>\r\n          <div class=\"margin-top-10 row no-padding\">\r\n           <div  class=\"padding-1\" *ngIf=\"isSetsCompleted\"> <ion-icon class=\"color-text\" ios=\"ios-checkmark-circle\" md=\"md-checkmark-circle\"></ion-icon></div>\r\n            <div class=\"padding-left-5\" *ngIf=\"isSetsCompleted\">Completed</div>\r\n            <div class=\"row\" *ngIf=\"!isSetsCompleted\">In Progress ..</div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-card>\r\n    <ion-card class=\"ion-card-no-padding margin-pto-10 video-card\">\r\n      <ion-row>\r\n        <ion-col size=\"5\" class=\"margin-0\">\r\n          <ion-thumbnail style=\"width:100%;height: 180px;\" >\r\n            <div class=\"video \">\r\n              <img  class=\"video-css\" src= \"../../../assets/img/track-workout-footer-background.jpg\">\r\n            </div>\r\n            <div class=\"btnMore\">\r\n              <ion-icon ios=\"ios-arrow-dropright-circle\" md=\"md-arrow-dropright-circle\"></ion-icon>\r\n            </div>\r\n          </ion-thumbnail>\r\n        </ion-col>\r\n        <ion-col style=\"margin-left:10px\">\r\n          <div class=\"color-text\">\r\n            <div class=\"margin-top-10 font-size-18\">Workout Name</div>\r\n          </div>\r\n          <div class=\"margin-top-7 row\">Short Description</div>\r\n          <div class=\"row margin-top-5 no-padding\" >\r\n            <div class=\"padding-1\"><ion-icon ios=\"ios-clipboard\" md=\"md-clipboard\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Number of sets</div>\r\n          </div>\r\n          <div class=\"row margin-top-5 row no-padding\">\r\n            <div  class=\"padding-1\"><ion-icon ios=\"ios-stopwatch\" md=\"md-stopwatch\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Length of time</div>\r\n          </div>\r\n          <div class=\"margin-top-10 row no-padding\">\r\n           <div  class=\"padding-1\"> <ion-icon class=\"color-text\" ios=\"ios-checkmark-circle\" md=\"md-checkmark-circle\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Completed</div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-card>\r\n    <ion-card class=\"ion-card-no-padding margin-pto-10 video-card\">\r\n      <ion-row>\r\n        <ion-col size=\"5\" class=\"margin-0\">\r\n          <ion-thumbnail style=\"width:100%;height: 180px;\" >\r\n            <div class=\"video \">\r\n              <img  class=\"video-css\" src= \"../../../assets/img/track-workout-footer-background.jpg\">\r\n            </div>\r\n            <div class=\"btnMore\">\r\n              <ion-icon ios=\"ios-arrow-dropright-circle\" md=\"md-arrow-dropright-circle\"></ion-icon>\r\n            </div>\r\n          </ion-thumbnail>\r\n        </ion-col>\r\n        <ion-col style=\"margin-left:10px\">\r\n          <div class=\"color-text\">\r\n            <div class=\"margin-top-10 font-size-18\">Workout Name</div>\r\n          </div>\r\n          <div class=\"margin-top-7 row\">Short Description</div>\r\n          <div class=\"row margin-top-5 no-padding\" >\r\n            <div class=\"padding-1\"><ion-icon ios=\"ios-clipboard\" md=\"md-clipboard\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Number of sets</div>\r\n          </div>\r\n          <div class=\"row margin-top-5 row no-padding\">\r\n            <div  class=\"padding-1\"><ion-icon ios=\"ios-stopwatch\" md=\"md-stopwatch\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Length of time</div>\r\n          </div>\r\n          <div class=\"margin-top-10 row no-padding\">\r\n           <div  class=\"padding-1\"> <ion-icon class=\"color-text\" ios=\"ios-checkmark-circle\" md=\"md-checkmark-circle\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Completed</div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-card>\r\n    <ion-card class=\"ion-card-no-padding margin-pto-10 video-card\">\r\n      <ion-row>\r\n        <ion-col size=\"5\" class=\"margin-0\">\r\n          <ion-thumbnail style=\"width:100%;height: 180px;\" >\r\n            <div class=\"video \">\r\n              <img  class=\"video-css\" src= \"../../../assets/img/track-workout-footer-background.jpg\">\r\n            </div>\r\n            <div class=\"btnMore\">\r\n              <ion-icon ios=\"ios-arrow-dropright-circle\" md=\"md-arrow-dropright-circle\"></ion-icon>\r\n            </div>\r\n          </ion-thumbnail>\r\n        </ion-col>\r\n        <ion-col style=\"margin-left:10px\">\r\n          <div class=\"color-text\">\r\n            <div class=\"margin-top-10 font-size-18\">Workout Name</div>\r\n          </div>\r\n          <div class=\"margin-top-7 row\">Short Description</div>\r\n          <div class=\"row margin-top-5 no-padding\" >\r\n            <div class=\"padding-1\"><ion-icon ios=\"ios-clipboard\" md=\"md-clipboard\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Number of sets</div>\r\n          </div>\r\n          <div class=\"row margin-top-5 row no-padding\">\r\n            <div  class=\"padding-1\"><ion-icon ios=\"ios-stopwatch\" md=\"md-stopwatch\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Length of time</div>\r\n          </div>\r\n          <div class=\"margin-top-10 row no-padding\">\r\n           <div  class=\"padding-1\"> <ion-icon class=\"color-text\" ios=\"ios-checkmark-circle\" md=\"md-checkmark-circle\"></ion-icon></div>\r\n            <div class=\"padding-left-5\">Completed</div>\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-card>\r\n    \r\n  </ion-grid>\r\n  <!-- Ion Refresher -->\r\n  <!-- <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher> -->\r\n\r\n\r\n\r\n  <!-- Day Change Slider -->\r\n  <!-- <ion-toolbar class=\"day-change-slider\" (swipeleft)=\"handleSwipeLeft()\" (swiperight)=\"handleSwipeRight()\">\r\n      <ion-card>\r\n          <ion-icon class=\"arrow-back\" *ngIf=\"dayNumber > 1\" (click)=\"handleSwipeRight()\" name=\"arrow-back\" slot=\"start\"></ion-icon>\r\n          <section>\r\n              <ion-card-header>\r\n                  <ion-card-title class=\"dc-slider-title-label\">{{day}} <span *ngIf = \"!day\">DAY {{dayNumber}} </span></ion-card-title>\r\n              </ion-card-header>\r\n              <ion-card-content class=\"dc-slider-title\">\r\n                  <div class=\"date-long-form\">Thurs, Nov 21, 2020</div>\r\n              </ion-card-content>\r\n          </section>\r\n          <ion-icon class=\"arrow-forward\" *ngIf=\"!today\" (click)=\"handleSwipeLeft()\" name=\"arrow-forward\" slot=\"end\"></ion-icon>\r\n      </ion-card>\r\n  </ion-toolbar>\r\n -->\r\n\r\n\r\n  <!-- Title Bar -->\r\n  <!-- <div class=\"title-bar\">\r\n\r\n    <h3>Workout List</h3>\r\n    <div class=\"icons\">\r\n      <ion-icon class=\"icon\" name=\"pulse\"></ion-icon>\r\n      <ion-icon class=\"icon heart\" name=\"heart\"></ion-icon>\r\n    </div>\r\n    \r\n  </div> -->\r\n\r\n\r\n\r\n  <!-- Workout List -->\r\n  <!-- <ion-list class=\"workoutList\">\r\n\r\n    <ion-item *ngIf=\"exercises.length > 0\" class=\"list-header\">\r\n      <h3 class=\"text-center text-white\">Total Calories Burned Today: <strong>333</strong></h3>\r\n    </ion-item>\r\n\r\n    <ion-item-sliding *ngFor=\"let exercise of exercises\">\r\n      <ion-item class=\"workoutListBkg\">\r\n        <ion-label class= \"meal\">{{exercise.exercise_name}} {{exercise.minutes}} minutes  <span>{{exercise.calories_burned}} cal</span></ion-label>\r\n      </ion-item>\r\n\r\n      <ion-item-options *ngIf=\"today\" side=\"end\">\r\n        <ion-item-option color=\"danger\" (click)=\"removeExercise(exercise.id)\"><ion-icon name=\"trash\"></ion-icon></ion-item-option>\r\n      </ion-item-options>\r\n    </ion-item-sliding>\r\n\r\n  </ion-list> \r\n -->\r\n\r\n  <!-- Footer Section -->\r\n  <!-- <section class=\"content-footer\">\r\n    <ion-button expand=\"full\" (click)=\"openExerciseModal()\" class=\"btn btn-round\" shape=\"round\">Add workout</ion-button>\r\n  </section> -->\r\n\r\n\r\n\r\n</ion-content>\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/track-workout/track-workout.page.scss":
+/*!******************************************************************!*\
+  !*** ./src/app/user_pages/track-workout/track-workout.page.scss ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "ion-toolbar.day-change-slider ion-card section .dc-slider-title {\n  font-size: 1.2rem;\n  line-height: 1.2rem; }\n\n/*\r\n * Title Bar\r\n */\n\n.title-bar {\n  margin: 0 0 1rem;\n  display: flex;\n  justify-content: space-between; }\n\n.title-bar h3 {\n    margin: 0;\n    color: #0417c2; }\n\n.title-bar .icon {\n    font-size: 1.6rem; }\n\n.title-bar .heart {\n    color: #931818; }\n\n/*\r\n * Workout List\r\n */\n\n.workoutList {\n  background-color: #fff;\n  border-radius: 9px;\n  border: solid 2px #c7c7c7;\n  padding: 0.12rem; }\n\n.workoutList .list-header {\n    --ion-safe-area-left:0;\n    --padding-start: 0;\n    background-color: #0417c2;\n    border-top-left-radius: 6px;\n    border-top-right-radius: 6px; }\n\n.workoutList .list-header h3 {\n      display: block;\n      width: 100%;\n      margin: 0.25rem 0;\n      text-transform: uppercase;\n      font-size: 1rem; }\n\n.workoutList .workoutListBkg {\n    --background: none;\n    --ion-safe-area-left:0;\n    --ion-safe-area-right: 0;\n    --padding-start: 0; }\n\n.workoutList .workoutListBkg ion-label {\n      padding: 0.21rem 0.72rem;\n      text-transform: capitalize;\n      display: flex;\n      justify-content: space-between; }\n\n/*\r\n * Footer Section\r\n */\n\nsection.content-footer {\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n  background-image: url('meal-footer-background.jpg');\n  margin-left: -16px;\n  margin-right: -16px;\n  margin-bottom: -16px;\n  margin-top: 3rem;\n  min-height: 270px; }\n\nsection.content-footer ion-button {\n    position: relative;\n    top: -1rem;\n    left: calc(50vw - 7.5em);\n    max-width: 210px;\n    --border-radius: 6px; }\n\n.margin-0 {\n  margin: 0px;\n  padding: 0px; }\n\n.video-css {\n  width: 100%;\n  height: 180px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  border-radius: 10px; }\n\n*::-webkit-media-controls-panel {\n  display: none !important;\n  -webkit-appearance: none; }\n\n/* Old shadow dom for play button */\n\n*::-webkit-media-controls-play-button {\n  display: none !important;\n  -webkit-appearance: none; }\n\n/* New shadow dom for play button */\n\n/* This one works! */\n\n*::-webkit-media-controls-start-playback-button {\n  display: none !important;\n  -webkit-appearance: none; }\n\n.btnMore {\n  position: absolute;\n  top: 40%;\n  right: 0;\n  /* bottom: 0; */\n  left: 0;\n  color: white;\n  margin: auto;\n  font-size: 41px;\n  text-align: center;\n  z-index: 9999; }\n\n.container-2 {\n  background-color: #f2f2f2; }\n\n.container-1 {\n  background-color: #FFFFFF; }\n\n.container-3 {\n  background-color: #F1F1F1; }\n\n.video-card {\n  background-color: white;\n  margin-top: 20px;\n  box-shadow: unset; }\n\n.back-ground-white {\n  background-color: white;\n  box-shadow: unset; }\n\n.font-size-18 {\n  font-size: 18px;\n  margin-left: 5px; }\n\n.margin-top-7 {\n  margin-top: 7px; }\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlcl9wYWdlcy90cmFjay13b3Jrb3V0L0M6XFxVc2Vyc1xcUmljaGFyZC5TcHJpbmNlXFxEb2N1bWVudHNcXG1lbHQtZG93bi1hcHAvc3JjXFxhcHBcXHVzZXJfcGFnZXNcXHRyYWNrLXdvcmtvdXRcXHRyYWNrLXdvcmtvdXQucGFnZS5zY3NzIiwic3JjL2FwcC91c2VyX3BhZ2VzL3RyYWNrLXdvcmtvdXQvdHJhY2std29ya291dC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSxpQkFBaUI7RUFDakIsbUJBQW1CLEVBQUE7O0FBR3ZCOztFQ0FFOztBREdGO0VBQ0ksZ0JBQWdCO0VBQ2hCLGFBQWE7RUFDYiw4QkFBOEIsRUFBQTs7QUFIbEM7SUFNUSxTQUFTO0lBQ1QsY0FBYyxFQUFBOztBQVB0QjtJQVdRLGlCQUFpQixFQUFBOztBQVh6QjtJQWNRLGNBQXdCLEVBQUE7O0FBS2hDOztFQ1BFOztBRFVGO0VBQ0ksc0JBQXNCO0VBQ3RCLGtCQUFrQjtFQUNsQix5QkFBeUI7RUFDekIsZ0JBQWdCLEVBQUE7O0FBSnBCO0lBVVEsc0JBQXFCO0lBQ3JCLGtCQUFnQjtJQUdoQix5QkFBeUI7SUFDekIsMkJBQTJCO0lBQzNCLDRCQUE0QixFQUFBOztBQWhCcEM7TUFtQlksY0FBYztNQUNkLFdBQVc7TUFDWCxpQkFBaUI7TUFDakIseUJBQXlCO01BQ3pCLGVBQWUsRUFBQTs7QUF2QjNCO0lBNEJRLGtCQUFhO0lBR2Isc0JBQXFCO0lBQ3JCLHdCQUFzQjtJQUN0QixrQkFBZ0IsRUFBQTs7QUFqQ3hCO01Bb0NZLHdCQUF3QjtNQUN4QiwwQkFBMEI7TUFDMUIsYUFBYTtNQUNiLDhCQUE4QixFQUFBOztBQU0xQzs7RUN4QkU7O0FEMkJGO0VBRUksNEJBQTRCO0VBQzVCLDJCQUEyQjtFQUMzQixzQkFBc0I7RUFDdEIsbURBQXVFO0VBR3ZFLGtCQUFrQjtFQUNsQixtQkFBbUI7RUFDbkIsb0JBQW9CO0VBR3BCLGdCQUFnQjtFQUNoQixpQkFBaUIsRUFBQTs7QUFkckI7SUFpQlEsa0JBQWtCO0lBQ2xCLFVBQVU7SUFDVix3QkFBd0I7SUFDeEIsZ0JBQWdCO0lBQ2hCLG9CQUFnQixFQUFBOztBQUd4QjtFQUNJLFdBQVc7RUFDWCxZQUFZLEVBQUE7O0FBRWhCO0VBQ0ksV0FBVztFQUNYLGFBQWE7RUFDYixvQkFBaUI7S0FBakIsaUJBQWlCO0VBQ2pCLG1CQUFtQixFQUFBOztBQUd2QjtFQUNJLHdCQUF1QjtFQUN2Qix3QkFBd0IsRUFBQTs7QUFHMUIsbUNBQUE7O0FBRUE7RUFDRSx3QkFBdUI7RUFDdkIsd0JBQXdCLEVBQUE7O0FBRzFCLG1DQUFBOztBQUVBLG9CQUFBOztBQUVBO0VBQ0Usd0JBQXVCO0VBQ3ZCLHdCQUF3QixFQUFBOztBQUUxQjtFQUNFLGtCQUFrQjtFQUNsQixRQUFRO0VBQ1IsUUFBUTtFQUNSLGVBQUE7RUFDQSxPQUFPO0VBQ1AsWUFBWTtFQUNaLFlBQVk7RUFDWixlQUFlO0VBQ2Ysa0JBQWtCO0VBQ2xCLGFBQWEsRUFBQTs7QUFHakI7RUFDSSx5QkFBeUIsRUFBQTs7QUFFN0I7RUFDSSx5QkFBMEIsRUFBQTs7QUFFOUI7RUFDSSx5QkFBeUIsRUFBQTs7QUFFN0I7RUFDSSx1QkFBdUI7RUFDdkIsZ0JBQWdCO0VBQ2hCLGlCQUFpQixFQUFBOztBQUVyQjtFQUNJLHVCQUF1QjtFQUN2QixpQkFBaUIsRUFBQTs7QUFFckI7RUFDSSxlQUFlO0VBQ2YsZ0JBQWdCLEVBQUE7O0FBRXBCO0VBQ0ksZUFBZSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvdXNlcl9wYWdlcy90cmFjay13b3Jrb3V0L3RyYWNrLXdvcmtvdXQucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gVXBkYXRlIEZvbnQgU2l6ZSBpbiBEYXkgQ2hhbmdlciBTbGlkZXJcclxuaW9uLXRvb2xiYXIuZGF5LWNoYW5nZS1zbGlkZXIgaW9uLWNhcmQgc2VjdGlvbiAuZGMtc2xpZGVyLXRpdGxlIHtcclxuICAgIGZvbnQtc2l6ZTogMS4ycmVtO1xyXG4gICAgbGluZS1oZWlnaHQ6IDEuMnJlbTtcclxufVxyXG5cclxuLypcclxuICogVGl0bGUgQmFyXHJcbiAqL1xyXG4udGl0bGUtYmFyIHtcclxuICAgIG1hcmdpbjogMCAwIDFyZW07XHJcbiAgICBkaXNwbGF5OiBmbGV4OyBcclxuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuXHJcbiAgICBoMyB7XHJcbiAgICAgICAgbWFyZ2luOiAwO1xyXG4gICAgICAgIGNvbG9yOiAjMDQxN2MyO1xyXG4gICAgfVxyXG5cclxuICAgIC5pY29uIHtcclxuICAgICAgICBmb250LXNpemU6IDEuNnJlbTtcclxuICAgIH1cclxuICAgIC5oZWFydCB7XHJcbiAgICAgICAgY29sb3IgOiByZ2IoMTQ3LCAyNCwgMjQpO1xyXG4gICAgfVxyXG59XHJcblxyXG5cclxuLypcclxuICogV29ya291dCBMaXN0XHJcbiAqL1xyXG4ud29ya291dExpc3Qge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjtcclxuICAgIGJvcmRlci1yYWRpdXM6IDlweDtcclxuICAgIGJvcmRlcjogc29saWQgMnB4ICNjN2M3Yzc7XHJcbiAgICBwYWRkaW5nOiAwLjEycmVtO1xyXG5cclxuXHJcbiAgICAubGlzdC1oZWFkZXIge1xyXG5cclxuICAgICAgICAvLyBSZXNldCBQYWRkaW5nIGFuZCBNYXJnaW5zXHJcbiAgICAgICAgLS1pb24tc2FmZS1hcmVhLWxlZnQ6MDtcclxuICAgICAgICAtLXBhZGRpbmctc3RhcnQ6IDA7XHJcblxyXG4gICAgICAgIC8vIEdlbmVyaWMgU3R5bGVzXHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzA0MTdjMjtcclxuICAgICAgICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiA2cHg7XHJcbiAgICAgICAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDZweDtcclxuXHJcbiAgICAgICAgaDMge1xyXG4gICAgICAgICAgICBkaXNwbGF5OiBibG9jaztcclxuICAgICAgICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICAgICAgICAgIG1hcmdpbjogMC4yNXJlbSAwO1xyXG4gICAgICAgICAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG4gICAgICAgICAgICBmb250LXNpemU6IDFyZW07XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG5cclxuICAgIC53b3Jrb3V0TGlzdEJrZyB7XHJcbiAgICAgICAgLS1iYWNrZ3JvdW5kOiBub25lO1xyXG5cclxuICAgICAgICAvLyBSZXNldCBQYWRkaW5nIGFuZCBNYXJnaW5zXHJcbiAgICAgICAgLS1pb24tc2FmZS1hcmVhLWxlZnQ6MDtcclxuICAgICAgICAtLWlvbi1zYWZlLWFyZWEtcmlnaHQ6IDA7XHJcbiAgICAgICAgLS1wYWRkaW5nLXN0YXJ0OiAwO1xyXG5cclxuICAgICAgICBpb24tbGFiZWwge1xyXG4gICAgICAgICAgICBwYWRkaW5nOiAwLjIxcmVtIDAuNzJyZW07XHJcbiAgICAgICAgICAgIHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplO1xyXG4gICAgICAgICAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG5cclxufVxyXG5cclxuLypcclxuICogRm9vdGVyIFNlY3Rpb25cclxuICovXHJcbnNlY3Rpb24uY29udGVudC1mb290ZXIge1xyXG4gICAgLy8gU2V0IEJhY2tncm91bmQgSW1hZ2VcclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xyXG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL2ltZy9tZWFsLWZvb3Rlci1iYWNrZ3JvdW5kLmpwZ1wiKTtcclxuXHJcbiAgICAvLyBTZXQgTmVnYXRpdmUgTWFyZ2lucyB0byBzaW11bGF0ZSBmdWxsIHdpZHRoIGFyZWFcclxuICAgIG1hcmdpbi1sZWZ0OiAtMTZweDtcclxuICAgIG1hcmdpbi1yaWdodDogLTE2cHg7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAtMTZweDtcclxuXHJcbiAgICAvLyBTZXQgZ2VuZXJpYyBzdHlsZXNcclxuICAgIG1hcmdpbi10b3A6IDNyZW07XHJcbiAgICBtaW4taGVpZ2h0OiAyNzBweDtcclxuXHJcbiAgICBpb24tYnV0dG9uIHtcclxuICAgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICAgICAgdG9wOiAtMXJlbTsgLy8gUmFpc2UgdGhlIGJ1dHRvbiBvdXQgb2YgdGhlIGZvb3RlciBjb250ZW50IGFyZWFcclxuICAgICAgICBsZWZ0OiBjYWxjKDUwdncgLSA3LjVlbSk7IC8vIENlbnRlciB0aGUgYnV0dG9uXHJcbiAgICAgICAgbWF4LXdpZHRoOiAyMTBweDtcclxuICAgICAgICAtLWJvcmRlci1yYWRpdXM6IDZweDtcclxuICAgIH1cclxufVxyXG4ubWFyZ2luLTAge1xyXG4gICAgbWFyZ2luOiAwcHg7XHJcbiAgICBwYWRkaW5nOiAwcHg7XHJcbn1cclxuLnZpZGVvLWNzcyB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogMTgwcHg7XHJcbiAgICBvYmplY3QtZml0OiBjb3ZlcjtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7XHJcbiAgICAvLyBib3JkZXI6IDFweCBzb2xpZCB3aGl0ZTtcclxufVxyXG4qOjotd2Via2l0LW1lZGlhLWNvbnRyb2xzLXBhbmVsIHtcclxuICAgIGRpc3BsYXk6IG5vbmUhaW1wb3J0YW50O1xyXG4gICAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lO1xyXG4gIH1cclxuICBcclxuICAvKiBPbGQgc2hhZG93IGRvbSBmb3IgcGxheSBidXR0b24gKi9cclxuICBcclxuICAqOjotd2Via2l0LW1lZGlhLWNvbnRyb2xzLXBsYXktYnV0dG9uIHtcclxuICAgIGRpc3BsYXk6IG5vbmUhaW1wb3J0YW50O1xyXG4gICAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lO1xyXG4gIH1cclxuICBcclxuICAvKiBOZXcgc2hhZG93IGRvbSBmb3IgcGxheSBidXR0b24gKi9cclxuICBcclxuICAvKiBUaGlzIG9uZSB3b3JrcyEgKi9cclxuICBcclxuICAqOjotd2Via2l0LW1lZGlhLWNvbnRyb2xzLXN0YXJ0LXBsYXliYWNrLWJ1dHRvbiB7XHJcbiAgICBkaXNwbGF5OiBub25lIWltcG9ydGFudDtcclxuICAgIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcclxuICB9XHJcbiAgLmJ0bk1vcmV7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICB0b3A6IDQwJTtcclxuICAgIHJpZ2h0OiAwO1xyXG4gICAgLyogYm90dG9tOiAwOyAqL1xyXG4gICAgbGVmdDogMDtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIG1hcmdpbjogYXV0bztcclxuICAgIGZvbnQtc2l6ZTogNDFweDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIHotaW5kZXg6IDk5OTk7XHJcbiAgICB9XHJcblxyXG4uY29udGFpbmVyLTIge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2YyZjJmMjtcclxufVxyXG4uY29udGFpbmVyLTEge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogICNGRkZGRkY7XHJcbn1cclxuLmNvbnRhaW5lci0zIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNGMUYxRjE7XHJcbn1cclxuLnZpZGVvLWNhcmQge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgICBtYXJnaW4tdG9wOiAyMHB4O1xyXG4gICAgYm94LXNoYWRvdzogdW5zZXQ7XHJcbn1cclxuLmJhY2stZ3JvdW5kLXdoaXRlIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gICAgYm94LXNoYWRvdzogdW5zZXQ7XHJcbn1cclxuLmZvbnQtc2l6ZS0xOCB7XHJcbiAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgICBtYXJnaW4tbGVmdDogNXB4O1xyXG59XHJcbi5tYXJnaW4tdG9wLTcge1xyXG4gICAgbWFyZ2luLXRvcDogN3B4O1xyXG59XHJcbiIsImlvbi10b29sYmFyLmRheS1jaGFuZ2Utc2xpZGVyIGlvbi1jYXJkIHNlY3Rpb24gLmRjLXNsaWRlci10aXRsZSB7XG4gIGZvbnQtc2l6ZTogMS4ycmVtO1xuICBsaW5lLWhlaWdodDogMS4ycmVtOyB9XG5cbi8qXHJcbiAqIFRpdGxlIEJhclxyXG4gKi9cbi50aXRsZS1iYXIge1xuICBtYXJnaW46IDAgMCAxcmVtO1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IH1cbiAgLnRpdGxlLWJhciBoMyB7XG4gICAgbWFyZ2luOiAwO1xuICAgIGNvbG9yOiAjMDQxN2MyOyB9XG4gIC50aXRsZS1iYXIgLmljb24ge1xuICAgIGZvbnQtc2l6ZTogMS42cmVtOyB9XG4gIC50aXRsZS1iYXIgLmhlYXJ0IHtcbiAgICBjb2xvcjogIzkzMTgxODsgfVxuXG4vKlxyXG4gKiBXb3Jrb3V0IExpc3RcclxuICovXG4ud29ya291dExpc3Qge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xuICBib3JkZXItcmFkaXVzOiA5cHg7XG4gIGJvcmRlcjogc29saWQgMnB4ICNjN2M3Yzc7XG4gIHBhZGRpbmc6IDAuMTJyZW07IH1cbiAgLndvcmtvdXRMaXN0IC5saXN0LWhlYWRlciB7XG4gICAgLS1pb24tc2FmZS1hcmVhLWxlZnQ6MDtcbiAgICAtLXBhZGRpbmctc3RhcnQ6IDA7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzA0MTdjMjtcbiAgICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiA2cHg7XG4gICAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDZweDsgfVxuICAgIC53b3Jrb3V0TGlzdCAubGlzdC1oZWFkZXIgaDMge1xuICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICB3aWR0aDogMTAwJTtcbiAgICAgIG1hcmdpbjogMC4yNXJlbSAwO1xuICAgICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcbiAgICAgIGZvbnQtc2l6ZTogMXJlbTsgfVxuICAud29ya291dExpc3QgLndvcmtvdXRMaXN0QmtnIHtcbiAgICAtLWJhY2tncm91bmQ6IG5vbmU7XG4gICAgLS1pb24tc2FmZS1hcmVhLWxlZnQ6MDtcbiAgICAtLWlvbi1zYWZlLWFyZWEtcmlnaHQ6IDA7XG4gICAgLS1wYWRkaW5nLXN0YXJ0OiAwOyB9XG4gICAgLndvcmtvdXRMaXN0IC53b3Jrb3V0TGlzdEJrZyBpb24tbGFiZWwge1xuICAgICAgcGFkZGluZzogMC4yMXJlbSAwLjcycmVtO1xuICAgICAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemU7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOyB9XG5cbi8qXHJcbiAqIEZvb3RlciBTZWN0aW9uXHJcbiAqL1xuc2VjdGlvbi5jb250ZW50LWZvb3RlciB7XG4gIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcbiAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vYXNzZXRzL2ltZy9tZWFsLWZvb3Rlci1iYWNrZ3JvdW5kLmpwZ1wiKTtcbiAgbWFyZ2luLWxlZnQ6IC0xNnB4O1xuICBtYXJnaW4tcmlnaHQ6IC0xNnB4O1xuICBtYXJnaW4tYm90dG9tOiAtMTZweDtcbiAgbWFyZ2luLXRvcDogM3JlbTtcbiAgbWluLWhlaWdodDogMjcwcHg7IH1cbiAgc2VjdGlvbi5jb250ZW50LWZvb3RlciBpb24tYnV0dG9uIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgdG9wOiAtMXJlbTtcbiAgICBsZWZ0OiBjYWxjKDUwdncgLSA3LjVlbSk7XG4gICAgbWF4LXdpZHRoOiAyMTBweDtcbiAgICAtLWJvcmRlci1yYWRpdXM6IDZweDsgfVxuXG4ubWFyZ2luLTAge1xuICBtYXJnaW46IDBweDtcbiAgcGFkZGluZzogMHB4OyB9XG5cbi52aWRlby1jc3Mge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxODBweDtcbiAgb2JqZWN0LWZpdDogY292ZXI7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7IH1cblxuKjo6LXdlYmtpdC1tZWRpYS1jb250cm9scy1wYW5lbCB7XG4gIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDtcbiAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lOyB9XG5cbi8qIE9sZCBzaGFkb3cgZG9tIGZvciBwbGF5IGJ1dHRvbiAqL1xuKjo6LXdlYmtpdC1tZWRpYS1jb250cm9scy1wbGF5LWJ1dHRvbiB7XG4gIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDtcbiAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lOyB9XG5cbi8qIE5ldyBzaGFkb3cgZG9tIGZvciBwbGF5IGJ1dHRvbiAqL1xuLyogVGhpcyBvbmUgd29ya3MhICovXG4qOjotd2Via2l0LW1lZGlhLWNvbnRyb2xzLXN0YXJ0LXBsYXliYWNrLWJ1dHRvbiB7XG4gIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDtcbiAgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lOyB9XG5cbi5idG5Nb3JlIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDQwJTtcbiAgcmlnaHQ6IDA7XG4gIC8qIGJvdHRvbTogMDsgKi9cbiAgbGVmdDogMDtcbiAgY29sb3I6IHdoaXRlO1xuICBtYXJnaW46IGF1dG87XG4gIGZvbnQtc2l6ZTogNDFweDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICB6LWluZGV4OiA5OTk5OyB9XG5cbi5jb250YWluZXItMiB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmMmYyZjI7IH1cblxuLmNvbnRhaW5lci0xIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0ZGRkZGRjsgfVxuXG4uY29udGFpbmVyLTMge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjRjFGMUYxOyB9XG5cbi52aWRlby1jYXJkIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIG1hcmdpbi10b3A6IDIwcHg7XG4gIGJveC1zaGFkb3c6IHVuc2V0OyB9XG5cbi5iYWNrLWdyb3VuZC13aGl0ZSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBib3gtc2hhZG93OiB1bnNldDsgfVxuXG4uZm9udC1zaXplLTE4IHtcbiAgZm9udC1zaXplOiAxOHB4O1xuICBtYXJnaW4tbGVmdDogNXB4OyB9XG5cbi5tYXJnaW4tdG9wLTcge1xuICBtYXJnaW4tdG9wOiA3cHg7IH1cbiJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/user_pages/track-workout/track-workout.page.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/user_pages/track-workout/track-workout.page.ts ***!
+  \****************************************************************/
+/*! exports provided: TrackWorkoutPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrackWorkoutPage", function() { return TrackWorkoutPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/global-services.service */ "./src/app/services/global-services.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var src_app_services_food_suggestions_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/food-suggestions.service */ "./src/app/services/food-suggestions.service.ts");
+/* harmony import */ var src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/api-call.service */ "./src/app/services/api-call.service.ts");
+/* harmony import */ var _home_add_workout_modal_home_add_workout_modal_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../home-add-workout-modal/home-add-workout-modal.page */ "./src/app/user_pages/home-add-workout-modal/home-add-workout-modal.page.ts");
+/* harmony import */ var _modals_view_video_view_video__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../modals/view-video/view-video */ "./src/app/user_pages/modals/view-video/view-video.ts");
+
+
+
+
+
+
+
+
+
+// import { url } from 'inspector';
+var TrackWorkoutPage = /** @class */ (function () {
+    function TrackWorkoutPage(activatedRoute, globalServices, modalController, foodSuggestionsService, myAPI, router) {
+        this.activatedRoute = activatedRoute;
+        this.globalServices = globalServices;
+        this.modalController = modalController;
+        this.foodSuggestionsService = foodSuggestionsService;
+        this.myAPI = myAPI;
+        this.router = router;
+        this.day = "";
+        this.today = false;
+        this.dayNumber = null;
+        this.date = null;
+        this.meals = [];
+        this.exercises = [];
+        this.weekDays = [
+            { 'name': 'S', selected: false },
+            { 'name': 'M', selected: false },
+            { 'name': 'T', selected: true },
+            { 'name': 'W', selected: false },
+            { 'name': 'T', selected: false },
+            { 'name': 'F', selected: false },
+            { 'name': 'S', selected: false }
+        ];
+        this.isSetsCompleted = false;
+    }
+    TrackWorkoutPage.prototype.ngOnInit = function () {
+        this.date = this.activatedRoute.snapshot.paramMap.get('day');
+        if (this.date == '') {
+            this.date = this.date = this.globalServices.getTodayDate();
+        }
+        this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
+        if (this.date == this.globalServices.getTodayDate()) {
+            this.today = true;
+            this.day = "Today";
+        }
+        //this.loadExercises();
+    };
+    TrackWorkoutPage.prototype.doRefresh = function (event) {
+        this.ngOnInit();
+        event.target.complete();
+    };
+    TrackWorkoutPage.prototype.handleSwipeLeft = function () {
+        if (this.today) {
+            // won't swipeLeft 
+        }
+        else
+            this.globalServices.swipeLeft("/track-workout/" + this.globalServices.getNextDate(this.date));
+    };
+    TrackWorkoutPage.prototype.handleSwipeRight = function () {
+        if (this.dayNumber > 1) {
+            this.globalServices.swipeRight("/track-workout/" + this.globalServices.getPreviousDate(this.date));
+        }
+    };
+    TrackWorkoutPage.prototype.loadExercises = function () {
+        var _this = this;
+        this.myAPI.makeAPIcall("exercises.php", {
+            "action": "getExercises",
+            "date": this.date
+        }, true).subscribe(function (result) {
+            if (result.error) {
+                _this.myAPI.handleMyAPIError(result.error);
+            }
+            else {
+                _this.exercises = result.success.exercises;
+            }
+        });
+    };
+    TrackWorkoutPage.prototype.openExerciseModal = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalController.create({
+                            component: _home_add_workout_modal_home_add_workout_modal_page__WEBPACK_IMPORTED_MODULE_7__["HomeAddWorkoutModalPage"],
+                            componentProps: { date: this.date }
+                        })];
+                    case 1:
+                        modal = _a.sent();
+                        modal.onDidDismiss()
+                            .then(function (response) {
+                            if (response.data) {
+                                _this.loadExercises();
+                            }
+                        });
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    TrackWorkoutPage.prototype.removeExercise = function (exercise_id) {
+        this.exercises = this.exercises.filter(function (el) { return el.id !== exercise_id; });
+        this.myAPI.makeSilentCall('exercises.php', {
+            'action': 'removeExercise',
+            exercise_id: exercise_id
+        }, true);
+    };
+    TrackWorkoutPage.prototype.onClickDate = function (data, i) {
+        this.weekDays.forEach(function (item, index) {
+            if (index === i) {
+                data.selected = true;
+            }
+            else {
+                item.selected = false;
+            }
+        });
+    };
+    TrackWorkoutPage.prototype.videocontorl = function (url) {
+        this.isShow = !this.isShow;
+    };
+    TrackWorkoutPage.prototype.viewVideo = function (url) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal, data;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalController.create({
+                            component: _modals_view_video_view_video__WEBPACK_IMPORTED_MODULE_8__["ViewVideo"],
+                            cssClass: 'my-custom-modal-year-css',
+                            componentProps: { url: url }
+                        })];
+                    case 1:
+                        modal = _a.sent();
+                        return [4 /*yield*/, modal.present()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, modal.onWillDismiss()];
+                    case 3:
+                        data = (_a.sent()).data;
+                        console.log('data t', data);
+                        if (data !== undefined) {
+                            this.isSetsCompleted = data.isSetsDone;
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TrackWorkoutPage.prototype.showSettings = function () {
+        this.router.navigateByUrl('/settings');
+    };
+    TrackWorkoutPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-track-workout',
+            template: __webpack_require__(/*! ./track-workout.page.html */ "./src/app/user_pages/track-workout/track-workout.page.html"),
+            styles: [__webpack_require__(/*! ./track-workout.page.scss */ "./src/app/user_pages/track-workout/track-workout.page.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            src_app_services_global_services_service__WEBPACK_IMPORTED_MODULE_3__["GlobalServicesService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"],
+            src_app_services_food_suggestions_service__WEBPACK_IMPORTED_MODULE_5__["FoodSuggestionsService"],
+            src_app_services_api_call_service__WEBPACK_IMPORTED_MODULE_6__["ApiCallService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+    ], TrackWorkoutPage);
+    return TrackWorkoutPage;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=track-workout-track-workout-module.js.map
