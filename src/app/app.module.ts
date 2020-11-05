@@ -35,6 +35,7 @@ import { UserInfoPageModule } from './user_pages/user-info/user-info.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { DatePipe } from '@angular/common';
 import { NotificationModalModule } from './user_pages/modals/notification-modal/notification-modal.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -59,7 +60,8 @@ import { NotificationModalModule } from './user_pages/modals/notification-modal/
       AddSleepModalPageModule,
       AddWaterModalPageModule,
       UserInfoPageModule,
-      NotificationModalModule
+      NotificationModalModule,
+      BrowserAnimationsModule
     ],
   providers: [
     StatusBar,
