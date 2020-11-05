@@ -33,12 +33,13 @@ export class TrackWorkoutPage implements OnInit {
   isShow: boolean;
   isSetsCompleted = false;
 
-  constructor(private activatedRoute: ActivatedRoute, 
+  constructor(private activatedRoute: ActivatedRoute,
     private globalServices: GlobalServicesService,
     private modalController: ModalController,
-    private foodSuggestionsService: FoodSuggestionsService, 
+    private foodSuggestionsService: FoodSuggestionsService,
     private myAPI: ApiCallService,
-    private router: Router
+    private router: Router,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -152,4 +153,13 @@ export class TrackWorkoutPage implements OnInit {
   showSettings() {
     this.router.navigateByUrl('/settings');
   }
+  async handleButtonClick(ev) {
+    const popover = await this.popoverController.create({
+       component: NotificationModal,
+       event: ev,
+       translucent: true,
+     });
+     await popover.present();
+     const { data } = await popover.onWillDismiss();
+   }
 }

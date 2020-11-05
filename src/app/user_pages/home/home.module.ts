@@ -8,7 +8,11 @@ import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home.page';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ChartsModule } from 'ng2-charts';
-
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material';
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +25,12 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
     NgCircleProgressModule.forRoot({
       "radius": 60,
       "maxPercent": 100,
