@@ -11,6 +11,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
 import * as pluginLabels from 'chartjs-plugin-labels';
 import { AddEventModalPage } from '../add-event-modal/add-event-modal.page';
 import {NotificationModal} from '../modals/notification-modal/notification-modal';
+
 @Component({
   selector: 'app-track-meal',
   templateUrl: './track-meal.page.html',
@@ -51,22 +52,87 @@ export class TrackMealPage implements OnInit {
       backgroundColor: ['#00B8FF', '#FF00CB', '#2CA500'],
     },
   ];
-  todaysMealsList = [{name: '10 Ounces of ribeye', cal: '769 cal.', selected: false},
-  {name: '2 Ounces of broccoli', cal: '80 cal.', selected: false},
-  {name: '1 Ounces of cheese', cal: '100 cal.', selected: false}]
-  suggestionList =  [{name: 'Bang Keto Coffee- BCB', cal: '120 cal.', selected: false},
-  {name: 'Pristine Protein WPI ', cal: '90 cal.', selected: false},
-  {name: '8 KETO ZERO CARB', cal: '50 cal.', selected: false}]
-  constructor( private globalServices: GlobalServicesService, private activatedRoute: ActivatedRoute,
-    public router: Router, public alertController: AlertController
-   , private foodSuggestionsService: FoodSuggestionsService, private myAPI: ApiCallService,
-  private modalController: ModalController, public popoverController: PopoverController) { }
+
+  constructor( 
+    private globalServices: GlobalServicesService, 
+    private activatedRoute: ActivatedRoute,
+    public router: Router, 
+    public alertController: AlertController, 
+    private foodSuggestionsService: FoodSuggestionsService, 
+    private myAPI: ApiCallService,
+    private modalController: ModalController, 
+    public popoverController: PopoverController
+  ) { }
+
+  // TO DO: new variables, functions
+  todaysNutrition = {
+    calories: {intake: 1100, recommended: 2200},
+    fats: {intake: 42, recommended: 101},
+    protein: {intake: 62, recommended: 401},
+    carbs: {intake: 101, recommended: 201},
+    numMeals: 3,
+    meals: [
+      {desc: "10 Ounces of Ribeye", calories: 800, fat: 20, protein: 20, carbs: 10, selected: false},
+      {desc: "3 Ounces of Broccoli", calories: 60, fat: 0, protein: 0, carbs: 10, selected: false},
+      {desc: "1 Ounce of Cheese", calories: 100, fat: 5, protein: 2, carbs: 0, selected: false}
+    ],
+    suggestions: [
+      {name: 'Bang Keto Coffee- BCB', cal: '120 cal.', fat: 0, protein: 0, carbs: 0, selected: false},
+      {name: 'Pristine Protein WPI ', cal: '90 cal.', fat: 8, protein: 16, carbs: 10, selected: false},
+      {name: '8 KETO ZERO CARB', cal: '50 cal.', fat: 2, protein: 8, carbs: 10, selected: false}
+    ],
+    ratio: {fat: 10, protein: 50, carbs: 40}
+  }
+
+  progressBar: number = this.todaysNutrition.calories.intake / this.todaysNutrition.calories.recommended;
+  caloriesRemaining = this.todaysNutrition.calories.recommended - this.todaysNutrition.calories.intake;
+
+  // gets todaysNutrition
+	getTodaysNutrition() {
+		this.myAPI.makeAPIcall(
+			"todays-nutrition",
+			{
+				"action": "loadNutrition",
+				"date": this.date
+			},
+			true
+		)
+		.subscribe(
+			response => {
+				// handle error
+				if( response.error ){
+					this.myAPI.handleMyAPIError(response.error);
+				} 
+				// successful response
+				else {
+					let data = response.success;
+					this.todaysNutrition = data.todaysNutrition;
+					console.log("Today: ", this.todaysNutrition);
+				}
+			},
+			error => console.log(error)
+		)
+	}
+
+    // call API to get calories
+    // set variables
+    // calculate progress bar
+    // display breakdown of fats, proteins, carbs
+    // display numOfMeals
+    // calculate and display calories remaining
+    // get days in Plan (plan.day, plan.totaldays)
+    // list meals already consumed:
+    // - meal.desc, meal.calories, meal.fat, meal.protein, meal.carbs
+    // get data for calorie ratio, ratio.fat, ratio.protein, ratio.carbs
+    // get supplement suggestions:
+    //   - suggest.desc, suggest.calories, .fat, .protein, .carbs
+
 
   ngOnInit() {
-    // PIE CHART SETTINGS
+    // CALORIE RATIO CHART SETTINGS
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
-    this.pieChartData = [50.4, 33.6, 15.9];
+    this.pieChartData = [this.todaysNutrition.ratio.protein, this.todaysNutrition.ratio.carbs, this.todaysNutrition.ratio.fat];
     this.pieChartType = 'doughnut';
     this.pieChartLegend = true;
     this.pieChartPlugins = [pluginLabels];
@@ -84,7 +150,7 @@ export class TrackMealPage implements OnInit {
     }
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
     this.suggestedSupplements = this.foodSuggestionsService.getSupplementSuggestions(this.date, this.planLength_weeks);
-    //this.loadMeals();
+    this.loadMeals();
   }
 
   // PIE CHART OPTIONS
@@ -114,51 +180,27 @@ export class TrackMealPage implements OnInit {
 
   handleSwipeLeft() {
     this.dayNumberVal = this.dayNumberVal + 1
-      this.dateVal = this.dateVal + 1
-    // if(this.dayNumberVal == 17) {
-    //   this.dayNumberVal = this.dayNumberVal + 1
-    //   this.dateVal = this.dateVal + 1
-    // }else if(this.dayNumberVal == 19){
-    //   this.dayNumberVal = this.dayNumberVal + 1
-    //   this.dateVal = this.dateVal + 1
-    // }else if(this.dayNumberVal == 18) {
-    //   this.dayNumberVal = this.dayCount + 1
-    //   this.dateVal = this.dateCount + 1
-    //   }
-    
+      this.dateVal = this.dateVal + 1; 
     if(this.today){
       //won't swipe left tomorrow
-    }else{
-     
+    }else{  
       this.globalServices.swipeLeft("/track-meal/" );
     }
-
   }
 
   handleSwipeRight() {
     this.dayNumberVal = this.dayNumberVal - 1
     this.dateVal = this.dateVal - 1
-    // if(this.dayNumberVal == 17) {
-    //   this.dayNumberVal = this.dayCount - 1
-    //   this.dateVal = this.dateCount - 1
-    // }else if(this.dayNumberVal == 19){
-    //   this.dayNumberVal = this.dayNumberVal - 1
-    //   this.dateVal = this.dateVal - 1
-    // }else if(this.dayNumberVal == 18) {
-    //   this.dayNumberVal = this.dayCount - 1
-    //   this.dateVal = this.dateCount - 1
-    // }
     if( this.dayNumber > 1 ){
-      // this.dayNumberVal = this.dayCount - 1
-      // this.dateVal = this.dateCount - 1
       this.globalServices.swipeRight("/track-meal/");
     }
   }
 
   loadMeals(){
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
+    console.log("Loading meals...");
+    // this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
     this.myAPI.makeAPIcall(
-      "meals.php", 
+      "meals", 
       {
         "action": "getDayInfo",
         "date":this.date
@@ -169,6 +211,7 @@ export class TrackMealPage implements OnInit {
         this.myAPI.handleMyAPIError(result.error);
       }
       else{
+        console.log("Load Meals: ", result.success);
         this.meals = result.success.dayInfo.meals;
         this.exercises = result.success.dayInfo.exercises;
         this.calculateCaloriesConsumed();
@@ -177,19 +220,6 @@ export class TrackMealPage implements OnInit {
   }
 
   async openFoodModal(){
-    // const modal = await this.modalController.create({
-    //   component: HomeAddFoodModalPage,
-    //   componentProps: { date: this.date }
-    // });
-
-    // modal.onDidDismiss()
-    //   .then((response) => {
-    //     if( response.data ){
-    //       this.loadMeals();
-    //     }        
-    // });
-
-    // return await modal.present();
     this.router.navigateByUrl('/home-add')
   }
 
@@ -239,6 +269,7 @@ export class TrackMealPage implements OnInit {
     const modal = await this.modalController.create({component: AddEventModalPage});
     return await modal.present();
   }
+
   // Alert to delete today's meals list
   async deleteItem() {
     const alert = await this.alertController.create({
@@ -269,6 +300,7 @@ export class TrackMealPage implements OnInit {
   showSettings() {
     this.router.navigateByUrl('/settings');
   }
+
   async handleButtonClick(ev) {
     const popover = await this.popoverController.create({
        component: NotificationModal,
@@ -277,5 +309,5 @@ export class TrackMealPage implements OnInit {
      });
      await popover.present();
      const { data } = await popover.onWillDismiss();
-   }
+  }
 }

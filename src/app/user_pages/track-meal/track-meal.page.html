@@ -29,11 +29,11 @@
     <ion-row class="margin-top-10">
       <ion-col>Calorie intake/recommended
         <div class="row">
-          <h1 class="color-text">800</h1><h1>/2000</h1>
+          <h1 class="color-text">{{ todaysNutrition.calories.intake }}</h1><h1>/{{ todaysNutrition.calories.recommended }}</h1>
         </div>
         <div class="daily-progress">
           <div class="row"><div class="chart ionBar-progress">
-            <ion-progress-bar value="0.6" class="height-20"></ion-progress-bar>
+            <ion-progress-bar value="{{ progressBar }}" class="height-20"></ion-progress-bar>
           </div>
         </div>
       </div>
@@ -43,33 +43,33 @@
       <ion-col size="4">
         <div>Fat(grams)</div>
         <div class="row">
-          <h2 class="fat-color">58 </h2><h2 class="colo-black padding-left-5"> /100</h2>
+          <h2 class="fat-color">{{ todaysNutrition.fats.intake }} </h2><h2 class="colo-black padding-left-5"> /{{ todaysNutrition.fats.recommended }}</h2>
         </div>
       </ion-col>
       <ion-col size="4" style="padding: 0px;
       margin: auto;">
         <div>Protein(grams)</div>
         <div class="row">
-          <h2 class="protein-color">400 </h2><h2 class="colo-black padding-left-5"> /500</h2>
+          <h2 class="protein-color">{{ todaysNutrition.protein.intake }} </h2><h2 class="colo-black padding-left-5"> /{{ todaysNutrition.protein.recommended }}</h2>
         </div>
       </ion-col>
       <ion-col size="4">
         <div>Carbs(grams)</div>
         <div class="row">
-          <h2 class="crab-color">100 </h2><h2 class="colo-black padding-left-5"> /200</h2>
+          <h2 class="crab-color">{{ todaysNutrition.carbs.intake }} </h2><h2 class="colo-black padding-left-5"> /{{ todaysNutrition.carbs.recommended }}</h2>
         </div>
       </ion-col>
     </ion-row>
     <ion-row class="margin-top-15">
       <ion-col size="5.5" class="goal-weight">
         <div class="row">
-          <h1 class="align-center">1200</h1>
+          <h1 class="align-center">{{ caloriesRemaining }}</h1>
         </div>
         <div>Calories Remaining</div>
       </ion-col>
       <ion-col size="5.5" class="current-weight">
         <div class="row">
-          <h1 class="align-center" >5</h1>
+          <h1 class="align-center" >{{ todaysNutrition.numMeals }}</h1>
         </div>
         <div>Meals Consumed</div>
       </ion-col>
@@ -97,44 +97,44 @@
         </ion-col>
       </ion-row>
       <div class="margin-top-10">
-        <div *ngFor="let data of todaysMealsList" style="margin:10px 0px;border-bottom:1px solid gainsboro">
+        <div *ngFor="let meal of todaysNutrition.meals" style="margin:10px 0px;border-bottom:1px solid gainsboro">
             <ion-row >
-              <ion-col size="0.5" (click)="expandRow(data)">
-                <ion-icon name="arrow-down" *ngIf="data.selected"></ion-icon>
-                <ion-icon name="arrow-forward" *ngIf="!data.selected"></ion-icon>
+              <ion-col size="0.5" (click)="expandRow(meal)">
+                <ion-icon name="arrow-down" *ngIf="meal.selected"></ion-icon>
+                <ion-icon name="arrow-forward" *ngIf="!meal.selected"></ion-icon>
               </ion-col>
-              <ion-col size="7" class="text-align-left-auto" (click)="expandRow(data)">{{data.name}}</ion-col>
-              <ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(data)">
-               {{data.cal}}
+              <ion-col size="7" class="text-align-left-auto" (click)="expandRow(meal)">
+                {{meal.desc}}
+              </ion-col>
+              <ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(meal)">
+               {{meal.calories}}
               </ion-col>
               <ion-col size="1" class="text-align-left-auto" (click)="deleteItem()">
                 <ion-icon class="color-red" name="trash"></ion-icon>
               </ion-col>
             </ion-row>
-            <ion-row class="margin-top-10" *ngIf="data.selected">
+            <ion-row class="margin-top-10" *ngIf="meal.selected">
               <ion-col size="4" class="align-center">
                 <div>Fat(grams)</div>
                 <div class="align-center">
-                  <h2 class="fat-color">58</h2>
+                  <h2 class="fat-color">{{meal.fat}}</h2>
                 </div>
               </ion-col>
               <ion-col size="4" class="align-center">
                 <div>Protein(grams)</div>
                 <div class="align-center">
-                  <h2 class="protein-color">300</h2>
+                  <h2 class="protein-color">{{meal.protein}}</h2>
                 </div>
               </ion-col>
               <ion-col size="4" class="align-center">
                 <div>Carbs(grams)</div>
                 <div class="align-center">
-                  <h2 class="crab-color">300</h2>
+                  <h2 class="crab-color">{{meal.carbs}}</h2>
                 </div>
               </ion-col>
             </ion-row>
-        </div>
-        
-      </div>
-      
+        </div>       
+      </div>  
       <div class="margin-top-10"></div>
     </ion-card>
     <ion-row class="margin-top-10 margin-left-right-15">
@@ -176,16 +176,17 @@
       </ion-col>
     </ion-row>
     <ion-row class="margin-top-15">
-      <ion-col><canvas baseChart *ngIf="pieChartData"
-        [data]="pieChartData" 
-        [labels]="pieChartLabels" 
-        [chartType]="pieChartType"
-        [options]="pieChartOptions"
-        [plugins]="pieChartPlugins"
-        [legend]="pieChartLegend"
-        [colors]="pieChartColors" height="230">
-      </canvas></ion-col>
-
+      <ion-col>
+				<canvas baseChart *ngIf="pieChartData"
+					[data]="pieChartData" 
+					[labels]="pieChartLabels" 
+					[chartType]="pieChartType"
+					[options]="pieChartOptions"
+					[plugins]="pieChartPlugins"
+					[legend]="pieChartLegend"
+					[colors]="pieChartColors" height="230">
+				</canvas>
+			</ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid class="padding-20 grid1-background">
@@ -195,47 +196,49 @@
       </ion-col>
     </ion-row>
     <div class="margin-top-10">
-      <div *ngFor="let data of suggestionList" style="margin:10px 0px;border-bottom:1px solid gainsboro">
-          <ion-row  style="width:100%">
-            <ion-col size="0.5" (click)="expandRow(data)">
-              <ion-icon name="arrow-down" *ngIf="data.selected"></ion-icon>
-              <ion-icon name="arrow-forward" *ngIf="!data.selected"></ion-icon>
-            </ion-col>
-            <ion-col size="7" class="text-align-left-auto" (click)="expandRow(data)">{{data.name}}</ion-col>
-            <ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(data)">
-             {{data.cal}}
-            </ion-col>
-            <ion-col size="1" class="text-align-left-auto">
-              <ion-icon name="add-circle"></ion-icon>
-            </ion-col>
-          </ion-row>
-          <div *ngIf="data.selected">
-            <ion-row class="margin-top-10" >
-              <ion-col size="4" class="align-center">
-                <div>Fat(grams)</div>
-                <div class="align-center">
-                  <h2 class="fat-color">58</h2>
-                </div>
-              </ion-col>
-              <ion-col size="4" style="padding: 0px;" class="align-center">
-                <div>Protein(grams)</div>
-                <div class="align-center">
-                  <h2 class="protein-color">300</h2>
-                </div>
-              </ion-col>
-              <ion-col size="4" class="align-center">
-                <div>Carbs(grams)</div>
-                <div class="align-center">
-                  <h2 class="crab-color">300</h2>
-                </div>
-              </ion-col>
-            </ion-row>
-            <ion-row class="margin-top-10">
-              <ion-col class="color-text" style="text-align: right;">
-                Order Now
-              </ion-col>
-            </ion-row>
-          </div>
+      <div *ngFor="let suggestion of todaysNutrition.suggestions" style="margin:10px 0px;border-bottom:1px solid gainsboro">
+				<ion-row  style="width:100%">
+					<ion-col size="0.5" (click)="expandRow(suggestion)">
+						<ion-icon name="arrow-down" *ngIf="suggestion.selected"></ion-icon>
+						<ion-icon name="arrow-forward" *ngIf="!suggestion.selected"></ion-icon>
+					</ion-col>
+					<ion-col size="7" class="text-align-left-auto" (click)="expandRow(suggestion)">
+						{{suggestion.name}}
+					</ion-col>
+					<ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(data)">
+						{{suggestion.cal}}
+					</ion-col>
+					<ion-col size="1" class="text-align-left-auto">
+						<ion-icon name="add-circle"></ion-icon>
+					</ion-col>
+				</ion-row>
+				<div *ngIf="suggestion.selected">
+					<ion-row class="margin-top-10" >
+						<ion-col size="4" class="align-center">
+							<div>Fat(grams)</div>
+							<div class="align-center">
+								<h2 class="fat-color">{{suggestion.fat}}</h2>
+							</div>
+						</ion-col>
+						<ion-col size="4" style="padding: 0px;" class="align-center">
+							<div>Protein(grams)</div>
+							<div class="align-center">
+								<h2 class="protein-color">{{suggestion.protein}}</h2>
+							</div>
+						</ion-col>
+						<ion-col size="4" class="align-center">
+							<div>Carbs(grams)</div>
+							<div class="align-center">
+								<h2 class="crab-color">{{suggestion.carbs}}</h2>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row class="margin-top-10">
+						<ion-col class="color-text" style="text-align: right;">
+							Order Now
+						</ion-col>
+					</ion-row>
+				</div>
       </div>
     </div>
     <ion-row class="margin-top-10 margin-left-right-15">
@@ -266,7 +269,3 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-<!-- <ion-footer>
-  <ion-button  expand="block" class="addFood btn btn-primary block-center margin-10" *ngIf="today" (click)="openFoodModal()" class="button">Add Food</ion-button>
-
-</ion-footer> -->
