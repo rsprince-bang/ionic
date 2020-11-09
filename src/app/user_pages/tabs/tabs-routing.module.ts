@@ -10,7 +10,7 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'home/:day',
+        path: 'home',
         children: [
           {
             path: '',

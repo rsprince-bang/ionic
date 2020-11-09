@@ -63,7 +63,7 @@ export class RegisterPage implements OnInit {
               this.router.navigateByUrl("/enter-measurements");
             }
             else{
-              this.router.navigateByUrl("/tabs/home/today");
+              this.router.navigateByUrl("/tabs/home");
             }
           }
           else {
