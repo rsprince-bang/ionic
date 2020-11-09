@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-event-modal',
@@ -10,12 +11,15 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 })
 export class AddEventModalPage implements OnInit {
   searchTerm: string;
-  meals = {};
+  searchResults = [];
+  today = new Date();
+	date = this.datePipe.transform(this.today, 'yyyy-MM-dd');
   
   constructor(
     public modalController: ModalController,
     public router:Router,
-    private myAPI: ApiCallService
+    private myAPI: ApiCallService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -26,13 +30,11 @@ export class AddEventModalPage implements OnInit {
   }
 
   searchMeals() {
-    console.log("Search Meals", this.searchTerm);
-
     this.myAPI.makeAPIcall(
-			"searchMeals",
+			"food_api_nutritionix",
 			{
-        "action": "sendSearchTerm",
-        "searchTerm": this.searchTerm
+        "action": "loadFoods",
+        "food": this.searchTerm
 			},
 			true
 		)
@@ -45,12 +47,36 @@ export class AddEventModalPage implements OnInit {
 				// successful response
 				else {
 					let data = response.success;
-					this.meals = data.meals;
-					console.log();
+					this.searchResults = data;
 				}
 			},
 			error => console.log(error)
 		)
+  }
+
+  addMeal(item){
+    this.myAPI.makeAPIcall( // old version used .makeSilentcall() ?
+      "food_api_nutritionix", 
+      {
+        "action": "nutritionixAddMeal",
+        "foods": item,
+        "day": this.date
+      },
+      true
+    )
+    .subscribe(
+			response => {
+				// handle error
+				if( response.error ){
+					this.myAPI.handleMyAPIError(response.error);
+				}
+				else {
+          console.log("Meal Added...");
+          this.modalController.dismiss(item);
+				}
+			},
+			error => console.log(error)
+		);
   }
 
   sendData() {

@@ -40,7 +40,7 @@ export class AddSleepModalPage implements OnInit {
     this.updateSleep();
   }
   
-  	// update water intake
+  // update sleep intake
 	updateSleep() {
 		this.myAPI.makeAPIcall(
 			"sleep",

@@ -620,6 +620,12 @@ svg:not(:root) {
 .margin-left-right-2 {
     margin:0px 2px;
 }
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
 .color-red {
     color: red;
 }
