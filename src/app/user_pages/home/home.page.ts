@@ -16,7 +16,7 @@ import { AddSleepModalPage } from '../add-sleep-modal/add-sleep-modal.page';
 import { AddWaterModalPage } from '../add-water-modal/add-water-modal.page';
 import {NotificationModal} from '../modals/notification-modal/notification-modal';
 import * as moment from 'moment-timezone';
-
+import { AddEventModalPage } from '../add-event-modal/add-event-modal.page';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -395,7 +395,7 @@ export class HomePage implements OnInit {
            /* week progress bar chart x-axis data */
             labels: ['1', '2', '3', '4', '5', '6', '7'],
             datasets: [{
-                label: 'Weight',
+                label: 'Lean Body Mass',
                 /* date of weight */
                 data: [13, 10, 35, 30.25, 30, 37, 27],
                 fill: false, borderColor: '#00ff00', backgroundColor: '#00ff00'},
@@ -614,7 +614,6 @@ clickOnWeight() {
     const modal = await this.modalController.create({component: AddSleepModalPage});
     return await modal.present();
   }
-  
 	async openWaterModal() {
     const modal = await this.modalController.create({component: AddWaterModalPage});
     return await modal.present();
@@ -651,5 +650,10 @@ clickOnWeight() {
       currentDate.getDate())) / (1000 * 60 * 60 * 24));
       return noOfDays + 1;
     }
+  }
+  // function to open add meal modal
+  async openModal() {
+    const modal = await this.modalController.create({component: AddEventModalPage});
+    return await modal.present();
   }
 }

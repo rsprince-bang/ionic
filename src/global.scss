@@ -108,9 +108,11 @@ small {
 }
 
 h1 {
-	font-weight: bold;
-	text-transform: uppercase;
-	margin-bottom: 16px;
+	font-weight: 500 !important;
+	text-transform: capitalize !important;
+    margin-bottom: 0px;
+    color: black ;
+    margin-top: 0px;
 	// margin-left: -4px;
 }
 
@@ -800,4 +802,35 @@ ion-fab-button[data-desc]::after {
 }	
 textarea:focus, input:focus{	
     outline: none;	
+}
+.padding-top-bottom-30 {
+    padding: 30px 0px !important;
+}
+.padding-top-0 {
+    padding-top: 0px !important;
+}
+.padding-bottom-0 {
+    padding-bottom: 0px !important;
+}
+.padding-left-right-20 {
+    padding: 0px 20px;
+}
+.color-white {
+    color: white !important;
+}
+.font-size-24 {
+    font-size: 24px;
+}
+.text-left-auto {
+    text-align: left;
+    margin: auto;
+}
+.padding-left-right-30 {
+    padding: 0px 30px;
+}
+.font-size-17 {
+    font-size: 17px;
+}
+.font-size-16 {
+    font-size: 21px;
 }
