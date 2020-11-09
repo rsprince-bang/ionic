@@ -17,6 +17,7 @@
 @import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-angular-calendars/styles/material.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 $fontBold: bold;
 $lightGrey: #c9ccd0;
@@ -772,4 +773,31 @@ ion-fab-button[data-desc]::after {
 }
 .font-size-15 {
     font-size: 23px;
+}
+.padding-0 {	
+    padding: 0px;	
+}	
+.font-wight-500 {	
+    font-weight: 500;	
+}	
+.margin-left-neg-23 {	
+	margin-left: -23px;	
+}	
+.margin-top-20 {	
+    margin-top: 20px !important;	
+}	
+.font-size-30 {	
+    font-size: 30px;	
+}	
+.border-none {	
+    border: none;	
+}	
+.font-size-25 {	
+    font-size: 25px;	
+}	
+.height-310 {	
+    height: 310px;	
+}	
+textarea:focus, input:focus{	
+    outline: none;	
 }

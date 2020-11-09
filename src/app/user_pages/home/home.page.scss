@@ -266,7 +266,7 @@ h3 {
 	text-align: right;
 	margin: auto;
 }
-.paddinleft-right-5 {
+.padding-left-right-5 {
 	margin: 0px 5px;
 }
 .color-white {
@@ -347,14 +347,27 @@ h3 {
 	padding:0px 15px
 }
 .lineChart-bar {
-	height: 250px;width: 373px !important;
-	margin-left: -38px;
-	margin-top: -36px;
+	width: 106% !important;
+	height: 100% !important;
 }
 .header-css {
     padding: 0px 15px;border-bottom: 2px solid gainsboro;
 }
 .profile-background {
 	background: linear-gradient(144.62deg, #0274E3 0%, #0274E3 0%);
+	color: white;
+}
+.font-500 {
+	color: black;
+    font-weight: 500;
+}
+.sleep-chart {
+    height: 100% !important;
+    width: 104% !important;
+    margin-left: -10px;
+}
+.header-size {
+	font-weight: 500;
+	font-size: 23px;
 	color: white;
 }
