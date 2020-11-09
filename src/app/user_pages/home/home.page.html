@@ -17,21 +17,139 @@
   </ion-toolbar>
 </ion-header>
 <ion-content >
-  <ion-grid class="padding-20 content-div profile-background" >
-    <ion-row>
-      <ion-col size="3" class="margin-0 margin-auto">
+  <ion-grid class="margin-0"  >
+    <ion-row class="padding-20 content-div profile-background">
+      <ion-col size="3" class="margin-0 ">
           <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
         </ion-col>
         <ion-col size="9" class="margin-top-10">
-            <h2 class="margin-0 margin-to-7">
-              Good Morning, Jack.
-            </h2>
+            <h1 class="margin-0 margin-to-7 color-white">
+              Hi Jack!
+            </h1>
             <p class="margin-0 font-size-14">Here's your daily tracking report.</p>
       </ion-col>
     </ion-row>
+    <ion-card class="margin-0 ion-card-progress calorie-breakDown">
+      <ion-row >
+        <ion-col size="8.2">
+          <h1 class="text-capitalize font-500 font-size-24">Calorie Breakdown</h1>
+          <!-- <h1 class="header-size">Calorie Breakdown</h1> -->
+        </ion-col>
+        <ion-col size="3.8" class="color-text align-left">
+          <div class="row" (click)="openModal()">
+            <ion-icon class="margin-left  font-size-17" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+            <p >Add Meal</p>
+          </div>
+        </ion-col>
+      </ion-row>
+        <ion-row class="margin-top-15 color-black">
+          <ion-col size="2" class="align-center" (click)="picker.open()"> 
+            <!-- used material datePicker to select date -->
+            <ion-icon class="font-size-30" ios="ios-calendar" md="md-calendar"></ion-icon>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" 
+            class="border-none" style="width: 0px;" (dateChange) = onDateChange($event)>
+            <mat-datepicker #picker></mat-datepicker>
+          </ion-col>
+          <ion-col size="10" class="align-right">
+            <div class="font-500" ><p>{{currentRunningDate}}</p></div>
+            <div class="font-500"><p>Day {{CurrentRunningDay}}/49</p></div>
+          </ion-col>
+          
+        </ion-row>
+        <ion-row class="margin-top-15">
+          <ion-col>
+            <div  class="font-500">Fat Intake/recommended</div>
+            <div class="row">
+              <h2 class="fat-color">58</h2><h2 class="color-black" >/100 grams</h2>
+            </div>
+            <div class="chart fat-progress">
+              <ion-progress-bar value="0.85" class="height-12"></ion-progress-bar>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="margin-top-15">
+          <ion-col>
+            <div class="colo-black font-500">Protein Intake/recommended</div>
+            <div class="row">
+              <h2 class="protein-color">400</h2><h2 class="color-black">/500 grams</h2>
+            </div>
+            <div class="chart protein-progress">
+              <ion-progress-bar value="0.9" class="height-12"></ion-progress-bar>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="margin-top-15">
+          <ion-col>
+            <div class="colo-black font-500">Carbs Intake/recommended</div>
+            <div class="row">
+              <h2 class="crab-color">100</h2><h2 class="color-black">/200 grams</h2>
+            </div>
+            <div class="chart crab-progress">
+              <ion-progress-bar value="0.85" class="height-12"></ion-progress-bar>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card>
   </ion-grid>
-  <ion-grid class="padding-20">
-    <ion-row class="margin-top-15">
+  <ion-card class="margin-0 water-intake">
+    <ion-row class="padding-left-right-5 ">
+      <ion-col size="7">
+        <h3 class=" color-black">Water Intake</h3>
+      </ion-col>
+      <ion-col size="5" class=" color-text align-left">
+        <div class="row" (click)="openWaterModal()">
+          <ion-icon class="margin-left font-size-17" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+          <p >Add Intake</p>
+        </div>
+      </ion-col>
+    </ion-row >
+    <ion-row class="padding-left-right-5">
+      <ion-col>
+        <p class=" color-black margin-top-5">Today's Intake/Recommended</p>
+        <div class="row">
+          <h2 class=" color-text">16</h2><h2 class=" color-black">/70 ounces</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col size=12 size-md="12" size-lg="8" size-xl="4" class="pad-left-right-15">
+          <div class='chart-container-big'>
+              <canvas class="padding-10" #barIntakeCanvas height="200" ></canvas> 
+          </div>
+      </ion-col>
+  </ion-row>
+  <ion-row class="margin-auto color-white"><ion-col><p class="color-white">Week</p></ion-col></ion-row>
+  </ion-card>
+  <ion-card class=" margin-0 margin-top-20 Add-sleep ">
+    <ion-row class="padding-left-right-5">
+      <ion-col size="7">
+        <h3 class="color-white">Sleep</h3>
+      </ion-col>
+      <ion-col size="5" class="color-white align-left">
+        <div class="row" (click)="openSleepModal()">
+          <ion-icon class="margin-left  font-size-17" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+          <p >Add Sleep</p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="padding-left-right-5">
+      <ion-col>
+        <h2 class="color-white">8hrs last night</h2>
+        <div class="color-white"><p>Remember, insufficient sleep</p></div>
+         <div class="color-white"><p>Undermines, dietary efforts.</p></div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="pad-left-right-15">
+      <ion-col size=12 size-md="12" size-lg="8" size-xl="4">
+          <div class='chart-container-big'>
+              <canvas #barSleepCanvas height="200" class="sleep-chart padding-10" ></canvas> 
+          </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="margin-auto color-white"><ion-col><p class="color-white">Week</p></ion-col></ion-row>
+  </ion-card>
+  <ion-grid class="padding-20 padding-top-0">
+    <!-- <ion-row class="margin-top-15">
       <ion-col size="4" class="progress-height padding-0">
         <circle-progress
           [percent]="39"
@@ -57,144 +175,30 @@
           ></circle-progress>
       </ion-col> 
       <ion-col size="8" class="padding-0">
-        <div class="color-black"><h2>The Bang Anti-Diet</h2></div>
+        <div class="color-black"><h1>The Bang Anti-Diet</h1></div>
         <div class="color-black"><p>Week 1 of 7</p></div>
         <div class="color-black"><p>Current Weight: 165 lbs</p></div>
         <div class="color-black"><p>Goal Weight: 150 lbs</p></div>
         <div class="color-text margin-top-5"><p>Weigh In</p></div>
       </ion-col>
-    </ion-row>
-    <ion-card class="margin-0 margin-top-20 water-intake">
-      <div class="margin-top-20"></div>
-      <ion-row class="padding-left-right-5 margin-top-10">
-        <ion-col size="7">
-          <h3 class=" color-white">Water Intake</h3>
-        </ion-col>
-        <ion-col size="5" class=" color-white align-left">
-          <p >Add Intake</p>
-        </ion-col>
-      </ion-row >
-      <ion-row class="padding-left-right-5">
-        <ion-col>
-          <p class=" color-white margin-top-5">Today's Intake/Recommended</p>
-          <div class="row">
-            <h2 class=" color-white">16</h2><h2 class=" color-white">/70oz</h2>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row >
-        <ion-col size=12 size-md="12" size-lg="8" size-xl="4" class="pad-left-right-15">
-            <div class='chart-container-big'>
-                <canvas #barIntakeCanvas height="200" ></canvas> 
-            </div>
-        </ion-col>
-    </ion-row>
-    <ion-row class="margin-auto color-white"><ion-col><p class="color-white">Week</p></ion-col></ion-row>
-    <div class="margin-top-20"></div>
-    <div class="margin-top-10"></div>
-    </ion-card>
-    <ion-card class=" margin-0 margin-top-20 Add-sleep">
-      <div class="margin-top-20"></div>
-    <div class="margin-top-10"></div>
-      <ion-row class="padding-left-right-5">
-        <ion-col size="7">
-          <h3 class="color-white">Sleep</h3>
-        </ion-col>
-        <ion-col size="5" class="color-white align-left">
-          <p >Add Sleep</p>
-        </ion-col>
-      </ion-row>
-      <ion-row class="padding-left-right-5">
-        <ion-col>
-          <h2 class="color-white">8hrs last night</h2>
-          <div class="color-white"><p>Remember, insufficient sleep</p></div>
-           <div class="color-white"><p>Undermines, dietary efforts.</p></div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="pad-left-right-15">
-        <ion-col size=12 size-md="12" size-lg="8" size-xl="4">
-            <div class='chart-container-big'>
-                <canvas #barSleepCanvas height="200" class="sleep-chart" ></canvas> 
-            </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="margin-auto color-white"><ion-col><p class="color-white">Week</p></ion-col></ion-row>
-      <div class="margin-top-20"></div>
-    <div class="margin-top-10"></div>
-    </ion-card>
-    <ion-card class="margin-0 margin-top-20 ion-card-progress">
-      <div class="margin-top-20"></div>
-    <div class="margin-top-10"></div>
-    <ion-row class="margin-top-20">
-      <ion-col>
-        <h1 class="text-capitalize font-500">Calorie Breakdown</h1>
-        <!-- <h1 class="header-size">Calorie Breakdown</h1> -->
-      </ion-col>
-    </ion-row>
-      <ion-row class="margin-top-15">
-        <ion-col size="9" class="align-right">
-          <div class="font-500" ><p>{{currentRunningDate}}</p></div>
-          <div class="font-500"><h3>DAY {{CurrentRunningDay}}/49</h3></div>
-        </ion-col>
-        <ion-col size="3" class="align-center" (click)="picker.open()"> 
-          <!-- used material datePicker to select date -->
-          <ion-icon class="font-size-30" ios="ios-calendar" md="md-calendar"></ion-icon>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" 
-          class="border-none" style="width: 0px;" (dateChange) = onDateChange($event)>
-          <mat-datepicker #picker></mat-datepicker>
-        </ion-col>
-      </ion-row>
-      <ion-row class="margin-top-15">
-        <ion-col>
-          <div  class="font-500">Fat Intake/Recommended</div>
-          <div class="row">
-            <h2 class="fat-color">58</h2><h2>/100g</h2>
-          </div>
-          <div class="chart fat-progress">
-            <ion-progress-bar value="0.58" class="height-22"></ion-progress-bar>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="margin-top-15">
-        <ion-col>
-          <div class="colo-black font-500">Protein Intake/Recommended</div>
-          <div class="row">
-            <h2 class="protein-color">400</h2><h2 class="colo-black">/500g</h2>
-          </div>
-          <div class="chart protein-progress">
-            <ion-progress-bar value="0.9" class="height-22"></ion-progress-bar>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="margin-top-15">
-        <ion-col>
-          <div class="colo-black font-500">Carbs Intake/Recommended</div>
-          <div class="row">
-            <h2 class="crab-color">100</h2><h2 class="colo-black">/200g</h2>
-          </div>
-          <div class="chart crab-progress">
-            <ion-progress-bar value="0.50" class="height-22"></ion-progress-bar>
-          </div>
-        </ion-col>
-      </ion-row>
-      <div class="margin-top-20"></div>
-    <div class="margin-top-10"></div>
-    </ion-card>
+    </ion-row> -->
+   
+    
     <ion-row >
       <ion-col>
-        <ion-card class="ion-card">
-          <ion-row>
-            <ion-col size="3" class="vert-center">
+        <ion-card class="ion-card ">
+          <ion-row class="padding-top-bottom-30">
+            <ion-col size="4" class="vert-center">
               <img src="assets/img/bang-can.png" />
             </ion-col>
-            <ion-col size="9">
-              <ion-card-header>
+            <ion-col size="8">
+              <ion-card-header class="padding-top-0">
                 <ion-card-title> 
                  <h1 class="header-size"> Let's get you on <br /> 
                   track today!</h1>
                 </ion-card-title>
               </ion-card-header>
-              <ion-card-content>
+              <ion-card-content class="padding-bottom-0">
                 Bang Energy 12-Pack <br />
                 $31.00
                 <p class="global-link-wrapper">
@@ -207,12 +211,12 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-    <ion-card-content class="lineChartBac">
-      <ion-row class="margin-top-15 color-white" >
+    <ion-card-content class="lineChartBac padding-top-bottom-30 ">
+      <ion-row class="color-white padding-left-right-30" >
         <ion-col>
-          <ion-card-header class="margin-0">
+          <ion-card-header class="margin-0 ">
             <ion-card-title class="color-white">
-             <h1> Let's track your  <br /> 
+             <h1 class="color-white"> Let's track your  <br /> 
               7 week progress</h1>
             </ion-card-title>
           </ion-card-header>
@@ -221,8 +225,8 @@
       
       <ion-row>
           <ion-col size=12 size-md="12" size-lg="8" size-xl="4" class="dateDiv">
-              <div class='chart-container-big margin-left-neg-23 height-310'>
-                  <canvas #barCanvas height="300"  width="350" class="lineChart-bar"></canvas> 
+              <div class='chart-container-big margin-left-neg-23 height-310 padding-left-right-20'>
+                  <canvas #barCanvas height="300"  width="350" class="lineChart-bar padding-10"></canvas> 
               </div>
           </ion-col>
       </ion-row>

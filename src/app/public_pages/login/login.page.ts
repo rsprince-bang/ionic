@@ -105,7 +105,7 @@ export class LoginPage implements OnInit {
               localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
               this.globalServices.syncAlerts();
 
-              this.router.navigateByUrl("/tabs/home/today");
+              this.router.navigateByUrl("/tabs/home");
             }
           }
           else{
@@ -192,7 +192,7 @@ export class LoginPage implements OnInit {
             localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
             this.globalServices.syncAlerts();
 
-            this.router.navigateByUrl("/tabs/home/today");
+            this.router.navigateByUrl("/tabs/home");
           }
         }
         // else{
@@ -272,7 +272,7 @@ export class LoginPage implements OnInit {
             localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
             this.globalServices.syncAlerts();
 
-            this.router.navigateByUrl("/tabs/home/today");
+            this.router.navigateByUrl("/tabs/home");
           }
         }
         // else{
@@ -340,7 +340,7 @@ export class LoginPage implements OnInit {
             localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
             this.globalServices.syncAlerts();
 
-            this.router.navigateByUrl("/tabs/home/today");
+            this.router.navigateByUrl("/tabs/home");
           }
         }
         // else{
