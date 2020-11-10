@@ -552,9 +552,9 @@ svg:not(:root) {
  }
  .alert-title.sc-ion-alert-ios {
     margin-top: 8px;
-    color: #003CCA;
-    font-size: 17px;
-    font-weight: 600;
+    color: black;
+    // font-size: 17px;
+    font-weight: 400;
 }
 .secondary {
     color: black !important;
@@ -833,4 +833,7 @@ textarea:focus, input:focus{
 }
 .font-size-16 {
     font-size: 21px;
+}
+.my-custom-class {
+    color: black;
 }
