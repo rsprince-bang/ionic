@@ -18,18 +18,32 @@
 </ion-header>
 <ion-content >
   <ion-grid class="margin-0"  >
-    <ion-row class="padding-20 content-div profile-background">
+    <ion-row class="padding-20 content-div">
       <ion-col size="3" class="margin-0 ">
           <img class="imgBacStyle" src="../../../assets/img/Jack-with-chain.png">
         </ion-col>
         <ion-col size="9" class="margin-top-10">
-            <h1 class="margin-0 margin-to-7 color-white">
+            <h1 class="margin-0 margin-to-7 color-black">
               Hi Jack!
             </h1>
             <p class="margin-0 font-size-14">Here's your daily tracking report.</p>
+            <div class="row color-text padding-top-bottom-5" >
+              <ion-icon class="font-size-17" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+              <p >Weigh - In</p>
+            </div>
       </ion-col>
     </ion-row>
-    <ion-card class="margin-0 ion-card-progress calorie-breakDown">
+    <ion-row class="margin-top-10 padding-left-right-20">
+      <ion-col size="5.5" class="mass">
+       <small class="color-white">% Lean Mass</small>
+        <div class="color-white font-size-25 font-bolder">80%</div>
+      </ion-col>
+      <ion-col size="5.5" class="fat">
+        <small class="color-white">% Body Fat</small>
+        <div class="color-white font-size-25 font-bolder">20%</div>
+      </ion-col>
+    </ion-row>
+    <ion-card class="margin-0 ion-card-progress calorie-breakDown margin-top-20">
       <ion-row >
         <ion-col size="8.2">
           <h1 class="text-capitalize font-500 font-size-24">Calorie Breakdown</h1>
