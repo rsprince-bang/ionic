@@ -17,6 +17,7 @@
 @import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-angular-calendars/styles/material.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 $fontBold: bold;
 $lightGrey: #c9ccd0;
@@ -107,9 +108,11 @@ small {
 }
 
 h1 {
-	font-weight: bold;
-	text-transform: uppercase;
-	margin-bottom: 16px;
+	font-weight: 500 !important;
+	text-transform: capitalize !important;
+    margin-bottom: 0px;
+    color: black ;
+    margin-top: 0px;
 	// margin-left: -4px;
 }
 
@@ -549,9 +552,9 @@ svg:not(:root) {
  }
  .alert-title.sc-ion-alert-ios {
     margin-top: 8px;
-    color: #003CCA;
-    font-size: 17px;
-    font-weight: 600;
+    color: black;
+    // font-size: 17px;
+    font-weight: 400;
 }
 .secondary {
     color: black !important;
@@ -772,4 +775,65 @@ ion-fab-button[data-desc]::after {
 }
 .font-size-15 {
     font-size: 23px;
+}
+.padding-0 {	
+    padding: 0px;	
+}	
+.font-wight-500 {	
+    font-weight: 500;	
+}	
+.margin-left-neg-23 {	
+	margin-left: -23px;	
+}	
+.margin-top-20 {	
+    margin-top: 20px !important;	
+}	
+.font-size-30 {	
+    font-size: 30px;	
+}	
+.border-none {	
+    border: none;	
+}	
+.font-size-25 {	
+    font-size: 25px;	
+}	
+.height-310 {	
+    height: 310px;	
+}	
+textarea:focus, input:focus{	
+    outline: none;	
+}
+.padding-top-bottom-30 {
+    padding: 30px 0px !important;
+}
+.padding-top-0 {
+    padding-top: 0px !important;
+}
+.padding-bottom-0 {
+    padding-bottom: 0px !important;
+}
+.padding-left-right-20 {
+    padding: 0px 20px;
+}
+.color-white {
+    color: white !important;
+}
+.font-size-24 {
+    font-size: 24px;
+}
+.text-left-auto {
+    text-align: left;
+    margin: auto;
+}
+.padding-left-right-30 {
+    padding: 0px 30px;
+}
+.font-size-17 {
+    font-size: 17px;
+}
+.font-size-16 {
+    font-size: 21px;
+}
+.my-custom-class {
+    color: black;
 }

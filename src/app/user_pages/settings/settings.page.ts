@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController,PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController, AlertController } from '@ionic/angular';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { GlobalServicesService } from 'src/app/services/global-services.service';
 import { UserInfoPage } from '../user-info/user-info.page';
@@ -39,15 +39,34 @@ export class SettingsPage implements OnInit {
     private modalController: ModalController,
     public popoverController: PopoverController,
     private myAPI: ApiCallService,
-    private globalServices: GlobalServicesService
+    private globalServices: GlobalServicesService,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
     this.getCurrentSettings();
   }
 
-  resetDiet() {
-    this.router.navigateByUrl('/reset-diet');
+  async resetDiet() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Are you sure you want to do this? Remember, when you reset your plan, all your current progress will be deleted.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'OK',
+          cssClass: 'endDiet',
+          handler: () => this.router.navigateByUrl('/reset-diet')
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async openUserInfoModal() {

@@ -93,7 +93,6 @@ $fontGrayColor : rgb(67, 66, 66);
 	   --background: green;
 	   --buffer-background: #e2e2e2 ;
 	   --progress-background:#0417c2 ;
-	   border-radius: 30px;
 	 }
    }
 .fat-progress {
@@ -101,7 +100,6 @@ $fontGrayColor : rgb(67, 66, 66);
 		--background: green;
 		--buffer-background: #e2e2e2 ;
 		--progress-background: #2CA500;
-		border-radius: 30px;
 	  }
 }
 .protein-progress {
@@ -109,7 +107,6 @@ $fontGrayColor : rgb(67, 66, 66);
 		--background: green;
 		--buffer-background: #e2e2e2 ;
 		--progress-background: #00B8FF;
-		border-radius: 30px;
 	  }
 }
 .crab-progress {
@@ -117,7 +114,6 @@ $fontGrayColor : rgb(67, 66, 66);
 		--background: green;
 		--buffer-background: #e2e2e2 ;
 		--progress-background: #FF00CB;
-		border-radius: 30px;
 	  }
 }
    .ColorChange{
@@ -177,8 +173,8 @@ $fontGrayColor : rgb(67, 66, 66);
 .margin-left-10{
 	margin-left: 10px;
 }
-.height-22{
-	height: 22px;
+.height-12{
+	height: 12px;
 }
 .font-size-12{
 	font-size: 12px;
@@ -190,7 +186,7 @@ $fontGrayColor : rgb(67, 66, 66);
 	font-weight: 600;font-size: 16px;padding: 10px 10px;
 }
 .lineChartBac {
-	background-color:#0417c2;
+	background	:linear-gradient(144.62deg, #0274E3 0%, #0274E3 0%);
 }
 .lineChartHeader {
 	color:white
@@ -219,6 +215,8 @@ $fontGrayColor : rgb(67, 66, 66);
 }
 .water-intake {
 	background: linear-gradient(136.08deg, #99E7F7 0%, #00B0FF 100%);
+	padding: 30px 20px !important;
+    border-radius: 0px;
 }
 p{
 	margin: 0px;
@@ -266,14 +264,16 @@ h3 {
 	text-align: right;
 	margin: auto;
 }
-.paddinleft-right-5 {
+.padding-left-right-5 {
 	margin: 0px 5px;
 }
 .color-white {
 	color: white;
 }
 .Add-sleep {
-	background: linear-gradient(136.08deg, #0152C4 0%, #003347 100%)
+	background: linear-gradient(136.08deg, #0152C4 0%, #003347 100%);
+	padding: 30px 20px !important;
+    border-radius: 0px;
 }
 .margin-top-25 {
 	margin-top: 25px;
@@ -305,10 +305,10 @@ h3 {
 .margin-top-5 {
 	margin-top: 5px;
 }
-.ion-card-progress {
-	--box-shadow : unset;
-	box-shadow: unset;border: 2px solid gainsboro;
-}
+// .ion-card-progress {
+// 	--box-shadow : unset;
+// 	box-shadow: unset;border: 2px solid gainsboro;
+// }
 .weight-dot {
 	margin: 0px 5px;
     background: #9FFF93;
@@ -347,9 +347,8 @@ h3 {
 	padding:0px 15px
 }
 .lineChart-bar {
-	height: 250px;width: 373px !important;
-	margin-left: -38px;
-	margin-top: -36px;
+	width: 106% !important;
+	height: 100% !important;
 }
 .header-css {
     padding: 0px 15px;border-bottom: 2px solid gainsboro;
@@ -357,4 +356,27 @@ h3 {
 .profile-background {
 	background: linear-gradient(144.62deg, #0274E3 0%, #0274E3 0%);
 	color: white;
+	height: 270px;
+}
+.font-500 {
+	color: black;
+    font-weight: 500;
+}
+.sleep-chart {
+    height: 100% !important;
+    width: 104% !important;
+    margin-left: -10px;
+}
+.header-size {
+	font-weight: 500;
+	font-size: 24px;
+	color: white;
+}
+.calorie-breakDown {
+	z-index: 9999;
+	padding: 30px 10px;
+	margin: 20px;
+	margin-top: -140px;
+    background-color: white;
+    border-radius: 0px;
 }

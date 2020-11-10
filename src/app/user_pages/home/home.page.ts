@@ -15,7 +15,8 @@ import { ModalController } from '@ionic/angular';
 import { AddSleepModalPage } from '../add-sleep-modal/add-sleep-modal.page';
 import { AddWaterModalPage } from '../add-water-modal/add-water-modal.page';
 import {NotificationModal} from '../modals/notification-modal/notification-modal';
-
+import * as moment from 'moment-timezone';
+import { AddEventModalPage } from '../add-event-modal/add-event-modal.page';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -23,12 +24,15 @@ import {NotificationModal} from '../modals/notification-modal/notification-modal
 })
 
 export class HomePage implements OnInit {
-  @ViewChild("barCanvas") barCanvas: ElementRef;
-  @ViewChild("barIntakeCanvas") barIntakeCanvas: ElementRef
-  @ViewChild("barSleepCanvas") barSleepCanvas:ElementRef
+  @ViewChild('barCanvas') barCanvas: ElementRef;
+  @ViewChild('barIntakeCanvas') barIntakeCanvas: ElementRef;
+  @ViewChild('barSleepCanvas') barSleepCanvas: ElementRef;
   private barIntake: Chart;
   private barChart: Chart;
   private barSleep: Chart;
+  startDate = new Date(2020, 8, 11)
+  selectedDate: any = moment(new Date(2020, 8, 29));
+  currentRunningDate: any;
   day = null;
   date = null;
   dayNumber = null;
@@ -50,8 +54,9 @@ export class HomePage implements OnInit {
   workout_completed = false;
   workout_completed_msn ="";
   percent: number = 0;
-  circlesubtitle = "";
-  circlecolor = "#2b2b2b"; //gray atr first
+  circleSubtitle = "";
+  CurrentRunningDay;
+  circleColor = "#2b2b2b"; //gray atr first
   dayNutritionInfo = { "phase": null, "phaseday": null,"phasename":null , "daynutrition": { "protein": null, "carbs": null, "fat": null } }
   score:number = 0;
   progressPercentage = 0;
@@ -63,15 +68,15 @@ export class HomePage implements OnInit {
   pieChartType: ChartType;
   pieChartLegend: boolean;
   pieChartPlugins = [];
-  onBodyFatSelect = false
+  onBodyFatSelect = false;
   onBodyMassSelect = false;
-  OnWeightSelecr = true
+  OnWeightSelect = true;
   public pieChartColors = [
     {
       backgroundColor: ['rgba(0,0,255,1.0)', 'rgba(255,165,0,1.0)', 'rgba(0,255,0,1.0)'],
     },
   ];
-  data =[' ','100g',' ','of PROTEIN',' ']
+  data = [' ', '100g', ' ', 'of PROTEIN', ' '];
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -80,36 +85,38 @@ export class HomePage implements OnInit {
   public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [];
+  bodyWeight = 3335;
+  calculatedMaxWaterIntake;
   constructor(
-    private router: Router, 
-    private globalServices: GlobalServicesService, 
-    private activatedRoute: ActivatedRoute, 
+    private router: Router,
+    private globalServices: GlobalServicesService,
+    private activatedRoute: ActivatedRoute,
     private myAPI: ApiCallService,
-    private foodSuggestionsService: FoodSuggestionsService, 
+    private foodSuggestionsService: FoodSuggestionsService,
     private alertController: AlertController,
     private modalController: ModalController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
   ) { }
 
   ngOnInit() {
-    
     // PIE CHART SETTINGS
-    this.updateChart()
+    this.updateChart();
+    this.currentRunningDate = moment(this.selectedDate.toDate()).format('MMMM DD, YYYY');
+    this.CurrentRunningDay = this.calculateDiff();
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
     this.pieChartData = [50.4, 33.6, 15.9];
     this.pieChartType = 'doughnut';
     this.pieChartLegend = true;
     this.pieChartPlugins = [pluginLabels];
-
     this.day = this.activatedRoute.snapshot.paramMap.get('day');
-    if(!this.day) {
+    if (!this.day) {
       this.day = 'today';
     }
     this.date = this.globalServices.getDate(this.day);
+    this.calculatedMaxWaterIntake = (this.bodyWeight / 2) * 7;
   }
-
-  // PIE CHART OPTIONS
+    // PIE CHART OPTIONS
   private createOptions(): ChartOptions {
     return {
       responsive: true,
@@ -138,7 +145,7 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    //this.updatepage();
+    //this.updatePage();
     //this.getFeedback();
   }
 
@@ -199,17 +206,15 @@ export class HomePage implements OnInit {
   }
 
   doRefresh(event) {
-    this.updatepage();
+    this.updatePage();
     event.target.complete();
   }
 
-  updatepage() {
+  updatePage() {
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
     this.planLength_days = this.planLength_weeks * 7;
     this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
-
-    // this.pieChartLabels = ['Protein' + this.dayNutritionInfo.daynutrition.protein +'%', this.dayNutritionInfo.daynutrition.carbs+'%', this.daynutritionOfFat()];
     this.myAPI.makeAPIcall(
       "meals.php",
       {
@@ -252,48 +257,41 @@ export class HomePage implements OnInit {
     this.warnText.carbsText = this.warnTextFunction(info.targetCaloriesFromCarbs, info.caloriesFromCarbs);
     this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
 
-    if (info.color == "red") {
-      this.circlecolor = "#CA1616";
+    if (info.color === 'red') {
+      this.circleColor = '#CA1616';
+    } else {
+      this.circleColor = 'rgb(56, 129, 255';
     }
-    else {
-      this.circlecolor = "rgb(56, 129, 255"; 
-    }
-    this.circlesubtitle = this.caloriesConsumed + "/" + this.dietCaloriesIntake;
-
-    //this.score = this.foodSuggestionsService.getScore(this.caloriesConsumed, this.dietCaloriesIntake, this.workout_completed, info.color, this.percent);
-  
+    this.circleSubtitle = this.caloriesConsumed + '/' + this.dietCaloriesIntake;
   }
 
-  workoutCompleted(){
-    if(this.workout_completed){
-      this.workout_completed_msn = " Workout Completed";
-    }else{
-      this.workout_completed_msn = "Need Workout";
+  workoutCompleted() {
+    if (this.workout_completed) {
+      this.workout_completed_msn = 'Workout Completed';
+    } else {
+      this.workout_completed_msn = 'Need Workout';
     }
 
   }
 
-  warnTextFunction( target, current){
-    var text = '';
-    var difference = Math.floor(target - current);
-    
-    if( target > current && this.caloriesConsumed > this.dietCaloriesIntake ){
-      text = "missing " + difference + " Calories";
+  warnTextFunction( target, current) {
+    let text = '';
+    const difference = Math.floor(target - current);
+    if ( target > current && this.caloriesConsumed > this.dietCaloriesIntake ){
+      text =  'missing ' + difference + ' Calories';
+    } else if (target > current) {
+      text = 'need ' + difference + ' Calories';
+    } else if ( target < current ) {
+      text = 'consumed too much ' + difference + ' Calories';
     }
-    else if(target > current){
-      text = "need " + difference + " Calories";
-    }
-    else if( target < current ){
-      text = "consumed too much " + difference + " Calories";
-    }
-    return text;  
+    return text;
   }
 
-  daynutritionOfFat(){
-    var text = null;
+  dayNutritionOfFat(){
+    let text = null;
 
-    if (this.dayNutritionInfo.daynutrition.fat == undefined){
-        text = '5%'
+    if (this.dayNutritionInfo.daynutrition.fat === undefined){
+        text = '5%';
     }else {
       text = this.dayNutritionInfo.daynutrition.fat + '%'
     }
@@ -394,13 +392,16 @@ export class HomePage implements OnInit {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
         type: 'line',
         data:{
-            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+           /* week progress bar chart x-axis data */
+            labels: ['1', '2', '3', '4', '5', '6', '7'],
             datasets: [{
-                label: 'Weight',
-                data: [13, 10, 35, 30.25, 30, 37, 27, 40, 25],
+                label: 'Lean Body Mass',
+                /* date of weight */
+                data: [13, 10, 35, 30.25, 30, 37, 27],
                 fill: false, borderColor: '#00ff00', backgroundColor: '#00ff00'},
                 {label: 'Body Fat',
-                data: [27.5, 27.5, 27.5, 27.5, 40, 35, 30, 20, 25],
+                /* date of body fat */
+                data: [27.5, 27.5, 27.5, 27.5, 40, 35, 30],
                 fill: false, borderColor: 'rgb(255,165,0)', backgroundColor: 'rgb(255,165,0)'
             }]
         },
@@ -457,14 +458,15 @@ export class HomePage implements OnInit {
     const gradientStroke = this.barIntakeCanvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 300);
     gradientStroke.addColorStop(0, '#375DFF');
     gradientStroke.addColorStop(1, '#B02BEB');
-    this.barChartLabels = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    this.barChartLabels = ['1', '2', '3', '4', '5', '6', '7'];
     this.barChartData = [
       {data: [20, 30, 75, 80.25, 50, 67, 67], label: 'WEEK', fill: false, borderColor: 'red', backgroundColor: 'red'},
     ];
     this.barIntake = new Chart(this.barIntakeCanvas.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+         /* water chart x-axis data */
+        labels: ['1', '2', '3', '4', '5', '6', '7'],
         datasets: [{
           data: [20, 30, 75, 80.25, 50, 67, 67],
           fill: true, borderColor: gradientStroke, backgroundColor: gradientStroke,
@@ -491,7 +493,7 @@ export class HomePage implements OnInit {
                   display: true,
                   color: 'white',
                 drawBorder: true,
-                drawTicks: false
+                drawTicks: false,
               },
               ticks: {
                 fontColor: 'white',
@@ -524,22 +526,23 @@ export class HomePage implements OnInit {
   this.barSleep = new Chart(this.barSleepCanvas.nativeElement, {
     type: 'bar',
     data: {
-        labels:['1','2', '3','4','5','6','7','8','9'], 
-        datasets:[{
-            label:' WEEK',
-            data:[4,6,7,6.9,6,10,11,10,0,0],
-            fill:false,
-            borderColor:gradientStroke2,backgroundColor:gradientStroke2,datalabels:{
-            }}
-            
+      /* sleep chart x-axis data */
+      labels: ['1', '2', '3', '4', '5', '6', '7'],
+      /* datasets to used to represent to x-axis and y-axis graph values */
+      datasets: [{
+          label: ' WEEK',
+          data: [4, 6, 7, 6, 6, 4, 8, 10],
+          fill: false,
+          borderColor: gradientStroke2, backgroundColor: gradientStroke2, datalabels: {
+        }}
       ]
     },
     options: {
       legend: {
         display: false,
-        position: "bottom",
-        labels:{
-          fontColor:'white',
+        position: 'bottom',
+        labels: {
+          fontColor: 'white',
           usePointStyle: true
         }
       },
@@ -552,38 +555,39 @@ export class HomePage implements OnInit {
         }
     },
       scales: {
-        
-        xAxes: [{ 
-            gridLines: {
-                display: true,
-                color: "white",
-              drawBorder:true,
-              drawTicks:false,
-              drawOnChartArea: true
-            },
-            ticks: {
-              fontColor: "white",
-              padding:10
-            },
-        }],
-        yAxes: [{
-            display: true,
-            gridLines: {
-                display: true,
-                color: "white",
-              drawBorder:true,
-              drawTicks:false,
+        xAxes: [{
+          gridLines: {
+              display: true,
+              color: 'white',
+            drawBorder: true,
+            drawTicks: false,
+            tickMarkLength: 90
+          },
+          ticks: {
+            fontColor: 'white',
+            padding: 10
+          },
+      }],
+      yAxes: [{
+          display: true,
+          gridLines: {
+              display: true,
+              color: 'white',
+            drawBorder: true,
+            drawTicks: false,
+            tickMarkLength: 70
 
-            },
-            scaleLabel: {
-              display: false,},
-            ticks: {
-              fontColor: "white",
-              padding:20
-            },
-        }],
+          },
+          ticks: {
+            fontColor: 'white',
+            padding: 20,
+            min: 2, // min value of y-axis data
+            max: 10, // max value of y-axis data
+            callback: function(value) {if (value % 2 === 0) {return value;}}
+          },
+      }],
     }
-    }
+  }
 });
 
 }
@@ -591,26 +595,25 @@ export class HomePage implements OnInit {
 clickOnBodyFat() {
   this.onBodyFatSelect = true;
  this.onBodyMassSelect = false;
-  this.OnWeightSelecr = false;
+  this.OnWeightSelect = false;
 }
 
 clickOnBodyMass() {
   this.onBodyFatSelect = false;
  this.onBodyMassSelect = true;
-  this.OnWeightSelecr = false;
+  this.OnWeightSelect = false;
 }
 
 clickOnWeight() {
   this.onBodyFatSelect = false;
  this.onBodyMassSelect = false;
-  this.OnWeightSelecr = true;
+  this.OnWeightSelect = true;
 }
 
   async openSleepModal() {
     const modal = await this.modalController.create({component: AddSleepModalPage});
     return await modal.present();
   }
-  
 	async openWaterModal() {
     const modal = await this.modalController.create({component: AddWaterModalPage});
     return await modal.present();
@@ -627,4 +630,30 @@ clickOnWeight() {
      await popover.present();
      const { data } = await popover.onWillDismiss();
    }
+   /* Function to return date on change of date in  datePicker */
+   onDateChange($event) {
+    this.currentRunningDate = moment(this.selectedDate.toDate()).format('MMMM DD, YYYY');
+    this.CurrentRunningDay = this.calculateDiff();
+   }
+   /* function to calculate how many days  difference between two dates */ 
+   calculateDiff() {
+    const currentDate = this.startDate;
+    const dateSent = new Date(this.selectedDate.toDate());
+    if (dateSent < currentDate) {
+      const noOfDays = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),
+      currentDate.getDate()) - Date.UTC(dateSent.getFullYear(),
+      dateSent.getMonth(), dateSent.getDate()) ) / (1000 * 60 * 60 * 24));
+      return noOfDays + 1;
+    } else {
+      const noOfDays =  Math.floor((Date.UTC(dateSent.getFullYear(),
+      dateSent.getMonth(), dateSent.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(),
+      currentDate.getDate())) / (1000 * 60 * 60 * 24));
+      return noOfDays + 1;
+    }
+  }
+  // function to open add meal modal
+  async openModal() {
+    const modal = await this.modalController.create({component: AddEventModalPage});
+    return await modal.present();
+  }
 }

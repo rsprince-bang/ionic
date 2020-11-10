@@ -19,8 +19,8 @@
 <ion-content class="track-meal">
   <ion-grid class="padding-20 grid1-background" >
     <ion-row>
-      <ion-col size="8">
-        <h2>Today's Nutrition</h2>
+      <ion-col size="8" class="text-left-auto">
+        <h1>Today's Nutrition</h1>
       </ion-col>
       <ion-col class="color-text text-align-right-auto" (click)="openModal()">
         <p>Add Meal</p>
@@ -75,15 +75,14 @@
       </ion-col>
     </ion-row>
     <div class="margin-top-15"></div>
-    <ion-card class="margin-top-10 ion-card-no-padding" style="padding: 0px 10px">
-      <ion-row class="margin-top-10">
+    <ion-card class="margin-top-10 ion-card-no-padding padding-top-bottom-30" >
+      <ion-row >
         <ion-col size="2" class="align-center">
           <ion-icon class="icon-size" ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
         </ion-col>
         <ion-col size="8" class="align-center">
-          <div><p>September 29, 2020</p></div>
-          <!-- Plan days -->
-          <div><h3>DAY 18/49</h3></div>
+          <div class="color-black"><p>September 29, 2020</p></div>
+          <div class="color-black"><h3>DAY 18/49</h3></div>
         </ion-col>
         <ion-col size="2" class="align-center">
           <ion-icon class="icon-size" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
@@ -91,14 +90,14 @@
       </ion-row>
       <ion-row class="margin-top-15">
         <ion-col size="8">
-          <h2>Today's Meals</h2>
+          <h1>Today's Meals</h1>
         </ion-col>
         <ion-col class="color-text text-align-right-auto" (click)="openModal()">
           <p>Add Meal</p>
         </ion-col>
       </ion-row>
       <div class="margin-top-10">
-        <div *ngFor="let meal of todaysNutrition.meals" style="margin:10px 0px;border-bottom:1px solid gainsboro">
+        <div *ngFor="let meal of todaysNutrition.meals;let i=index" style="margin:10px 0px;border-bottom:1px solid gainsboro">
             <ion-row >
               <ion-col size="0.5" (click)="expandRow(meal)">
                 <ion-icon name="arrow-down" *ngIf="meal.selected"></ion-icon>
@@ -110,7 +109,7 @@
               <ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(meal)">
                {{meal.calories}}
               </ion-col>
-              <ion-col size="1" class="text-align-left-auto" (click)="deleteItem()">
+              <ion-col size="1" class="text-align-left-auto" (click)="deleteItem(i)">
                 <ion-icon class="color-red" name="trash"></ion-icon>
               </ion-col>
             </ion-row>
@@ -141,18 +140,18 @@
     <ion-row class="margin-top-10 margin-left-right-15">
       <ion-col>
         <ion-card class="ion-card">
-          <ion-row>
+          <ion-row class="padding-top-bottom-30">
             <ion-col size="3" class="vert-center">
               <img src="assets/img/bang-can.png" />
             </ion-col>
             <ion-col size="9">
-              <ion-card-header>
+              <ion-card-header class="padding-top-0">
                 <ion-card-title>
-                  Let's get you on <br /> 
-                  track today.
+                  <h1 class="color-white">Let's get you on <br /> 
+                    track today.</h1>
                 </ion-card-title>
               </ion-card-header>
-              <ion-card-content>
+              <ion-card-content class="padding-bottom-0 ">
                 Bang Energy 12-Pack <br />
                 $31.00
                 <p class="global-link-wrapper">
@@ -193,7 +192,7 @@
   <ion-grid class="padding-20 grid1-background">
     <ion-row>
       <ion-col>
-        <h2>Supplement Suggestions </h2>
+        <h1>Supplement Suggestions </h1>
       </ion-col>
     </ion-row>
     <div class="margin-top-10">
@@ -206,7 +205,7 @@
 					<ion-col size="7" class="text-align-left-auto" (click)="expandRow(suggestion)">
 						{{suggestion.name}}
 					</ion-col>
-					<ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(data)">
+					<ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(suggestion)">
 						{{suggestion.cal}}
 					</ion-col>
 					<ion-col size="1" class="text-align-left-auto">
@@ -245,18 +244,18 @@
     <ion-row class="margin-top-10 margin-left-right-15">
       <ion-col>
         <ion-card class="ion-card zeroCard">
-          <ion-row>
+          <ion-row class="padding-top-bottom-30">
             <ion-col size="3" class="vert-center">
               <img src="assets/img/BangCanMeals.png" />
             </ion-col>
             <ion-col size="9">
-              <ion-card-header>
+              <ion-card-header class="padding-top-0">
                 <ion-card-title class="font-size-24">
-                  The perfect <br /> 
-                  ZERO-calorie drink!
+                  <h1 class="color-white font-size-24">The perfect <br /> 
+                    ZERO-calorie drink!</h1>
                 </ion-card-title>
               </ion-card-header>
-              <ion-card-content>
+              <ion-card-content class=" padding-bottom-0">
                 Bang Energy 12-Pack <br />
                 $31.00
                 <p class="global-link-wrapper">
