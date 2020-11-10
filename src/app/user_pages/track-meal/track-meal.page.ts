@@ -84,15 +84,17 @@ export class TrackMealPage implements OnInit {
     ratio: {fat: 10, protein: 50, carbs: 40}
   }
 
+  testNutrition: any;
+
   progressBar: number = this.todaysNutrition.calories.intake / this.todaysNutrition.calories.recommended;
   caloriesRemaining = this.todaysNutrition.calories.recommended - this.todaysNutrition.calories.intake;
 
   // gets todaysNutrition
 	getTodaysNutrition() {
 		this.myAPI.makeAPIcall(
-			"todays-nutrition",
+			"meals",
 			{
-				"action": "loadNutrition",
+				"action": "getDayInfo",
 				"date": this.date
 			},
 			true
@@ -106,8 +108,8 @@ export class TrackMealPage implements OnInit {
 				// successful response
 				else {
 					let data = response.success;
-					this.todaysNutrition = data.todaysNutrition;
-					console.log("Today: ", this.todaysNutrition);
+					this.testNutrition = data.dayInfo.meals;
+					console.log("Today: ", this.testNutrition);
 				}
 			},
 			error => console.log(error)
@@ -129,6 +131,9 @@ export class TrackMealPage implements OnInit {
 
 
   ngOnInit() {
+    console.log("Date: ", this.date);
+    this.getTodaysNutrition();
+
     // CALORIE RATIO CHART SETTINGS
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
