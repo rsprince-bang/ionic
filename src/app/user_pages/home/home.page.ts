@@ -418,12 +418,12 @@ export class HomePage implements OnInit {
             xAxes: [{
                 gridLines: {
                     display: true,
-                    color: '#CCC',
+                    color: 'white',
                   drawBorder: true,
                   drawTicks: false
                 },
                 ticks: {
-                  fontColor: '#CCC',
+                  fontColor: 'white',
                   padding: 10
                 },
             }],
@@ -431,14 +431,14 @@ export class HomePage implements OnInit {
                 display: true,
                 gridLines: {
                     display: true,
-                    color: '#CCC',
+                    color: 'white',
                   drawBorder: true,
                   drawTicks: false,
                   tickMarkLength: 15
 
                 },
                 ticks: {
-                  fontColor: '#CCC',
+                  fontColor: 'white',
                   padding: 20,
                   min: 0,
                   max: 45, // Your absolute max value
