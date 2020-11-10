@@ -186,7 +186,7 @@ $fontGrayColor : rgb(67, 66, 66);
 	font-weight: 600;font-size: 16px;padding: 10px 10px;
 }
 .lineChartBac {
-	background	:linear-gradient(144.62deg, #0274E3 0%, #0274E3 0%);
+	background: linear-gradient(144.61deg, #0274E3 0%, #0140C2 100%);
 }
 .lineChartHeader {
 	color:white
@@ -379,4 +379,20 @@ h3 {
 	margin-top: -140px;
     background-color: white;
     border-radius: 0px;
+}
+.mass {
+    background: #0B5AFF;
+    box-shadow: 0 2px 34px 0 rgba(0,0,0,0.2);
+    padding: 15px 0px;
+    text-align: center;
+    margin: auto;
+    color:white;
+}
+.fat {
+    background: #0140C2;
+    box-shadow: 0 2px 34px 0 rgba(0,0,0,0.2);
+    padding: 15px 0px;
+    text-align: center;
+    margin: auto;
+    color:white;
 }
