@@ -271,11 +271,10 @@ export class TrackMealPage implements OnInit {
   }
 
   // Alert to delete today's meals list
-  async deleteItem() {
+  async deleteItem(index) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Do you want to delete the Item?',
-      message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequuntur odit rerum quam repellat maxime, quidem nobis modi, quaerat culpa assumenda sint non asperiores quod dolore adipisci vero, fuga facere.',
+      header: 'You are deleting this meal. Keep in mind that, by doing so, your nutritional goals and progress for the day will be recalibrated.',
       buttons: [
         {
           text: 'Cancel',
@@ -288,7 +287,7 @@ export class TrackMealPage implements OnInit {
           text: 'Ok',
           cssClass: 'endDiet',
           handler: () => {
-
+            this.todaysNutrition.meals.splice(index,1)
           }
         }
       ]

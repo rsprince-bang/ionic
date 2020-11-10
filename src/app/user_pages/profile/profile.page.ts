@@ -253,8 +253,7 @@ export class ProfilePage implements OnInit {
   async deleteItem(index) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Do you want to delete the Item?',
-      message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequuntur odit rerum quam repellat maxime, quidem nobis modi, quaerat culpa assumenda sint non asperiores quod dolore adipisci vero, fuga facere.',
+      header: 'You are deleting a scheduled alert. Are you sure you wish to do this?',
       buttons: [
         {
           text: 'Cancel',
@@ -267,7 +266,7 @@ export class ProfilePage implements OnInit {
           text: 'Ok',
           cssClass: 'endDiet',
           handler: () => {
-            this.todaysList.splice(index,1)
+            this.todaysList.splice(index, 1);
           }
         }
       ]
@@ -303,7 +302,7 @@ export class ProfilePage implements OnInit {
     this.isProfilePage = false;
     this.isSettingsPage = false;
     this.isSchedulePage = false;
-    this.title = "Upload Photo"
+    this.title = "Upload Photo";
     this.imageUrl =""
     this.isEditPhoto = false
   }
@@ -319,8 +318,7 @@ export class ProfilePage implements OnInit {
   async deletePhoto() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Do you want to delete the Photo?',
-      message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam consequuntur odit rerum quam repellat maxime, quidem nobis modi, quaerat culpa assumenda sint non asperiores quod dolore adipisci vero, fuga facere.',
+      header: 'This will permanently remove this photo from your gallery. Are you sure you wish to proceed?',
       buttons: [
         {
           text: 'Cancel',
@@ -349,8 +347,7 @@ export class ProfilePage implements OnInit {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Reset Diet',
-      message: 'Are you sure you want to reset your diet? This cannot be undone.',
+      header: 'Are you sure you want to do this? Remember, when you reset your plan, all your current progress will be deleted.',
       buttons: [
         {
           text: 'Cancel',
