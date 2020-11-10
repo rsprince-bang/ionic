@@ -54,12 +54,12 @@ export class AddEventModalPage implements OnInit {
 		)
   }
 
-  addMeal(item){
+  addMeal(foods){
     this.myAPI.makeAPIcall( // old version used .makeSilentcall() ?
       "food_api_nutritionix", 
       {
         "action": "nutritionixAddMeal",
-        "foods": item,
+        "foods": foods,
         "day": this.date
       },
       true
@@ -71,8 +71,7 @@ export class AddEventModalPage implements OnInit {
 					this.myAPI.handleMyAPIError(response.error);
 				}
 				else {
-          console.log("Meal Added...");
-          this.modalController.dismiss(item);
+          this.modalController.dismiss(foods);
 				}
 			},
 			error => console.log(error)

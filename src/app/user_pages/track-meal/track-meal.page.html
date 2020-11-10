@@ -69,7 +69,7 @@
       </ion-col>
       <ion-col size="5.5" class="current-weight">
         <div class="row">
-          <h1 class="align-center" >{{ todaysNutrition.numMeals }}</h1>
+          <h1 class="align-center" >{{ todaysNutrition.meals.length }}</h1>
         </div>
         <div>Meals Consumed</div>
       </ion-col>
@@ -81,8 +81,8 @@
           <ion-icon class="icon-size" ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
         </ion-col>
         <ion-col size="8" class="align-center">
-          <div class="color-black"><p>September 29, 2020</p></div>
-          <div class="color-black"><h3>DAY 18/49</h3></div>
+          <div class="color-black"><p>{{date}}</p></div>
+          <div class="color-black"><h3>DAY {{dayNumber}}/0</h3></div>
         </ion-col>
         <ion-col size="2" class="align-center">
           <ion-icon class="icon-size" ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
@@ -104,12 +104,12 @@
                 <ion-icon name="arrow-forward" *ngIf="!meal.selected"></ion-icon>
               </ion-col>
               <ion-col size="7" class="text-align-left-auto" (click)="expandRow(meal)">
-                {{meal.desc}}
+                {{meal.meal_name}}
               </ion-col>
               <ion-col size="2.5" class="text-align-right-auto" (click)="expandRow(meal)">
                {{meal.calories}}
               </ion-col>
-              <ion-col size="1" class="text-align-left-auto" (click)="deleteItem(i)">
+              <ion-col size="1" class="text-align-left-auto" (click)="deleteItem(meal.id)">
                 <ion-icon class="color-red" name="trash"></ion-icon>
               </ion-col>
             </ion-row>
