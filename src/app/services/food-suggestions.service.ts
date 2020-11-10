@@ -409,6 +409,54 @@ export class FoodSuggestionsService {
     };
   }
 
+  getCalorieGrams(date, meals, plan_length) {
+
+    var caloriesConsumed = 0;
+    var gramsProteinConsumed = 0;
+    var gramsCarbsConsumed = 0;
+    var gramsFatConsumed = 0;
+
+    var dietCaloriesIntake = parseInt(localStorage.getItem('currentCaloriesIntake'));
+    var dayNutritionInfo = this.getDietDayDescription(date, plan_length);
+
+    for (let i = 0; i < meals.length; i++) {
+      caloriesConsumed = caloriesConsumed + parseInt(meals[i].calories);
+
+      gramsProteinConsumed = gramsProteinConsumed + (meals[i].protein);
+      gramsCarbsConsumed = gramsCarbsConsumed + (meals[i].carbs);
+      gramsFatConsumed = gramsFatConsumed + (meals[i].fat);
+    }
+
+    //calculate targeted calories
+    var targetCaloriesFromProtein = dayNutritionInfo.daynutrition.protein / 100 * dietCaloriesIntake;
+    var targetProtein = targetCaloriesFromProtein / 4; //4 calories in gram of protein
+
+    var targetCaloriesFromCarbs = dayNutritionInfo.daynutrition.carbs / 100 * dietCaloriesIntake;
+    var targetCarbs = targetCaloriesFromCarbs / 4;
+
+    var targetCaloriesFromFat = 5 / 100 * dietCaloriesIntake;
+    if (dayNutritionInfo.daynutrition.fat) {
+      targetCaloriesFromFat = dayNutritionInfo.daynutrition.fat / 100 * dietCaloriesIntake;
+    }
+    var targetFat = targetCaloriesFromFat / 9;
+
+    var percent = caloriesConsumed * 100 / dietCaloriesIntake;
+
+    return {
+      "gramsProteinConsumed": gramsProteinConsumed,
+      "gramsCarbsConsumed": gramsCarbsConsumed,
+      "gramsFatConsumed": gramsFatConsumed,
+
+      "targetProtein": targetProtein,
+      "targetCarbs": targetCarbs,
+      "targetFat": targetFat,
+
+      "caloriesConsumed": caloriesConsumed,
+      "dietCaloriesIntake": dietCaloriesIntake,
+      "percent": percent,
+    };
+  }
+
   getWorkoutStatus(exercises) {
     if (exercises.length > 0) {
       //at elast 20 minutes of exersice
@@ -514,24 +562,25 @@ export class FoodSuggestionsService {
     }
   }
 
+  //no longer used
   getSupplementSuggestions(date, plan_length){
-    var suggestions = [];
-    suggestions["supplement"] = null;
+    // var suggestions = [];
+    // suggestions["supplement"] = null;
 
-    var dayDescription = this.getDietDayDescription(date, plan_length);
-    if (dayDescription.daynutrition.hasOwnProperty("suplement_suggestions")) {
-      var suggestionsArray = this.charts[dayDescription.daynutrition.suplement_suggestions];
-      suggestions["supplement"] = suggestionsArray[Math.floor(Math.random() * suggestionsArray.length)];
-    }
-    else{
-      //if there are no suggestions, then you can take keto coffee any day
-      var suggestionsArray = this.charts["Anyday"];
-      suggestions["supplement"] = suggestionsArray[Math.floor(Math.random() * suggestionsArray.length)];
-    }
+    // var dayDescription = this.getDietDayDescription(date, plan_length);
+    // if (dayDescription.daynutrition.hasOwnProperty("suplement_suggestions")) {
+    //   var suggestionsArray = this.charts[dayDescription.daynutrition.suplement_suggestions];
+    //   suggestions["supplement"] = suggestionsArray[Math.floor(Math.random() * suggestionsArray.length)];
+    // }
+    // else{
+    //   //if there are no suggestions, then you can take keto coffee any day
+    //   var suggestionsArray = this.charts["Anyday"];
+    //   suggestions["supplement"] = suggestionsArray[Math.floor(Math.random() * suggestionsArray.length)];
+    // }
 
-    return {
-      "supplement":suggestions["supplement"]
-    }
+    // return {
+    //   "supplement":suggestions["supplement"]
+    // }
   }
 
 
