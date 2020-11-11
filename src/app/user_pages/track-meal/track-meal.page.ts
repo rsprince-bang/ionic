@@ -79,7 +79,7 @@ export class TrackMealPage implements OnInit {
     // CALORIE RATIO CHART SETTINGS
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
-    this.pieChartData = [this.dayNutritionInfo.daynutrition.protein, this.dayNutritionInfo.daynutrition.carbs, this.dayNutritionInfo.daynutrition.fat];
+    this.pieChartData = [25, 50, 25];
     this.pieChartType = 'doughnut';
     this.pieChartLegend = true;
     this.pieChartPlugins = [pluginLabels];
