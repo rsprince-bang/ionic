@@ -214,7 +214,7 @@ export class HomePage implements OnInit {
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
     this.planLength_days = this.planLength_weeks * 7;
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
+    //this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
     this.myAPI.makeAPIcall(
       "meals.php",
       {
@@ -240,7 +240,7 @@ export class HomePage implements OnInit {
   }
 
   calculateCaloriesConsumed() {
-    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
+    //var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
 
     // this.barChartData[0].data = [Math.round(info.caloriesFromProtein), Math.round(info.caloriesFromCarbs), Math.round(info.caloriesFromFat)];
     // this.barChartData[1].data = [Math.round(info.targetCaloriesFromProtein), Math.round(info.targetCaloriesFromCarbs), Math.round(info.targetCaloriesFromFat)];
