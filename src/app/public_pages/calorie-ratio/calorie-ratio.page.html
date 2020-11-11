@@ -1,0 +1,62 @@
+<ion-header padding class="extra-padding">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button 
+        class="back-button"
+        text=""
+        icon="arrow-round-back">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="extra-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>Calorie Ratio</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        Based on your Rapid Body Remodeling goals, we recommend the following calorie breakdown:
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="margin-top-15">
+      <ion-col>
+				<canvas baseChart *ngIf="pieChartData"
+					[data]="pieChartData" 
+					[labels]="pieChartLabels" 
+					[chartType]="pieChartType"
+					[options]="pieChartOptions"
+					[plugins]="pieChartPlugins"
+					[legend]="pieChartLegend"
+					[colors]="pieChartColors" height="230">
+				</canvas>
+			</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        We'll help you keep track of your daily meal breakdown, and recommend stacks to achieve your Rapid Body Remodeling Goal.
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-col>
+          <ion-button 
+            expand="block"
+            (click)="continue()"  
+            shape="round">
+            Get Started
+          </ion-button>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
+
