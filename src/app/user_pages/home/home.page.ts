@@ -245,24 +245,24 @@ export class HomePage implements OnInit {
     // this.barChartData[0].data = [Math.round(info.caloriesFromProtein), Math.round(info.caloriesFromCarbs), Math.round(info.caloriesFromFat)];
     // this.barChartData[1].data = [Math.round(info.targetCaloriesFromProtein), Math.round(info.targetCaloriesFromCarbs), Math.round(info.targetCaloriesFromFat)];
 
-    this.caloriesConsumed = info.caloriesConsumed;
-    this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
-    this.caloriesFromCarbsAsP = info.caloriesFromCarbsAsP;
-    this.caloriesFromFatAsP = info.caloriesFromFatAsP;
-    this.dietCaloriesIntake = info.dietCaloriesIntake;
-    this.percent = info.percent;
+    // this.caloriesConsumed = info.caloriesConsumed;
+    // this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
+    // this.caloriesFromCarbsAsP = info.caloriesFromCarbsAsP;
+    // this.caloriesFromFatAsP = info.caloriesFromFatAsP;
+    // this.dietCaloriesIntake = info.dietCaloriesIntake;
+    // this.percent = info.percent;
 
 
-    this.warnText.proteinText = this.warnTextFunction(info.targetCaloriesFromProtein, info.caloriesFromProtein );
-    this.warnText.carbsText = this.warnTextFunction(info.targetCaloriesFromCarbs, info.caloriesFromCarbs);
-    this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
+    // this.warnText.proteinText = this.warnTextFunction(info.targetCaloriesFromProtein, info.caloriesFromProtein );
+    // this.warnText.carbsText = this.warnTextFunction(info.targetCaloriesFromCarbs, info.caloriesFromCarbs);
+    // this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
 
-    if (info.color === 'red') {
-      this.circleColor = '#CA1616';
-    } else {
-      this.circleColor = 'rgb(56, 129, 255';
-    }
-    this.circleSubtitle = this.caloriesConsumed + '/' + this.dietCaloriesIntake;
+    // if (info.color === 'red') {
+    //   this.circleColor = '#CA1616';
+    // } else {
+    //   this.circleColor = 'rgb(56, 129, 255';
+    // }
+    // this.circleSubtitle = this.caloriesConsumed + '/' + this.dietCaloriesIntake;
   }
 
   workoutCompleted() {

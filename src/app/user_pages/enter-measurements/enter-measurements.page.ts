@@ -80,13 +80,8 @@ export class EnterMeasurementsPage implements OnInit {
         else {
           localStorage.setItem("measurements", JSON.stringify(result.success.measurements));
           localStorage.setItem("diet", JSON.stringify(result.success.diet));
-          localStorage.setItem("dailyCaloriesIntake", result.success.measurements.dailyCaloriesIntake);
-          localStorage.setItem("currentCaloriesIntake", result.success.diet.cur_calories_intake);
-          localStorage.setItem("diet_plan_length", this.measurementsForm.value.plan);
           //after we have or update the diet plan sync alerts
           this.globalServices.syncAlerts();
-          localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet.diet_start_date));
-          localStorage.setItem("lastFeedback", result.success.diet.feedback_for_week);
   
           if( this.action == "update" ){
             this.router.navigateByUrl("/profile");
