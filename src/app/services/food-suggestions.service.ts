@@ -22,11 +22,11 @@ export class FoodSuggestionsService {
     //those are percentages
     this.dietPlan.loose.days[1] = {
       "protein": 59, "carbs": 19.5, "fat": 21.5,
-      "calorie_deficit": -25
+      "calorie_deficit": 25
     };
     this.dietPlan.loose.days[2] = {
       "protein": 59, "carbs": 19.5, "fat": 21.5,
-      "calorie_deficit": -25 //should eat 25% less calories
+      "calorie_deficit": 25 //should eat 25% less calories
     };
     this.dietPlan.loose.days[3] = {
       "protein": 50, "carbs": 40, "fat": 10,
@@ -34,11 +34,11 @@ export class FoodSuggestionsService {
     };
     this.dietPlan.loose.days[4] = {
       "protein": 59, "carbs": 19.5, "fat": 21.5,
-      "calorie_deficit": -25
+      "calorie_deficit": 25
     };
     this.dietPlan.loose.days[5] = {
       "protein": 59, "carbs": 19.5, "fat": 21.5,
-      "calorie_deficit": -25
+      "calorie_deficit": 25
     };
     this.dietPlan.loose.days[6] = {
       "protein": 50, "carbs": 40, "fat": 10,
@@ -46,7 +46,7 @@ export class FoodSuggestionsService {
     };
     this.dietPlan.loose.days[7] = {
       "protein": 40, "carbs": 40, "fat": 20,
-      "calorie_deficit": -25
+      "calorie_deficit": 25
     };
     //end loose weight plan
 
@@ -60,7 +60,8 @@ export class FoodSuggestionsService {
 
   getDietDayNumber(date) {
 
-    var dateRegistered = new Date(JSON.parse(localStorage.getItem('diet_start_date')));
+    var diet = JSON.parse(localStorage.getItem('diet'));
+    var dateRegistered = new Date(diet.diet_start_date);
     var dateRequested = new Date(date);
 
     var diffTime = (dateRequested.getTime() - dateRegistered.getTime());
@@ -70,7 +71,8 @@ export class FoodSuggestionsService {
   }
 
   getDietPlanWeeks(){
-    var weeks = localStorage.getItem('diet_plan_length');
+    var diet = JSON.parse(localStorage.getItem('diet'));
+    var weeks = diet.plan_length;
 
     return parseInt(weeks);
   }
@@ -106,8 +108,14 @@ export class FoodSuggestionsService {
     var gramsCarbsConsumed = 0;
     var gramsFatConsumed = 0;
 
-    var dietCaloriesIntake = parseInt(localStorage.getItem('currentCaloriesIntake'));
+    var measurements = JSON.parse(localStorage.getItem("measurements"));
+    var caloriesIntake = measurements.dailyCaloriesIntake; //this the regular intake
     var dayNutritionInfo = this.getDietDayDescription(date);
+
+    var dietCaloriesIntake = caloriesIntake; //default value is maintenance
+    if( dayNutritionInfo.daynutrition.calorie_deficit ){
+      dietCaloriesIntake = caloriesIntake - ( caloriesIntake*(dayNutritionInfo.daynutrition.calorie_deficit)/100 );
+    }
 
     for (let i = 0; i < meals.length; i++) {
       caloriesConsumed = caloriesConsumed + parseInt(meals[i].calories);

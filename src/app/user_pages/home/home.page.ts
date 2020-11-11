@@ -146,7 +146,6 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     //this.updatePage();
-    //this.getFeedback();
   }
 
   handleSwipeLeft() {
@@ -310,68 +309,6 @@ export class HomePage implements OnInit {
     return fontSize;
   }
 
-  getFeedback(){
-    //this.dayNumber is stored in lcoal storage so it will be available at the time this functino gets called 
-
-    if( this.dayNumber > 7 ){
-      var current_week = Math.ceil( this.dayNumber / 7 );
-      var lastFeedback = parseInt(localStorage.getItem("lastFeedback"));
-
-      //after first week reduce calories by 200
-      if( Number.isNaN(lastFeedback) ){
-        this.updateFeedback('no', 2);
-      }
-      //every week after that ask if happy
-      else if( lastFeedback < current_week ){
-        this.showFeedbackConfirm(current_week);
-      }
-    }
-
-  }
-
-  async showFeedbackConfirm(current_week) {
-    const alert = await this.alertController.create({
-      header: 'Confirm',
-      message: 'Are you happy with your progress so far?',
-      buttons: [
-        {
-            text: 'Yes',
-            handler: () => {
-              this.updateFeedback('yes', current_week);
-            }
-        },
-        {
-            text: 'No',
-            handler: () => {
-              this.updateFeedback('no', current_week);
-            }
-        }
-    ]
-    });
-    await alert.present();
-  }
-
-  updateFeedback(feedback, weeknum){
-    this.myAPI.makeAPIcall(
-      "users.php", 
-      {
-        "action": "updateFeedback",
-        "feedback": feedback,
-        "weeknum": weeknum
-      },
-      true
-    )
-    .subscribe((result) => {
-      if (result.error) {
-        this.myAPI.handleMyAPIError(result.error);
-      }
-      else if(result.success){
-        localStorage.setItem("lastFeedback", result.success.weeknum);
-        localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
-        this.calculateCaloriesConsumed();
-      }
-    });
-  }
 
   /* 
    * Calculate Day Completion Percentage
