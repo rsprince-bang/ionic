@@ -251,7 +251,6 @@ export class GlobalServicesService {
       var alerts = JSON.parse(localStorage.getItem("alerts"));
       var diet = JSON.parse(localStorage.getItem('diet'));
       var diet_plan_length = diet.plan_length;
-
       var diet_start_date = diet.diet_start_date+"T00:00:00";
       var dietEndDate = new Date( diet_start_date );
       dietEndDate.setDate(dietEndDate.getDate() + Number(diet_plan_length) * 7);
