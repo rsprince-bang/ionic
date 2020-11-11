@@ -146,7 +146,6 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     //this.updatePage();
-    //this.getFeedback();
   }
 
   handleSwipeLeft() {
@@ -214,7 +213,7 @@ export class HomePage implements OnInit {
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
     this.planLength_days = this.planLength_weeks * 7;
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
+    //this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
     this.myAPI.makeAPIcall(
       "meals.php",
       {
@@ -240,29 +239,29 @@ export class HomePage implements OnInit {
   }
 
   calculateCaloriesConsumed() {
-    var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
+    //var info = this.foodSuggestionsService.getCaloriesPercentages(this.date, this.meals, this.exercises, this.planLength_weeks);
 
     // this.barChartData[0].data = [Math.round(info.caloriesFromProtein), Math.round(info.caloriesFromCarbs), Math.round(info.caloriesFromFat)];
     // this.barChartData[1].data = [Math.round(info.targetCaloriesFromProtein), Math.round(info.targetCaloriesFromCarbs), Math.round(info.targetCaloriesFromFat)];
 
-    this.caloriesConsumed = info.caloriesConsumed;
-    this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
-    this.caloriesFromCarbsAsP = info.caloriesFromCarbsAsP;
-    this.caloriesFromFatAsP = info.caloriesFromFatAsP;
-    this.dietCaloriesIntake = info.dietCaloriesIntake;
-    this.percent = info.percent;
+    // this.caloriesConsumed = info.caloriesConsumed;
+    // this.caloriesFromProteinAsP = info.caloriesFromProteinAsP;
+    // this.caloriesFromCarbsAsP = info.caloriesFromCarbsAsP;
+    // this.caloriesFromFatAsP = info.caloriesFromFatAsP;
+    // this.dietCaloriesIntake = info.dietCaloriesIntake;
+    // this.percent = info.percent;
 
 
-    this.warnText.proteinText = this.warnTextFunction(info.targetCaloriesFromProtein, info.caloriesFromProtein );
-    this.warnText.carbsText = this.warnTextFunction(info.targetCaloriesFromCarbs, info.caloriesFromCarbs);
-    this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
+    // this.warnText.proteinText = this.warnTextFunction(info.targetCaloriesFromProtein, info.caloriesFromProtein );
+    // this.warnText.carbsText = this.warnTextFunction(info.targetCaloriesFromCarbs, info.caloriesFromCarbs);
+    // this.warnText.fatText = this.warnTextFunction(info.targetCaloriesFromFat, info.caloriesFromFat);
 
-    if (info.color === 'red') {
-      this.circleColor = '#CA1616';
-    } else {
-      this.circleColor = 'rgb(56, 129, 255';
-    }
-    this.circleSubtitle = this.caloriesConsumed + '/' + this.dietCaloriesIntake;
+    // if (info.color === 'red') {
+    //   this.circleColor = '#CA1616';
+    // } else {
+    //   this.circleColor = 'rgb(56, 129, 255';
+    // }
+    // this.circleSubtitle = this.caloriesConsumed + '/' + this.dietCaloriesIntake;
   }
 
   workoutCompleted() {
@@ -310,68 +309,6 @@ export class HomePage implements OnInit {
     return fontSize;
   }
 
-  getFeedback(){
-    //this.dayNumber is stored in lcoal storage so it will be available at the time this functino gets called 
-
-    if( this.dayNumber > 7 ){
-      var current_week = Math.ceil( this.dayNumber / 7 );
-      var lastFeedback = parseInt(localStorage.getItem("lastFeedback"));
-
-      //after first week reduce calories by 200
-      if( Number.isNaN(lastFeedback) ){
-        this.updateFeedback('no', 2);
-      }
-      //every week after that ask if happy
-      else if( lastFeedback < current_week ){
-        this.showFeedbackConfirm(current_week);
-      }
-    }
-
-  }
-
-  async showFeedbackConfirm(current_week) {
-    const alert = await this.alertController.create({
-      header: 'Confirm',
-      message: 'Are you happy with your progress so far?',
-      buttons: [
-        {
-            text: 'Yes',
-            handler: () => {
-              this.updateFeedback('yes', current_week);
-            }
-        },
-        {
-            text: 'No',
-            handler: () => {
-              this.updateFeedback('no', current_week);
-            }
-        }
-    ]
-    });
-    await alert.present();
-  }
-
-  updateFeedback(feedback, weeknum){
-    this.myAPI.makeAPIcall(
-      "users.php", 
-      {
-        "action": "updateFeedback",
-        "feedback": feedback,
-        "weeknum": weeknum
-      },
-      true
-    )
-    .subscribe((result) => {
-      if (result.error) {
-        this.myAPI.handleMyAPIError(result.error);
-      }
-      else if(result.success){
-        localStorage.setItem("lastFeedback", result.success.weeknum);
-        localStorage.setItem("currentCaloriesIntake", result.success.currentCaloriesIntake);
-        this.calculateCaloriesConsumed();
-      }
-    });
-  }
 
   /* 
    * Calculate Day Completion Percentage
