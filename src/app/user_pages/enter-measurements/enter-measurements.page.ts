@@ -92,7 +92,7 @@ export class EnterMeasurementsPage implements OnInit {
             this.router.navigateByUrl("/profile");
           }
           else{
-            this.router.navigateByUrl("/tabs/home");
+            this.router.navigateByUrl("/calorie-ratio");
           }
         }
       });
