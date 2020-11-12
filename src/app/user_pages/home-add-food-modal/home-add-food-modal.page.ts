@@ -21,8 +21,6 @@ export class HomeAddFoodModalPage implements OnInit {
 
   ngOnInit() {
     var planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
-    //this.suggestedFoods = this.foodSuggestionsService.getFoodSuggestions(this.date, planLength_weeks);
-    //this.suggestedSupplements = this.foodSuggestionsService.getSupplementSuggestions(this.date, planLength_weeks);
   }
 
   searchChanged(){

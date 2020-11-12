@@ -182,8 +182,8 @@ export class ProfilePage implements OnInit {
         this.myAPI.handleMyAPIError(result.error);
       }
       else {
-        localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
-        //this.ionViewWillEnter();
+        //localStorage.setItem('diet_start_date', JSON.stringify(result.success.diet_start_date));
+
         //when diet is reset, we need to confirm measurements and recalculate teh calories intake
         let navigationExtras: NavigationExtras = {
           state: {

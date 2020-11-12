@@ -22,7 +22,7 @@ export class TrackMealPage implements OnInit {
   today = false;
   dayNumber = null;
   date = null;
-  dayNutritionInfo = {'phase':null, phaseday:null, daynutrition:{protein:null, carbs:null, fat:null}};
+  dayNutritionInfo = {daynumber:null, phaseday:null, daynutrition:{protein:null, carbs:null, fat:null}};
   planLength_weeks;
 
   // PIE CHART VARIABLES
@@ -74,12 +74,12 @@ export class TrackMealPage implements OnInit {
     this.date = this.date = this.globalServices.getTodayDate();
     this.dayNumber = this.foodSuggestionsService.getDietDayNumber(this.date);
     this.planLength_weeks = this.foodSuggestionsService.getDietPlanWeeks();
-    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date, this.planLength_weeks);
+    this.dayNutritionInfo = this.foodSuggestionsService.getDietDayDescription(this.date);
 
     // CALORIE RATIO CHART SETTINGS
     this.pieChartOptions = this.createOptions();
     this.pieChartLabels = ['Protein', 'Carbs', 'Fat'];
-    this.pieChartData = [25, 50, 25];
+    this.pieChartData = [this.dayNutritionInfo.daynutrition.protein, this.dayNutritionInfo.daynutrition.carbs, this.dayNutritionInfo.daynutrition.fat];
     this.pieChartType = 'doughnut';
     this.pieChartLegend = true;
     this.pieChartPlugins = [pluginLabels];

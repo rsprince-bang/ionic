@@ -98,11 +98,6 @@ export class LoginPage implements OnInit {
               localStorage.setItem("alerts", JSON.stringify(this.userInfo.success.user.alerts));
               localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
               localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
-              localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
-              localStorage.setItem("currentCaloriesIntake", this.userInfo.success.user.diet.cur_calories_intake);
-              localStorage.setItem("diet_plan_length", this.userInfo.success.user.diet.plan_length);
-              localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
-              localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
               this.globalServices.syncAlerts();
 
               this.router.navigateByUrl("/tabs/home");
@@ -185,11 +180,6 @@ export class LoginPage implements OnInit {
             localStorage.setItem("alerts", JSON.stringify(this.userInfo.success.user.alerts));
             localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
             localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
-            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
-            localStorage.setItem("currentCaloriesIntake", this.userInfo.success.user.diet.cur_calories_intake);
-            localStorage.setItem("diet_plan_length", this.userInfo.success.user.diet.plan_length);
-            localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
-            localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
             this.globalServices.syncAlerts();
 
             this.router.navigateByUrl("/tabs/home");
@@ -265,11 +255,6 @@ export class LoginPage implements OnInit {
             localStorage.setItem("alerts", JSON.stringify(this.userInfo.success.user.alerts));
             localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
             localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
-            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
-            localStorage.setItem("currentCaloriesIntake", this.userInfo.success.user.diet.cur_calories_intake);
-            localStorage.setItem("diet_plan_length", this.userInfo.success.user.diet.plan_length);
-            localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
-            localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
             this.globalServices.syncAlerts();
 
             this.router.navigateByUrl("/tabs/home");
@@ -333,11 +318,6 @@ export class LoginPage implements OnInit {
             localStorage.setItem("alerts", JSON.stringify(this.userInfo.success.user.alerts));
             localStorage.setItem("measurements", JSON.stringify(this.userInfo.success.user.measurements));
             localStorage.setItem("diet", JSON.stringify(this.userInfo.success.user.diet));
-            localStorage.setItem('dailyCaloriesIntake', this.userInfo.success.user.measurements.dailyCaloriesIntake);
-            localStorage.setItem("currentCaloriesIntake", this.userInfo.success.user.diet.cur_calories_intake);
-            localStorage.setItem("diet_plan_length", this.userInfo.success.user.diet.plan_length);
-            localStorage.setItem('diet_start_date', JSON.stringify(this.userInfo.success.user.diet.diet_start_date));
-            localStorage.setItem("lastFeedback", this.userInfo.success.user.diet.feedback_for_week);
             this.globalServices.syncAlerts();
 
             this.router.navigateByUrl("/tabs/home");
