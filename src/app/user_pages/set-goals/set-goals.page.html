@@ -14,14 +14,15 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <h1>Set Goals</h1>
+        <h1>Rapid Body Remodeling Goals</h1>
+        Gaining muscle while losing body fat.
       </ion-col>
     </ion-row>
     
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label>Body Sculpting Goal</ion-label>
+          <ion-label>Target</ion-label>
           <ion-select name="lossgoal" [(ngModel)]="lossGoal" okText="OK" cancelText="Cancel">
             <ion-select-option 
               *ngFor="let item of lossOptions"
@@ -30,23 +31,29 @@
               </ion-select-option>
           </ion-select>
         </ion-item>
+        <span class="error ion-padding" *ngIf="isSubmitted && !lossGoal">
+          Please select your target weight goal.
+        </span>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        Weigh-in Day
+        Weigh-in Day(s)
       </ion-col>
     </ion-row>
     <ion-row>
-			<div class="day-select-wrapper">
+			<div class="day-select-wrapper" (click)="checkDays()">
 				<ion-col text-center *ngFor="let item of days; let i of index"
 					class="day-selector"
 					[class.day-selected]="item.selected"
 					(click)="select(item)">
 					{{ item.day }}
 				</ion-col>
-			</div>
+      </div>
+      <span class="error ion-padding" *ngIf="isSubmitted && weighinDays.length == 0">
+        Please select your weigh in day(s).
+      </span>
     </ion-row>
     
     <ion-row>
@@ -55,13 +62,22 @@
           <ion-label>Weigh-in Time</ion-label>
           <ion-datetime [(ngModel)]="selected_time" display-format="h:mm A" picker-format="h mm A"></ion-datetime>
         </ion-item>
+        <span class="error ion-padding" *ngIf="isSubmitted && !selected_time">
+          Please select your weigh in time.
+        </span>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
         <small>
-          NOTE: The best time to weigh yourself is fasted, upon waking after you empty your bladder, nude. [need to rewrite this and add jacks one day recommendation]
+          The best time to weigh yourself is first thing in the morning,
+          on an empty stomach. For the sake consistency, it is also best to be naked.
+          <p>
+            While you can weigh in every day if you want, once a week is sufficient. 
+            Just remember: don't be ruled by the number on the scale. It is a snapshot in time,
+            not an etching in stone.
+          </p>
         </small>
       </ion-col>
     </ion-row>
