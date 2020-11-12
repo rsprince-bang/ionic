@@ -4,7 +4,7 @@
       <ion-col size="1" (click)="dismiss()">
         <ion-icon class="ion-text-left close-icon" name="close"></ion-icon>
       </ion-col>
-    </ion-row>
+		</ion-row>
 
     <ion-row>
       <ion-col>
@@ -14,53 +14,132 @@
 
     <ion-row>
       <ion-col>
-        <ion-item>
-          <ion-range 
-						min="0" 
-						max="24" 
-						[(ngModel)]="sleepAmount" 
-						pin color="primary">
-						<ion-icon 
-							slot="start" 
-							size="large" 
-							name="remove-circle-outline"
-							(click)="decrementCounter()">
-						</ion-icon>
-						<ion-icon 
-							slot="end" 
-							size="large" 
-							name="add-circle-outline"
-							(click)="incrementCounter()">
-						</ion-icon>
-          </ion-range>
-        </ion-item>
+        {{ today | date: 'longDate' }}
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col class="ion-text-center">
-        <div class="counter-display">{{ sleepAmount }} hrs</div>
+        <ion-item>
+          About Measuring Body Fat
+        </ion-item>
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <small>
-          [copy to accompany sleep counter...]
-        </small>
-      </ion-col>
-    </ion-row>
+		<form
+			[formGroup]="weighInForm"
+			(ngSubmit)="submitWeighIn()"
+			class="form">
+		
+			<ion-row>
+				<ion-col>
+					<ion-item (ionChange)="calculateBodyMass()">
+						<ion-label>Area 1</ion-label>
+						<ion-select name="area1" formControlName="area1" okText="OK" cancelText="Cancel">
+							<ion-select-option 
+								*ngFor="let item of fatOptions"
+								[value]="item">
+									{{ item }} %
+								</ion-select-option>
+						</ion-select>
+					</ion-item>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+						Please select your area1 fat percentage.
+					</span>
+				</ion-col>
+			</ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-button 
-        expand="block" 
-        shape="round" 
-        (click)="sendData()">
-          Save
-        </ion-button>
-      </ion-col>
-    </ion-row>
+			<ion-row>
+				<ion-col>
+					<ion-item (ionChange)="calculateBodyMass()">
+						<ion-label>Area 2</ion-label>
+						<ion-select name="area2" formControlName="area2" okText="OK" cancelText="Cancel">
+							<ion-select-option 
+								*ngFor="let item of fatOptions"
+								[value]="item">
+									{{ item }} %
+								</ion-select-option>
+						</ion-select>
+					</ion-item>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+						Please select your area2 fat percentage.
+					</span>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-item (ionChange)="calculateBodyMass()">
+						<ion-label>Area 3</ion-label>
+						<ion-select name="area3" formControlName="area3" okText="OK" cancelText="Cancel">
+							<ion-select-option 
+								*ngFor="let item of fatOptions"
+								[value]="item">
+									{{ item }} %
+								</ion-select-option>
+						</ion-select>
+					</ion-item>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+						Please select your area3 fat percentage.
+					</span>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label>Body Weight</ion-label>
+						<ion-select name="weight" formControlName="weight" okText="OK" cancelText="Cancel">
+							<ion-select-option 
+								*ngFor="let item of weightOptions"
+								[value]="item">
+									{{ item }} lbs.
+								</ion-select-option>
+						</ion-select>
+					</ion-item>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+						Please select your weight.
+					</span>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label>
+							Body Fat
+						</ion-label>
+						<ion-note slot="end" color="primary">
+							{{ bodyFat}}%
+						</ion-note>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label>
+							Lean Mass
+						</ion-label>
+						<ion-note slot="end" color="primary">
+							{{ leanMass }}%
+						</ion-note>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-button 
+					expand="block" 
+					shape="round" 
+					(click)="sendData()">
+						Save
+					</ion-button>
+				</ion-col>
+			</ion-row>
+		</form>
 
   </ion-grid>
 
