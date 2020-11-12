@@ -17,6 +17,7 @@ import { AddWaterModalPage } from '../add-water-modal/add-water-modal.page';
 import {NotificationModal} from '../modals/notification-modal/notification-modal';
 import * as moment from 'moment-timezone';
 import { AddEventModalPage } from '../add-event-modal/add-event-modal.page';
+import { WeighinModalPage } from '../weighin-modal/weighin-modal.page';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -589,8 +590,14 @@ clickOnWeight() {
     }
   }
   // function to open add meal modal
-  async openModal() {
+  async openMealModal() {
     const modal = await this.modalController.create({component: AddEventModalPage});
     return await modal.present();
   }
+
+    // function to open weighin modal
+    async openWeighinModal() {
+      const modal = await this.modalController.create({component: WeighinModalPage});
+      return await modal.present();
+    }
 }

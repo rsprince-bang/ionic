@@ -36,6 +36,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { DatePipe } from '@angular/common';
 import { NotificationModalModule } from './user_pages/modals/notification-modal/notification-modal.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WeighinModalPageModule } from './user_pages/weighin-modal/weighin-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -61,7 +62,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       AddWaterModalPageModule,
       UserInfoPageModule,
       NotificationModalModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      WeighinModalPageModule
     ],
   providers: [
     StatusBar,

@@ -29,7 +29,7 @@
             <p class="margin-0 font-size-14">Here's your daily tracking report.</p>
             <div class="row color-text padding-top-bottom-5" >
               <ion-icon class="font-size-17" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
-              <p >Weigh - In</p>
+              <p (click)="openWeighinModal()">Weigh-In</p>
             </div>
       </ion-col>
     </ion-row>
@@ -47,10 +47,9 @@
       <ion-row >
         <ion-col size="8.2">
           <h1 class="text-capitalize font-500 font-size-24">Calorie Breakdown</h1>
-          <!-- <h1 class="header-size">Calorie Breakdown</h1> -->
         </ion-col>
         <ion-col size="3.8" class="color-text align-left">
-          <div class="row" (click)="openModal()">
+          <div class="row" (click)="openMealModal()">
             <ion-icon class="margin-left  font-size-17" ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
             <p >Add Meal</p>
           </div>
@@ -162,42 +161,7 @@
     </ion-row>
     <ion-row class="margin-auto color-white"><ion-col><p class="color-white">Week</p></ion-col></ion-row>
   </ion-card>
-  <ion-grid class="padding-20 padding-top-0">
-    <!-- <ion-row class="margin-top-15">
-      <ion-col size="4" class="progress-height padding-0">
-        <circle-progress
-          [percent]="39"
-          [showInnerStroke]="true" [radius]="100"
-            [outerStrokeWidth]="30"
-            [innerStrokeWidth]="35"
-            [space]="-29"
-            [outerStrokeColor]="'#0417c2'"
-            [innerStrokeColor] = "'gainsboro'"
-            [backgroundStroke]="'white'"
-            [animation]="true"
-            [showTitle] = "true"
-            [animationDuration]="300" [title]="['39 %']"
-            [outerStrokeGradientStopColor] ="'white'"
-            [backgroundGradientStopColor] = "'white'"
-            [titleFontSize] = "56"
-            [subtitle] = "'Completed'"
-            [showSubtitle] ="true"
-            [subtitleColor] = "'black'"
-            [subtitleFontSize]="30"
-            [titleColor] = "'#0417c2'"
-            [titleFontWeight] = "900"
-          ></circle-progress>
-      </ion-col> 
-      <ion-col size="8" class="padding-0">
-        <div class="color-black"><h1>The Bang Anti-Diet</h1></div>
-        <div class="color-black"><p>Week 1 of 7</p></div>
-        <div class="color-black"><p>Current Weight: 165 lbs</p></div>
-        <div class="color-black"><p>Goal Weight: 150 lbs</p></div>
-        <div class="color-text margin-top-5"><p>Weigh In</p></div>
-      </ion-col>
-    </ion-row> -->
-   
-    
+  <ion-grid class="padding-20 padding-top-0">   
     <ion-row >
       <ion-col>
         <ion-card class="ion-card ">

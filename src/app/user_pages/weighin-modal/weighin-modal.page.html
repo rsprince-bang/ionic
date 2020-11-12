@@ -1,0 +1,69 @@
+<ion-content padding class="extra-padding">
+  <ion-grid>
+    <ion-row class="close-icon-margin">
+      <ion-col size="1" (click)="dismiss()">
+        <ion-icon class="ion-text-left close-icon" name="close"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <h1>Weigh In</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-range 
+						min="0" 
+						max="24" 
+						[(ngModel)]="sleepAmount" 
+						pin color="primary">
+						<ion-icon 
+							slot="start" 
+							size="large" 
+							name="remove-circle-outline"
+							(click)="decrementCounter()">
+						</ion-icon>
+						<ion-icon 
+							slot="end" 
+							size="large" 
+							name="add-circle-outline"
+							(click)="incrementCounter()">
+						</ion-icon>
+          </ion-range>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <div class="counter-display">{{ sleepAmount }} hrs</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <small>
+          [copy to accompany sleep counter...]
+        </small>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button 
+        expand="block" 
+        shape="round" 
+        (click)="sendData()">
+          Save
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
+
+
