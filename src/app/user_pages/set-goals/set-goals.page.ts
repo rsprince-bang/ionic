@@ -41,10 +41,13 @@ export class SetGoalsPage implements OnInit {
 
 
   constructor(
-    private router: Router, private myAPI: ApiCallService, private globalServices: GlobalServicesService
+    private router: Router, 
+    private myAPI: ApiCallService, 
+    private globalServices: GlobalServicesService
   ) { }
 
   ngOnInit() {
+    // Default values
     // this.lossGoal = 5;
     // this.selected_time = this.globalServices.formatTime(this.date);
   }
