@@ -14,17 +14,11 @@ export class WeighinModalPage implements OnInit {
   weighInForm: FormGroup;
   weightOptions = [];
   fatOptions = [];
-  weighIn = {
-    area1: 0,
-    area2: 0,
-    area3: 0,
-    weight: 0,
-    bodyfat: 0,
-    leanmass: 0
-  }
   bodyWeight: number;
-  bodyFat: number;
-  leanMass: number;
+  bodyFatPct: number;
+  bodyFatLbs: number;
+  leanMassPct: number;
+  leanMassLbs: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,8 +59,10 @@ export class WeighinModalPage implements OnInit {
   }
 
   calculateBodyMass() {
-    this.bodyFat = Math.round((this.weighInForm.value.area1 + this.weighInForm.value.area2 + this.weighInForm.value.area3) / 3); 
-    this.leanMass = 100 - this.bodyFat;
+    this.bodyFatPct = Math.round((this.weighInForm.value.area1 + this.weighInForm.value.area2 + this.weighInForm.value.area3) / 3); 
+    this.leanMassPct = 100 - this.bodyFatPct;
+    this.bodyFatLbs = this.weighInForm.value.weight * (this.bodyFatPct/100);
+    this.leanMassLbs = this.weighInForm.value.weight - this.bodyFatLbs;
   }
 
 }

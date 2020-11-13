@@ -87,7 +87,7 @@
 
 			<ion-row>
 				<ion-col>
-					<ion-item>
+					<ion-item (ionChange)="calculateBodyMass()">
 						<ion-label>Body Weight</ion-label>
 						<ion-select name="weight" formControlName="weight" okText="OK" cancelText="Cancel">
 							<ion-select-option 
@@ -110,7 +110,7 @@
 							Body Fat
 						</ion-label>
 						<ion-note slot="end" color="primary">
-							{{ bodyFat}}%
+							<span *ngIf="bodyFatLbs">{{ bodyFatLbs }} lbs /</span> {{ bodyFatPct }} %
 						</ion-note>
 					</ion-item>
 				</ion-col>
@@ -123,7 +123,7 @@
 							Lean Mass
 						</ion-label>
 						<ion-note slot="end" color="primary">
-							{{ leanMass }}%
+							<span *ngIf="leanMassLbs">{{ leanMassLbs }} lbs /</span> {{ leanMassPct }} %
 						</ion-note>
 					</ion-item>
 				</ion-col>
