@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BodyFatInfoComponent } from '../body-fat-info/body-fat-info/body-fat-info.component';
 
 @Component({
   selector: 'app-weighin-modal',
@@ -9,8 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./weighin-modal.page.scss'],
 })
 export class WeighinModalPage implements OnInit {
-  today = new Date();
-  date = this.datePipe.transform(this.today, 'yyyy-MM-dd');
+  date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   weighInForm: FormGroup;
   weightOptions = [];
   fatOptions = [];
@@ -19,6 +19,7 @@ export class WeighinModalPage implements OnInit {
   bodyFatLbs: number;
   leanMassPct: number;
   leanMassLbs: number;
+  gender: string = "F"; // get gender from data
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +28,7 @@ export class WeighinModalPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.date);
     this.weighInForm = this.formBuilder.group({
       area1: ['', [ Validators.required ]],
       area2: ['', [ Validators.required ]],
@@ -63,6 +65,18 @@ export class WeighinModalPage implements OnInit {
     this.leanMassPct = 100 - this.bodyFatPct;
     this.bodyFatLbs = this.weighInForm.value.weight * (this.bodyFatPct/100);
     this.leanMassLbs = this.weighInForm.value.weight - this.bodyFatLbs;
+  }
+
+  // showBodyFatInfo() {
+  //   console.log("Body Fat Info");
+  //   const nav = document.querySelector('ion-nav');
+  //   nav.push(BodyFatInfoComponent);
+  // }
+
+  // function to open Body Fat Info
+  async showBodyFatInfo() {
+    const modal = await this.modalController.create({component: BodyFatInfoComponent});
+    return await modal.present();
   }
 
 }

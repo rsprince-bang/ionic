@@ -1,0 +1,149 @@
+<ion-content padding class="extra-padding">
+  <ion-grid>
+    <ion-row class="close-icon-margin">
+      <ion-col size="1" (click)="dismiss()">
+        <ion-icon class="ion-text-left close-icon" name="close"></ion-icon>
+      </ion-col>
+		</ion-row>
+
+    <ion-row>
+      <ion-col>
+        <h1>Weigh In</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        {{ today | date: 'longDate' }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-item (click)="showBodyFatInfo()">
+					Measuring Body Fat
+					<ion-icon name="information-circle-outline" slot="end"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+		<form *ngIf="weighInForm"
+			[formGroup]="weighInForm"
+			(ngSubmit)="submitWeighIn()"
+			class="form">
+		
+			<ion-row>
+				<ion-col>
+					<ion-item (ionChange)="calculateBodyMass()">
+						<ion-label *ngIf="gender == 'M'">Pectoral</ion-label>
+						<ion-label *ngIf="gender == 'F'">Tricep</ion-label>
+						<ion-select name="area1" formControlName="area1" okText="OK" cancelText="Cancel">
+							<ion-select-option 
+								*ngFor="let item of fatOptions"
+								[value]="item">
+									{{ item }} %
+								</ion-select-option>
+						</ion-select>
+					</ion-item>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+						Please select your area1 fat percentage.
+					</span>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-item (ionChange)="calculateBodyMass()">
+						<ion-label *ngIf="gender == 'M'">Abdominal</ion-label>
+						<ion-label *ngIf="gender == 'F'">Suprailiac</ion-label>
+						<ion-select name="area2" formControlName="area2" okText="OK" cancelText="Cancel">
+							<ion-select-option 
+								*ngFor="let item of fatOptions"
+								[value]="item">
+									{{ item }} %
+								</ion-select-option>
+						</ion-select>
+					</ion-item>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+						Please select your area2 fat percentage.
+					</span>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-item (ionChange)="calculateBodyMass()">
+						<ion-label>Thigh</ion-label>
+						<ion-select name="area3" formControlName="area3" okText="OK" cancelText="Cancel">
+							<ion-select-option 
+								*ngFor="let item of fatOptions"
+								[value]="item">
+									{{ item }} %
+								</ion-select-option>
+						</ion-select>
+					</ion-item>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+						Please select your area3 fat percentage.
+					</span>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-item (ionChange)="calculateBodyMass()">
+						<ion-label>Body Weight</ion-label>
+						<ion-select name="weight" formControlName="weight" okText="OK" cancelText="Cancel">
+							<ion-select-option 
+								*ngFor="let item of weightOptions"
+								[value]="item">
+									{{ item }} lbs.
+								</ion-select-option>
+						</ion-select>
+					</ion-item>
+					<span class="error ion-padding" *ngIf="isSubmitted && errorControl.weight.errors?.required">
+						Please select your weight.
+					</span>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label>
+							Body Fat
+						</ion-label>
+						<ion-note slot="end" color="primary">
+							<span *ngIf="bodyFatLbs">{{ bodyFatLbs }} lbs /</span> {{ bodyFatPct }} %
+						</ion-note>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label>
+							Lean Mass
+						</ion-label>
+						<ion-note slot="end" color="primary">
+							<span *ngIf="leanMassLbs">{{ leanMassLbs }} lbs /</span> {{ leanMassPct }} %
+						</ion-note>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+
+			<ion-row>
+				<ion-col>
+					<ion-button 
+					expand="block" 
+					shape="round" 
+					(click)="sendData()">
+						Save
+					</ion-button>
+				</ion-col>
+			</ion-row>
+		</form>
+
+  </ion-grid>
+
+</ion-content>

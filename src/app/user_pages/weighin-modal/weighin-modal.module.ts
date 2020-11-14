@@ -5,12 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WeighinModalPage } from './weighin-modal.page';
+import { WeighinModalPage } from './modal-root/weighin-modal.page';
+import { BodyFatInfoComponent } from './body-fat-info/body-fat-info/body-fat-info.component';
+import { WeighinMainComponent } from './weighin-main/weighin-main.component';
 
 const routes: Routes = [
   {
     path: '',
     component: WeighinModalPage
+  },
+  {
+    path: 'body-fat-info',
+    component: BodyFatInfoComponent
   }
 ];
 
@@ -22,6 +28,11 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule
   ],
-  declarations: [WeighinModalPage]
+  declarations: [
+    WeighinModalPage,
+    WeighinMainComponent,
+    BodyFatInfoComponent
+  ],
+  entryComponents: [WeighinModalPage, WeighinMainComponent, BodyFatInfoComponent]
 })
 export class WeighinModalPageModule {}

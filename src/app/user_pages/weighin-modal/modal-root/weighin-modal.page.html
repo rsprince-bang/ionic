@@ -1,30 +1,31 @@
 <ion-content padding class="extra-padding">
-  <ion-grid>
-    <ion-row class="close-icon-margin">
-      <ion-col size="1" (click)="dismiss()">
-        <ion-icon class="ion-text-left close-icon" name="close"></ion-icon>
-      </ion-col>
+	<ion-grid>
+		<ion-row class="close-icon-margin">
+			<ion-col size="1" (click)="dismiss()">
+				<ion-icon class="ion-text-left close-icon" name="close"></ion-icon>
+			</ion-col>
 		</ion-row>
 
-    <ion-row>
-      <ion-col>
-        <h1>Weigh In</h1>
-      </ion-col>
-    </ion-row>
+		<ion-row>
+			<ion-col>
+				<h1>Weigh In</h1>
+			</ion-col>
+		</ion-row>
 
-    <ion-row>
-      <ion-col>
-        {{ today | date: 'longDate' }}
-      </ion-col>
-    </ion-row>
+		<ion-row>
+			<ion-col>
+				{{ today | date: 'longDate' }}
+			</ion-col>
+		</ion-row>
 
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-item>
-          About Measuring Body Fat
-        </ion-item>
-      </ion-col>
-    </ion-row>
+		<ion-row>
+			<ion-col class="ion-text-center">
+				<ion-item (click)="showBodyFatInfo()">
+					Measuring Body Fat
+					<ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+				</ion-item>
+			</ion-col>
+		</ion-row>
 
 		<form
 			[formGroup]="weighInForm"
@@ -34,7 +35,8 @@
 			<ion-row>
 				<ion-col>
 					<ion-item (ionChange)="calculateBodyMass()">
-						<ion-label>Area 1</ion-label>
+						<ion-label *ngIf="gender == 'M'">Pectoral</ion-label>
+						<ion-label *ngIf="gender == 'F'">Tricep</ion-label>
 						<ion-select name="area1" formControlName="area1" okText="OK" cancelText="Cancel">
 							<ion-select-option 
 								*ngFor="let item of fatOptions"
@@ -52,7 +54,8 @@
 			<ion-row>
 				<ion-col>
 					<ion-item (ionChange)="calculateBodyMass()">
-						<ion-label>Area 2</ion-label>
+						<ion-label *ngIf="gender == 'M'">Abdominal</ion-label>
+						<ion-label *ngIf="gender == 'F'">Suprailiac</ion-label>
 						<ion-select name="area2" formControlName="area2" okText="OK" cancelText="Cancel">
 							<ion-select-option 
 								*ngFor="let item of fatOptions"
@@ -70,7 +73,7 @@
 			<ion-row>
 				<ion-col>
 					<ion-item (ionChange)="calculateBodyMass()">
-						<ion-label>Area 3</ion-label>
+						<ion-label>Thigh</ion-label>
 						<ion-select name="area3" formControlName="area3" okText="OK" cancelText="Cancel">
 							<ion-select-option 
 								*ngFor="let item of fatOptions"
@@ -141,8 +144,9 @@
 			</ion-row>
 		</form>
 
-  </ion-grid>
+	</ion-grid>
 
 </ion-content>
+
 
 
